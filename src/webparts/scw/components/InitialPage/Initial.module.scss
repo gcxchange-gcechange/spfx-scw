@@ -1,0 +1,23 @@
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:350px;
+
+    p {
+        text-align: center;
+    }
+
+    strong{
+        color: rgb(0, 120, 212);
+    }
+}
+
+.blue {
+   color:  rgb(0, 120, 212);
+}
+
+.centerButton {
+    left:40%;
+}
