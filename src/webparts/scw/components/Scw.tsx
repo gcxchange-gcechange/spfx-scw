@@ -3,13 +3,14 @@ import styles from './Scw.module.scss';
 import { IScwProps } from './IScwProps';
 import { Steps, Button, message } from 'antd';
 import FistStep from "./FirstStep";
+import { Initial } from './InitialPage/Initial';
 
 const { Step } = Steps;
 
 const steps = [
     {
         title: 'First',
-        content: <FistStep></FistStep>,
+        content: <FistStep/>,
     },
     {
         title: 'Second',
@@ -34,12 +35,12 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         };
     }
 
-    private next = () => {
+    private next = (): void => {
         const current = this.state.current + 1;
         this.setState({ current });
     }
 
-    private prev = () => {
+    private prev = (): void => {
         const current = this.state.current - 1;
         this.setState({ current });
     }
@@ -49,6 +50,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             <div className={styles.scw}>
                 <div className={styles.container}>
                     <div className={styles.row}>
+                        <Initial/>
                         <Steps current={this.state.current}>
                             {steps.map(item => (<Step key={item.title} title={item.title} />))}
                         </Steps>
