@@ -36,7 +36,6 @@ export class Initial extends React.Component {
                </div>
                <div className={styles.card}>
                     <FontAwesomeIcon icon={faUsers} size='2x' className={styles.blue} />
-                    {/* <Icon iconName='Group'  styles={icon}/> */}
                     <p className={styles.mg10}>Identify at least <strong className={styles.blue}>two owners</strong></p>
                </div>
                <div className={styles.card}>
