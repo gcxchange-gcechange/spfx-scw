@@ -1,9 +1,17 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+@import '~office-ui-fabric-react/dist/sass/References.scss';
+
 
 .card {
     display: flex;
     flex-direction: column;
     align-items: center;
     width:350px;
+    padding: 20px;
+
+    h4{
+        margin-bottom: 0;
+    }
 
     p {
         text-align: center;
@@ -20,4 +28,8 @@
 
 .centerButton {
     left:40%;
+    width:150px;
+}
+.mg10 {
+    margin: 10px;
 }
