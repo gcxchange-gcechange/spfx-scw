@@ -14,6 +14,7 @@ import { IScwProps } from './components/IScwProps';
 
 export interface IScwWebPartProps {
   description: string;
+  step:number;
 }
 
 export default class ScwWebPart extends BaseClientSideWebPart<IScwWebPartProps> {
@@ -29,7 +30,8 @@ export default class ScwWebPart extends BaseClientSideWebPart<IScwWebPartProps> 
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
+        userDisplayName: this.context.pageContext.user.displayName,
+        step: this.properties.step
       }
     );
 

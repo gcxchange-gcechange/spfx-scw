@@ -6,7 +6,16 @@ import {faUsers, faGlobe, faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
-export class Initial extends React.Component {
+export interface IInitialProps {
+    //pass in the click event from the scw.tsx as props
+    onClickEvent: (step: number) => void;
+    step: number;
+}
+
+
+export class Initial extends React.Component<IInitialProps> {
+
+   
 
 
     public render(): React.ReactElement {
@@ -18,6 +27,8 @@ export class Initial extends React.Component {
             
         };
 
+
+        console.log("PROPS", this.props);
 
         return (
             <>
@@ -44,11 +55,12 @@ export class Initial extends React.Component {
                </div>
             </Stack>
 
-            <PrimaryButton text="Let's go" ariaLabel="Let's go" onClick={_handleOnClick} className={styles.centerButton}/>
+            <PrimaryButton text="Let's go" ariaLabel="Let's go" onClick={() => {_handleOnClick()}} className={styles.centerButton}/>
             </>
         );
 
         function _handleOnClick(): void {
+           this.props.onClickEvent(1)
             alert("Clicked");
         }
     }

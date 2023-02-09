@@ -22,16 +22,23 @@ const steps = [
     },
 ];
 
+
 export interface IScwState {
     current: number;
+    step: number;
+    
 }
+
+
 
 export default class AntDesignStep extends React.Component<IScwProps, IScwState> {
 
     public constructor(props: IScwProps, state: IScwState) {
         super(props);
         this.state = {
-            current: 0
+            current: 0,
+            step: 0
+            
         };
     }
 
@@ -45,15 +52,25 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         this.setState({ current });
     }
 
+    public handleClickEvent=():void=> {
+        this.setState({
+            current:0
+        })
+    }
+
     public render(): React.ReactElement<IScwProps> {
         return (
             <div className={styles.scw}>
+                {this.state.step === 0 
+                ? 
+                <Initial step={this.props.step} onClickEvent={this.handleClickEvent}/>
+                :
                 <div className={styles.container}>
                     <div className={styles.row}>
-                        <Initial/>
                         <Steps current={this.state.current}>
                             {steps.map(item => (<Step key={item.title} title={item.title} />))}
                         </Steps>
+
                         <div className="steps-content">{steps[this.state.current].content}</div>
                         <div className="steps-action">
                             {this.state.current < steps.length - 1 && (<Button type="primary" onClick={() => this.next()}>Next</Button>)}
@@ -63,6 +80,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                         </div>
                     </div>
                 </div>
+                 }
             </div>
         );
     }
