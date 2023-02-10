@@ -40,8 +40,8 @@ export class Initial extends React.Component {
             <h3>A few things before you start</h3>
             <p>To create a community, you will need to:</p>
 
-            <Stack horizontal styles={stackStyles} horizontalAlign='center'>
-                <div role="list" className={styles.card}>
+            <Stack horizontal styles={stackStyles} horizontalAlign='center' verticalAlign="baseline">
+                <div className={styles.card}>
                     <FontAwesomeIcon icon={faGlobe} size='2x' className={styles.blue} />
                     <p>Provide <strong className={styles.blue}>bilingual</strong> name and descriptions</p>
                </div>
