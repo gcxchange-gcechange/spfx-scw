@@ -1,13 +1,19 @@
 @import '~@fluentui/react/dist/sass/References.scss';
 @import '~office-ui-fabric-react/dist/sass/References.scss';
 
+.container {
+    display:flex;
+    flex-direction: column;
+}
+
 
 .card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width:350px;
-    padding: 20px;
+    justify-content: center;
+    width:225px;
+    height:225px;
 
     h3 {
         margin-bottom: 0;
