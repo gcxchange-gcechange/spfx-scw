@@ -4,5 +4,4 @@ export interface IScwProps {
   environmentMessage: string;
   hasTeamsContext: boolean;
   userDisplayName: string;
-  step: number;
 }

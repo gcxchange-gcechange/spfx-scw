@@ -1,21 +1,12 @@
 import { IImageProps, ImageFit, Stack } from 'office-ui-fabric-react';
 import * as React from 'react';
 import styles from  '../InitialPage/Initial.module.scss';
-import { PrimaryButton } from '@fluentui/react';
 import {faUsers, faGlobe, faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
-export interface IInitialProps {
-    //pass in the click event from the scw.tsx as props
-    onClickEvent: (step: number) => void;
-    step: number;
-}
 
-
-export class Initial extends React.Component<IInitialProps> {
-
-   
+export class Initial extends React.Component {
 
 
     public render(): React.ReactElement {
@@ -27,8 +18,6 @@ export class Initial extends React.Component<IInitialProps> {
             
         };
 
-
-        console.log("PROPS", this.props);
 
         return (
             <>
@@ -54,14 +43,8 @@ export class Initial extends React.Component<IInitialProps> {
                     <p>Identify if your data will be <strong className={styles.blue}>Protected</strong> or  <strong className={styles.blue}>Unclassified</strong></p>
                </div>
             </Stack>
-
-            <PrimaryButton text="Let's go" ariaLabel="Let's go" onClick={() => {_handleOnClick()}} className={styles.centerButton}/>
             </>
-        );
 
-        function _handleOnClick(): void {
-           this.props.onClickEvent(1)
-            alert("Clicked");
-        }
+        );
     }
 }
