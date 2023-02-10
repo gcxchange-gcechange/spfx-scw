@@ -21,12 +21,13 @@ export class Initial extends React.Component {
 
         return (
             <>
-            <Stack horizontal>
-            <p>Collaborate with collegues across departments using Microsoft Teams and Sharepoint to share ideas, documents, and much more...</p>
+            <h2 className={styles.mgBottom0}>Create a community</h2>
+            <Stack horizontal verticalAlign="center">
+            <p className={styles.mg0}>Collaborate with collegues across departments using Microsoft Teams and Sharepoint to share ideas, documents, and much more...</p>
             <img {...imageProps} alt={"teams"}/> 
             </Stack>
 
-            <h4>A few things before you start</h4>
+            <h3>A few things before you start</h3>
             <p>To create a community, you will need to:</p>
 
             <Stack horizontal>
