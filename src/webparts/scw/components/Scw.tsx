@@ -4,7 +4,7 @@ import { IScwProps } from './IScwProps';
 import { Steps, Button, message } from 'antd';
 import FistStep from "./FirstStep";
 import { Initial } from './InitialPage/Initial';
-import { PrimaryButton } from 'office-ui-fabric-react';
+import { IButtonStyles, PrimaryButton } from 'office-ui-fabric-react';
 
 const { Step } = Steps;
 
@@ -60,18 +60,25 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         })
     }
 
+    public buttonStyle: IButtonStyles = {
+        root: {
+            fontSize:'18px'
+        }
+    }
+
+  
     public render(): React.ReactElement<IScwProps> {
         return (
             <div className={styles.scw}>
                 {this.state.step === 0 
                 ? <>
                 <Initial/>
-                <PrimaryButton text="Let's go" ariaLabel="Let's go" onClick={() => {this.handleClickEvent()}} className={styles.centerButton}/>
+                <PrimaryButton styles={ this.buttonStyle } text="Let's go" ariaLabel="Let's go" onClick={() => {this.handleClickEvent()}} className={ styles.centerButton }/>
                 </>
                 :
-                <div className={styles.container}>
-                    <div className={styles.row}>
-                        <Steps current={this.state.current}>
+                <div className={ styles.container }>
+                    <div className={ styles.row }>
+                        <Steps current={ this.state.current }>
                             {steps.map(item => (<Step key={item.title} title={item.title} />))}
                         </Steps>
 

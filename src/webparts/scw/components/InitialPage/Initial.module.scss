@@ -2,9 +2,11 @@
 @import '~office-ui-fabric-react/dist/sass/References.scss';
 
 .container {
-    display:flex;
+    display:flex!important;
     flex-direction: column;
 }
+
+p { font-size:18px }
 
 
 .card {
@@ -14,13 +16,21 @@
     justify-content: center;
     width:225px;
     height:225px;
+    padding: 10px;
+
 
     h3 {
         margin-bottom: 0;
     }
 
     p {
+        font-size: 18px!important;
         text-align: center;
+    }
+
+    p .mgsides{
+        margin-left:10px;
+        margin-right:10px;
     }
 
     strong{
@@ -33,9 +43,7 @@
 }
 
 
-.mg10 {
-    margin: 10px;
-}
+
 .mg0 {
     margin: 0px;
 }
