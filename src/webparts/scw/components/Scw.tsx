@@ -17,7 +17,15 @@ const steps = [
     },
     {
         title: '3',
-        content: 'Last-content',
+        content: 'Third-content',
+    },
+    {
+        title: '4',
+        content: 'Fourth-content',
+    },
+    {
+        title: '5',
+        content: 'Fifth-content',
     },
 ];
 

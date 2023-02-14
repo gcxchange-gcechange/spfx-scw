@@ -84,31 +84,27 @@
         margin-top: 24px;
     }
 
+
     .ant-steps .ant-steps-item-icon {
         margin:0px;
         color: rgb(0,120,212);
+        border: 3px solid;
+        font-weight: bold;
     }
 
-    // .ant-steps .ant-steps-item-process .ant-steps-item-icon .ant-steps-item-active{
-    //     background-color: white;
-    // }
-   
-
+  
     .ant-steps .ant-steps-item-process .ant-steps-item-icon {
         background-color: white;
     }
 
-    
-    // .ant-steps-item .ant-steps-item-finish >.ant-steps-item-icon {
-    //     background-color: rgb(0,120,212) ;
-    // }
 
     .ant-steps .ant-steps-item-process .ant-steps-item-icon >.ant-steps-icon {
         color:rgb(0,120,212);
+        font-weight: bold;
     }
 
     .ant-steps .ant-steps-item-wait .ant-steps-item-icon {
-        border-color: gray;
+        border: 3px solid gray;
     }
 
     .ant-steps .ant-steps-item-wait>.ant-steps-item-container>.ant-steps-item-content>.ant-steps-item-title,
@@ -129,6 +125,8 @@
 
     .anticon svg{
         color: white;
+        font-size: 16px;
+        text-shadow: white;
     }
 
     .ant-steps.ant-steps-horizontal:not(.ant-steps-label-vertical) .ant-steps-item {
