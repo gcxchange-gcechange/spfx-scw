@@ -6,18 +6,35 @@ export interface IFistStepProps {
 }
 
 export interface IFistStepState {
-
+    name: string;
 }
+
+
 
 export default class FistStep extends React.Component<IFistStepProps, IFistStepState> {
     public constructor(props: IFistStepProps, state: IFistStepState) {
         super(props);
+
+        this.state = {
+            name: ''
+        };
+    }
+
+    handleOnChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) :void => { 
+        console.log(event.target.value);
+        this.setState({name: event.target.value})
     }
 
     public render(): React.ReactElement<IFistStepProps> {
+
+        const name = this.state.name;
+
         return (
             <div>
-                <Input placeholder="First Step" />
+                <Input type="text" placeholder="name" value={name}
+                onChange={this.handleOnChangeEvent} 
+                //  onChange = {(e) => this.setState({name: e.target.value})}
+                />
             </div>
         );
     }
