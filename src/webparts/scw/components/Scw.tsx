@@ -121,7 +121,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                         <div className="steps-content">{steps[this.state.current].content}</div>
                         <div className="steps-action">
                             {this.state.current < steps.length - 1 && (<Button type="primary" onClick={this.next} >Next</Button> ) }
-                            {this.state.current === steps.length - 2 && (<Button type="primary" onClick={this.successMessage} >Done</Button> )}
+                            {this.state.current === steps.length - 1 && (<Button type="primary" onClick={this.successMessage} >Done</Button> )}
                             {this.state.current > 0 && (<Button style={{ margin: '0 8px' }} onClick={() => this.prev()}>Previous</Button> )}
                         </div>
                     </div>
