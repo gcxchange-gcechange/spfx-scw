@@ -12,6 +12,9 @@
     "test": "gulp test"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.3.0",
+    "@fortawesome/free-solid-svg-icons": "^6.3.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@microsoft/sp-core-library": "1.16.1",
     "@microsoft/sp-lodash-subset": "1.16.1",
     "@microsoft/sp-office-ui-fabric-core": "1.16.1",

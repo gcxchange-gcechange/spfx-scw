@@ -3,8 +3,8 @@ import styles from './Scw.module.scss';
 import { IScwProps } from './IScwProps';
 import { Steps, Button, message } from 'antd';
 import FistStep from "./FirstStep";
-
-
+import { Initial } from './InitialPage/Initial';
+import { IButtonStyles, PrimaryButton } from 'office-ui-fabric-react';
 import { MessageType } from 'antd/es/message/interface';
 
 const { Step } = Steps;
@@ -50,8 +50,11 @@ const steps = [
     }
 ];
 
+
 export interface IScwState {
     current: number;
+    step: number;
+    
 }
 
 
@@ -60,7 +63,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     public constructor(props: IScwProps, state: IScwState) {
         super(props);
         this.state = {
-            current: 0
+            current: 0,
+            step: 0
+            
         };
     }
 
@@ -74,6 +79,19 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         this.setState({ current });
     }
 
+    public handleClickEvent=():void=> {
+        const step = this.state.step + 1;
+        this.setState({
+           step
+        })
+    }
+
+    public buttonStyle: IButtonStyles = {
+        root: {
+            fontSize:'18px'
+        }
+    }
+
     public successMessage = (): MessageType  => {
         return (
             message.success({
@@ -82,19 +100,24 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         ) 
     }
 
-
-
-
+  
     public render(): React.ReactElement<IScwProps> {
         return (
             <div className={styles.scw}>
-                <div className={styles.container}>
-                    <div className={styles.row}>
-                        <Steps current={this.state.current}>
-                            {steps.map(item => ( 
+                {this.state.step === 0 
+                ? <>
+                <Initial/>
+                <PrimaryButton styles={ this.buttonStyle } text="Let's go" ariaLabel="Let's go" onClick={() => {this.handleClickEvent()}} className={ styles.centerButton }/>
+                </>
+                :
+                <div className={ styles.container }>
+                    <div className={ styles.row }>
+                        <Steps current={ this.state.current }>
+                            {steps.map(item => (
                                 item.title !== '9' ?
-                            <Step key={item.title} title={item.title}/>: null ))}
+                                <Step key={item.title} title={item.title} />: null ))}
                         </Steps>
+
                         <div className="steps-content">{steps[this.state.current].content}</div>
                         <div className="steps-action">
                             {this.state.current < steps.length - 1 && (<Button type="primary" onClick={this.next} >Next</Button> ) }
@@ -103,6 +126,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                         </div>
                     </div>
                 </div>
+                 }
             </div>
         );
     }
