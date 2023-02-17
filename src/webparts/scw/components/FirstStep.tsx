@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Input } from 'antd';
+import { Input, Form } from 'antd';
 
 export interface IFistStepProps {
 
@@ -27,15 +27,18 @@ export default class FistStep extends React.Component<IFistStepProps, IFistStepS
 
     public render(): React.ReactElement<IFistStepProps> {
 
-        const name = this.state.name;
+        // const name = this.state.name;
 
         return (
-            <div>
-                <Input type="text" placeholder="name" value={name}
-                onChange={this.handleOnChangeEvent} 
-                //  onChange = {(e) => this.setState({name: e.target.value})}
-                />
-            </div>
+            <>
+            <Form>
+                <Form.Item name="name" label={'name'}>
+                    <Input/>
+                {/* onChange={this.handleOnChangeEvent} 
+                //  onChange = {(e) => this.setState({name: e.target.value})} */}
+                </Form.Item>
+            </Form>
+            </>
         );
     }
 }
