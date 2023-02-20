@@ -72,13 +72,20 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         this.state = {
             current: 0,
             step: 0,
-            name: '',
+            name:'',
             
         };
 
         this.handleCallback = this.handleCallback.bind(this);
     }
 
+    componentDidMount(): void {
+        const getName = localStorage.getItem('name');
+        const parseData = JSON.parse(getName);
+        if(getName) {
+            this.setState({name: parseData});
+        }
+    }
  
 
     private next = (): void => {
@@ -87,8 +94,13 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     }
 
     private prev = (): void => {
+        
         const current = this.state.current - 1;
-        this.setState({ current });
+        const prevValue = localStorage.getItem("name")
+        if(prevValue) {
+            this.setState({name: prevValue});
+        }
+        this.setState({ current });   
     }
 
     public handleClickEvent=():void=> {
@@ -113,18 +125,25 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     }
 
 
+
+    // componentDidUpdate(prevProps: Readonly<IScwProps>, prevState: Readonly<IScwState>, snapshot?: any): void {
+    //     console.log("update",prevState.name)
+    //     if(this.state.name !== localStorage.getItem('name')) {
+    //         this.setState({name: localStorage.getItem('name')});
+    //     }
+    // }
  
     public handleCallback = (name: string): void => {
     
         this.setState({ 
             name: name
         }) ; 
+        localStorage.setItem('name', JSON.stringify(name));
     }
 
+  
 
-    // componentWillUpdate(nextProps: Readonly<IScwProps>, nextState: Readonly<IScwState>): void {
-    //     localStorage.setItem('name', JSON.stringify(nextState));
-    // }
+
      
     
     public render(): React.ReactElement<IScwProps> {
@@ -133,7 +152,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             {
                 step: '1',
                 title: '1',
-                content: <FirstStep handleCallback={this.handleCallback}/>
+                content: <FirstStep handleCallback={this.handleCallback} name={this.state.name}/>
 
             },
             {

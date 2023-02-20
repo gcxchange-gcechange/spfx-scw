@@ -4,7 +4,7 @@ import { Input, Form } from 'antd';
 
 
 export interface IFirstStepProps {
-   
+   name: string;
    handleCallback?: (name: string) => void;
 }
 
@@ -46,8 +46,11 @@ export default class FirstStep extends React.Component<IFirstStepProps, IFirstSt
             <>
             <Form>
                 <Form.Item name="name" label={'name'}  >
-                    <Input  showCount maxLength={20} onChange={this.handleOnChangeNameEvent} value={name}/>
-                
+                    { this.state.name ? <Input  showCount maxLength={20} onChange={this.handleOnChangeNameEvent} name={name}/> 
+                    :
+                     <Input  showCount maxLength={20} onChange={this.handleOnChangeNameEvent} value={name}/>
+                    }
+                    
                 </Form.Item>
             </Form>
             </>
@@ -60,10 +63,8 @@ export default class FirstStep extends React.Component<IFirstStepProps, IFirstSt
         // console.log("newName",newName);
         this.setState({name: newName});
         //send it to the parent
-        return (
-            
-            this.props.handleCallback("hello my child name is " + newName)
-        );
+        this.props.handleCallback("ChildName " + newName)
+       
     }
 }
 
