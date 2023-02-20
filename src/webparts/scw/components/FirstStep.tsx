@@ -1,44 +1,90 @@
 import * as React from 'react';
 import { Input, Form } from 'antd';
 
-export interface IFistStepProps {
 
+
+export interface IFirstStepProps {
+   
+   handleCallback?: (name: string) => void;
 }
 
-export interface IFistStepState {
+export interface IFirstStepState {
     name: string;
 }
 
 
 
-export default class FistStep extends React.Component<IFistStepProps, IFistStepState> {
-    public constructor(props: IFistStepProps, state: IFistStepState) {
+export default class FirstStep extends React.Component<IFirstStepProps, IFirstStepState> {
+    public constructor(props: IFirstStepProps, state: IFirstStepState) {
         super(props);
 
         this.state = {
             name: ''
         };
+
+        this.handleOnChangeNameEvent = this.handleOnChangeNameEvent.bind(this);
     }
 
-    handleOnChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) :void => { 
-        console.log(event.target.value);
-        this.setState({name: event.target.value})
-    }
+    
 
-    public render(): React.ReactElement<IFistStepProps> {
+    // componentDidUpdate(): void {
+    //     this.userData = JSON.parse(localStorage.getItem('name'));
+    //      console.log(this.userData);
+    //     if(localStorage.getItem('name')) {
+    //      this.setState({
+    //          name: this.userData.name
+    //      })
+    //     }
+    // }
 
-        // const name = this.state.name;
+    public render(): React.ReactElement<IFirstStepProps> {
+
+        const {name} = this.state;
+ 
 
         return (
             <>
             <Form>
-                <Form.Item name="name" label={'name'}>
-                    <Input/>
-                {/* onChange={this.handleOnChangeEvent} 
-                //  onChange = {(e) => this.setState({name: e.target.value})} */}
+                <Form.Item name="name" label={'name'}  >
+                    <Input  showCount maxLength={20} onChange={this.handleOnChangeNameEvent} value={name}/>
+                
                 </Form.Item>
             </Form>
             </>
         );
     }
+
+
+    private  handleOnChangeNameEvent = (event: React.ChangeEvent<HTMLInputElement>) :void => { 
+        const newName = event.target.value;
+        // console.log("newName",newName);
+        this.setState({name: newName});
+        //send it to the parent
+        return (
+            
+            this.props.handleCallback("hello my child name is " + newName)
+        );
+    }
 }
+
+
+// const FirstStep: React.FC<IFirstStepProps> = (props)=> {
+
+//     const handleOnChangeEvent = (event: any):void => {
+//         const userName = event.target.value;
+//         console.log(userName);
+       
+//     };
+
+
+
+//     return (
+//         <>
+//                 <FormItem name='name' label='name'>
+//                     <Input onChange={() => props.handleCallback}/>
+//                 </FormItem>
+//         </>
+//     );
+
+// }
+// export default FirstStep;
