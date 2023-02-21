@@ -128,14 +128,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     }
 
 
-
-    // componentDidUpdate(prevProps: Readonly<IScwProps>, prevState: Readonly<IScwState>, snapshot?: any): void {
-    //     console.log("update",prevState.name)
-    //     if(this.state.name !== localStorage.getItem('name')) {
-    //         this.setState({name: localStorage.getItem('name')});
-    //     }
-    // }
- 
     public handleCallback = (name: string): void => {
         localStorage.setItem('name', name); 
 
@@ -143,11 +135,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             name: name
         }) ; 
     }
-
-  
-
-
-     
+    
     
     public render(): React.ReactElement<IScwProps> {
 
