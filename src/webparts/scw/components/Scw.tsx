@@ -123,7 +123,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     }
 
     public successMessage = (): MessageType  => {
-        localStorage.removeItem('name');
+        // localStorage.removeItem('name');
         return (
             message.success({
                 content: "loaded!",
@@ -133,7 +133,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
 
     public handleCallback = (name: string): void => {
-        localStorage.setItem('name', name); 
+        // localStorage.setItem('name', name); 
 
         this.setState({ 
             name: name
@@ -175,7 +175,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         console.log("name", this.state.name);
 
-        const items = steps.map( item => ( item.title !== '9' ? { key: item.step, title: item.title } : null));
+        const items = steps.map( item => ( item.title !== '6' ? { key: item.step, title: item.title } : null));
 
         return (
             <div className={styles.scw}>
@@ -187,7 +187,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 :
                 <div className={ styles.container }>
                     <div className={ styles.row }>
-                        <Steps current={ this.state.current } items={items} />
+                        <Steps current={ this.state.current } labelPlacement='vertical' items={items} />
                         <div className="steps-content">{steps[this.state.current].content}</div>
                         <div className="steps-action">
                             {this.state.current < steps.length - 1 && (<Button type="primary" onClick={this.next} >Next</Button> ) }
