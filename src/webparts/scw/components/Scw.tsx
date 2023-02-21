@@ -6,7 +6,7 @@ import { IScwProps } from './IScwProps';
 import { MessageType } from 'antd/es/message/interface';
 import { Initial } from './InitialPage/Initial';
 import { IButtonStyles, PrimaryButton } from 'office-ui-fabric-react';
-import EightStep from './EightStep';
+import LastStep from './LastStep';
 
 // const { Step } = Steps;
 
@@ -90,8 +90,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     private next = (): void => {
         const current = this.state.current + 1;
+        const saveName = this.state.name;
         const getName = localStorage.getItem(JSON.stringify('name'));
-        this.setState({ current: current, name: getName });
+        this.setState({ current: current, name: saveName });
 
         console.log("name", getName)
     }
@@ -116,11 +117,13 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     public buttonStyle: IButtonStyles = {
         root: {
-            fontSize:'18px'
+            fontSize:'18px',
+            backgroundColor:'#004DB8'
         }
     }
 
     public successMessage = (): MessageType  => {
+        localStorage.removeItem('name');
         return (
             message.success({
                 content: "loaded!",
@@ -137,19 +140,34 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         }) ; 
     }
     
-    
     public render(): React.ReactElement<IScwProps> {
 
         const steps = [
             {
                 step: '1',
-                title: '1',
+                title: 'Details',
                 content: <FirstStep handleCallback={this.handleCallback} name={this.state.name}/>
 
             },
             {
-                title: '8',
-                content: <EightStep name={this.state.name}/>,
+                step: '2',
+                title: 'Classification',
+                content: 'second',
+            },
+            {
+                step: '3',
+                title: 'Terms of use',
+                content: 'third',
+            },
+             {
+                step: '4',
+                title: 'Owners & Members',
+                content: 'fourth',
+            },
+            {
+                step: '5',
+                title: 'Review & Submit',
+                content: <LastStep name={this.state.name}/>,
             },
         ]
 
@@ -184,78 +202,3 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     }
     
 }
-
-
-
-
-
-
-// const AntDesignStep: React.FC<IScwProps> = (props) => {
-    
-
-// const [form] = Form.useForm();
-
-//   const [current, setCurrent] = useState(0);
-//   const [name, setName] = useState('');
-
-//   const next = ():void => {
-//     setCurrent(current + 1);
-//   };
-
-//   const prev = ():void => {
-//     setCurrent(current - 1);
-//   };
-
-// const handleCallback = (name: string): void => {
-//     setName(name)
-//  }
-
-//  const steps = [
-//     {
-//       step: '1',
-//       title: 'First',
-//       content: <FirstStep handleCallback={handleCallback}/>,
-//     },
-//     {
-//       title: 'Seco',
-//       content: 'Second-content',
-//     },
-//     {
-//       title: 'Last',
-//       content: 'Last-content',
-//     },
-//   ];
-
-//   const items = steps.map((item) => ({ key: item.title, title: item.title }));
-
-
-//   return (
-//     <>
-//     <Form form={form}>
-//       <Steps current={current} items={items} />
-//       <div>{steps[current].content}</div>
-//       <div style={{ marginTop: 24 }}>
-//         {current < steps.length - 1 && (
-//           <Button type="primary" onClick={() => next()}>
-//             Next
-//           </Button>
-//         )}
-//         {current === steps.length - 1 && (
-//           <Button type="primary" onClick={() => message.success('Processing complete!')}>
-//             Done
-//           </Button>
-//         )}
-//         {current > 0 && (
-//           <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
-//             Previous
-//           </Button>
-//         )}
-//       </div>
-//       </Form>
-//     </>
-//   );
-// };
-
-// export default AntDesignStep;
-
-

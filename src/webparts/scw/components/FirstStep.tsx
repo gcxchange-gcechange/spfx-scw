@@ -36,9 +36,9 @@ export default class FirstStep extends React.Component<IFirstStepProps, IFirstSt
        
         return (
             <>
-            <Form>
+            <Form layout='vertical'>
                 <Form.Item name="name" label={'name'}  >
-                    { localStorage.getItem('name') ? <Input  showCount maxLength={30} onChange={this.handleOnChangeNameEvent} defaultValue={localStorage.getItem('name')}/>
+                    { this.props.name !== '' ? <Input  showCount maxLength={30} onChange={this.handleOnChangeNameEvent} defaultValue={this.props.name}/>
                     : <Input  showCount maxLength={20} onChange={this.handleOnChangeNameEvent} value={name}/>
                     }
                     
@@ -54,29 +54,7 @@ export default class FirstStep extends React.Component<IFirstStepProps, IFirstSt
         // console.log("newName",newName);
         this.setState({name: newName});
         //send it to the parent
-        this.props.handleCallback("ChildNameToParent " + newName)
+        this.props.handleCallback("cTP " + newName)
        
     }
 }
-
-
-// const FirstStep: React.FC<IFirstStepProps> = (props)=> {
-
-//     const handleOnChangeEvent = (event: any):void => {
-//         const userName = event.target.value;
-//         console.log(userName);
-       
-//     };
-
-
-
-//     return (
-//         <>
-//                 <FormItem name='name' label='name'>
-//                     <Input onChange={() => props.handleCallback}/>
-//                 </FormItem>
-//         </>
-//     );
-
-// }
-// export default FirstStep;
