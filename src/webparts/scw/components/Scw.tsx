@@ -6,6 +6,7 @@ import { IScwProps } from './IScwProps';
 import { MessageType } from 'antd/es/message/interface';
 import { Initial } from './InitialPage/Initial';
 import { IButtonStyles, PrimaryButton } from 'office-ui-fabric-react';
+import EightStep from './EightStep';
 
 // const { Step } = Steps;
 
@@ -147,8 +148,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
             },
             {
-                title: '2',
-                content: 'Second-content',
+                title: '8',
+                content: <EightStep name={this.state.name}/>,
             },
         ]
 
