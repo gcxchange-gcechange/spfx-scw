@@ -34,7 +34,7 @@ export class Initial extends React.Component {
             
             <Stack horizontal verticalAlign="center">
                 <Stack.Item grow={1} >
-                    <h2>Create a community</h2>
+                    <h1>Create a community</h1>
                     <p style={{fontSize:'18px'}}className={styles.mg0}>Collaborate with collegues across departments using Microsoft Teams and Sharepoint to share ideas, documents, and much more...</p>
                 </Stack.Item>
                 <Stack.Item grow={2}>
@@ -42,7 +42,7 @@ export class Initial extends React.Component {
                 </Stack.Item>
             </Stack>
 
-            <h3>A few things before you start</h3>
+            <h2>A few things before you start</h2>
             <p>To create a community, you will need to:</p>
  
             <Stack horizontal styles={stackStyles} horizontalAlign='center' verticalAlign="baseline" tokens={sectionStackTokens}>
