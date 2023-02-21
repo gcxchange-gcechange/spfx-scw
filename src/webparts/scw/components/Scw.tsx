@@ -65,8 +65,6 @@ export interface IScwState {
 
 
 export default class AntDesignStep extends React.Component<IScwProps, IScwState> {
-    userData: any;
-
     public constructor(props: IScwProps, state: IScwState) {
         super(props);
         this.state = {
@@ -79,24 +77,29 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         this.handleCallback = this.handleCallback.bind(this);
     }
 
-    componentDidMount(): void {
-        const getName = localStorage.getItem('name');
-        const parseData = JSON.parse(getName);
-        if(getName) {
-            this.setState({name: parseData});
-        }
-    }
+    // componentDidMount(): void {
+    //     const getName = localStorage.getItem('name');
+    //     console.log("getN",getName)
+    //     const parseData = JSON.parse(getName);
+    //     if(getName) {
+    //         this.setState({name: parseData});
+    //     }
+    // }
  
 
     private next = (): void => {
         const current = this.state.current + 1;
-        this.setState({ current });
+        const getName = localStorage.getItem(JSON.stringify('name'));
+        this.setState({ current: current, name: getName });
+
+        console.log("name", getName)
     }
 
     private prev = (): void => {
         
         const current = this.state.current - 1;
         const prevValue = localStorage.getItem("name")
+        
         if(prevValue) {
             this.setState({name: prevValue});
         }
@@ -134,11 +137,11 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     // }
  
     public handleCallback = (name: string): void => {
-    
+        localStorage.setItem('name', name); 
+
         this.setState({ 
             name: name
         }) ; 
-        localStorage.setItem('name', JSON.stringify(name));
     }
 
   

@@ -15,6 +15,8 @@ export interface IFirstStepState {
 
 
 export default class FirstStep extends React.Component<IFirstStepProps, IFirstStepState> {
+    // userData: any;
+
     public constructor(props: IFirstStepProps, state: IFirstStepState) {
         super(props);
 
@@ -27,28 +29,17 @@ export default class FirstStep extends React.Component<IFirstStepProps, IFirstSt
 
     
 
-    // componentDidUpdate(): void {
-    //     this.userData = JSON.parse(localStorage.getItem('name'));
-    //      console.log(this.userData);
-    //     if(localStorage.getItem('name')) {
-    //      this.setState({
-    //          name: this.userData.name
-    //      })
-    //     }
-    // }
-
     public render(): React.ReactElement<IFirstStepProps> {
 
         const {name} = this.state;
- 
 
+       
         return (
             <>
             <Form>
                 <Form.Item name="name" label={'name'}  >
-                    { this.state.name ? <Input  showCount maxLength={20} onChange={this.handleOnChangeNameEvent} name={name}/> 
-                    :
-                     <Input  showCount maxLength={20} onChange={this.handleOnChangeNameEvent} value={name}/>
+                    { localStorage.getItem('name') ? <Input  showCount maxLength={30} onChange={this.handleOnChangeNameEvent} defaultValue={localStorage.getItem('name')}/>
+                    : <Input  showCount maxLength={20} onChange={this.handleOnChangeNameEvent} value={name}/>
                     }
                     
                 </Form.Item>
@@ -63,7 +54,7 @@ export default class FirstStep extends React.Component<IFirstStepProps, IFirstSt
         // console.log("newName",newName);
         this.setState({name: newName});
         //send it to the parent
-        this.props.handleCallback("ChildName " + newName)
+        this.props.handleCallback("ChildNameToParent " + newName)
        
     }
 }
