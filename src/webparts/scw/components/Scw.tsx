@@ -7,48 +7,6 @@ import { Initial } from './InitialPage/Initial';
 import { IButtonStyles, PrimaryButton } from 'office-ui-fabric-react';
 import { MessageType } from 'antd/es/message/interface';
 
-const { Step } = Steps;
-
-const steps = [
-    {
-        title: '1',
-        content: <FistStep/>,
-    },
-    {
-        title: '2',
-        content: 'Second-content',
-    },
-    {
-        title: '3',
-        content: 'Third-content',
-    },
-    {
-        title: '4',
-        content: 'Fourth-content',
-    },
-    {
-        title: '5',
-        content: 'Fifth-content',
-    },
-    {
-        title: '6',
-        content: 'Sixth-content',
-    },
-    {
-        title: '7',
-        content: 'Seventh-content',
-    },
-    {
-        title: '8',
-        content: 'Last-content',
-        // status: 'finished'
-    },
-    {
-        title: '9',
-        content: 'Last-content',
-        status: 'finished'
-    }
-];
 
 
 export interface IScwState {
@@ -102,6 +60,42 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
   
     public render(): React.ReactElement<IScwProps> {
+
+        const steps = [
+            {
+                step:'1',
+                title: 'Details',
+                content: <FistStep/>,
+            },
+            {
+                step:'2',
+                title: 'Classification',
+                content: 'Second-content',
+            },
+            {
+                step:'3',
+                title: 'Terms of use',
+                content: 'Third-content',
+            },
+            {
+                step:'4',
+                title: 'Owners & Members',
+                content: 'Fourth-content',
+            },
+            {
+                step:'5',
+                title: 'Review & Submit',
+                content: 'Fifth-content',
+            },
+            {
+                title: '6',
+                content: 'Sixth-content',
+            }
+        ];
+
+        const items = steps.map( item => ( item.title !== '6' ? { key: item.step, title: item.title } : null));  
+        
+        
         return (
             <div className={styles.scw}>
                 {this.state.step === 0 
@@ -112,12 +106,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 :
                 <div className={ styles.container }>
                     <div className={ styles.row }>
-                        <Steps current={ this.state.current }>
-                            {steps.map(item => (
-                                item.title !== '9' ?
-                                <Step key={item.title} title={item.title} />: null ))}
-                        </Steps>
-
+                        <Steps current={ this.state.current } labelPlacement='vertical' items={items}/>
                         <div className="steps-content">{steps[this.state.current].content}</div>
                         <div className="steps-action">
                             {this.state.current < steps.length - 1 && (<Button type="primary" onClick={this.next} >Next</Button> ) }
