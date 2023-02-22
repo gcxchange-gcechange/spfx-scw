@@ -29,11 +29,19 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     private next = (): void => {
         const current = this.state.current + 1;
+
+
         this.setState({ current });
     }
 
     private prev = (): void => {
         const current = this.state.current - 1;
+        
+        
+        
+        
+        
+        
         this.setState({ current });
     }
 
@@ -41,15 +49,16 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         const step = this.state.step + 1;
         this.setState({
            step
-        })
+        });
     }
 
     public buttonStyle: IButtonStyles = {
         root: {
             fontSize:'18px'
         }
-    }
-
+    }   
+    
+    
     public successMessage = (): MessageType  => {
         return (
             message.success({
@@ -59,6 +68,14 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     }
 
   
+    
+    
+    
+    
+    
+    
+    
+    
     public render(): React.ReactElement<IScwProps> {
 
         const steps = [
