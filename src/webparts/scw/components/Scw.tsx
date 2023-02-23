@@ -7,6 +7,8 @@ import { MessageType } from 'antd/es/message/interface';
 import { Initial } from './InitialPage/Initial';
 import { IButtonStyles, PrimaryButton } from 'office-ui-fabric-react';
 import LastStep from './LastStep';
+import { MessageType } from 'antd/es/message/interface';
+
 
 
 export interface IScwState {
@@ -29,6 +31,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     private next = (): void => {
         const current = this.state.current + 1;
+
+
         const saveName = this.state.name;
         // const getName = localStorage.getItem(JSON.stringify('name'));
         this.setState({ current: current, name: saveName });
@@ -37,6 +41,12 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     private prev = (): void => {
         
         const current = this.state.current - 1;
+        
+        
+        
+        
+        
+        
         // const prevValue = localStorage.getItem("name")
         
         // if(prevValue) {
@@ -49,7 +59,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         const step = this.state.step + 1;
         this.setState({
            step
-        })
+        });
     }
 
     public buttonStyle: IButtonStyles = {
@@ -57,8 +67,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             fontSize:'18px',
             backgroundColor:'#004DB8'
         }
-    }
-
+    }   
+    
+    
     public successMessage = (): MessageType  => {
         // localStorage.removeItem('name');
         return (
@@ -67,6 +78,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             })
         ) 
     }
+
 
     public handleCallback = (name: string): void => {
         // localStorage.setItem('name', name); 
