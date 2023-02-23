@@ -76,7 +76,7 @@
         border-radius: 2px;
         background-color: #fafafa;
         min-height: 200px;
-        text-align: center;
+        // text-align: center;
         padding-top: 80px;
     }
 
@@ -182,4 +182,10 @@
     .p {
         font-size: 18px;
     }
+}
+
+.instruction {
+    font-size: 14px;
+    color:gray;
+    margin:0px;
 }
