@@ -3,11 +3,11 @@ import styles from './Scw.module.scss';
 import { Steps, Button, message} from 'antd';
 import FirstStep from "./FirstStep";
 import { IScwProps } from './IScwProps';
-import { MessageType } from 'antd/es/message/interface';
 import { Initial } from './InitialPage/Initial';
 import { IButtonStyles, PrimaryButton } from 'office-ui-fabric-react';
 import LastStep from './LastStep';
 import { MessageType } from 'antd/es/message/interface';
+import FourthStep from './FourthStep';
 
 
 
@@ -24,7 +24,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         this.state = {
             current: 0,
             step: 0,
-            name:'',   
+            name:'',  
         };
         this.handleCallback = this.handleCallback.bind(this);
     }
@@ -40,18 +40,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     private prev = (): void => {
         
-        const current = this.state.current - 1;
-        
-        
-        
-        
-        
-        
-        // const prevValue = localStorage.getItem("name")
-        
-        // if(prevValue) {
-        //     this.setState({name: prevValue});
-        // }
+        const current = this.state.current - 1;       
         this.setState({ current });   
     }
 
@@ -71,7 +60,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     
     
     public successMessage = (): MessageType  => {
-        // localStorage.removeItem('name');
         return (
             message.success({
                 content: "loaded!",
@@ -82,7 +70,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     public handleCallback = (name: string): void => {
         // localStorage.setItem('name', name); 
-
         this.setState({ 
             name: name
         }) ; 
@@ -110,12 +97,12 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
              {
                 step: '4',
                 title: 'Owners & Members',
-                content: 'fourth',
+                content: <FourthStep/>,
             },
             {
                 step: '5',
                 title: 'Review & Submit',
-                content: <LastStep name={this.state.name}/>,
+                content: <LastStep handleCallback={this.handleCallback} name={this.state.name}/>,
             },
         ]
 
