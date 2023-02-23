@@ -1,7 +1,5 @@
-import { Input, Select } from 'antd';
-import Form from 'antd/es/form/Form';
-import FormItem from 'antd/es/form/FormItem';
 import * as React from 'react';
+import { Label, TextField } from 'office-ui-fabric-react';
 
 export interface ILastStepProps {
     name: string;
@@ -12,7 +10,6 @@ export interface ILastStepProps {
      name: string;
  }
 
-const {Option} = Select;
 
 export default class FirstStep extends React.Component<ILastStepProps, ILastStepState> {
 
@@ -21,31 +18,30 @@ export default class FirstStep extends React.Component<ILastStepProps, ILastStep
             this.state = {
             name: ''
         }
+
+        this.onUpdate = this.onUpdate.bind(this);
     }
 
+
+    private  onUpdate = (event: React.ChangeEvent<HTMLInputElement>) :void => { 
+        const updatedName = event.target.value;
+
+        this.setState({name: updatedName});
+        //send it to the parent
+        this.props.handleCallback("Name change from last step " + updatedName)
+       
+    }
     
     public render(): React.ReactElement<ILastStepProps>{
 
-        console.log("prosp", this.props.name);
+        console.log("props", this.props.name);
 
         return (
-            <Form layout='vertical'>
-                <FormItem name='template' label='Community template'>
-                    <Select>
-                        <Option value='template1'>Temp1</Option>
-                        <Option value='template2'>Temp 2</Option>
-                    </Select>
-                </FormItem>
-                <FormItem name='name' label='English community name'>
-                    <Input defaultValue={this.props.name}/>
-                </FormItem>
-                <FormItem name='FrCommName' label='French community name'>
-                    <Input/>
-                </FormItem>
-                <FormItem name='EngDes' label='English description'>
-                    <Input/>
-                </FormItem>
-            </Form>
+
+            <>
+                <Label htmlFor={'name'}>Community purpose</Label>
+                <TextField id={'name'} defaultValue={this.props.name} onChange={this.onUpdate}/>
+            </>
         );
     }
 
