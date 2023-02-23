@@ -5,7 +5,7 @@ import {
   IPropertyPaneConfiguration,
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
-import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
+import { BaseClientSideWebPart, WebPartContext } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
 import * as strings from 'ScwWebPartStrings';
@@ -14,6 +14,7 @@ import AntDesignStep from './components/Scw';
 
 export interface IScwWebPartProps {
   description: string;
+  context: WebPartContext;
  
 }
 
@@ -31,6 +32,7 @@ export default class ScwWebPart extends BaseClientSideWebPart<IScwWebPartProps> 
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
         userDisplayName: this.context.pageContext.user.displayName,
+        context: this.properties.context
         
       }
     );
