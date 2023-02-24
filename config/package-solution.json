@@ -14,12 +14,6 @@
       "termsOfUseUrl": "",
       "mpnId": "Undefined-1.16.1"
     },
-    "webApiPermissionRequests": [
-      {
-        "resource": "Microsoft Graph",
-        "scope": "User.ReadBasic.All"
-      }
-    ],
     "metadata": {
       "shortDescription": {
         "default": "spfx-scw description"
@@ -37,6 +31,12 @@
         "description": "The feature that activates elements of the spfx-scw solution.",
         "id": "8c40075e-6ab9-4203-93e0-8cee8448ad49",
         "version": "1.0.0.0"
+      }
+    ],
+    "webApiPermissionRequests": [
+      {
+        "resource": "Microsoft Graph",
+        "scope": "User.ReadBasic.All"
       }
     ]
   },
