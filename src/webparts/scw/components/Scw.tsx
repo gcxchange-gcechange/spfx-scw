@@ -10,21 +10,24 @@ import { MessageType } from 'antd/es/message/interface';
 import FourthStep from './FourthStep';
 
 
-
 export interface IScwState {
     current: number;
     step: number;
     name: string;
+    people: []
 }
 
 
 export default class AntDesignStep extends React.Component<IScwProps, IScwState> {
+
+
     public constructor(props: IScwProps, state: IScwState) {
         super(props);
         this.state = {
             current: 0,
             step: 0,
-            name:'',  
+            name:'', 
+            people: [],
         };
         this.handleCallback = this.handleCallback.bind(this);
     }
@@ -74,6 +77,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             name: name
         }) ; 
     }
+
     
     public render(): React.ReactElement<IScwProps> {
 
@@ -97,7 +101,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
              {
                 step: '4',
                 title: 'Owners & Members',
-                content: <FourthStep/>,
+                content: <FourthStep context={this.props.context}/>,
             },
             {
                 step: '5',
@@ -114,6 +118,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         return (
             <div className={styles.scw}>
+                <PrimaryButton onClick={this.getusers}>click</PrimaryButton>
                 {this.state.step === 0 
                 ? <>
                 <Initial/>
