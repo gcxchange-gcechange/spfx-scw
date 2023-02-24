@@ -12,6 +12,8 @@ import * as strings from 'ScwWebPartStrings';
 import { IScwProps } from './components/IScwProps';
 import AntDesignStep from './components/Scw';
 
+
+
 export interface IScwWebPartProps {
   description: string;
   context: WebPartContext;
@@ -32,7 +34,7 @@ export default class ScwWebPart extends BaseClientSideWebPart<IScwWebPartProps> 
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
         userDisplayName: this.context.pageContext.user.displayName,
-        context: this.properties.context
+        context: this.context
         
       }
     );
