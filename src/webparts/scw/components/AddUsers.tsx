@@ -17,8 +17,6 @@ export default class AUsers extends React.Component<IAddUsersProps> {
 
 public _getPeoplePickerItems = (items: []):void => {
     console.log("Items", items);
-        
-
    
     this.setState({
         peopleList: items
@@ -28,35 +26,26 @@ public _getPeoplePickerItems = (items: []):void => {
   };
 
 
-  
-
-
 
     public render(): React.ReactElement<IAddUsersProps>  {
 
-    
-        const users = this.props.peopleList;
-    
-         users.forEach((user) => {
-            const newItem = user[0];
-            console.log(newItem)
-         })
+        console.log(this.props.peopleList);
 
         return(
 
-            <PeoplePicker
-            context={this.props.context}
-            titleText="Pick"
-            required={true}
-            personSelectionLimit={3}
-            groupName={""} // Leave this blank in case you want to filter from all users
-            onChange={this._getPeoplePickerItems}
-            showHiddenInUI={false}
-            resolveDelay={1000}
-            defaultSelectedUsers = {[this.props.context.pageContext.user.email]} //sets the owner of page
-        
-        
-            />
+            <> 
+                <PeoplePicker
+                context={this.props.context}
+                titleText="Owners"
+                required={true}
+                personSelectionLimit={3}
+                groupName={""} // Leave this blank in case you want to filter from all users
+                onChange={this._getPeoplePickerItems}
+                showHiddenInUI={false}
+                resolveDelay={1000}
+                defaultSelectedUsers = {[this.props.peopleList.toString()]} //sets the owner of page
+                />
+            </>
         );
 
     }

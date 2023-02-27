@@ -61,10 +61,14 @@ export default class FourthStep extends React.Component<IFourthStepProps, IFourt
     public handleOwnerMembCallback = (items: []): void => {
         // localStorage.setItem('name', name);
 
-     console.log("Item", items)
+        // eslint-disable-next-line dot-notation
+        const values = items.map(item => items[item]['id']);
+
+
+     console.log("FourthStepItems", items)
     
         this.setState({ 
-            peopleList: items
+            peopleList: values
         }) ; 
 
         this.props.getOwnersCallback(items)

@@ -2,13 +2,14 @@ import * as React from 'react';
 import { Label, TextField } from 'office-ui-fabric-react';
 
 import { WebPartContext } from '@microsoft/sp-webpart-base';
-import AddUsers from './AddUsers';
+import { PeoplePicker } from '@pnp/spfx-controls-react/lib/PeoplePicker';
+// import AddUsers from './AddUsers';
 
 export interface ILastStepProps {
     context: WebPartContext;
     name: string;
-    handleCallback?: (name: string) => void;
     peopleList: string[];
+    handleCallback?: (name: string) => void;
     getOwnersCallback?: (item: []) => void;
 
  }
@@ -37,29 +38,33 @@ export default class FirstStep extends React.Component<ILastStepProps, ILastStep
        
     }
 
-    public handleOwnerMembCallback = (items: []): void => {
-        // localStorage.setItem('name', name);
+    // public handleOwnerMembCallback = (items: []): void => {
+    //     // localStorage.setItem('name', name);
 
-     console.log("Item", items)
+    //  console.log("Items", items)
     
-        this.setState({ 
-            peopleList: items
-        }) ; 
-    }
+    //     this.setState({ 
+    //         peopleList: items
+    //     }) ; 
+    // }
     
     public render(): React.ReactElement<ILastStepProps>{
 
-        console.log("props", this.props.peopleList);
 
-    
-
+      
         return (
             
             <>
                 <Label htmlFor={'name'}>Community purpose</Label>
                 <TextField id={'name'} defaultValue={this.props.name} onChange={this.onUpdate}/>
+               
+               <PeoplePicker context={this.props.context}
+                defaultSelectedUsers={this.props.peopleList}/>
 
-                <AddUsers context={this.props.context} peopleList={this.props.peopleList} getOwnersCallback={this.handleOwnerMembCallback} />
+                
+                
+
+                {/* <AddUsers context={this.props.context} peopleList={...this.props.peopleList} getOwnersCallback={this.handleOwnerMembCallback} /> */}
                 {/* <PeoplePicker
                     context={this.props.context} 
                     titleText='Owners'
@@ -67,7 +72,7 @@ export default class FirstStep extends React.Component<ILastStepProps, ILastStep
                     
                 
                 /> */}
-                {/* <TextField defaultValue={this.props.peopleList.toString()}/> */}
+    
             </>
         );
     }

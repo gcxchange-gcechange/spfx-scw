@@ -32,7 +32,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             current: 0,
             step: 0,
             name:'', 
-            peopleList: [],
+            peopleList: [this.props.context.pageContext.user.email],
             commPurpose: '',
             FrCommName: '',
             shEngDesc: '',
@@ -92,10 +92,13 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     public handleOwnerMembCallback = (items: []): void => {
         // localStorage.setItem('name', name);
 
-     console.log("Item", items)
+    // eslint-disable-next-line dot-notation
+    const values = items.map(item => items[item]['id']);
+
+     console.log("Item", values)
     
         this.setState({ 
-            peopleList: items
+            peopleList: values
         }) ; 
     }
 
@@ -132,7 +135,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         ]
 
         
-
         console.log("name", this.state.name);
         console.log("user", this.state.peopleList)
 
