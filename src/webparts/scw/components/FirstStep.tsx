@@ -55,10 +55,10 @@ export default class FirstStep extends React.Component<IFirstStepProps, IFirstSt
 
             <h2>Community description</h2>
             <p>The community descriptions will be visible to users when they use the {`"All communities"`} page and when they search for it.</p>
-            <Label>English community name</Label>
+            <Label>English description name</Label>
             <p className={styles.instruction}>Max. 33 characters.</p>
             <TextField/>
-            <Label>French community name</Label>
+            <Label>French description name</Label>
             <p className={styles.instruction}>Max. 33 characters.</p>
             <TextField/>
             
