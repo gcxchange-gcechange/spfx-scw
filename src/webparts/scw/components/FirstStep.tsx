@@ -10,11 +10,7 @@ export interface IFirstStepProps {
 }
 
 export interface IFirstStepState {
-    name: string;
-    commPurpose: string;
-    FrCommName: string;
-    shEngDesc: string;
-    shFrDesc: string;
+  
 }
 
 
@@ -25,14 +21,7 @@ export default class FirstStep extends React.Component<IFirstStepProps, IFirstSt
     public constructor(props: IFirstStepProps, state: IFirstStepState) {
         super(props);
 
-        this.state = {
-            name: '',
-            commPurpose: '',
-            FrCommName: '',
-            shEngDesc: '',
-            shFrDesc: ''
-        };
-
+     
         this.handleOnChangeNameEvent = this.handleOnChangeNameEvent.bind(this);
     }
 
@@ -40,7 +29,7 @@ export default class FirstStep extends React.Component<IFirstStepProps, IFirstSt
 
     public render(): React.ReactElement<IFirstStepProps> {
 
-        const {name} = this.state;
+        const {name} = this.props;
 
        
         return (

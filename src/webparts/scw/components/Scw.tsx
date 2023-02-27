@@ -14,7 +14,12 @@ export interface IScwState {
     current: number;
     step: number;
     name: string;
-    people: []
+    peopleList: string[];
+    commPurpose: string;
+    FrCommName: string;
+    shEngDesc: string;
+    shFrDesc: string;
+    
 }
 
 
@@ -27,9 +32,15 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             current: 0,
             step: 0,
             name:'', 
-            people: [],
+            peopleList: [],
+            commPurpose: '',
+            FrCommName: '',
+            shEngDesc: '',
+            shFrDesc: ''
         };
+
         this.handleCallback = this.handleCallback.bind(this);
+        this.handleOwnerMembCallback = this.handleOwnerMembCallback.bind(this);
     }
 
     private next = (): void => {
@@ -78,6 +89,16 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         }) ; 
     }
 
+    public handleOwnerMembCallback = (items: []): void => {
+        // localStorage.setItem('name', name);
+
+     console.log("Item", items)
+    
+        this.setState({ 
+            peopleList: items
+        }) ; 
+    }
+
     
     public render(): React.ReactElement<IScwProps> {
 
@@ -101,24 +122,24 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
              {
                 step: '4',
                 title: 'Owners & Members',
-                content: <FourthStep context={this.props.context}/>,
+                content: <FourthStep context={this.props.context} peopleList={this.state.peopleList} getOwnersCallback={this.handleOwnerMembCallback}/>,
             },
             {
                 step: '5',
                 title: 'Review & Submit',
-                content: <LastStep handleCallback={this.handleCallback} name={this.state.name}/>,
+                content: <LastStep handleCallback={this.handleCallback} name={this.state.name} peopleList={this.state.peopleList} context={this.props.context} getOwnersCallback={this.handleOwnerMembCallback}/>,
             },
         ]
 
         
 
         console.log("name", this.state.name);
+        console.log("user", this.state.peopleList)
 
         const items = steps.map( item => ( item.title !== '6' ? { key: item.step, title: item.title } : null));
 
         return (
             <div className={styles.scw}>
-                <PrimaryButton onClick={this.getusers}>click</PrimaryButton>
                 {this.state.step === 0 
                 ? <>
                 <Initial/>
