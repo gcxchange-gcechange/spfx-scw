@@ -25,6 +25,7 @@ export interface IScwState {
 
 export default class AntDesignStep extends React.Component<IScwProps, IScwState> {
 
+   private owner = this.props.context.pageContext.user.email;
 
     public constructor(props: IScwProps, state: IScwState) {
         super(props);
@@ -32,7 +33,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             current: 0,
             step: 0,
             name:'', 
-            peopleList: [this.props.context.pageContext.user.email],
+            peopleList: [this.owner],
             commPurpose: '',
             FrCommName: '',
             shEngDesc: '',
@@ -91,19 +92,25 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     public handleOwnerMembCallback = (items: []): void => {
         // localStorage.setItem('name', name);
+        // const users = items.map((item) => {
+        //     return(
+        //         // eslint-disable-next-line dot-notation
+        //         items[item]['secondaryText']
+        //     )
+        // })
 
-    // eslint-disable-next-line dot-notation
-    const values = items.map(item => items[item]['id']);
 
-     console.log("Item", values)
+     console.log("ItemSCWValues", items);
+
     
         this.setState({ 
-            peopleList: values
+            peopleList: items
         }) ; 
     }
 
     
     public render(): React.ReactElement<IScwProps> {
+
 
         const steps = [
             {
@@ -134,9 +141,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             },
         ]
 
-        
-        console.log("name", this.state.name);
-        console.log("user", this.state.peopleList)
 
         const items = steps.map( item => ( item.title !== '6' ? { key: item.step, title: item.title } : null));
 

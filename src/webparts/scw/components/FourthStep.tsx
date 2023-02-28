@@ -1,14 +1,13 @@
 import * as React from 'react';
-// import {IPersonaProps} from 'office-ui-fabric-react';
+
 // import { MSGraphClientV3 } from '@microsoft/sp-http';
 // import { WebPartContext } from "@microsoft/sp-webpart-base";
 // import * as MicrosoftGraph from "@microsoft/microsoft-graph-types";
 // import { GraphError } from '@microsoft/microsoft-graph-clientv1';
 
-// import { NormalPeoplePicker} from '@fluentui/react/lib/Pickers';
-// import { PeoplePicker, PrincipalType } from "@pnp/spfx-controls-react/lib/PeoplePicker";
+import { PeoplePicker} from "@pnp/spfx-controls-react/lib/PeoplePicker";
 import { WebPartContext } from '@microsoft/sp-webpart-base';
-import AddUsers from './AddUsers';
+// import AddUsers from './AddUsers';
 
 
 
@@ -46,33 +45,40 @@ export default class FourthStep extends React.Component<IFourthStepProps, IFourt
 
 
 
-    //   public _getPeoplePickerItems = (items: []):void => {
-        
-    //     console.log("Items", items)
-
-        
-    //     this.setState({
-    //         peopleList: items
-    //     });
+      public _getPeoplePickerItems = (items:[]):void => {
        
-    //     this.props.getOwnersCallback(items);
-    //   };
-
-    public handleOwnerMembCallback = (items: []): void => {
-        // localStorage.setItem('name', name);
-
+        
         // eslint-disable-next-line dot-notation
-        const values = items.map(item => items[item]['id']);
+        items.map((item ) => {
+            
+            return(
+
+                this.setState({
+                    // eslint-disable-next-line dot-notation
+                    peopleList:  item['secondayText']
+                })
+            
+            );
+        })
+       
+        this.props.getOwnersCallback(items);
+      };
+
+    // public handleOwnerMembCallback = (items: []): void => {
+    //     // localStorage.setItem('name', name);
+
+    //     // eslint-disable-next-line dot-notation
+    //     const values = items.map(item => items[item]['id']);
 
 
-     console.log("FourthStepItems", items)
+    //  console.log("FourthStepItems", items)
     
-        this.setState({ 
-            peopleList: values
-        }) ; 
+    //     this.setState({ 
+    //         peopleList: values
+    //     }) ; 
 
-        this.props.getOwnersCallback(items)
-    }
+    //     this.props.getOwnersCallback(items)
+    // }
 
       
       
@@ -83,8 +89,8 @@ export default class FourthStep extends React.Component<IFourthStepProps, IFourt
 
         return (
             <>
-            <AddUsers context={this.props.context} peopleList={this.props.peopleList} getOwnersCallback={this.handleOwnerMembCallback} />
-            {/* <PeoplePicker
+            {/* <AddUsers context={this.props.context} peopleList={this.props.peopleList} getOwnersCallback={this.handleOwnerMembCallback} /> */}
+            <PeoplePicker
             context={this.props.context}
             titleText="Invite Owners"
             required={true}
@@ -92,12 +98,9 @@ export default class FourthStep extends React.Component<IFourthStepProps, IFourt
             groupName={""} // Leave this blank in case you want to filter from all users
             onChange={this._getPeoplePickerItems}
             showHiddenInUI={false}
-            principalTypes={[PrincipalType.User]}
             resolveDelay={1000} 
-            defaultSelectedUsers = {[this.props.context.pageContext.user.email]} //sets the owner of page
-          
-          
-            /> */}
+            defaultSelectedUsers = {this.props.peopleList} //sets the owner of page
+            />
 
             </>
         );

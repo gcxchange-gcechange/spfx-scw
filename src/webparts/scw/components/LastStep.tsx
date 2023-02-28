@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Label, TextField } from 'office-ui-fabric-react';
 
 import { WebPartContext } from '@microsoft/sp-webpart-base';
-import { PeoplePicker } from '@pnp/spfx-controls-react/lib/PeoplePicker';
+// import { PeoplePicker } from '@pnp/spfx-controls-react/lib/PeoplePicker';
 // import AddUsers from './AddUsers';
 
 export interface ILastStepProps {
@@ -50,16 +50,29 @@ export default class FirstStep extends React.Component<ILastStepProps, ILastStep
     
     public render(): React.ReactElement<ILastStepProps>{
 
-
-      
+        
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // const users: any  = this.props.peopleList.map((user) => {
+        //     return (
+        //         // eslint-disable-next-line dot-notation
+        //         users[user]['secondaryText']
+        //         );
+        //     })
+            console.log("LastProps", this.props.peopleList)
+            
         return (
             
             <>
                 <Label htmlFor={'name'}>Community purpose</Label>
                 <TextField id={'name'} defaultValue={this.props.name} onChange={this.onUpdate}/>
+
+                <TextField  defaultValue={this.props.peopleList.toString()} multiline autoAdjustHeight/>
+                
+
+
                
-               <PeoplePicker context={this.props.context}
-                defaultSelectedUsers={this.props.peopleList}/>
+               {/* <PeoplePicker context={this.props.context}
+                defaultSelectedUsers={users}/> */}
 
                 
                 
