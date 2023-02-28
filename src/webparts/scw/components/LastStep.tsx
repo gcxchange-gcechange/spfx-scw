@@ -3,7 +3,9 @@ import * as React from 'react';
 import { Label, TextField } from 'office-ui-fabric-react';
 
 import { WebPartContext } from '@microsoft/sp-webpart-base';
-import { PeoplePicker } from '@pnp/spfx-controls-react/lib/PeoplePicker';
+// import { PeoplePicker } from '@pnp/spfx-controls-react/lib/PeoplePicker';
+import AddUsers from './AddUsers';
+
 
 export interface ILastStepProps {
     context: WebPartContext;
@@ -26,6 +28,7 @@ export default class FirstStep extends React.Component<ILastStepProps, ILastStep
         
 
         this.onUpdate = this.onUpdate.bind(this);
+  
     }
 
 
@@ -38,15 +41,19 @@ export default class FirstStep extends React.Component<ILastStepProps, ILastStep
        
     }
 
-    // public handleOwnerMembCallback = (items: []): void => {
-    //     // localStorage.setItem('name', name);
+    private updateDefaultValues = ( username: []):void  => {
+        const newValues = username;
 
-    //  console.log("Items", items)
-    
-    //     this.setState({ 
-    //         peopleList: items
-    //     }) ; 
-    // }
+        this.setState({peopleList: newValues})
+
+        this.props.getOwnersCallback(newValues)
+     
+    }
+
+   
+
+
+
     
     public render(): React.ReactElement<ILastStepProps>{
 
@@ -56,7 +63,6 @@ export default class FirstStep extends React.Component<ILastStepProps, ILastStep
         peopleList.forEach(user => {
             username.push(user)
         })
-        console.log(username)
 
        
         return (
@@ -64,10 +70,10 @@ export default class FirstStep extends React.Component<ILastStepProps, ILastStep
             <>
 
                 <Label htmlFor={'name'}>Community purpose</Label>
-                <TextField id={'name'} defaultValue={this.props.name} onChange={this.onUpdate}/>   
-                <PeoplePicker titleText='Owners' context={this.props.context}  defaultSelectedUsers={peopleList}/>
+                <TextField id={'name'} defaultValue={this.props.name} onChange={this.onUpdate}/>  
+                {/* <PeoplePicker titleText='Owners1' context={this.props.context}  defaultSelectedUsers={username} onChange={this.updateDefaultValues}/> */}
+                <AddUsers context={this.props.context} peopleList={this.props.peopleList} getOwnersCallback={this.updateDefaultValues} />
 
-                {/* <AddUsers context={this.props.context} peopleList={...this.props.peopleList} getOwnersCallback={this.handleOwnerMembCallback} /> */}
     
             </>
         );

@@ -5,9 +5,9 @@ import * as React from 'react';
 // import * as MicrosoftGraph from "@microsoft/microsoft-graph-types";
 // import { GraphError } from '@microsoft/microsoft-graph-clientv1';
 
-import { PeoplePicker} from "@pnp/spfx-controls-react/lib/PeoplePicker";
+// import { PeoplePicker} from "@pnp/spfx-controls-react/lib/PeoplePicker";
 import { WebPartContext } from '@microsoft/sp-webpart-base';
-// import AddUsers from './AddUsers';
+import AddUsers from './AddUsers';
 
 
 
@@ -46,43 +46,33 @@ export default class FourthStep extends React.Component<IFourthStepProps, IFourt
 
 
       public _getPeoplePickerItems = (items:[]):void => {
-       
-        
+               
         // eslint-disable-next-line dot-notation
         items.map((item ) => {
             
             return(
-
                 this.setState({
                     // eslint-disable-next-line dot-notation
                     peopleList:  item['secondayText']
                 })
-            
             );
         })
        
         this.props.getOwnersCallback(items);
       };
 
-    // public handleOwnerMembCallback = (items: []): void => {
-    //     // localStorage.setItem('name', name);
-
-    //     // eslint-disable-next-line dot-notation
-    //     const values = items.map(item => items[item]['id']);
-
-
-    //  console.log("FourthStepItems", items)
+    public handleOwnerMembCallback = (items: []): void => {
+        // localStorage.setItem('name', name);
     
-    //     this.setState({ 
-    //         peopleList: values
-    //     }) ; 
-
-    //     this.props.getOwnersCallback(items)
-    // }
+        this.setState({ 
+            peopleList: items
+        }) ; 
+        console.log("PropsToParent",this.props.getOwnersCallback(items));
+        this.props.getOwnersCallback(items)
+    }
 
       
-      
-
+    
 
     public render(): React.ReactElement<IFourthStepProps>  {
 
@@ -96,8 +86,8 @@ export default class FourthStep extends React.Component<IFourthStepProps, IFourt
                 individual {`doesn't`}  have an account, you can invite them to sign up below. If you {`don't`} want to invite members just yet, no problem. We will provide detailed instructions on how
                 to do this once your community has been created.</p>
                 
-                {/* <AddUsers context={this.props.context} peopleList={this.props.peopleList} getOwnersCallback={this.handleOwnerMembCallback} /> */}
-                <PeoplePicker
+                <AddUsers context={this.props.context} peopleList={this.props.peopleList} getOwnersCallback={this.handleOwnerMembCallback} />
+                {/* <PeoplePicker
                 context={this.props.context}
                 titleText="Invite Owners"
                 required={true}
@@ -107,7 +97,7 @@ export default class FourthStep extends React.Component<IFourthStepProps, IFourt
                 showHiddenInUI={false}
                 resolveDelay={1000} 
                 defaultSelectedUsers = {this.props.peopleList} //sets the owner of page
-                />
+                /> */}
 
             </>
         );

@@ -43,7 +43,7 @@ public _getPeoplePickerItems = (items: []):void => {
                 onChange={this._getPeoplePickerItems}
                 showHiddenInUI={false}
                 resolveDelay={1000}
-                defaultSelectedUsers = {[this.props.peopleList.toString()]} //sets the owner of page
+                defaultSelectedUsers = {this.props.peopleList} //sets the owner of page
                 />
             </>
         );
