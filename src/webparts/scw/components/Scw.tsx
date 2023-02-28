@@ -22,6 +22,12 @@ export interface IScwState {
     
 }
 
+export interface IUserDetails {
+    id: string;
+    imageUrl: string;
+    email: string;
+}
+
 
 export default class AntDesignStep extends React.Component<IScwProps, IScwState> {
 
@@ -92,19 +98,15 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     public handleOwnerMembCallback = (items: []): void => {
         // localStorage.setItem('name', name);
-        // const users = items.map((item) => {
-        //     return(
-        //         // eslint-disable-next-line dot-notation
-        //         items[item]['secondaryText']
-        //     )
-        // })
+        const userArr: string[] = [];
 
-
-     console.log("ItemSCWValues", items);
-
-    
+        items.forEach(user => {
+            // eslint-disable-next-line dot-notation
+            userArr.push(user['secondaryText'])
+        })
+  
         this.setState({ 
-            peopleList: items
+            peopleList: userArr
         }) ; 
     }
 

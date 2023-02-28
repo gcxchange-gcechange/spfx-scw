@@ -1,9 +1,9 @@
+/* eslint-disable dot-notation */
 import * as React from 'react';
 import { Label, TextField } from 'office-ui-fabric-react';
 
 import { WebPartContext } from '@microsoft/sp-webpart-base';
-// import { PeoplePicker } from '@pnp/spfx-controls-react/lib/PeoplePicker';
-// import AddUsers from './AddUsers';
+import { PeoplePicker } from '@pnp/spfx-controls-react/lib/PeoplePicker';
 
 export interface ILastStepProps {
     context: WebPartContext;
@@ -50,41 +50,24 @@ export default class FirstStep extends React.Component<ILastStepProps, ILastStep
     
     public render(): React.ReactElement<ILastStepProps>{
 
+        const {peopleList} = this.props
         
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        // const users: any  = this.props.peopleList.map((user) => {
-        //     return (
-        //         // eslint-disable-next-line dot-notation
-        //         users[user]['secondaryText']
-        //         );
-        //     })
-            console.log("LastProps", this.props.peopleList)
-            
+        const  username: string[] = [];
+        peopleList.forEach(user => {
+            username.push(user)
+        })
+        console.log(username)
+
+       
         return (
             
             <>
+
                 <Label htmlFor={'name'}>Community purpose</Label>
-                <TextField id={'name'} defaultValue={this.props.name} onChange={this.onUpdate}/>
-
-                <TextField  defaultValue={this.props.peopleList.toString()} multiline autoAdjustHeight/>
-                
-
-
-               
-               {/* <PeoplePicker context={this.props.context}
-                defaultSelectedUsers={users}/> */}
-
-                
-                
+                <TextField id={'name'} defaultValue={this.props.name} onChange={this.onUpdate}/>   
+                <PeoplePicker titleText='Owners' context={this.props.context}  defaultSelectedUsers={peopleList}/>
 
                 {/* <AddUsers context={this.props.context} peopleList={...this.props.peopleList} getOwnersCallback={this.handleOwnerMembCallback} /> */}
-                {/* <PeoplePicker
-                    context={this.props.context} 
-                    titleText='Owners'
-                    defaultSelectedUsers = {[this.props.context.pageContext.user.email]} //sets the owner of page
-                    
-                
-                /> */}
     
             </>
         );
