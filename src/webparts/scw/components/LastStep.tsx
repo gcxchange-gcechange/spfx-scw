@@ -7,12 +7,20 @@ import AddUsers from './AddUsers';
 
 export interface ILastStepProps {
     context: WebPartContext;
-    name: string;
+    engName: string;
     memberList: string[];
     ownerList: string[];
-    handleCallback?: (name: string) => void;
+    commPurpose: string;
+    frCommName: string;
+    shEngDesc: string;
+    shFrDesc: string;
+    commClass: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    handleEngNameCallback?: (engNameValue: string ) => void;
+    frNameCallBack?:(frNameValue: string)=> void;
     getOwnersCallback?: (item: []) => void;
     getMemberCallback?: (item: []) => void;
+    handleFrDescCallback?:(frDescValue: string)=> void;
 
  }
  
@@ -28,9 +36,9 @@ export default class FirstStep extends React.Component<ILastStepProps> {
     private  onUpdate = (event: React.ChangeEvent<HTMLInputElement>) :void => { 
         const updatedName = event.target.value;
         
-        this.setState({name: updatedName});
+        this.setState({engName: updatedName});
         //send it to the parent
-        this.props.handleCallback(updatedName)
+        this.props.handleEngNameCallback(updatedName);
        
     }
 
@@ -59,17 +67,34 @@ export default class FirstStep extends React.Component<ILastStepProps> {
     
     public render(): React.ReactElement<ILastStepProps>{
 
-        const {ownerList, memberList} = this.props
+        const {ownerList, memberList, engName, frCommName} = this.props
         
-       
+        console.log("LASTProps", this.props.engName)
+        console.log("LASTFRProps", this.props.frCommName)
         return (
             
             <>
 
-                <Label htmlFor={'name'}>Community purpose</Label>
-                <TextField id={'name'} defaultValue={this.props.name} onChange={this.onUpdate}/>  
+                <Label htmlFor='commPurpose'>Community purpose</Label>
+                <TextField id='commPurpose' defaultValue={this.props.commPurpose}/> 
+
+                <Label htmlFor='name'>English community name</Label>
+                <TextField id='name' defaultValue={engName} onChange={this.onUpdate}/>  
+
+                <Label htmlFor='FrCommName'>French community name</Label>
+                <TextField id='FrCommName' defaultValue={frCommName} />
+
+                <Label htmlFor='shEngDesc'>English description</Label>
+                <TextField id='shEngDesc' defaultValue={this.props.shEngDesc} />
+
+                <Label htmlFor='shFrDesc'>French description</Label>
+                <TextField id='shFrDesc' defaultValue={this.props.shFrDesc}/>
+
                 <AddUsers context={this.props.context} ownerList={ownerList} memberList={memberList} getOwnersCallback={this.updateDefaultOwnerValues}  
                 getMemberCallback={this.updateDefaultMemberValues}/>
+
+
+
 
     
             </>
