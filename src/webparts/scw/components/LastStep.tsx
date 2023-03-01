@@ -1,34 +1,27 @@
 /* eslint-disable dot-notation */
 import * as React from 'react';
 import { Label, TextField } from 'office-ui-fabric-react';
-
 import { WebPartContext } from '@microsoft/sp-webpart-base';
-// import { PeoplePicker } from '@pnp/spfx-controls-react/lib/PeoplePicker';
 import AddUsers from './AddUsers';
 
 
 export interface ILastStepProps {
     context: WebPartContext;
     name: string;
-    peopleList: string[];
+    memberList: string[];
+    ownerList: string[];
     handleCallback?: (name: string) => void;
     getOwnersCallback?: (item: []) => void;
+    getMemberCallback?: (item: []) => void;
 
  }
  
- export interface ILastStepState {
- 
- }
 
+export default class FirstStep extends React.Component<ILastStepProps> {
 
-export default class FirstStep extends React.Component<ILastStepProps, ILastStepState> {
-
-    public constructor(props: ILastStepProps, state: ILastStepProps) {
+    public constructor(props: ILastStepProps) {
         super(props);
         
-
-        this.onUpdate = this.onUpdate.bind(this);
-  
     }
 
 
@@ -37,16 +30,25 @@ export default class FirstStep extends React.Component<ILastStepProps, ILastStep
         
         this.setState({name: updatedName});
         //send it to the parent
-        this.props.handleCallback("Name change from last step " + updatedName)
+        this.props.handleCallback(updatedName)
        
     }
 
-    private updateDefaultValues = ( username: []):void  => {
+    private updateDefaultOwnerValues = ( username: []):void  => {
         const newValues = username;
 
-        this.setState({peopleList: newValues})
+        this.setState({ownerList: newValues})
 
         this.props.getOwnersCallback(newValues)
+     
+    }
+
+    private updateDefaultMemberValues = ( items: []):void  => {    
+        const newValues = items;
+
+        this.setState({memberList: newValues})
+
+        this.props.getMemberCallback(newValues)
      
     }
 
@@ -57,13 +59,8 @@ export default class FirstStep extends React.Component<ILastStepProps, ILastStep
     
     public render(): React.ReactElement<ILastStepProps>{
 
-        const {peopleList} = this.props
+        const {ownerList, memberList} = this.props
         
-        const  username: string[] = [];
-        peopleList.forEach(user => {
-            username.push(user)
-        })
-
        
         return (
             
@@ -71,15 +68,12 @@ export default class FirstStep extends React.Component<ILastStepProps, ILastStep
 
                 <Label htmlFor={'name'}>Community purpose</Label>
                 <TextField id={'name'} defaultValue={this.props.name} onChange={this.onUpdate}/>  
-                {/* <PeoplePicker titleText='Owners1' context={this.props.context}  defaultSelectedUsers={username} onChange={this.updateDefaultValues}/> */}
-                <AddUsers context={this.props.context} peopleList={this.props.peopleList} getOwnersCallback={this.updateDefaultValues} />
+                <AddUsers context={this.props.context} ownerList={ownerList} memberList={memberList} getOwnersCallback={this.updateDefaultOwnerValues}  
+                getMemberCallback={this.updateDefaultMemberValues}/>
 
     
             </>
         );
     }
-
-
-
 
 }

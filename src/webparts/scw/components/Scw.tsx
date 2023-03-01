@@ -14,7 +14,8 @@ export interface IScwState {
     current: number;
     step: number;
     name: string;
-    peopleList: string[];
+    ownerList: string[];
+    memberList: string[];
     commPurpose: string;
     FrCommName: string;
     shEngDesc: string;
@@ -39,23 +40,19 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             current: 0,
             step: 0,
             name:'', 
-            peopleList: [this.owner],
+            ownerList: [this.owner],
+            memberList: [this.owner],
             commPurpose: '',
             FrCommName: '',
             shEngDesc: '',
             shFrDesc: ''
         };
 
-        this.handleCallback = this.handleCallback.bind(this);
-        this.handleOwnerMembCallback = this.handleOwnerMembCallback.bind(this);
     }
 
     private next = (): void => {
         const current = this.state.current + 1;
-
-
         const saveName = this.state.name;
-        // const getName = localStorage.getItem(JSON.stringify('name'));
         this.setState({ current: current, name: saveName });
     }
 
@@ -90,30 +87,42 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
 
     public handleCallback = (name: string): void => {
-        // localStorage.setItem('name', name); 
         this.setState({ 
             name: name
         }) ; 
     }
 
-    public handleOwnerMembCallback = (items: []): void => {
-        // localStorage.setItem('name', name);
-        const userArr: string[] = [];
+    public handleOwnerCallback = (items: []): void => {
+        const OwnerArr: string[] = [];
 
         items.forEach(user => {
             // eslint-disable-next-line dot-notation
-            userArr.push(user['secondaryText'])
+            OwnerArr.push(user['secondaryText'])
         })
   
         this.setState({ 
-            peopleList: userArr
+            ownerList: OwnerArr
         }) ; 
-        console.log('scwitems', userArr)
+    }
+
+    public handleMemberCallback = (items: []): void => {
+        const MemberArr: string[] = [];
+
+        items.forEach(user => {
+            // eslint-disable-next-line dot-notation
+            MemberArr.push(user['secondaryText'])
+        })
+  
+        this.setState({ 
+            memberList: MemberArr
+        }) ; 
+
     }
 
     
-    public render(): React.ReactElement<IScwProps> {
 
+    
+    public render(): React.ReactElement<IScwProps> {
 
         const steps = [
             {
@@ -135,12 +144,14 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
              {
                 step: '4',
                 title: 'Owners & Members',
-                content: <FourthStep context={this.props.context} peopleList={this.state.peopleList} getOwnersCallback={this.handleOwnerMembCallback}/>,
+                content: <FourthStep context={this.props.context} ownerList={this.state.ownerList} memberList={this.state.memberList}
+                getOwnersCallback={this.handleOwnerCallback} getMemberCallback={this.handleMemberCallback}/>,
             },
             {
                 step: '5',
                 title: 'Review & Submit',
-                content: <LastStep handleCallback={this.handleCallback} name={this.state.name} peopleList={this.state.peopleList} context={this.props.context} getOwnersCallback={this.handleOwnerMembCallback}/>,
+                content: <LastStep handleCallback={this.handleCallback} name={this.state.name} ownerList={this.state.ownerList} memberList={this.state.memberList} 
+                context={this.props.context} getOwnersCallback={this.handleOwnerCallback} getMemberCallback={this.handleMemberCallback}/>,
             },
         ]
 
