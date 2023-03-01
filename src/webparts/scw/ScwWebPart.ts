@@ -5,7 +5,7 @@ import {
   IPropertyPaneConfiguration,
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
-import { BaseClientSideWebPart, WebPartContext } from '@microsoft/sp-webpart-base';
+import { BaseClientSideWebPart} from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
 import * as strings from 'ScwWebPartStrings';
@@ -16,7 +16,6 @@ import AntDesignStep from './components/Scw';
 
 export interface IScwWebPartProps {
   description: string;
-  context: WebPartContext;
  
 }
 
