@@ -6,6 +6,7 @@ import FistStep from "./FirstStep";
 import { Initial } from './InitialPage/Initial';
 import { IButtonStyles, PrimaryButton } from 'office-ui-fabric-react';
 import { MessageType } from 'antd/es/message/interface';
+import ErrorModal from './Modal';
 
 
 
@@ -82,12 +83,12 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             {
                 step:'1',
                 title: 'Details',
-                content: <FistStep/>,
+                content: <ErrorModal/>,
             },
             {
                 step:'2',
                 title: 'Classification',
-                content: 'Second-content',
+                content: <FistStep/>,
             },
             {
                 step:'3',
