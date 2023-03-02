@@ -14,7 +14,6 @@ export interface ILastStepProps {
     frCommName: string;
     shEngDesc: string;
     shFrDesc: string;
-    commClass: string;
     selectedChoice: string;
     
     handleEngNameCallback?: (engNameValue: string ) => void;
@@ -88,7 +87,7 @@ export default class FirstStep extends React.Component<ILastStepProps> {
     
     public render(): React.ReactElement<ILastStepProps> {
 
-        const { ownerList, memberList, engName, frCommName } = this.props
+        const { ownerList, memberList, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, context } = this.props
         
 
         return (
@@ -105,15 +104,15 @@ export default class FirstStep extends React.Component<ILastStepProps> {
                 <TextField id='FrCommName' defaultValue={ frCommName } onChange={ this.onUpdateFrName }/>
 
                 <Label htmlFor='shEngDesc'>English description</Label>
-                <TextField id='shEngDesc' defaultValue={ this.props.shEngDesc } onChange={ this.onUpdateEngDesc }/>
+                <TextField id='shEngDesc' defaultValue={ shEngDesc } onChange={ this.onUpdateEngDesc }/>
 
                 <Label htmlFor='shFrDesc'>French description</Label>
-                <TextField id='shFrDesc' defaultValue={ this.props.shFrDesc } onChange={ this.onUpdateFrDesc }/>
+                <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc }/>
 
                 <Label htmlFor='classification'>Community classification</Label>
-                <TextField id='calssification' value={this.props.selectedChoice}/>
+                <TextField id='calssification' value={selectedChoice}/>
 
-                <AddUsers context={ this.props.context } ownerList={ ownerList } memberList={ memberList } getOwnersCallback={ this.updateDefaultOwnerValues }  
+                <AddUsers context={ context } ownerList={ ownerList } memberList={ memberList } getOwnersCallback={ this.updateDefaultOwnerValues }  
                 getMemberCallback={ this.updateDefaultMemberValues }/>
 
             </>
