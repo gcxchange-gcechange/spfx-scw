@@ -7,7 +7,8 @@ import { Initial } from './InitialPage/Initial';
 import { IButtonStyles, PrimaryButton } from 'office-ui-fabric-react';
 import LastStep from './LastStep';
 import { MessageType } from 'antd/es/message/interface';
-// import FourthStep from './FourthStep';
+import FourthStep from './FourthStep';
+import SecondStep from './SecondStep';
 
 
 
@@ -17,23 +18,17 @@ export interface IScwState {
     engName: string;
     ownerList: string[];
     memberList: string[];
-    allValues: IUserInputs[];
     commPurpose: string;
     frCommName: string;
     shEngDesc: string;
     shFrDesc: string;
     commClass: string;
+    selectedChoice: string;
+   
     
 }
 
-export interface IUserInputs{
-    commPurpose: string;
-    name: string;
-    frName: string;
-    shEngDesc: string;
-    shFrDesc: string;
-    commClass: string;
-}
+
 
 
 export default class AntDesignStep extends React.Component<IScwProps, IScwState> {
@@ -53,7 +48,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             shEngDesc: '',
             shFrDesc: '',
             commClass: '',
-            allValues: []
+            selectedChoice: ''
+            
 
         };
 
@@ -100,20 +96,13 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         ) 
     }
 
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    // public handleCallback = (event:any): void =>  {
-
-    //     const saveEngName = event.target.value;
-    //     const saveFRName = event.target.value;
-    //     // const values = event.target.value;
-    //     console.log("SCWValuesENg", saveEngName);
-    //     console.log("SCWValuesFr", saveFRName);
-    //     this.setState({ 
-    //         engName: saveEngName,
-    //         frCommName: saveFRName
-    //     }) ; 
-    // }
+    public commPurposeCallback = (commPurpose: string): void =>  {
+        const savePurpose = commPurpose;
+        this.setState ({
+            commPurpose: savePurpose
+        });
+     
+    }
 
     public handleEngNameCallback = (engNameValue: string): void =>  {
         const saveEngName = engNameValue;
@@ -131,20 +120,33 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         
     }
 
-    public frDescCallback = (FrDesValue: string): void =>  {
-        const saveFrDesc = FrDesValue;
+    public engDescCallback = (EngDescValue: string): void =>  {
+        const saveEngDesc = EngDescValue;
+        this.setState ({
+            shEngDesc: saveEngDesc
+        });
+        
+    }
+
+    public frDescCallback = (FrDescValue: string): void =>  {
+        const saveFrDesc = FrDescValue;
         this.setState ({
             shFrDesc: saveFrDesc
         });
         
     }
 
-    // public frDescCallback = (shFrDesc: string): void => {
-    //     this.setState({ 
-    //         shFrDesc: shFrDesc,
-    //     }) ; 
-    // }
+    public selectedChoiceCallback = (selectedChoice: string): void => {
+        const saveSelectedChoice = selectedChoice;
 
+        console.log("Choice", saveSelectedChoice);
+
+        this.setState({
+            selectedChoice: selectedChoice
+        })
+    } 
+
+  
     public handleOwnerCallback = (items: []): void => {
         const OwnerArr: string[] = [];
 
@@ -172,45 +174,49 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     }
 
-    
+
 
     
     public render(): React.ReactElement<IScwProps> {
+
+        const { commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice} = this.state;
+
 
         const steps = [
             {
                 step: '1',
                 title: 'Details',
-                content: <FirstStep engName={this.state.engName} commPurpose={this.state.commPurpose} frCommName={this.state.frCommName} allValues={this.state.allValues}
-                shEngDesc={this.state.shEngDesc} shFrDesc={this.state.shFrDesc} handleEngNameCallback={this.handleEngNameCallback}  frNameCallback={this.frNameCallback}
-                frDescCallback={this.frDescCallback}
+                content: <FirstStep engName={engName} commPurpose={commPurpose} frCommName={frCommName}
+                shEngDesc={shEngDesc} shFrDesc={shFrDesc}  commPurposeCallback={ this.commPurposeCallback} 
+                handleEngNameCallback={this.handleEngNameCallback}  frNameCallback={this.frNameCallback}
+                frDescCallback={this.frDescCallback} engDescCallback={this.engDescCallback} 
                 
                 />
 
             },
-            // {
-            //     step: '2',
-            //     title: 'Classification',
-            //     content: 'second',
-            // },
-            // {
-            //     step: '3',
-            //     title: 'Terms of use',
-            //     content: 'third',
-            // },
-            //  {
-            //     step: '4',
-            //     title: 'Owners & Members',
-            //     content: <FourthStep context={this.props.context} ownerList={this.state.ownerList} memberList={this.state.memberList}
-            //     getOwnersCallback={this.handleOwnerCallback} getMemberCallback={this.handleMemberCallback}/>,
-            // },
+            {
+                step: '2',
+                title: 'Classification',
+                content: <SecondStep selectedChoice={selectedChoice} handleSelectedChoice={this.selectedChoiceCallback}/>,
+            },
+            {
+                step: '3',
+                title: 'Terms of use',
+                content: 'third',
+            },
+             {
+                step: '4',
+                title: 'Owners & Members',
+                content: <FourthStep context={this.props.context} ownerList={this.state.ownerList} memberList={this.state.memberList}
+                getOwnersCallback={this.handleOwnerCallback} getMemberCallback={this.handleMemberCallback}/>,
+            },
             {
                 step: '5',
                 title: 'Review & Submit',
-                content: <LastStep engName={this.state.engName} commPurpose={this.state.commPurpose} frCommName={this.state.frCommName} 
+                content: <LastStep engName={engName} commPurpose={this.state.commPurpose} frCommName={this.state.frCommName}  selectedChoice={selectedChoice}
                 shEngDesc={this.state.shEngDesc} shFrDesc={this.state.shFrDesc} commClass={this.state.commClass} ownerList={this.state.ownerList} memberList={this.state.memberList} 
                 context={this.props.context} handleEngNameCallback={this.handleEngNameCallback} getOwnersCallback={this.handleOwnerCallback} getMemberCallback={this.handleMemberCallback}
-                handleFrDescCallback={this.frDescCallback}/>,
+                handleFrDescCallback={this.frDescCallback} handleEngDescCallback={this.engDescCallback}/>,
             },
         ]
 
