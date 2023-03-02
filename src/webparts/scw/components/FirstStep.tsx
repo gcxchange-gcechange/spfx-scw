@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
-import styles from './Scw.module.scss'
+import styles from './Scw.module.scss';
 import { Label, TextField } from 'office-ui-fabric-react';
 
 
@@ -24,20 +24,13 @@ export interface IFirstStepProps {
 
 }
 
-export interface IFirstStepState {
-  
-}
+
+export default class FirstStep extends React.Component<IFirstStepProps> {
 
 
-
-export default class FirstStep extends React.Component<IFirstStepProps, IFirstStepState> {
-
-
-    public constructor(props: IFirstStepProps, state: IFirstStepState) {
+    public constructor(props: IFirstStepProps) {
         super(props);
 
-     
-        this.handleOnChangeEngNameEvent = this.handleOnChangeEngNameEvent.bind(this);
     }
 
 
@@ -84,7 +77,6 @@ export default class FirstStep extends React.Component<IFirstStepProps, IFirstSt
 
     private  commPurposeOnChange = (event:React.ChangeEvent<HTMLInputElement>) :void => { 
         const value = event.target.value;
-        console.log("purpose", value);
         this.setState({commPurpose: value});
         //send it to the parent
         this.props.commPurposeCallback(value)
@@ -92,7 +84,6 @@ export default class FirstStep extends React.Component<IFirstStepProps, IFirstSt
 
     private  handleOnChangeEngNameEvent = (event:React.ChangeEvent<HTMLInputElement>) :void => { 
         const nameValue = event.target.value;
-        console.log("engName", nameValue);
         this.setState({engName: nameValue});
         //send it to the parent
         this.props.handleEngNameCallback(nameValue)
@@ -101,7 +92,6 @@ export default class FirstStep extends React.Component<IFirstStepProps, IFirstSt
 
     private  OnChangeFrNameEvent = (event: React.ChangeEvent<HTMLInputElement>) :void => { 
         const frNameValue = event.target.value;
-        console.log("frNameValue", frNameValue)
         this.setState({frCommName: frNameValue});
         //send it to the parent
         this.props.frNameCallback(frNameValue)
@@ -111,7 +101,6 @@ export default class FirstStep extends React.Component<IFirstStepProps, IFirstSt
 
     private  handleOnChangeEngDescEvent = (event: React.ChangeEvent<HTMLInputElement>) :void => { 
         const engDescValue = event.target.value;
-        console.log("engDescValue", engDescValue)
         this.setState({shEngDesc: engDescValue});
         //send it to the parent
         this.props.engDescCallback(engDescValue)
@@ -119,7 +108,6 @@ export default class FirstStep extends React.Component<IFirstStepProps, IFirstSt
     }
     private  handleOnChangeFrDescEvent = (event: React.ChangeEvent<HTMLInputElement>) :void => { 
         const frDescValue = event.target.value;
-        console.log("frDescValue", frDescValue)
         this.setState({shFrDesc: frDescValue});
         //send it to the parent
         this.props.frDescCallback(frDescValue)
