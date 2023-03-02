@@ -233,6 +233,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 ownerList= { ownerList }
                 memberList= { memberList }
                 context= { this.props.context }
+                commPurposeCallback={ this.commPurposeCallback }
                 handleEngNameCallback= { this.handleEngNameCallback }
                 frNameCallBack= { this.frNameCallback }
                 getOwnersCallback= { this.handleOwnerCallback }

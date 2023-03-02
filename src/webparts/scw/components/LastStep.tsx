@@ -15,7 +15,7 @@ export interface ILastStepProps {
     shEngDesc: string;
     shFrDesc: string;
     selectedChoice: string;
-    
+    commPurposeCallback?: (commPurpose: string) => void;
     handleEngNameCallback?: (engNameValue: string ) => void;
     frNameCallBack?:(frNameValue: string)=> void;
     handleFrDescCallback?:(frDescValue: string)=> void;
@@ -33,6 +33,13 @@ export default class FirstStep extends React.Component<ILastStepProps> {
         
      }
 
+     
+    private  onUpdateCommPurpose = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+        const updatedPurpose = event.target.value;    
+        this.setState({ commPurpose: updatedPurpose });
+        //send it to the parent
+        this.props.commPurposeCallback(updatedPurpose); 
+     }
 
     private  onUpdateEngName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
         const updatedName = event.target.value;    
@@ -95,7 +102,7 @@ export default class FirstStep extends React.Component<ILastStepProps> {
             <>
 
                 <Label htmlFor='commPurpose'>Community purpose</Label>
-                <TextField id='commPurpose' defaultValue={ this.props.commPurpose }/> 
+                <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={this.onUpdateCommPurpose}/> 
 
                 <Label htmlFor='name'>English community name</Label>
                 <TextField id='name' defaultValue={ engName } onChange={ this.onUpdateEngName }/>  
