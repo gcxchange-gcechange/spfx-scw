@@ -102,25 +102,25 @@ export default class FirstStep extends React.Component<ILastStepProps> {
             <>
 
                 <Label htmlFor='commPurpose'>Community purpose</Label>
-                <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={this.onUpdateCommPurpose}/> 
+                <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={this.onUpdateCommPurpose} required/> 
 
                 <Label htmlFor='name'>English community name</Label>
-                <TextField id='name' defaultValue={ engName } onChange={ this.onUpdateEngName }/>  
+                <TextField id='name' defaultValue={ engName } onChange={ this.onUpdateEngName } required/>  
 
                 <Label htmlFor='FrCommName'>French community name</Label>
-                <TextField id='FrCommName' defaultValue={ frCommName } onChange={ this.onUpdateFrName }/>
+                <TextField id='FrCommName' defaultValue={ frCommName } onChange={ this.onUpdateFrName } required/>
 
                 <Label htmlFor='shEngDesc'>English description</Label>
-                <TextField id='shEngDesc' defaultValue={ shEngDesc } onChange={ this.onUpdateEngDesc }/>
+                <TextField id='shEngDesc' defaultValue={ shEngDesc } onChange={ this.onUpdateEngDesc } required/>
 
                 <Label htmlFor='shFrDesc'>French description</Label>
-                <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc }/>
+                <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } required/>
 
                 <Label htmlFor='classification'>Community classification</Label>
-                <TextField id='calssification' value={selectedChoice}/>
+                <TextField id='calssification' value={selectedChoice} required/>
 
                 <AddUsers context={ context } ownerList={ ownerList } memberList={ memberList } getOwnersCallback={ this.updateDefaultOwnerValues }  
-                getMemberCallback={ this.updateDefaultMemberValues }/>
+                getMemberCallback={ this.updateDefaultMemberValues } />
 
             </>
         );

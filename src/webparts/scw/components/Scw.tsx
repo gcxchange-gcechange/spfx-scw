@@ -3,13 +3,15 @@ import styles from './Scw.module.scss';
 import  { Steps, Button, message} from 'antd';
 import FirstStep from "./FirstStep";
 import  { IScwProps } from './IScwProps';
-import  { Initial } from './InitialPage/Initial';
-import  { IButtonStyles, PrimaryButton } from 'office-ui-fabric-react';
+// import  { Initial } from './InitialPage/Initial';
+// import  { PrimaryButton } from 'office-ui-fabric-react';
+import  { IButtonStyles } from 'office-ui-fabric-react';
 import LastStep from './LastStep';
 import  { MessageType } from 'antd/es/message/interface';
-import ErrorModal from './Modal';
+// import ErrorModal from './Modal';
 import FourthStep from './FourthStep';
 import SecondStep from './SecondStep';
+
 
 
 
@@ -24,6 +26,8 @@ export interface IScwState  {
     shEngDesc: string;
     shFrDesc: string;
     selectedChoice: string;
+    errorMessage: string;
+    showModal: boolean;
    
     
 }
@@ -47,7 +51,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             frCommName: '',
             shEngDesc: '',
             shFrDesc: '',
-            selectedChoice: ''
+            selectedChoice: '',
+            errorMessage: '',
+            showModal: false
             
         };
 
@@ -58,6 +64,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         this.setState( { 
             current: current, 
         });
+
     }
 
     private prev = (): void =>  { 
@@ -165,18 +172,43 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     }
 
+    public handleErrorMessage = ( errorMessage: string ):void  => {
+        const errorM = errorMessage;
+        this.setState({
+            errorMessage: errorM
+        });
+    }
+
+    public handleShowModal = ( ) :void => {
+        this.setState({
+            showModal: false
+        })
+    }
+
 
 
     
     public render(): React.ReactElement<IScwProps>  { 
 
-        const  { commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, memberList } = this.state;
+        const  { commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, memberList, errorMessage } = this.state;
 
 
         const steps = [
          { 
             step: "1",
             title: "Details",
+            // content: (
+            //     <ErrorModal
+            //     engName= { engName }
+            //     commPurpose= { commPurpose }
+            //     frCommName= { frCommName }
+            //     selectedChoice= { selectedChoice }
+            //     shEngDesc= { shEngDesc }
+            //     shFrDesc= { shFrDesc }
+            //     ownerList= { ownerList }
+            //     memberList= { memberList }
+            //     />
+            // )
             content: (
               <FirstStep
                 engName= { engName }
@@ -184,11 +216,13 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 frCommName= { frCommName }
                 shEngDesc= { shEngDesc }
                 shFrDesc= { shFrDesc }
+                errorMessage ={ errorMessage }
                 commPurposeCallback= { this.commPurposeCallback }
                 handleEngNameCallback= { this.handleEngNameCallback }
                 frNameCallback= { this.frNameCallback }
                 frDescCallback= { this.frDescCallback }
                 engDescCallback= { this.engDescCallback }
+            
               />
             ),
           },
@@ -251,12 +285,12 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         
         return (
             <div className= { styles.scw }>
-                 { this.state.step === 0 
+                 {/* { this.state.step === 0 
                 ? <>
                 <Initial/>
                 <PrimaryButton styles= { this.buttonStyle } text="Let's go" ariaLabel="Let's go" onClick= { () =>  { this.handleClickEvent()} } className= { styles.centerButton }/>
                 </>
-                :
+                : */}
                 <div className= { styles.container }>
                     <div className= { styles.row }>
                         <Steps current= { this.state.current } labelPlacement='vertical' items= { items } />
@@ -268,7 +302,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                         </div>
                     </div>
                 </div>
-                 }
+                 {/* } */}
             </div>
         );
     }

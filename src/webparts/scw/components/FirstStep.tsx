@@ -2,6 +2,8 @@
 import * as React from 'react';
 import styles from './Scw.module.scss';
 import { Label, TextField } from 'office-ui-fabric-react';
+import ModalError from './Modal';
+
 
 
 
@@ -12,6 +14,7 @@ export interface IFirstStepProps {
     frCommName: string;
     shEngDesc: string;
     shFrDesc: string;
+    errorMessage: string;
 
  
     handleEngNameCallback?:(engNameValue: string) => void;
@@ -19,6 +22,7 @@ export interface IFirstStepProps {
     engDescCallback?:(shEngDescValue: string) => void;
     frDescCallback?: (shFrDescValue: string) => void;
     commPurposeCallback?: (commPurpose: string) => void;
+    handleErrorMessage?: (errorMessage: string) => void;
 
 
 
@@ -53,7 +57,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             <p>The communitys name is the title of your community. Create a short descriptive name. A bilingual name complies with the Official Langauges Act and makes it easier for others to find your community in the GCXchange Catalogue.</p>
             <Label htmlFor='EngName'>English community name</Label>
             <p className={ styles.instruction }>Use keywords, not abbreviations for better discoverability. Must be between 5 and 126 characters in length and special characters are not permitted.</p>
-            <TextField  id='EngName' name='EngName' onChange={this.handleOnChangeEngNameEvent} defaultValue={engName}/>
+            <TextField  id='EngName' name='EngName' onChange={this.handleOnChangeEngNameEvent} defaultValue={engName} required onGetErrorMessage={this.onGetErrorMessage} validateOnLoad={false}/>
             <Label htmlFor='frCommName'>French community name</Label>
             <p className={ styles.instruction }>Use keywords, not abbreviations for better discoverability. Must be between 5 and 126 characters in length and special characters are not permitted.</p>
             <p className={ styles.instruction }>Max. 33 characters.</p>
@@ -114,5 +118,23 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
        
     }
 
+    public onGetErrorMessage = ():JSX.Element => {
+        
+        const engNameValue = this.props.engName
+        if(engNameValue === null || engNameValue === '') {
+            return(
+                <ModalError showModal={false} />
+                )
+        } else {
+            return null;
+        }
+        
+        
+    }
+
+ 
+
  
 }
+
+
