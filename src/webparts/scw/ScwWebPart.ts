@@ -5,12 +5,14 @@ import {
   IPropertyPaneConfiguration,
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
-import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
+import { BaseClientSideWebPart} from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
 import * as strings from 'ScwWebPartStrings';
-import Scw from './components/Scw';
 import { IScwProps } from './components/IScwProps';
+import AntDesignStep from './components/Scw';
+
+
 
 export interface IScwWebPartProps {
   description: string;
@@ -24,13 +26,14 @@ export default class ScwWebPart extends BaseClientSideWebPart<IScwWebPartProps> 
 
   public render(): void {
     const element: React.ReactElement<IScwProps> = React.createElement(
-      Scw,
+      AntDesignStep,
       {
         description: this.properties.description,
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
         userDisplayName: this.context.pageContext.user.displayName,
+        context: this.context
         
       }
     );

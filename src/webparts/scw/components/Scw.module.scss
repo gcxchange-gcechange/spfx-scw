@@ -2,8 +2,8 @@
 @import '~office-ui-fabric-react/dist/sass/References.scss';
 .scw {
     .container {
-        max-width: 700px;
-        margin: 0px auto;
+        // max-width: 700px;
+        margin: 0px;
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
     }
 
@@ -76,7 +76,7 @@
         border-radius: 2px;
         background-color: #fafafa;
         min-height: 200px;
-        text-align: center;
+        // text-align: center;
         padding-top: 80px;
     }
 
@@ -182,4 +182,10 @@
     .p {
         font-size: 18px;
     }
+}
+
+.instruction {
+    font-size: 14px;
+    color:gray;
+    margin:0px;
 }
