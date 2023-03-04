@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable dot-notation */
 import * as React from 'react';
 import {  Label, TextField  } from 'office-ui-fabric-react';
@@ -101,23 +102,23 @@ export default class FirstStep extends React.Component<ILastStepProps> {
             
             <>
 
-                <Label htmlFor='commPurpose'>Community purpose</Label>
-                <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={this.onUpdateCommPurpose} required/> 
+                <Label htmlFor='commPurpose' required >Community purpose</Label>
+                <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={this.onUpdateCommPurpose} /> 
 
-                <Label htmlFor='name'>English community name</Label>
-                <TextField id='name' defaultValue={ engName } onChange={ this.onUpdateEngName } required/>  
+                <Label htmlFor='name'required >English community name</Label>
+                <TextField id='name' defaultValue={ engName } onChange={ this.onUpdateEngName }/>  
 
-                <Label htmlFor='FrCommName'>French community name</Label>
-                <TextField id='FrCommName' defaultValue={ frCommName } onChange={ this.onUpdateFrName } required/>
+                <Label htmlFor='FrCommName' required >French community name</Label>
+                <TextField id='FrCommName' defaultValue={ frCommName } onChange={ this.onUpdateFrName }/>
 
-                <Label htmlFor='shEngDesc'>English description</Label>
-                <TextField id='shEngDesc' defaultValue={ shEngDesc } onChange={ this.onUpdateEngDesc } required/>
+                <Label htmlFor='shEngDesc'required >English description</Label>
+                <TextField id='shEngDesc' defaultValue={ shEngDesc } onChange={ this.onUpdateEngDesc }/>
 
-                <Label htmlFor='shFrDesc'>French description</Label>
-                <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } required/>
+                <Label htmlFor='shFrDesc'required >French description</Label>
+                <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc }/>
 
-                <Label htmlFor='classification'>Community classification</Label>
-                <TextField id='calssification' value={selectedChoice} required/>
+                <Label htmlFor='classification'required >Community classification</Label>
+                <TextField id='calssification' value={selectedChoice}/>
 
                 <AddUsers context={ context } ownerList={ ownerList } memberList={ memberList } getOwnersCallback={ this.updateDefaultOwnerValues }  
                 getMemberCallback={ this.updateDefaultMemberValues } />
