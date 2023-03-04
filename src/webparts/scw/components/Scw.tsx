@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import styles from './Scw.module.scss';
 import  { Steps, Button, message} from 'antd';
@@ -96,6 +97,16 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         ) 
     }
 
+    public handleOnChange =(event: any, value:string):void => {
+        const eventValue = event;
+        const values = value
+        this.setState({
+            ...this.state,
+            [eventValue]:values
+        })
+        console.log("Parent",eventValue);
+    }
+
     public commPurposeCallback = ( commPurpose: string ): void =>   { 
         const savePurpose = commPurpose;
         this.setState ( { 
@@ -192,7 +203,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         const  { commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, memberList, errorMessage } = this.state;
 
-
+        console.log("EngName",this.state.engName);
+        console.log("frName",this.state.frCommName);
         const steps = [
          { 
             step: "1",
@@ -217,11 +229,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 shEngDesc= { shEngDesc }
                 shFrDesc= { shFrDesc }
                 errorMessage ={ errorMessage }
-                commPurposeCallback= { this.commPurposeCallback }
-                handleEngNameCallback= { this.handleEngNameCallback }
-                frNameCallback= { this.frNameCallback }
-                frDescCallback= { this.frDescCallback }
-                engDescCallback= { this.engDescCallback }
+                handleOnChange={this.handleOnChange}
             
               />
             ),
