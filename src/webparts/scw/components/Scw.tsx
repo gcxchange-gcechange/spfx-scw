@@ -103,8 +103,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         this.setState({
             ...this.state,
             [eventValue]:values
-        })
-        console.log("Parent",eventValue);
+        });
     }
 
     public commPurposeCallback = ( commPurpose: string ): void =>   { 
@@ -203,8 +202,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         const  { commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, memberList, errorMessage } = this.state;
 
-        console.log("EngName",this.state.engName);
-        console.log("frName",this.state.frCommName);
         const steps = [
          { 
             step: "1",
