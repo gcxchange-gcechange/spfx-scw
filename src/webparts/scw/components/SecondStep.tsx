@@ -1,6 +1,9 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+// import { mergeStyles } from 'office-ui-fabric-react';
 import { ChoiceGroup, IChoiceGroupOption } from 'office-ui-fabric-react/lib/ChoiceGroup';
 import * as React from 'react';
+import styles from './Scw.module.scss';
 
 
 
@@ -32,15 +35,56 @@ export default class SecondStep extends React.Component<ISecondStepProps, ISecon
 
     public render(): React.ReactElement<ISecondStepProps>  { 
 
+        const optionStyle = {
+            root: { 
+                display: 'flex'
+            }
+        }
+
+        // const optionRootClass = mergeStyles({display: 'flex'})
+
         const templateChoice: IChoiceGroupOption[] = [
-             { key: '1', text: 'Unclassified community', ariaLabel: 'Unclassified community' },
-             { key: '2', text:'Protected Aor B community', ariaLabel: 'Protected Aor B community' }
+             { key: '1', text: 'Unclassified community', 
+             ariaLabel: 'Unclassified community' ,
+             onRenderField: (props, render) => {
+                return (
+                    <div className={ styles.choiceCard }>
+                        {render(props)}
+                        <div className={styles.cardBody}>
+                            No, I don't need to store protected information.<strong>All users will be able to find your community, and search for it.</strong>
+                        </div>
+                    </div>
+                    
+                )
+              
+             }
+
+            
+            },
+             { key: '2', text:'Protected Aor B community', ariaLabel: 'Protected Aor B community',
+             onRenderField: (props, render) => {
+                return (
+                    <div className={ styles.choiceCard }>
+                        {render(props)}
+                        <div className={styles.cardBody}>
+                           Yes, I need to store protected information such as: consent forms, personal information, contact details for individuals or organizations, financial documentation, or others
+                           documents that, if compromised, <strong>could cause injury to an individual, organization or government</strong>
+                        </div>
+                    </div>
+                    
+                )
+              
+             } }
         ]
 
        
         return (
             <>
-            <ChoiceGroup options={templateChoice} required={true} onChange={this.onSelectedKey}/>
+            <p>You may ned to store protected documents or information in your community's library. GCXchange can provide a space for protected information up to Protected B. First,
+                let's find out whether you will be storing protected documents in your community.
+            </p>
+                        <ChoiceGroup options={templateChoice} required={true} onChange={this.onSelectedKey} styles={optionStyle}/>
+                        
         
             </>
         );

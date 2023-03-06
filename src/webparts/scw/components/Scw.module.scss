@@ -189,3 +189,42 @@
     color:gray;
     margin:0px;
 }
+
+// .cardContainer {
+   
+  
+//   }
+  
+  .choiceCard {
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+    box-shadow: 2px ;
+    width: 350px;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .cardHeading {
+    background-color: rgb(0, 120, 212);
+    height: 40px;
+    color: white;  
+  }
+
+  .cardBody {
+    padding: 10px;
+  }
+
+  .inviteContainer{
+    display:flex;
+    flex-direction: column;
+    align-items: 'center';
+    margin-top:20px;
+    border: 1px solid gray;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+ .magnifyingIcon {
+    color:#106EBE;
+    font-size: 20px;
+ }

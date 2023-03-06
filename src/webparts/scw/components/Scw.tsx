@@ -9,6 +9,7 @@ import LastStep from './LastStep';
 import  { MessageType } from 'antd/es/message/interface';
 import FourthStep from './FourthStep';
 import SecondStep from './SecondStep';
+import ThirdStep from './ThirdStep';
 
 
 
@@ -204,7 +205,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
          { 
             step: "3",
             title: "Terms of use",
-            content: "third",
+            content: <ThirdStep/>,
           },
          { 
             step: "4",

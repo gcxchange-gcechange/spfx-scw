@@ -1,6 +1,10 @@
+/* eslint-disable react/no-unescaped-entities */
 import * as React from 'react';
 import { WebPartContext } from '@microsoft/sp-webpart-base';
 import AddUsers from './AddUsers';
+import styles from './Scw.module.scss';
+import { Icon } from 'office-ui-fabric-react/lib/Icon';
+import { PrimaryButton, Stack } from 'office-ui-fabric-react';
 
 
 
@@ -59,15 +63,29 @@ export default class FourthStep extends React.Component<IFourthStepProps> {
                 <p>We need to <strong>add at least one more owner</strong> before your community can be created.</p>
                 <p>You can <strong>add members</strong> to your GXChange community before it goes live. You can only add individuals who <strong>already have a GCXchange account.</strong> If an 
                 individual {`doesn't`}  have an account, you can invite them to sign up below. If you {`don't`} want to invite members just yet, no problem. We will provide detailed instructions on how
-                to do this once your community has been created.</p>
+                to do this once your community has been created. Please note, users <strong>cannot</strong> request to join a protected community, so it is up to the owner to make sure they have invited all members.</p>
                 
                 <AddUsers 
                 context={this.props.context} 
-                ownerList={this.props.ownerList} 
+                ownerList={this.props.ownerList}
                 memberList={this.props.memberList} 
                 getOwnersCallback={this.handleOwnerCallback} 
                 getMemberCallback={this.handleMemberCallback}
                 />
+
+
+                <div className={styles.inviteContainer}>
+                    <Icon iconName='Zoom' className={styles.magnifyingIcon}/>
+                    <Stack>
+                        <Stack.Item>
+                            <p><strong>Can't find someone?</strong> It's likely they haven't registered yet fort GCXhange.You can invite them to join GCXchange using the button below. Once they are registered, 
+                            you will be able to add them to your community.</p>
+                        </Stack.Item>
+                        <Stack.Item>
+                            <PrimaryButton>Invite a colleague to GCXchange</PrimaryButton>
+                        </Stack.Item>
+                    </Stack>
+                </div>
             </>
         );
     }

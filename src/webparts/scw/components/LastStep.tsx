@@ -100,7 +100,8 @@ export default class FirstStep extends React.Component<ILastStepProps> {
         return (
             
             <>
-
+                <p>Review that the information below is accurate, or edit them </p>
+                
                 <Label htmlFor='commPurpose'>Community purpose</Label>
                 <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={this.onUpdateCommPurpose}/> 
 
