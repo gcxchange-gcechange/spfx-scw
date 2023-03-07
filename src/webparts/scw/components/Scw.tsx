@@ -9,7 +9,7 @@ import  { IScwProps } from './IScwProps';
 import  { IButtonStyles } from 'office-ui-fabric-react';
 import LastStep from './LastStep';
 import  { MessageType } from 'antd/es/message/interface';
-// import ErrorModal from './Modal';
+import ErrorModal from './Modal';
 import FourthStep from './FourthStep';
 import SecondStep from './SecondStep';
 
@@ -62,9 +62,20 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     private next = (): void =>  { 
         const current = this.state.current + 1;
+
+        const length = this.state.engName.length
+        console.log("lENGTH", length);
+
         this.setState( { 
             current: current, 
         });
+
+        if ( length === 0 ) {
+
+            this.setState({
+                showModal: true
+            })
+        }
 
     }
 
@@ -189,7 +200,13 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         });
     }
 
-    public handleShowModal = ( ) :void => {
+    // public openModal = ( ) :void => {
+    //     this.setState({
+    //         showModal: true
+    //     })
+    // }
+
+    public closeModal = ( ) :void => {
         this.setState({
             showModal: false
         })
@@ -200,26 +217,16 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     
     public render(): React.ReactElement<IScwProps>  { 
 
-        const  { commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, memberList, errorMessage } = this.state;
+        const  { commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, memberList, errorMessage, showModal } = this.state;
 
         const steps = [
          { 
             step: "1",
             title: "Details",
-            // content: (
-            //     <ErrorModal
-            //     engName= { engName }
-            //     commPurpose= { commPurpose }
-            //     frCommName= { frCommName }
-            //     selectedChoice= { selectedChoice }
-            //     shEngDesc= { shEngDesc }
-            //     shFrDesc= { shFrDesc }
-            //     ownerList= { ownerList }
-            //     memberList= { memberList }
-            //     />
-            // )
+            
             content: (
               <FirstStep
+              showModal = {showModal}
                 engName= { engName }
                 commPurpose= { commPurpose }
                 frCommName= { frCommName }
@@ -290,6 +297,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         
         return (
             <div className= { styles.scw }>
+              
                  {/* { this.state.step === 0 
                 ? <>
                 <Initial/>
@@ -301,6 +309,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                         <Steps current= { this.state.current } labelPlacement='vertical' items= { items } />
                         <div className="steps-content"> { steps[ this.state.current ].content }</div>
                         <div className="steps-action">
+                            {this.state.showModal === true && <ErrorModal showModal={showModal} closeModal={this.closeModal} openModal = {this.next}/>}
                              { this.state.current < steps.length - 1 && (<Button type="primary" onClick= { this.next} >Next</Button> ) }
                              { this.state.current === steps.length - 1 && (<Button type="primary" onClick= { this.successMessage} >Done</Button> ) }
                              { this.state.current > 0 && (<Button style= {{ margin: '0 8px' }} onClick= { () => this.prev()}>Previous</Button> ) }
