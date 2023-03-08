@@ -11,6 +11,7 @@ declare interface IScwWebPartStrings {
   AppOfficeEnvironment: string;
   AppOutlookEnvironment: string;
   title_details: string;
+  provide_bilingual_name: string;
 }
 
 declare module 'ScwWebPartStrings' {

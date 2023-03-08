@@ -11,6 +11,7 @@ define([], function() {
     "AppTeamsTabEnvironment": "The app is running in Microsoft Teams",
     "AppOfficeEnvironment": "The app is running in office.com",
     "AppOutlookEnvironment": "The app is running in Outlook",
-    "title_details": "Details"
+    "title_details": "Details",
+    "provide_bilingual_name": "Provide <strong>bilingual</strong> name and descriptions"
   }
 });

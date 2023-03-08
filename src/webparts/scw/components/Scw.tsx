@@ -252,7 +252,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             <div className= { styles.scw }>
                  { this.state.step === 0 
                 ? <>
-                <Initial/>
+                        <Initial
+                            context={this.props.context}
+                            prefLang={this.props.prefLang}
+                        />
                 <PrimaryButton styles= { this.buttonStyle } text="Let's go" ariaLabel="Let's go" onClick= { () =>  { this.handleClickEvent()} } className= { styles.centerButton }/>
                 </>
                 :
