@@ -2,7 +2,7 @@
 import * as React from 'react';
 import styles from './Scw.module.scss';
 import { Label, TextField } from 'office-ui-fabric-react';
-import ModalError from './Modal';
+// import ModalError from './Modal';
 
 
 
@@ -15,6 +15,7 @@ export interface IFirstStepProps {
     shEngDesc: string;
     shFrDesc: string;
     errorMessage: string;
+    showModal: boolean;
 
     handleOnChange?:(event:any, value: string)=> void;
     handleErrorMessage?: (errorMessage: string) => void;
@@ -47,7 +48,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             <p>The GCX Support Team needs to know the purpose of the new community to determine whether it can be <strong>approved.</strong></p>
             <Label htmlFor='Community purpose' required>Community purpose</Label>
             <p className={ styles.instruction }>This will not show up on your site. Write in the official language of your choice. Max. 500 characters</p>
-            <TextField type='text' name='commPurpose' id='Community purpose'  onChange={ this.onhandleChangeEvent }defaultValue={ commPurpose } />
+            <TextField type='text' name='commPurpose' id='Community purpose'  onChange={ this.onhandleChangeEvent }defaultValue={ commPurpose }  validateOnLoad={false} onGetErrorMessage={this.onGetErrorMessage}/>
 
             
             <h2>Community name</h2>
@@ -58,18 +59,18 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             <Label htmlFor='frCommName' required>French community name</Label>
             <p className={ styles.instruction }>Use keywords, not abbreviations for better discoverability. Must be between 5 and 126 characters in length and special characters are not permitted.</p>
             <p className={ styles.instruction }>Max. 33 characters.</p>
-            <TextField  id='frCommName' name='frCommName' onChange={this.onhandleChangeEvent } defaultValue={frCommName}/>
+            <TextField  id='frCommName' name='frCommName' onChange={this.onhandleChangeEvent } defaultValue={frCommName} validateOnLoad={false} onGetErrorMessage={this.onGetErrorMessage}/>
 
 
             <h2>Community description</h2>
             <p>The community descriptions will be visible to users when they use the {`"All communities"`} page and when they search for it.</p>
             <Label htmlFor='shEngDesc' required>English description name</Label>
             <p className={ styles.instruction }>Max. 33 characters.</p>
-            <TextField id='shEngDesc' name='shEngDesc'onChange={this.onhandleChangeEvent} defaultValue={shEngDesc}/>
+            <TextField id='shEngDesc' name='shEngDesc'onChange={this.onhandleChangeEvent} defaultValue={shEngDesc} validateOnLoad={false} onGetErrorMessage={this.onGetErrorMessage}/>
 
             <Label htmlFor='shFrDesc' required>French description name</Label>
             <p className={ styles.instruction }>Max. 33 characters.</p>
-            <TextField id='shFrDesc' name='shFrDesc' onChange={this.onhandleChangeEvent} defaultValue={shFrDesc}/> 
+            <TextField id='shFrDesc' name='shFrDesc' onChange={this.onhandleChangeEvent} defaultValue={shFrDesc} validateOnLoad={false} onGetErrorMessage={this.onGetErrorMessage}/> 
             
             </>
         );
@@ -77,26 +78,29 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
 
     private onhandleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) :void => {
         const eventValue = event.target.value;
-        console.log(event.target.name)
-        this.setState({
-            ...this.state,
-            [event.target.name]: eventValue
-        })
-        this.props.handleOnChange(event.target.name, eventValue)
+        const eventName = event.target.name;
+ 
+
+        try {
+            this.props.handleOnChange(eventName, eventValue)
+
+        } catch (error) {
+            console.log(error);
+        }
+         
     }
 
 
 
 
-    public onGetErrorMessage = ():JSX.Element => {
-        
-        const engNameValue = this.props.engName
-        if(engNameValue === null || engNameValue === '') {
-            return(
-                <ModalError showModal={false} />
-                )
-        } else {
-            return null;
+    public onGetErrorMessage = ():string => {
+        // const {engName, frCommName, shEngDesc, shFrDesc, commPurpose} = this.props
+        const {engName} = this.props
+     
+        if (engName.trim().length === 0 ) {
+          return (
+                'empty'
+            );
         }
         
         
