@@ -4,14 +4,15 @@ import styles from './Scw.module.scss';
 import  { Steps, Button, message} from 'antd';
 import FirstStep from "./FirstStep";
 import  { IScwProps } from './IScwProps';
-// import  { Initial } from './InitialPage/Initial';
-// import  { PrimaryButton } from 'office-ui-fabric-react';
+import  { Initial } from './InitialPage/Initial';
+import  { PrimaryButton } from 'office-ui-fabric-react';
 import  { IButtonStyles } from 'office-ui-fabric-react';
 import LastStep from './LastStep';
 import  { MessageType } from 'antd/es/message/interface';
 import ErrorModal from './Modal';
 import FourthStep from './FourthStep';
 import SecondStep from './SecondStep';
+import ThirdStep from './ThirdStep';
 
 
 
@@ -61,17 +62,32 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     }
 
     private next = (): void =>  { 
+        const page = this.state.current + 1;
         const nextPage = this.state.current + 1;
-        const { engName, frCommName, shEngDesc, shFrDesc, commPurpose } = this.state
+        const { engName, frCommName, shEngDesc, shFrDesc, commPurpose, selectedChoice } = this.state
+        console.log("Page",page)
 
-       if ( commPurpose.length ===  0 || engName.length ===  0 || frCommName.length ===  0 || shEngDesc.length ===  0 || shFrDesc.length ===  0 ) {
+       if ( page === 1 && (commPurpose.length ===  0 || engName.length ===  0 || frCommName.length ===  0 || shEngDesc.length ===  0 || shFrDesc.length ===  0) ) {
         
             this.setState({
                 showModal: true
             })
        }
 
-       if ( commPurpose.length !==  0 && engName.length !==  0 && frCommName.length !==  0 && shEngDesc.length !==  0 && shFrDesc.length !==  0 ) {
+       if ( page === 2 && (!selectedChoice.length) ) {
+            this.setState({
+                showModal: true
+            });
+       }
+
+//        if ( page === 3 && (!terms.length) ) {
+//         this.setState({
+//             showModal: true
+//         });
+//    }
+
+       
+       if ( commPurpose.length !==  0 && engName.length !==  0 && frCommName.length !==  0 && shEngDesc.length !==  0 && shFrDesc.length !==  0 && selectedChoice.length !== 0) {
             this.setState({
                 current: nextPage
             })
@@ -246,7 +262,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
          { 
             step: "3",
             title: "Terms of use",
-            content: "third",
+            content: <ThirdStep/>,
           },
          { 
             step: "4",
@@ -293,25 +309,25 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         return (
             <div className= { styles.scw }>
               
-                 {/* { this.state.step === 0 
+                { this.state.step === 0 
                 ? <>
                 <Initial/>
                 <PrimaryButton styles= { this.buttonStyle } text="Let's go" ariaLabel="Let's go" onClick= { () =>  { this.handleClickEvent()} } className= { styles.centerButton }/>
                 </>
-                : */}
+                :
                 <div className= { styles.container }>
                     <div className= { styles.row }> 
                         <Steps current= { this.state.current } labelPlacement='vertical' items= { items } />
                         <div className="steps-content"> { steps[ this.state.current ].content }</div>
                         <div className="steps-action">
-                            {this.state.showModal === true && <ErrorModal   engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } />}
+                            {this.state.showModal === true && <ErrorModal   engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } selectedChoice={ selectedChoice }showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } />}
                              { this.state.current < steps.length - 1 && (<Button type="primary" onClick= { this.next} >Next</Button> ) }
                              { this.state.current === steps.length - 1 && (<Button type="primary" onClick= { this.successMessage} >Done</Button> ) }
                              { this.state.current > 0 && (<Button style= {{ margin: '0 8px' }} onClick= { () => this.prev()}>Previous</Button> ) }
                         </div>
                     </div>
                 </div>
-                 {/* } */}
+                }
             </div>
         );
     }

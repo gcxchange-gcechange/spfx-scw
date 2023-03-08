@@ -47,6 +47,7 @@ export default class SecondStep extends React.Component<ISecondStepProps, ISecon
     }
 
     private onSelectedKey = ( event: React.SyntheticEvent<HTMLElement>, option: IChoiceGroupOption):void => {
+        event.preventDefault();
         this.setState({
             selectedChoice: option.text
         })

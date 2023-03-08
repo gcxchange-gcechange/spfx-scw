@@ -13,6 +13,7 @@ export interface IErrorModalProps {
     commPurpose: string;
     shEngDesc: string;
     shFrDesc: string;
+    selectedChoice: string;
 }
 
 export interface IErrorModalState {
@@ -52,12 +53,12 @@ export default class ErrorModal extends React.Component<IErrorModalProps,IErrorM
   }
 
   public errorMessage = () : string =>  {
-      const { commPurpose, engName, frCommName, shEngDesc, shFrDesc } = this.props;
-      const fieldNames: string[] = ["Community Purpose", "English community name", "French community name", "Short English description", "Short French description" ];
+      const { commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice } = this.props;
+      const fieldNames: string[] = ["Community Purpose", "English community name", "French community name", "Short English description", "Short French description", "community classification" ];
       let message = '';
 
       if(!commPurpose.length && !engName.length && !frCommName.length && !shEngDesc.length && !shFrDesc.length) {
-        message = `${fieldNames[0]}, ${fieldNames[1]} , ${fieldNames[2]}, ${fieldNames[3]} ${fieldNames[4]}`
+        message = `${fieldNames[0]}, ${fieldNames[1]} , ${fieldNames[2]}, ${fieldNames[3]}, ${fieldNames[4]}`
       }
       else if (!commPurpose.length) {
         message = `${fieldNames[0]}`
@@ -73,6 +74,9 @@ export default class ErrorModal extends React.Component<IErrorModalProps,IErrorM
       }
       else if ( !shFrDesc.length) {
         message = `${fieldNames[4]}`
+      }
+      else if (!selectedChoice.length) {
+        message = `${fieldNames[5]}`
       }
 
        return message
