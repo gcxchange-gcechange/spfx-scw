@@ -61,22 +61,27 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     }
 
     private next = (): void =>  { 
-        const current = this.state.current + 1;
+        const nextPage = this.state.current + 1;
+        const { engName, frCommName, shEngDesc, shFrDesc, commPurpose } = this.state
 
-        const length = this.state.engName.length
-        console.log("lENGTH", length);
-
-        this.setState( { 
-            current: current, 
-        });
-
-        if ( length === 0 ) {
-
+       if ( commPurpose.length ===  0 || engName.length ===  0 || frCommName.length ===  0 || shEngDesc.length ===  0 || shFrDesc.length ===  0 ) {
             this.setState({
                 showModal: true
             })
-        }
+       }
 
+       if ( commPurpose.length !==  0 && engName.length !==  0 && frCommName.length !==  0 && shEngDesc.length !==  0 && shFrDesc.length !==  0 ) {
+            this.setState({
+                current: nextPage
+            })
+       }
+
+    }
+
+    public closeModal = (): void => {
+        this.setState({
+            showModal: false
+        })
     }
 
     private prev = (): void =>  { 
@@ -200,17 +205,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         });
     }
 
-    // public openModal = ( ) :void => {
-    //     this.setState({
-    //         showModal: true
-    //     })
-    // }
-
-    public closeModal = ( ) :void => {
-        this.setState({
-            showModal: false
-        })
-    }
 
 
 
@@ -309,7 +303,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                         <Steps current= { this.state.current } labelPlacement='vertical' items= { items } />
                         <div className="steps-content"> { steps[ this.state.current ].content }</div>
                         <div className="steps-action">
-                            {this.state.showModal === true && <ErrorModal showModal={showModal} closeModal={this.closeModal} openModal = {this.next}/>}
+                            {this.state.showModal === true && <ErrorModal showModal={showModal} openModal = {this.next} onClose={this.closeModal} />}
                              { this.state.current < steps.length - 1 && (<Button type="primary" onClick= { this.next} >Next</Button> ) }
                              { this.state.current === steps.length - 1 && (<Button type="primary" onClick= { this.successMessage} >Done</Button> ) }
                              { this.state.current > 0 && (<Button style= {{ margin: '0 8px' }} onClick= { () => this.prev()}>Previous</Button> ) }

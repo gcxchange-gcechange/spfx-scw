@@ -6,7 +6,8 @@ import { Stack } from "office-ui-fabric-react/lib/Stack";
 
 export interface IErrorModalProps {
     showModal: boolean;
-    handleShowModal?:(value: boolean) => void  ;
+    openModal?: () => void;
+    onClose?: () => void;
 }
 
 export interface IErrorModalState {
@@ -22,14 +23,6 @@ export default class ErrorModal extends React.Component<IErrorModalProps,IErrorM
  
   }
 
-//   private showModal = (): void => {
-//     this.setState({ showModal: true });
-//   };
-
-  private hideModal = (): void => {
-    this.setState({ showModal: false });
-    this.props.handleShowModal(false);
-  };
 
 
   private modalStyle = {
@@ -62,9 +55,9 @@ export default class ErrorModal extends React.Component<IErrorModalProps,IErrorM
         <div>
           {/* <PrimaryButton onClick={this.showModal}>Open</PrimaryButton> */}
           <Modal
-            isOpen={this.props.showModal}
-            onDismiss={this.hideModal}
-            isBlocking={true}
+            isOpen={ this.props.showModal }
+            onDismiss={ this.props.onClose }
+            isBlocking={ true }
             styles={{
                 main: this.modalStyle.main
             }}
@@ -72,15 +65,15 @@ export default class ErrorModal extends React.Component<IErrorModalProps,IErrorM
             <div style={this.modalStyle.header}>
               <h2>Did you forget something?</h2>
                 <IconButton 
-                    className={styles.cancelIcon}
-                    iconProps={{iconName: 'Cancel'}}  
-                    onClick={this.hideModal}/>
+                    className={ styles.cancelIcon }
+                    iconProps={{ iconName: 'Cancel' }}  
+                    onClick={ this.props.onClose }/>
             </div>
             <div style={this.modalStyle.footer}>
                 <Stack >
                     <Stack.Item align="center"><p>You must provide in order to proceed.</p></Stack.Item>
-                    <Stack.Item><hr className={styles.horizontalLine}/></Stack.Item>
-                    <Stack.Item align="center"><PrimaryButton onClick={this.hideModal} className={styles.close}>CLOSE</PrimaryButton></Stack.Item>
+                    <Stack.Item><hr className={ styles.horizontalLine }/></Stack.Item>
+                    <Stack.Item align="center"><PrimaryButton onClick={this.props.onClose } className={ styles.close }>CLOSE</PrimaryButton></Stack.Item>
               </Stack>
             </div>
           </Modal>
