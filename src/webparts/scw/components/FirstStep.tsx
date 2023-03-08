@@ -93,17 +93,21 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
 
 
 
-    public onGetErrorMessage = ():string => {
-        // const {engName, frCommName, shEngDesc, shFrDesc, commPurpose} = this.props
-        const {engName} = this.props
-     
-        if (engName.trim().length === 0 ) {
-          return (
-                'empty'
+    public onGetErrorMessage = (value: string): string => {
+        
+
+        const inputElement = document.getElementsByName(value)
+        console.log("event", inputElement[0].id);
+
+        if(value === null ) {
+
+            this.props.handleErrorMessage( `The ${inputElement[0].id} must be filed before proceeding.`)
+        
+            return (
+                `The ${inputElement[0].id} must be filed before proceeding.`
             );
         }
-        
-        
+        return '';
     }
 
  

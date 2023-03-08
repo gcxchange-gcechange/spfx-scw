@@ -8,6 +8,11 @@ export interface IErrorModalProps {
     showModal: boolean;
     openModal?: () => void;
     onClose?: () => void;
+    engName: string;
+    frCommName: string;
+    commPurpose: string;
+    shEngDesc: string;
+    shFrDesc: string;
 }
 
 export interface IErrorModalState {
@@ -46,14 +51,42 @@ export default class ErrorModal extends React.Component<IErrorModalProps,IErrorM
     }   
   }
 
+  public errorMessage = () : string =>  {
+      const { commPurpose, engName, frCommName, shEngDesc, shFrDesc } = this.props;
+      const fieldNames: string[] = ["Community Purpose", "English community name", "French community name", "Short English description", "Short French description" ];
+      let message = '';
+
+      if(!commPurpose.length && !engName.length && !frCommName.length && !shEngDesc.length && !shFrDesc.length) {
+        message = `${fieldNames[0]}, ${fieldNames[1]} , ${fieldNames[2]}, ${fieldNames[3]} ${fieldNames[4]}`
+      }
+      else if (!commPurpose.length) {
+        message = `${fieldNames[0]}`
+      }
+      else if ( !engName.length) {
+        message = `${fieldNames[1]}`
+      }
+      else if ( !frCommName.length ) {
+          message = ` ${fieldNames[2]}`
+      }
+      else if ( !shEngDesc.length) {
+        message = `${fieldNames[3]}`
+      }
+      else if ( !shFrDesc.length) {
+        message = `${fieldNames[4]}`
+      }
+
+       return message
+    }
+
+
+
   public render(): React.ReactElement<IErrorModalProps> {
 
-    console.log("ModalProps",this.props);
+
 
     return (
       <>
         <div>
-          {/* <PrimaryButton onClick={this.showModal}>Open</PrimaryButton> */}
           <Modal
             isOpen={ this.props.showModal }
             onDismiss={ this.props.onClose }
@@ -71,7 +104,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps,IErrorM
             </div>
             <div style={this.modalStyle.footer}>
                 <Stack >
-                    <Stack.Item align="center"><p>You must provide in order to proceed.</p></Stack.Item>
+                    <Stack.Item align="center"><p>You must provide <strong>{this.errorMessage()}</strong> before proceeding</p></Stack.Item>
                     <Stack.Item><hr className={ styles.horizontalLine }/></Stack.Item>
                     <Stack.Item align="center"><PrimaryButton onClick={this.props.onClose } className={ styles.close }>CLOSE</PrimaryButton></Stack.Item>
               </Stack>
