@@ -6,5 +6,6 @@ export interface IScwProps {
   environmentMessage: string;
   hasTeamsContext: boolean;
   userDisplayName: string;
-  context: WebPartContext;
+    context: WebPartContext;
+    prefLang: string;
 }

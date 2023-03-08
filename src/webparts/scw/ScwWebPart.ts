@@ -1,9 +1,10 @@
-import * as React from 'react';
+﻿import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+    PropertyPaneTextField,
+    PropertyPaneDropdown
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart} from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
@@ -15,7 +16,8 @@ import AntDesignStep from './components/Scw';
 
 
 export interface IScwWebPartProps {
-  description: string;
+    description: string;
+    prefLang: string;
  
 }
 
@@ -33,7 +35,8 @@ export default class ScwWebPart extends BaseClientSideWebPart<IScwWebPartProps> 
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
         userDisplayName: this.context.pageContext.user.displayName,
-        context: this.context
+          context: this.context,
+        prefLang: this.properties.prefLang
         
       }
     );
@@ -114,6 +117,14 @@ export default class ScwWebPart extends BaseClientSideWebPart<IScwWebPartProps> 
               groupFields: [
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
+                }),
+                PropertyPaneDropdown('prefLang', {
+                    label: 'Preferred Language',
+                    options: [
+                        { key: 'account', text: 'Account' },
+                        { key: 'en-us', text: 'English' },
+                        { key: 'fr-fr', text: 'Français' }
+                    ]
                 })
               ]
             }

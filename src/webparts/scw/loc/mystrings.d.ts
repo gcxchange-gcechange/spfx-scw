@@ -10,6 +10,7 @@ declare interface IScwWebPartStrings {
   AppTeamsTabEnvironment: string;
   AppOfficeEnvironment: string;
   AppOutlookEnvironment: string;
+  title_details: string;
 }
 
 declare module 'ScwWebPartStrings' {
