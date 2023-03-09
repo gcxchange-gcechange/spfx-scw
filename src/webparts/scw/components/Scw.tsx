@@ -100,16 +100,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     private next = (): void =>  { 
        
         const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, selectedChoice, checkedValues } = this.state
-        //const { current, ownerList, selectedChoice } = this.state
+   
         console.log("Page",ownerList)
-        console.log("Current page9 " + this.state.current);
-
-        //if (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc) {
-        //    this.setState({ showModal: true });
-        //} 
-        //this.setState(
-        //  { current: current + 1 },
-        //)
+        console.log("Current page" + this.state.current);
 
         if (current == 0) {
             console.log("You are on 0");
