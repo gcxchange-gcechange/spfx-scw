@@ -99,41 +99,56 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     private next = (): void =>  { 
        
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, selectedChoice, checkedValues } = this.state
-        console.log("Page",current)
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, selectedChoice, checkedValues, ownerList } = this.state
+        console.log("Page",ownerList)
 
 
        if (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc) {
-        this.setState({ showModal: true });
+            this.setState({ showModal: true });
         } 
 
-       if ( current === 1 && (!selectedChoice.length) ) {
+        if ( current === 1  && !selectedChoice.length ) {
             this.setState({
                 showModal: true
             });
-       }
+        }   
 
-       if ( current === 2 && checkedValues.length < 7 ) {
-        this.setState({
-            showModal: true
-        });
+        if ( current === 2 && checkedValues.length < 7 ) {
+            this.setState({
+                showModal: true
+            });
+        } 
+
+        if ( current === 2 && ownerList.length < 2 ) {
+            this.setState({
+                showModal: true
+            });
+        } 
+
+        if ( commPurpose.length !==  0 && engName.length !==  0 && frCommName.length !==  0 && shEngDesc.length !==  0 && shFrDesc.length !==  0 ) {
+            this.setState(
+                { current: current + 1 },
+            )
+        } 
+
+       if ( current === 1 && selectedChoice.length !== 0) {
+            this.setState({
+                current: current + 1
+            });
         }
-       
-       if ( commPurpose.length !==  0 && engName.length !==  0 && frCommName.length !==  0 && shEngDesc.length !==  0 && shFrDesc.length !==  0 ) {
+
+        if  ( current === 2 && checkedValues.length === 8 ) {
+                this.setState({
+                    current: current + 1
+                });
+        }
+
+        if ( current === 2 && ownerList.length >= 2 ) {
             this.setState({
                 current: current + 1
-            })
-       } 
-       
-       else if ( current === 1 && selectedChoice.length !== 0) {
-            this.setState({
-                current: current + 1
-            })
-       } else if  ( current === 2 && checkedValues.length === 7) {
-            this.setState({
-                current: current + 1
-            })
-       }
+            });
+        } 
+    
 
     }
 
@@ -142,6 +157,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             showModal: false
         })
     }
+
 
     private prev = (): void =>  { 
         

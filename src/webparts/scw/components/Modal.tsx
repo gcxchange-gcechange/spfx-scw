@@ -59,8 +59,10 @@ export default class ErrorModal extends React.Component<IErrorModalProps,IErrorM
       const fieldNames: string[] = ["Community Purpose", "English community name", "French community name", "Short English description", "Short French description", "community classification", "terms of use", "add at least one more owner" ];
       let message = '';
 
+    
+
       if(!commPurpose.length && !engName.length && !frCommName.length && !shEngDesc.length && !shFrDesc.length) {
-        message = `${fieldNames[0]}, \n ${fieldNames[1]} , ${fieldNames[2]}, \n ${fieldNames[3]}, ${fieldNames[4]}`
+        message = `${fieldNames[0]},  ${fieldNames[1]} , ${fieldNames[2]}, \n  ${fieldNames[3]}, ${fieldNames[4]}`
       }
       else if (!commPurpose.length) {
         message = `${fieldNames[0]}`
