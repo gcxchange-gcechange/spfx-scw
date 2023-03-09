@@ -63,94 +63,38 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     }
 
-    // private next = (): void => {
-    //     const { current, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, checkedValues } = this.state;
-    //     const nextPage = current + 1;
-      
-    //     switch (current) {
-    //       case 1:
-    //         if (commPurpose.length === 0 || engName.length === 0 || frCommName.length === 0 || shEngDesc.length === 0 || shFrDesc.length === 0) {
-    //           this.setState({ showModal: true });
-    //         } else {
-    //           this.setState({ current: nextPage });
-    //         }
-    //         break;
-      
-    //       case 2:
-    //         if (!selectedChoice.length) {
-    //           this.setState({ showModal: true });
-    //         } else {
-    //           this.setState({ current: nextPage });
-    //         }
-    //         break;
-      
-    //       case 3:
-    //         if (checkedValues.length < 7) {
-    //           this.setState({ showModal: true });
-    //         } else {
-    //           this.setState({ current: nextPage });
-    //         }
-    //         break;
-      
-    //       default:
-    //         break;
-    //     }
-    //   };
+   
 
     private next = (): void =>  { 
+
        
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, selectedChoice, checkedValues, ownerList } = this.state
-        console.log("Page",ownerList)
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, selectedChoice, checkedValues, ownerList} = this.state
 
-
-       if (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc) {
+        
+       if ( !commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc) {
+   
             this.setState({ showModal: true });
-        } 
+       } 
 
-        if ( current === 1  && !selectedChoice.length ) {
-            this.setState({
-                showModal: true
-            });
-        }   
+       else if ( current === 1 && selectedChoice === '' ) {
+            
+             this.setState({ showModal: true });
+       }
+       else if ( current === 2 && checkedValues.length < 7 ) {
+                
+                this.setState({ showModal: true });
+       } 
+        else if ( current === 3 && ownerList.length === 1 ) {
+            
+                this.setState({ showModal: true });
 
-        if ( current === 2 && checkedValues.length < 7 ) {
-            this.setState({
-                showModal: true
-            });
-        } 
-
-        if ( current === 2 && ownerList.length < 2 ) {
-            this.setState({
-                showModal: true
-            });
-        } 
-
-        if ( commPurpose.length !==  0 && engName.length !==  0 && frCommName.length !==  0 && shEngDesc.length !==  0 && shFrDesc.length !==  0 ) {
-            this.setState(
-                { current: current + 1 },
-            )
-        } 
-
-       if ( current === 1 && selectedChoice.length !== 0) {
-            this.setState({
-                current: current + 1
-            });
+        } else {
+            
+            this.goToNextPg(current);
         }
-
-        if  ( current === 2 && checkedValues.length === 8 ) {
-                this.setState({
-                    current: current + 1
-                });
-        }
-
-        if ( current === 2 && ownerList.length >= 2 ) {
-            this.setState({
-                current: current + 1
-            });
-        } 
-    
-
+       
     }
+
 
     public closeModal = (): void => {
         this.setState({
@@ -158,6 +102,12 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         })
     }
 
+    private goToNextPg = (pageNumber: number): void =>  { 
+            
+        this.setState ((prevState) => ({
+            current: prevState.current + 1
+        }))
+    }
 
     private prev = (): void =>  { 
         
