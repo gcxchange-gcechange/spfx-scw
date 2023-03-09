@@ -99,55 +99,93 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     private next = (): void =>  { 
        
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, selectedChoice, checkedValues, ownerList } = this.state
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, selectedChoice, checkedValues } = this.state
+        //const { current, ownerList, selectedChoice } = this.state
         console.log("Page",ownerList)
+        console.log("Current page9 " + this.state.current);
 
+        //if (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc) {
+        //    this.setState({ showModal: true });
+        //} 
+        //this.setState(
+        //  { current: current + 1 },
+        //)
 
-       if (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc) {
-            this.setState({ showModal: true });
-        } 
-
-        if ( current === 1  && !selectedChoice.length ) {
-            this.setState({
-                showModal: true
-            });
-        }   
-
-        if ( current === 2 && checkedValues.length < 7 ) {
-            this.setState({
-                showModal: true
-            });
-        } 
-
-        if ( current === 2 && ownerList.length < 2 ) {
-            this.setState({
-                showModal: true
-            });
-        } 
-
-        if ( commPurpose.length !==  0 && engName.length !==  0 && frCommName.length !==  0 && shEngDesc.length !==  0 && shFrDesc.length !==  0 ) {
-            this.setState(
-                { current: current + 1 },
-            )
-        } 
-
-       if ( current === 1 && selectedChoice.length !== 0) {
-            this.setState({
-                current: current + 1
-            });
+        if (current == 0) {
+            console.log("You are on 0");
+            if (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc) {
+                this.setState({ showModal: true });
+            } else {
+                 this.setState(
+                    { current: current + 1 },
+                 )
+            }
+        }
+        if (current == 1) {
+            console.log("You are on 1 " + selectedChoice);
+            if (!selectedChoice.length) {
+                this.setState({ showModal: true });
+            } else {
+                this.setState(
+                    { current: current + 1 },
+                )
+            }
         }
 
-        if  ( current === 2 && checkedValues.length === 8 ) {
-                this.setState({
-                    current: current + 1
-                });
+        if (current == 2) {
+            console.log("You are on 2");
+            if (checkedValues.length < 7) {
+                this.setState({ showModal: true });
+            } else {
+                this.setState(
+                    { current: current + 1 },
+                )
+            }
         }
 
-        if ( current === 2 && ownerList.length >= 2 ) {
-            this.setState({
-                current: current + 1
-            });
-        } 
+    
+
+       // if ( current === 0  && !selectedChoice.length ) {
+       //     this.setState({
+       //         showModal: true
+       //     });
+       // }   
+
+       // if ( current === 2 && checkedValues.length < 7 ) {
+       //     this.setState({
+       //         showModal: true
+       //     });
+       // } 
+
+       // if ( current === 2 && ownerList.length < 2 ) {
+       //     this.setState({
+       //         showModal: true
+       //     });
+       // } 
+
+       // if ( commPurpose.length !==  0 && engName.length !==  0 && frCommName.length !==  0 && shEngDesc.length !==  0 && shFrDesc.length !==  0 ) {
+       //     this.setState(
+       //         { current: current + 1 },
+       //     )
+       // } 
+
+       //if ( current === 1 && selectedChoice.length !== 0) {
+       //     this.setState({
+       //         current: current + 1
+       //     });
+       // }
+
+       // if  ( current === 2 && checkedValues.length === 8 ) {
+       //         this.setState({
+       //             current: current + 1
+       //         });
+       // }
+
+       // if ( current === 2 && ownerList.length >= 2 ) {
+       //     this.setState({
+       //         current: current + 1
+       //     });
+       // } 
     
 
     }
@@ -160,7 +198,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
 
     private prev = (): void =>  { 
-        
+        console.log("previous " + this.state.current)
         const current = this.state.current - 1;       
         this.setState( { current });   
     }
