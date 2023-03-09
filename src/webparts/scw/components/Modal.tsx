@@ -14,6 +14,8 @@ export interface IErrorModalProps {
     shEngDesc: string;
     shFrDesc: string;
     selectedChoice: string;
+    checkedValues: boolean[];
+    ownerList: string[];
 }
 
 export interface IErrorModalState {
@@ -53,12 +55,12 @@ export default class ErrorModal extends React.Component<IErrorModalProps,IErrorM
   }
 
   public errorMessage = () : string =>  {
-      const { commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice } = this.props;
-      const fieldNames: string[] = ["Community Purpose", "English community name", "French community name", "Short English description", "Short French description", "community classification" ];
+      const { commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, checkedValues, ownerList } = this.props;
+      const fieldNames: string[] = ["Community Purpose", "English community name", "French community name", "Short English description", "Short French description", "community classification", "terms of use", "add at least one more owner" ];
       let message = '';
 
       if(!commPurpose.length && !engName.length && !frCommName.length && !shEngDesc.length && !shFrDesc.length) {
-        message = `${fieldNames[0]}, ${fieldNames[1]} , ${fieldNames[2]}, ${fieldNames[3]}, ${fieldNames[4]}`
+        message = `${fieldNames[0]}, \n ${fieldNames[1]} , ${fieldNames[2]}, \n ${fieldNames[3]}, ${fieldNames[4]}`
       }
       else if (!commPurpose.length) {
         message = `${fieldNames[0]}`
@@ -77,6 +79,12 @@ export default class ErrorModal extends React.Component<IErrorModalProps,IErrorM
       }
       else if (!selectedChoice.length) {
         message = `${fieldNames[5]}`
+      } 
+      else if (checkedValues.length < 7) {
+        message = `${fieldNames[6]}`
+      } 
+      else if ( ownerList.length < 2 ) {
+        message = `${fieldNames[7]}`
       }
 
        return message

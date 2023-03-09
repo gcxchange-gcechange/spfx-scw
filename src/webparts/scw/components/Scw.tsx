@@ -30,6 +30,7 @@ export interface IScwState  {
     selectedChoice: string;
     errorMessage: string;
     showModal: boolean;
+    checkedValues: boolean[];
    
     
 }
@@ -55,41 +56,82 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             shFrDesc: '',
             selectedChoice: '',
             errorMessage: '',
-            showModal: false
+            showModal: false,
+            checkedValues: []
             
         };
 
     }
 
+    // private next = (): void => {
+    //     const { current, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, checkedValues } = this.state;
+    //     const nextPage = current + 1;
+      
+    //     switch (current) {
+    //       case 1:
+    //         if (commPurpose.length === 0 || engName.length === 0 || frCommName.length === 0 || shEngDesc.length === 0 || shFrDesc.length === 0) {
+    //           this.setState({ showModal: true });
+    //         } else {
+    //           this.setState({ current: nextPage });
+    //         }
+    //         break;
+      
+    //       case 2:
+    //         if (!selectedChoice.length) {
+    //           this.setState({ showModal: true });
+    //         } else {
+    //           this.setState({ current: nextPage });
+    //         }
+    //         break;
+      
+    //       case 3:
+    //         if (checkedValues.length < 7) {
+    //           this.setState({ showModal: true });
+    //         } else {
+    //           this.setState({ current: nextPage });
+    //         }
+    //         break;
+      
+    //       default:
+    //         break;
+    //     }
+    //   };
+
     private next = (): void =>  { 
-        const page = this.state.current + 1;
-        const nextPage = this.state.current + 1;
-        const { engName, frCommName, shEngDesc, shFrDesc, commPurpose, selectedChoice } = this.state
-        console.log("Page",page)
+       
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, selectedChoice, checkedValues } = this.state
+        console.log("Page",current)
 
-       if ( page === 1 && (commPurpose.length ===  0 || engName.length ===  0 || frCommName.length ===  0 || shEngDesc.length ===  0 || shFrDesc.length ===  0) ) {
-        
-            this.setState({
-                showModal: true
-            })
-       }
 
-       if ( page === 2 && (!selectedChoice.length) ) {
+       if (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc) {
+        this.setState({ showModal: true });
+        } 
+
+       if ( current === 1 && (!selectedChoice.length) ) {
             this.setState({
                 showModal: true
             });
        }
 
-//        if ( page === 3 && (!terms.length) ) {
-//         this.setState({
-//             showModal: true
-//         });
-//    }
-
+       if ( current === 2 && checkedValues.length < 7 ) {
+        this.setState({
+            showModal: true
+        });
+        }
        
-       if ( commPurpose.length !==  0 && engName.length !==  0 && frCommName.length !==  0 && shEngDesc.length !==  0 && shFrDesc.length !==  0 && selectedChoice.length !== 0) {
+       if ( commPurpose.length !==  0 && engName.length !==  0 && frCommName.length !==  0 && shEngDesc.length !==  0 && shFrDesc.length !==  0 ) {
             this.setState({
-                current: nextPage
+                current: current + 1
+            })
+       } 
+       
+       else if ( current === 1 && selectedChoice.length !== 0) {
+            this.setState({
+                current: current + 1
+            })
+       } else if  ( current === 2 && checkedValues.length === 7) {
+            this.setState({
+                current: current + 1
             })
        }
 
@@ -222,13 +264,19 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         });
     }
 
+    public checkedTerms = ( isChecked: boolean ):void => {
+        this.setState(prevState => ({
+            checkedValues: [...prevState.checkedValues, isChecked]
+        }));
+    }
+
 
 
 
     
     public render(): React.ReactElement<IScwProps>  { 
 
-        const  { commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, memberList, errorMessage, showModal } = this.state;
+        const  { commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, memberList, errorMessage, showModal, checkedValues } = this.state;
 
         const steps = [
          { 
@@ -262,7 +310,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
          { 
             step: "3",
             title: "Terms of use",
-            content: <ThirdStep/>,
+            content: <ThirdStep checkedValues= { checkedValues } checkedTerms = { this.checkedTerms } />,
           },
          { 
             step: "4",
@@ -308,7 +356,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         
         return (
             <div className= { styles.scw }>
-              
+                <h2>Create a community</h2>
                 { this.state.step === 0 
                 ? <>
                 <Initial/>
@@ -320,7 +368,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                         <Steps current= { this.state.current } labelPlacement='vertical' items= { items } />
                         <div className="steps-content"> { steps[ this.state.current ].content }</div>
                         <div className="steps-action">
-                            {this.state.showModal === true && <ErrorModal   engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } selectedChoice={ selectedChoice }showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } />}
+                            {this.state.showModal === true && <ErrorModal   engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } selectedChoice={ selectedChoice } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } />}
                              { this.state.current < steps.length - 1 && (<Button type="primary" onClick= { this.next} >Next</Button> ) }
                              { this.state.current === steps.length - 1 && (<Button type="primary" onClick= { this.successMessage} >Done</Button> ) }
                              { this.state.current > 0 && (<Button style= {{ margin: '0 8px' }} onClick= { () => this.prev()}>Previous</Button> ) }
