@@ -34,10 +34,12 @@ export default class ErrorModal extends React.Component<IErrorModalProps,IErrorM
 
 
   private modalStyle = {
+   
     main: {
         display: 'flex',
         borderRadius: '5px',
-        minWidth: '500px'
+        minWidth: '500px',
+        maxWidth: 'calc(70% - 32px)'
     },
     header: {
         backgroundColor: '#106EBE',
@@ -56,13 +58,13 @@ export default class ErrorModal extends React.Component<IErrorModalProps,IErrorM
 
   public errorMessage = () : string =>  {
       const { commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, checkedValues, ownerList } = this.props;
-      const fieldNames: string[] = ["Community Purpose", "English community name", "French community name", "Short English description", "Short French description", "community classification", "terms of use", "add at least one more owner" ];
+      const fieldNames: string[] = ["Community Purpose", "English community name", "French community name", "Short English description", "Short French description", "community classification", " all terms of use", "add at least one more owner" ];
       let message = '';
 
     
 
       if(!commPurpose.length && !engName.length && !frCommName.length && !shEngDesc.length && !shFrDesc.length) {
-        message = `${fieldNames[0]},  ${fieldNames[1]} , ${fieldNames[2]}, \n  ${fieldNames[3]}, ${fieldNames[4]}`
+        message = `${fieldNames[0]},  ${fieldNames[1]} , ${fieldNames[2]},  ${fieldNames[3]}, ${fieldNames[4]}`
       }
       else if (!commPurpose.length) {
         message = `${fieldNames[0]}`
