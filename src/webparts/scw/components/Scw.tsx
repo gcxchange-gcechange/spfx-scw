@@ -68,7 +68,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     private next = (): void =>  { 
 
        
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, selectedChoice, checkedValues, ownerList} = this.state
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, selectedChoice, checkedValues, ownerList } = this.state
 
         
        if ( !commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc) {
@@ -89,7 +89,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 this.setState({ showModal: true });
 
         } else {
-            
+
             this.goToNextPg(current);
         }
        
