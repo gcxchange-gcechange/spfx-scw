@@ -39,7 +39,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps,IErrorM
         display: 'flex',
         borderRadius: '5px',
         minWidth: '500px',
-        maxWidth: 'calc(70% - 32px)'
+        maxWidth: '500px'
     },
     header: {
         backgroundColor: '#106EBE',
