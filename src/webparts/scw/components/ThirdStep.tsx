@@ -58,27 +58,27 @@ export default class ThirdStep extends React.Component<IThirdStepProps> {
                         <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>I understand that my community will only be visible to members.</strong></p>
                     </StackItem>
                     <StackItem>
-                        <Checkbox label='All members of a protected community must have a governement-issued phone with the Microsoft Authenticator app enabled.' onChange={ this.onChange } defaultChecked={this.props.checkedValues[1]}/>
+                        <Checkbox styles={checkBoxStyles} label='All members of a protected community must have a governement-issued phone with the Microsoft Authenticator app enabled.' onChange={ this.onChange } defaultChecked={this.props.checkedValues[1]}/>
                         <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>I understand that my community members must meet these requirements to access my community.</strong></p>
                     </StackItem>
                     <StackItem>
-                        <Checkbox label='All members must use a government-issued devide and have MyKey activated to access a protected B community.' onChange={ this.onChange } defaultChecked={this.props.checkedValues[2]}/>
+                        <Checkbox  styles={checkBoxStyles} label='All members must use a government-issued devide and have MyKey activated to access a protected B community.' onChange={ this.onChange } defaultChecked={this.props.checkedValues[2]}/>
                         <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>I understand that my community members must meet these requirements to access my community. </strong></p>
                     </StackItem>
                     <StackItem>
-                        <Checkbox label='Users must have a reliability clearance to access a protected space and a need to know the information stored within.' onChange={ this.onChange } defaultChecked={this.props.checkedValues[3]}/>
+                        <Checkbox styles={checkBoxStyles} label='Users must have a reliability clearance to access a protected space and a need to know the information stored within.' onChange={ this.onChange } defaultChecked={this.props.checkedValues[3]}/>
                         <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>I understand that my community members must meet these requirements to access my community. </strong></p>
                     </StackItem>
                     <StackItem>
-                        <Checkbox label='We cant guarantee timely support for classified communities. Our Support Team doesnt have direct access to these sites until they are added as members.' onChange={ this.onChange } defaultChecked={this.props.checkedValues[4]}/>
+                        <Checkbox styles={checkBoxStyles} label='We cant guarantee timely support for classified communities. Our Support Team doesnt have direct access to these sites until they are added as members.' onChange={ this.onChange } defaultChecked={this.props.checkedValues[4]}/>
                         <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>I agree to limited access to GCXchange support.</strong></p>
                     </StackItem>
                     <StackItem>
-                        <Checkbox label='Only users with a need to know protected information should be included in a community. When a member changes roles this need to know changes too.' onChange={ this.onChange } defaultChecked={this.props.checkedValues[5]}/>
+                        <Checkbox styles={checkBoxStyles} label='Only users with a need to know protected information should be included in a community. When a member changes roles this need to know changes too.' onChange={ this.onChange } defaultChecked={this.props.checkedValues[5]}/>
                         <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>I will regularly review membership on my community and remove members who have changed roles</strong></p>
                     </StackItem>
                     <StackItem>
-                        <Checkbox label='GCXchange has a retention policy of 2 years for all documents and should only be used to store transitory information.' onChange={ this.onChange } defaultChecked={this.props.checkedValues[6]}/>
+                        <Checkbox styles={checkBoxStyles} label='GCXchange has a retention policy of 2 years for all documents and should only be used to store transitory information.' onChange={ this.onChange } defaultChecked={this.props.checkedValues[6]}/>
                         <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>I agree to back up my community documents on my department's official repository if they contain information of business value.</strong></p>
                     </StackItem>
                 </Stack>
