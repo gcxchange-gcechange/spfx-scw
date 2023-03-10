@@ -111,9 +111,20 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     }
 
     private prev = (): void =>  { 
+
+        const prevPage = this.state.current - 1;   
+
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList } = this.state
+         console.log("currentPafe", this.state.current)
         
-        const current = this.state.current - 1;       
-        this.setState( { current });   
+        if ( current === 4 && !commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 1) {
+            this.setState({ showModal: true });
+        } 
+        else {
+            this.setState( { current: prevPage });  
+        }
+
+        
     }
 
     public handleClickEvent=():void=>  { 
@@ -133,9 +144,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     
     public successMessage = (): MessageType  =>  { 
 
-        const { engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList } = this.state
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList } = this.state
 
-        if( !commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length === 1) {
+        if ( current === 4 && !commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length === 1) {
             this.setState({ showModal: true });
         }
         else {
