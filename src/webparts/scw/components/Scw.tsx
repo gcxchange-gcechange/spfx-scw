@@ -331,7 +331,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         
         return (
             <div className= { styles.scw }>
-                <h2>Create a community</h2>
                 { this.state.step === 0 
                 ? <>
                 <Initial/>
