@@ -58,11 +58,45 @@ export default class ErrorModal extends React.Component<IErrorModalProps,IErrorM
 
   public errorMessage = () : string =>  {
       const { commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, checkedValues, ownerList } = this.props;
+
+      interface PropValues {
+        name: string;
+        value: string | boolean |number;
+      }
+
+      const values: PropValues[] = [
+        {name: 'Community purpose',   value: `${commPurpose}`},
+        {name: 'English community name', value: `${engName}`},
+        {name: 'French community name', value: `${frCommName}`},
+        {name: 'Short English description', value: `${shEngDesc}`},
+        {name: 'community classification', value: `${selectedChoice}`},
+        {name: 'all terms of use', value: `${checkedValues}`},
+        {name: 'add at least one more owner', value: `${ownerList}`},
+      ]
+
+
+     const missingValues = values.filter(obj => obj.value === '')
+        
+      console.log("MissingVal", values);
+
+      console.log("null", missingValues);
+
+      for (const item of missingValues) {
+        let errorMessage = '';
+
+        if (!item.value) {
+          errorMessage += item.name
+        }
+
+       console.log("Message", errorMessage)
+      }
+
+
+
       const fieldNames: string[] = ["Community Purpose", "English community name", "French community name", "Short English description", "Short French description", "community classification", " all terms of use", "add at least one more owner" ];
       let message = '';
 
-    
-
+  
       if(!commPurpose.length && !engName.length && !frCommName.length && !shEngDesc.length && !shFrDesc.length) {
         message = `${fieldNames[0]},  ${fieldNames[1]} , ${fieldNames[2]},  ${fieldNames[3]}, ${fieldNames[4]}`
       }
