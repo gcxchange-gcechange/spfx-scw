@@ -186,7 +186,7 @@
 
 .instruction {
     font-size: 14px;
-    color:gray;
+    color: #605E5C;
     margin:0px;
 }
 
@@ -205,25 +205,38 @@
 }
 
 .close{
-    color: orange;
+    color: #FF510F;
     background-color: white;
     border: none;
 }
 
 .close:hover {
     background-color: white;
-    color: orange;
+    color: #FF510F;
     font-weight: bolder;
     border:none;
 }
 
 .horizontalLine {
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid #605E5C;
     width: 100%;
     // padding-bottom: 10px;
 }
 
+:global {
+    .main-149 {
+        max-width: 'calc(50% - 32px)'
+    }
+}
 
-.main-149 {
-    max-width: 'calc(70% - 32px)'
+:global {
+    .ms-TextField-errorMessage {
+        color: transparent;
+        padding: 0px;
+      }
+}
+
+.terms {
+    margin: 0px!important;
+    text-indent: 2.5em;
 }
