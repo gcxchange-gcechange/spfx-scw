@@ -132,11 +132,19 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     
     
     public successMessage = (): MessageType  =>  { 
-        return (
-            message.success( { 
-                content: "loaded!",
-            })
-        ) 
+
+        const { engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList } = this.state
+
+        if( !commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length === 1) {
+            this.setState({ showModal: true });
+        }
+        else {
+            return (
+                message.success( { 
+                    content: "loaded!",
+                })
+            );
+        }
     }
 
     public handleOnChange =(event: any, value:string):void => {
