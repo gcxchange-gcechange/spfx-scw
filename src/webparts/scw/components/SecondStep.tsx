@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // import { mergeStyles } from 'office-ui-fabric-react';
+import { Stack, StackItem } from 'office-ui-fabric-react';
 import { ChoiceGroup, IChoiceGroupOption } from 'office-ui-fabric-react/lib/ChoiceGroup';
 import * as React from 'react';
 import styles from './Scw.module.scss';
@@ -49,7 +50,11 @@ export default class SecondStep extends React.Component<ISecondStepProps, ISecon
              onRenderField: (props, render) => {
                 return (
                     <div className={ styles.choiceCard }>
-                        {render(props)}
+                        <Stack>
+                            <StackItem>
+                                {render(props)}
+                            </StackItem>
+                        </Stack>
                         <div className={styles.cardBody}>
                             No, I don't need to store protected information.<strong>All users will be able to find your community, and search for it.</strong>
                         </div>
@@ -83,7 +88,7 @@ export default class SecondStep extends React.Component<ISecondStepProps, ISecon
             <p>You may ned to store protected documents or information in your community's library. GCXchange can provide a space for protected information up to Protected B. First,
                 let's find out whether you will be storing protected documents in your community.
             </p>
-                        <ChoiceGroup options={templateChoice} required={true} onChange={this.onSelectedKey} styles={optionStyle}/>
+                    <ChoiceGroup options={templateChoice} required={true} onChange={this.onSelectedKey} styles={optionStyle}/>
                         
         
             </>

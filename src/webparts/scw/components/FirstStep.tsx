@@ -1,7 +1,8 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import styles from './Scw.module.scss';
-import { ILabelStyles, Label, TextField } from 'office-ui-fabric-react';
+import { ILabelStyles, Label, Stack, StackItem, TextField } from 'office-ui-fabric-react';
 
 
 
@@ -40,9 +41,13 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
 
         const labelStyle: Partial<ILabelStyles> = {
             root: {
-                paddingBottom: '0px'
-            }
+                paddingBottom: '5px',
+            },
+
+           
         }
+
+        const stackTokens = { childrenGap: 18 }
 
        
         return (
@@ -56,25 +61,34 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
 
             
             <h2>Community name</h2>
-            <p>The communitys name is the title of your community. Create a short descriptive name. A bilingual name complies with the Official Langauges Act and makes it easier for others to find your community in the GCXchange Catalogue.</p>
-            <Label htmlFor='EngName'  required  styles={labelStyle} >English community name</Label>
-            <p className={ styles.instruction }>Use keywords, not abbreviations for better discoverability. Must be between 5 and 126 characters in length and special characters are not permitted.</p>
-            <TextField  id='EngName' name='EngName' onChange={this.handleOnChangeEngNameEvent} defaultValue={engName}/>
-            <Label htmlFor='frCommName' required  styles={labelStyle} >French community name</Label>
-            <p className={ styles.instruction }>Use keywords, not abbreviations for better discoverability. Must be between 5 and 126 characters in length and special characters are not permitted.</p>
-            <TextField  id='frCommName' name='frCommName' onChange={this.OnChangeFrNameEvent } defaultValue={frCommName}/>
-
+            <Stack tokens={stackTokens}>
+                <p>The community's name is the title of your community. Create a short descriptive name. A bilingual name complies with the Official Langauges Act and makes it easier for others to find your community in the GCXchange Catalogue.</p>
+                <StackItem>
+                    <Label htmlFor='EngName'  required  styles={labelStyle} >English community name</Label>
+                    <p className={ styles.instruction }>Use keywords, not abbreviations for better discoverability. Must be between 5 and 126 characters in length and special characters are not permitted.</p>
+                    <TextField  id='EngName' name='EngName' onChange={this.handleOnChangeEngNameEvent} defaultValue={engName}/>
+                </StackItem>
+                <StackItem>
+                    <Label htmlFor='frCommName' required  styles={labelStyle} >French community name</Label>
+                    <p className={ styles.instruction }>Use keywords, not abbreviations for better discoverability. Must be between 5 and 126 characters in length and special characters are not permitted.</p>
+                    <TextField  id='frCommName' name='frCommName' onChange={this.OnChangeFrNameEvent } defaultValue={frCommName}/>
+                </StackItem>
+            </Stack>
 
             <h2>Community description</h2>
-            <p>The community descriptions will be visible to users when they use the {`"All communities"`} page and when they search for it.</p>
-            <Label htmlFor='shEngDesc' required  styles={labelStyle} >English description name</Label>
-            <p className={ styles.instruction }>Max. 33 characters.</p>
-            <TextField id='shEngDesc' name='shEngDesc'onChange={this.handleOnChangeEngDescEvent} defaultValue={shEngDesc}/>
-
-            <Label htmlFor='shFrDesc' required  styles={labelStyle} >French description name</Label>
-            <p className={ styles.instruction }>Max. 33 characters.</p>
-            <TextField id='shFrDesc' name='shFrDesc' onChange={this.handleOnChangeFrDescEvent} defaultValue={shFrDesc}/> 
-            
+            <Stack tokens={stackTokens}>
+                <p>The community descriptions will be visible to users when they use the {`"All communities"`} page and when they search for it.</p>
+                <StackItem>
+                    <Label htmlFor='shEngDesc' required  styles={labelStyle} >English description name</Label>
+                    <p className={ styles.instruction }>Max. 33 characters.</p>
+                    <TextField id='shEngDesc' name='shEngDesc'onChange={this.handleOnChangeEngDescEvent} defaultValue={shEngDesc}/>
+                </StackItem>
+                <StackItem>
+                    <Label htmlFor='shFrDesc' required  styles={labelStyle} >French description name</Label>
+                    <p className={ styles.instruction }>Max. 33 characters.</p>
+                    <TextField id='shFrDesc' name='shFrDesc' onChange={this.handleOnChangeFrDescEvent} defaultValue={shFrDesc}/> 
+                </StackItem>
+            </Stack>
             </>
         );
     }
