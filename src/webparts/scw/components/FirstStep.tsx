@@ -2,7 +2,6 @@
 import * as React from 'react';
 import styles from './Scw.module.scss';
 import { Label, TextField } from 'office-ui-fabric-react';
-// import ModalError from './Modal';
 
 
 
@@ -76,10 +75,9 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
     }
 
     private onhandleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-        // const eventValue = event.target.value;
+    
         const eventName = event.target.name;
 
-        console.log('ORIGINValue', event.target.value)
         const trimmedValue = event.target.value.trim();
 
         try {
