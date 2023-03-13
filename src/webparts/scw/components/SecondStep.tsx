@@ -33,20 +33,22 @@ export default class SecondStep extends React.Component<ISecondStepProps, ISecon
     public render(): React.ReactElement<ISecondStepProps>  { 
 
         const templateChoice: IChoiceGroupOption[] = [
-             { key: '1', text: 'Unclassified community', ariaLabel: 'Unclassified community' },
-             { key: '2', text:'Protected Aor B community', ariaLabel: 'Protected Aor B community' }
+             { key: 'Unclassified community', text: 'Unclassified community', ariaLabel: 'Unclassified community' },
+             { key: 'Protected Aor B community', text:'Protected A or B community', ariaLabel: 'Protected A or B community' }
         ]
 
        
         return (
             <>
-            <ChoiceGroup options={templateChoice} required={true} onChange={this.onSelectedKey}/>
+            <ChoiceGroup options={templateChoice} required={true} onChange={this.onSelectedKey} defaultSelectedKey={this.props.selectedChoice} />
         
             </>
         );
     }
 
     private onSelectedKey = ( event: React.SyntheticEvent<HTMLElement>, option: IChoiceGroupOption):void => {
+        console.log("Choice", option.text);
+        // event.preventDefault();
         this.setState({
             selectedChoice: option.text
         })
