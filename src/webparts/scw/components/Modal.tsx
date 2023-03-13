@@ -49,9 +49,9 @@ export default class ErrorModal extends React.Component<
       justifyContent: "space-between",
     },
     footer: {
-      padding: "30px",
+      padding: "10px",
       marginLeft: "60px",
-      marginRight: "60px",
+      marginRight: "60px"
     },
   };
 
@@ -84,7 +84,7 @@ export default class ErrorModal extends React.Component<
     const secondValues: PropValues[] = [
       { name: "community classification", value: `${selectedChoice}` },
     ];
-
+    console.log("SV",secondValues)
     const thirdValues: PropValues[] = [
       { name: "terms of use", value: `${checkedValues.length}` },
     ];
@@ -190,7 +190,7 @@ export default class ErrorModal extends React.Component<
             <div style={this.modalStyle.footer}>
               <Stack>
                 <Stack.Item align="center">
-                  <p>You must provide <strong>{messages}</strong> before proceeding</p>
+                  <p className={ styles.modalContent }>You must provide <strong>{messages}</strong> before proceeding</p>
                 </Stack.Item>
                 <Stack.Item>
                   <hr className={styles.horizontalLine} />

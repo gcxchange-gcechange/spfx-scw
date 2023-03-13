@@ -182,21 +182,22 @@
     }
   }
 
-:global {
-    font-size: 18px;
+// :global {
+//     font-size: 18px;
 
-    .p {
-        font-size: 18px;
-    }
-}
+//     .p {
+//         font-size: 18px;
+//     }
+// }
 
 .instruction {
     font-size: 14px;
     color: #605E5C;
     margin:0px;
 }
+
 :global {
-    .icon-131 {
+    .icon-163 {
         font-size: 24px;
         
     }
@@ -222,6 +223,7 @@
     color: #FF510F;
     background-color: white;
     border: none;
+    font-size: 18px;
 }
 
 .close:hover {
@@ -234,7 +236,6 @@
 .horizontalLine {
     border-bottom: 1px solid #605E5C;
     width: 100%;
-    // padding-bottom: 10px;
 }
 
 :global {
@@ -257,4 +258,8 @@
 .previousbtn {
     background-color: lightgray;
     color: #106EBE
+}
+
+.modalContent {
+    font-size: 16px;
 }
