@@ -69,12 +69,12 @@ export default class ErrorModal extends React.Component<
       value: string | boolean | number;
     }
 
-    const values: PropValues[] = [
+    const firstValues: PropValues[] = [
       { name: "Community purpose", value: `${commPurpose}` },
       { name: "English community name", value: `${engName}` },
       { name: "French community name", value: `${frCommName}` },
       { name: "Short English description", value: `${shEngDesc}` },
-      { name: "Short English description", value: `${shFrDesc}` },
+      { name: "Short French description", value: `${shFrDesc}` },
     ];
 
     const secondValues: PropValues[] = [
@@ -90,22 +90,17 @@ export default class ErrorModal extends React.Component<
     ];
     const lastValues: PropValues[] = [
       { name: "Community Purpose", value: `${commPurpose}` },
-
       { name: "English community name", value: `${engName}` },
-
       { name: "French community name", value: `${frCommName}` },
-
       { name: "Short English description", value: `${shEngDesc}` },
-
       { name: "Short French description", value: `${shFrDesc}` },
-
-      { name: "owners", value: `${ownerList.length}` },
+      { name: "add at least one more owner", value: `${ownerList.length}` },
     ];
 
     let message: string = "";
     const results: string[] = [];
 
-    for (const obj of values) {
+    for (const obj of firstValues) {
       if (current === 0 && obj.value === "") {
         results.push(obj.name);
 
