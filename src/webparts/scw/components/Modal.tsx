@@ -3,6 +3,7 @@ import { Modal, PrimaryButton } from "@fluentui/react";
 import { IconButton } from "@fluentui/react/lib/Button";
 import styles from "./Scw.module.scss";
 import { Stack } from "office-ui-fabric-react/lib/Stack";
+import parse from 'html-react-parser';
 
 export interface IErrorModalProps {
   showModal: boolean;
@@ -99,6 +100,9 @@ export default class ErrorModal extends React.Component<
 
     let message: string = "";
     const results: string[] = [];
+    const seperatorAndThe = '<span style="fontWeight:normal"> and the </span>';
+    const seperatorAnd = '<span style="fontWeight:normal"> and </span>';
+    const seperatorThe = '<span style="fontWeight:normal"> the </span>';
 
     for (const obj of firstValues) {
       if (current === 0 && obj.value === "") {
@@ -106,11 +110,11 @@ export default class ErrorModal extends React.Component<
 
         if (results.length !== 1) {
           message =
-            results.slice(0, -1).join(" and the ") +
-            " and " +
+            results.slice(0, -1).join(`${seperatorAndThe}`) +
+            `${ seperatorAnd }` +
             results.slice(-1);
         } else {
-          message = ` the ${obj.name}`;
+          message = ` ${seperatorThe} ${obj.name}`;
         }
       }
     }
@@ -128,26 +132,22 @@ export default class ErrorModal extends React.Component<
     }
 
     for (const obj of fourthValues) {
-      console.log("Owners", fourthValues);
-
       if (current === 3 && obj.value < 2) {
         message += `${obj.name}`;
       }
     }
 
     for (const obj of lastValues) {
-      console.log("Owners", lastValues);
-
       if (current === 4 && (obj.value === "" || obj.value < 2)) {
         results.push(obj.name);
 
         if (results.length !== 1) {
           message =
-            results.slice(0, -1).join(" and the ") +
-            " and " +
+            results.slice(0, -1).join(`${seperatorAndThe}`) +
+            `${ seperatorAnd }` +
             results.slice(-1);
         } else {
-          message = ` the ${obj.name}`;
+          message = ` ${seperatorThe} ${obj.name}`;
         }
       }
     }
@@ -156,6 +156,9 @@ export default class ErrorModal extends React.Component<
   };
 
   public render(): React.ReactElement<IErrorModalProps> {
+
+    const messages = parse(this.errorMessage());
+
     return (
       <>
         <div>
@@ -179,8 +182,7 @@ export default class ErrorModal extends React.Component<
               <Stack>
                 <Stack.Item align="center">
                   <p>
-                    You must provide <strong>{this.errorMessage()}</strong>{" "}
-                    before proceeding
+                    You must provide <strong>{messages}</strong>{" "} before proceeding
                   </p>
                 </Stack.Item>
                 <Stack.Item>
