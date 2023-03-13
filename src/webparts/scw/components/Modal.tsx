@@ -34,21 +34,24 @@ export default class ErrorModal extends React.Component<
     main: {
       display: "flex",
       borderRadius: "5px",
-      minWidth: "500px",
-      maxWidth: "500px",
+      minWidth: "600px",
+      maxWidth: "600px",
     },
     header: {
       backgroundColor: "#106EBE",
       color: "white",
-      padding: "10px",
+      paddingTop: "10px",
+      paddingBottom: "10px",
+      paddingLeft: "30px",
+      paddingRight: "30px",
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
     },
     footer: {
-      padding: "10px",
-      marginLeft: "20px",
-      marginRight: "20px",
+      padding: "30px",
+      marginLeft: "60px",
+      marginRight: "60px",
     },
   };
 
@@ -87,7 +90,7 @@ export default class ErrorModal extends React.Component<
     ];
 
     const fourthValues: PropValues[] = [
-      { name: "add at least one more owner", value: `${ownerList.length}` },
+      { name: "at least one more owner", value: `${ownerList.length}` },
     ];
     const lastValues: PropValues[] = [
       { name: "Community Purpose", value: `${commPurpose}` },
@@ -95,39 +98,43 @@ export default class ErrorModal extends React.Component<
       { name: "French community name", value: `${frCommName}` },
       { name: "Short English description", value: `${shEngDesc}` },
       { name: "Short French description", value: `${shFrDesc}` },
-      { name: "add at least one more owner", value: `${ownerList.length}` },
+      { name: "second owner", value: `${ownerList.length}` },
     ];
 
     let message: string = "";
     const results: string[] = [];
-    const seperatorAndThe = '<span style="fontWeight:normal"> and the </span>';
-    const seperatorAnd = '<span style="fontWeight:normal"> and </span>';
-    const seperatorThe = '<span style="fontWeight:normal"> the </span>';
+    const seperatorAndThe = '<span style="fontWeight:normal">, and the </span>';
+    const seperatorThe = '<span style="fontWeight:normal">, the </span>';
+    const seperatorTheNoComma = '<span style="fontWeight:normal"> the </span>';
+    const seperatorA = '<span style="fontWeight:normal"> a </span>';
+    const seperatorAll = '<span style="fontWeight:normal"> all </span>';
 
     for (const obj of firstValues) {
       if (current === 0 && obj.value === "") {
         results.push(obj.name);
 
-        if (results.length !== 1) {
+        if (results.length > 2 ) {
           message =
-            results.slice(0, -1).join(`${seperatorAndThe}`) +
-            `${ seperatorAnd }` +
-            results.slice(-1);
-        } else {
-          message = ` ${seperatorThe} ${obj.name}`;
+            results.slice(0, -1).join(`${seperatorThe}`) + `${ seperatorAndThe }` + results.slice(-1);
+        } 
+        else if ( results.length === 2 ){
+          message = results.join(`${seperatorAndThe}`) ;
+        }
+        else if ( results.length === 1 ) {
+          message = `${seperatorTheNoComma} ${obj.name}`
         }
       }
     }
 
     for (const obj of secondValues) {
       if (current === 1 && obj.value === "") {
-        message = `${obj.name}`;
+        message = `${seperatorA} ${obj.name}`;
       }
     }
 
     for (const obj of thirdValues) {
       if (current === 2 && (obj.value === "" || obj.value < 7)) {
-        message += `${obj.name}`;
+        message += `${seperatorAll} ${obj.name}`;
       }
     }
 
@@ -138,16 +145,18 @@ export default class ErrorModal extends React.Component<
     }
 
     for (const obj of lastValues) {
-      if (current === 4 && (obj.value === "" || obj.value < 2)) {
+      if (current === 4 && (obj.value === '' || obj.value < 2)) {
         results.push(obj.name);
-
-        if (results.length !== 1) {
+        console.log("res",results);
+        if ( results.length > 2 ) {
           message =
-            results.slice(0, -1).join(`${seperatorAndThe}`) +
-            `${ seperatorAnd }` +
-            results.slice(-1);
-        } else {
-          message = ` ${seperatorThe} ${obj.name}`;
+            results.slice(0, -1).join(`${seperatorThe}`) + `${ seperatorAndThe }` +  results.slice(-1);
+        } 
+        else if ( results.length === 2 )  {
+          message = results.join(`${seperatorAndThe}`)
+        }
+        else if (results.length === 1) {
+          message = `${seperatorTheNoComma} ${obj.name}`
         }
       }
     }
@@ -181,9 +190,7 @@ export default class ErrorModal extends React.Component<
             <div style={this.modalStyle.footer}>
               <Stack>
                 <Stack.Item align="center">
-                  <p>
-                    You must provide <strong>{messages}</strong>{" "} before proceeding
-                  </p>
+                  <p>You must provide <strong>{messages}</strong> before proceeding</p>
                 </Stack.Item>
                 <Stack.Item>
                   <hr className={styles.horizontalLine} />

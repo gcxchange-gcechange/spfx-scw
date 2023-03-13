@@ -70,6 +70,12 @@
 }
 
 :global {
+
+    .ant-steps {
+        width: 80%;
+        margin-left: 100px;
+    }
+    
     .steps-content {
         margin-top: 16px;
         border: 1px dashed #e9e9e9;
@@ -189,19 +195,27 @@
     color: #605E5C;
     margin:0px;
 }
+:global {
+    .icon-131 {
+        font-size: 24px;
+        
+    }
+    .css-41 {
+        font-weight: 900;
+    }
+}
 
 
 .cancelIcon {
     color: white;
     background-color: transparent;
-    font-size: 16px;
-    font-weight: bold;
+    // font-weight: 900;
 }
 
 .cancelIcon:hover{
     background-color: transparent;
     color: white;
-    font-weight: bolder;
+//     font-weight: 900;
 }
 
 .close{
@@ -238,4 +252,9 @@
 .terms {
     margin: 0px!important;
     text-indent: 2.5em;
+}
+
+.previousbtn {
+    background-color: lightgray;
+    color: #106EBE
 }
