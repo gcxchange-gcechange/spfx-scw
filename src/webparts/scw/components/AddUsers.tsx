@@ -57,7 +57,6 @@ public _getOwnerItems = (items: []):void => {
                 <PeoplePicker
                     context={this.props.context}
                     titleText="Invite Members"
-                    required={true}
                     personSelectionLimit={1000}
                     groupName={""} // Leave this blank in case you want to filter from all users
                     onChange={this._getMemberItems}
