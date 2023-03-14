@@ -1,8 +1,8 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import styles from './Scw.module.scss';
 import { ILabelStyles, Label, Stack, StackItem, TextField } from 'office-ui-fabric-react';
-
 
 
 
@@ -40,8 +40,10 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
 
         const labelStyle: Partial<ILabelStyles> = {
             root: {
-                paddingBottom: '0px'
-            }
+                paddingBottom: '5px',
+            },
+
+           
         }
 
        const stackTokens = { childrenGap: 18 }

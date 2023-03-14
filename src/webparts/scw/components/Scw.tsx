@@ -13,9 +13,8 @@ import  { MessageType } from 'antd/es/message/interface';
 import ErrorModal from './Modal';
 import FourthStep from './FourthStep';
 import SecondStep from './SecondStep';
-import ThirdStep from './ThirdStep';
 import { SelectLanguage } from './SelectLanguage';
-
+import ThirdStep from './ThirdStep';
 
 
 export interface IScwState  { 
@@ -346,10 +345,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             <div className= { styles.scw }>
                 { this.state.step === 0 
                 ? <>
-                    <Initial
-                         context={this.props.context}
-                        prefLang={this.props.prefLang}
-                    />
+                        <Initial
+                            context={this.props.context}
+                            prefLang={this.props.prefLang}
+                        />
                 <PrimaryButton styles= { this.buttonStyle } text="Let's go" ariaLabel="Let's go" onClick= { () =>  { this.handleClickEvent()} } className= { styles.centerButton }/>
                 </>
                 :
