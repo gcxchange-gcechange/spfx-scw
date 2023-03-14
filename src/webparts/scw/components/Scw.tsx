@@ -1,16 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import styles from './Scw.module.scss';
 import  { Steps, Button, message} from 'antd';
 import FirstStep from "./FirstStep";
 import  { IScwProps } from './IScwProps';
 import  { Initial } from './InitialPage/Initial';
-import  { IButtonStyles, PrimaryButton } from 'office-ui-fabric-react';
+import  { PrimaryButton } from 'office-ui-fabric-react';
+import  { IButtonStyles } from 'office-ui-fabric-react';
 import LastStep from './LastStep';
 import  { MessageType } from 'antd/es/message/interface';
+import ErrorModal from './Modal';
 import FourthStep from './FourthStep';
 import SecondStep from './SecondStep';
 import ThirdStep from './ThirdStep';
-
+import { SelectLanguage } from './SelectLanguage';
+import ThirdStep from './ThirdStep';
 
 
 export interface IScwState  { 
@@ -24,6 +28,9 @@ export interface IScwState  {
     shEngDesc: string;
     shFrDesc: string;
     selectedChoice: string;
+    errorMessage: string;
+    showModal: boolean;
+    checkedValues: boolean[];
    
     
 }
@@ -32,7 +39,7 @@ export interface IScwState  {
 
 
 export default class AntDesignStep extends React.Component<IScwProps, IScwState>  { 
-
+   public strings = SelectLanguage(this.props.prefLang);
    private owner = this.props.context.pageContext.user.email;
 
     public constructor( props: IScwProps, state: IScwState )  { 
@@ -47,24 +54,79 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             frCommName: '',
             shEngDesc: '',
             shFrDesc: '',
-            selectedChoice: ''
+            selectedChoice: '',
+            errorMessage: '',
+            showModal: false,
+            checkedValues: []
             
         };
 
     }
 
+   
+
     private next = (): void =>  { 
-        const current = this.state.current + 1;
-        this.setState( { 
-            current: current, 
-        });
+
+       
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, selectedChoice, checkedValues, ownerList } = this.state
+
+        console.log("CommPurpose", commPurpose)
+        
+       if ( !commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc) {
+   
+            this.setState({ showModal: true });
+       } 
+
+       else if ( current === 1 && selectedChoice === '' ) {
+            
+             this.setState({ showModal: true });
+       }
+       else if ( current === 2 && checkedValues.length < 7 ) {
+                
+                this.setState({ showModal: true });
+       } 
+        else if ( current === 3 && ownerList.length === 1 ) {
+            
+                this.setState({ showModal: true });
+
+        } else {
+
+            this.goToNextPg(current);
+        }
+       
+    }
+
+
+    public closeModal = (): void => {
+        this.setState({
+            showModal: false
+        })
+    }
+
+    private goToNextPg = (pageNumber: number): void =>  { 
+            
+        this.setState ((prevState) => ({
+            current: prevState.current + 1
+        }))
     }
 
     private prev = (): void =>  { 
+        const prevPage = this.state.current - 1;   
+
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList } = this.state
+
+        if ( current === 4 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 1)) {
+           
+            this.setState({ showModal: true });
+        } 
+        else {
+            
+            this.setState({ current: prevPage})
+        }
         
-        const current = this.state.current - 1;       
-        this.setState( { current });   
     }
+
+
 
     public handleClickEvent=():void=>  { 
         const step = this.state.step + 1;
@@ -82,11 +144,29 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     
     
     public successMessage = (): MessageType  =>  { 
-        return (
-            message.success( { 
-                content: "loaded!",
-            })
-        ) 
+
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList } = this.state
+
+        if ( current === 4 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length === 1)) {
+            console.log('thisState', this.state)
+            this.setState({ showModal: true });
+        }
+        else {
+            return (
+                message.success( { 
+                    content: "loaded!",
+                })
+            );
+        }
+    }
+
+    public handleOnChange =(event: any, value:string):void => {
+        const eventValue = event;
+        const values = value
+        this.setState({
+            ...this.state,
+            [eventValue]:values
+        });
     }
 
     public commPurposeCallback = ( commPurpose: string ): void =>   { 
@@ -165,30 +245,42 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     }
 
+    public handleErrorMessage = ( errorMessage: string ):void  => {
+        const errorM = errorMessage;
+        this.setState({
+            errorMessage: errorM
+        });
+    }
+
+    public checkedTerms = ( isChecked: boolean ):void => {
+        this.setState(prevState => ({
+            checkedValues: [...prevState.checkedValues, isChecked]
+        }));
+    }
+
+
 
 
     
     public render(): React.ReactElement<IScwProps>  { 
 
-        const  { commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, memberList } = this.state;
-
+        const  { current, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, memberList, errorMessage, showModal, checkedValues } = this.state;
 
         const steps = [
          { 
             step: "1",
-            title: "Details",
+            title: this.strings.title_details,
             content: (
               <FirstStep
+              showModal = {showModal}
                 engName= { engName }
                 commPurpose= { commPurpose }
                 frCommName= { frCommName }
                 shEngDesc= { shEngDesc }
                 shFrDesc= { shFrDesc }
-                commPurposeCallback= { this.commPurposeCallback }
-                handleEngNameCallback= { this.handleEngNameCallback }
-                frNameCallback= { this.frNameCallback }
-                frDescCallback= { this.frDescCallback }
-                engDescCallback= { this.engDescCallback }
+                errorMessage ={ errorMessage }
+                handleOnChange={this.handleOnChange}
+            
               />
             ),
           },
@@ -205,7 +297,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
          { 
             step: "3",
             title: "Terms of use",
-            content: <ThirdStep/>,
+            content: <ThirdStep checkedValues= { checkedValues } checkedTerms = { this.checkedTerms } />,
           },
          { 
             step: "4",
@@ -251,24 +343,28 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         
         return (
             <div className= { styles.scw }>
-                 { this.state.step === 0 
+                { this.state.step === 0 
                 ? <>
-                <Initial/>
+                        <Initial
+                            context={this.props.context}
+                            prefLang={this.props.prefLang}
+                        />
                 <PrimaryButton styles= { this.buttonStyle } text="Let's go" ariaLabel="Let's go" onClick= { () =>  { this.handleClickEvent()} } className= { styles.centerButton }/>
                 </>
                 :
                 <div className= { styles.container }>
-                    <div className= { styles.row }>
+                    <div className= { styles.row }> 
                         <Steps current= { this.state.current } labelPlacement='vertical' items= { items } />
                         <div className="steps-content"> { steps[ this.state.current ].content }</div>
                         <div className="steps-action">
-                             { this.state.current < steps.length - 1 && (<Button type="primary" onClick= { this.next} >Next</Button> ) }
-                             { this.state.current === steps.length - 1 && (<Button type="primary" onClick= { this.successMessage} >Done</Button> ) }
-                             { this.state.current > 0 && (<Button style= {{ margin: '0 8px' }} onClick= { () => this.prev()}>Previous</Button> ) }
+                            {this.state.showModal === true && <ErrorModal current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } selectedChoice={ selectedChoice } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } />} 
+                            { this.state.current === steps.length - 1 && (<Button type="primary" onClick= { this.successMessage} >Done</Button> ) }
+                            { this.state.current > 0 && (<Button className={styles.previousbtn}style= {{ margin: '0 8px' }} onClick= { () => this.prev()}>Previous</Button> ) }
+                            { this.state.current < steps.length - 1 && (<Button type="primary" onClick= { this.next} >Next</Button> ) }
                         </div>
                     </div>
                 </div>
-                 }
+                }
             </div>
         );
     }

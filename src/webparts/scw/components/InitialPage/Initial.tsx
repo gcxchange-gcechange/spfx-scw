@@ -3,11 +3,13 @@ import * as React from 'react';
 import styles from  '../InitialPage/Initial.module.scss';
 import {faUsers, faGlobe, faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IScwProps } from '../IScwProps';
+import { SelectLanguage } from '../SelectLanguage';
+import parse from 'html-react-parser';
 
 
-
-export class Initial extends React.Component {
-
+export class Initial extends React.Component<IScwProps> {
+    public strings = SelectLanguage(this.props.prefLang);
 
     public render(): React.ReactElement {
 
@@ -34,7 +36,7 @@ export class Initial extends React.Component {
             
             <Stack horizontal verticalAlign="center">
                 <Stack.Item grow={1} >
-                    <h2>Create a community</h2>
+                            <h2>Create a community</h2>
                     <p style={{fontSize:'18px'}}className={styles.mg0}>Collaborate with collegues across departments using Microsoft Teams and Sharepoint to share ideas, documents, and much more...</p>
                 </Stack.Item>
                 <Stack.Item grow={2}>
@@ -48,7 +50,7 @@ export class Initial extends React.Component {
             <Stack horizontal styles={stackStyles} horizontalAlign='center' verticalAlign="baseline" tokens={sectionStackTokens}>
                 <div className={ styles.card }>
                     <FontAwesomeIcon icon={faGlobe} size='2x' className={styles.blue} />
-                    <p>Provide <strong className={styles.blue}>bilingual</strong> name and descriptions</p>
+                            <p>{parse(this.strings.provide_bilingual_name)}</p>
                 </div>
                <div className={ styles.card }>
                     <FontAwesomeIcon icon={faUsers} size='2x' className={styles.blue} />
