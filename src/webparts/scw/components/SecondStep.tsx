@@ -39,7 +39,8 @@ export default class SecondStep extends React.Component<ISecondStepProps, ISecon
         const optionStyle = {
             root: { 
                 display: 'flex',
-                flexDirection: 'column'
+                flexDirection: 'column',
+                color:'pink'
             }
         }
 
@@ -89,7 +90,7 @@ export default class SecondStep extends React.Component<ISecondStepProps, ISecon
             <p>You may ned to store protected documents or information in your community's library. GCXchange can provide a space for protected information up to Protected B. First,
                 let's find out whether you will be storing protected documents in your community.
             </p>
-            <Stack>
+            <Stack horizontal>
                 <StackItem>
                     <ChoiceGroup options={templateChoice} required={true} onChange={this.onSelectedKey} styles={optionStyle}/>
                 </StackItem>

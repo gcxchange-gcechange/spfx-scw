@@ -284,6 +284,8 @@
 }
   
   .cardHeading {
+    display: flex;
+    align-items: center;
     border-radius: 8px;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
@@ -294,10 +296,12 @@
     font-weight: bold; 
   }
   .cardHeading2 {
+    display: flex;
+    align-items: center;
     border-radius: 8px;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
-    background-color: rgba(171,205,239);
+    background-color:#02A0FF;
     padding: 10px;
     height: 40px;
     font-weight: bold; 

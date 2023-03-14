@@ -15,6 +15,7 @@ import FourthStep from './FourthStep';
 import SecondStep from './SecondStep';
 import { SelectLanguage } from './SelectLanguage';
 import ThirdStep from './ThirdStep';
+import Title from './Title';
 
 
 export interface IScwState  { 
@@ -264,9 +265,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     
     public render(): React.ReactElement<IScwProps>  { 
 
-        const  { current, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, memberList, errorMessage, showModal, checkedValues } = this.state;
+        const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, memberList, errorMessage, showModal, checkedValues } = this.state;
 
         const steps = [
+     
          { 
             step: "1",
             title: this.strings.title_details,
@@ -339,10 +341,12 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         ];
 
 
-        const items = steps.map( item => ( item.title !== '6' ?  { key: item.step, title: item.title } : null));
+        const items = steps.map( item => ( item.title !== '0' ?  { key: item.step, title: item.title} : null));
         
         return (
             <div className= { styles.scw }>
+                <h1>Create a community</h1>
+                <Title current={ current } step={ step }/>
                 { this.state.step === 0 
                 ? <>
                         <Initial
@@ -359,7 +363,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                         <div className="steps-action">
                             <Stack horizontal horizontalAlign='space-between'>
                                 {this.state.showModal === true && <ErrorModal current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } selectedChoice={ selectedChoice } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } />} 
-                                { this.state.current > 0 && (<Button className={styles.previousbtn}style= {{ margin: '0 8px' }} onClick= { () => this.prev()}>Previous</Button> ) }
+                                { this.state.current > 0 && (<Button className={styles.previousbtn} style= {{ margin: '0 8px' }} onClick= { () => this.prev()}>Previous</Button> ) }
                                 { this.state.current < steps.length - 1 && (<Button className={ styles.largebtn } type="primary" onClick= { this.next} >Next</Button> ) }
                                 { this.state.current === steps.length - 1 && (<Button className={ styles.largebtn } type="primary" onClick= { this.successMessage} >Let's do this</Button> ) }
                             </Stack>
