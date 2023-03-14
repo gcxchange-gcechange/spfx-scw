@@ -40,6 +40,13 @@ export default class ThirdStep extends React.Component<IThirdStepProps> {
         const checkBoxStyles: ICheckboxStyles = {
            text: {
             marginLeft:'20px'
+           },
+           checkbox: {
+            background: 'white',
+            color:'#004DB8'
+           },
+           checkmark: {
+            color:'#004DB8'
            }
         };
 

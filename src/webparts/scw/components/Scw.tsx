@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import styles from './Scw.module.scss';
@@ -5,7 +6,7 @@ import  { Steps, Button, message} from 'antd';
 import FirstStep from "./FirstStep";
 import  { IScwProps } from './IScwProps';
 import  { Initial } from './InitialPage/Initial';
-import  { PrimaryButton } from 'office-ui-fabric-react';
+import  { PrimaryButton, Stack } from 'office-ui-fabric-react';
 import  { IButtonStyles } from 'office-ui-fabric-react';
 import LastStep from './LastStep';
 import  { MessageType } from 'antd/es/message/interface';
@@ -14,7 +15,7 @@ import FourthStep from './FourthStep';
 import SecondStep from './SecondStep';
 import ThirdStep from './ThirdStep';
 import { SelectLanguage } from './SelectLanguage';
-import ThirdStep from './ThirdStep';
+
 
 
 export interface IScwState  { 
@@ -345,10 +346,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             <div className= { styles.scw }>
                 { this.state.step === 0 
                 ? <>
-                        <Initial
-                            context={this.props.context}
-                            prefLang={this.props.prefLang}
-                        />
+                    <Initial
+                         context={this.props.context}
+                        prefLang={this.props.prefLang}
+                    />
                 <PrimaryButton styles= { this.buttonStyle } text="Let's go" ariaLabel="Let's go" onClick= { () =>  { this.handleClickEvent()} } className= { styles.centerButton }/>
                 </>
                 :
@@ -357,10 +358,12 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                         <Steps current= { this.state.current } labelPlacement='vertical' items= { items } />
                         <div className="steps-content"> { steps[ this.state.current ].content }</div>
                         <div className="steps-action">
-                            {this.state.showModal === true && <ErrorModal current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } selectedChoice={ selectedChoice } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } />} 
-                            { this.state.current === steps.length - 1 && (<Button type="primary" onClick= { this.successMessage} >Done</Button> ) }
-                            { this.state.current > 0 && (<Button className={styles.previousbtn}style= {{ margin: '0 8px' }} onClick= { () => this.prev()}>Previous</Button> ) }
-                            { this.state.current < steps.length - 1 && (<Button type="primary" onClick= { this.next} >Next</Button> ) }
+                            <Stack horizontal horizontalAlign='space-between'>
+                                {this.state.showModal === true && <ErrorModal current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } selectedChoice={ selectedChoice } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } />} 
+                                { this.state.current > 0 && (<Button className={styles.previousbtn}style= {{ margin: '0 8px' }} onClick= { () => this.prev()}>Previous</Button> ) }
+                                { this.state.current < steps.length - 1 && (<Button className={ styles.largebtn } type="primary" onClick= { this.next} >Next</Button> ) }
+                                { this.state.current === steps.length - 1 && (<Button className={ styles.largebtn } type="primary" onClick= { this.successMessage} >Let's do this</Button> ) }
+                            </Stack>
                         </div>
                     </div>
                 </div>

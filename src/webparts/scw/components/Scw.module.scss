@@ -9,7 +9,7 @@
 
     .row {
         @include ms-Grid-row;
-        padding: 20px;
+        padding: 30px;
     }
 
     .column {
@@ -194,6 +194,7 @@
     font-size: 14px;
     color: #605E5C;
     margin:0px;
+    padding-bottom: 8px;
 }
 
 :global {
@@ -256,36 +257,50 @@
 }
 
 .previousbtn {
-    background-color: lightgray;
-    color: #106EBE
+    background-color: #c0c0cC!important;
+    color: #004DB8;
+    width: 250px;
 }
 
 .modalContent {
     font-size: 16px;
 }
 
-// .cardContainer {
-   
-  
-//   }
   
   .choiceCard {
     border: 1px solid #e7e7e7;
-    border-radius: 5px;
+    border-radius: 8px;
     box-shadow: 2px ;
     width: 350px;
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
+    height: 200px;
   }
   
   .cardHeading {
-    background-color: rgb(0, 120, 212);
+    border-radius: 8px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    background-color: #004DB8;
+    padding: 10px;
     height: 40px;
-    color: white;  
+    color: white; 
+    font-weight: bold; 
+  }
+  .cardHeading2 {
+    border-radius: 8px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    background-color: rgba(171,205,239);
+    padding: 10px;
+    height: 40px;
+    font-weight: bold; 
   }
 
+
   .cardBody {
-    padding: 10px;
+    padding: 20px;
   }
 
   .inviteContainer{
@@ -302,3 +317,38 @@
     color:#106EBE;
     font-size: 20px;
  }
+
+.btmSpace {
+    padding-bottom: 18px;
+}
+
+:global{
+    .ms-Label::before {
+        content: "*";
+        display: inline-block;
+        margin-right: 4px;
+        margin-left: -10px;
+        font-size: 16px;
+        color: red; 
+    }
+    .ms-Label::after {
+        display: none;
+    }
+}
+
+.largebtn {
+    width: 250px;
+}
+:global {
+
+    .ms-Checkbox.is-enabled .ms-Checkbox-checkbox {
+        background-color: white;
+    }
+    .ms-Checkbox.is-enabled ms.-Checkbox-checkbox:hover {
+        background-color: white;
+        border: 2px solid #004DB8;
+    }
+    .ms-Checkbox-checkmark {
+        font-weight: bold;
+    }
+}
