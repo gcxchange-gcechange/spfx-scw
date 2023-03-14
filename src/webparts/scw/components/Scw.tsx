@@ -12,9 +12,8 @@ import  { MessageType } from 'antd/es/message/interface';
 import ErrorModal from './Modal';
 import FourthStep from './FourthStep';
 import SecondStep from './SecondStep';
+import { SelectLanguage } from './SelectLanguage';
 import ThirdStep from './ThirdStep';
-
-
 
 
 export interface IScwState  { 
@@ -39,7 +38,7 @@ export interface IScwState  {
 
 
 export default class AntDesignStep extends React.Component<IScwProps, IScwState>  { 
-
+   public strings = SelectLanguage(this.props.prefLang);
    private owner = this.props.context.pageContext.user.email;
 
     public constructor( props: IScwProps, state: IScwState )  { 
@@ -269,8 +268,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         const steps = [
          { 
             step: "1",
-            title: "Details",
-            
+            title: this.strings.title_details,
             content: (
               <FirstStep
               showModal = {showModal}
@@ -346,7 +344,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             <div className= { styles.scw }>
                 { this.state.step === 0 
                 ? <>
-                <Initial/>
+                        <Initial
+                            context={this.props.context}
+                            prefLang={this.props.prefLang}
+                        />
                 <PrimaryButton styles= { this.buttonStyle } text="Let's go" ariaLabel="Let's go" onClick= { () =>  { this.handleClickEvent()} } className= { styles.centerButton }/>
                 </>
                 :
