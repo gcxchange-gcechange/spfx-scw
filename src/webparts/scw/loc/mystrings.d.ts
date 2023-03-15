@@ -12,6 +12,12 @@ declare interface IScwWebPartStrings {
   AppOutlookEnvironment: string;
   title_details: string;
   provide_bilingual_name: string;
+  create_a_community: string;
+  community_details: string;
+  community_classification: string;
+  terms: string;
+  invite_owners_members: string;
+  review_submit: string;
 }
 
 declare module 'ScwWebPartStrings' {

@@ -1,8 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // import { mergeStyles } from 'office-ui-fabric-react';
-import { Stack, StackItem } from 'office-ui-fabric-react';
-import { ChoiceGroup, IChoiceGroupOption } from 'office-ui-fabric-react/lib/ChoiceGroup';
+import { Stack } from 'office-ui-fabric-react';
+import { ChoiceGroup, IChoiceGroupOption, IChoiceGroupStyles } from 'office-ui-fabric-react/lib/ChoiceGroup';
 import * as React from 'react';
 import styles from './Scw.module.scss';
 
@@ -36,28 +36,35 @@ export default class SecondStep extends React.Component<ISecondStepProps, ISecon
 
     public render(): React.ReactElement<ISecondStepProps>  { 
 
-        const optionStyle = {
-            root: { 
-                display: 'flex',
-                flexDirection: 'column',
-                color:'pink'
+        // const optionStyle = {
+        //     root: { 
+        //         marginRight:'30px'
+        //     }
+        // }
+        
+        const flexSyle: Partial<IChoiceGroupStyles> = {
+            flexContainer:{
+                display:'flex'
             }
         }
+
+        
+
 
        
 
         const templateChoice: IChoiceGroupOption[] = [
-             { key: '1', 
+            { key: '1', 
              text: 'Unclassified community', 
              ariaLabel: 'Unclassified community' ,
              onRenderField: (props, render) => {
                 return (
-                    <div className={ styles.choiceCard }>
+                    <div className={ styles.choiceCard } >
                         <div className={ styles.cardHeading}>
                             {render(props)}
                         </div>
                         <div className={styles.cardBody}>
-                            No, I don't need to store protected information.<strong>All users will be able to find your community, and search for it.</strong>
+                            No, I don't need to store protected information.<strong> All users will be able to find your community, and search for it.</strong>
                         </div>
                     </div>  
                     )
@@ -90,12 +97,10 @@ export default class SecondStep extends React.Component<ISecondStepProps, ISecon
             <p>You may ned to store protected documents or information in your community's library. GCXchange can provide a space for protected information up to Protected B. First,
                 let's find out whether you will be storing protected documents in your community.
             </p>
-            <Stack horizontal>
-                <StackItem>
-                    <ChoiceGroup options={templateChoice} required={true} onChange={this.onSelectedKey} styles={optionStyle}/>
-                </StackItem>
+            <Stack horizontalAlign='center'>
+                <ChoiceGroup id='choiceGroup' options={templateChoice} required={true} onChange={this.onSelectedKey} styles={ flexSyle } defaultValue={this.props.selectedChoice}/>
             </Stack>
-                        
+ 
         
             </>
         );
@@ -103,6 +108,25 @@ export default class SecondStep extends React.Component<ISecondStepProps, ISecon
 
     private onSelectedKey = ( event: React.SyntheticEvent<HTMLElement>, option: IChoiceGroupOption):void => {
 
+        const selectedRadioButton1 = document.getElementById('choiceGroup');
+        const elementclass = document.querySelector(".ms-ChoiceField-wrapper.is-inFocus")
+        // const choiceCard = document.querySelector(".choiceCard")
+        const checked = document.querySelector(".ms-ChoiceField-field.is-checked")
+
+       
+
+        if (option.key === '1') {
+            console.log("radio",selectedRadioButton1)
+            console.log("ec", elementclass)
+            console.log("checked", checked)
+            elementclass.classList.add(styles.checkedRadioButton1);
+            checked.classList.replace(styles.choiceCard , styles.selectedChoiceCard);
+
+        }
+        else if (option.key === '2') {
+            elementclass.classList.add(styles.checkedRadioButton2)
+            // checked.classList.add(styles.checkedRadioButton2);
+        }
         this.setState({
             selectedChoice: option.text
         })

@@ -230,14 +230,21 @@
     background-color: white;
     border: none;
     font-size: 18px;
+
+    &:hover {
+        background-color: white;
+        color: #FF510F;
+        font-weight: bolder;
+        border:none; 
+    }
 }
 
-.close:hover {
-    background-color: white;
-    color: #FF510F;
-    font-weight: bolder;
-    border:none;
-}
+// .close:hover {
+//     background-color: white;
+//     color: #FF510F;
+//     font-weight: bolder;
+//     border:none;
+// }
 
 .horizontalLine {
     border-bottom: 1px solid #605E5C;
@@ -280,7 +287,16 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 200px;
+}
+
+.selectedChoiceCard {
+    border: 2px solid rgb(0, 77, 184) ;
+    border-radius: 8px;
+    box-shadow: 2px ;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
   
   .cardHeading {
@@ -310,6 +326,12 @@
 
 .cardBody {
     padding: 20px;
+    height: 150px;
+    border-bottom: 1px solid #c0c0cc;
+    border-right: 1px solid #c0c0cc; 
+    border-left: 1px solid #c0c0cc;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 .inviteContainer{
@@ -318,13 +340,15 @@
     align-items: 'center';
     margin-top:20px;
     border: 1px solid gray;
+    border-radius: 8px;
     margin-left: 20px;
     margin-right: 20px;
 }
 
 .magnifyingIcon {
     color:#004DB8;
-    font-size: 20px;
+    font-size: 36px;
+    margin-right:30px;
 }
 
 
@@ -348,19 +372,6 @@
 
 .largebtn {
     width: 250px;
-}
-:global {
-
-    .ms-Checkbox.is-enabled .ms-Checkbox-checkbox {
-        background-color: white;
-    }
-    .ms-Checkbox.is-enabled ms.-Checkbox-checkbox:hover {
-        background-color: white;
-        border: 2px solid #004DB8;
-    }
-    .ms-Checkbox-checkmark {
-        font-weight: bold;
-    }
 }
 
 .btmSpace {
@@ -397,5 +408,39 @@
 
     .ms-Checkbox-checkmark{
         font-weight: bold;
+    }
+}
+
+
+.mainTitle {
+    font-size: x-large;
+    margin-bottom: 0px;
+    opacity: 0.8;
+}
+
+:global {
+    .ms-ChoiceField {
+        margin-right: 50px;
+    }
+    
+    
+}
+
+.checkedRadioButton1 {
+    border: 2px solid rgb(0, 77, 184) ;
+    border-radius: 8px;
+}
+
+.checkedRadioButton2 {
+    border: 2px solid rgb(0, 77, 184,0.6);
+    border-radius: 8px;
+}
+
+.graybtn {
+    background-color: #c0c0cc;
+    color:#004DB8;
+
+    &:hover{
+        background-color: none;
     }
 }

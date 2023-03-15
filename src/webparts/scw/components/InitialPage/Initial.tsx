@@ -18,59 +18,59 @@ export class Initial extends React.Component<IScwProps> {
             width: 400,
             imageFit: ImageFit.contain,
             
-        };
+      };
 
         const stackStyles: IStackStyles = {
             root: {
                 display:'flex',
                 width:'80%',
                 fontSize: '18px;'
-            },
-          };
+          },
+        };
 
         const flexStyles: IStackStyles = {
             root: {
                 height:'130px'
-            },
-          };
+          },
+        };
 
           const sectionStackTokens: IStackTokens = { childrenGap: 20 };
 
         return (
             <>
-            <section className={styles.container}>
-            
-            <Stack horizontal verticalAlign="center" styles={flexStyles}>
+            <section className={ styles.container }>
+            <h1 className={ styles.mgBottom0 }> { this.strings.create_a_community } </h1>
+            <Stack horizontal verticalAlign="center" styles={ flexStyles }>
                 <Stack.Item >
-                    <p style={{fontSize:'18px'}}className={styles.mg0}>Collaborate with collegues across departments using Microsoft Teams and Sharepoint to share ideas, documents, and much more...</p>
+                    <p style={{ fontSize:'18px' }}className={ styles.mg0 }>Collaborate with collegues across departments using Microsoft Teams and Sharepoint to share ideas, documents, and much more...</p>
                 </Stack.Item>
                 <Stack.Item >
-                    <img {...imageProps} alt={"teams"}/> 
+                    <img { ...imageProps } alt={"teams" }/> 
                 </Stack.Item>
             </Stack>
 
-            <h3>A few things before you start</h3>
+            <h2>A few things before you start</h2>
             <p>To create a community, you will need to:</p>
  
-            <Stack horizontal styles={stackStyles} horizontalAlign='center' verticalAlign="baseline" tokens={sectionStackTokens}>
-                <StackItem>
+            <Stack horizontal styles={stackStyles } horizontalAlign='center' verticalAlign="baseline" tokens={ sectionStackTokens }>
+                <StackItem align="start">
                     <div className={ styles.card }>
-                        <FontAwesomeIcon icon={faGlobe} size='2x' className={styles.blue} />
-                        <p>{parse(this.strings.provide_bilingual_name)}</p>
+                        <FontAwesomeIcon icon={ faGlobe } size='3x' className={ styles.blue } />
+                        <p>{ parse( this.strings.provide_bilingual_name ) }</p>
                         <small>Communities’ name and description need to be fully bilingual to comply with the Official Languages Act </small>
                     </div>
                 </StackItem>
                 <StackItem>
                 <div className={ styles.card }>
-                    <FontAwesomeIcon icon={faUsers} size='2x' className={styles.blue} />
-                    <p>Identify at least <strong className={styles.blue}>two owners</strong></p>
+                    <FontAwesomeIcon icon={faUsers } size='3x' className={ styles.blue } />
+                    <p>Identify at least <strong className={ styles.blue }>one more owner</strong></p>
                     <small>Identifying more than one owner ensures the continuity of the community if one owner leaves </small>
                 </div>
                </StackItem>
                <StackItem>
                 <div className={ styles.card }>
-                    <FontAwesomeIcon icon={faLock} size='2x' className={styles.blue} />
-                    <p>Identify if your data will be <strong className={styles.blue}>Protected</strong> or  <strong className={styles.blue}>Unclassified</strong></p>
+                    <FontAwesomeIcon icon={faLock } size='3x' className={ styles.blue } />
+                    <p>Identify if your data will be <strong className={ styles.blue }>Protected</strong> or  <strong className={ styles.blue }>Unclassified</strong></p>
                     <small>Terms and conditions for creating a protected  community will need to be accepted prior to creating one </small>
                 </div>
                </StackItem>
@@ -79,5 +79,5 @@ export class Initial extends React.Component<IScwProps> {
             </>
 
         );
-    }
-}
+  }
+ }

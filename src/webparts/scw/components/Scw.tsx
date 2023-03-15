@@ -82,7 +82,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             
              this.setState({ showModal: true });
        }
-       else if ( current === 2 && checkedValues.length < 7 ) {
+       
+       else if ( current === 2 &&  selectedChoice === 'Protected A or B community' && checkedValues.length < 7 ) {
                 
                 this.setState({ showModal: true });
        } 
@@ -211,11 +212,13 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     }
 
     public selectedChoiceCallback = ( selectedChoice: string ): void =>  { 
+
         const saveSelectedChoice = selectedChoice;
 
         this.setState( { 
             selectedChoice: saveSelectedChoice
         })
+        console.log("callback", selectedChoice);
     } 
 
   
@@ -299,7 +302,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
          { 
             step: "3",
             title: "Terms of use",
-            content: <ThirdStep checkedValues= { checkedValues } checkedTerms = { this.checkedTerms } />,
+            content: <ThirdStep checkedValues= { checkedValues } checkedTerms = { this.checkedTerms } selectedChoice = { selectedChoice }/>,
           },
          { 
             step: "4",
@@ -345,9 +348,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         
         return (
             <div className= { styles.scw }>
-                <h1>Create a community</h1>
-                <Title current={ current } step={ step }/>
-                { this.state.step === 0 
+                <Title current={ current } step={ step } prefLang={this.props.prefLang} />
+                { step === 0 
                 ? <>
                         <Initial
                             context={this.props.context}

@@ -13,6 +13,13 @@ define([], function() {
     "AppOfficeEnvironment": "The app is running in office.com",
     "AppOutlookEnvironment": "The app is running in Outlook",
     "title_details": "Details",
-    "provide_bilingual_name": "Provide <strong>bilingual</strong> name and descriptions"
+    "provide_bilingual_name": "Provide <strong>bilingual</strong> name and descriptions",
+    "create_a_community": "Create a community",
+    "community_details": "Community details",
+    "community_classification": "Community classification",
+    "terms":"Protected community terms of use",
+    "invite_owners_members": "Invite owners and members",
+    "review_submit":"Review and submit",
+
   }
 });

@@ -75,14 +75,19 @@ export default class FourthStep extends React.Component<IFourthStepProps> {
 
 
                 <div className={styles.inviteContainer}>
-                    <Icon iconName='Zoom' className={styles.magnifyingIcon}/>
-                    <Stack>
-                        <Stack.Item>
+                    
+                    <Stack horizontal>
+                        <Stack.Item align='center'>
+                            <Icon iconName='Zoom' className={styles.magnifyingIcon}/>
+                        </Stack.Item>
+                        <Stack.Item align='center'>
                             <p><strong>Can't find someone?</strong> It's likely they haven't registered yet fort GCXhange.You can invite them to join GCXchange using the button below. Once they are registered, 
                             you will be able to add them to your community.</p>
                         </Stack.Item>
+                        </Stack>
+                        <Stack>
                         <Stack.Item>
-                            <PrimaryButton>Invite a colleague to GCXchange</PrimaryButton>
+                            <PrimaryButton className={ styles.graybtn} >Invite a colleague to GCXchange</PrimaryButton>
                         </Stack.Item>
                     </Stack>
                 </div>
