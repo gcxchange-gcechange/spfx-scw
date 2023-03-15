@@ -272,6 +272,7 @@
     background: #c0c0cc!important;
     color:#004DB8;
     width: 250px;
+    font-size: 14px;
 }
 
 .modalContent {
@@ -338,11 +339,12 @@
     display:flex;
     flex-direction: column;
     align-items: 'center';
-    margin-top:20px;
     border: 1px solid gray;
     border-radius: 8px;
+    margin-top:20px;
     margin-left: 20px;
     margin-right: 20px;
+    padding: 30px;
 }
 
 .magnifyingIcon {

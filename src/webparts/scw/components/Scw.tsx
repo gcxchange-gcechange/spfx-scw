@@ -137,6 +137,13 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         });
     }
 
+    public goToInitalPage=():void=>  { 
+        const step = this.state.step - 1;
+        this.setState( { 
+           step
+        });
+    }
+
     public buttonStyle: IButtonStyles =  { 
         root:  { 
             fontSize:'18px',
@@ -364,6 +371,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                         <div className="steps-content"> { steps[ this.state.current ].content }</div>
                         <div className="steps-action">
                             <Stack horizontal horizontalAlign='space-between'>
+                                {this.state.current === 0 &&  <PrimaryButton  className={styles.previousbtn} styles= { this.buttonStyle } text="Previous" ariaLabel="Previous" onClick= { () =>  { this.goToInitalPage()} }/>}
                                 {this.state.showModal === true && <ErrorModal current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } selectedChoice={ selectedChoice } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } />} 
                                 { this.state.current > 0 && (<Button className={styles.previousbtn} style= {{ margin: '0 8px' }} onClick= { () => this.prev()}>Previous</Button> ) }
                                 { this.state.current < steps.length - 1 && (<Button className={ styles.largebtn } type="primary" onClick= { this.next} >Next</Button> ) }
