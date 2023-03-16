@@ -20,7 +20,8 @@ define([], function() {
     "terms":"Protected community terms of use",
     "invite_owners_members": "Invite owners and members",
     "review_submit":"Review and submit",
-    "unclassified_button": "I don't want to store protected documents anymore"
+    "unclassified_button": "I don't want to store protected documents anymore",
+    "CommPurpose": 'The GCX Support Team needs the purpose of the new community to determine whether it can be <strong>approved</strong>.<br/> This will not show up on your site. Write it in the official language of your choice. Max. 500 characters.'
 
   }
 });

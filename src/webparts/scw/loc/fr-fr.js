@@ -12,7 +12,8 @@ define([], function() {
       "terms": "Conditions d’utilisation des collectivités protégées",
       "invite_owners_members": "Inviter les responsables et les membres",
       "review_submit":"Vérifier et soumettre",
-      "unclassified_button": "Je ne veux plus stocker de documents protégés."
+      "unclassified_button": "Je ne veux plus stocker de documents protégés.",
+      "CommPurpose": 'L’équipe de soutien GCÉ doit connaître l’objectif de la nouvelle collectivité pour déterminer si elle peut être <strong>approuvée</strong>.<br/> Cette information n’apparaîtra pas sur votre site. Rédiger l’information dans la langue officielle de votre choix. Max. 500 caractères.'
       
   }
 });
