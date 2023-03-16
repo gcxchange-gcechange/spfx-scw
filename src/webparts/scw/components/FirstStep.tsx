@@ -51,14 +51,14 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
         return (
             <>
            
-            <h2>Community purpose</h2>
+            <h3>Community purpose</h3>
             <p>The GCX Support Team needs to know the purpose of the new community to determine whether it can be <strong>approved.</strong></p>
             <Label htmlFor='Community purpose' required styles={ labelStyle }>Community purpose</Label>
             <p className={ styles.instruction }>This will not show up on your site. Write in the official language of your choice. Max. 500 characters</p>
             <TextField type='text' name='commPurpose' id='Community purpose'  onChange={ this.onhandleChangeEvent } 
             defaultValue={ commPurpose }  validateOnLoad= { false }  onGetErrorMessage={ this.getErrorMessage } />
 
-            <h2>Community name</h2>
+            <h3>Community name</h3>
             <Stack tokens={stackTokens}>
                 <p>The communitys name is the title of your community. Create a short descriptive name. A bilingual name complies with the Official Langauges Act and makes it easier for others to find your community in the GCXchange Catalogue.</p>
                 <StackItem>
@@ -73,7 +73,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 </StackItem>
             </Stack>
 
-            <h2>Community description</h2>
+            <h3>Community description</h3>
             <p>The community descriptions will be visible to users when they use the {`"All communities"`} page and when they search for it.</p>
             <Stack tokens={stackTokens}>
                 <StackItem>

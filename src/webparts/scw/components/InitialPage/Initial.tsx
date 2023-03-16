@@ -39,17 +39,17 @@ export class Initial extends React.Component<IScwProps> {
         return (
             <>
             <section className={ styles.container }>
-            <h1 className={ styles.mgBottom0 }> { this.strings.create_a_community } </h1>
+            <h2 className={ styles.mgBottom0 }>{this.strings.create_a_community}</h2>
             <Stack horizontal verticalAlign="center" styles={ flexStyles }>
-                <Stack.Item >
+                <Stack.Item grow={ 2 } >
                     <p style={{ fontSize:'18px' }}className={ styles.mg0 }>Collaborate with collegues across departments using Microsoft Teams and Sharepoint to share ideas, documents, and much more...</p>
                 </Stack.Item>
-                <Stack.Item >
+                <Stack.Item grow={ 4 }>
                     <img { ...imageProps } alt={"teams" }/> 
                 </Stack.Item>
             </Stack>
 
-            <h2>A few things before you start</h2>
+            <h3>A few things before you start</h3>
             <p>To create a community, you will need to:</p>
  
             <Stack horizontal styles={stackStyles } horizontalAlign='center' verticalAlign="baseline" tokens={ sectionStackTokens }>

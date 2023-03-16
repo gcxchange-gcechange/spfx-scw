@@ -18,6 +18,7 @@ declare interface IScwWebPartStrings {
   terms: string;
   invite_owners_members: string;
   review_submit: string;
+  unclassified_button: string;
 }
 
 declare module 'ScwWebPartStrings' {

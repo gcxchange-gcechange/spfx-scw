@@ -101,7 +101,7 @@ export default class FirstStep extends React.Component<ILastStepProps> {
         return (
             
             <>
-
+                <p>Review that the information below is accurate, or edit them </p>
                 <Label htmlFor='commPurpose' required >Community purpose</Label>
                 <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={this.onUpdateCommPurpose}  onGetErrorMessage={ this.getErrorMessage } /> 
 
@@ -118,7 +118,7 @@ export default class FirstStep extends React.Component<ILastStepProps> {
                 <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } onGetErrorMessage={ this.getErrorMessage }/>
 
                 <Label htmlFor='classification'required >Community classification</Label>
-                <TextField id='calssification' value={selectedChoice}/>
+                <TextField style={{ background:'#eaeaea'}} id='calssification' value={selectedChoice}/>
 
                 <AddUsers context={ context } ownerList={ ownerList } memberList={ memberList } getOwnersCallback={ this.updateDefaultOwnerValues }  
                 getMemberCallback={ this.updateDefaultMemberValues }  />

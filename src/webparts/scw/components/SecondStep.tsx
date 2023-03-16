@@ -48,13 +48,10 @@ export default class SecondStep extends React.Component<ISecondStepProps, ISecon
             }
         }
 
-        
-
-
-       
+        console.log("props", this.props)
 
         const templateChoice: IChoiceGroupOption[] = [
-            { key: '1', 
+            { key: 'Unclassified community', 
              text: 'Unclassified community', 
              ariaLabel: 'Unclassified community' ,
              onRenderField: (props, render) => {
@@ -72,7 +69,7 @@ export default class SecondStep extends React.Component<ISecondStepProps, ISecon
 
             
             },
-             { key: '2', 
+             { key: 'Protected A or B community', 
                 text:'Protected A or B community', 
                 ariaLabel: 'Protected A or B community',
                 onRenderField: (props, render) => {
@@ -98,7 +95,7 @@ export default class SecondStep extends React.Component<ISecondStepProps, ISecon
                 let's find out whether you will be storing protected documents in your community.
             </p>
             <Stack horizontalAlign='center'>
-                <ChoiceGroup id='choiceGroup' options={templateChoice} required={true} onChange={this.onSelectedKey} styles={ flexSyle } defaultValue={this.props.selectedChoice}/>
+                <ChoiceGroup id='choiceGroup' options={templateChoice} required={true} onChange={this.onSelectedKey} styles={ flexSyle } defaultSelectedKey={this.props.selectedChoice}/>
             </Stack>
  
         
@@ -106,24 +103,20 @@ export default class SecondStep extends React.Component<ISecondStepProps, ISecon
         );
     }
 
-    private onSelectedKey = ( event: React.SyntheticEvent<HTMLElement>, option: IChoiceGroupOption):void => {
+    private onSelectedKey = ( event: React.ChangeEvent<HTMLInputElement>, option: IChoiceGroupOption):void => {
 
-        const selectedRadioButton1 = document.getElementById('choiceGroup');
         const elementclass = document.querySelector(".ms-ChoiceField-wrapper.is-inFocus")
-        // const choiceCard = document.querySelector(".choiceCard")
         const checked = document.querySelector(".ms-ChoiceField-field.is-checked")
-
-       
-
-        if (option.key === '1') {
-            console.log("radio",selectedRadioButton1)
+        // console.log(event.target.value)
+      
+        if (option.key === 'Unclassified community') {
             console.log("ec", elementclass)
             console.log("checked", checked)
             elementclass.classList.add(styles.checkedRadioButton1);
-            checked.classList.replace(styles.choiceCard , styles.selectedChoiceCard);
-
-        }
-        else if (option.key === '2') {
+               // event.target.parentElement.classList.add(styles.choiceCardBorder);
+            
+        } 
+        else if (option.key === 'Protected A or B community') {
             elementclass.classList.add(styles.checkedRadioButton2)
             // checked.classList.add(styles.checkedRadioButton2);
         }

@@ -115,12 +115,18 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     private prev = (): void =>  { 
         const prevPage = this.state.current - 1;   
 
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList } = this.state
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, selectedChoice } = this.state
+
+       
 
         if ( current === 4 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 1)) {
            
             this.setState({ showModal: true });
-        } 
+        }
+        else    if ( current === 2 && selectedChoice === 'Protected A or B community') {
+
+            this.setState({ selectedChoice: 'Unclassified community' })
+        }
         else {
             
             this.setState({ current: prevPage})
@@ -352,6 +358,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
 
         const items = steps.map( item => ( item.title !== '0' ?  { key: item.step, title: item.title} : null));
+
         
         return (
             <div className= { styles.scw }>
@@ -371,9 +378,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                         <div className="steps-content"> { steps[ this.state.current ].content }</div>
                         <div className="steps-action">
                             <Stack horizontal horizontalAlign='space-between'>
-                                {this.state.current === 0 &&  <PrimaryButton  className={styles.previousbtn} styles= { this.buttonStyle } text="Previous" ariaLabel="Previous" onClick= { () =>  { this.goToInitalPage()} }/>}
+                                {this.state.current === 0 &&   <Button className={styles.previousbtn}  onClick= { () => this.goToInitalPage()}>Previous</Button>}
                                 {this.state.showModal === true && <ErrorModal current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } selectedChoice={ selectedChoice } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } />} 
-                                { this.state.current > 0 && (<Button className={styles.previousbtn} style= {{ margin: '0 8px' }} onClick= { () => this.prev()}>Previous</Button> ) }
+                                { this.state.current > 0 && (<Button className={styles.previousbtn} style={{ display: 'inline-block', overflow: 'visible', whiteSpace: 'break-spaces', height:'auto'}}  onClick= { () => this.prev()} > { this.state.current === 2 && selectedChoice === `Protected A or B community`?  `${ this.strings.unclassified_button }` : `Previous`}</Button> ) }
                                 { this.state.current < steps.length - 1 && (<Button className={ styles.largebtn } type="primary" onClick= { this.next} >Next</Button> ) }
                                 { this.state.current === steps.length - 1 && (<Button className={ styles.largebtn } type="primary" onClick= { this.successMessage} >Let's do this</Button> ) }
                             </Stack>

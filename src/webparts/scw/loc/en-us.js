@@ -20,6 +20,7 @@ define([], function() {
     "terms":"Protected community terms of use",
     "invite_owners_members": "Invite owners and members",
     "review_submit":"Review and submit",
+    "unclassified_button": "I don't want to store protected documents anymore"
 
   }
 });

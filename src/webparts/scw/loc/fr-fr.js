@@ -11,6 +11,8 @@ define([], function() {
       "community_classification": "Classification de la collectivité",
       "terms": "Conditions d’utilisation des collectivités protégées",
       "invite_owners_members": "Inviter les responsables et les membres",
+      "review_submit":"Vérifier et soumettre",
+      "unclassified_button": "Je ne veux plus stocker de documents protégés."
       
   }
 });
