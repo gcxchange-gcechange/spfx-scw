@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable dot-notation */
 import * as React from 'react';
-import { IconButton, IIconProps, Label, Stack, TextField  } from 'office-ui-fabric-react';
+import { IButtonStyles, IconButton, IIconProps, Label, Stack, TextField  } from 'office-ui-fabric-react';
 import {  WebPartContext  } from '@microsoft/sp-webpart-base';
 import AddUsers from './AddUsers';
-import Callouts from './Callouts';
+
+
 
 
 
@@ -18,6 +19,7 @@ export interface ILastStepProps {
     shEngDesc: string;
     shFrDesc: string;
     selectedChoice: string;
+    showCallout: boolean;
     commPurposeCallback?: (commPurpose: string) => void;
     handleEngNameCallback?: (engNameValue: string ) => void;
     frNameCallBack?:(frNameValue: string)=> void;
@@ -25,21 +27,16 @@ export interface ILastStepProps {
     handleEngDescCallback?:(engDescValue: string ) => void;
     getOwnersCallback?: (item: []) => void;
     getMemberCallback?: (item: []) => void;
+    isCalloutVisible?: ()=> void;  
 
   }
-export interface ILastStepState {
-    showCallout: boolean;
-}
- 
 
-export default class LastStep extends React.Component<ILastStepProps, ILastStepState> {
+
+export default class LastStep extends React.Component<ILastStepProps> {
 
     public constructor(props: ILastStepProps) {
         super(props);
 
-        this.state = {
-            showCallout: false
-        }
         
      }
 
@@ -84,12 +81,14 @@ export default class LastStep extends React.Component<ILastStepProps, ILastStepS
         this.props.getMemberCallback(newValues)
      
      }
-    
-    private isCalloutVisible = ():void => {
-        this.setState(prevState => ({
-            showCallout: !prevState.showCallout
-        }))
+
+    private showCalloutVisible = (event: any):void => {
+        console.log("Event ID", event.target.id);
+        this.props.isCalloutVisible()
     }
+
+
+   
 
 
     
@@ -98,18 +97,28 @@ export default class LastStep extends React.Component<ILastStepProps, ILastStepS
         const { ownerList, memberList, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, context } = this.props
         const infoIcon: IIconProps = { iconName: 'UnknownSolid' }; 
 
+        const iconStyles: IButtonStyles = {
+            root: {
+                paddingTop: '10px'
+            }
+        }
+
         return (
             
             <>
+               
                 <p>Review that the information below is accurate, or edit them </p>
-                <Stack horizontal>
+                <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='commPurpose' required >Community purpose </Label>
-                    <IconButton id={'callout-button'}iconProps={infoIcon} onClick={this.isCalloutVisible} />
+                    <IconButton id={ 'commPurpose' } styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
-                <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={this.onUpdateCommPurpose}  onGetErrorMessage={ this.getErrorMessage } /> 
-                {this.state.showCallout && <Callouts/> }
+                <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={ this.onUpdateCommPurpose }  onGetErrorMessage={ this.getErrorMessage } /> 
+                
 
-                <Label htmlFor='name'required >English community name</Label>
+                <Stack horizontal verticalAlign='end'>
+                    <Label htmlFor='name'required >English community name</Label>
+                    <IconButton id={ 'callout-button' } styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
+                </Stack>
                 <TextField id='name' defaultValue={ engName }  onChange={ this.onUpdateEngName } onGetErrorMessage={ this.getErrorMessage }  />  
 
                 <Label htmlFor='FrCommName' required >French community name</Label>

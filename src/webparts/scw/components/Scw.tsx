@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
@@ -17,6 +18,8 @@ import { SelectLanguage } from './SelectLanguage';
 import ThirdStep from './ThirdStep';
 import { AadHttpClient, HttpClientResponse, IHttpClientOptions } from '@microsoft/sp-http-base';
 import Title from './Title';
+import Callouts from './Callouts';
+
 
 
 export interface IScwState  { 
@@ -33,6 +36,7 @@ export interface IScwState  {
     errorMessage: string;
     showModal: boolean;
     checkedValues: boolean[];
+    showCallout: boolean;
    
     
 }
@@ -59,7 +63,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             selectedChoice: '',
             errorMessage: '',
             showModal: false,
-            checkedValues: []
+            checkedValues: [],
+            showCallout: false
             
         };
 
@@ -173,16 +178,16 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             requestHeaders.append("Content-type", "application/json");
             requestHeaders.append("Cache-Control", "no-cache");
 
-            var owner1: any;
-            if (ownerList.length == 2) {
+            let owner1: any;
+            if (ownerList.length === 2) {
                 owner1 = ownerList[0] + "," + ownerList[1];
             } else {
                 owner1 = ownerList[0] + "," + ownerList[1] + "," + ownerList[2];
             }
 
-            var memberlist = "";
-            for (var i = 0; i < memberList.length; i++) {
-                if (i == memberList.length - 1) {
+            let memberlist = "";
+            for (let i = 0; i < memberList.length; i++) {
+                if (i === memberList.length - 1) {
                     memberlist += memberList[i]
                 } else {
                     memberlist += memberList[i] + ","
@@ -334,13 +339,20 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         }));
     }
 
+     
+    public isCalloutVisible = ():void => {
+        this.setState(prevState => ({
+            showCallout: !prevState.showCallout
+        }))
+    }
+
 
 
 
     
     public render(): React.ReactElement<IScwProps>  { 
 
-        const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, memberList, errorMessage, showModal, checkedValues } = this.state;
+        const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, memberList, errorMessage, showModal, checkedValues, showCallout } = this.state;
 
         const steps = [
      
@@ -403,6 +415,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 ownerList= { ownerList }
                 memberList= { memberList }
                 context= { this.props.context }
+                showCallout = { showCallout}
                 commPurposeCallback={ this.commPurposeCallback }
                 handleEngNameCallback= { this.handleEngNameCallback }
                 frNameCallBack= { this.frNameCallback }
@@ -410,6 +423,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 getMemberCallback= { this.handleMemberCallback }
                 handleFrDescCallback= { this.frDescCallback }
                 handleEngDescCallback= { this.engDescCallback }
+                isCalloutVisible ={ this.isCalloutVisible }
+
               />
             ),
           },
@@ -437,6 +452,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                         <div className="steps-content"> { steps[ this.state.current ].content }</div>
                         <div className="steps-action">
                             <Stack horizontal horizontalAlign='space-between'>
+                                {  showCallout && <Callouts prefLang={ this.props.prefLang }showCallout={showCallout} openCallout = {this.isCalloutVisible} /> }
                                 { this.state.current === 0 &&   <Button className={ styles.previousbtn }  onClick= { () => this.goToInitalPage() } > Previous </Button> }
                                 { this.state.showModal === true && <ErrorModal current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } selectedChoice={ selectedChoice } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } /> } 
                                 { this.state.current > 0 && (<Button className={styles.previousbtn} style={{ display: 'inline-block', overflow: 'visible', whiteSpace: 'break-spaces', height:'auto'}}  onClick= { () => this.prev() } > { this.state.current === 2 && selectedChoice === `Protected A or B community`?  `${ this.strings.unclassified_button }` : `Previous` } </Button> ) }
