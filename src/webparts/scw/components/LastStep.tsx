@@ -102,7 +102,7 @@ export default class LastStep extends React.Component<ILastStepProps, ILastStepS
             
             <>
                 <p>Review that the information below is accurate, or edit them </p>
-                <Stack horizontal horizontalAlign='center'>
+                <Stack horizontal>
                     <Label htmlFor='commPurpose' required >Community purpose </Label>
                     <IconButton id={'callout-button'}iconProps={infoIcon} onClick={this.isCalloutVisible} />
                 </Stack>
