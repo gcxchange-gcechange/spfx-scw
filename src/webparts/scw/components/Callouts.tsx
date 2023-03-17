@@ -1,6 +1,6 @@
 import * as React from "react";
 // import styles from "./Scw.module.scss";
-import { Callout, PrimaryButton } from 'office-ui-fabric-react';
+import { Callout, PrimaryButton, Stack } from 'office-ui-fabric-react';
 
 
 
@@ -17,23 +17,36 @@ export default class Callouts extends React.Component<ICalloutsProps, ICalloutsS
   }
 
 
-  
+  private closeCallout = () :void => {
+    console.log('close')
+  }
   
 
   
   public render(): React.ReactElement<ICalloutsProps> {
 
-
+  
+  const calloutStyle = {
+    root: {
+      width: '300px',
+      
+    }
+  }
 
 
     return (
       <>
         <div>
           <Callout
-           target={`#callout-button`}
+            styles={calloutStyle}
+            target={`#callout-button`}
+            onDismiss={this.closeCallout}
           >
-            Hello
-            <PrimaryButton>Close</PrimaryButton>
+            <Stack>
+              Hello
+              <PrimaryButton>Close</PrimaryButton>
+            </Stack>
+            
           </Callout>
         </div>
       </>

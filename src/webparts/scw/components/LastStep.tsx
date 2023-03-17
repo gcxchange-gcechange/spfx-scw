@@ -91,42 +91,6 @@ export default class LastStep extends React.Component<ILastStepProps, ILastStepS
         }))
     }
 
-   
-    //  const CustomLabel = (props: ITextFieldProps): JSX.Element => {
-    //     const [isCalloutVisible, { toggle: toggleIsCalloutVisible }] = useBoolean(false);
-    
-      
-    //     return (
-    //       <>
-    //         <Stack horizontal verticalAlign="center" tokens={stackTokens}>
-    //           <span id={props.id}>{props.label}</span>
-    //           <IconButton
-    //             id={iconButtonId}
-    //             iconProps={iconProps}
-    //             title="Info"
-    //             ariaLabel="Info"
-    //             onClick={toggleIsCalloutVisible}
-    //             styles={iconButtonStyles}
-    //           />
-    //         </Stack>
-    //         {isCalloutVisible && (
-    //           <Callout
-    //             target={'#' + iconButtonId}
-    //             setInitialFocus
-    //             onDismiss={toggleIsCalloutVisible}
-    //             ariaDescribedBy={descriptionId}
-    //             role="alertdialog"
-    //           >
-    //             <Stack tokens={stackTokens} horizontalAlign="start" styles={labelCalloutStackStyles}>
-    //               <span id={descriptionId}>The custom label includes an IconButton that displays this Callout on click.</span>
-    //               <DefaultButton onClick={toggleIsCalloutVisible}>Close</DefaultButton>
-    //             </Stack>
-    //           </Callout>
-    //         )}
-    //       </>
-    //     );
-    //   };
-
 
     
     public render(): React.ReactElement<ILastStepProps> {
@@ -138,10 +102,9 @@ export default class LastStep extends React.Component<ILastStepProps, ILastStepS
             
             <>
                 <p>Review that the information below is accurate, or edit them </p>
-                <Stack horizontal>
-                    <Label htmlFor='commPurpose' required >Community purpose
-                        <IconButton id={'callout-button'}iconProps={infoIcon} onClick={this.isCalloutVisible} />
-                    </Label>
+                <Stack horizontal horizontalAlign='center'>
+                    <Label htmlFor='commPurpose' required >Community purpose </Label>
+                    <IconButton id={'callout-button'}iconProps={infoIcon} onClick={this.isCalloutVisible} />
                 </Stack>
                 <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={this.onUpdateCommPurpose}  onGetErrorMessage={ this.getErrorMessage } /> 
                 {this.state.showCallout && <Callouts/> }
