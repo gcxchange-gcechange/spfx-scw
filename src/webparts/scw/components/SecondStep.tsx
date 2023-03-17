@@ -41,6 +41,7 @@ export default class SecondStep extends React.Component< ISecondStepProps >  {
         console.log("props", this.props)
 
         const templateChoice: IChoiceGroupOption[] = [
+
             { key: 'Unclassified community', 
                 text: 'Unclassified community', 
                 ariaLabel: 'Unclassified community' ,
@@ -75,6 +76,7 @@ export default class SecondStep extends React.Component< ISecondStepProps >  {
                     );
                 } 
             }
+
         ]
 
        
@@ -108,7 +110,7 @@ export default class SecondStep extends React.Component< ISecondStepProps >  {
         }
 
         this.setState({
-            selectedChoice: option.text
+            selectedChoice: option.key
         })
 
         this.props.handleSelectedChoice(option.text)

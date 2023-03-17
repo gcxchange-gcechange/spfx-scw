@@ -15,6 +15,7 @@ import FourthStep from './FourthStep';
 import SecondStep from './SecondStep';
 import { SelectLanguage } from './SelectLanguage';
 import ThirdStep from './ThirdStep';
+import { AadHttpClient, HttpClientResponse, IHttpClientOptions } from '@microsoft/sp-http-base';
 import Title from './Title';
 
 
@@ -160,13 +161,71 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     
     public successMessage = (): MessageType  =>  { 
 
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList } = this.state
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, memberList, selectedChoice } = this.state
 
         if ( current === 4 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length === 1)) {
             console.log('thisState', this.state)
             this.setState({ showModal: true });
         }
         else {
+            const functionUrl = "";
+            const requestHeaders: Headers = new Headers();
+            requestHeaders.append("Content-type", "application/json");
+            requestHeaders.append("Cache-Control", "no-cache");
+
+            var owner1: any;
+            if (ownerList.length == 2) {
+                owner1 = ownerList[0] + "," + ownerList[1];
+            } else {
+                owner1 = ownerList[0] + "," + ownerList[1] + "," + ownerList[2];
+            }
+
+            var memberlist = "";
+            for (var i = 0; i < memberList.length; i++) {
+                if (i == memberList.length - 1) {
+                    memberlist += memberList[i]
+                } else {
+                    memberlist += memberList[i] + ","
+                }
+            }
+            console.log(memberlist);
+            const postOptions: IHttpClientOptions = {
+                headers: requestHeaders,
+                body: `
+                {
+                    "SpaceName": "${engName}",
+                    "SpaceNameFR": "${frCommName}",
+                    "Owner1": "${owner1}",
+                    "SpaceDescription": "${shEngDesc}",
+                    "SpaceDescriptionFR": "${shFrDesc}",
+                    "BusinessJustification":"${commPurpose}",
+                    "TeamPurpose":"${commPurpose}",
+                    "TemplateTitle": "Generic",
+                    "RequesterName": "${this.props.context.pageContext.user.displayName}",
+                    "RequesterEmail": "${this.props.context.pageContext.user.email}",
+                    "SecurityCategory": "${selectedChoice}",
+                    "Status": "Submitted",
+                    "Members": "${memberList}"
+                }`
+            };
+
+            let responseText: string = "";
+
+                this.props.context.aadHttpClientFactory.getClient("").then((client: AadHttpClient) => {
+                    client.post(functionUrl, AadHttpClient.configurations.v1, postOptions).then((response: HttpClientResponse) => {
+                        console.log(`Status code: ${response.status}`);
+                        response.json().then((responseJSON: JSON) => {
+                            responseText = JSON.stringify(responseJSON);
+                            console.log("respond is ", responseText);
+                            if (response.ok) {
+                                console.log("response OK");
+                            } else {
+                                console.log("Response error");
+                            }
+                        })
+                    });
+                });
+
             return (
                 message.success( { 
                     content: "loaded!",
