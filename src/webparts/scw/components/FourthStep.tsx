@@ -4,7 +4,7 @@ import { WebPartContext } from '@microsoft/sp-webpart-base';
 import AddUsers from './AddUsers';
 import styles from './Scw.module.scss';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
-import { PrimaryButton, Stack } from 'office-ui-fabric-react';
+import { IButtonStyles, PrimaryButton, Stack } from 'office-ui-fabric-react';
 
 
 
@@ -55,6 +55,25 @@ export default class FourthStep extends React.Component<IFourthStepProps> {
 
     public render(): React.ReactElement<IFourthStepProps>  {
 
+        const buttonStyles: IButtonStyles = {
+            
+            root: {
+                color: '#004db8',
+                backgroundColor: '#c0c0cc',
+                borderColor: '#c0c0cc'
+            },
+
+            rootHovered: {
+                color: '#4096ff',
+                background: '#c0c0cc',
+                borderColor: '#4096ff'
+            },
+            
+            label: {
+                fontWeight: 'normal'
+            }
+        }
+
 
         return (
             <>
@@ -87,7 +106,7 @@ export default class FourthStep extends React.Component<IFourthStepProps> {
                         </Stack>
                         <Stack>
                         <Stack.Item>
-                            <PrimaryButton className={ styles.graybtn} >Invite a colleague to GCXchange</PrimaryButton>
+                            <PrimaryButton styles={ buttonStyles } >Invite a colleague to GCXchange</PrimaryButton>
                         </Stack.Item>
                     </Stack>
                 </div>
