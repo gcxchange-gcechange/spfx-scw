@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import styles from './Scw.module.scss';
@@ -5,7 +6,7 @@ import  { Steps, Button, message} from 'antd';
 import FirstStep from "./FirstStep";
 import  { IScwProps } from './IScwProps';
 import  { Initial } from './InitialPage/Initial';
-import  { PrimaryButton } from 'office-ui-fabric-react';
+import  { PrimaryButton, Stack } from 'office-ui-fabric-react';
 import  { IButtonStyles } from 'office-ui-fabric-react';
 import LastStep from './LastStep';
 import  { MessageType } from 'antd/es/message/interface';
@@ -15,6 +16,7 @@ import SecondStep from './SecondStep';
 import { SelectLanguage } from './SelectLanguage';
 import ThirdStep from './ThirdStep';
 import { AadHttpClient, HttpClientResponse, IHttpClientOptions } from '@microsoft/sp-http-base';
+import Title from './Title';
 
 
 export interface IScwState  { 
@@ -81,7 +83,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             
              this.setState({ showModal: true });
        }
-       else if ( current === 2 && checkedValues.length < 7 ) {
+       
+       else if ( current === 2 &&  selectedChoice === 'Protected A or B community' && checkedValues.length < 7 ) {
                 
                 this.setState({ showModal: true });
        } 
@@ -113,12 +116,18 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     private prev = (): void =>  { 
         const prevPage = this.state.current - 1;   
 
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList } = this.state
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, selectedChoice } = this.state
+
+       
 
         if ( current === 4 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 1)) {
            
             this.setState({ showModal: true });
-        } 
+        }
+        else    if ( current === 2 && selectedChoice === 'Protected A or B community') {
+
+            this.setState({ selectedChoice: 'Unclassified community' })
+        }
         else {
             
             this.setState({ current: prevPage})
@@ -130,6 +139,13 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     public handleClickEvent=():void=>  { 
         const step = this.state.step + 1;
+        this.setState( { 
+           step
+        });
+    }
+
+    public goToInitalPage=():void=>  { 
+        const step = this.state.step - 1;
         this.setState( { 
            step
         });
@@ -268,11 +284,13 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     }
 
     public selectedChoiceCallback = ( selectedChoice: string ): void =>  { 
+
         const saveSelectedChoice = selectedChoice;
 
         this.setState( { 
             selectedChoice: saveSelectedChoice
         })
+        console.log("callback", selectedChoice);
     } 
 
   
@@ -322,9 +340,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     
     public render(): React.ReactElement<IScwProps>  { 
 
-        const  { current, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, memberList, errorMessage, showModal, checkedValues } = this.state;
+        const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, memberList, errorMessage, showModal, checkedValues } = this.state;
 
         const steps = [
+     
          { 
             step: "1",
             title: this.strings.title_details,
@@ -355,7 +374,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
          { 
             step: "3",
             title: "Terms of use",
-            content: <ThirdStep checkedValues= { checkedValues } checkedTerms = { this.checkedTerms } />,
+            content: <ThirdStep checkedValues= { checkedValues } checkedTerms = { this.checkedTerms } selectedChoice = { selectedChoice }/>,
           },
          { 
             step: "4",
@@ -397,11 +416,13 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         ];
 
 
-        const items = steps.map( item => ( item.title !== '6' ?  { key: item.step, title: item.title } : null));
-        
+        const items = steps.map( item => ( item.title !== '0' ?  { key: item.step, title: item.title} : null));
+
+        console.log("page", this.state.current);
         return (
             <div className= { styles.scw }>
-                { this.state.step === 0 
+                <Title current={ current } step={ step } prefLang={this.props.prefLang} />
+                { step === 0 
                 ? <>
                         <Initial
                             context={this.props.context}
@@ -415,10 +436,14 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                         <Steps current= { this.state.current } labelPlacement='vertical' items= { items } />
                         <div className="steps-content"> { steps[ this.state.current ].content }</div>
                         <div className="steps-action">
-                            {this.state.showModal === true && <ErrorModal current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } selectedChoice={ selectedChoice } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } />} 
-                            { this.state.current === steps.length - 1 && (<Button type="primary" onClick= { this.successMessage} >Done</Button> ) }
-                            { this.state.current > 0 && (<Button className={styles.previousbtn}style= {{ margin: '0 8px' }} onClick= { () => this.prev()}>Previous</Button> ) }
-                            { this.state.current < steps.length - 1 && (<Button type="primary" onClick= { this.next} >Next</Button> ) }
+                            <Stack horizontal horizontalAlign='space-between'>
+                                { this.state.current === 0 &&   <Button className={ styles.previousbtn }  onClick= { () => this.goToInitalPage() } > Previous </Button> }
+                                { this.state.showModal === true && <ErrorModal current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } selectedChoice={ selectedChoice } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } /> } 
+                                { this.state.current > 0 && (<Button className={styles.previousbtn} style={{ display: 'inline-block', overflow: 'visible', whiteSpace: 'break-spaces', height:'auto'}}  onClick= { () => this.prev() } > { this.state.current === 2 && selectedChoice === `Protected A or B community`?  `${ this.strings.unclassified_button }` : `Previous` } </Button> ) }
+                                { this.state.current < steps.length - 1 && (this.state.current !== 2 || selectedChoice === 'Unclassified community' ) && (<Button className={ styles.largebtn } type="primary" onClick= { this.next} >Next</Button> )}
+                                { this.state.current < steps.length - 1 && (this.state.current === 2 && selectedChoice === `Protected A or B community`) && (<Button className={ styles.largebtn } style={{ height: '54px'}} type="primary" onClick= { this.next} >Next</Button> ) }
+                                { this.state.current === steps.length - 1 && (<Button className={ styles.largebtn } type="primary" onClick= { this.successMessage} >Let's do this</Button> ) }
+                            </Stack>
                         </div>
                     </div>
                 </div>

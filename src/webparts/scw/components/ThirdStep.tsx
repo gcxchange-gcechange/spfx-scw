@@ -9,6 +9,7 @@ import styles from './Scw.module.scss';
 export interface IThirdStepProps { 
     checkedValues: boolean[];
     checkedTerms?:( checked: boolean ) => void; 
+    selectedChoice: string;
   }
  
 
@@ -40,13 +41,24 @@ export default class ThirdStep extends React.Component<IThirdStepProps> {
         const checkBoxStyles: ICheckboxStyles = {
            text: {
             marginLeft:'20px'
+           },
+           checkbox: {
+            background:'white',
+            color: '#004DB8'
+           },
+           checkmark: {
+            color: '#004DB8'
            }
         };
+
+        console.log("Third", this.props.selectedChoice);
 
     
         return (
             
             <>
+            { this.props.selectedChoice === 'Protected A or B community' ? 
+            <div>
                 <p>Looks like you need a space to store protected documents and information on GCXchange. We have a few terms of use for protected communities.</p>
                 <p>The security of documents is the responsability of all members on GCXchange, including yourself. We ask that you review your departmental security guidelines
                     to make sure youy are familiar with your responsabilities and so that you can inform your members about their responsabilities, before agreeing to the terms of use below.
@@ -82,7 +94,13 @@ export default class ThirdStep extends React.Component<IThirdStepProps> {
                         <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>I agree to back up my community documents on my department's official repository if they contain information of business value.</strong></p>
                     </StackItem>
                 </Stack>
-              
+            </div>
+                : 
+                    <div>
+                        <p>The information you are storing is unclassified so you won't need a classified document space. 
+                            Make sure <strong>not to store</strong> any classified documents in your library. If you are unsure what information is classified you can check with your departmental security policy or information management branch. </p>
+                    </div>
+                }
             </>
         );
      }

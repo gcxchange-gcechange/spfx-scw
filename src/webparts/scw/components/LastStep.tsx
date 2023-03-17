@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable dot-notation */
 import * as React from 'react';
-import {  Label, TextField  } from 'office-ui-fabric-react';
+import { IconButton, IIconProps, Label, Stack, TextField  } from 'office-ui-fabric-react';
 import {  WebPartContext  } from '@microsoft/sp-webpart-base';
 import AddUsers from './AddUsers';
+import Callouts from './Callouts';
+
 
 
 export interface ILastStepProps { 
@@ -25,55 +27,50 @@ export interface ILastStepProps {
     getMemberCallback?: (item: []) => void;
 
   }
+export interface ILastStepState {
+    showCallout: boolean;
+}
  
 
-export default class FirstStep extends React.Component<ILastStepProps> {
+export default class LastStep extends React.Component<ILastStepProps, ILastStepState> {
 
     public constructor(props: ILastStepProps) {
         super(props);
+
+        this.state = {
+            showCallout: false
+        }
         
      }
 
   
     private  onUpdateCommPurpose = (event: React.ChangeEvent<HTMLInputElement>) :void => {
         const updatedPurpose = event.target.value.trim();    
-        this.setState({ commPurpose: updatedPurpose });
-        //send it to the parent
         this.props.commPurposeCallback(updatedPurpose); 
      }
 
     private  onUpdateEngName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
         const updatedName = event.target.value.trim();    
-        this.setState({ engName: updatedName });
-        //send it to the parent
         this.props.handleEngNameCallback(updatedName); 
      }
     
     private  onUpdateFrName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
         const updateFrName = event.target.value.trim();
-        this.setState({ frCommName: updateFrName });
-        //send it to the parent
         this.props.frNameCallBack(updateFrName)    
      }
 
      private onUpdateEngDesc = (event: React.ChangeEvent<HTMLInputElement>) :void => {
         const updateEngDesc = event.target.value;
-        this.setState({ shEngDesc: updateEngDesc });
-        //send it to the parent
         this.props.handleEngDescCallback(updateEngDesc)    
      }
 
     private  onUpdateFrDesc = (event: React.ChangeEvent<HTMLInputElement>) :void => {
         const updateFrDesc = event.target.value.trim();
-        this.setState({ shFrDesc: updateFrDesc });
-        //send it to the parent
         this.props.handleFrDescCallback(updateFrDesc)    
      }
 
     private updateDefaultOwnerValues = ( username: []):void  => {
         const newValues = username;
-
-        this.setState({ ownerList: newValues })
 
         this.props.getOwnersCallback(newValues)
      
@@ -82,28 +79,35 @@ export default class FirstStep extends React.Component<ILastStepProps> {
     private updateDefaultMemberValues = ( items: []):void  => {
         const newValues = items;
 
-        this.setState({ memberList: newValues })
+        // this.setState({ memberList: newValues })
 
         this.props.getMemberCallback(newValues)
      
      }
-
-   
-
+    
+    private isCalloutVisible = ():void => {
+        this.setState(prevState => ({
+            showCallout: !prevState.showCallout
+        }))
+    }
 
 
     
     public render(): React.ReactElement<ILastStepProps> {
 
         const { ownerList, memberList, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, context } = this.props
-        
+        const infoIcon: IIconProps = { iconName: 'UnknownSolid' }; 
 
         return (
             
             <>
-
-                <Label htmlFor='commPurpose' required >Community purpose</Label>
+                <p>Review that the information below is accurate, or edit them </p>
+                <Stack horizontal>
+                    <Label htmlFor='commPurpose' required >Community purpose </Label>
+                    <IconButton id={'callout-button'}iconProps={infoIcon} onClick={this.isCalloutVisible} />
+                </Stack>
                 <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={this.onUpdateCommPurpose}  onGetErrorMessage={ this.getErrorMessage } /> 
+                {this.state.showCallout && <Callouts/> }
 
                 <Label htmlFor='name'required >English community name</Label>
                 <TextField id='name' defaultValue={ engName }  onChange={ this.onUpdateEngName } onGetErrorMessage={ this.getErrorMessage }  />  
@@ -118,7 +122,7 @@ export default class FirstStep extends React.Component<ILastStepProps> {
                 <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } onGetErrorMessage={ this.getErrorMessage }/>
 
                 <Label htmlFor='classification'required >Community classification</Label>
-                <TextField id='calssification' value={selectedChoice}/>
+                <TextField style={{ background:'#eaeaea'}} id='calssification' value={selectedChoice}/>
 
                 <AddUsers context={ context } ownerList={ ownerList } memberList={ memberList } getOwnersCallback={ this.updateDefaultOwnerValues }  
                 getMemberCallback={ this.updateDefaultMemberValues }  />

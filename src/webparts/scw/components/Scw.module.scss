@@ -9,7 +9,7 @@
 
     .row {
         @include ms-Grid-row;
-        padding: 20px;
+        padding: 30px;
     }
 
     .column {
@@ -67,6 +67,14 @@
             display: inline-block;
         }
     }
+
+    h2 {
+        font-size: 32px;
+    }
+
+    h3 {
+        font-size: 24px;
+    }
 }
 
 :global {
@@ -76,14 +84,18 @@
         margin-left: 100px;
     }
     
+
+    .ant-steps {
+        width: 80%;
+        margin-left: 100px;
+    }
     .steps-content {
-        margin-top: 16px;
         border: 1px dashed #e9e9e9;
         border-radius: 2px;
         background-color: #fafafa;
         min-height: 200px;
         // text-align: center;
-        padding-top: 80px;
+        padding-top: 50px;
     }
 
     .steps-action {
@@ -92,7 +104,7 @@
 
   
     .ant-steps .ant-steps-item-process .ant-steps-item-icon >.ant-steps-icon {
-        color:#106EBE;
+        color:#004DB8;
         font-weight: bold;
     }
 
@@ -102,7 +114,7 @@
 
     .ant-steps .ant-steps-item-process .ant-steps-item-icon {
         background-color: white;
-        border: 2px solid #106EBE!important;
+        border: 2px solid #004DB8!important;
     }
 
     .ant-steps .ant-steps-item-wait .ant-steps-item-icon {
@@ -116,7 +128,7 @@
     }
 
     .ant-steps .ant-steps-item-finish .ant-steps-item-icon {
-        background-color: #106EBE;
+        background-color: #004DB8;
     }
 
     .anticon {
@@ -134,7 +146,7 @@
     }
 
     .ant-steps .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-tail::after{
-        border: 1px solid #106EBE;
+        border: 1px solid #004db8;
     }
 
 
@@ -147,11 +159,11 @@
     }
 
     .ant-steps .ant-steps-item-process>.ant-steps-item-container>.ant-steps-item-content>.ant-steps-item-title{
-        color: #106EBE;
+        color: #004DB8;
     }
     
     .ant-steps .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-content>.ant-steps-item-title{
-        color: #106EBE;
+        color: #004DB8;
         opacity: 0.4;
     }
 
@@ -174,6 +186,7 @@
     width:150px;
 }
 
+
 :global {
     #workbenchPageContent,
     .CanvasComponent.LCS .CanvasZone {
@@ -194,8 +207,8 @@
     font-size: 14px;
     color: #605E5C;
     margin:0px;
+    padding-bottom: 8px;
 }
-
 :global {
     .icon-131 {
         font-size: 24px;
@@ -224,14 +237,21 @@
     background-color: white;
     border: none;
     font-size: 18px;
+
+    &:hover {
+        background-color: white;
+        color: #FF510F;
+        font-weight: bolder;
+        border:none; 
+    }
 }
 
-.close:hover {
-    background-color: white;
-    color: #FF510F;
-    font-weight: bolder;
-    border:none;
-}
+// .close:hover {
+//     background-color: white;
+//     color: #FF510F;
+//     font-weight: bolder;
+//     border:none;
+// }
 
 .horizontalLine {
     border-bottom: 1px solid #605E5C;
@@ -256,10 +276,169 @@
 }
 
 .previousbtn {
-    background-color: lightgray;
-    color: #106EBE
+    display:flex;
+    justify-content: center;
+    background: #c0c0cc!important;
+    color:#004DB8;
+    width: 250px;
+    font-size: 14px;
 }
+
 
 .modalContent {
     font-size: 16px;
+}
+
+
+.choiceCard {
+    box-shadow: 2px ;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.choiceCardBorder {
+   border: 1px solid #004DB8;
+   border-radius: 5px;
+}
+
+  
+  .cardHeading {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    background-color: #004DB8;
+    padding: 10px;
+    height: 40px;
+    color: white; 
+    font-weight: bold; 
+  }
+
+  .cardHeading2 {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    background-color:#02A0FF;
+    padding: 10px;
+    height: 40px;
+    font-weight: bold; 
+}
+
+
+.cardBody {
+    padding: 20px;
+    height: 150px;
+    border-bottom: 1px solid #c0c0cc;
+    border-right: 1px solid #c0c0cc; 
+    border-left: 1px solid #c0c0cc;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.inviteContainer{
+    display:flex;
+    flex-direction: column;
+    align-items: 'center';
+    border: 1px solid gray;
+    border-radius: 8px;
+    margin-top:20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 30px;
+}
+
+.magnifyingIcon {
+    color:#004DB8;
+    font-size: 36px;
+    margin-right:30px;
+}
+
+
+.btmSpace {
+    padding-bottom: 18px;
+}
+
+:global{
+    .ms-Label::before {
+        content: "*";
+        display: inline-block;
+        margin-right: 4px;
+        margin-left: -10px;
+        font-size: 16px;
+        color: red; 
+    }
+    .ms-Label::after {
+        display: none;
+    }
+}
+
+.largebtn {
+    width: 250px;
+}
+
+.btmSpace {
+    padding-bottom: 18px;
+}
+
+
+:global {
+     .ms-Label::before {
+        content: "*";
+        display: inline-block;
+        margin-right: 4px;
+        font-size: 16px;
+        color: red
+     }
+     .ms-Label::after{
+        display: none;
+     }
+}
+
+.largebtn {
+    width: 250px;
+}
+
+:global {
+    .ms-Checkbox.is-enabled .ms-Checkbox-checkbox {
+        background-color: white;
+    }
+
+    .ms-Checkbox.is-enabled .ms-Checkbox-checkbox:hover {
+        background-color: white;
+        border: 2px solid #004DB8;
+    }
+
+    .ms-Checkbox-checkmark{
+        font-weight: bold;
+    }
+}
+
+
+.mainTitle {
+    font-size: large!important;
+    margin-bottom: 0px;
+    opacity: 0.8;
+}
+
+:global {
+    .ms-ChoiceField {
+        margin-right: 50px;
+    }
+    
+    
+}
+
+.checkedRadioButton1 {
+    border: 2px solid rgb(0, 77, 184) ;
+    border-radius: 8px;
+}
+
+.checkedRadioButton2 {
+    border: 2px solid rgb(0, 77, 184,0.6);
+    border-radius: 8px;
 }
