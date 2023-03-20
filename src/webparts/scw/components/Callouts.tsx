@@ -32,8 +32,33 @@ export default class Callouts extends React.Component< ICalloutsProps > {
     if ( targetId === 'commPurpose') {
       message = `${this.strings.CommPurpose}`
     }
+    else if (targetId === 'Engname') {
+      message = `${this.strings.engName_desc} <br/> ${this.strings.engName_Instruction}`
+    }
+    else if (targetId === 'FrCommName') {
+      message = `${this.strings.frCommName_desc}`
+    }
+    else if (targetId === 'Short English description') {
+      message = `${this.strings.shEngDesc_desc}`
+    }
+    else if (targetId === 'Community classification') {
+      message = `${this.strings.community_classification_desc}`
+    }
 
     return message
+  }
+
+  private getTitles = () : string => {
+    const {targetId} = this.props;
+    let title = '';
+
+    if ( targetId === 'commPurpose'){
+      title = `${this.strings.engName_title}`
+    }
+
+    
+
+    return title
   }
 
   
@@ -42,6 +67,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
     console.log("Props", this.props.targetId);
   
    const message = parse(this.messageText());
+   
   
   const calloutStyle = {
     root: {
@@ -97,7 +123,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
           >
             <div className={stylesCallout.heading}>
               <Stack horizontal horizontalAlign="space-between" verticalAlign="center" className={ stylesCallout.title }>
-                <Text>{this.props.targetId}</Text>
+                <Text>{this.getTitles}</Text>
                 <IconButton
                   className={ styles.cancelIcon }
                   iconProps={{ iconName: "Cancel" }}

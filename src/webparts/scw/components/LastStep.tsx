@@ -129,20 +129,32 @@ export default class LastStep extends React.Component<ILastStepProps> {
 
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='name'required >English community name</Label>
-                    <IconButton id='engName' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
+                    <IconButton id='Engname' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='name' defaultValue={ engName }  onChange={ this.onUpdateEngName } onGetErrorMessage={ this.getErrorMessage }  />  
 
-                <Label htmlFor='FrCommName' required >French community name</Label>
+                <Stack horizontal verticalAlign='end'>
+                    <Label htmlFor='FrCommName' required >French community name</Label>
+                    <IconButton id='french community name' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
+                </Stack>
                 <TextField id='FrCommName' defaultValue={ frCommName } onChange={ this.onUpdateFrName } onGetErrorMessage={ this.getErrorMessage }/>
 
-                <Label htmlFor='shEngDesc'required >English description</Label>
+                <Stack horizontal verticalAlign='end'>
+                    <Label htmlFor='shEngDesc'required >English description</Label>
+                    <IconButton id='Short English description' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
+                </Stack>
                 <TextField id='shEngDesc' defaultValue={ shEngDesc } onChange={ this.onUpdateEngDesc } onGetErrorMessage={ this.getErrorMessage }/>
 
-                <Label htmlFor='shFrDesc'required >French description</Label>
+                <Stack horizontal verticalAlign='end'>
+                    <Label htmlFor='shFrDesc'required >French description</Label>
+                    <IconButton id='Short French description' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
+                </Stack>
                 <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } onGetErrorMessage={ this.getErrorMessage }/>
 
-                <Label htmlFor='classification'required >Community classification</Label>
+                <Stack horizontal verticalAlign='end'>
+                    <Label htmlFor='classification'required >Community classification</Label>
+                    <IconButton id='Community classification' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
+                </Stack>
                 <TextField style={{ background:'#eaeaea'}} id='calssification' value={selectedChoice}/>
 
                 <AddUsers context={ context } ownerList={ ownerList } memberList={ memberList } getOwnersCallback={ this.updateDefaultOwnerValues }  
