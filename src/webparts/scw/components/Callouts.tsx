@@ -30,33 +30,51 @@ export default class Callouts extends React.Component< ICalloutsProps > {
     let message: any = '';
 
     if ( targetId === 'commPurpose') {
-      message = `${this.strings.CommPurpose}`
+      message = `${ this.strings.commPurpose_desc } <br/> ${ this.strings.commPurpose_Instruction}`
     }
     else if (targetId === 'Engname') {
-      message = `${this.strings.engName_desc} <br/> ${this.strings.engName_Instruction}`
+      message = `${ this.strings.engName_desc } <br/> ${ this.strings.engName_Instruction }`
     }
     else if (targetId === 'FrCommName') {
-      message = `${this.strings.frCommName_desc}`
+      message = `${ this.strings.frCommName_desc } <br/> ${ this.strings.frCommName_Instruction}`
     }
-    else if (targetId === 'Short English description') {
-      message = `${this.strings.shEngDesc_desc}`
+    else if (targetId === 'shEngDesc') {
+      message = `${ this.strings.shEngDesc_desc } <br/> ${ this.strings.shEngDesc_Instruction}` 
     }
-    else if (targetId === 'Community classification') {
-      message = `${this.strings.community_classification_desc}`
+    else if (targetId === 'shFrDesc' ){
+      message = `${ this.strings.shFrDesc_desc } <br/> ${ this.strings.shFrDesc_Instruction}`
+    }
+    else if (targetId === 'classification') {
+      message = `${ this.strings.community_classification_desc } <p style={{ color: 'blue!important'}}><u>${this.strings.community_classification_link} </u></p>`
     }
 
     return message
   }
 
   private getTitles = () : string => {
-    const {targetId} = this.props;
-    let title = '';
+    const { targetId } = this.props;
 
-    if ( targetId === 'commPurpose'){
-      title = `${this.strings.engName_title}`
+    let title:string = '';
+
+
+    if ( targetId === 'commPurpose')  {
+      title = `${ this.strings.commPurpose_title }`
     }
-
-    
+    else if ( targetId === 'Engname' ) {
+      title = `${ this.strings.engName_title }`
+    }
+    else if ( targetId === 'FrCommName' ) {
+      title = `${ this.strings.frCommName_title }`
+    }
+    else if ( targetId === 'shEngDesc' ) {
+      title = `${ this.strings.shEngDesc_title }`
+    }
+    else if ( targetId === 'shFrDesc' ) {
+      title = `${ this.strings.shFrDesc_title }`
+    }
+    else if ( targetId === 'classification' ) {
+      title = ` ${ this.strings.community_classification}`
+    }
 
     return title
   }
@@ -64,14 +82,14 @@ export default class Callouts extends React.Component< ICalloutsProps > {
   
   public render(): React.ReactElement<ICalloutsProps> {
 
-    console.log("Props", this.props.targetId);
+    console.log("Props", this.getTitles());
   
    const message = parse(this.messageText());
    
   
   const calloutStyle = {
     root: {
-      width: '500px',
+      width: '40%',
       height: '100px',
       border: '1px solid #c0c0cc',
       borderRadius: '5px',
@@ -85,14 +103,14 @@ export default class Callouts extends React.Component< ICalloutsProps > {
   const stylesCallout = mergeStyleSets({
 
     heading: {
-      height: '50px',
-      padding: '10px'
+      height: '50px'
     },
     body: {
-      height: '50px',
+      height: 'auto',
       padding: '10px'
     },
     title: {
+      padding: '10px',
       color: 'white',
       marginBottom: 12,
       fontWeight: 'normal',
@@ -102,7 +120,6 @@ export default class Callouts extends React.Component< ICalloutsProps > {
       padding:'10px',
       display: 'flex',
       justifyContent: 'flex-end',
-      marginTop: 20,
     },
   });
 
@@ -113,17 +130,18 @@ export default class Callouts extends React.Component< ICalloutsProps > {
 
           <FocusTrapCallout
             role="alertdialog"
-            target={ `#${this.props.targetId}` }
+            target={ `#${ this.props.targetId}` }
             isBeakVisible={ true }
             beakWidth={ 10 }
             styles={ calloutStyle }
             directionalHint={ DirectionalHint.rightCenter }
             gapSpace={ 10 }
+            setInitialFocus
             
           >
             <div className={stylesCallout.heading}>
               <Stack horizontal horizontalAlign="space-between" verticalAlign="center" className={ stylesCallout.title }>
-                <Text>{this.getTitles}</Text>
+                <Text>{ this.getTitles() }</Text>
                 <IconButton
                   className={ styles.cancelIcon }
                   iconProps={{ iconName: "Cancel" }}
@@ -132,7 +150,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
               </Stack>
             </div>
             <div className={stylesCallout.body}>
-            <Text>{message}</Text>
+            <Text>{message }</Text>
             </div>
             
             <FocusZone>

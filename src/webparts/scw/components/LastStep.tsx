@@ -21,6 +21,7 @@ export interface ILastStepProps {
     selectedChoice: string;
     showCallout: boolean;
     targetId: string;
+    prefLang: string;
     commPurposeCallback?: (commPurpose: string) => void;
     handleEngNameCallback?: (engNameValue: string ) => void;
     frNameCallBack?:(frNameValue: string)=> void;
@@ -106,7 +107,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
     
     public render(): React.ReactElement<ILastStepProps> {
 
-        const { ownerList, memberList, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, context } = this.props
+        const { ownerList, memberList, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, context, prefLang } = this.props
         const infoIcon: IIconProps = { iconName: 'UnknownSolid' }; 
 
         const iconStyles: IButtonStyles = {
@@ -135,30 +136,31 @@ export default class LastStep extends React.Component<ILastStepProps> {
 
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='FrCommName' required >French community name</Label>
-                    <IconButton id='french community name' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
+                    <IconButton id='FrCommName' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='FrCommName' defaultValue={ frCommName } onChange={ this.onUpdateFrName } onGetErrorMessage={ this.getErrorMessage }/>
 
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='shEngDesc'required >English description</Label>
-                    <IconButton id='Short English description' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
+                    <IconButton id='shEngDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='shEngDesc' defaultValue={ shEngDesc } onChange={ this.onUpdateEngDesc } onGetErrorMessage={ this.getErrorMessage }/>
 
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='shFrDesc'required >French description</Label>
-                    <IconButton id='Short French description' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
+                    <IconButton id='shFrDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } onGetErrorMessage={ this.getErrorMessage }/>
 
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='classification'required >Community classification</Label>
-                    <IconButton id='Community classification' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
+                    <IconButton id='classification' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
-                <TextField style={{ background:'#eaeaea'}} id='calssification' value={selectedChoice}/>
+                <TextField style={{ background:'#eaeaea'}} id='classification' value={selectedChoice}/>
 
-                <AddUsers context={ context } ownerList={ ownerList } memberList={ memberList } getOwnersCallback={ this.updateDefaultOwnerValues }  
-                getMemberCallback={ this.updateDefaultMemberValues }  />
+                <AddUsers prefLang={prefLang} context={ context } ownerList={ ownerList } memberList={ memberList } getOwnersCallback={ this.updateDefaultOwnerValues }  
+                getMemberCallback={ this.updateDefaultMemberValues } /> 
+                
 
             </>
         );

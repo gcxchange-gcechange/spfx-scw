@@ -1,17 +1,21 @@
 import { WebPartContext } from "@microsoft/sp-webpart-base";
 import { PeoplePicker, PrincipalType } from "@pnp/spfx-controls-react/lib/PeoplePicker";
+import { DirectionalHint } from "office-ui-fabric-react";
 import * as React from "react";
+import { SelectLanguage } from './SelectLanguage';
 
 
 export interface IAddUsersProps {
     context: WebPartContext;
     ownerList: string[];
     memberList: string[];
+    prefLang: string;
     getOwnersCallback?: (item: []) => void;
     getMemberCallback?: (item: []) => void;
 }
 
 export default class AUsers extends React.Component<IAddUsersProps> {
+    public strings = SelectLanguage(this.props.prefLang);
 
     constructor(props: IAddUsersProps) {
         super(props);
@@ -41,6 +45,7 @@ public _getOwnerItems = (items: []):void => {
         return(
 
             <> 
+                
                 <PeoplePicker
                     context={this.props.context}
                     titleText="Invite Owners"
@@ -52,7 +57,11 @@ public _getOwnerItems = (items: []):void => {
                     showHiddenInUI={false}
                     resolveDelay={1000}
                     defaultSelectedUsers = {this.props.ownerList}
+                    showtooltip={true}
+                    tooltipMessage={ `${this.strings.owners_Instruction}`}
+                    tooltipDirectional = { DirectionalHint.rightCenter}
                 />
+
 
                 <PeoplePicker
                     context={this.props.context}
@@ -64,6 +73,9 @@ public _getOwnerItems = (items: []):void => {
                     showHiddenInUI={false}
                     resolveDelay={1000}
                     defaultSelectedUsers = {this.props.memberList} 
+                    showtooltip={true}
+                    tooltipMessage={ `${this.strings.owners_Instruction}`}
+                    tooltipDirectional = { DirectionalHint.rightCenter}
                 />
             </>
         );

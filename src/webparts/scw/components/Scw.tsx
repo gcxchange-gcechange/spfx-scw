@@ -409,6 +409,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             title: "Owners & Members",
             content: (
               <FourthStep
+                prefLang={this.props.prefLang}
                 context= { this.props.context }
                 ownerList= { ownerList }
                 memberList= { memberList }
@@ -422,6 +423,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             title: "Review & Submit",
             content: (
               <LastStep
+                prefLang={this.props.prefLang}
                 engName= { engName }
                 commPurpose= { commPurpose }
                 frCommName= { frCommName }
