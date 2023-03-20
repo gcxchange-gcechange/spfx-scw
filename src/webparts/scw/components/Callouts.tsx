@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
 import styles from "./Scw.module.scss";
 import { DirectionalHint, FocusTrapCallout, FocusZone, IconButton, mergeStyleSets, PrimaryButton, Stack, Text } from 'office-ui-fabric-react';
@@ -9,6 +10,7 @@ import parse from 'html-react-parser';
 export interface ICalloutsProps {
   showCallout: boolean;
   prefLang: string;
+  targetId: string;
   openCallout?: ()=> void;
 
 }
@@ -22,11 +24,24 @@ export default class Callouts extends React.Component< ICalloutsProps > {
     super(props);
   }
 
+  private messageText = () : string => {
+    const { targetId } = this.props;
 
+    let message: any = '';
+
+    if ( targetId === 'commPurpose') {
+      message = `${this.strings.CommPurpose}`
+    }
+
+    return message
+  }
 
   
   public render(): React.ReactElement<ICalloutsProps> {
-    
+
+    console.log("Props", this.props.targetId);
+  
+   const message = parse(this.messageText());
   
   const calloutStyle = {
     root: {
@@ -72,7 +87,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
 
           <FocusTrapCallout
             role="alertdialog"
-            target={ `#callout-button` }
+            target={ `#${this.props.targetId}` }
             isBeakVisible={ true }
             beakWidth={ 10 }
             styles={ calloutStyle }
@@ -82,7 +97,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
           >
             <div className={stylesCallout.heading}>
               <Stack horizontal horizontalAlign="space-between" verticalAlign="center" className={ stylesCallout.title }>
-                <Text>Title</Text>
+                <Text>{this.props.targetId}</Text>
                 <IconButton
                   className={ styles.cancelIcon }
                   iconProps={{ iconName: "Cancel" }}
@@ -91,7 +106,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
               </Stack>
             </div>
             <div className={stylesCallout.body}>
-            <Text>{parse(this.strings.CommPurpose) }</Text>
+            <Text>{message}</Text>
             </div>
             
             <FocusZone>

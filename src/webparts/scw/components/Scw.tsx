@@ -37,6 +37,7 @@ export interface IScwState  {
     showModal: boolean;
     checkedValues: boolean[];
     showCallout: boolean;
+    targetId: string;
    
     
 }
@@ -64,7 +65,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             errorMessage: '',
             showModal: false,
             checkedValues: [],
-            showCallout: false
+            showCallout: false,
+            targetId: ''
             
         };
 
@@ -341,10 +343,24 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
      
     public isCalloutVisible = ():void => {
+
         this.setState(prevState => ({
-            showCallout: !prevState.showCallout
+            showCallout: !prevState.showCallout,
+           
         }))
+       
     }
+
+    public getElementId = (id: string): void => {
+        
+
+        this.setState({
+            targetId: id
+        })
+        console.log("ID", id)
+    }
+
+
 
 
 
@@ -352,7 +368,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     
     public render(): React.ReactElement<IScwProps>  { 
 
-        const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, memberList, errorMessage, showModal, checkedValues, showCallout } = this.state;
+        const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, memberList, errorMessage, showModal, checkedValues, showCallout, targetId } = this.state;
 
         const steps = [
      
@@ -416,6 +432,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 memberList= { memberList }
                 context= { this.props.context }
                 showCallout = { showCallout}
+                targetId = { targetId }
                 commPurposeCallback={ this.commPurposeCallback }
                 handleEngNameCallback= { this.handleEngNameCallback }
                 frNameCallBack= { this.frNameCallback }
@@ -424,7 +441,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 handleFrDescCallback= { this.frDescCallback }
                 handleEngDescCallback= { this.engDescCallback }
                 isCalloutVisible ={ this.isCalloutVisible }
-
+                getElementId={this.getElementId}
               />
             ),
           },
@@ -433,7 +450,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         const items = steps.map( item => ( item.title !== '0' ?  { key: item.step, title: item.title} : null));
 
-        console.log("page", this.state.current);
+        console.log("id", this.state.targetId);
         return (
             <div className= { styles.scw }>
                 <Title current={ current } step={ step } prefLang={this.props.prefLang} />
@@ -452,7 +469,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                         <div className="steps-content"> { steps[ this.state.current ].content }</div>
                         <div className="steps-action">
                             <Stack horizontal horizontalAlign='space-between'>
-                                {  showCallout && <Callouts prefLang={ this.props.prefLang }showCallout={showCallout} openCallout = {this.isCalloutVisible} /> }
+                                {  showCallout && <Callouts prefLang={ this.props.prefLang } showCallout={showCallout}  targetId= { targetId } openCallout = {this.isCalloutVisible} /> }
                                 { this.state.current === 0 &&   <Button className={ styles.previousbtn }  onClick= { () => this.goToInitalPage() } > Previous </Button> }
                                 { this.state.showModal === true && <ErrorModal current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } selectedChoice={ selectedChoice } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } /> } 
                                 { this.state.current > 0 && (<Button className={styles.previousbtn} style={{ display: 'inline-block', overflow: 'visible', whiteSpace: 'break-spaces', height:'auto'}}  onClick= { () => this.prev() } > { this.state.current === 2 && selectedChoice === `Protected A or B community`?  `${ this.strings.unclassified_button }` : `Previous` } </Button> ) }

@@ -20,6 +20,7 @@ export interface ILastStepProps {
     shFrDesc: string;
     selectedChoice: string;
     showCallout: boolean;
+    targetId: string;
     commPurposeCallback?: (commPurpose: string) => void;
     handleEngNameCallback?: (engNameValue: string ) => void;
     frNameCallBack?:(frNameValue: string)=> void;
@@ -28,6 +29,8 @@ export interface ILastStepProps {
     getOwnersCallback?: (item: []) => void;
     getMemberCallback?: (item: []) => void;
     isCalloutVisible?: ()=> void;  
+    getElementId?: (id: string) => void;
+
 
   }
 
@@ -82,10 +85,19 @@ export default class LastStep extends React.Component<ILastStepProps> {
      
      }
 
-    private showCalloutVisible = (event: any):void => {
-        console.log("Event ID", event.target.id);
-        this.props.isCalloutVisible()
+    public showCalloutVisible = ( event:any ):void => {
+        
+        const id = event.currentTarget.id;
+
+
+        this.props.isCalloutVisible();
+        this.elementId(id)
     }
+
+    public elementId = (id: string ):void => {
+        this.props.getElementId(id)
+    }
+
 
 
    
@@ -110,14 +122,14 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 <p>Review that the information below is accurate, or edit them </p>
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='commPurpose' required >Community purpose </Label>
-                    <IconButton id={ 'commPurpose' } styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
+                    <IconButton id='commPurpose' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={ this.onUpdateCommPurpose }  onGetErrorMessage={ this.getErrorMessage } /> 
                 
 
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='name'required >English community name</Label>
-                    <IconButton id={ 'callout-button' } styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
+                    <IconButton id='engName' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='name' defaultValue={ engName }  onChange={ this.onUpdateEngName } onGetErrorMessage={ this.getErrorMessage }  />  
 
