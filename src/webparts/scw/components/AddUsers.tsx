@@ -1,12 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { WebPartContext } from "@microsoft/sp-webpart-base";
 import { PeoplePicker, PrincipalType } from "@pnp/spfx-controls-react/lib/PeoplePicker";
-import { DirectionalHint, IButtonStyles, IIconProps, Stack } from "office-ui-fabric-react";
+import { DirectionalHint } from "office-ui-fabric-react";
 import * as React from "react";
 import { SelectLanguage } from './SelectLanguage';
-// import parse from 'html-react-parser';
-import { Label } from '@fluentui/react/lib/Label';
-import { IconButton } from '@fluentui/react/lib/Button';
+
 
 
 export interface IAddUsersProps {

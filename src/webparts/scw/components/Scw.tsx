@@ -360,18 +360,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         console.log("ID", id)
     }
 
-    public handleIconButtonClick = ():void => {
-        this.setState(prevState => ({
-            showCallout: !prevState.showCallout,
-           
-        }))
-
-        console.log("callOut", this.state.showCallout)
-    }
-
-
-
-
 
 
     
@@ -455,7 +443,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 handleEngDescCallback= { this.engDescCallback }
                 isCalloutVisible ={ this.isCalloutVisible }
                 getElementId={this.getElementId}
-                handleButtonClick = { this.handleIconButtonClick}
 
                 
               />
@@ -483,9 +470,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     <div className= { styles.row }> 
                         <Steps current= { this.state.current } labelPlacement='vertical' items= { items } />
                         <div className="steps-content"> { steps[ this.state.current ].content }</div>
+                        {  showCallout && <Callouts prefLang={ this.props.prefLang } showCallout={showCallout}  targetId= { targetId } openCallout = {this.isCalloutVisible} /> }
                         <div className="steps-action">
                             <Stack horizontal horizontalAlign='space-between'>
-                                {  showCallout && <Callouts prefLang={ this.props.prefLang } showCallout={showCallout}  targetId= { targetId } openCallout = {this.isCalloutVisible} /> }
                                 { this.state.current === 0 &&   <Button className={ styles.previousbtn }  onClick= { () => this.goToInitalPage() } > Previous </Button> }
                                 { this.state.showModal === true && <ErrorModal current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } selectedChoice={ selectedChoice } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } /> } 
                                 { this.state.current > 0 && (<Button className={styles.previousbtn} style={{ display: 'inline-block', overflow: 'visible', whiteSpace: 'break-spaces', height:'auto'}}  onClick= { () => this.prev() } > { this.state.current === 2 && selectedChoice === `Protected A or B community`?  `${ this.strings.unclassified_button }` : `Previous` } </Button> ) }

@@ -131,7 +131,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
 
         const iconStyles: IButtonStyles = {
             root: {
-                paddingTop: '10px'
+                paddingTop: '10px',
             }
         }
 
@@ -180,6 +180,8 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 {/* <AddUsers current = { current } prefLang={prefLang} context={ context } ownerList={ ownerList } memberList={ memberList } getOwnersCallback={ this.updateDefaultOwnerValues }  
                 getMemberCallback={ this.updateDefaultMemberValues } getElementId={this.elementId} handleButtonClick={this.props.isCalloutVisible } /> 
                  */}
+
+
 
                 <Stack horizontal verticalAlign ="end">
                     <Label>Invite Owners</Label>

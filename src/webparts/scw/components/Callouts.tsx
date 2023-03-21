@@ -88,6 +88,8 @@ export default class Callouts extends React.Component< ICalloutsProps > {
     return title
   }
 
+
+
   
   public render(): React.ReactElement<ICalloutsProps> {
 
@@ -99,12 +101,13 @@ export default class Callouts extends React.Component< ICalloutsProps > {
   const calloutStyle = {
     root: {
       width: '41%',
-      height: '100px',
+      height: 'auto',
       border: '1px solid #c0c0cc',
       borderRadius: '5px',
       
     },
     beak: {
+      top: '25px',
       backgroundColor:  "#106EBE"
     }
   }
@@ -138,14 +141,16 @@ export default class Callouts extends React.Component< ICalloutsProps > {
         <div>
 
           <FocusTrapCallout
-            role="alertdialog"
+            role="dialog"
             target={ `#${ this.props.targetId}` }
             isBeakVisible={ true }
             beakWidth={ 10 }
             styles={ calloutStyle }
-            directionalHint={ DirectionalHint.rightCenter }
+            directionalHint={ DirectionalHint.rightTopEdge }
             gapSpace={ 10 }
-            setInitialFocus
+            setInitialFocus = {true}
+            onDismiss = { this.props.openCallout}
+
             
           >
             <div className={stylesCallout.heading}>
