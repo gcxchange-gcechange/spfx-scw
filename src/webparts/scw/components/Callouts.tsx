@@ -18,7 +18,7 @@ export interface ICalloutsProps {
 
 
 export default class Callouts extends React.Component< ICalloutsProps > {
-  public strings = SelectLanguage(this.props.prefLang);
+  public strings = SelectLanguage( this.props.prefLang);
 
   public constructor( props: ICalloutsProps ) {
     super(props);
@@ -29,23 +29,26 @@ export default class Callouts extends React.Component< ICalloutsProps > {
 
     let message: any = '';
 
-    if ( targetId === 'commPurpose') {
+    if ( targetId === 'commPurpose' ) {
       message = `${ this.strings.commPurpose_desc } <br/> ${ this.strings.commPurpose_Instruction}`
     }
-    else if (targetId === 'Engname') {
+    else if ( targetId === 'Engname' ) {
       message = `${ this.strings.engName_desc } <br/> ${ this.strings.engName_Instruction }`
     }
-    else if (targetId === 'FrCommName') {
+    else if ( targetId === 'FrCommName' ) {
       message = `${ this.strings.frCommName_desc } <br/> ${ this.strings.frCommName_Instruction}`
     }
-    else if (targetId === 'shEngDesc') {
+    else if ( targetId === 'shEngDesc' ) {
       message = `${ this.strings.shEngDesc_desc } <br/> ${ this.strings.shEngDesc_Instruction}` 
     }
-    else if (targetId === 'shFrDesc' ){
+    else if ( targetId === 'shFrDesc' ) {
       message = `${ this.strings.shFrDesc_desc } <br/> ${ this.strings.shFrDesc_Instruction}`
     }
-    else if (targetId === 'classification') {
-      message = `${ this.strings.community_classification_desc } <p style={{ color: 'blue!important'}}><u>${this.strings.community_classification_link} </u></p>`
+    else if ( targetId === 'classification' ) {
+      message = `${ this.strings.community_classification_desc } <br/><p><u>${this.strings.community_classification_link} </u></p>`
+    }
+    else if ( targetId === 'owners' || targetId === 'members') {
+      message = `${this.strings.owners_Instruction}`
     }
 
     return message
@@ -57,7 +60,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
     let title:string = '';
 
 
-    if ( targetId === 'commPurpose')  {
+    if ( targetId === 'commPurpose' )  {
       title = `${ this.strings.commPurpose_title }`
     }
     else if ( targetId === 'Engname' ) {
@@ -75,6 +78,12 @@ export default class Callouts extends React.Component< ICalloutsProps > {
     else if ( targetId === 'classification' ) {
       title = ` ${ this.strings.community_classification}`
     }
+    else if ( targetId === 'owners' ) {
+      title = `Owners`
+    }
+    else if ( targetId === 'members' ) {
+      title = `Members`
+    }
 
     return title
   }
@@ -84,12 +93,12 @@ export default class Callouts extends React.Component< ICalloutsProps > {
 
     console.log("Props", this.getTitles());
   
-   const message = parse(this.messageText());
+   const message = parse( this.messageText());
    
   
   const calloutStyle = {
     root: {
-      width: '40%',
+      width: '41%',
       height: '100px',
       border: '1px solid #c0c0cc',
       borderRadius: '5px',

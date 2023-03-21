@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/no-unescaped-entities */
 import * as React from 'react';
 import { WebPartContext } from '@microsoft/sp-webpart-base';
@@ -11,12 +12,14 @@ import { SelectLanguage } from './SelectLanguage';
 
 
 export interface IFourthStepProps  {
+    current: number;
     context: WebPartContext;
     ownerList: string[];
     memberList: string[];
     prefLang: string;
     getOwnersCallback?: (item: []) => void;
     getMemberCallback?: (item: []) => void;
+
  }
 
  export interface IPerson {
@@ -53,6 +56,7 @@ export default class FourthStep extends React.Component<IFourthStepProps> {
         this.props.getMemberCallback(items)
     }
 
+    
       
     
 
@@ -88,6 +92,7 @@ export default class FourthStep extends React.Component<IFourthStepProps> {
                 to do this once your community has been created. Please note, users <strong>cannot</strong> request to join a protected community, so it is up to the owner to make sure they have invited all members.</p>
                 
                 <AddUsers 
+                current = { this.props.current }
                 prefLang={this.props.prefLang}
                 context={this.props.context} 
                 ownerList={this.props.ownerList}

@@ -39,6 +39,6 @@ define([], function() {
     "owners_Instruction": 'Start typing an owner’s last name to find and add them.',
     "members_Instruction": 'Start typing an owner’s last name to find and add them.',
     "community_classification_desc": "To change the classification of your community, you need to go back to the Community classification page, and read the terms of use.",
-    "community_classification_link": "Go to the Community classification page "
+    "community_classification_link": "Go to the <i>Community classification</i> page "
   }
 })

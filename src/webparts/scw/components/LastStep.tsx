@@ -3,7 +3,8 @@
 import * as React from 'react';
 import { IButtonStyles, IconButton, IIconProps, Label, Stack, TextField  } from 'office-ui-fabric-react';
 import {  WebPartContext  } from '@microsoft/sp-webpart-base';
-import AddUsers from './AddUsers';
+// import AddUsers from './AddUsers';
+import { PeoplePicker, PrincipalType } from '@pnp/spfx-controls-react/lib/PeoplePicker';
 
 
 
@@ -22,6 +23,7 @@ export interface ILastStepProps {
     showCallout: boolean;
     targetId: string;
     prefLang: string;
+    current: number;
     commPurposeCallback?: (commPurpose: string) => void;
     handleEngNameCallback?: (engNameValue: string ) => void;
     frNameCallBack?:(frNameValue: string)=> void;
@@ -31,6 +33,8 @@ export interface ILastStepProps {
     getMemberCallback?: (item: []) => void;
     isCalloutVisible?: ()=> void;  
     getElementId?: (id: string) => void;
+    handleButtonClick?: () => void;
+
 
 
   }
@@ -70,21 +74,21 @@ export default class LastStep extends React.Component<ILastStepProps> {
         this.props.handleFrDescCallback(updateFrDesc)    
      }
 
-    private updateDefaultOwnerValues = ( username: []):void  => {
-        const newValues = username;
+    // private updateDefaultOwnerValues = ( username: []):void  => {
+    //     const newValues = username;
 
-        this.props.getOwnersCallback(newValues)
+    //     this.props.getOwnersCallback(newValues)
      
-     }
+    //  }
 
-    private updateDefaultMemberValues = ( items: []):void  => {
-        const newValues = items;
+    // private updateDefaultMemberValues = ( items: []):void  => {
+    //     const newValues = items;
 
-        // this.setState({ memberList: newValues })
+    //     // this.setState({ memberList: newValues })
 
-        this.props.getMemberCallback(newValues)
+    //     this.props.getMemberCallback(newValues)
      
-     }
+    //  }
 
     public showCalloutVisible = ( event:any ):void => {
         
@@ -99,7 +103,21 @@ export default class LastStep extends React.Component<ILastStepProps> {
         this.props.getElementId(id)
     }
 
+    public _getOwnerItems = ( items: []):void  => {   
+        this.setState({
+            ownerList: items
+        });
+   
+        this.props.getOwnersCallback( items );//pass to parent
+    };
 
+  
+    public _getMemberItems = ( items: [] ):void  => {
+        this.setState({    
+            memberList: items
+        });
+        this.props.getMemberCallback( items );//pass to parent
+    };
 
    
 
@@ -107,7 +125,8 @@ export default class LastStep extends React.Component<ILastStepProps> {
     
     public render(): React.ReactElement<ILastStepProps> {
 
-        const { ownerList, memberList, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, context, prefLang } = this.props
+        // const { ownerList, memberList, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, context, prefLang, current } = this.props
+        const { engName, frCommName, shEngDesc, shFrDesc, selectedChoice } = this.props
         const infoIcon: IIconProps = { iconName: 'UnknownSolid' }; 
 
         const iconStyles: IButtonStyles = {
@@ -158,9 +177,41 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 </Stack>
                 <TextField style={{ background:'#eaeaea'}} id='classification' value={selectedChoice}/>
 
-                <AddUsers prefLang={prefLang} context={ context } ownerList={ ownerList } memberList={ memberList } getOwnersCallback={ this.updateDefaultOwnerValues }  
-                getMemberCallback={ this.updateDefaultMemberValues } /> 
-                
+                {/* <AddUsers current = { current } prefLang={prefLang} context={ context } ownerList={ ownerList } memberList={ memberList } getOwnersCallback={ this.updateDefaultOwnerValues }  
+                getMemberCallback={ this.updateDefaultMemberValues } getElementId={this.elementId} handleButtonClick={this.props.isCalloutVisible } /> 
+                 */}
+
+                <Stack horizontal verticalAlign ="end">
+                    <Label>Invite Owners</Label>
+                    <IconButton id ="owners" styles  = { iconStyles } iconProps = { infoIcon } ariaLabel ="InfoIcon" onClick={this.showCalloutVisible }/>
+                </Stack>
+                <PeoplePicker
+                    context = { this.props.context }
+                    required = { true }
+                    personSelectionLimit = { 3 }
+                    groupName = { "" } // Leave this blank in case you want to filter from all users
+                    onChange = { this._getOwnerItems }
+                    principalTypes = { [ PrincipalType.User ] }
+                    showHiddenInUI = {false }
+                    resolveDelay = {1000}
+                    defaultSelectedUsers  = { this.props.ownerList }
+                />
+
+                <Stack horizontal verticalAlign ="end">
+                    <Label>Invite Members</Label>
+                    <IconButton id ="members" styles  = { iconStyles } iconProps = { infoIcon } ariaLabel ="InfoIcon" onClick={this.showCalloutVisible }/>
+                </Stack>
+                <PeoplePicker
+                    context = { this.props.context }
+                    required = { true }
+                    personSelectionLimit = { 3 }
+                    groupName = { "" } // Leave this blank in case you want to filter from all users
+                    onChange = { this._getMemberItems }
+                    principalTypes = { [ PrincipalType.User ] }
+                    showHiddenInUI = {false }
+                    resolveDelay = {1000}
+                    defaultSelectedUsers  = { this.props.ownerList }
+                />      
 
             </>
         );

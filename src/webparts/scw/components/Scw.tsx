@@ -360,6 +360,15 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         console.log("ID", id)
     }
 
+    public handleIconButtonClick = ():void => {
+        this.setState(prevState => ({
+            showCallout: !prevState.showCallout,
+           
+        }))
+
+        console.log("callOut", this.state.showCallout)
+    }
+
 
 
 
@@ -409,6 +418,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             title: "Owners & Members",
             content: (
               <FourthStep
+                current= { current }
                 prefLang={this.props.prefLang}
                 context= { this.props.context }
                 ownerList= { ownerList }
@@ -423,6 +433,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             title: "Review & Submit",
             content: (
               <LastStep
+                current= { current }
                 prefLang={this.props.prefLang}
                 engName= { engName }
                 commPurpose= { commPurpose }
@@ -444,6 +455,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 handleEngDescCallback= { this.engDescCallback }
                 isCalloutVisible ={ this.isCalloutVisible }
                 getElementId={this.getElementId}
+                handleButtonClick = { this.handleIconButtonClick}
+
+                
               />
             ),
           },
@@ -452,7 +466,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         const items = steps.map( item => ( item.title !== '0' ?  { key: item.step, title: item.title} : null));
 
-        console.log("id", this.state.targetId);
+        console.log("element", this.state.targetId);
         return (
             <div className= { styles.scw }>
                 <Title current={ current } step={ step } prefLang={this.props.prefLang} />
