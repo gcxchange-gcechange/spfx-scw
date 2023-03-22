@@ -78,7 +78,6 @@ export default class LastStep extends React.Component<ILastStepProps> {
         
         const id = event.currentTarget.id;
 
-
         this.props.isCalloutVisible();
         this.elementId(id)
     }
@@ -87,20 +86,18 @@ export default class LastStep extends React.Component<ILastStepProps> {
         this.props.getElementId(id)
     }
 
-    public _getOwnerItems = ( items: []):void  => {   
-        this.setState({
-            ownerList: items
-        });
-   
-        this.props.getOwnersCallback( items );//pass to parent
+    public updateDefaultOwnerValues = ( username: []):void  => {   
+        
+        const newValues = username;
+
+        this.props.getOwnersCallback( newValues );//pass to parent
     };
 
   
-    public _getMemberItems = ( items: [] ):void  => {
-        this.setState({    
-            memberList: items
-        });
-        this.props.getMemberCallback( items );//pass to parent
+    public updateDefaultMemberValues = ( items: [] ):void  => { 
+           const newValues = items;
+           
+        this.props.getMemberCallback( newValues );//pass to parent
     };
 
    
@@ -173,7 +170,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     required = { true }
                     personSelectionLimit = { 3 }
                     groupName = { "" } // Leave this blank in case you want to filter from all users
-                    onChange = { this._getOwnerItems }
+                    onChange = { this.updateDefaultOwnerValues }
                     principalTypes = { [ PrincipalType.User ] }
                     showHiddenInUI = {false }
                     resolveDelay = {1000}
@@ -189,11 +186,11 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     required = { true }
                     personSelectionLimit = { 3 }
                     groupName = { "" } // Leave this blank in case you want to filter from all users
-                    onChange = { this._getMemberItems }
+                    onChange = { this.updateDefaultMemberValues }
                     principalTypes = { [ PrincipalType.User ] }
                     showHiddenInUI = {false }
                     resolveDelay = {1000}
-                    defaultSelectedUsers  = { this.props.ownerList }
+                    defaultSelectedUsers  = { this.props.memberList }
                 />      
 
             </>
