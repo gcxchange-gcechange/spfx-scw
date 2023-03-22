@@ -24,6 +24,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
     super(props);
   }
 
+
   private messageText = () : string => {
     const { targetId } = this.props;
 
@@ -45,7 +46,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
       message = `${ this.strings.shFrDesc_desc } <br/> ${ this.strings.shFrDesc_Instruction}`
     }
     else if ( targetId === 'classification' ) {
-      message = `${ this.strings.community_classification_desc } <br/><p><u>${this.strings.community_classification_link} </u></p>`
+      message = `${ this.strings.community_classification_desc } <br/><br/> ${this.strings.community_classification_link}`
     }
     else if ( targetId === 'owners' || targetId === 'members') {
       message = `${this.strings.owners_Instruction}`
@@ -93,7 +94,6 @@ export default class Callouts extends React.Component< ICalloutsProps > {
   
   public render(): React.ReactElement<ICalloutsProps> {
 
-    console.log("Props", this.getTitles());
   
    const message = parse( this.messageText());
    
@@ -122,6 +122,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
       padding: '10px'
     },
     title: {
+      fontSize: '16px',
       padding: '10px',
       color: 'white',
       marginBottom: 12,
@@ -164,7 +165,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
               </Stack>
             </div>
             <div className={stylesCallout.body}>
-            <Text>{message }</Text>
+              <Text>{ message }</Text>
             </div>
             
             <FocusZone>

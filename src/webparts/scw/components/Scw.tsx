@@ -297,7 +297,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         this.setState( { 
             selectedChoice: saveSelectedChoice
         })
-        console.log("callback", selectedChoice);
     } 
 
   
@@ -347,18 +346,17 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         this.setState(prevState => ({
             showCallout: !prevState.showCallout,
            
-        }))
+        }));
        
-    }
+    };
 
     public getElementId = (id: string): void => {
         
 
         this.setState({
             targetId: id
-        })
-        console.log("ID", id)
-    }
+        });
+    };
 
 
 
@@ -406,7 +404,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             title: "Owners & Members",
             content: (
               <FourthStep
-                current= { current }
                 prefLang={this.props.prefLang}
                 context= { this.props.context }
                 ownerList= { ownerList }
@@ -453,7 +450,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         const items = steps.map( item => ( item.title !== '0' ?  { key: item.step, title: item.title} : null));
 
-        console.log("element", this.state.targetId);
         return (
             <div className= { styles.scw }>
                 <Title current={ current } step={ step } prefLang={this.props.prefLang} />

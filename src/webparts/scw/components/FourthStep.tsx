@@ -12,7 +12,6 @@ import { SelectLanguage } from './SelectLanguage';
 
 
 export interface IFourthStepProps  {
-    current: number;
     context: WebPartContext;
     ownerList: string[];
     memberList: string[];
@@ -92,7 +91,6 @@ export default class FourthStep extends React.Component<IFourthStepProps> {
                 to do this once your community has been created. Please note, users <strong>cannot</strong> request to join a protected community, so it is up to the owner to make sure they have invited all members.</p>
                 
                 <AddUsers 
-                current = { this.props.current }
                 prefLang={this.props.prefLang}
                 context={this.props.context} 
                 ownerList={this.props.ownerList}
