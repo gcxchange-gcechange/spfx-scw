@@ -2,20 +2,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import styles from './Scw.module.scss';
-import  { Steps, Button, message} from 'antd';
+import  { Steps, Button } from 'antd';
 import FirstStep from "./FirstStep";
 import  { IScwProps } from './IScwProps';
 import  { Initial } from './InitialPage/Initial';
 import  { PrimaryButton, Stack } from 'office-ui-fabric-react';
 import  { IButtonStyles } from 'office-ui-fabric-react';
 import LastStep from './LastStep';
-import  { MessageType } from 'antd/es/message/interface';
+// import  { MessageType } from 'antd/es/message/interface';
 import ErrorModal from './Modal';
 import FourthStep from './FourthStep';
 import SecondStep from './SecondStep';
 import { SelectLanguage } from './SelectLanguage';
 import ThirdStep from './ThirdStep';
 import Title from './Title';
+import Complete from './Complete';
 
 
 export interface IScwState  { 
@@ -158,7 +159,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     }   
     
     
-    public successMessage = (): MessageType  =>  { 
+    public successMessage = (): any  =>  { 
 
         const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList } = this.state
 
@@ -168,9 +169,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         }
         else {
             return (
-                message.success( { 
-                    content: "loaded!",
-                })
+                <Complete prefLang={this.props.prefLang}/>
+                // message.success( { 
+                //     content: "loaded!",
+                // })
             );
         }
     }
@@ -284,80 +286,89 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, memberList, errorMessage, showModal, checkedValues } = this.state;
 
         const steps = [
-     
-         { 
-            step: "1",
-            title: this.strings.title_details,
-            content: (
-              <FirstStep
-              showModal = {showModal}
-                engName= { engName }
-                commPurpose= { commPurpose }
-                frCommName= { frCommName }
-                shEngDesc= { shEngDesc }
-                shFrDesc= { shFrDesc }
-                errorMessage ={ errorMessage }
-                handleOnChange={this.handleOnChange}
-            
-              />
-            ),
-          },
-         { 
-            step: "2",
-            title: "Classification",
-            content: (
-              <SecondStep
-                selectedChoice= { selectedChoice }
-                handleSelectedChoice= { this.selectedChoiceCallback}
-              />
-            ),
-          },
-         { 
-            step: "3",
-            title: "Terms of use",
-            content: <ThirdStep checkedValues= { checkedValues } checkedTerms = { this.checkedTerms } selectedChoice = { selectedChoice }/>,
-          },
-         { 
-            step: "4",
-            title: "Owners & Members",
-            content: (
-              <FourthStep
-                context= { this.props.context }
-                ownerList= { ownerList }
-                memberList= { memberList }
-                getOwnersCallback= { this.handleOwnerCallback }
-                getMemberCallback= { this.handleMemberCallback }
-              />
-            ),
-          },
-         { 
-            step: "5",
-            title: "Review & Submit",
-            content: (
-              <LastStep
-                engName= { engName }
-                commPurpose= { commPurpose }
-                frCommName= { frCommName }
-                selectedChoice= { selectedChoice }
-                shEngDesc= { shEngDesc }
-                shFrDesc= { shFrDesc }
-                ownerList= { ownerList }
-                memberList= { memberList }
-                context= { this.props.context }
-                commPurposeCallback={ this.commPurposeCallback }
-                handleEngNameCallback= { this.handleEngNameCallback }
-                frNameCallBack= { this.frNameCallback }
-                getOwnersCallback= { this.handleOwnerCallback }
-                getMemberCallback= { this.handleMemberCallback }
-                handleFrDescCallback= { this.frDescCallback }
-                handleEngDescCallback= { this.engDescCallback }
-              />
-            ),
-          },
+        
+            { 
+                step: "1",
+                title: this.strings.title_details,
+                content: (
+                <FirstStep
+                showModal = {showModal}
+                    engName= { engName }
+                    commPurpose= { commPurpose }
+                    frCommName= { frCommName }
+                    shEngDesc= { shEngDesc }
+                    shFrDesc= { shFrDesc }
+                    errorMessage ={ errorMessage }
+                    handleOnChange={this.handleOnChange}
+                
+                />
+                ),
+            },
+            { 
+                step: "2",
+                title: "Classification",
+                content: (
+                <SecondStep
+                    selectedChoice= { selectedChoice }
+                    handleSelectedChoice= { this.selectedChoiceCallback}
+                />
+                ),
+            },
+            { 
+                step: "3",
+                title: "Terms of use",
+                content: <ThirdStep checkedValues= { checkedValues } checkedTerms = { this.checkedTerms } selectedChoice = { selectedChoice }/>,
+            },
+            { 
+                step: "4",
+                title: "Owners & Members",
+                content: (
+                <FourthStep
+                    context= { this.props.context }
+                    ownerList= { ownerList }
+                    memberList= { memberList }
+                    getOwnersCallback= { this.handleOwnerCallback }
+                    getMemberCallback= { this.handleMemberCallback }
+                />
+                ),
+            },
+            { 
+                step: "5",
+                title: "Review & Submit",
+                content: (
+                <LastStep
+                    engName= { engName }
+                    commPurpose= { commPurpose }
+                    frCommName= { frCommName }
+                    selectedChoice= { selectedChoice }
+                    shEngDesc= { shEngDesc }
+                    shFrDesc= { shFrDesc }
+                    ownerList= { ownerList }
+                    memberList= { memberList }
+                    context= { this.props.context }
+                    commPurposeCallback={ this.commPurposeCallback }
+                    handleEngNameCallback= { this.handleEngNameCallback }
+                    frNameCallBack= { this.frNameCallback }
+                    getOwnersCallback= { this.handleOwnerCallback }
+                    getMemberCallback= { this.handleMemberCallback }
+                    handleFrDescCallback= { this.frDescCallback }
+                    handleEngDescCallback= { this.engDescCallback }
+                />
+                ),
+            },
+            {
+                step:"6",
+                title: this.strings.title_complete,
+                content: (
+                    <Complete 
+                        prefLang={this.props.prefLang}
+                    />
+                ),
+            },
         ];
 
 
-        const items = steps.map( item => ( item.title !== '0' ?  { key: item.step, title: item.title} : null));
+        const items = steps.map( item => ( item.title !== '6' ?  { key: item.step, title: item.title} : null));
 
         console.log("page", this.state.current);
         return (

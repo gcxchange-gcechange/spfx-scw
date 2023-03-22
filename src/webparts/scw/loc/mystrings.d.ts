@@ -20,6 +20,13 @@ declare interface IScwWebPartStrings {
   review_submit: string;
   unclassified_button: string;
   CommPurpose: string;
+  title_complete: string;
+  thank_you: string;
+  complete_content: string;
+  complete_img_alt: string;
+  complete_button: string;
+
+  
 }
 
 declare module 'ScwWebPartStrings' {

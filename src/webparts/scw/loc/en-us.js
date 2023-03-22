@@ -21,7 +21,11 @@ define([], function() {
     "invite_owners_members": "Invite owners and members",
     "review_submit":"Review and submit",
     "unclassified_button": "I don't want to store protected documents anymore",
-    "CommPurpose": 'The GCX Support Team needs the purpose of the new community to determine whether it can be <strong>approved</strong>.<br/> This will not show up on your site. Write it in the official language of your choice. Max. 500 characters.'
-
+    "CommPurpose": 'The GCX Support Team needs the purpose of the new community to determine whether it can be <strong>approved</strong>.<br/> This will not show up on your site. Write it in the official language of your choice. Max. 500 characters.',
+    "title_complete": "Complete!",
+    "thank_you": "Thank you for your submission.",
+    "complete_content":"You will receive an email when your community has been created with everything you need to get started! (Within 48 hours Monday to Friday). <p> If you do not receive the email or have any questions, please submit a service request using the <u>GCXchange Support portal</u>.</p>",
+    "complete_img_alt":"Three people celebrating",
+    "complete_button": "GCXchange Homepage",
   }
 });
