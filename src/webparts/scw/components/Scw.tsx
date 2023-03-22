@@ -3,7 +3,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import styles from './Scw.module.scss';
-import  { Steps, Button, message} from 'antd';
+import  { Steps, Button} from 'antd';
+import  { message} from 'antd';
 import FirstStep from "./FirstStep";
 import  { IScwProps } from './IScwProps';
 import  { Initial } from './InitialPage/Initial';
@@ -19,6 +20,7 @@ import ThirdStep from './ThirdStep';
 import { AadHttpClient, HttpClientResponse, IHttpClientOptions } from '@microsoft/sp-http-base';
 import Title from './Title';
 import Complete from './Complete';
+import { Spinner, SpinnerSize } from '@fluentui/react/lib/Spinner';
 
 
 export interface IScwState  { 
@@ -35,6 +37,7 @@ export interface IScwState  {
     errorMessage: string;
     showModal: boolean;
     checkedValues: boolean[];
+    isLoading: boolean;
    
     
 }
@@ -61,7 +64,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             selectedChoice: '',
             errorMessage: '',
             showModal: false,
-            checkedValues: []
+            checkedValues: [],
+            isLoading: false
             
         };
 
@@ -74,7 +78,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
        
         const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, selectedChoice, checkedValues, ownerList } = this.state
 
-        console.log("CommPurpose", commPurpose)
         
        if ( !commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc) {
    
@@ -161,7 +164,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     }   
     
     
-    public successMessage = (): MessageType  =>  { 
+    public successMessage = (): MessageType =>  { 
+       
 
         const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, memberList, selectedChoice } = this.state
 
@@ -170,13 +174,18 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             this.setState({ showModal: true });
         }
         else {
-            const functionUrl = "";
+
+            this.setState({
+                isLoading: true,
+            })
+
+            const functionUrl = "https://appsvc-fnc-dev-scw-list-dotnet001.azurewebsites.net/api/CreateItem";
             const requestHeaders: Headers = new Headers();
             requestHeaders.append("Content-type", "application/json");
             requestHeaders.append("Cache-Control", "no-cache");
 
             let owner1: any;
-            if (ownerList.length == 2) {
+            if (ownerList.length === 2) {
                 owner1 = ownerList[0] + "," + ownerList[1];
             } else {
                 owner1 = ownerList[0] + "," + ownerList[1] + "," + ownerList[2];
@@ -184,13 +193,15 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
             let memberlist = "";
             for (let i = 0; i < memberList.length; i++) {
-                if (i == memberList.length - 1) {
+                if (i === memberList.length - 1) {
                     memberlist += memberList[i]
                 } else {
                     memberlist += memberList[i] + ","
                 }
             }
-            console.log(memberlist);
+            console.log("memberList",memberlist);
+
+
             const postOptions: IHttpClientOptions = {
                 headers: requestHeaders,
                 body: `
@@ -213,22 +224,34 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
             let responseText: string = "";
                 
-                this.props.context.aadHttpClientFactory.getClient("").then((client: AadHttpClient) => {
+                this.props.context.aadHttpClientFactory.getClient("ffbdb74a-7e0c-48a2-b460-2265ae3eb634").then((client: AadHttpClient) => {
                     client.post(functionUrl, AadHttpClient.configurations.v1, postOptions).then((response: HttpClientResponse) => {
+                        console.log("res", response);
                         console.log(`Status code: ${response.status}`);
                         response.json().then((responseJSON: JSON) => {
                             responseText = JSON.stringify(responseJSON);
                             console.log("respond is ", responseText);
                             if (response.ok) {
+                                this.setState({
+                                    isLoading: false
+                                })
                                 console.log("response OK");
                             } else {
+                               
                                 console.log("Response error");
                             }
+                           
                         })
+                        
                     });
                 });
 
+                this.setState({
+                    isLoading: false
+                });
+
             return (
+                // <Complete prefLang={this.props.prefLang }/>
                 message.success( { 
                     content: "loaded!",
                 })
@@ -427,7 +450,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         ];
 
 
-        const items = steps.map( item => ( item.title !== '6' ?  { key: item.step, title: item.title} : null));
+        const items = steps.map( item => ( item.step !== '6' ?  { key: item.step, title: item.title} : null));
 
         console.log("page", this.state.current);
         return (
@@ -445,15 +468,17 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 <div className= { styles.container }>
                     <div className= { styles.row }> 
                         <Steps current= { this.state.current } labelPlacement='vertical' items= { items } />
+                        { this.state.isLoading && <Spinner size={ SpinnerSize.large }/> }
                         <div className="steps-content"> { steps[ this.state.current ].content }</div>
                         <div className="steps-action">
                             <Stack horizontal horizontalAlign='space-between'>
                                 { this.state.current === 0 &&   <Button className={ styles.previousbtn }  onClick= { () => this.goToInitalPage() } > Previous </Button> }
                                 { this.state.showModal === true && <ErrorModal current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } selectedChoice={ selectedChoice } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } /> } 
                                 { this.state.current > 0 && (<Button className={styles.previousbtn} style={{ display: 'inline-block', overflow: 'visible', whiteSpace: 'break-spaces', height:'auto'}}  onClick= { () => this.prev() } > { this.state.current === 2 && selectedChoice === `Protected A or B community`?  `${ this.strings.unclassified_button }` : `Previous` } </Button> ) }
-                                { this.state.current < steps.length - 1 && (this.state.current !== 2 || selectedChoice === 'Unclassified community' ) && (<Button className={ styles.largebtn } type="primary" onClick= { this.next} >Next</Button> )}
+                                { this.state.current < steps.length - 2 && (this.state.current !== 2 || selectedChoice === 'Unclassified community' ) && (<Button className={ styles.largebtn } type="primary" onClick= { this.next} >Next</Button> )}
                                 { this.state.current < steps.length - 1 && (this.state.current === 2 && selectedChoice === `Protected A or B community`) && (<Button className={ styles.largebtn } style={{ height: '54px'}} type="primary" onClick= { this.next} >Next</Button> ) }
                                 { this.state.current === steps.length - 2 && (<Button className={ styles.largebtn } type="primary" onClick= { this.successMessage} >Let's do this</Button> ) }
+                               
                             </Stack>
                         </div>
                     </div>
