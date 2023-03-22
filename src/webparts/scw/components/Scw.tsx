@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
@@ -174,15 +175,15 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             requestHeaders.append("Content-type", "application/json");
             requestHeaders.append("Cache-Control", "no-cache");
 
-            var owner1: any;
+            let owner1: any;
             if (ownerList.length == 2) {
                 owner1 = ownerList[0] + "," + ownerList[1];
             } else {
                 owner1 = ownerList[0] + "," + ownerList[1] + "," + ownerList[2];
             }
 
-            var memberlist = "";
-            for (var i = 0; i < memberList.length; i++) {
+            let memberlist = "";
+            for (let i = 0; i < memberList.length; i++) {
                 if (i == memberList.length - 1) {
                     memberlist += memberList[i]
                 } else {
@@ -211,7 +212,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             };
 
             let responseText: string = "";
-
+                
                 this.props.context.aadHttpClientFactory.getClient("").then((client: AadHttpClient) => {
                     client.post(functionUrl, AadHttpClient.configurations.v1, postOptions).then((response: HttpClientResponse) => {
                         console.log(`Status code: ${response.status}`);
