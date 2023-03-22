@@ -2,14 +2,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import styles from './Scw.module.scss';
-import  { Steps, Button } from 'antd';
+import  { Steps, Button, message} from 'antd';
 import FirstStep from "./FirstStep";
 import  { IScwProps } from './IScwProps';
 import  { Initial } from './InitialPage/Initial';
 import  { PrimaryButton, Stack } from 'office-ui-fabric-react';
 import  { IButtonStyles } from 'office-ui-fabric-react';
 import LastStep from './LastStep';
-// import  { MessageType } from 'antd/es/message/interface';
+import  { MessageType } from 'antd/es/message/interface';
 import ErrorModal from './Modal';
 import FourthStep from './FourthStep';
 import SecondStep from './SecondStep';
@@ -159,7 +159,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     }   
     
     
-    public successMessage = (): any  =>  { 
+    public successMessage = (): MessageType  =>  { 
 
         const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList } = this.state
 
@@ -169,10 +169,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         }
         else {
             return (
-                <Complete prefLang={this.props.prefLang}/>
-                // message.success( { 
-                //     content: "loaded!",
-                // })
+                message.success( { 
+                    content: "loaded!",
+                })
             );
         }
     }
@@ -394,7 +393,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                                 { this.state.current > 0 && (<Button className={styles.previousbtn} style={{ display: 'inline-block', overflow: 'visible', whiteSpace: 'break-spaces', height:'auto'}}  onClick= { () => this.prev() } > { this.state.current === 2 && selectedChoice === `Protected A or B community`?  `${ this.strings.unclassified_button }` : `Previous` } </Button> ) }
                                 { this.state.current < steps.length - 1 && (this.state.current !== 2 || selectedChoice === 'Unclassified community' ) && (<Button className={ styles.largebtn } type="primary" onClick= { this.next} >Next</Button> )}
                                 { this.state.current < steps.length - 1 && (this.state.current === 2 && selectedChoice === `Protected A or B community`) && (<Button className={ styles.largebtn } style={{ height: '54px'}} type="primary" onClick= { this.next} >Next</Button> ) }
-                                { this.state.current === steps.length - 1 && (<Button className={ styles.largebtn } type="primary" onClick= { this.successMessage} >Let's do this</Button> ) }
+                                { this.state.current === steps.length - 2 && (<Button className={ styles.largebtn } type="primary" onClick= { this.successMessage} >Let's do this</Button> ) }
                             </Stack>
                         </div>
                     </div>
