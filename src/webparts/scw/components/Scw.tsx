@@ -1,17 +1,18 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
+
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import styles from './Scw.module.scss';
-import  { Steps, Button} from 'antd';
-import  { message} from 'antd';
+import  { Steps, Button, Result} from 'antd';
+// import  { message} from 'antd';
 import FirstStep from "./FirstStep";
 import  { IScwProps } from './IScwProps';
 import  { Initial } from './InitialPage/Initial';
 import  { PrimaryButton, Stack } from 'office-ui-fabric-react';
 import  { IButtonStyles } from 'office-ui-fabric-react';
 import LastStep from './LastStep';
-import  { MessageType } from 'antd/es/message/interface';
+// import  { MessageType } from 'antd/es/message/interface';
 import ErrorModal from './Modal';
 import FourthStep from './FourthStep';
 import SecondStep from './SecondStep';
@@ -164,9 +165,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     }   
     
     
-    public successMessage = (): MessageType =>  { 
-       
-
+    
+    public successMessage = ():void =>  { 
+        
         const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, memberList, selectedChoice } = this.state
 
         if ( current === 4 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length === 1)) {
@@ -175,11 +176,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         }
         else {
 
-            this.setState({
-                isLoading: true,
-            })
+            
 
-            const functionUrl = "https://appsvc-fnc-dev-scw-list-dotnet001.azurewebsites.net/api/CreateItem";
+            const functionUrl = "";
             const requestHeaders: Headers = new Headers();
             requestHeaders.append("Content-type", "application/json");
             requestHeaders.append("Cache-Control", "no-cache");
@@ -190,7 +189,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             } else {
                 owner1 = ownerList[0] + "," + ownerList[1] + "," + ownerList[2];
             }
-
+            console.log("ownerList",owner1);
             let memberlist = "";
             for (let i = 0; i < memberList.length; i++) {
                 if (i === memberList.length - 1) {
@@ -222,41 +221,75 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 }`
             };
 
+            
             let responseText: string = "";
-                
-                this.props.context.aadHttpClientFactory.getClient("ffbdb74a-7e0c-48a2-b460-2265ae3eb634").then((client: AadHttpClient) => {
-                    client.post(functionUrl, AadHttpClient.configurations.v1, postOptions).then((response: HttpClientResponse) => {
-                        console.log("res", response);
-                        console.log(`Status code: ${response.status}`);
-                        response.json().then((responseJSON: JSON) => {
-                            responseText = JSON.stringify(responseJSON);
-                            console.log("respond is ", responseText);
-                            if (response.ok) {
-                                this.setState({
-                                    isLoading: false
-                                })
-                                console.log("response OK");
-                            } else {
-                               
-                                console.log("Response error");
-                            }
-                           
-                        })
-                        
-                    });
-                });
-
-                this.setState({
+       
+            // this.setState({
+            //     isLoading: true
+            // })
+            // use aad authentication
+            this.setState({isLoading:true}, () => {
+              this.props.context.aadHttpClientFactory
+              .getClient("")
+              .then((client: AadHttpClient) => {
+               
+                client.post(functionUrl, AadHttpClient.configurations.v1, postOptions)
+                .then((response: HttpClientResponse) => {
+                  console.log(`Status code: ${response}`);
+                  this.setState({
+                  
                     isLoading: false
+                  });
+                
+                  response.json().then((responseJSON: JSON) => {
+                    responseText = JSON.stringify(responseJSON);
+                    console.log("respond is ", responseText);
+                    if (response.ok) {
+                      console.log("response OK");
+                    } else {
+                    console.log("Response error");
+                    }
+                  })
+                  .catch((response: any) => {
+                    this.setState({
+                  
+                        isLoading: false
+                      });
+                    
+                    const errMsg: string = `WARNING - error when calling URL ${functionUrl}. Error = ${response.message}`;
+                    console.log("err is ", errMsg);
+                  });
                 });
+              });
+            });
+          }
 
-            return (
-                // <Complete prefLang={this.props.prefLang }/>
-                message.success( { 
-                    content: "loaded!",
-                })
-            );
+          this.renderCompletePage();
+            // return (
+                
+            //     <Complete prefLang={this.props.prefLang }/>
+            //     // message.success( { 
+            //     //     content: "complete!",
+            //     // })
+            // );
         }
+    
+    public renderCompletePage = (): JSX.Element => {
+        return (
+            <Result
+            status="success"
+            title="Successfully Purchased Cloud Server ECS!"
+            subTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
+            extra={[
+              <Button type="primary" key="console">
+                Go Console
+              </Button>,
+              <Button key="buy">Buy Again</Button>,
+            ]}
+          />
+            
+            // <Complete prefLang={ this.props.prefLang}/>
+        );
     }
 
     public handleOnChange =(event: any, value:string):void => {
@@ -437,6 +470,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     handleEngDescCallback= { this.engDescCallback }
                 />
                 ),
+                status: 'wait'
             },
             {
                 step:"6",
@@ -446,6 +480,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                         prefLang={this.props.prefLang}
                     />
                 ),
+                status: 'finish'
             },
         ];
 
@@ -455,6 +490,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         console.log("page", this.state.current);
         return (
             <div className= { styles.scw }>
+                {this.state.isLoading.toString()}
                 <Title current={ current } step={ step } prefLang={this.props.prefLang} />
                 { step === 0 
                 ? <>
@@ -468,8 +504,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 <div className= { styles.container }>
                     <div className= { styles.row }> 
                         <Steps current= { this.state.current } labelPlacement='vertical' items= { items } />
-                        { this.state.isLoading && <Spinner size={ SpinnerSize.large }/> }
-                        <div className="steps-content"> { steps[ this.state.current ].content }</div>
+                        <div className="steps-content"> { this.state.isLoading ? <Spinner size={ SpinnerSize.large }/> : steps[ this.state.current ].content }</div>
                         <div className="steps-action">
                             <Stack horizontal horizontalAlign='space-between'>
                                 { this.state.current === 0 &&   <Button className={ styles.previousbtn }  onClick= { () => this.goToInitalPage() } > Previous </Button> }
