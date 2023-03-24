@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import styles from './Scw.module.scss';
-import  { Steps, Button, Result} from 'antd';
+import  { Steps, Button, Result } from 'antd';
 // import  { message} from 'antd';
 import FirstStep from "./FirstStep";
 import  { IScwProps } from './IScwProps';
@@ -22,6 +22,7 @@ import { AadHttpClient, HttpClientResponse, IHttpClientOptions } from '@microsof
 import Title from './Title';
 import Complete from './Complete';
 import { Spinner, SpinnerSize } from '@fluentui/react/lib/Spinner';
+import { CloseCircleOutlined } from '@ant-design/icons';
 
 
 export interface IScwState  { 
@@ -39,6 +40,7 @@ export interface IScwState  {
     showModal: boolean;
     checkedValues: boolean[];
     isLoading: boolean;
+    validationStatus: number;
    
     
 }
@@ -66,7 +68,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             errorMessage: '',
             showModal: false,
             checkedValues: [],
-            isLoading: false
+            isLoading: false,
+            validationStatus: 0
             
         };
 
@@ -166,10 +169,11 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     
     
     
-    public successMessage = ():void =>  { 
+    public successMessage = (): void =>  { 
         
         const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, memberList, selectedChoice } = this.state
 
+        
         if ( current === 4 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length === 1)) {
             console.log('thisState', this.state)
             this.setState({ showModal: true });
@@ -178,7 +182,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
             
 
-            const functionUrl = "";
+            const functionUrl = "https://appsvc-fnc-dev-scw-list-dotnet001.azurewebsites.net/api/CreateItem?";
             const requestHeaders: Headers = new Headers();
             requestHeaders.append("Content-type", "application/json");
             requestHeaders.append("Cache-Control", "no-cache");
@@ -230,31 +234,31 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             // use aad authentication
             this.setState({isLoading:true}, () => {
               this.props.context.aadHttpClientFactory
-              .getClient("")
+              .getClient("3385e8cd-40a4-41f5-bd2f-68690654a54b")
               .then((client: AadHttpClient) => {
                
                 client.post(functionUrl, AadHttpClient.configurations.v1, postOptions)
                 .then((response: HttpClientResponse) => {
-                  console.log(`Status code: ${response}`);
+                  console.log(`Status code: ${response.status}`);
+                
                   this.setState({
-                  
-                    isLoading: false
+                    isLoading: false,
+                    validationStatus: response.status
                   });
                 
                   response.json().then((responseJSON: JSON) => {
                     responseText = JSON.stringify(responseJSON);
                     console.log("respond is ", responseText);
                     if (response.ok) {
+                    
                       console.log("response OK");
                     } else {
+                        
                     console.log("Response error");
+
                     }
                   })
                   .catch((response: any) => {
-                    this.setState({
-                  
-                        isLoading: false
-                      });
                     
                     const errMsg: string = `WARNING - error when calling URL ${functionUrl}. Error = ${response.message}`;
                     console.log("err is ", errMsg);
@@ -262,9 +266,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 });
               });
             });
-          }
+            // this.renderCompletePage();
+        }
 
-          this.renderCompletePage();
             // return (
                 
             //     <Complete prefLang={this.props.prefLang }/>
@@ -272,25 +276,28 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             //     //     content: "complete!",
             //     // })
             // );
-        }
-    
-    public renderCompletePage = (): JSX.Element => {
-        return (
-            <Result
-            status="success"
-            title="Successfully Purchased Cloud Server ECS!"
-            subTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
-            extra={[
-              <Button type="primary" key="console">
-                Go Console
-              </Button>,
-              <Button key="buy">Buy Again</Button>,
-            ]}
-          />
-            
-            // <Complete prefLang={ this.props.prefLang}/>
-        );
     }
+    
+    // public renderCompletePage = (): JSX.Element => {
+    //     const status = this.state.validationStatus
+    //     debugger
+    //     console.log("valStatus", status)
+    //     return (
+    //         <Result
+    //         status="success"
+    //         title="Successfully Purchased Cloud Server ECS!"
+    //         subTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
+    //         extra={[
+    //           <Button type="primary" key="console">
+    //             Go Console
+    //           </Button>,
+    //           <Button key="buy">Buy Again</Button>,
+    //         ]}
+    //       />
+            
+    //         // <Complete prefLang={ this.props.prefLang}/>
+    //     );
+    // }
 
     public handleOnChange =(event: any, value:string):void => {
         const eventValue = event;
@@ -485,9 +492,11 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         ];
 
 
-        const items = steps.map( item => ( item.step !== '6' ?  { key: item.step, title: item.title} : null));
+        // const items = steps.map( item => ( item.step !== '6' ?  { key: item.step, title: item.title} : null));
+        const items = steps.map( item => ( { key: item.step, title: item.title } ));
+        
 
-        console.log("page", this.state.current);
+        console.log("Status", this.state.validationStatus);
         return (
             <div className= { styles.scw }>
                 {this.state.isLoading.toString()}
@@ -504,7 +513,22 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 <div className= { styles.container }>
                     <div className= { styles.row }> 
                         <Steps current= { this.state.current } labelPlacement='vertical' items= { items } />
-                        <div className="steps-content"> { this.state.isLoading ? <Spinner size={ SpinnerSize.large }/> : steps[ this.state.current ].content }</div>
+                        <div className="steps-content"> 
+                        {console.log("stepsCurrent",steps[this.state.current])}
+                        { this.state.isLoading ? 
+                            (<Spinner size={ SpinnerSize.large }/>) : this.state.validationStatus === 400 && steps[this.state.current].step ==='5' ? <Result
+                                icon={<CloseCircleOutlined/>}
+                                title="Submission Failed"
+                                subTitle="Please send GCXchange and email."
+                                extra={<Button type="primary">Email us</Button>}
+                            /> 
+                            : this.state.validationStatus === 200 && steps[this.state.current].step === '5' ?
+                            steps[ this.state.current ].content
+                            :
+                            steps[ this.state.current ].content
+                        }
+                           
+                        </div>
                         <div className="steps-action">
                             <Stack horizontal horizontalAlign='space-between'>
                                 { this.state.current === 0 &&   <Button className={ styles.previousbtn }  onClick= { () => this.goToInitalPage() } > Previous </Button> }
