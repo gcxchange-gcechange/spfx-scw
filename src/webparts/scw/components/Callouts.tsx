@@ -105,7 +105,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
       borderRadius: '15px',
     },
     beak: {
-      top: '30px!important',
+      top: '15px!important',
       backgroundColor:  "#106EBE"
     },
     calloutMain: {
@@ -131,8 +131,6 @@ export default class Callouts extends React.Component< ICalloutsProps > {
       marginBottom: 12,
       fontWeight: 'normal',
       backgroundColor:  "#106EBE",
-      borderTopLeftRadius: '15px',
-      borderTopRightRadius: '15px',
 
     },
     buttons: {
@@ -140,8 +138,6 @@ export default class Callouts extends React.Component< ICalloutsProps > {
       padding:'10px',
       display: 'flex',
       justifyContent: 'flex-end',
-      borderBottomLeftRadius: '15px',
-      borderBottomRightRadius: '15px'
     },
   });
 
@@ -155,7 +151,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
             isBeakVisible={ true }
             beakWidth={ 16 }
             styles={ calloutStyle }
-            directionalHint={ DirectionalHint.rightCenter }
+            directionalHint={ DirectionalHint.rightTopEdge }
             gapSpace={ 10 }
             setInitialFocus = {true}
             onDismiss = { this.props.openCallout} 
