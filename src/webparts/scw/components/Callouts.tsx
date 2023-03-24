@@ -100,22 +100,25 @@ export default class Callouts extends React.Component< ICalloutsProps > {
   
   const calloutStyle = {
     root: {
-      width: '41%',
+      width: '60%',
       height: 'auto',
-      border: '1px solid #c0c0cc',
-      borderRadius: '5px',
-      
+      borderRadius: '15px',
     },
     beak: {
-      top: '25px',
+      top: '30px!important',
       backgroundColor:  "#106EBE"
+    },
+    calloutMain: {
+      border: '1px solid #c0c0cc',
+      borderRadius: '15px',
     }
   }
 
   const stylesCallout = mergeStyleSets({
 
     heading: {
-      height: '50px'
+      height: '50px',
+     
     },
     body: {
       height: 'auto',
@@ -127,33 +130,37 @@ export default class Callouts extends React.Component< ICalloutsProps > {
       color: 'white',
       marginBottom: 12,
       fontWeight: 'normal',
-      backgroundColor:  "#106EBE"
+      backgroundColor:  "#106EBE",
+      borderTopLeftRadius: '15px',
+      borderTopRightRadius: '15px',
+
     },
     buttons: {
+      width:'98%',
       padding:'10px',
       display: 'flex',
       justifyContent: 'flex-end',
+      borderBottomLeftRadius: '15px',
+      borderBottomRightRadius: '15px'
     },
   });
 
 
     return (
       <>
-        <div>
-
+        
           <FocusTrapCallout
             role="dialog"
             target={ `#${ this.props.targetId}` }
             isBeakVisible={ true }
-            beakWidth={ 10 }
+            beakWidth={ 16 }
             styles={ calloutStyle }
-            directionalHint={ DirectionalHint.rightTopEdge }
+            directionalHint={ DirectionalHint.rightCenter }
             gapSpace={ 10 }
             setInitialFocus = {true}
-            onDismiss = { this.props.openCallout}
-
-            
+            onDismiss = { this.props.openCallout} 
           >
+
             <div className={stylesCallout.heading}>
               <Stack horizontal horizontalAlign="space-between" verticalAlign="center" className={ stylesCallout.title }>
                 <Text>{ this.getTitles() }</Text>
@@ -166,17 +173,16 @@ export default class Callouts extends React.Component< ICalloutsProps > {
             </div>
             <div className={stylesCallout.body}>
               <Text>{ message }</Text>
+              <FocusZone>
+                <div className={ stylesCallout.buttons } >
+                  <PrimaryButton onClick={ this.props.openCallout } > Close </PrimaryButton>
+                </div>
+              </FocusZone>
             </div>
             
-            <FocusZone>
-              <div className={ stylesCallout.buttons } >
-                <PrimaryButton onClick={ this.props.openCallout } > Close </PrimaryButton>
-              </div>
-            </FocusZone>
+           
 
           </FocusTrapCallout>
-     
-        </div>
       </>
     );
   }
