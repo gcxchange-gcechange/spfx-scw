@@ -82,7 +82,7 @@ export default class AUsers extends React.Component<IAddUsersProps> {
                     defaultSelectedUsers  = { this.props.memberList } 
                     showtooltip = { true }
                     tooltipMessage = { `${ this.strings.owners_Instruction}` }
-                    tooltipDirectional  = { DirectionalHint.rightCenter }
+                    tooltipDirectional  = { DirectionalHint.topCenter }
                 />
             </>
         );
