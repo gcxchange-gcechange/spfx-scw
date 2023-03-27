@@ -175,14 +175,14 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         
         if ( current === 4 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length === 1)) {
-            console.log('thisState', this.state)
+            
             this.setState({ showModal: true });
         }
         else {
 
-            
 
-            const functionUrl = "https://appsvc-fnc-dev-scw-list-dotnet001.azurewebsites.net/api/CreateItem?";
+
+            const functionUrl = "";
             const requestHeaders: Headers = new Headers();
             requestHeaders.append("Content-type", "application/json");
             requestHeaders.append("Cache-Control", "no-cache");
@@ -227,25 +227,39 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
             
             let responseText: string = "";
-       
-            // this.setState({
-            //     isLoading: true
-            // })
+
             // use aad authentication
-            this.setState({isLoading:true}, () => {
+
+
+            this.setState({ isLoading: true }, () => {
+
+            document.getElementById("prev").style.display= 'none';    
+            document.getElementById("submit").style.display = 'none';
+                
               this.props.context.aadHttpClientFactory
-              .getClient("3385e8cd-40a4-41f5-bd2f-68690654a54b")
+              .getClient("")
               .then((client: AadHttpClient) => {
                
                 client.post(functionUrl, AadHttpClient.configurations.v1, postOptions)
                 .then((response: HttpClientResponse) => {
                   console.log(`Status code: ${response.status}`);
+
+                  if ( response.status === 200 ) {
+                    this.setState({
+                        current: current + 1,
+                        isLoading: false,
+                        validationStatus: response.status,
+                    })
+                  } else {
+                    
+                    this.setState({
+                        isLoading: false,
+                        validationStatus: response.status,
+                    });
+                  
+                  }
                 
-                  this.setState({
-                    isLoading: false,
-                    validationStatus: response.status
-                  });
-                
+                  
                   response.json().then((responseJSON: JSON) => {
                     responseText = JSON.stringify(responseJSON);
                     console.log("respond is ", responseText);
@@ -266,38 +280,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 });
               });
             });
-            // this.renderCompletePage();
-        }
-
-            // return (
-                
-            //     <Complete prefLang={this.props.prefLang }/>
-            //     // message.success( { 
-            //     //     content: "complete!",
-            //     // })
-            // );
-    }
-    
-    // public renderCompletePage = (): JSX.Element => {
-    //     const status = this.state.validationStatus
-    //     debugger
-    //     console.log("valStatus", status)
-    //     return (
-    //         <Result
-    //         status="success"
-    //         title="Successfully Purchased Cloud Server ECS!"
-    //         subTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
-    //         extra={[
-    //           <Button type="primary" key="console">
-    //             Go Console
-    //           </Button>,
-    //           <Button key="buy">Buy Again</Button>,
-    //         ]}
-    //       />
             
-    //         // <Complete prefLang={ this.props.prefLang}/>
-    //     );
-    // }
+        }
+    }
+
 
     public handleOnChange =(event: any, value:string):void => {
         const eventValue = event;
@@ -355,7 +341,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         this.setState( { 
             selectedChoice: saveSelectedChoice
         })
-        console.log("callback", selectedChoice);
     } 
 
   
@@ -477,7 +462,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     handleEngDescCallback= { this.engDescCallback }
                 />
                 ),
-                status: 'wait'
             },
             {
                 step:"6",
@@ -487,19 +471,15 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                         prefLang={this.props.prefLang}
                     />
                 ),
-                status: 'finish'
+               
             },
         ];
 
 
-        // const items = steps.map( item => ( item.step !== '6' ?  { key: item.step, title: item.title} : null));
-        const items = steps.map( item => ( { key: item.step, title: item.title } ));
+        const items = steps.map( item => ( item.step !== '6' ?  { key: item.step, title: item.title} : null));
         
-
-        console.log("Status", this.state.validationStatus);
         return (
             <div className= { styles.scw }>
-                {this.state.isLoading.toString()}
                 <Title current={ current } step={ step } prefLang={this.props.prefLang} />
                 { step === 0 
                 ? <>
@@ -514,30 +494,30 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     <div className= { styles.row }> 
                         <Steps current= { this.state.current } labelPlacement='vertical' items= { items } />
                         <div className="steps-content"> 
-                        {console.log("stepsCurrent",steps[this.state.current])}
-                        { this.state.isLoading ? 
-                            (<Spinner size={ SpinnerSize.large }/>) : this.state.validationStatus === 400 && steps[this.state.current].step ==='5' ? <Result
-                                icon={<CloseCircleOutlined/>}
-                                title="Submission Failed"
-                                subTitle="Please send GCXchange and email."
-                                extra={<Button type="primary">Email us</Button>}
-                            /> 
-                            : this.state.validationStatus === 200 && steps[this.state.current].step === '5' ?
-                            steps[ this.state.current ].content
-                            :
-                            steps[ this.state.current ].content
-                        }
-                           
+                            { this.state.isLoading ? 
+                                (<Spinner size={ SpinnerSize.large }/>) : this.state.validationStatus === 400 && steps[this.state.current].step ==='5'
+                                ? 
+                                <Result
+                                    icon={<CloseCircleOutlined/>}
+                                    title="Submission Failed"
+                                    subTitle="Please send GCXchange and email."
+                                    extra={<Button type="primary">Email us</Button>}
+                                /> 
+                                :
+                                steps[ this.state.current ].content
+                            }   
                         </div>
                         <div className="steps-action">
                             <Stack horizontal horizontalAlign='space-between'>
                                 { this.state.current === 0 &&   <Button className={ styles.previousbtn }  onClick= { () => this.goToInitalPage() } > Previous </Button> }
                                 { this.state.showModal === true && <ErrorModal current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } selectedChoice={ selectedChoice } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } /> } 
-                                { this.state.current > 0 && (<Button className={styles.previousbtn} style={{ display: 'inline-block', overflow: 'visible', whiteSpace: 'break-spaces', height:'auto'}}  onClick= { () => this.prev() } > { this.state.current === 2 && selectedChoice === `Protected A or B community`?  `${ this.strings.unclassified_button }` : `Previous` } </Button> ) }
-                                { this.state.current < steps.length - 2 && (this.state.current !== 2 || selectedChoice === 'Unclassified community' ) && (<Button className={ styles.largebtn } type="primary" onClick= { this.next} >Next</Button> )}
-                                { this.state.current < steps.length - 1 && (this.state.current === 2 && selectedChoice === `Protected A or B community`) && (<Button className={ styles.largebtn } style={{ height: '54px'}} type="primary" onClick= { this.next} >Next</Button> ) }
-                                { this.state.current === steps.length - 2 && (<Button className={ styles.largebtn } type="primary" onClick= { this.successMessage} >Let's do this</Button> ) }
-                               
+                                { this.state.current > 0 &&  (this.state.current !== 4 && steps[this.state.current].step !== '5' || steps[this.state.current].step !== '6')
+                                && ( <Button id='prev'className={ styles.previousbtn } style={{ display: 'inline-block', overflow: 'visible', whiteSpace: 'break-spaces', height:'auto'}}  onClick= { () => this.prev() } > { this.state.current === 2 && selectedChoice === `Protected A or B community`?  `${ this.strings.unclassified_button }` : `Previous` } </Button> ) 
+                                 }
+                                { this.state.current < steps.length - 2 && ( this.state.current !== 2 || selectedChoice === 'Unclassified community' ) && (<Button className={ styles.largebtn } type="primary" onClick= { this.next} >Next</Button> )}
+                                { this.state.current < steps.length - 2 && ( this.state.current === 2 && selectedChoice === `Protected A or B community` ) && (<Button className={ styles.largebtn } style={{ height: '54px'}} type="primary" onClick= { this.next} >Next</Button> ) }
+                                { this.state.current === steps.length - 2 && 
+                                ( <Button id="submit" className={ styles.largebtn } type="primary" onClick= { this.successMessage} >Let's do this</Button> )}
                             </Stack>
                         </div>
                     </div>
