@@ -48,7 +48,7 @@ export default class Complete extends React.Component<ICompleteProps, ICompleteS
             <h3>{ this.strings.thank_you }</h3>
             <p>{ parse( this.strings.complete_content ) }</p>
             <Stack horizontal horizontalAlign="center">
-                <PrimaryButton id="GCXHomepage" text={this.strings.complete_button}/>
+                <PrimaryButton id="GCXHomepage" text={this.strings.complete_button} href={'https://devgcx.sharepoint.com/'}/>
             </Stack>
            
         </div>
