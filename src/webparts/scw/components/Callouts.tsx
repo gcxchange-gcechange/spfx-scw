@@ -111,6 +111,9 @@ export default class Callouts extends React.Component< ICalloutsProps > {
     calloutMain: {
       border: '1px solid #c0c0cc',
       borderRadius: '15px',
+    },
+    beakCurtain: {
+      borderRadius: '15px',
     }
   }
 
