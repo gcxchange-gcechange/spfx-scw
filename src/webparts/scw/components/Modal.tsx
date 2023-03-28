@@ -84,7 +84,7 @@ export default class ErrorModal extends React.Component<
     const secondValues: PropValues[] = [
       { name: "community classification", value: `${selectedChoice}` },
     ];
-    console.log("SV",secondValues)
+   
     const thirdValues: PropValues[] = [
       { name: "terms of use", value: `${checkedValues.length}` },
     ];
@@ -147,7 +147,7 @@ export default class ErrorModal extends React.Component<
     for (const obj of lastValues) {
       if (current === 4 && (obj.value === '' || obj.value < 2)) {
         results.push(obj.name);
-        console.log("res",results);
+     
         if ( results.length > 2 ) {
           message =
             results.slice(0, -1).join(`${seperatorThe}`) + `${ seperatorAndThe }` +  results.slice(-1);

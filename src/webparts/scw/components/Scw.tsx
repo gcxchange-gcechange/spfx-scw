@@ -23,6 +23,8 @@ import Title from './Title';
 import Complete from './Complete';
 import { Spinner, SpinnerSize } from '@fluentui/react/lib/Spinner';
 import { CloseCircleOutlined } from '@ant-design/icons';
+import Callouts from './Callouts';
+
 
 
 export interface IScwState  { 
@@ -41,6 +43,8 @@ export interface IScwState  {
     checkedValues: boolean[];
     isLoading: boolean;
     validationStatus: number;
+    showCallout: boolean;
+    targetId: string;
    
     
 }
@@ -69,7 +73,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             showModal: false,
             checkedValues: [],
             isLoading: false,
-            validationStatus: 0
+            validationStatus: 0,
+            showCallout: false,
+            targetId: ''
             
         };
 
@@ -188,6 +194,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             requestHeaders.append("Cache-Control", "no-cache");
 
             let owner1: any;
+     
             if (ownerList.length === 2) {
                 owner1 = ownerList[0] + "," + ownerList[1];
             } else {
@@ -384,13 +391,30 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         }));
     }
 
+     
+    public isCalloutVisible = ():void => {
+
+        this.setState(prevState => ({
+            showCallout: !prevState.showCallout,
+           
+        }));
+       
+    };
+
+    public getElementId = (id: string): void => {
+        
+
+        this.setState({
+            targetId: id
+        });
+    };
 
 
 
     
     public render(): React.ReactElement<IScwProps>  { 
 
-        const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, memberList, errorMessage, showModal, checkedValues } = this.state;
+        const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, memberList, errorMessage, showModal, checkedValues, showCallout, targetId } = this.state;
 
         const steps = [
         
@@ -431,7 +455,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 title: "Owners & Members",
                 content: (
                 <FourthStep
-                    context= { this.props.context }
+                    prefLang={this.props.prefLang}
+                context= { this.props.context }
                     ownerList= { ownerList }
                     memberList= { memberList }
                     getOwnersCallback= { this.handleOwnerCallback }
@@ -444,7 +469,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 title: "Review & Submit",
                 content: (
                 <LastStep
-                    engName= { engName }
+                    current= { current }
+                prefLang={this.props.prefLang}
+                engName= { engName }
                     commPurpose= { commPurpose }
                     frCommName= { frCommName }
                     selectedChoice= { selectedChoice }
@@ -453,14 +480,20 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     ownerList= { ownerList }
                     memberList= { memberList }
                     context= { this.props.context }
-                    commPurposeCallback={ this.commPurposeCallback }
+                    showCallout = { showCallout}
+                targetId = { targetId }
+                commPurposeCallback={ this.commPurposeCallback }
                     handleEngNameCallback= { this.handleEngNameCallback }
                     frNameCallBack= { this.frNameCallback }
                     getOwnersCallback= { this.handleOwnerCallback }
                     getMemberCallback= { this.handleMemberCallback }
                     handleFrDescCallback= { this.frDescCallback }
                     handleEngDescCallback= { this.engDescCallback }
-                />
+                  isCalloutVisible ={ this.isCalloutVisible }
+                getElementId={this.getElementId}
+
+                
+              />
                 ),
             },
             {
@@ -507,6 +540,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                                 steps[ this.state.current ].content
                             }   
                         </div>
+                        {  showCallout && <Callouts prefLang={ this.props.prefLang } showCallout={showCallout}  targetId= { targetId } openCallout = {this.isCalloutVisible} /> }
                         <div className="steps-action">
                             <Stack horizontal horizontalAlign='space-between'>
                                 { this.state.current === 0 &&   <Button className={ styles.previousbtn }  onClick= { () => this.goToInitalPage() } > Previous </Button> }

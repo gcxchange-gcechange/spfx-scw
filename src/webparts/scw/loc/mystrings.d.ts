@@ -27,6 +27,26 @@ declare interface IScwWebPartStrings {
   complete_button: string;
 
   
+  commPurpose_title: string;
+  commPurpose_desc: string;
+  commPurpose_Instruction: string;
+  engName_title: string;
+  engName_desc: string;
+  engName_Instruction: string;
+  frCommName_title: string;
+  frCommName_desc:string;
+  frCommName_Instruction: string;
+  shEngDesc_title: string;
+  shEngDesc_desc: string;
+  shEngDesc_Instruction: string;
+  shFrDesc_title: string;
+  shFrDesc_desc: string;
+  shFrDesc_Instruction: string;
+  owners_Instruction: string;
+  members_Instruction: string;
+  community_classification_desc: string;
+  community_classification_link: string;
+
 }
 
 declare module 'ScwWebPartStrings' {

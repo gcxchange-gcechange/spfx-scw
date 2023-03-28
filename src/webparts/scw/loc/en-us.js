@@ -27,5 +27,24 @@ define([], function() {
     "complete_content":"You will receive an email when your community has been created with everything you need to get started! (Within 48 hours Monday to Friday). <p> If you do not receive the email or have any questions, please submit a service request using the <u>GCXchange Support portal</u>.</p>",
     "complete_img_alt":"Three people celebrating",
     "complete_button": "GCXchange Homepage",
+    "commPurpose_title": "Community purpose",
+    "commPurpose_desc": 'The GCX Support Team needs the purpose of the new community to determine whether it can be <strong>approved</strong>.',
+    "commPurpose_Instruction":"This will not show up on your site. Write it in the official language of your choice. Max. 500 characters.",
+    "engName_title": 'English community name',
+    "engName_desc": 'The community’s name is the title of your community. Create a short descriptive name. A bilingual name complies with the Official Languages Act and makes it easier for others to find your community in the GCXchange Catalogue.',
+    "engName_Instruction": "Use keywords, not abbreviations for better discoverability. Must be between 5 and 125 characters in length and special characters are not permitted.",
+    "frCommName_title": "French community name",
+    "frCommName_desc":"The community’s name is the title of your community. Create a short descriptive name. A bilingual name complies with the Official Languages Act and makes it easier for others to find your community in the GCXchange Catalogue. ",
+    "frCommName_Instruction": "Use keywords, not abbreviations for better discoverability. Must be between 5 and 125 characters in length and special characters are not permitted.",
+    "shEngDesc_title": 'Short English description',
+    "shEngDesc_desc": 'The community description will be visible to users when they use the “All Communities” page and when they search for it. ',
+    "shEngDesc_Instruction": 'Max. 33 characters.',
+    "shFrDesc_title": 'Short French description ',
+    "shFrDesc_desc": 'The community description will be visible to users when they use the “All Communities” page and when they search for it. ',
+    "shFrDesc_Instruction": 'Max. 33 characters.',
+    "owners_Instruction": 'Start typing an owner’s last name to find and add them.',
+    "members_Instruction": 'Start typing an owner’s last name to find and add them.',
+    "community_classification_desc": "To change the classification of your community, you need to go back to the Community classification page, and read the terms of use.",
+    "community_classification_link": "<u> Go to the <i>Community classification</i> page</u> "
   }
-});
+})
