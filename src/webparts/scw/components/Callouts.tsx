@@ -109,7 +109,6 @@ export default class Callouts extends React.Component< ICalloutsProps > {
       backgroundColor:  "#106EBE"
     },
     calloutMain: {
-      border: '1px solid #c0c0cc',
       borderRadius: '15px',
     },
     beakCurtain: {
