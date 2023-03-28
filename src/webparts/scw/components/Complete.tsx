@@ -31,7 +31,7 @@ export default class Complete extends React.Component<ICompleteProps, ICompleteS
   public render(): React.ReactElement<ICompleteProps> {
 
     const imageProps: Partial<IImageProps> = {
-        src: (require("../assets/complete scw-02.png")),
+        src: (require("../assets/complete.png")),
         width: 400,
         imageFit: ImageFit.contain,
         
