@@ -51,9 +51,32 @@ define([], function() {
     "Lets_go": "Let's go",
     "comm_desc_title": "Community description",
     "comm_name":"Community name",
-
-
-    
+    "unclassified_cardText": "No, I don’t need to store protected information. <strong>All users will be able to find your community, and search for it</strong>.",
+    "protected_cardText":"Yes, I need to store protected information such as: consent forms, personal information, contact details for individuals or organizations, financial documentation, or other documents that, if compromised, <strong>could cause injury to an individual, organization or the government</strong>.",
+    "comm_classification_para1":"You may need to store protected documents or information in your community’s library. GCXchange can provide a space for protected information up to Protected B. First, let’s find out whether you will be storing protected documents in your community.",
+    "unclassified": "The information you are storing is unclassified so you won't need a classified document space. Make sure <strong>not to store</strong> any classified documents in your library. If you are unsure what information is classified you can check with your departmental security policy or information management branch.",
+    "protected_para1":"Looks like you need a space to store protected documents and information on GCXchange. We have a few terms of use for protected communities.",
+    "protected_para2":"The security of documents is the responsibility of all members on GCXchange, including yourself. We ask that you review your departmental security guidelines to make sure you are familiar with your responsibilities and so that you can inform your members about their responsibilities, before agreeing to the terms of use below.",
+    "agree_to_terms":"I agree to the terms of use below",
+    "chk1":"Protected communities are only visible to members that have been invited by the community's owner.",
+    "chk1b":"I understand that my community will only be visible to members.",
+    "chk2":"All members of a protected community must have a government-issued phone with the Microsoft Authenticator app enabled.",
+    "chk2b":"I understand that my community members must meet these requirements to access my community.",
+    "chk3":"All members must use a government-issued device and have MyKey activated to access a protected B community.",
+    "chk3b":"I understand that my community members must meet these requirements to access my community.",
+    "chk4":"Users must have reliability clearance to access a protected space, and a need to know the information stored within.",
+    "chk4b":"I understand that my community members must meet these requirements to access my community.",
+    "chk5":"We can't guarantee timely support for classified communities. Our Support Team doesn't have direct access to these sites until they are added as members.",
+    "chk5b":"I agree to limited access to GCXchange support.",
+    "chk6":"Only users with a need to know protected information should be included in a community. When a member changes roles this need to know changes too.",
+    "chk6b":"I will regularly review membership on my community and remove members who have changed roles.",
+    "chk7":"GCXchange has a retention policy of 2 years for all documents and should only be used to store transitory information.",
+    "chk7b":"I agree to back up my community documents on my department's official repository if they contain information of business value.",
+    "invite_owners_para1": "As a GCXchange owner you can modify your Community and invite other users to your community so they can collaborate with you in Microsoft Teams.",
+    "invite_owners_para2": "For now, we need you to <strong>add at least one more owner</strong> before your community can be created. You can <strong>add members</strong> to your GCXchange community before it goes live. You can only add individuals who <strong>already have a GCXchange</strong> account. You can invite colleagues to GCXchange below.",
+    "invite_owners_para3": "If you don’t want to invite members just yet, no problem. We will provide detailed instructions on how to do this once your community has been created.",
+    "invite_owners":"Invite owners",
+    "invite_members":"Invite members",
 
   }
 })

@@ -43,8 +43,32 @@ define([], function() {
       "Lets_go": "C’est parti…",
       "comm_desc_title": "Description de la collectivité",
       "comm_name":"Nom de la collectivité",
-
-   
-
-  }
+      "unclassified_cardText": "Non, je n’ai pas besoin de stocker des renseignements protégés. <strong>Tous les utilisateurs pourront trouver votre collectivité et en faire la recherche</strong>.",
+      "protected_cardText":"Oui, je dois stocker des renseignements protégés tels que des formulaires de consentement, des renseignements personnels, des coordonnées de personnes ou d’organisations, des documents financiers ou d’autres documents qui, s’ils sont compromis, <strong>pourraient causer un préjudice à une personne, à une organisation ou au gouvernement</strong>.",
+      "comm_classification_para1":"Vous devrez peut-être conserver des documents ou des renseignements protégés dans la bibliothèque de votre collectivité. GCÉchange peut fournir un espace pour des renseignements protégés jusqu’au niveau Protégé B. Tout d’abord, il faut savoir si vous allez stocker des documents protégés dans votre collectivité.",
+      "unclassified": "Les renseignements que vous stockez sont non classifiés, vous n’avez donc pas besoin d’un espace pour documents classifiés. Veillez à <strong>ne pas stocker</strong> de documents classifiés dans votre bibliothèque. Si vous ne savez pas quels renseignements sont classifiés, vous pouvez consulter la politique de sécurité de votre ministère ou la direction de la gestion de l’information.",
+      "protected_para1":"Il semble que vous ayez besoin d’un espace pour stocker des documents et des renseignements protégés sur GCÉchange. Il existe quelques conditions d’utilisation pour les collectivités protégées.",
+      "protected_para2":"La sécurité des documents est la responsabilité de tous les membres de GCÉchange, y compris la vôtre. Nous vous demandons de passer en revue les directives de sécurité de votre ministère afin de veiller à ce que vous connaissiez bien vos responsabilités et pour que vous puissiez informer vos membres de leurs responsabilités, avant d’accepter les conditions d’utilisation ci-dessous.",
+      "agree_to_terms":"J’accepte les conditions d’utilisation ci-dessous",
+      "chk1":"Les collectivités protégées ne sont visibles que par les membres qui ont été invités par le responsable de la collectivité.",
+      "chk1b":"Je comprends que ma collectivité ne sera visible que par les membres.",
+      "chk2":"Tous les membres d’une collectivité protégée doivent disposer d’un téléphone délivré par le gouvernement dont l’application Microsoft Authenticator est activée.",
+      "chk2b":"Je comprends que les membres de ma collectivité doivent respecter ces exigences pour accéder à ma collectivité.",
+      "chk3":"Tous les membres doivent utiliser un appareil délivré par le gouvernement et avoir activé MaClé pour accéder à une collectivité Protégé B.",
+      "chk3b":"Je comprends que les membres de ma collectivité doivent respecter ces exigences pour accéder à ma collectivité.",
+      "chk4":"Les utilisateurs doivent posséder une cote de fiabilité pour accéder à un espace protégé, et avoir besoin de connaître les renseignements qui y sont stockés.",
+      "chk4b":"Je comprends que les membres de ma collectivité doivent respecter ces exigences pour accéder à ma collectivité.",
+      "chk5":"Nous ne pouvons pas garantir un soutien opportun pour les collectivités classifiées. Notre équipe de soutien n’a pas d’accès direct à ces sites tant qu’ils ne sont pas inscrits en tant que membres.",
+      "chk5b":"J’accepte un accès limité aux services de soutien de GCÉchange.",
+      "chk6":"Seuls les utilisateurs ayant besoin de connaître des renseignements protégés doivent être inclus comme membres dans une collectivité. Lorsqu’un membre change de rôle, ce besoin de savoir change également.",
+      "chk6b":"Je passerai régulièrement en revue la liste des membres de ma collectivité et le nom des membres qui ont changé de rôle sera retiré.",
+      "chk7":"La politique de conservation de GCÉchange est limitée à 2 ans pour tous les documents et on devrait seulement s’en servir pour stocker des renseignements transitoires.",
+      "chk7b":"J’accepte de sauvegarder les documents de ma collectivité dans le dépôt officiel de mon ministère s’ils contiennent des renseignements à valeur opérationnelle.",
+      "invite_owners_para1": "En tant que responsable de GCÉchange, vous pouvez modifier votre collectivité et y inviter d’autres utilisateurs afin qu’ils puissent collaborer avec vous dans Microsoft Teams.",
+      "invite_owners_para2": "Pour l’instant, vous devez <strong>ajouter au moins un responsable supplémentaire</strong> avant de créer votre collectivité. Vous pouvez <strong>ajouter des membres</strong> à votre collectivité GCÉchange avant qu’elle ne soit mise en ligne. Vous ne pouvez ajouter que des personnes qui <strong>ont déjà un compte GCÉchange</strong>. Vous pouvez inviter des collègues à GCÉchange ci-dessous.",
+      "invite_owners_para3": "Si vous ne souhaitez pas encore inviter de membres, c’est correct. Nous vous fournirons des instructions détaillées sur la manière de procéder une fois que votre collectivité aura été créée.",
+      "invite_owners":"Inviter les responsables",
+      "invite_members":"Inviter les membres",
+  
+    } 
 });

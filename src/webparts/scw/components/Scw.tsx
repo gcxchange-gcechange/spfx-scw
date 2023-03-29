@@ -390,6 +390,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             title: "Classification",
             content: (
               <SecondStep
+                prefLang = { this.props.prefLang }
                 selectedChoice= { selectedChoice }
                 handleSelectedChoice= { this.selectedChoiceCallback}
               />
@@ -398,7 +399,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
          { 
             step: "3",
             title: "Terms of use",
-            content: <ThirdStep checkedValues= { checkedValues } checkedTerms = { this.checkedTerms } selectedChoice = { selectedChoice }/>,
+            content: <ThirdStep prefLang={this.props.prefLang} checkedValues= { checkedValues } checkedTerms = { this.checkedTerms } selectedChoice = { selectedChoice }/>,
           },
          { 
             step: "4",
