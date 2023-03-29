@@ -2,9 +2,8 @@
 @import '~office-ui-fabric-react/dist/sass/References.scss';
 .scw {
     .container {
-        // max-width: 700px;
         margin: 0px;
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+       
     }
 
     .row {
@@ -90,11 +89,7 @@
         margin-left: 100px;
     }
     .steps-content {
-        border: 1px dashed #e9e9e9;
-        border-radius: 2px;
-        background-color: #fafafa;
         min-height: 200px;
-        // text-align: center;
         padding-top: 50px;
     }
 
@@ -246,12 +241,7 @@
     }
 }
 
-// .close:hover {
-//     background-color: white;
-//     color: #FF510F;
-//     font-weight: bolder;
-//     border:none;
-// }
+
 
 .horizontalLine {
     border-bottom: 1px solid #605E5C;
