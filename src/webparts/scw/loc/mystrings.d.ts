@@ -75,6 +75,22 @@ declare interface IScwWebPartStrings {
   invite_owners_para3: string;
   invite_owners:string;
   invite_members:string;
+  invite_user_not_found: string;
+  invite_a_colleague: string;
+  review_info: string;
+  prev_btn: string;
+  next_btn: string;
+  submit_btn: string;
+  eng_desc: string;
+  fr_desc: string;
+  owners: string;
+  members: string;
+  close: string;
+  you_must_provide: string;
+  forget: string;
+  before_proceeding: string,
+  and_the: string;
+  the: string;
 
 }
 

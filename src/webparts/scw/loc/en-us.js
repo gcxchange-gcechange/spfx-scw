@@ -77,6 +77,23 @@ define([], function() {
     "invite_owners_para3": "If you don’t want to invite members just yet, no problem. We will provide detailed instructions on how to do this once your community has been created.",
     "invite_owners":"Invite owners",
     "invite_members":"Invite members",
+    "invite_user_not_found": "<strong>Can't find someone?</strong> It's likely they haven't registered yet for GCXchange. You can invite them to join GCXchange using the button below. Once they are registered, you will be able to add them to your community.",
+    "invite_a_colleague": "Invite a colleague to GCXchange",
+    "review_info":"Review that the information below is accurate, or edit them.",
+    "prev_btn":"Previous",
+    "next_btn": "Next",
+    "submit_btn": "Let’s do this",
+    'eng_desc': 'English description',
+    'fr_desc': 'French description',
+    'owners':'Owners',
+    'members':'Members',
+    'close': 'Close',
+    'you_must_provide':'You must provide',
+    'forget':'Did you forget something?',
+    'before_proceeding': 'before proceeding',
+    'and_the': '',
+    'the': '',
+
 
   }
 })

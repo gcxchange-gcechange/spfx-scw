@@ -68,7 +68,6 @@ export default class SecondStep extends React.Component< ISecondStepProps >  {
                         <div className={ styles.choiceCard }>
                             <div className={styles.cardHeading2}>
                                 {render(props)}
-                                <div>Hello</div>
                             </div>
                             <div className={styles.cardBody}>
                             { parse( this.strings.protected_cardText )}

@@ -69,6 +69,20 @@ define([], function() {
       "invite_owners_para3": "Si vous ne souhaitez pas encore inviter de membres, c’est correct. Nous vous fournirons des instructions détaillées sur la manière de procéder une fois que votre collectivité aura été créée.",
       "invite_owners":"Inviter les responsables",
       "invite_members":"Inviter les membres",
-  
+      "invite_user_not_found": "<strong>Vous ne trouvez pas quelqu’un?</strong> Il est probable qu’il ne se soit pas encore inscrit à GCÉchange. Vous pouvez l’inviter à rejoindre GCÉchange en utilisant le bouton ci-dessous. Une fois l’enregistrement effectué, vous pourrez l’ajouter à votre collectivité.",
+      "invite_a_colleague": "Inviter un collègue à GCÉchange",
+      "review_info": "Vérifiez que les renseignements ci-dessous sont exacts ou modifiez-les.",
+      "prev_btn":"Précédent",
+      "next_btn": "Suivant",
+      "submit_btn": "Allons-y",
+      'eng_desc': 'Description en anglais',
+      'fr_desc': 'Description en français',
+      'owners':'Responsables',
+      'members':'Membres',
+      'close': 'Fermer',
+      'you_must_provide':'Vous devez fournir',
+      'forget':'Vous avez oublié quelque chose?',
+      'before_proceeding': 'avant de poursuivre',
+
     } 
 });

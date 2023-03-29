@@ -4,6 +4,7 @@ import { IconButton } from "@fluentui/react/lib/Button";
 import styles from "./Scw.module.scss";
 import { Stack } from "office-ui-fabric-react/lib/Stack";
 import parse from 'html-react-parser';
+import { SelectLanguage } from './SelectLanguage';
 
 export interface IErrorModalProps {
   showModal: boolean;
@@ -18,6 +19,7 @@ export interface IErrorModalProps {
   checkedValues: boolean[];
   ownerList: string[];
   current: number;
+  prefLang: string;
 }
 
 export interface IErrorModalState {}
@@ -29,6 +31,8 @@ export default class ErrorModal extends React.Component<
   public constructor(props: IErrorModalProps, state: IErrorModalState) {
     super(props);
   }
+
+  public strings = SelectLanguage(this.props.prefLang);
 
   private modalStyle = {
     main: {
@@ -74,15 +78,15 @@ export default class ErrorModal extends React.Component<
     }
 
     const firstValues: PropValues[] = [
-      { name: "Community purpose", value: `${commPurpose}` },
-      { name: "English community name", value: `${engName}` },
-      { name: "French community name", value: `${frCommName}` },
-      { name: "Short English description", value: `${shEngDesc}` },
-      { name: "Short French description", value: `${shFrDesc}` },
+      { name: `${this.strings.commPurpose_title}`, value: `${commPurpose}` },
+      { name: `${this.strings.engName_title}`, value: `${engName}` },
+      { name: `${this.strings.frCommName_title}`, value: `${frCommName}` },
+      { name: `${this.strings.shEngDesc_title }`, value: `${shEngDesc}` },
+      { name: `${this.strings.shFrDesc_title}`, value: `${shFrDesc}` },
     ];
 
     const secondValues: PropValues[] = [
-      { name: "community classification", value: `${selectedChoice}` },
+      { name: `${this.strings.community_classification}`, value: `${selectedChoice}` },
     ];
    
     const thirdValues: PropValues[] = [
@@ -93,19 +97,19 @@ export default class ErrorModal extends React.Component<
       { name: "at least one more owner", value: `${ownerList.length}` },
     ];
     const lastValues: PropValues[] = [
-      { name: "Community Purpose", value: `${commPurpose}` },
-      { name: "English community name", value: `${engName}` },
-      { name: "French community name", value: `${frCommName}` },
-      { name: "Short English description", value: `${shEngDesc}` },
-      { name: "Short French description", value: `${shFrDesc}` },
+      { name: `${this.strings.commPurpose_title}`, value: `${commPurpose}` },
+      { name: `${this.strings.engName_title}`, value: `${engName}` },
+      { name: `${this.strings.frCommName_title}`, value: `${frCommName}` },
+      { name: `${this.strings.shEngDesc_title }`, value: `${shEngDesc}` },
+      { name: `${this.strings.shFrDesc_title}`, value: `${shFrDesc}` },
       { name: "second owner", value: `${ownerList.length}` },
     ];
 
     let message: string = "";
     const results: string[] = [];
-    const seperatorAndThe = '<span style="fontWeight:normal">, and the </span>';
-    const seperatorThe = '<span style="fontWeight:normal">, the </span>';
-    const seperatorTheNoComma = '<span style="fontWeight:normal"> the </span>';
+    const seperatorAndThe = `<span style="fontWeight:normal">, ${this.strings.and_the} </span>`;
+    const seperatorThe = `<span style="fontWeight:normal">, ${this.strings.the} </span>`;
+    const seperatorTheNoComma = `<span style="fontWeight:normal"> ${ this.strings.the } </span>`;
     const seperatorA = '<span style="fontWeight:normal"> a </span>';
     const seperatorAll = '<span style="fontWeight:normal"> all </span>';
 
@@ -180,7 +184,7 @@ export default class ErrorModal extends React.Component<
             }}
           >
             <div style={this.modalStyle.header}>
-              <h2>Did you forget something?</h2>
+              <h2>{ this.strings.forget }</h2>
               <IconButton
                 className={styles.cancelIcon}
                 iconProps={{ iconName: "Cancel" }}
@@ -190,7 +194,7 @@ export default class ErrorModal extends React.Component<
             <div style={this.modalStyle.footer}>
               <Stack>
                 <Stack.Item align="center">
-                  <p className={ styles.modalContent }>You must provide <strong>{messages}</strong> before proceeding</p>
+                  <p className={ styles.modalContent }>{ this.strings.you_must_provide } <strong>{messages}</strong> { this.strings.before_proceeding }</p>
                 </Stack.Item>
                 <Stack.Item>
                   <hr className={styles.horizontalLine} />
@@ -200,7 +204,7 @@ export default class ErrorModal extends React.Component<
                     onClick={this.props.onClose}
                     className={styles.close}
                   >
-                    CLOSE
+                    { this.strings.close }
                   </PrimaryButton>
                 </Stack.Item>
               </Stack>
