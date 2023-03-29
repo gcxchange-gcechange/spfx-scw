@@ -38,6 +38,19 @@ declare interface IScwWebPartStrings {
   members_Instruction: string;
   community_classification_desc: string;
   community_classification_link: string;
+  collaborate: string;
+  a_few_things: string;
+  to_create: string;
+  bilingual_name_smallText: string;
+  indentify_one_more_owner: string;
+  indentify_one_more_owner_smallText: string; 
+  protected_or_unclassified: string;
+  protected_or_unclassified_smallText: string;
+  Lets_go: string;
+  comm_desc_title: string;
+  comm_name: string;
+
+
 
 }
 

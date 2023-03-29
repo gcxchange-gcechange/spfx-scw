@@ -39,6 +39,21 @@ define([], function() {
     "owners_Instruction": 'Start typing an owner’s last name to find and add them.',
     "members_Instruction": 'Start typing an owner’s last name to find and add them.',
     "community_classification_desc": "To change the classification of your community, you need to go back to the Community classification page, and read the terms of use.",
-    "community_classification_link": "<u> Go to the <i>Community classification</i> page</u> "
+    "community_classification_link": "<u> Go to the <i>Community classification</i> page</u> ",
+    "collaborate":"Collaborate with colleagues across departments using Microsoft Teams and Sharepoint to share ideas, documents, and much more…",
+    "a_few_things":"A few things before you start",
+    "to_create": "To create a community, you will need to:",
+    "bilingual_name_smallText": "Communities’ name and description need to be fully bilingual to comply with the <i>Official Languages Act</i>",
+    "indentify_one_more_owner": "Identify at least <strong className={ styles.blue }>one more owner</strong>",
+    "indentify_one_more_owner_smallText": "Identifying more than one owner ensures the continuity of the community if one owner leaves",
+    "protected_or_unclassified": "Identify if your community will be <strong className={ styles.blue }>Protected</strong> or <strong className={ styles.blue }>Unclassified</strong>",
+    "protected_or_unclassified_smallText": "Terms and conditions for creating a protected  community will need to be accepted prior to creating one",
+    "Lets_go": "Let's go",
+    "comm_desc_title": "Community description",
+    "comm_name":"Community name",
+
+
+    
+
   }
 })

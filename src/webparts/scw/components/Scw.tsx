@@ -372,7 +372,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             title: this.strings.title_details,
             content: (
               <FirstStep
-              showModal = {showModal}
+                prefLang = { this.props.prefLang }
+                showModal = {showModal}
                 engName= { engName }
                 commPurpose= { commPurpose }
                 frCommName= { frCommName }
@@ -456,17 +457,17 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 { step === 0 
                 ? <>
                         <Initial
-                            context={this.props.context}
-                            prefLang={this.props.prefLang}
+                            context={ this.props.context }
+                            prefLang={ this.props.prefLang }
                         />
-                <PrimaryButton styles= { this.buttonStyle } text="Let's go" ariaLabel="Let's go" onClick= { () =>  { this.handleClickEvent()} } className= { styles.centerButton }/>
+                <PrimaryButton styles= { this.buttonStyle } text={ this.strings.Lets_go } ariaLabel="Let's go" onClick= { () =>  { this.handleClickEvent()} } className= { styles.centerButton }/>
                 </>
                 :
                 <div className= { styles.container }>
                     <div className= { styles.row }> 
                         <Steps current= { this.state.current } labelPlacement='vertical' items= { items } />
                         <div className="steps-content"> { steps[ this.state.current ].content }</div>
-                        {  showCallout && <Callouts prefLang={ this.props.prefLang } showCallout={showCallout}  targetId= { targetId } openCallout = {this.isCalloutVisible} /> }
+                        {  showCallout && <Callouts prefLang={ this.props.prefLang } showCallout={ showCallout }  targetId= { targetId } openCallout = {this.isCalloutVisible} /> }
                         <div className="steps-action">
                             <Stack horizontal horizontalAlign='space-between'>
                                 { this.state.current === 0 &&   <Button className={ styles.previousbtn }  onClick= { () => this.goToInitalPage() } > Previous </Button> }

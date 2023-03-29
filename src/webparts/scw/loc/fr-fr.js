@@ -6,7 +6,7 @@ define([], function() {
       "BasicGroupName": "Nom de groupe",
       "title_details": "Détails",
       "provide_bilingual_name": "Fournir un nom et des descriptions <strong>bilingues.",
-      "create_a_commuinity": "Créer une collectivité",
+      "create_a_community": "Créer une collectivité",
       "community_details": "Détails de la collectivité",
       "community_classification": "Classification de la collectivité",
       "terms": "Conditions d’utilisation des collectivités protégées",
@@ -31,7 +31,20 @@ define([], function() {
       "owners_Instruction": 'Commencez à taper le nom de famille d’un membre pour le trouver et l’ajouter.',
       "members_Instruction": 'Commencez à taper le nom de famille d’un membre pour le trouver et l’ajouter.',
       "community_classification_desc": "Pour modifier la classification de votre collectivité, vous devez retourner à la page sur la classification de la collectivité et lire les conditions d’utilisation.",
-      "community_classification_link": "Accéder à la page Classification de la collectivité "
+      "community_classification_link": "Accéder à la page Classification de la collectivité",
+      "collaborate": "Collaborer avec des collègues d’autres ministères en utilisant Microsoft Teams et Sharepoint pour échanger des idées, des documents, et bien plus encore…",
+      "a_few_things":"Quelques directives avant de commencer",
+      "to_create": "Pour créer une collectivité, vous devrez :",
+      "bilingual_name_smallText":"Indiquer le nom et la description de la collectivité et le tout doit être entièrement bilingue pour respecter la <i>Loi sur les langues officielles</i>",
+      "indentify_one_more_owner": "Indiquer au moins <strong className={ styles.blue }>un autre responsable</strong>",
+      "indentify_one_more_owner_smallText": "La désignation de plus d’un responsable garantit la continuité de la collectivité en cas de départ d’un responsable",
+      "protected_or_unclassified": "Indiquer si votre collectivité présentera des renseignements de niveau <strong className={ styles.blue }>Protégé</strong> ou <strong className={ styles.blue }>Non classifié</strong>",
+      "protected_or_unclassified_smallText": "Les conditions de création d’une collectivité protégée devront être acceptées avant la création d’une collectivité",
+      "Lets_go": "C’est parti…",
+      "comm_desc_title": "Description de la collectivité",
+      "comm_name":"Nom de la collectivité",
+
+   
 
   }
 });
