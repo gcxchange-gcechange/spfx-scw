@@ -83,6 +83,8 @@ define([], function() {
       'you_must_provide':'Vous devez fournir',
       'forget':'Vous avez oublié quelque chose?',
       'before_proceeding': 'avant de poursuivre',
+      'and_the': '',
+      'the': '',
 
     } 
 });
