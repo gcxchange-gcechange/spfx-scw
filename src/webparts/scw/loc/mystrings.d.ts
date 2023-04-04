@@ -91,6 +91,11 @@ declare interface IScwWebPartStrings {
   before_proceeding: string,
   and_the: string;
   the: string;
+  classification: string;
+  term_of_use: string;
+  owners_and_members: string;
+
+
 
 }
 

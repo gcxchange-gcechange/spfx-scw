@@ -173,7 +173,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
               <Text>{ message }</Text>
               <FocusZone>
                 <div className={ stylesCallout.buttons } >
-                  <PrimaryButton onClick={ this.props.openCallout } > Close </PrimaryButton>
+                            <PrimaryButton onClick={this.props.openCallout} > {this.strings.close} </PrimaryButton>
                 </div>
               </FocusZone>
             </div>

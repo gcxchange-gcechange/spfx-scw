@@ -93,6 +93,9 @@ define([], function() {
     'before_proceeding': 'before proceeding',
     'and_the': '',
     'the': '',
+    'classification': 'Classification',
+    'term_of_use': 'Terms of use',
+    'owners_and_members': 'Owners and members',
 
 
   }

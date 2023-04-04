@@ -387,7 +387,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
           },
          { 
             step: "2",
-            title: "Classification",
+             title: this.strings.classification,
             content: (
               <SecondStep
                 prefLang = { this.props.prefLang }
@@ -397,13 +397,13 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             ),
           },
          { 
-            step: "3",
-            title: "Terms of use",
+             step: "3",
+             title: this.strings.term_of_use,
             content: <ThirdStep prefLang={this.props.prefLang} checkedValues= { checkedValues } checkedTerms = { this.checkedTerms } selectedChoice = { selectedChoice }/>,
           },
          { 
-            step: "4",
-            title: "Owners & Members",
+             step: "4",
+             title: this.strings.owners_and_members,
             content: (
               <FourthStep
                 prefLang={this.props.prefLang}
@@ -416,8 +416,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             ),
           },
          { 
-            step: "5",
-            title: "Review & Submit",
+             step: "5",
+             title: this.strings.review_submit,
             content: (
               <LastStep
                 current= { current }
