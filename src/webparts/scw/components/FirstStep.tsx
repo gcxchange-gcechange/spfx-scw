@@ -63,8 +63,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             defaultValue={ commPurpose }  validateOnLoad= { false }  onGetErrorMessage={ this.getErrorMessage } />
 
             <h3>{ this.strings.comm_name }</h3>
-            <Stack tokens={stackTokens}>
-                <p>{ this.strings.engName_desc}</p>
+            <p className={ styles.topMgn0 }>{ this.strings.engName_desc}</p>
+            <Stack tokens={ stackTokens }>
                 <StackItem>
                     <Label htmlFor='engName' required styles={ labelStyle } >{ this.strings.engName_title }</Label>
                     <p className={ styles.instruction }>{ this.strings.engName_Instruction}</p>
@@ -78,8 +78,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             </Stack>
 
             <h3>{ this.strings.comm_desc_title }</h3>
-            <p> { this.strings.shEngDesc_desc }</p>
-            <Stack tokens={stackTokens}>
+            <p className={ styles.topMgn0 }> { this.strings.shEngDesc_desc }</p>
+            <Stack tokens={ stackTokens }>
                 <StackItem>
                     <Label htmlFor='shEngDesc' required  styles={ labelStyle } >{ this.strings.shEngDesc_title }</Label>
                     <p className={ styles.instruction }>{ this.strings.shEngDesc_Instruction }</p>
@@ -87,7 +87,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 </StackItem>
                 <StackItem>
                     <Label htmlFor='shFrDesc' required  styles={ labelStyle } >{ this.strings.shFrDesc_title }</Label>
-                    <p className={ styles.instruction }>{ this.strings.shFrDesc_Instruction}</p>
+                    <p className={ styles.instruction }>{ this.strings.shFrDesc_Instruction }</p>
                     <TextField id='shFrDesc' name='shFrDesc' onChange={this.onhandleChangeEvent} defaultValue={ shFrDesc } validateOnLoad= { false }  onGetErrorMessage={ this.getErrorMessage }/> 
                 </StackItem>
             </Stack>
