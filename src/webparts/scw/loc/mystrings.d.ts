@@ -26,7 +26,7 @@ declare interface IScwWebPartStrings {
   engName_desc: string;
   engName_Instruction: string;
   frCommName_title: string;
-  frCommName_desc:string;
+  frCommName_desc: string;
   frCommName_Instruction: string;
   shEngDesc_title: string;
   shEngDesc_desc: string;
@@ -57,24 +57,24 @@ declare interface IScwWebPartStrings {
   protected_para2: string;
   agree_to_terms: string;
   chk1: string;
-  chk1b:string;
+  chk1b: string;
   chk2: string;
-  chk2b:string;
+  chk2b: string;
   chk3: string;
-  chk3b:string;
+  chk3b: string;
   chk4: string;
-  chk4b:string;
+  chk4b: string;
   chk5: string;
-  chk5b:string;
-  chk6:string;
-  chk6b:string;
-  chk7:string;
-  chk7b:string;
+  chk5b: string;
+  chk6: string;
+  chk6b: string;
+  chk7: string;
+  chk7b: string;
   invite_owners_para1: string;
   invite_owners_para2: string;
   invite_owners_para3: string;
-  invite_owners:string;
-  invite_members:string;
+  invite_owners: string;
+  invite_members: string;
   invite_user_not_found: string;
   invite_a_colleague: string;
   review_info: string;
@@ -94,6 +94,8 @@ declare interface IScwWebPartStrings {
   classification: string;
   term_of_use: string;
   owners_and_members: string;
+  unclassified_cardTitle: string;
+  protected_cardTitle: string;
 
 
 

@@ -35,6 +35,7 @@ export default class SecondStep extends React.Component< ISecondStepProps >  {
 
     public render(): React.ReactElement<ISecondStepProps>  { 
 
+
         const flexSyle: Partial<IChoiceGroupStyles> = {
             flexContainer:{
                 display:'flex'
@@ -43,8 +44,8 @@ export default class SecondStep extends React.Component< ISecondStepProps >  {
 
 
         const templateChoice: IChoiceGroupOption[] = [
-            {   key: 'Unclassified community', 
-                text: 'Unclassified community', 
+            {   key: `${this.strings.unclassified_cardTitle}`, 
+                text: `${this.strings.unclassified_cardTitle}`, 
                 ariaLabel: 'Unclassified community' ,
                 onRenderField: (props, render) => {
                     return (
@@ -60,8 +61,8 @@ export default class SecondStep extends React.Component< ISecondStepProps >  {
                 }
             },
 
-             {  key: 'Protected A or B community', 
-                text:'Protected A or B community', 
+             {  key: `${this.strings.protected_cardTitle}`, 
+                text:`${this.strings.protected_cardTitle}`, 
                 ariaLabel: 'Protected A or B community',
                 onRenderField: (props, render) => {
                     return (
@@ -99,6 +100,7 @@ export default class SecondStep extends React.Component< ISecondStepProps >  {
 
       
         if (option.key === 'Unclassified community') {
+            console.log("this is the key",option.key)
             elementclass.classList.add(styles.checkedRadioButton1);
             
         } 

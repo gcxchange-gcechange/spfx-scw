@@ -87,7 +87,9 @@ define([], function() {
         'the': '',
         'classification': 'Classification',
         'term_of_use': 'Conditions d’utilisation',
-        'owners_and_members': 'Propriétaires et membres'
+        'owners_and_members': 'Propriétaires et membres',
+        'unclassified_cardTitle': 'Collectivité non classifiée',
+        'protected_cardTitle': 'Collectivité Protégé A ou B',
 
     } 
 });
