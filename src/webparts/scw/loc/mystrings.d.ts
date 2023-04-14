@@ -96,6 +96,9 @@ declare interface IScwWebPartStrings {
   owners_and_members: string;
   unclassified_cardTitle: string;
   protected_cardTitle: string;
+  one_more_owner: string;
+  second_owner: string;
+  you_must_agree: string;
 
 
 

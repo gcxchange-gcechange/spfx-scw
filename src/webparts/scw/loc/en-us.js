@@ -89,6 +89,7 @@ define([], function() {
     'members':'Members',
     'close': 'Close',
     'you_must_provide':'You must provide',
+    'you_must_agree':'You must agree to all',
     'forget':'Did you forget something?',
     'before_proceeding': 'before proceeding',
     'and_the': '',
@@ -96,6 +97,10 @@ define([], function() {
     'classification': 'Classification',
     'term_of_use': 'Terms of use',
     'owners_and_members': 'Owners and members',
+    'unclassified_cardTitle': 'Unclassified community',
+    'protected_cardTitle': 'Protected A or B community',
+    'one_more_owner':'at least one more owner',
+    'second_owner': 'second owner'
 
 
   }

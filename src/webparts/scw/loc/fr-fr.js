@@ -81,6 +81,7 @@ define([], function() {
         'members': 'Membres',
         'close': 'Fermer',
         'you_must_provide': 'Vous devez fournir',
+        'you_must_agree':'Vous devez accepter toutes les',
         'forget': 'Vous avez oublié quelque chose?',
         'before_proceeding': 'avant de poursuivre',
         'and_the': '',
@@ -90,6 +91,8 @@ define([], function() {
         'owners_and_members': 'Propriétaires et membres',
         'unclassified_cardTitle': 'Collectivité non classifiée',
         'protected_cardTitle': 'Collectivité Protégé A ou B',
+        'one_more_owner':'ajouter au moins un propriétaire supplémentaire',
+        'second_owner': 'propriétaire supplémentaire'
 
     } 
 });

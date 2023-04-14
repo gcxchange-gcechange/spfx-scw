@@ -65,6 +65,7 @@ export default class SecondStep extends React.Component< ISecondStepProps >  {
                 text:`${this.strings.protected_cardTitle}`, 
                 ariaLabel: 'Protected A or B community',
                 onRenderField: (props, render) => {
+                    console.log("props",props)
                     return (
                         <div className={ styles.choiceCard }>
                             <div className={styles.cardHeading2}>
