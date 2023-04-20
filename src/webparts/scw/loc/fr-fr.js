@@ -23,9 +23,11 @@ define([], function() {
         "frCommName_desc": "Le nom de la collectivité est le titre de votre collectivité. Créer un nom court et descriptif. Un nom bilingue respecte la Loi sur les langues officielles et permet aux autres de trouver plus facilement votre collectivité dans le catalogue GCÉchange. ",
         "frCommName_Instruction": 'Utiliser des mots-clés, et non des abréviations, pour une meilleure visibilité. La longueur doit être de 5 à 125 caractères et les caractères spéciaux ne sont pas autorisés.',
         "shEngDesc_title": 'Brève description en anglais',
+        "shEngDesc_Modal": "brève description en anglais",
         "shEngDesc_desc": 'La description de la collectivité sera visible pour les utilisateurs lorsqu’ils utiliseront la page « Toutes les collectivités » et lorsqu’ils font une recherche.',
         "shEngDesc_Instruction": 'Max. 33 caractères.',
-        "shFrDesc_title": 'Brève description en français ',
+        "shFrDesc_title": 'Brève description en français',
+        "shFrDesc_Modal": 'brève description en français',
         "shFrDesc_desc": 'La description de la collectivité sera visible pour les utilisateurs lorsqu’ils utiliseront la page « Toutes les collectivités » et lorsqu’ils font une recherche.',
         "shFrDesc_Instruction": 'Max. 33 caractères.',
         "owners_Instruction": 'Commencez à taper le nom de famille d’un membre pour le trouver et l’ajouter.',
@@ -84,15 +86,15 @@ define([], function() {
         'you_must_agree':'Vous devez accepter toutes les',
         'forget': 'Vous avez oublié quelque chose?',
         'before_proceeding': 'avant de poursuivre',
-        'and_the': '',
-        'the': '',
+        'and_the': 'et',
+        'the': 'le',
         'classification': 'Classification',
         'term_of_use': 'Conditions d’utilisation',
         'owners_and_members': 'Propriétaires et membres',
         'unclassified_cardTitle': 'Collectivité non classifiée',
         'protected_cardTitle': 'Collectivité Protégé A ou B',
-        'one_more_owner':'ajouter au moins un propriétaire supplémentaire',
-        'second_owner': 'propriétaire supplémentaire'
+        'one_more_owner':'ajouter au moins un autre propriétaire',
+        'second_owner': 'propriétaire'
 
     } 
 });

@@ -99,6 +99,9 @@ declare interface IScwWebPartStrings {
   one_more_owner: string;
   second_owner: string;
   you_must_agree: string;
+  shEngDesc_Modal: string;
+  shFrDesc_Modal: string;
+
 
 
 
