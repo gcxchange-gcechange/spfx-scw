@@ -15,17 +15,21 @@ declare interface IScwWebPartStrings {
   create_a_community: string;
   community_details: string;
   community_classification: string;
+  community_classification_Modal: string;
   terms: string;
   invite_owners_members: string;
   review_submit: string;
   unclassified_button: string;
   commPurpose_title: string;
+  commPurpose_Modal: string;
   commPurpose_desc: string;
   commPurpose_Instruction: string;
   engName_title: string;
+  engName_Modal: string;
   engName_desc: string;
   engName_Instruction: string;
   frCommName_title: string;
+  frCommName_Modal: string;
   frCommName_desc: string;
   frCommName_Instruction: string;
   shEngDesc_title: string;
@@ -86,10 +90,11 @@ declare interface IScwWebPartStrings {
   owners: string;
   members: string;
   close: string;
-  you_must_provide: string;
+  you_must: string;
+  provide: string;
   forget: string;
   before_proceeding: string,
-  and_the: string;
+  and: string;
   the: string;
   classification: string;
   term_of_use: string;
@@ -98,9 +103,10 @@ declare interface IScwWebPartStrings {
   protected_cardTitle: string;
   one_more_owner: string;
   second_owner: string;
-  you_must_agree: string;
+  agree: string;
   shEngDesc_Modal: string;
   shFrDesc_Modal: string;
+  select: string;
 
 
 

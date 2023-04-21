@@ -82,81 +82,60 @@ export default class ErrorModal extends React.Component<
     }
 
     const firstValues: PropValues[] = [
-      { name: `${ this.strings.commPurpose_title }`, value: `${commPurpose}` },
-      { name: `${ this.strings.engName_title }`, value: `${engName}` },
-      { name: `${ this.strings.frCommName_title }`, value: `${frCommName}` },
+      { name: `${ this.strings.commPurpose_Modal }`, value: `${commPurpose}` },
+      { name: `${ this.strings.engName_Modal }`, value: `${engName}` },
+      { name: `${ this.strings.frCommName_Modal }`, value: `${frCommName}` },
       { name: `${ this.strings.shEngDesc_Modal }`, value: `${shEngDesc}` },
-      { name: `${ this.strings.shFrDesc_Modal}`, value: `${shFrDesc}` },
+      { name: `${ this.strings.shFrDesc_Modal }`, value: `${shFrDesc}` },
     ];
 
     const secondValues: PropValues[] = [
-      { name: `${ this.strings.community_classification }`, value: `${selectedChoice}` },
+      { name: `${ this.strings.community_classification_Modal }`, value: `${selectedChoice}` },
     ];
    
     const thirdValues: PropValues[] = [
-      { name: `${ this.strings.term_of_use }`, value: `${checkedValues.length}` },
+      { name: `${ this.strings.term_of_use.toLowerCase() }`, value: `${checkedValues.length}` },
     ];
 
     const fourthValues: PropValues[] = [
       { name: `${ this.strings.one_more_owner }`, value: `${ownerList.length}` },
     ];
     const lastValues: PropValues[] = [
-      { name: `${ this.strings.commPurpose_title }`, value: `${commPurpose}` },
-      { name: `${ this.strings.engName_title }`, value: `${engName}` },
-      { name: `${ this.strings.frCommName_title }`, value: `${frCommName}` },
-      { name: `${ this.strings.shEngDesc_title }`, value: `${shEngDesc}` },
-      { name: `${ this.strings.shFrDesc_title }`, value: `${shFrDesc}` },
+      { name: `${ this.strings.commPurpose_Modal }`, value: `${commPurpose}` },
+      { name: `${ this.strings.engName_Modal }`, value: `${engName}` },
+      { name: `${ this.strings.frCommName_Modal }`, value: `${frCommName}` },
+      { name: `${ this.strings.shEngDesc_Modal }`, value: `${shEngDesc}` },
+      { name: `${ this.strings.shFrDesc_Modal }`, value: `${shFrDesc}` },
       { name: `${ this.strings.second_owner }`, value: `${ownerList.length}` },
     ];
 
     let message: string = "";
     const results: string[] = [];
-    const seperatorAndThe = `<span style="fontWeight:normal">, ${ this.strings.and_the} </span>`;
-    const seperatorThe = `<span style="fontWeight:normal">, ${ this.strings.the} </span>`;
-    const seperatorTheNoComma = `<span style="fontWeight:normal"> ${ this.strings.the } </span>`;
-    const seperatorA = '<span style="fontWeight:normal"> a </span>';
-    const seperatorUne = '<span style="fontWeight:normal">, une </span>';
+    const comma = `<span style="fontWeight:normal">, </span>`;
 
     for (const obj of firstValues) {
       if (current === 0 && obj.value === "") {
         results.push(obj.name);
-
-        if (results.length > 2 && this.props.prefLang === 'en-en') {
-          message =
-            results.slice(0, -1).join(`${seperatorThe}`) + `${ seperatorAndThe }` + results.slice(-1);
+        
+        if (results.length > 1) {
+          message =  `${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` + results.slice(-1)
+          
         } 
-        else if (results.length > 2 && this.props.prefLang === 'fr-fr' ) {
-          // message =
-          // results.slice(0, -1).join(`${seperatorThe}`) + `${ seperatorAndThe }`+ results.slice(-1);
-
-          message =  results.slice(0, -1)
-          .map(word => {
-            console.log("word", word.charAt(0))
-          if (word.charAt(0) === 'b') {
-              return `${seperatorUne} + ${word}`;
-          }
-          return word;
-        })
-        .join(seperatorThe) + results.slice(-1);
-        }
-        else if ( results.length === 2 ){
-          message = results.join(`${seperatorAndThe}`) ;
-        }
         else if ( results.length === 1 ) {
-          message = `${seperatorTheNoComma} ${obj.name}`
+          message = `${obj.name}`
         }
       }
     }
 
     for (const obj of secondValues) {
       if (current === 1 && obj.value === "") {
-        message = `${seperatorA} ${obj.name}`;
+        message = `${this.strings.select }  ${obj.name}`;
       }
     }
 
     for (const obj of thirdValues) {
       if (current === 2 && (obj.value === '' || obj.value < 7)) {
-        message += `${ obj.name.toLowerCase() }`;
+        message += `${this.strings.agree} ${ obj.name }`;
       }
     }
 
@@ -170,15 +149,12 @@ export default class ErrorModal extends React.Component<
       if (current === 4 && (obj.value === '' || obj.value < 2)) {
         results.push(obj.name);
      
-        if ( results.length > 2 ) {
-          message =
-            results.slice(0, -1).join(`${seperatorThe}`) + `${ seperatorAndThe }` +  results.slice(-1);
+        if ( results.length > 1 ) {
+          message =  `${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` + results.slice(-1)
         } 
-        else if ( results.length === 2 )  {
-          message = results.join(`${seperatorAndThe}`)
-        }
+       
         else if (results.length === 1) {
-          message = `${seperatorTheNoComma} ${obj.name}`
+          message = `${this.strings.provide} ${obj.name}`
         }
       }
     }
@@ -212,7 +188,7 @@ export default class ErrorModal extends React.Component<
             <div style={ this.modalStyle.footer}>
               <Stack>
                 <Stack.Item align="center">
-                  <p className={ styles.modalContent }>{ this.props.checkedValues.length !== 0 ? this.strings.you_must_agree : this.strings.you_must_provide } <strong>{messages}</strong> { this.strings.before_proceeding }</p>
+                  <p className={ styles.modalContent }>{ this.strings.you_must } <strong>{messages}</strong> { this.strings.before_proceeding }</p>
                 </Stack.Item>
                 <Stack.Item>
                   <hr className={styles.horizontalLine} />
