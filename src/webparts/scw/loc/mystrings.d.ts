@@ -20,6 +20,14 @@ declare interface IScwWebPartStrings {
   invite_owners_members: string;
   review_submit: string;
   unclassified_button: string;
+  CommPurpose: string;
+  title_complete: string;
+  thank_you: string;
+  complete_content: string;
+  complete_img_alt: string;
+  complete_button: string;
+
+  
   commPurpose_title: string;
   commPurpose_Modal: string;
   commPurpose_desc: string;

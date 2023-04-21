@@ -27,7 +27,8 @@ export default class Title extends React.Component<ITitleProps> {
 					`${this.strings.community_classification}`, 
 					`${this.strings.terms}`,
 					`${this.strings.invite_owners_members}`,
-					`${this.strings.review_submit}`
+					`${this.strings.review_submit}`,
+                    `${ this.strings.title_complete }`
 				]
         
         let title:string = '';
@@ -42,14 +43,17 @@ export default class Title extends React.Component<ITitleProps> {
         else if ( current === 1) {
             title = `${ titles[1] }`;
         }
-        else if (current === 2 ) {
+        else if ( current === 2 ) {
             title = `${ titles[2] }`;
         }
-        else if (current === 3 ) {
+        else if ( current === 3 ) {
             title=`${ titles[3] }`;
         } 
-        else if (current === 4 ) {
+        else if ( current === 4 ) {
                 title= `${ titles[4] }`;
+        }
+        else if ( current === 5 ) {
+            title= `${ titles[5] }`
         }
         return title;
      }
@@ -59,7 +63,7 @@ export default class Title extends React.Component<ITitleProps> {
 
         return(
             <>
-				{ this.props.step !== 0 && <h2 className={ styles.mainTitle }>{ this.strings.create_a_community }</h2> }
+				{ this.props.step !== 0 && <h2 className={ styles.mainTitle }> { this.strings.create_a_community } </h2> }
                 <h2 style={{ marginTop: '0px' }}>{ this.pageTitle() }</h2>
             </>
         );
