@@ -464,8 +464,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
 
         const items = steps.map( item => ( item.title !== '0' ?  { key: item.step, title: item.title} : null));
-        console.log("checkedVal", this.state.checkedValues);
-        console.log("modalState", this.state.showModal);
+        // console.log("checkedVal", this.state.checkedValues);
+        // console.log("modalState", this.state.showModal);
 
         return (
             <div className= { styles.scw }>
@@ -484,10 +484,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                         <Steps current= { this.state.current } labelPlacement='vertical' items= { items } />
                         <div className="steps-content"> { steps[ this.state.current ].content }</div>
                         {  showCallout && <Callouts prefLang={ this.props.prefLang } showCallout={ showCallout }  targetId= { targetId } openCallout = {this.isCalloutVisible} /> }
+                        { this.state.showModal === true && <ErrorModal prefLang={ this.props.prefLang } current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } selectedChoice={ selectedChoice } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } /> } 
                         <div className="steps-action">
                             <Stack horizontal horizontalAlign='space-between'>
                                 { this.state.current === 0 &&   <Button className={ styles.previousbtn }  onClick= { () => this.goToInitalPage() } >{ this.strings.prev_btn }</Button> }
-                                { this.state.showModal === true && <ErrorModal prefLang={ this.props.prefLang } current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } selectedChoice={ selectedChoice } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } /> } 
                                 { this.state.current > 0 && (<Button className={styles.previousbtn} style={{ display: 'inline-block', overflow: 'visible', whiteSpace: 'break-spaces', height:'auto'}}  onClick= { () => this.prev() } > { this.state.current === 2 && selectedChoice === `${this.strings.protected_cardTitle}` ?  `${ this.strings.unclassified_button }` : `${ this.strings.prev_btn }` } </Button> ) }
                                 { this.state.current < steps.length - 1 && (this.state.current !== 2 || selectedChoice === `${ this.strings.unclassified_cardTitle }` ) && (<Button className={ styles.largebtn } type="primary" onClick= { this.next} > { this.strings.next_btn } </Button> )}
                                 { this.state.current < steps.length - 1 && (this.state.current === 2 && selectedChoice === `${ this.strings.protected_cardTitle }`) && (<Button className={ styles.largebtn } style={{ height: '54px'}} type="primary" onClick= { this.next} >{ this.strings.next_btn }</Button> ) }
