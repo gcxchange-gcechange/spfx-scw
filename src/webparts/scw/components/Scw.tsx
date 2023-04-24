@@ -88,6 +88,11 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
        
         const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, selectedChoice, checkedValues, ownerList } = this.state
 
+        const filtered = checkedValues.filter((value, index) => {
+            return checkedValues.indexOf(value) === index
+          });
+        console.log("filtered",filtered)
+
         
        if ( !commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc) {
    
@@ -99,7 +104,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
              this.setState({ showModal: true });
        }
        
-       else if ( current === 2 &&  selectedChoice === `${this.strings.protected_cardTitle}` && checkedValues.length < 7 ) {
+       else if ( current === 2 &&  selectedChoice === `${this.strings.protected_cardTitle}` && filtered.length < 7 ) {
                 
                 this.setState({ showModal: true });
        } 
@@ -386,17 +391,29 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     }
 
     public checkedTerms = ( event: any, isChecked:boolean ):void => {
-        const id = event
-        console.log("id", id);
-        if( isChecked) {
+        const id = event;
+
+        if( isChecked === true ) {
+            console.log("Iam checked")
+            // this.setState({
+            //     checkedValues: [...this.state.checkedValues, id]
+            // })
             this.setState(prevState => ({
                 checkedValues: [...prevState.checkedValues, id]
             }));
-        } else {
-            this.setState(prevState => ({
-                checkedValues: [...prevState.checkedValues.filter((selectedId) => selectedId !== id)]
-            }))
+        } 
+
+        else {
+            console.log("Iam not")
+            const newArray = this.state.checkedValues.slice();
+            newArray.splice(id, 1)
+
+            this.setState({
+                checkedValues: newArray
+            })
+            console.log("cV", this.state.checkedValues)
         }
+
       
     }
    
@@ -433,8 +450,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 title: this.strings.title_details,
                 content: (
                 <FirstStep
-                  prefLang = { this.props.prefLang }
-                showModal = {showModal}
+                    prefLang = { this.props.prefLang }
+                    showModal = {showModal}
                     engName= { engName }
                     commPurpose= { commPurpose }
                     frCommName= { frCommName }
@@ -448,27 +465,27 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             },
             { 
                 step: "2",
-                 title: this.strings.classification,
+                title: this.strings.classification,
                 content: (
                 <SecondStep
                     prefLang = { this.props.prefLang }
-                selectedChoice= { selectedChoice }
+                    selectedChoice= { selectedChoice }
                     handleSelectedChoice= { this.selectedChoiceCallback}
                 />
                 ),
             },
             { 
-                 step: "3",
-                 title: this.strings.term_of_use,
+                step: "3",
+                title: this.strings.term_of_use,
                 content: <ThirdStep prefLang={this.props.prefLang} checkedValues= { checkedValues } checkedTerms = { this.checkedTerms } selectedChoice = { selectedChoice }/>,
             },
             { 
-                 step: "4",
-                 title: this.strings.owners_and_members,
+                step: "4",
+                title: this.strings.owners_and_members,
                 content: (
                 <FourthStep
                     prefLang={this.props.prefLang}
-                context= { this.props.context }
+                    context= { this.props.context }
                     ownerList= { ownerList }
                     memberList= { memberList }
                     getOwnersCallback= { this.handleOwnerCallback }
@@ -477,13 +494,13 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 ),
             },
             { 
-                 step: "5",
-                 title: this.strings.review_submit,
+                step: "5",
+                title: this.strings.review_submit,
                 content: (
                 <LastStep
                     current= { current }
-                prefLang={this.props.prefLang}
-                engName= { engName }
+                    prefLang={this.props.prefLang}
+                    engName= { engName }
                     commPurpose= { commPurpose }
                     frCommName= { frCommName }
                     selectedChoice= { selectedChoice }
@@ -493,18 +510,16 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     memberList= { memberList }
                     context= { this.props.context }
                     showCallout = { showCallout}
-                targetId = { targetId }
-                commPurposeCallback={ this.commPurposeCallback }
+                    targetId = { targetId }
+                    commPurposeCallback={ this.commPurposeCallback }
                     handleEngNameCallback= { this.handleEngNameCallback }
                     frNameCallBack= { this.frNameCallback }
                     getOwnersCallback= { this.handleOwnerCallback }
                     getMemberCallback= { this.handleMemberCallback }
                     handleFrDescCallback= { this.frDescCallback }
                     handleEngDescCallback= { this.engDescCallback }
-                  isCalloutVisible ={ this.isCalloutVisible }
-                getElementId={this.getElementId}
-
-                
+                    isCalloutVisible ={ this.isCalloutVisible }
+                    getElementId={this.getElementId}
               />
                 ),
             },
@@ -522,8 +537,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
 
         const items = steps.map( item => ( item.step !== '6' ?  { key: item.step, title: item.title} : null));
-                // console.log("checkedVal", this.state.checkedValues);
-        // console.log("modalState", this.state.showModal);
+        console.log("checkedVal", this.state.checkedValues);
 
         return (
             <div className= { styles.scw }>

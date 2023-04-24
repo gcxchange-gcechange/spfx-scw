@@ -74,7 +74,9 @@ export default class ErrorModal extends React.Component<
       ownerList,
     } = this.props;
 
-  
+  const filtered = checkedValues.filter((value, index) => {
+    return checkedValues.indexOf(value) === index
+  });
 
     interface PropValues {
       name: string;
@@ -94,7 +96,7 @@ export default class ErrorModal extends React.Component<
     ];
    
     const thirdValues: PropValues[] = [
-      { name: `${ this.strings.term_of_use.toLowerCase() }`, value: `${checkedValues.length}` },
+      { name: `${ this.strings.term_of_use.toLowerCase() }`, value: `${filtered.length}` },
     ];
 
     const fourthValues: PropValues[] = [
@@ -134,6 +136,7 @@ export default class ErrorModal extends React.Component<
     }
 
     for (const obj of thirdValues) {
+      console.log("thirdValues", obj.value)
       if (current === 2 && (obj.value === '' || obj.value < 7)) {
         message += `${this.strings.agree} ${ obj.name }`;
       }

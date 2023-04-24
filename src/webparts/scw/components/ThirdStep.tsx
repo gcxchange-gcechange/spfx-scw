@@ -16,15 +16,21 @@ export interface IThirdStepProps {
     checkedTerms?:( checked: string, isChecked: boolean ) => void; 
     selectedChoice: string;
   }
+
+export interface IThirdStepState {
+    // selectedIdValue: any[];
+}
  
 
-export default class ThirdStep extends React.Component<IThirdStepProps> {
+export default class ThirdStep extends React.Component<IThirdStepProps, IThirdStepState> {
 
     public strings = SelectLanguage(this.props.prefLang);
 
     public constructor(props: IThirdStepProps) {
         super(props);
-        
+        // this.state = {
+        //     selectedIdValue: []
+        // }   
     }
 
     private onChange = ( event: React.ChangeEvent<HTMLInputElement>, isChecked:boolean ): void => {
@@ -32,10 +38,17 @@ export default class ThirdStep extends React.Component<IThirdStepProps> {
         console.log("checked", event.target.checked);
         console.log("isChecked", isChecked);
 
-        if (isChecked) {
+        if (isChecked === true) {
             this.props.checkedTerms( checkBoxId, isChecked)
         } 
-    
+        // else {
+        //     const addtoArray:any = this.state.selectedIdValue.push(checkBoxId)
+        //     this.setState({
+        //         selectedIdValue: addtoArray
+        //     })
+
+        //     this.props.checkedTerms(addtoArray, isChecked)
+        // }
         
     }
     
