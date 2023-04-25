@@ -4,12 +4,15 @@ import { Stack } from 'office-ui-fabric-react';
 import { ChoiceGroup, IChoiceGroupOption, IChoiceGroupStyles } from 'office-ui-fabric-react/lib/ChoiceGroup';
 import * as React from 'react';
 import styles from './Scw.module.scss';
+import { SelectLanguage } from './SelectLanguage';
+import parse from 'html-react-parser';
 
 
 
 
 
 export interface ISecondStepProps  { 
+    prefLang: string;
     selectedChoice: string;
     handleSelectedChoice?: ( selectedChoice: string ) => void;
 
@@ -25,12 +28,13 @@ export default class SecondStep extends React.Component< ISecondStepProps >  {
     public constructor( props: ISecondStepProps )  { 
         super(props);
 
-     
-
     }
+
+    public strings = SelectLanguage(this.props.prefLang);
 
 
     public render(): React.ReactElement<ISecondStepProps>  { 
+
 
         const flexSyle: Partial<IChoiceGroupStyles> = {
             flexContainer:{
@@ -40,8 +44,8 @@ export default class SecondStep extends React.Component< ISecondStepProps >  {
 
 
         const templateChoice: IChoiceGroupOption[] = [
-            { key: 'Unclassified community', 
-                text: 'Unclassified community', 
+            {   key: `${this.strings.unclassified_cardTitle}`, 
+                text: `${this.strings.unclassified_cardTitle}`, 
                 ariaLabel: 'Unclassified community' ,
                 onRenderField: (props, render) => {
                     return (
@@ -50,25 +54,25 @@ export default class SecondStep extends React.Component< ISecondStepProps >  {
                                 {render(props)}
                             </div>
                             <div className={styles.cardBody}>
-                                No, I don't need to store protected information.<strong> All users will be able to find your community, and search for it.</strong>
+                                { parse( this.strings.unclassified_cardText )}
                             </div>
                         </div>  
                     )
                 }
             },
 
-             {  key: 'Protected A or B community', 
-                text:'Protected A or B community', 
+             {  key: `${this.strings.protected_cardTitle}`, 
+                text:`${this.strings.protected_cardTitle}`, 
                 ariaLabel: 'Protected A or B community',
                 onRenderField: (props, render) => {
+                    console.log("props",props)
                     return (
                         <div className={ styles.choiceCard }>
                             <div className={styles.cardHeading2}>
                                 {render(props)}
                             </div>
                             <div className={styles.cardBody}>
-                            Yes, I need to store protected information such as: consent forms, personal information, contact details for individuals or organizations, financial documentation, or others
-                            documents that, if compromised, <strong>could cause injury to an individual, organization or government</strong>
+                            { parse( this.strings.protected_cardText )}
                             </div>
                         </div>  
                     );
@@ -81,9 +85,7 @@ export default class SecondStep extends React.Component< ISecondStepProps >  {
 
             <>
 
-                <p>You may ned to store protected documents or information in your community's library. GCXchange can provide a space for protected information up to Protected B. First,
-                    let's find out whether you will be storing protected documents in your community.
-                </p>
+                <p>{ this.strings.comm_classification_para1 }</p>
                 <Stack horizontalAlign='center'>
                     <ChoiceGroup id='choiceGroup' options={templateChoice} required={true} onChange={this.onSelectedKey} styles={ flexSyle } defaultSelectedKey={this.props.selectedChoice}/>
                 </Stack>
@@ -99,6 +101,7 @@ export default class SecondStep extends React.Component< ISecondStepProps >  {
 
       
         if (option.key === 'Unclassified community') {
+            console.log("this is the key",option.key)
             elementclass.classList.add(styles.checkedRadioButton1);
             
         } 

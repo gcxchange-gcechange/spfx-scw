@@ -4,6 +4,7 @@ import * as React from 'react';
 import { IButtonStyles, IconButton, IIconProps, Label, Stack, TextField  } from 'office-ui-fabric-react';
 import {  WebPartContext  } from '@microsoft/sp-webpart-base';
 import { PeoplePicker, PrincipalType } from '@pnp/spfx-controls-react/lib/PeoplePicker';
+import { SelectLanguage } from './SelectLanguage';
 
 
 
@@ -45,8 +46,9 @@ export default class LastStep extends React.Component<ILastStepProps> {
         super(props);
 
         
-     }
-
+    }
+    
+    public strings = SelectLanguage(this.props.prefLang);
   
     private  onUpdateCommPurpose = (event: React.ChangeEvent<HTMLInputElement>) :void => {
         const updatedPurpose = event.target.value.trim();    
@@ -121,40 +123,40 @@ export default class LastStep extends React.Component<ILastStepProps> {
             
             <>
                
-                <p>Review that the information below is accurate, or edit them </p>
+                <p>{ this.strings.review_info }</p>
                 <Stack horizontal verticalAlign='end'>
-                    <Label htmlFor='commPurpose' required >Community purpose </Label>
+                    <Label htmlFor='commPurpose' required >{ this.strings.commPurpose_title }</Label>
                     <IconButton ariaLabel="information" id='commPurpose' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={ this.onUpdateCommPurpose }  onGetErrorMessage={ this.getErrorMessage } /> 
                 
 
                 <Stack horizontal verticalAlign='end'>
-                    <Label htmlFor='name'required >English community name</Label>
+                    <Label htmlFor='name'required >{ this.strings.engName_title }</Label>
                     <IconButton  ariaLabel="information" id='Engname' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='name' defaultValue={ engName }  onChange={ this.onUpdateEngName } onGetErrorMessage={ this.getErrorMessage }  />  
 
                 <Stack horizontal verticalAlign='end'>
-                    <Label htmlFor='FrCommName' required >French community name</Label>
+                    <Label htmlFor='FrCommName' required >{ this.strings.frCommName_title }</Label>
                     <IconButton  ariaLabel="information" id='FrCommName' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='FrCommName' defaultValue={ frCommName } onChange={ this.onUpdateFrName } onGetErrorMessage={ this.getErrorMessage }/>
 
                 <Stack horizontal verticalAlign='end'>
-                    <Label htmlFor='shEngDesc'required >English description</Label>
+                    <Label htmlFor='shEngDesc'required >{ this.strings.eng_desc }</Label>
                     <IconButton  ariaLabel="information" id='shEngDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='shEngDesc' defaultValue={ shEngDesc } onChange={ this.onUpdateEngDesc } onGetErrorMessage={ this.getErrorMessage }/>
 
                 <Stack horizontal verticalAlign='end'>
-                    <Label htmlFor='shFrDesc'required >French description</Label>
+                    <Label htmlFor='shFrDesc'required >{ this.strings.fr_desc }</Label>
                     <IconButton  ariaLabel="information" id='shFrDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } onGetErrorMessage={ this.getErrorMessage }/>
 
                 <Stack horizontal verticalAlign='end'>
-                    <Label htmlFor='classification'required >Community classification</Label>
+                    <Label htmlFor='classification'required >{ this.strings.community_classification }</Label>
                     <IconButton ariaLabel="information" id='classification' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField style={{ background:'#eaeaea'}} id='classification' value={selectedChoice}/>
@@ -162,7 +164,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
 
 
                 <Stack horizontal verticalAlign ="end">
-                    <Label>Invite Owners</Label>
+                    <Label>{ this.strings.owners }</Label>
                     <IconButton id ="owners" styles  = { iconStyles } iconProps = { infoIcon } ariaLabel ="InfoIcon" onClick={this.showCalloutVisible }/>
                 </Stack>
                 <PeoplePicker
@@ -178,7 +180,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 />
 
                 <Stack horizontal verticalAlign ="end">
-                    <Label>Invite Members</Label>
+                    <Label>{ this.strings.members }</Label>
                     <IconButton id ="members" styles  = { iconStyles } iconProps = { infoIcon } ariaLabel ="InfoIcon" onClick={this.showCalloutVisible }/>
                 </Stack>
                 <PeoplePicker

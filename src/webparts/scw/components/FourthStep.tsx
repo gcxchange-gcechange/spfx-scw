@@ -7,6 +7,7 @@ import styles from './Scw.module.scss';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { IButtonStyles, PrimaryButton, Stack } from 'office-ui-fabric-react';
 import { SelectLanguage } from './SelectLanguage';
+import parse from 'html-react-parser';
 
 
 
@@ -84,11 +85,9 @@ export default class FourthStep extends React.Component<IFourthStepProps> {
         return (
             <>
 
-                <p>As as GCXchange owner you can modify your community and invite other users to your community, so they can caollaborate with your in Microsoft Teams.</p>
-                <p>We need to <strong>add at least one more owner</strong> before your community can be created.</p>
-                <p>You can <strong>add members</strong> to your GXChange community before it goes live. You can only add individuals who <strong>already have a GCXchange account.</strong> If an 
-                individual {`doesn't`}  have an account, you can invite them to sign up below. If you {`don't`} want to invite members just yet, no problem. We will provide detailed instructions on how
-                to do this once your community has been created. Please note, users <strong>cannot</strong> request to join a protected community, so it is up to the owner to make sure they have invited all members.</p>
+                <p>{ this.strings.invite_owners_para1 }</p>
+                <p>{ parse( this.strings.invite_owners_para2 ) }</p>
+                <p>{ parse( this.strings.invite_owners_para3 ) }</p>
                 
                 <AddUsers 
                 prefLang={this.props.prefLang}
@@ -107,13 +106,12 @@ export default class FourthStep extends React.Component<IFourthStepProps> {
                             <Icon iconName='Zoom' className={styles.magnifyingIcon}/>
                         </Stack.Item>
                         <Stack.Item align='center'>
-                            <p><strong>Can't find someone?</strong> It's likely they haven't registered yet fort GCXhange.You can invite them to join GCXchange using the button below. Once they are registered, 
-                            you will be able to add them to your community.</p>
+                            <p>{ parse( this.strings.invite_user_not_found )}</p>
                         </Stack.Item>
                         </Stack>
                         <Stack>
                         <Stack.Item>
-                            <PrimaryButton styles={ buttonStyles } >Invite a colleague to GCXchange</PrimaryButton>
+                            <PrimaryButton styles={ buttonStyles } >{ this.strings.invite_a_colleague}</PrimaryButton>
                         </Stack.Item>
                     </Stack>
                 </div>
