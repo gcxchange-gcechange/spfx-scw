@@ -1,19 +1,28 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable dot-notation */
 import { Checkbox, ICheckboxStyles, IStackStyles, Label, Stack, StackItem } from 'office-ui-fabric-react';
 import * as React from 'react';
 import styles from './Scw.module.scss';
+import { SelectLanguage } from './SelectLanguage';
+import parse from 'html-react-parser';
+
 
 
 
 export interface IThirdStepProps { 
-    checkedValues: boolean[];
-    checkedTerms?:( checked: boolean ) => void; 
+    prefLang: string;
+    checkedValues: any[];
+    checkedTerms?:( checked: string, isChecked: boolean ) => void; 
     selectedChoice: string;
   }
+
+
  
 
 export default class ThirdStep extends React.Component<IThirdStepProps> {
+
+    public strings = SelectLanguage(this.props.prefLang);
 
     public constructor(props: IThirdStepProps) {
         super(props);
@@ -21,7 +30,13 @@ export default class ThirdStep extends React.Component<IThirdStepProps> {
     }
 
     private onChange = ( event: React.ChangeEvent<HTMLInputElement>, isChecked:boolean ): void => {
-        this.props.checkedTerms( isChecked )
+        const checkBoxId = event.target.id;
+        // console.log("checked", event.target.checked);
+        // console.log("isChecked", isChecked);
+
+        this.props.checkedTerms( checkBoxId, isChecked)
+        
+        
     }
     
     
@@ -51,54 +66,50 @@ export default class ThirdStep extends React.Component<IThirdStepProps> {
            }
         };
 
-        console.log("Third", this.props.selectedChoice);
 
     
         return (
             
             <>
-            { this.props.selectedChoice === 'Protected A or B community' ? 
+            { this.props.selectedChoice === `${this.strings.protected_cardTitle}` ? 
             <div>
-                <p>Looks like you need a space to store protected documents and information on GCXchange. We have a few terms of use for protected communities.</p>
-                <p>The security of documents is the responsability of all members on GCXchange, including yourself. We ask that you review your departmental security guidelines
-                    to make sure youy are familiar with your responsabilities and so that you can inform your members about their responsabilities, before agreeing to the terms of use below.
-                </p>
-                <Label required>I agree to the terms of use below</Label>
+                <p>{ this.strings.protected_para1 }</p>
+                <p>{ this.strings.protected_para2 }</p>
+                <Label required>{ this.strings.agree_to_terms }</Label>
                 <Stack tokens = { stackTokens } styles={ stackStyles }>
                     <StackItem>
-                        <Checkbox  styles={checkBoxStyles} label='Protected communities are only visible to members that have been invited by the communitys owner.' onChange={ this.onChange } defaultChecked={this.props.checkedValues[0]} />
-                        <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>I understand that my community will only be visible to members.</strong></p>
+                        <Checkbox id='1' styles={checkBoxStyles} label={`${ this.strings.chk1 }`} onChange={ this.onChange } defaultChecked={this.props.checkedValues[0]}/>
+                        <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>{ this.strings.chk1b }</strong></p>
                     </StackItem>
                     <StackItem>
-                        <Checkbox styles={checkBoxStyles} label='All members of a protected community must have a governement-issued phone with the Microsoft Authenticator app enabled.' onChange={ this.onChange } defaultChecked={this.props.checkedValues[1]}/>
-                        <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>I understand that my community members must meet these requirements to access my community.</strong></p>
+                        <Checkbox id='2' styles={checkBoxStyles} label={`${ this.strings.chk2 }`}  onChange={ this.onChange }  defaultChecked={this.props.checkedValues[1]}/>
+                        <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>{ this.strings.chk2b }</strong></p>
                     </StackItem>
                     <StackItem>
-                        <Checkbox  styles={checkBoxStyles} label='All members must use a government-issued devide and have MyKey activated to access a protected B community.' onChange={ this.onChange } defaultChecked={this.props.checkedValues[2]}/>
-                        <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>I understand that my community members must meet these requirements to access my community. </strong></p>
+                        <Checkbox id='3' styles={checkBoxStyles} label={`${ this.strings.chk3 }`}  onChange={ this.onChange }  defaultChecked={this.props.checkedValues[2]}/>
+                        <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>{ this.strings.chk3b }</strong></p>
                     </StackItem>
                     <StackItem>
-                        <Checkbox styles={checkBoxStyles} label='Users must have a reliability clearance to access a protected space and a need to know the information stored within.' onChange={ this.onChange } defaultChecked={this.props.checkedValues[3]}/>
-                        <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>I understand that my community members must meet these requirements to access my community. </strong></p>
+                        <Checkbox id='4' styles={checkBoxStyles} label={`${ this.strings.chk4 }`}  onChange={ this.onChange }  defaultChecked={this.props.checkedValues[3]}/>
+                        <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>{ this.strings.chk4b } </strong></p>
                     </StackItem>
                     <StackItem>
-                        <Checkbox styles={checkBoxStyles} label='We cant guarantee timely support for classified communities. Our Support Team doesnt have direct access to these sites until they are added as members.' onChange={ this.onChange } defaultChecked={this.props.checkedValues[4]}/>
-                        <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>I agree to limited access to GCXchange support.</strong></p>
+                        <Checkbox id='5' styles={checkBoxStyles} label={`${ this.strings.chk5 }`}  onChange={ this.onChange }  defaultChecked={this.props.checkedValues[4]}/>
+                        <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>{ this.strings.chk5b }</strong></p>
                     </StackItem>
                     <StackItem>
-                        <Checkbox styles={checkBoxStyles} label='Only users with a need to know protected information should be included in a community. When a member changes roles this need to know changes too.' onChange={ this.onChange } defaultChecked={this.props.checkedValues[5]}/>
-                        <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>I will regularly review membership on my community and remove members who have changed roles</strong></p>
+                        <Checkbox id='6' styles={checkBoxStyles} label={`${ this.strings.chk6 }`}  onChange={ this.onChange }  defaultChecked={this.props.checkedValues[5]}/>
+                        <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>{ this.strings.chk6b }</strong></p>
                     </StackItem>
                     <StackItem>
-                        <Checkbox styles={checkBoxStyles} label='GCXchange has a retention policy of 2 years for all documents and should only be used to store transitory information.' onChange={ this.onChange } defaultChecked={this.props.checkedValues[6]}/>
-                        <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>I agree to back up my community documents on my department's official repository if they contain information of business value.</strong></p>
+                        <Checkbox id='7' styles={checkBoxStyles} label={`${ this.strings.chk7 }`}  onChange={ this.onChange }  defaultChecked={this.props.checkedValues[6]}/>
+                        <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>{ this.strings.chk7b }</strong></p>
                     </StackItem>
                 </Stack>
             </div>
                 : 
                     <div>
-                        <p>The information you are storing is unclassified so you won't need a classified document space. 
-                            Make sure <strong>not to store</strong> any classified documents in your library. If you are unsure what information is classified you can check with your departmental security policy or information management branch. </p>
+                        <p>{ parse( this.strings.unclassified )}</p>
                     </div>
                 }
             </>
