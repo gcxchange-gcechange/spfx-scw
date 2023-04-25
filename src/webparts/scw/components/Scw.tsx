@@ -393,11 +393,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     public checkedTerms = ( event: any, isChecked:boolean ):void => {
         const id = event;
 
-        if( isChecked === true ) {
+        if ( isChecked === true ) {
             console.log("Iam checked")
-            // this.setState({
-            //     checkedValues: [...this.state.checkedValues, id]
-            // })
+           
             this.setState(prevState => ({
                 checkedValues: [...prevState.checkedValues, id]
             }));
@@ -405,13 +403,13 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         else {
             console.log("Iam not")
-            const newArray = this.state.checkedValues.slice();
-            newArray.splice(id, 1)
+            const newArray = this.state.checkedValues.filter((item) => item !== id)
+            
 
             this.setState({
                 checkedValues: newArray
             })
-            console.log("cV", this.state.checkedValues)
+           
         }
 
       
