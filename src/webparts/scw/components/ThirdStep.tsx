@@ -31,8 +31,8 @@ export default class ThirdStep extends React.Component<IThirdStepProps> {
 
     private onChange = ( event: React.ChangeEvent<HTMLInputElement>, isChecked:boolean ): void => {
         const checkBoxId = event.target.id;
-        console.log("checked", event.target.checked);
-        console.log("isChecked", isChecked);
+        // console.log("checked", event.target.checked);
+        // console.log("isChecked", isChecked);
 
         this.props.checkedTerms( checkBoxId, isChecked)
         
