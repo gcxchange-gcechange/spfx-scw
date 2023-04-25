@@ -40,7 +40,7 @@ export interface IScwState  {
     selectedChoice: string;
     errorMessage: string;
     showModal: boolean;
-    checkedValues: boolean[];
+    checkedValues: string[];
     isLoading: boolean;
     validationStatus: number;
     showCallout: boolean;
@@ -88,6 +88,11 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
        
         const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, selectedChoice, checkedValues, ownerList } = this.state
 
+        const filtered = checkedValues.filter((value, index) => {
+            return checkedValues.indexOf(value) === index
+          });
+        console.log("filtered",filtered)
+
         
        if ( !commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc) {
    
@@ -99,7 +104,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
              this.setState({ showModal: true });
        }
        
-       else if ( current === 2 &&  selectedChoice === 'Protected A or B community' && checkedValues.length < 7 ) {
+       else if ( current === 2 &&  selectedChoice === `${this.strings.protected_cardTitle}` && filtered.length < 7 ) {
                 
                 this.setState({ showModal: true });
        } 
@@ -139,9 +144,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
            
             this.setState({ showModal: true });
         }
-        else    if ( current === 2 && selectedChoice === 'Protected A or B community') {
+        else    if ( current === 2 && selectedChoice === `${ this.strings.protected_cardTitle }`) {
 
-            this.setState({ selectedChoice: 'Unclassified community' })
+            this.setState({ selectedChoice: `${ this.strings.unclassified_cardTitle }`})
         }
         else {
             
@@ -385,11 +390,28 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         });
     }
 
-    public checkedTerms = ( isChecked: boolean ):void => {
-        this.setState(prevState => ({
-            checkedValues: [...prevState.checkedValues, isChecked]
-        }));
+    public checkedTerms = ( event: any, isChecked:boolean ):void => {
+        const id = event;
+
+        if ( isChecked === true ) {
+           
+            this.setState(prevState => ({
+                checkedValues: [...prevState.checkedValues, id]
+            }));
+        } 
+
+        else {
+            const newArray = this.state.checkedValues.filter((item) => item !== id)
+            
+            this.setState({
+                checkedValues: newArray
+            })
+           
+        }
+
+      
     }
+   
 
      
     public isCalloutVisible = ():void => {
@@ -423,7 +445,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 title: this.strings.title_details,
                 content: (
                 <FirstStep
-                showModal = {showModal}
+                    prefLang = { this.props.prefLang }
+                    showModal = {showModal}
                     engName= { engName }
                     commPurpose= { commPurpose }
                     frCommName= { frCommName }
@@ -437,9 +460,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             },
             { 
                 step: "2",
-                title: "Classification",
+                title: this.strings.classification,
                 content: (
                 <SecondStep
+                    prefLang = { this.props.prefLang }
                     selectedChoice= { selectedChoice }
                     handleSelectedChoice= { this.selectedChoiceCallback}
                 />
@@ -447,16 +471,16 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             },
             { 
                 step: "3",
-                title: "Terms of use",
-                content: <ThirdStep checkedValues= { checkedValues } checkedTerms = { this.checkedTerms } selectedChoice = { selectedChoice }/>,
+                title: this.strings.term_of_use,
+                content: <ThirdStep prefLang={this.props.prefLang} checkedValues= { checkedValues } checkedTerms = { this.checkedTerms } selectedChoice = { selectedChoice }/>,
             },
             { 
                 step: "4",
-                title: "Owners & Members",
+                title: this.strings.owners_and_members,
                 content: (
                 <FourthStep
                     prefLang={this.props.prefLang}
-                context= { this.props.context }
+                    context= { this.props.context }
                     ownerList= { ownerList }
                     memberList= { memberList }
                     getOwnersCallback= { this.handleOwnerCallback }
@@ -466,12 +490,12 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             },
             { 
                 step: "5",
-                title: "Review & Submit",
+                title: this.strings.review_submit,
                 content: (
                 <LastStep
                     current= { current }
-                prefLang={this.props.prefLang}
-                engName= { engName }
+                    prefLang={this.props.prefLang}
+                    engName= { engName }
                     commPurpose= { commPurpose }
                     frCommName= { frCommName }
                     selectedChoice= { selectedChoice }
@@ -481,18 +505,16 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     memberList= { memberList }
                     context= { this.props.context }
                     showCallout = { showCallout}
-                targetId = { targetId }
-                commPurposeCallback={ this.commPurposeCallback }
+                    targetId = { targetId }
+                    commPurposeCallback={ this.commPurposeCallback }
                     handleEngNameCallback= { this.handleEngNameCallback }
                     frNameCallBack= { this.frNameCallback }
                     getOwnersCallback= { this.handleOwnerCallback }
                     getMemberCallback= { this.handleMemberCallback }
                     handleFrDescCallback= { this.frDescCallback }
                     handleEngDescCallback= { this.engDescCallback }
-                  isCalloutVisible ={ this.isCalloutVisible }
-                getElementId={this.getElementId}
-
-                
+                    isCalloutVisible ={ this.isCalloutVisible }
+                    getElementId={this.getElementId}
               />
                 ),
             },
@@ -510,22 +532,25 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
 
         const items = steps.map( item => ( item.step !== '6' ?  { key: item.step, title: item.title} : null));
-        
+       
+
         return (
             <div className= { styles.scw }>
                 <Title current={ current } step={ step } prefLang={this.props.prefLang} />
                 { step === 0 
                 ? <>
                         <Initial
-                            context={this.props.context}
-                            prefLang={this.props.prefLang}
+                            context={ this.props.context }
+                            prefLang={ this.props.prefLang }
                         />
-                <PrimaryButton styles= { this.buttonStyle } text="Let's go" ariaLabel="Let's go" onClick= { () =>  { this.handleClickEvent()} } className= { styles.centerButton }/>
+                <PrimaryButton styles= { this.buttonStyle } text={ this.strings.Lets_go } ariaLabel="Let's go" onClick= { () =>  { this.handleClickEvent()} } className= { styles.centerButton }/>
                 </>
                 :
                 <div className= { styles.container }>
                     <div className= { styles.row }> 
                         <Steps current= { this.state.current } labelPlacement='vertical' items= { items } />
+                        {  showCallout && <Callouts prefLang={ this.props.prefLang } showCallout={ showCallout }  targetId= { targetId } openCallout = {this.isCalloutVisible} /> }
+                        { this.state.showModal === true && <ErrorModal prefLang={ this.props.prefLang } current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } selectedChoice={ selectedChoice } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } /> } 
                         <div className="steps-content"> 
                             { this.state.isLoading ? 
                                 (<Spinner size={ SpinnerSize.large }/>) : this.state.validationStatus === 400 && steps[this.state.current].step ==='5'
@@ -540,18 +565,17 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                                 steps[ this.state.current ].content
                             }   
                         </div>
-                        {  showCallout && <Callouts prefLang={ this.props.prefLang } showCallout={showCallout}  targetId= { targetId } openCallout = {this.isCalloutVisible} /> }
+                       
                         <div className="steps-action">
                             <Stack horizontal horizontalAlign='space-between'>
-                                { this.state.current === 0 &&   <Button className={ styles.previousbtn }  onClick= { () => this.goToInitalPage() } > Previous </Button> }
-                                { this.state.showModal === true && <ErrorModal current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } selectedChoice={ selectedChoice } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } /> } 
+                                { this.state.current === 0 &&   <Button className={ styles.previousbtn }  onClick= { () => this.goToInitalPage() } >{ this.strings.prev_btn }</Button> }
                                 { this.state.current > 0 &&  (this.state.current !== 4 && steps[this.state.current].step !== '5' || steps[this.state.current].step !== '6')
-                                && ( <Button id='prev'className={ styles.previousbtn } style={{ display: 'inline-block', overflow: 'visible', whiteSpace: 'break-spaces', height:'auto'}}  onClick= { () => this.prev() } > { this.state.current === 2 && selectedChoice === `Protected A or B community`?  `${ this.strings.unclassified_button }` : `Previous` } </Button> ) 
+                                && ( <Button id='prev'className={ styles.previousbtn } style={{ display: 'inline-block', overflow: 'visible', whiteSpace: 'break-spaces', height:'auto'}}  onClick= { () => this.prev() } > { this.state.current === 2 && selectedChoice === `${this.strings.protected_cardTitle}` ?  `${ this.strings.unclassified_button }` : `${ this.strings.prev_btn }` } </Button> ) 
                                  }
-                                { this.state.current < steps.length - 2 && ( this.state.current !== 2 || selectedChoice === 'Unclassified community' ) && (<Button className={ styles.largebtn } type="primary" onClick= { this.next} >Next</Button> )}
-                                { this.state.current < steps.length - 2 && ( this.state.current === 2 && selectedChoice === `Protected A or B community` ) && (<Button className={ styles.largebtn } style={{ height: '54px'}} type="primary" onClick= { this.next} >Next</Button> ) }
+                                { this.state.current < steps.length - 2 && ( this.state.current !== 2 || selectedChoice === `${ this.strings.unclassified_cardTitle }` ) && (<Button className={ styles.largebtn } type="primary" onClick= { this.next} > { this.strings.next_btn } </Button> )}
+                                { this.state.current < steps.length - 2 && ( this.state.current === 2 && selectedChoice === `${ this.strings.protected_cardTitle }` ) && (<Button className={ styles.largebtn } style={{ height: '54px'}} type="primary" onClick= { this.next} >{ this.strings.next_btn }</Button> ) }
                                 { this.state.current === steps.length - 2 && 
-                                ( <Button id="submit" className={ styles.largebtn } type="primary" onClick= { this.successMessage} >Let's do this</Button> )}
+                                ( <Button id="submit" className={ styles.largebtn } type="primary" onClick= { this.successMessage} > { this.strings.submit_btn } </Button> )}
                             </Stack>
                         </div>
                     </div>

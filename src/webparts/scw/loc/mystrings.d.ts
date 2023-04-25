@@ -15,6 +15,7 @@ declare interface IScwWebPartStrings {
   create_a_community: string;
   community_details: string;
   community_classification: string;
+  community_classification_Modal: string;
   terms: string;
   invite_owners_members: string;
   review_submit: string;
@@ -28,13 +29,16 @@ declare interface IScwWebPartStrings {
 
   
   commPurpose_title: string;
+  commPurpose_Modal: string;
   commPurpose_desc: string;
   commPurpose_Instruction: string;
   engName_title: string;
+  engName_Modal: string;
   engName_desc: string;
   engName_Instruction: string;
   frCommName_title: string;
-  frCommName_desc:string;
+  frCommName_Modal: string;
+  frCommName_desc: string;
   frCommName_Instruction: string;
   shEngDesc_title: string;
   shEngDesc_desc: string;
@@ -46,6 +50,74 @@ declare interface IScwWebPartStrings {
   members_Instruction: string;
   community_classification_desc: string;
   community_classification_link: string;
+  collaborate: string;
+  a_few_things: string;
+  to_create: string;
+  bilingual_name_smallText: string;
+  indentify_one_more_owner: string;
+  indentify_one_more_owner_smallText: string; 
+  protected_or_unclassified: string;
+  protected_or_unclassified_smallText: string;
+  Lets_go: string;
+  comm_desc_title: string;
+  comm_name: string;
+  unclassified_cardText: string;
+  protected_cardText: string;
+  comm_classification_para1: string;
+  unclassified: string;
+  protected_para1: string;
+  protected_para2: string;
+  agree_to_terms: string;
+  chk1: string;
+  chk1b: string;
+  chk2: string;
+  chk2b: string;
+  chk3: string;
+  chk3b: string;
+  chk4: string;
+  chk4b: string;
+  chk5: string;
+  chk5b: string;
+  chk6: string;
+  chk6b: string;
+  chk7: string;
+  chk7b: string;
+  invite_owners_para1: string;
+  invite_owners_para2: string;
+  invite_owners_para3: string;
+  invite_owners: string;
+  invite_members: string;
+  invite_user_not_found: string;
+  invite_a_colleague: string;
+  review_info: string;
+  prev_btn: string;
+  next_btn: string;
+  submit_btn: string;
+  eng_desc: string;
+  fr_desc: string;
+  owners: string;
+  members: string;
+  close: string;
+  you_must: string;
+  provide: string;
+  forget: string;
+  before_proceeding: string,
+  and: string;
+  the: string;
+  classification: string;
+  term_of_use: string;
+  owners_and_members: string;
+  unclassified_cardTitle: string;
+  protected_cardTitle: string;
+  one_more_owner: string;
+  second_owner: string;
+  agree: string;
+  shEngDesc_Modal: string;
+  shFrDesc_Modal: string;
+  select: string;
+
+
+
 
 }
 

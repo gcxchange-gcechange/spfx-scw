@@ -56,7 +56,7 @@ export default class AUsers extends React.Component<IAddUsersProps> {
                 <PeoplePicker
                     context = { this.props.context }
                     required = { true }
-                    titleText ="Invite Owners"
+                    titleText ={`${ this.strings.invite_owners}`}
                     personSelectionLimit = { 3 }
                     groupName = { "" } // Leave this blank in case you want to filter from all users
                     onChange = { this._getOwnerItems }
@@ -72,7 +72,7 @@ export default class AUsers extends React.Component<IAddUsersProps> {
 
                 <PeoplePicker
                     context = { this.props.context }
-                    titleText ="Invite Members"
+                    titleText ={`${ this.strings.invite_members}`}
                     personSelectionLimit = { 1000 }
                     groupName = { "" } // Leave this blank in case you want to filter from all users
                     onChange = { this._getMemberItems}
