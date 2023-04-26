@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
 import { Modal, PrimaryButton } from "@fluentui/react";
 import { IconButton } from "@fluentui/react/lib/Button";
 import styles from "./Scw.module.scss";
 import { Stack } from "office-ui-fabric-react/lib/Stack";
 import parse from 'html-react-parser';
+import { SelectLanguage } from './SelectLanguage';
 
 export interface IErrorModalProps {
   showModal: boolean;
@@ -15,9 +17,10 @@ export interface IErrorModalProps {
   shEngDesc: string;
   shFrDesc: string;
   selectedChoice: string;
-  checkedValues: boolean[];
+  checkedValues: string[];
   ownerList: string[];
   current: number;
+  prefLang: string;
 }
 
 export interface IErrorModalState {}
@@ -29,6 +32,8 @@ export default class ErrorModal extends React.Component<
   public constructor(props: IErrorModalProps, state: IErrorModalState) {
     super(props);
   }
+
+  public strings = SelectLanguage(this.props.prefLang);
 
   private modalStyle = {
     main: {
@@ -56,6 +61,7 @@ export default class ErrorModal extends React.Component<
   };
 
   public errorMessage = (): string => {
+   
     const {
       current,
       commPurpose,
@@ -68,73 +74,71 @@ export default class ErrorModal extends React.Component<
       ownerList,
     } = this.props;
 
+  const filtered = checkedValues.filter((value, index) => {
+    return checkedValues.indexOf(value) === index
+  });
+
     interface PropValues {
       name: string;
-      value: string | boolean | number;
+      value: any;
     }
 
     const firstValues: PropValues[] = [
-      { name: "Community purpose", value: `${commPurpose}` },
-      { name: "English community name", value: `${engName}` },
-      { name: "French community name", value: `${frCommName}` },
-      { name: "Short English description", value: `${shEngDesc}` },
-      { name: "Short French description", value: `${shFrDesc}` },
+      { name: `${ this.strings.commPurpose_Modal }`, value: `${commPurpose}` },
+      { name: `${ this.strings.engName_Modal }`, value: `${engName}` },
+      { name: `${ this.strings.frCommName_Modal }`, value: `${frCommName}` },
+      { name: `${ this.strings.shEngDesc_Modal }`, value: `${shEngDesc}` },
+      { name: `${ this.strings.shFrDesc_Modal }`, value: `${shFrDesc}` },
     ];
 
     const secondValues: PropValues[] = [
-      { name: "community classification", value: `${selectedChoice}` },
+      { name: `${ this.strings.community_classification_Modal }`, value: `${selectedChoice}` },
     ];
-    console.log("SV",secondValues)
+   
     const thirdValues: PropValues[] = [
-      { name: "terms of use", value: `${checkedValues.length}` },
+      { name: `${ this.strings.term_of_use.toLowerCase() }`, value: `${filtered.length}` },
     ];
 
     const fourthValues: PropValues[] = [
-      { name: "at least one more owner", value: `${ownerList.length}` },
+      { name: `${ this.strings.one_more_owner }`, value: `${ownerList.length}` },
     ];
     const lastValues: PropValues[] = [
-      { name: "Community Purpose", value: `${commPurpose}` },
-      { name: "English community name", value: `${engName}` },
-      { name: "French community name", value: `${frCommName}` },
-      { name: "Short English description", value: `${shEngDesc}` },
-      { name: "Short French description", value: `${shFrDesc}` },
-      { name: "second owner", value: `${ownerList.length}` },
+      { name: `${ this.strings.commPurpose_Modal }`, value: `${commPurpose}` },
+      { name: `${ this.strings.engName_Modal }`, value: `${engName}` },
+      { name: `${ this.strings.frCommName_Modal }`, value: `${frCommName}` },
+      { name: `${ this.strings.shEngDesc_Modal }`, value: `${shEngDesc}` },
+      { name: `${ this.strings.shFrDesc_Modal }`, value: `${shFrDesc}` },
+      { name: `${ this.strings.second_owner }`, value: `${ownerList.length}` },
     ];
 
     let message: string = "";
     const results: string[] = [];
-    const seperatorAndThe = '<span style="fontWeight:normal">, and the </span>';
-    const seperatorThe = '<span style="fontWeight:normal">, the </span>';
-    const seperatorTheNoComma = '<span style="fontWeight:normal"> the </span>';
-    const seperatorA = '<span style="fontWeight:normal"> a </span>';
-    const seperatorAll = '<span style="fontWeight:normal"> all </span>';
+    const comma = `<span style="fontWeight:normal">, </span>`;
 
     for (const obj of firstValues) {
       if (current === 0 && obj.value === "") {
         results.push(obj.name);
-
-        if (results.length > 2 ) {
-          message =
-            results.slice(0, -1).join(`${seperatorThe}`) + `${ seperatorAndThe }` + results.slice(-1);
+        
+        if (results.length > 1) {
+          message =  `${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` + results.slice(-1)
+          
         } 
-        else if ( results.length === 2 ){
-          message = results.join(`${seperatorAndThe}`) ;
-        }
         else if ( results.length === 1 ) {
-          message = `${seperatorTheNoComma} ${obj.name}`
+          message = `${obj.name}`
         }
       }
     }
 
     for (const obj of secondValues) {
       if (current === 1 && obj.value === "") {
-        message = `${seperatorA} ${obj.name}`;
+        message = `${this.strings.select }  ${obj.name}`;
       }
     }
 
     for (const obj of thirdValues) {
-      if (current === 2 && (obj.value === "" || obj.value < 7)) {
-        message += `${seperatorAll} ${obj.name}`;
+      console.log("thirdValues", obj.value)
+      if (current === 2 && (obj.value === '' || obj.value < 7)) {
+        message += `${this.strings.agree} ${ obj.name }`;
       }
     }
 
@@ -147,16 +151,13 @@ export default class ErrorModal extends React.Component<
     for (const obj of lastValues) {
       if (current === 4 && (obj.value === '' || obj.value < 2)) {
         results.push(obj.name);
-        console.log("res",results);
-        if ( results.length > 2 ) {
-          message =
-            results.slice(0, -1).join(`${seperatorThe}`) + `${ seperatorAndThe }` +  results.slice(-1);
+     
+        if ( results.length > 1 ) {
+          message =  `${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` + results.slice(-1)
         } 
-        else if ( results.length === 2 )  {
-          message = results.join(`${seperatorAndThe}`)
-        }
+       
         else if (results.length === 1) {
-          message = `${seperatorTheNoComma} ${obj.name}`
+          message = `${this.strings.provide} ${obj.name}`
         }
       }
     }
@@ -172,35 +173,35 @@ export default class ErrorModal extends React.Component<
       <>
         <div>
           <Modal
-            isOpen={this.props.showModal}
-            onDismiss={this.props.onClose}
-            isBlocking={true}
+            isOpen={ this.props.showModal}
+            onDismiss={ this.props.onClose}
+            isBlocking={ true}
             styles={{
               main: this.modalStyle.main,
             }}
           >
-            <div style={this.modalStyle.header}>
-              <h2>Did you forget something?</h2>
+            <div style={ this.modalStyle.header}>
+              <h2>{ this.strings.forget }</h2>
               <IconButton
                 className={styles.cancelIcon}
                 iconProps={{ iconName: "Cancel" }}
-                onClick={this.props.onClose}
+                onClick={ this.props.onClose}
               />
             </div>
-            <div style={this.modalStyle.footer}>
+            <div style={ this.modalStyle.footer}>
               <Stack>
                 <Stack.Item align="center">
-                  <p className={ styles.modalContent }>You must provide <strong>{messages}</strong> before proceeding</p>
+                  <p className={ styles.modalContent }>{ this.strings.you_must } <strong>{messages}</strong> { this.strings.before_proceeding }</p>
                 </Stack.Item>
                 <Stack.Item>
                   <hr className={styles.horizontalLine} />
                 </Stack.Item>
                 <Stack.Item align="center">
                   <PrimaryButton
-                    onClick={this.props.onClose}
+                    onClick={ this.props.onClose}
                     className={styles.close}
                   >
-                    CLOSE
+                    { this.strings.close }
                   </PrimaryButton>
                 </Stack.Item>
               </Stack>

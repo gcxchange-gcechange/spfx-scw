@@ -1,6 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react/no-unescaped-entities */
 import * as React from 'react';
 import { WebPartContext } from '@microsoft/sp-webpart-base';
 import AddUsers from './AddUsers';
+import styles from './Scw.module.scss';
+import { Icon } from 'office-ui-fabric-react/lib/Icon';
+import { IButtonStyles, PrimaryButton, Stack } from 'office-ui-fabric-react';
+import { SelectLanguage } from './SelectLanguage';
+import parse from 'html-react-parser';
 
 
 
@@ -9,8 +16,10 @@ export interface IFourthStepProps  {
     context: WebPartContext;
     ownerList: string[];
     memberList: string[];
+    prefLang: string;
     getOwnersCallback?: (item: []) => void;
     getMemberCallback?: (item: []) => void;
+
  }
 
  export interface IPerson {
@@ -21,6 +30,7 @@ export interface IFourthStepProps  {
  
 
 export default class FourthStep extends React.Component<IFourthStepProps> {
+    public strings = SelectLanguage(this.props.prefLang);
    
 
     constructor(props: IFourthStepProps) {
@@ -46,28 +56,65 @@ export default class FourthStep extends React.Component<IFourthStepProps> {
         this.props.getMemberCallback(items)
     }
 
+    
       
     
 
     public render(): React.ReactElement<IFourthStepProps>  {
 
+        const buttonStyles: IButtonStyles = {
+            
+            root: {
+                color: '#004db8',
+                backgroundColor: '#c0c0cc',
+                borderColor: '#c0c0cc'
+            },
+
+            rootHovered: {
+                color: '#4096ff',
+                background: '#c0c0cc',
+                borderColor: '#4096ff'
+            },
+            
+            label: {
+                fontWeight: 'normal'
+            }
+        }
+
 
         return (
             <>
 
-                <p>As as GCXchange owner you can modify your community and invite other users to your community, so they can caollaborate with your in Microsoft Teams.</p>
-                <p>We need to <strong>add at least one more owner</strong> before your community can be created.</p>
-                <p>You can <strong>add members</strong> to your GXChange community before it goes live. You can only add individuals who <strong>already have a GCXchange account.</strong> If an 
-                individual {`doesn't`}  have an account, you can invite them to sign up below. If you {`don't`} want to invite members just yet, no problem. We will provide detailed instructions on how
-                to do this once your community has been created.</p>
+                <p>{ this.strings.invite_owners_para1 }</p>
+                <p>{ parse( this.strings.invite_owners_para2 ) }</p>
+                <p>{ parse( this.strings.invite_owners_para3 ) }</p>
                 
                 <AddUsers 
+                prefLang={this.props.prefLang}
                 context={this.props.context} 
-                ownerList={this.props.ownerList} 
+                ownerList={this.props.ownerList}
                 memberList={this.props.memberList} 
                 getOwnersCallback={this.handleOwnerCallback} 
                 getMemberCallback={this.handleMemberCallback}
                 />
+
+
+                <div className={styles.inviteContainer}>
+                    
+                    <Stack horizontal>
+                        <Stack.Item align='center'>
+                            <Icon iconName='Zoom' className={styles.magnifyingIcon}/>
+                        </Stack.Item>
+                        <Stack.Item align='center'>
+                            <p>{ parse( this.strings.invite_user_not_found )}</p>
+                        </Stack.Item>
+                        </Stack>
+                        <Stack>
+                        <Stack.Item>
+                            <PrimaryButton styles={ buttonStyles } >{ this.strings.invite_a_colleague}</PrimaryButton>
+                        </Stack.Item>
+                    </Stack>
+                </div>
             </>
         );
     }

@@ -1,9 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable dot-notation */
 import * as React from 'react';
-import {  Label, TextField  } from 'office-ui-fabric-react';
+import { IButtonStyles, IconButton, IIconProps, Label, Stack, TextField  } from 'office-ui-fabric-react';
 import {  WebPartContext  } from '@microsoft/sp-webpart-base';
-import AddUsers from './AddUsers';
+import { PeoplePicker, PrincipalType } from '@pnp/spfx-controls-react/lib/PeoplePicker';
+import { SelectLanguage } from './SelectLanguage';
+
+
+
 
 
 export interface ILastStepProps { 
@@ -16,6 +20,10 @@ export interface ILastStepProps {
     shEngDesc: string;
     shFrDesc: string;
     selectedChoice: string;
+    showCallout: boolean;
+    targetId: string;
+    prefLang: string;
+    current: number;
     commPurposeCallback?: (commPurpose: string) => void;
     handleEngNameCallback?: (engNameValue: string ) => void;
     frNameCallBack?:(frNameValue: string)=> void;
@@ -23,105 +31,169 @@ export interface ILastStepProps {
     handleEngDescCallback?:(engDescValue: string ) => void;
     getOwnersCallback?: (item: []) => void;
     getMemberCallback?: (item: []) => void;
+    isCalloutVisible?: ()=> void;  
+    getElementId?: (id: string) => void;
+    handleButtonClick?: () => void;
+
+
 
   }
- 
 
-export default class FirstStep extends React.Component<ILastStepProps> {
+
+export default class LastStep extends React.Component<ILastStepProps> {
 
     public constructor(props: ILastStepProps) {
         super(props);
-        
-     }
 
+        
+    }
+    
+    public strings = SelectLanguage(this.props.prefLang);
   
     private  onUpdateCommPurpose = (event: React.ChangeEvent<HTMLInputElement>) :void => {
         const updatedPurpose = event.target.value.trim();    
-        this.setState({ commPurpose: updatedPurpose });
-        //send it to the parent
         this.props.commPurposeCallback(updatedPurpose); 
      }
 
     private  onUpdateEngName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
         const updatedName = event.target.value.trim();    
-        this.setState({ engName: updatedName });
-        //send it to the parent
         this.props.handleEngNameCallback(updatedName); 
      }
     
     private  onUpdateFrName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
         const updateFrName = event.target.value.trim();
-        this.setState({ frCommName: updateFrName });
-        //send it to the parent
         this.props.frNameCallBack(updateFrName)    
      }
 
      private onUpdateEngDesc = (event: React.ChangeEvent<HTMLInputElement>) :void => {
         const updateEngDesc = event.target.value;
-        this.setState({ shEngDesc: updateEngDesc });
-        //send it to the parent
         this.props.handleEngDescCallback(updateEngDesc)    
      }
 
     private  onUpdateFrDesc = (event: React.ChangeEvent<HTMLInputElement>) :void => {
         const updateFrDesc = event.target.value.trim();
-        this.setState({ shFrDesc: updateFrDesc });
-        //send it to the parent
         this.props.handleFrDescCallback(updateFrDesc)    
      }
 
-    private updateDefaultOwnerValues = ( username: []):void  => {
+
+    public showCalloutVisible = ( event:any ):void => {
+        
+        const id = event.currentTarget.id;
+
+        this.props.isCalloutVisible();
+        this.elementId(id)
+    }
+
+    public elementId = (id: string ):void => {
+        this.props.getElementId(id)
+    }
+
+    public updateDefaultOwnerValues = ( username: []):void  => {   
+        
         const newValues = username;
 
-        this.setState({ ownerList: newValues })
+        this.props.getOwnersCallback( newValues );//pass to parent
+    };
 
-        this.props.getOwnersCallback(newValues)
-     
-     }
-
-    private updateDefaultMemberValues = ( items: []):void  => {
-        const newValues = items;
-
-        this.setState({ memberList: newValues })
-
-        this.props.getMemberCallback(newValues)
-     
-     }
+  
+    public updateDefaultMemberValues = ( items: [] ):void  => { 
+           const newValues = items;
+           
+        this.props.getMemberCallback( newValues );//pass to parent
+    };
 
    
-
 
 
     
     public render(): React.ReactElement<ILastStepProps> {
 
-        const { ownerList, memberList, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, context } = this.props
+
+        const { engName, frCommName, shEngDesc, shFrDesc, selectedChoice } = this.props
         
+        const infoIcon: IIconProps = { iconName: 'UnknownSolid' }; 
+
+        const iconStyles: IButtonStyles = {
+            root: {
+                paddingTop: '10px',
+            }
+        }
 
         return (
             
             <>
+               
+                <p>{ this.strings.review_info }</p>
+                <Stack horizontal verticalAlign='end'>
+                    <Label htmlFor='commPurpose' required >{ this.strings.commPurpose_title }</Label>
+                    <IconButton ariaLabel="information" id='commPurpose' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
+                </Stack>
+                <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={ this.onUpdateCommPurpose }  onGetErrorMessage={ this.getErrorMessage } /> 
+                
 
-                <Label htmlFor='commPurpose' required >Community purpose</Label>
-                <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={this.onUpdateCommPurpose}  onGetErrorMessage={ this.getErrorMessage } /> 
-
-                <Label htmlFor='name'required >English community name</Label>
+                <Stack horizontal verticalAlign='end'>
+                    <Label htmlFor='name'required >{ this.strings.engName_title }</Label>
+                    <IconButton  ariaLabel="information" id='Engname' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
+                </Stack>
                 <TextField id='name' defaultValue={ engName }  onChange={ this.onUpdateEngName } onGetErrorMessage={ this.getErrorMessage }  />  
 
-                <Label htmlFor='FrCommName' required >French community name</Label>
+                <Stack horizontal verticalAlign='end'>
+                    <Label htmlFor='FrCommName' required >{ this.strings.frCommName_title }</Label>
+                    <IconButton  ariaLabel="information" id='FrCommName' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
+                </Stack>
                 <TextField id='FrCommName' defaultValue={ frCommName } onChange={ this.onUpdateFrName } onGetErrorMessage={ this.getErrorMessage }/>
 
-                <Label htmlFor='shEngDesc'required >English description</Label>
+                <Stack horizontal verticalAlign='end'>
+                    <Label htmlFor='shEngDesc'required >{ this.strings.eng_desc }</Label>
+                    <IconButton  ariaLabel="information" id='shEngDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
+                </Stack>
                 <TextField id='shEngDesc' defaultValue={ shEngDesc } onChange={ this.onUpdateEngDesc } onGetErrorMessage={ this.getErrorMessage }/>
 
-                <Label htmlFor='shFrDesc'required >French description</Label>
+                <Stack horizontal verticalAlign='end'>
+                    <Label htmlFor='shFrDesc'required >{ this.strings.fr_desc }</Label>
+                    <IconButton  ariaLabel="information" id='shFrDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
+                </Stack>
                 <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } onGetErrorMessage={ this.getErrorMessage }/>
 
-                <Label htmlFor='classification'required >Community classification</Label>
-                <TextField id='calssification' value={selectedChoice}/>
+                <Stack horizontal verticalAlign='end'>
+                    <Label htmlFor='classification'required >{ this.strings.community_classification }</Label>
+                    <IconButton ariaLabel="information" id='classification' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
+                </Stack>
+                <TextField style={{ background:'#eaeaea'}} id='classification' value={selectedChoice}/>
 
-                <AddUsers context={ context } ownerList={ ownerList } memberList={ memberList } getOwnersCallback={ this.updateDefaultOwnerValues }  
-                getMemberCallback={ this.updateDefaultMemberValues }  />
+
+
+                <Stack horizontal verticalAlign ="end">
+                    <Label>{ this.strings.owners }</Label>
+                    <IconButton id ="owners" styles  = { iconStyles } iconProps = { infoIcon } ariaLabel ="InfoIcon" onClick={this.showCalloutVisible }/>
+                </Stack>
+                <PeoplePicker
+                    context = { this.props.context }
+                    required = { true }
+                    personSelectionLimit = { 3 }
+                    groupName = { "" } // Leave this blank in case you want to filter from all users
+                    onChange = { this.updateDefaultOwnerValues }
+                    principalTypes = { [ PrincipalType.User ] }
+                    showHiddenInUI = {false }
+                    resolveDelay = {1000}
+                    defaultSelectedUsers  = { this.props.ownerList }
+                />
+
+                <Stack horizontal verticalAlign ="end">
+                    <Label>{ this.strings.members }</Label>
+                    <IconButton id ="members" styles  = { iconStyles } iconProps = { infoIcon } ariaLabel ="InfoIcon" onClick={this.showCalloutVisible }/>
+                </Stack>
+                <PeoplePicker
+                    context = { this.props.context }
+                    required = { true }
+                    personSelectionLimit = { 3 }
+                    groupName = { "" } // Leave this blank in case you want to filter from all users
+                    onChange = { this.updateDefaultMemberValues }
+                    principalTypes = { [ PrincipalType.User ] }
+                    showHiddenInUI = {false }
+                    resolveDelay = {1000}
+                    defaultSelectedUsers  = { this.props.memberList }
+                />      
 
             </>
         );
