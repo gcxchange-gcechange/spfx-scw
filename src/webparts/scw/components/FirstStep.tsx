@@ -59,8 +59,9 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             <p>{ parse( this.strings.commPurpose_desc) }</p>
             <Label htmlFor='Community purpose' required styles={ labelStyle }>{ this.strings.commPurpose_title }</Label>
             <p className={ styles.instruction }>{ this.strings.commPurpose_Instruction}</p>
+            
             <TextField type='text' name='commPurpose' id='Community purpose'  onChange={ this.onhandleChangeEvent } 
-            defaultValue={ commPurpose }  validateOnLoad= { false }  onGetErrorMessage={ this.getErrorMessage } />
+            defaultValue={ commPurpose }  validateOnLoad= { false }  onGetErrorMessage={value => { if (value.length > 500 || value === '') return 'Max. 500 characters'}} />
 
             <h3>{ this.strings.comm_name }</h3>
             <p className={ styles.topMgn0 }>{ this.strings.engName_desc}</p>
@@ -68,7 +69,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 <StackItem>
                     <Label htmlFor='engName' required styles={ labelStyle } >{ this.strings.engName_title }</Label>
                     <p className={ styles.instruction }>{ this.strings.engName_Instruction}</p>
-                    <TextField  id='engName' name='engName' onChange={this.onhandleChangeEvent} defaultValue={ engName }  validateOnLoad= { false } onGetErrorMessage={ this.getErrorMessage }/>
+                    <TextField  id='engName' name='engName' onChange={this.onhandleChangeEvent} defaultValue={ engName }  validateOnLoad= { false } 
+                    onGetErrorMessage={value => { if ( value.length < 5 || value.length > 125  || value === '' || /[^a-zA-Z0-9]/.test(value)) return 'Must be between 5 and 125 characters long'}}/>
                 </StackItem>
                 <StackItem>
                     <Label htmlFor='frCommName' required>{ this.strings.frCommName_title }</Label>
@@ -102,7 +104,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
         const trimmedValue = event.target.value.trim();
 
         try {
-            this.props.handleOnChange(eventName, trimmedValue)
+                this.props.handleOnChange(eventName, trimmedValue)
+            
 
         } catch (error) {
             console.log(error);
@@ -114,6 +117,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
 
     private getErrorMessage = (value: string): string => {
 
+        console.log("val", value);
         const trimmedValue = value.trim() === '';
 
         return trimmedValue ? 'field is required' : '';
