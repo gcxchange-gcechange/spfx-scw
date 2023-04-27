@@ -46,7 +46,7 @@ export default class SecondStep extends React.Component< ISecondStepProps >  {
         const templateChoice: IChoiceGroupOption[] = [
             {   key: `${this.strings.unclassified_cardTitle}`, 
                 text: `${this.strings.unclassified_cardTitle}`, 
-                ariaLabel: 'Unclassified community' ,
+                ariaLabel: `${this.strings.unclassified_cardTitle}` ,
                 onRenderField: (props, render) => {
                     return (
                         <div className={ styles.choiceCard } >
@@ -63,7 +63,7 @@ export default class SecondStep extends React.Component< ISecondStepProps >  {
 
              {  key: `${this.strings.protected_cardTitle}`, 
                 text:`${this.strings.protected_cardTitle}`, 
-                ariaLabel: 'Protected A or B community',
+                ariaLabel: `${this.strings.protected_cardTitle}`,
                 onRenderField: (props, render) => {
                     console.log("props",props)
                     return (
