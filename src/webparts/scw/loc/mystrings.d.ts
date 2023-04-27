@@ -115,6 +115,11 @@ declare interface IScwWebPartStrings {
   shEngDesc_Modal: string;
   shFrDesc_Modal: string;
   select: string;
+  max500_validation: string;
+  special_char_validation: string;
+  between_5_125_char_validation: string;
+  max33_validation: string;
+  field_required: string;
 
 
 

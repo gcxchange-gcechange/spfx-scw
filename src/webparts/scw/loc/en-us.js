@@ -115,7 +115,10 @@ define([], function() {
     'one_more_owner':'<span style="fontWeight:normal"> add at least one more</span> owner',
     'second_owner': '<span style="fontWeight:normal"> one more</span> owner',
     'select': '<span style="fontWeight:normal"> select </span>',
-
+    'max500_validation': 'Max. 500 characters.',
+    'special_char_validation': 'Special characters are not permitted.',
+    'between_5_125_char_validation': 'Must be between 5 and 125 characters in length.',
+    'max33_validation':'Max. 33 characters.',
 
   }
 })

@@ -300,18 +300,11 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     public handleOnChange =(event: any, value:string):void => {
         const eventValue = event;
         const values = value
-
-        if (eventValue === 'commPurpose' && values.length <= 500 ) {
+        
             this.setState({
                 ...this.state,
-                [eventValue]:values
+                [eventValue]: values
             });
-        } else {
-            this.setState({
-                ...this.state,
-                [eventValue]:''
-            });
-        }
         
     }
 

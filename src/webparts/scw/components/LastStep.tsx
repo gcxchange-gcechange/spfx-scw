@@ -128,32 +128,32 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     <Label htmlFor='commPurpose' required >{ this.strings.commPurpose_title }</Label>
                     <IconButton ariaLabel="information" id='commPurpose' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
-                <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={ this.onUpdateCommPurpose }  onGetErrorMessage={ this.getErrorMessage } /> 
+                <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={ this.onUpdateCommPurpose }   onGetErrorMessage={ value => { if (value.length > 500 || value.trim() === '') return `${this.strings.max500_validation}` } } /> 
                 
 
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='name'required >{ this.strings.engName_title }</Label>
                     <IconButton  ariaLabel="information" id='Engname' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
-                <TextField id='name' defaultValue={ engName }  onChange={ this.onUpdateEngName } onGetErrorMessage={ this.getErrorMessage }  />  
+                <TextField id='name' defaultValue={ engName }  onChange={ this.onUpdateEngName } onGetErrorMessage={ this.validateInput }  />  
 
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='FrCommName' required >{ this.strings.frCommName_title }</Label>
                     <IconButton  ariaLabel="information" id='FrCommName' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
-                <TextField id='FrCommName' defaultValue={ frCommName } onChange={ this.onUpdateFrName } onGetErrorMessage={ this.getErrorMessage }/>
+                <TextField id='FrCommName' defaultValue={ frCommName } onChange={ this.onUpdateFrName } onGetErrorMessage={ this.validateInput }/>
 
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='shEngDesc'required >{ this.strings.eng_desc }</Label>
                     <IconButton  ariaLabel="information" id='shEngDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
-                <TextField id='shEngDesc' defaultValue={ shEngDesc } onChange={ this.onUpdateEngDesc } onGetErrorMessage={ this.getErrorMessage }/>
+                <TextField id='shEngDesc' defaultValue={ shEngDesc } onChange={ this.onUpdateEngDesc } onGetErrorMessage={ value => { if (value.length > 33 || value === '') return `${this.strings.max33_validation}` }}/>
 
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='shFrDesc'required >{ this.strings.fr_desc }</Label>
                     <IconButton  ariaLabel="information" id='shFrDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
-                <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } onGetErrorMessage={ this.getErrorMessage }/>
+                <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } onGetErrorMessage={ value => { if (value.length > 33 || value === '') return `${this.strings.max33_validation}` }}/>
 
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='classification'required >{ this.strings.community_classification }</Label>
@@ -199,12 +199,20 @@ export default class LastStep extends React.Component<ILastStepProps> {
         );
      }
 
-     private getErrorMessage = (value: string): string => {
+    private validateInput = (value: string): string => {
 
-        const trimmedValue = value.trim() === '';
+        if (value.length >= 5 && value.length <= 125 ) {
+            if (/[^a-zA-Z0-9\s]/.test(value) && value.length < 125 ) {
+                return `${ this.strings.special_char_validation}`
+            }
+        } 
+        else {
 
-        return trimmedValue ? 'field is required' : '';
-      };
+            return `${ this.strings.between_5_125_char_validation}`
+        }
+    
+       
+    };
 
 
  }
