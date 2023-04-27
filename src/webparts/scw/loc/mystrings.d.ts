@@ -119,7 +119,6 @@ declare interface IScwWebPartStrings {
   special_char_validation: string;
   between_5_125_char_validation: string;
   max33_validation: string;
-  field_required: string;
 
 
 
