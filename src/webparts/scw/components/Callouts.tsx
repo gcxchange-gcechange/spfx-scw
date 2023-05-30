@@ -82,9 +82,9 @@ export default class Callouts extends React.Component< ICalloutsProps > {
     else if ( targetId === 'owners' ) {
       title = `${this.strings.owners}`
     }
-    else if ( targetId === 'members' ) {
-      title = `${this.strings.members}`
-    }
+    // else if ( targetId === 'members' ) {
+    //   title = `${this.strings.members}`
+    // }
 
     return title
   }

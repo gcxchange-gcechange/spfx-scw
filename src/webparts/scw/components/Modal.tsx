@@ -16,7 +16,7 @@ export interface IErrorModalProps {
   commPurpose: string;
   shEngDesc: string;
   shFrDesc: string;
-  selectedChoice: string;
+  // selectedChoice: string;
   checkedValues: string[];
   ownerList: string[];
   current: number;
@@ -69,7 +69,7 @@ export default class ErrorModal extends React.Component<
       frCommName,
       shEngDesc,
       shFrDesc,
-      selectedChoice,
+      // selectedChoice,
       checkedValues,
       ownerList,
     } = this.props;
@@ -91,9 +91,9 @@ export default class ErrorModal extends React.Component<
       { name: `${ this.strings.shFrDesc_Modal }`, value: `${shFrDesc}` },
     ];
 
-    const secondValues: PropValues[] = [
-      { name: `${ this.strings.community_classification_Modal }`, value: `${selectedChoice}` },
-    ];
+    // const secondValues: PropValues[] = [
+    //   { name: `${ this.strings.community_classification_Modal }`, value: `${selectedChoice}` },
+    // ];
    
     const thirdValues: PropValues[] = [
       { name: `${ this.strings.term_of_use.toLowerCase() }`, value: `${filtered.length}` },
@@ -129,11 +129,11 @@ export default class ErrorModal extends React.Component<
       }
     }
 
-    for (const obj of secondValues) {
-      if (current === 1 && obj.value === "") {
-        message = `${this.strings.select }  ${obj.name}`;
-      }
-    }
+    // for (const obj of secondValues) {
+    //   if (current === 1 && obj.value === "") {
+    //     message = `${this.strings.select }  ${obj.name}`;
+    //   }
+    // }
 
     for (const obj of thirdValues) {
       console.log("thirdValues", obj.value)

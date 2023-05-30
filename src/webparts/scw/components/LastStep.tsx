@@ -13,7 +13,7 @@ import { SelectLanguage } from './SelectLanguage';
 export interface ILastStepProps { 
     context: WebPartContext;
     engName: string;
-    memberList: string[];
+    // memberList: string[];
     ownerList: string[];
     commPurpose: string;
     frCommName: string;
@@ -96,11 +96,11 @@ export default class LastStep extends React.Component<ILastStepProps> {
     };
 
   
-    public updateDefaultMemberValues = ( items: [] ):void  => { 
-           const newValues = items;
+    // public updateDefaultMemberValues = ( items: [] ):void  => { 
+    //        const newValues = items;
            
-        this.props.getMemberCallback( newValues );//pass to parent
-    };
+    //     this.props.getMemberCallback( newValues );//pass to parent
+    // };
 
    
 
@@ -183,7 +183,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     <Label>{ this.strings.members }</Label>
                     <IconButton id ="members" styles  = { iconStyles } iconProps = { infoIcon } ariaLabel ="InfoIcon" onClick={this.showCalloutVisible }/>
                 </Stack>
-                <PeoplePicker
+                {/* <PeoplePicker
                     context = { this.props.context }
                     required = { true }
                     personSelectionLimit = { 3 }
@@ -193,7 +193,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     showHiddenInUI = {false }
                     resolveDelay = {1000}
                     defaultSelectedUsers  = { this.props.memberList }
-                />      
+                />       */}
 
             </>
         );
