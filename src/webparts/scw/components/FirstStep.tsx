@@ -116,20 +116,35 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
 
 
     private validateInput = (value: string): string => {
-
-        if (value.length >= 5 && value.length <= 125 ) { 
-
-            if (/[^a-zA-Z0-9\s{1,126}]$/.test(value)) {
-                return `${ this.strings.special_char_validation}`
-            } 
-
-        } else {
-
-            return `${ this.strings.between_5_125_char_validation}`
-        }
+        const hasSpecialChar = /[?<>*]/.test(value);
+        const startsWithSpecialChar = /^[~`!@#$%^&()_+={[]|\/\\:;"',.-]/.test(value);
     
 
-       
+        if (value.length >= 5 && value.length <= 125) {
+        
+          if (hasSpecialChar) {
+            console.log("Value has special character: ?<>*");
+            return  `${this.strings.special_char_validation}`;
+          }
+
+          else if (startsWithSpecialChar) {
+            return `${this.strings.special_char_validation}`;
+          }
+        } else {
+        
+          if (value.length < 5 && (startsWithSpecialChar || hasSpecialChar)) {
+            console.log("less than 5 characters.");
+            return `${this.strings.special_char_validation}`;
+          }
+        
+          if (value.length > 125) {
+            console.log("Value must be less than 125 characters.");
+            return `${this.strings.between_5_125_char_validation}`;
+          }
+
+        } 
+    
+    
     };
 
 
