@@ -101,14 +101,51 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
     private onhandleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) :void => {
     
         const eventName = event.target.name;
+        let value = event.target.value;
+        console.log("eventName", eventName);
+        // const trimmedValue = value.trim();
 
-        const trimmedValue = event.target.value.trim();
+        const hasSpecialChar = /[?<>*]/.test(value);
+        const startsWithSpecialChar = /^[~`!@#$%^&()_+={[]|\/\\:;"',.-]/.test(value);
+        const invalidInput: string = '';
+
+        if ((eventName === 'engName' || eventName === 'frCommName') && value.length >= 5 && value.length <= 125) {
+            if (hasSpecialChar) {
+                console.log("Value has special character: ?<>*");
+                value = invalidInput;
+            } else if (startsWithSpecialChar) {
+                console.log("Starts with special");
+                value = invalidInput;
+            }
+
+        } else if (eventName === 'commPurpose' && value.length > 500) {
+            console.log("Condition for 'commPurpose' event name and value length greater than 500");
+            value = invalidInput;
+
+        } else if ((eventName === 'shEngDesc' || eventName === 'shFrDesc') && value.length > 33 ) {
+            value = invalidInput;
+
+        } else {
+            if (value.length < 5 && (startsWithSpecialChar || hasSpecialChar)) {
+                console.log("Less than 5 characters.");
+                value = invalidInput;
+            } else if ((eventName === 'engName' || eventName === 'frCommName') && value.length > 125) {
+                console.log("Value for engName and frName must be less than 125 characters.");
+                value = invalidInput;
+            }
+        }
+        
+    
+        const trimmedValue = value.trim();
+        
+       console.log("val",trimmedValue )
 
         try {
                 this.props.handleOnChange(eventName, trimmedValue)
             
 
         } catch (error) {
+
             console.log(error);
         }
          
