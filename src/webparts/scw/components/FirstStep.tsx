@@ -60,7 +60,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             <Label htmlFor='Community purpose' required styles={ labelStyle }>{ this.strings.commPurpose_title }</Label>
             <p className={ styles.instruction }>{ this.strings.commPurpose_Instruction}</p>
             
-            <TextField type='text' name='commPurpose' id='Community purpose'  onChange={ this.onhandleChangeEvent } 
+            <TextField type='text' name='commPurpose' id='Community purpose' multiline rows={3} onChange={ this.onhandleChangeEvent } 
             defaultValue={ commPurpose }  validateOnLoad= { false }  onGetErrorMessage={ value => { if (value.length > 500 || value.trim() === '') return `${this.strings.max500_validation}` } }
             />
 
@@ -102,11 +102,10 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
     
         const eventName = event.target.name;
         let value = event.target.value;
-        console.log("eventName", eventName);
-        // const trimmedValue = value.trim();
+
 
         const hasSpecialChar = /[?<>*]/.test(value);
-        const startsWithSpecialChar = /^[~`!@#$%^&()_+={[]|\/\\:;"',.-]/.test(value);
+        const startsWithSpecialChar = /^[~`!@#$%^&()_+={\x5B:;"',.|\x2F\x5D\x5C\x99-]/.test(value);
         const invalidInput: string = '';
 
         if ((eventName === 'engName' || eventName === 'frCommName') && value.length >= 5 && value.length <= 125) {
@@ -126,10 +125,11 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             value = invalidInput;
 
         } else {
-            if (value.length < 5 && (startsWithSpecialChar || hasSpecialChar)) {
+    
+            if (value && (startsWithSpecialChar || hasSpecialChar)) {
                 console.log("Less than 5 characters.");
                 value = invalidInput;
-            } else if ((eventName === 'engName' || eventName === 'frCommName') && value.length > 125) {
+            } else if ((eventName === 'engName' || eventName === 'frCommName') && value.length < 5 || value.length > 125) {
                 console.log("Value for engName and frName must be less than 125 characters.");
                 value = invalidInput;
             }
@@ -138,7 +138,6 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
     
         const trimmedValue = value.trim();
         
-       console.log("val",trimmedValue )
 
         try {
                 this.props.handleOnChange(eventName, trimmedValue)
@@ -154,7 +153,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
 
     private validateInput = (value: string): string => {
         const hasSpecialChar = /[?<>*]/.test(value);
-        const startsWithSpecialChar = /^[~`!@#$%^&()_+={[]|\/\\:;"',.-]/.test(value);
+        const startsWithSpecialChar = /^[~`!@#$%^&()_+={\x5B:;"',.|\x2F\x5D\x5C\x99-]/.test(value);
     
 
         if (value.length >= 5 && value.length <= 125) {
@@ -165,6 +164,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
           }
 
           else if (startsWithSpecialChar) {
+            console.log("Value statrts with special character");
             return `${this.strings.special_char_validation}`;
           }
         } else {
@@ -174,7 +174,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             return `${this.strings.special_char_validation}`;
           }
         
-          if (value.length > 125) {
+          if (value.length <5 || value.length > 125) {
             console.log("Value must be less than 125 characters.");
             return `${this.strings.between_5_125_char_validation}`;
           }

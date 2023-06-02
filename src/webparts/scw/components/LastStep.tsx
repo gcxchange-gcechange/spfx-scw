@@ -51,17 +51,51 @@ export default class LastStep extends React.Component<ILastStepProps> {
     public strings = SelectLanguage(this.props.prefLang);
   
     private  onUpdateCommPurpose = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-        const updatedPurpose = event.target.value.trim();    
+        let value = event.target.value;
+        const invalidInput: string = '';
+        
+        if (value.length > 500 ) {
+            value = invalidInput;
+        }
+
+        const updatedPurpose = value.trim();  
         this.props.commPurposeCallback(updatedPurpose); 
      }
 
     private  onUpdateEngName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-        const updatedName = event.target.value.trim();    
+
+        let value = event.target.value;
+        const hasSpecialChar = /[?<>*]/.test(value);
+        const startsWithSpecialChar = /^[~`!@#$%^&()_+={\x5B:;"',.|\x2F\x5D\x5C\x99-]/.test(value);
+        const invalidInput: string = '';
+
+        if ((value.length >= 5 && value.length <= 125) && startsWithSpecialChar ||  hasSpecialChar ) {
+            console.log("Value ")
+            value = invalidInput;
+        } else if (value.length < 5 || value.length > 125) {
+            console.log("length is less that 5 or more than 125");
+            value = invalidInput;
+        }
+
+        const updatedName = value.trim();
+
         this.props.handleEngNameCallback(updatedName); 
      }
     
     private  onUpdateFrName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-        const updateFrName = event.target.value.trim();
+
+        let value = event.target.value;
+        const hasSpecialChar = /[?<>*]/.test(value);
+        const startsWithSpecialChar = /^[~`!@#$%^&()_+={\x5B:;"',.|\x2F\x5D\x5C\x99-]/.test(value);
+        const invalidInput: string = '';
+
+        if ((value.length >= 5 && value.length <= 125) && startsWithSpecialChar ||  hasSpecialChar ) { 
+            value = invalidInput;
+        } else if (value.length < 5 || value.length > 125) {
+            value = invalidInput;
+        }
+        const updateFrName = value.trim();
+        
         this.props.frNameCallBack(updateFrName)    
      }
 
@@ -201,15 +235,32 @@ export default class LastStep extends React.Component<ILastStepProps> {
 
     private validateInput = (value: string): string => {
 
-        if (value.length >= 5 && value.length <= 125 ) {
-            if (/[^a-zA-Z0-9\s]/.test(value) && value.length < 125 ) {
-                return `${ this.strings.special_char_validation}`
-            }
-        } 
-        else {
+        const hasSpecialChar = /[?<>*]/.test(value);
+        const startsWithSpecialChar = /^[~`!@#$%^&()_+={\x5B:;"',.|\x2F\x5D\x5C\x99-]/.test(value);
 
-            return `${ this.strings.between_5_125_char_validation}`
-        }
+        if (value.length >= 5 && value.length <= 125 ) {
+            if (hasSpecialChar) {
+                console.log("Value has special character: ?<>*");
+                return  `${this.strings.special_char_validation}`;
+              }
+    
+              else if (startsWithSpecialChar) {
+                console.log("Value statrts with special character");
+                return `${this.strings.special_char_validation}`;
+              }
+        } else {
+        
+            if (value.length < 5 && (startsWithSpecialChar || hasSpecialChar)) {
+              console.log("less than 5 characters.");
+              return `${this.strings.special_char_validation}`;
+            }
+          
+            if (value.length <5 || value.length > 125) {
+              console.log("Value must be less than 125 characters.");
+              return `${this.strings.between_5_125_char_validation}`;
+            }
+  
+          } 
     
        
     };
