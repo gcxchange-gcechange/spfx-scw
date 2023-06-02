@@ -42,7 +42,7 @@ export class Initial extends React.Component<IScwProps> {
             <h2 className={ styles.mgBottom0 }>{this.strings.create_a_community}</h2>
             <Stack horizontal verticalAlign="center" styles={ flexStyles }>
                 <Stack.Item grow={ 2 } >
-                    <p style={{ fontSize:'18px' }}className={ styles.mg0 }>{ this.strings.collaborate }</p>
+                    <p style={{ fontSize:'18px' }}className={ styles.mg0 }>{parse(this.strings.collaborate)}</p>
                 </Stack.Item>
                 <Stack.Item grow={ 4 }>
                     <img { ...imageProps } alt={"teams" }/> 

@@ -86,7 +86,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     private next = (): void =>  { 
 
        
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, selectedChoice, checkedValues, ownerList } = this.state
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose,  checkedValues, ownerList } = this.state
 
         const filtered = checkedValues.filter((value, index) => {
             return checkedValues.indexOf(value) === index
@@ -99,10 +99,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             this.setState({ showModal: true });
        } 
 
-       else if ( current === 1 && selectedChoice === '' ) {
+    //    else if ( current === 1 && selectedChoice === '' ) {
             
-             this.setState({ showModal: true });
-       }
+    //          this.setState({ showModal: true });
+    //    }
        
     //    else if ( current === 2 &&  selectedChoice === `${this.strings.protected_cardTitle}` && filtered.length < 7 ) {
                 
@@ -140,7 +140,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
        
 
-        if ( current === 4 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 1)) {
+        if ( current === 3 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 1)) {
            
             this.setState({ showModal: true });
         }
@@ -182,10 +182,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     
     public successMessage = (): void =>  { 
         
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, selectedChoice } = this.state
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList } = this.state
 
         
-        if ( current === 4 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length === 1)) {
+        if ( current === 3 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length === 1)) {
             
             this.setState({ showModal: true });
         }
@@ -231,7 +231,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     "TemplateTitle": "Generic",
                     "RequesterName": "${this.props.context.pageContext.user.displayName}",
                     "RequesterEmail": "${this.props.context.pageContext.user.email}",
-                    "SecurityCategory": "${selectedChoice}",
+                    "SecurityCategory": "unclassified",
                     "Status": "Submitted",
                 }`
             };
@@ -368,19 +368,19 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         }) ; 
     }
 
-    public handleMemberCallback = ( items: [] ): void =>  { 
-        const MemberArr: string[] = [];
+    // public handleMemberCallback = ( items: [] ): void =>  { 
+    //     const MemberArr: string[] = [];
 
-        items.forEach(user =>  { 
-            // eslint-disable-next-line dot-notation
-            MemberArr.push( user['secondaryText'] )
-        })
+    //     items.forEach(user =>  { 
+    //         // eslint-disable-next-line dot-notation
+    //         MemberArr.push( user['secondaryText'] )
+    //     })
   
-        // this.setState( { 
-        //     memberList: MemberArr
-        // }) ; 
+    //     // this.setState( { 
+    //     //     memberList: MemberArr
+    //     // }) ; 
 
-    }
+    // }
 
     public handleErrorMessage = ( errorMessage: string ):void  => {
         const errorM = errorMessage;
@@ -483,7 +483,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     ownerList= { ownerList }
                     // memberList= { memberList }
                     getOwnersCallback= { this.handleOwnerCallback }
-                    getMemberCallback= { this.handleMemberCallback }
+                    // getMemberCallback= { this.handleMemberCallback }
                 />
                 ),
             },
@@ -509,7 +509,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     handleEngNameCallback= { this.handleEngNameCallback }
                     frNameCallBack= { this.frNameCallback }
                     getOwnersCallback= { this.handleOwnerCallback }
-                    getMemberCallback= { this.handleMemberCallback }
+                    // getMemberCallback= { this.handleMemberCallback }
                     handleFrDescCallback= { this.frDescCallback }
                     handleEngDescCallback= { this.engDescCallback }
                     isCalloutVisible ={ this.isCalloutVisible }
@@ -532,6 +532,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         const items = steps.map( item => ( item.step !== '6' ?  { key: item.step, title: item.title} : null));
        
+        console.log("page", current);
 
         return (
             <div className= { styles.scw }>

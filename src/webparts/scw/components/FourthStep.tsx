@@ -5,7 +5,7 @@ import { WebPartContext } from '@microsoft/sp-webpart-base';
 import AddUsers from './AddUsers';
 import styles from './Scw.module.scss';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
-import {  Stack } from 'office-ui-fabric-react';
+import {  IButtonStyles, Label, PrimaryButton, Stack } from 'office-ui-fabric-react';
 import { SelectLanguage } from './SelectLanguage';
 import parse from 'html-react-parser';
 
@@ -62,24 +62,24 @@ export default class FourthStep extends React.Component<IFourthStepProps> {
 
     public render(): React.ReactElement<IFourthStepProps>  {
 
-        // const buttonStyles: IButtonStyles = {
+        const buttonStyles: IButtonStyles = {
             
-        //     root: {
-        //         color: '#004db8',
-        //         backgroundColor: '#c0c0cc',
-        //         borderColor: '#c0c0cc'
-        //     },
+            root: {
+                color: '#004db8',
+                backgroundColor: '#c0c0cc',
+                borderColor: '#c0c0cc'
+            },
 
-        //     rootHovered: {
-        //         color: '#4096ff',
-        //         background: '#c0c0cc',
-        //         borderColor: '#4096ff'
-        //     },
+            rootHovered: {
+                color: '#4096ff',
+                background: '#c0c0cc',
+                borderColor: '#4096ff'
+            },
             
-        //     label: {
-        //         fontWeight: 'normal'
-        //     }
-        // }
+            label: {
+                fontWeight: 'normal'
+            }
+        }
 
 
         return (
@@ -87,8 +87,10 @@ export default class FourthStep extends React.Component<IFourthStepProps> {
 
                 <p>{ this.strings.invite_owners_para1 }</p>
                 <p>{ parse( this.strings.invite_owners_para2 ) }</p>
-                <p>{ parse( this.strings.invite_owners_para3 ) }</p>
-                
+                {/* <p>{ parse( this.strings.invite_owners_para3 ) }</p> */}
+
+                <Label>{this.strings.invite_owners}</Label>
+                <p className={ styles.instruction }>{ this.strings.owners_Instruction}</p>
                 <AddUsers 
                 prefLang={this.props.prefLang}
                 context={this.props.context} 
@@ -109,11 +111,11 @@ export default class FourthStep extends React.Component<IFourthStepProps> {
                             <p>{ parse( this.strings.invite_user_not_found )}</p>
                         </Stack.Item>
                     </Stack>
-                    {/* <Stack>
+                    <Stack>
                         <Stack.Item>
                             <PrimaryButton styles={ buttonStyles } >{ this.strings.invite_a_colleague}</PrimaryButton>
                         </Stack.Item>
-                    </Stack> */}
+                    </Stack>
                 </div>
             </>
         );

@@ -7,6 +7,7 @@ import { SelectLanguage } from './SelectLanguage';
 
 
 
+
 export interface IAddUsersProps {
     context: WebPartContext;
     ownerList: string[];
@@ -56,7 +57,6 @@ export default class AUsers extends React.Component<IAddUsersProps> {
                 <PeoplePicker
                     context = { this.props.context }
                     required = { true }
-                    titleText ={`${ this.strings.invite_owners}`}
                     personSelectionLimit = { 3 }
                     groupName = { "" } // Leave this blank in case you want to filter from all users
                     onChange = { this._getOwnerItems }
