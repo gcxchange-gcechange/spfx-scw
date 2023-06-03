@@ -1,7 +1,7 @@
 import { IImageProps, ImageFit, IStackStyles, IStackTokens, Stack, StackItem } from 'office-ui-fabric-react';
 import * as React from 'react';
 import styles from  '../InitialPage/Initial.module.scss';
-import {faUsers, faGlobe, faLock } from '@fortawesome/free-solid-svg-icons';
+import {faUsers, faGlobe, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IScwProps } from '../IScwProps';
 import { SelectLanguage } from '../SelectLanguage';
@@ -69,9 +69,9 @@ export class Initial extends React.Component<IScwProps> {
                </StackItem>
                <StackItem>
                 <div className={ styles.card }>
-                    <FontAwesomeIcon icon={faLock } size='3x' className={ styles.blue } />
-                    <p>{ parse( this.strings.protected_or_unclassified ) }</p>
-                    <small>{ this.strings.protected_or_unclassified_smallText }</small>
+                    <FontAwesomeIcon icon={ faUserPlus } size='3x' className={ styles.blue } />
+                    <p>{ parse( this.strings.protected_or_unclassified ) }</p> 
+                    <small>{ parse( this.strings.protected_or_unclassified_smallText )}</small>
                 </div>
                </StackItem>
             </Stack>

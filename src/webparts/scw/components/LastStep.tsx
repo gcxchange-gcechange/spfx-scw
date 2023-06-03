@@ -109,7 +109,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
     public render(): React.ReactElement<ILastStepProps> {
 
 
-        const { engName, frCommName, shEngDesc, shFrDesc, selectedChoice } = this.props
+        const { engName, frCommName, shEngDesc, shFrDesc } = this.props
         
         const infoIcon: IIconProps = { iconName: 'UnknownSolid' }; 
 
@@ -155,11 +155,11 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 </Stack>
                 <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } onGetErrorMessage={ this.getErrorMessage }/>
 
-                <Stack horizontal verticalAlign='end'>
+                {/* <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='classification'required >{ this.strings.community_classification }</Label>
                     <IconButton ariaLabel="information" id='classification' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
-                </Stack>
-                <TextField style={{ background:'#eaeaea'}} id='classification' value={selectedChoice}/>
+                </Stack> */}
+                {/* <TextField style={{ background:'#eaeaea'}} id='classification' value={selectedChoice}/> */}
 
 
 
@@ -179,10 +179,10 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     defaultSelectedUsers  = { this.props.ownerList }
                 />
 
-                <Stack horizontal verticalAlign ="end">
+                {/* <Stack horizontal verticalAlign ="end">
                     <Label>{ this.strings.members }</Label>
                     <IconButton id ="members" styles  = { iconStyles } iconProps = { infoIcon } ariaLabel ="InfoIcon" onClick={this.showCalloutVisible }/>
-                </Stack>
+                </Stack> */}
                 {/* <PeoplePicker
                     context = { this.props.context }
                     required = { true }
