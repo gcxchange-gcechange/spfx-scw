@@ -59,7 +59,7 @@ define([], function() {
     "indentify_one_more_owner": "Identify at least <strong className={ styles.blue }>one more owner</strong> already registered to GCXchange",
     "indentify_one_more_owner_smallText": "Identifying more than one owner ensures the continuity of the community if one owner leaves",
     "protected_or_unclassified": "Invite colleagues to <strong className={ styles.blue }>register to GCXchange</strong> prior to adding them to a community",
-    "protected_or_unclassified_smallText": "Colleagues not yet registered for GCXchange can <a href=https://devgcx.sharepoint.com className={styles.blue}>register to GCXchange</a>",
+    "protected_or_unclassified_smallText": "Colleagues not yet registered for GCXchange can <a href=https://devgcx.sharepoint.com >register to GCXchange</a>",
     "Lets_go": "Let's go",
     "comm_desc_title": "Community description",
     "comm_name":"Community name",
