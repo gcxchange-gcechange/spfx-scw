@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import styles from './Scw.module.scss';
-import  { Steps, Button, Result } from 'antd';
+import  { Steps, Button } from 'antd';
 // import  { message} from 'antd';
 import FirstStep from "./FirstStep";
 import  { IScwProps } from './IScwProps';
@@ -22,8 +22,9 @@ import { AadHttpClient, HttpClientResponse, IHttpClientOptions } from '@microsof
 import Title from './Title';
 import Complete from './Complete';
 import { Spinner, SpinnerSize } from '@fluentui/react/lib/Spinner';
-import { CloseCircleOutlined } from '@ant-design/icons';
+// import { CloseCircleOutlined } from '@ant-design/icons';
 import Callouts from './Callouts';
+import Failed from './Failed';
 
 
 
@@ -193,7 +194,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
 
 
-            const functionUrl = "";
+            const functionUrl = "https://appsvc-fnc-dev-scw-list-dotnet001.azurewebsites.net/api/CreateItem?";
             const requestHeaders: Headers = new Headers();
             requestHeaders.append("Content-type", "application/json");
             requestHeaders.append("Cache-Control", "no-cache");
@@ -249,7 +250,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             document.getElementById("submit").style.display = 'none';
                 
               this.props.context.aadHttpClientFactory
-              .getClient("")
+              .getClient("3385e8cd-40a4-41f5-bd2f-68690654a54b")
               .then((client: AadHttpClient) => {
                
                 client.post(functionUrl, AadHttpClient.configurations.v1, postOptions)
@@ -536,7 +537,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         return (
             <div className= { styles.scw }>
-                <Title current={ current } step={ step } prefLang={this.props.prefLang} />
+                <Title current={ current } step={ step } prefLang={this.props.prefLang} status={this.state.validationStatus} />
                 { step === 0 
                 ? <>
                         <Initial
@@ -555,12 +556,23 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                             { this.state.isLoading ? 
                                 (<Spinner size={ SpinnerSize.large }/>) : this.state.validationStatus === 400 && steps[this.state.current].step ==='5'
                                 ? 
-                                <Result
-                                    icon={<CloseCircleOutlined/>}
-                                    title="Submission Failed"
-                                    subTitle="Please send GCXchange and email."
-                                    extra={<Button type="primary">Email us</Button>}
-                                /> 
+                                <Failed
+                                    prefLang={ this.props.prefLang }
+                                    engName= { engName }
+                                    frCommName= { frCommName }
+                                    ownerList= { ownerList }
+                                    commPurpose= { commPurpose }
+                                    shEngDesc= { shEngDesc }
+                                    shFrDesc= { shFrDesc }
+                                    validationStatus = { this.state.validationStatus }
+                                 
+                                />
+                                // <Result
+                                //     icon={<CloseCircleOutlined/>}
+                                //     title="Submission Failed"
+                                //     subTitle="Please send GCXchange and email."
+                                //     extra={<Button type="primary">Email us</Button>}
+                                // /> 
                                 :
                                 steps[ this.state.current ].content
                             }   
