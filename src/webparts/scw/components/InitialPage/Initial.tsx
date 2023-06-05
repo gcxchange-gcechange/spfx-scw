@@ -1,4 +1,4 @@
-import { IImageProps, ImageFit, IStackStyles, IStackTokens, Stack, StackItem } from 'office-ui-fabric-react';
+import { Icon, IImageProps, ImageFit, IStackStyles, IStackTokens, Stack, StackItem } from 'office-ui-fabric-react';
 import * as React from 'react';
 import styles from  '../InitialPage/Initial.module.scss';
 import {faUsers, faGlobe, faUserPlus } from '@fortawesome/free-solid-svg-icons';
@@ -23,7 +23,7 @@ export class Initial extends React.Component<IScwProps> {
         const stackStyles: IStackStyles = {
             root: {
                 display:'flex',
-                width:'80%',
+                // width:'80%',
                 fontSize: '18px;'
           },
         };
@@ -71,7 +71,7 @@ export class Initial extends React.Component<IScwProps> {
                 <div className={ styles.card }>
                     <FontAwesomeIcon icon={ faUserPlus } size='3x' className={ styles.blue } />
                     <p>{ parse( this.strings.protected_or_unclassified ) }</p> 
-                    <small>{ parse( this.strings.protected_or_unclassified_smallText )}</small>
+                    <small>{ parse( this.strings.protected_or_unclassified_smallText )}<Icon className={styles.blue} iconName='NavigateExternalInLine'/></small>
                 </div>
                </StackItem>
             </Stack>

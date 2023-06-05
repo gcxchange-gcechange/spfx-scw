@@ -18,7 +18,7 @@ p { font-size:18px }
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width:300px;
+    width:350px;
     height:225px;
     padding: 10px;
 
@@ -37,6 +37,10 @@ p { font-size:18px }
         // color: rgb(0, 120, 212);
         color: #004DB8;
 
+    }
+    
+    a {
+        color: #004DB8;
     }
 }
 
