@@ -7,7 +7,8 @@ import styles from './Scw.module.scss';
 export interface ITitleProps {
     current: number;
     step: number;
-		prefLang: string;
+	prefLang: string;
+    status: number;
 }
 
 export default class Title extends React.Component<ITitleProps> {
@@ -20,7 +21,7 @@ export default class Title extends React.Component<ITitleProps> {
 
 
     private pageTitle = ():string  => {
-        const { current, step } = this.props;
+        const { current, step, status } = this.props;
         
         const titles: string[] = [ 
 					`${this.strings.community_details}`, 
@@ -28,6 +29,7 @@ export default class Title extends React.Component<ITitleProps> {
 					`${this.strings.terms}`,
 					`${this.strings.invite_owners_members}`,
 					`${this.strings.review_submit}`,
+                    `${this.strings.sumbissionFailed}`,
                     `${ this.strings.title_complete }`
 				]
         
@@ -51,9 +53,13 @@ export default class Title extends React.Component<ITitleProps> {
         } 
         else if ( current === 4 ) {
                 title= `${ titles[4] }`;
+            if ( status === 400) {
+                title=`${ titles[5] }`;
+            }
         }
+        
         else if ( current === 5 ) {
-            title= `${ titles[5] }`
+            title= `${ titles[6] }`
         }
         return title;
      }
