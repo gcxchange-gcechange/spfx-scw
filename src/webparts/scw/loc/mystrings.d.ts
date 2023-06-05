@@ -115,7 +115,12 @@ declare interface IScwWebPartStrings {
   shEngDesc_Modal: string;
   shFrDesc_Modal: string;
   select: string;
-
+  failed_oops: string;
+  failed_txt1: string;
+  failed_txt2: string;
+  failed_txt3: string;
+  failed_txt4: string;
+  sumbissionFailed: string;
 
 
 
