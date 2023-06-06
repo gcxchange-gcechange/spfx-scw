@@ -561,7 +561,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                         
                             { this.state.isLoading ? 
                                 ( <Spinner label={ this.strings.submitting_your_information } labelPosition="right"   size={ SpinnerSize.large }/>) 
-                                
                                 :
                                 steps[ this.state.current ].content
                             }   
