@@ -109,12 +109,12 @@ define([], function() {
         'second_owner': '<span style="fontWeight:normal"> un autre</span>  propriétaire',
         'select': '<span style="fontWeight:normal"> sélectionner </span>',
         'failed_oops': 'Oops, something went wrong!',
-        'failed_txt1': 'Let us try to make uit right. Please <a>send us an email</a>, and all the information you\'ve entered so far will be pre-populated in the email.',
+        'failed_txt1': 'Let us try to make it right.',
         'failed_txt2': 'The GCX Support team will create the community on your behalf. Once created, you will receive and email with everything in you need to get started!',
         'failed_txt3': 'Our team will respond within 24 to 48 hours Monday to Friday.',
-        'failed_txt4': 'If you do not reveid the email or you do have any questions, please submit a service request using the <a>GCXchange Support portal</a>',
-        "submissionFailed" : "",
-        "sumbissionFailedEmail": 'mailto:?subject=Create%20a%20community%20in%20GCXchange%20-%20Error%20400&body=Hi%20GCX%20Support%20Team%2C%0D%0A%0D%0ASomething%20went%20wrong%20as%20I%20was%20submitting%20a%20request%20to%20create%20a%20community%20in%20GCXchange.%20Please%20find%20the%20information%20for%20my%20community%20below%3A%0D%0A%0D%0ACommunity%20purpose%3A%20hello%0D%0AEnglish%20community%20name%3A%20hello%20name%0D%0AFrench%20community%20name%3A%20hello%20french%0D%0AEnglish%20description%3A%20Eng%20des%20Hello%0D%0AFrench%20description%3A%20FR%20desc%20Hello%0D%0AOwners%3A%20john.smith%40tbs.gc.ca%3B%20jane.smith%40tbs.gc.ca%0D%0A%0D%0AError%20ID%3A%20400%0D%0A%0D%0ACan%20you%20please%20create%20a%20community%20on%20my%20behalf%20using%20the%20information%20above%3F%0D%0A%0D%0AThanks%2C%0D%0A'
+        'failed_txt4': 'If you do not reveid the email or you do have any questions, please submit a service request using the',
+        "submissionFailed" : "Submission failed",
+        'submitting_your_information': 'Prenez le temps de savourer votre café ou thé; nous sommes en train de soumettre vos renseignements.',
 
 
     } 

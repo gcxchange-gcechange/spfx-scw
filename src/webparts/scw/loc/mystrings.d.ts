@@ -120,7 +120,8 @@ declare interface IScwWebPartStrings {
   failed_txt2: string;
   failed_txt3: string;
   failed_txt4: string;
-  sumbissionFailed: string;
+  submissionFailed: string;
+  submitting_your_information: string;
 
 
 
