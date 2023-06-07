@@ -33,7 +33,7 @@ export default class Title extends React.Component<ITitleProps> {
 
         const titles: string[] = [ 
             `${this.strings.community_details}`, 
-            `${this.strings.invite_owners}`,
+            `${this.strings.invite_owners_title}`,
             `${this.strings.review_submit}`,
             `${ this.strings.title_complete }`
 ]
