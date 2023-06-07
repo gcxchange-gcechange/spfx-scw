@@ -48,9 +48,9 @@ export default class Callouts extends React.Component< ICalloutsProps > {
     // else if ( targetId === 'classification' ) {
     //   message = `${ this.strings.community_classification_desc } <br/><br/> ${this.strings.community_classification_link}`
     // }
-    // else if ( targetId === 'owners' || targetId === 'members') {
-    //   message = `${this.strings.owners_Instruction}`
-    // }
+    else if ( targetId === 'owners' ) {
+      message = `${this.strings.owners_instruction_Callout}`
+    }
 
     return message
   }
@@ -100,7 +100,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
   
   const calloutStyle = {
     root: {
-      width: '60%',
+      width: '40%',
       height: 'auto',
       borderRadius: '15px',
     },
@@ -124,7 +124,11 @@ export default class Callouts extends React.Component< ICalloutsProps > {
     },
     body: {
       height: 'auto',
-      padding: '10px'
+      padding: '10px',
+      borderRadius: '10px;',
+      borderBottom: '1px solid lightgray',
+      borderRight : '1px solid lightgray',
+      borderLeft:'1px solid lightgray'
     },
     title: {
       fontSize: '16px',

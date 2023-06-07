@@ -41,6 +41,7 @@ define([], function() {
         "shFrDesc_desc": 'La description de la collectivité sera visible pour les utilisateurs lorsqu’ils utiliseront la page « Toutes les collectivités » et lorsqu’ils font une recherche.',
         "shFrDesc_Instruction": 'Max. 33 caractères.',
         "owners_Instruction": 'Commencez à taper le nom de famille d’un membre pour le trouver et l’ajouter.',
+        "owners_instruction_Callout": "Commencez à taper le nom de famille d’un responsable (qui est inscrit GCÉchange) pour les trouver et les ajouter.",
         // "members_Instruction": 'Commencez à taper le nom de famille d’un membre pour le trouver et l’ajouter.',
         // "community_classification_desc": "Pour modifier la classification de votre collectivité, vous devez retourner à la page sur la classification de la collectivité et lire les conditions d’utilisation.",
         // "community_classification_link": "Accéder à la page Classification de la collectivité",

@@ -49,6 +49,7 @@ define([], function() {
     "shFrDesc_desc": 'The community description will be visible to users when they use the “All Communities” page and when they search for it. ',
     "shFrDesc_Instruction": 'Max. 33 characters.',
     "owners_Instruction": 'Start typing an owner’s last name to find and add them.',
+    "owners_instruction_Callout": "Start typing an owner’s last name (who is registered to GCXchange) to find and add them.",
     // "members_Instruction": 'Start typing an owner’s last name to find and add them.',
     // "community_classification_desc": "To change the classification of your community, you need to go back to the Community classification page, and read the terms of use.",
     // "community_classification_link": "<u> Go to the <i>Community classification</i> page</u> ",

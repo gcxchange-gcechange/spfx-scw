@@ -108,7 +108,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 
     //             this.setState({ showModal: true });
     //    } 
-        else if ( current === 2 && ownerList.length === 1 ) {
+        else if ( current === 1 && ownerList.length === 1 ) {
             
                 this.setState({ showModal: true });
 
@@ -140,7 +140,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
        
 
-        if ( current === 3 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 1)) {
+        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 1)) {
            
             this.setState({ showModal: true });
         }
@@ -185,7 +185,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList } = this.state
 
         
-        if ( current === 3 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length === 1)) {
+        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length === 1)) {
             
             this.setState({ showModal: true });
         }

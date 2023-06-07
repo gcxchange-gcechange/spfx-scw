@@ -47,6 +47,7 @@ declare interface IScwWebPartStrings {
   shFrDesc_desc: string;
   shFrDesc_Instruction: string;
   owners_Instruction: string;
+  owners_instruction_Callout: string;
   // members_Instruction: string;
   // community_classification_desc: string;
   // community_classification_link: string;

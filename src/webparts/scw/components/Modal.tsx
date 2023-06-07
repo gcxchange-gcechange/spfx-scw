@@ -143,13 +143,13 @@ export default class ErrorModal extends React.Component<
     // }
 
     for (const obj of fourthValues) {
-      if (current === 3 && obj.value < 2) {
+      if (current === 1 && obj.value < 2) {
         message += `${obj.name}`;
       }
     }
 
     for (const obj of lastValues) {
-      if (current === 4 && (obj.value === '' || obj.value < 2)) {
+      if (current === 2 && (obj.value === '' || obj.value < 2)) {
         results.push(obj.name);
      
         if ( results.length > 1 ) {

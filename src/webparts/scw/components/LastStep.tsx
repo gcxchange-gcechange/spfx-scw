@@ -144,13 +144,13 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 <TextField id='FrCommName' defaultValue={ frCommName } onChange={ this.onUpdateFrName } onGetErrorMessage={ this.getErrorMessage }/>
 
                 <Stack horizontal verticalAlign='end'>
-                    <Label htmlFor='shEngDesc'required >{ this.strings.eng_desc }</Label>
+                    <Label htmlFor='shEngDesc'required >{ this.strings.shEngDesc_title }</Label>
                     <IconButton  ariaLabel="information" id='shEngDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='shEngDesc' defaultValue={ shEngDesc } onChange={ this.onUpdateEngDesc } onGetErrorMessage={ this.getErrorMessage }/>
 
                 <Stack horizontal verticalAlign='end'>
-                    <Label htmlFor='shFrDesc'required >{ this.strings.fr_desc }</Label>
+                    <Label htmlFor='shFrDesc'required >{ this.strings.shFrDesc_title }</Label>
                     <IconButton  ariaLabel="information" id='shFrDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } onGetErrorMessage={ this.getErrorMessage }/>
