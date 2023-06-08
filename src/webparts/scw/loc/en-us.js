@@ -113,8 +113,8 @@ define([], function() {
     // 'owners_and_members': 'Owners',
     // 'unclassified_cardTitle': 'Unclassified community',
     // 'protected_cardTitle': 'Protected A or B community',
-    'one_more_owner':'<span style="fontWeight:normal"> add at least one more</span> owner',
-    'second_owner': '<span style="fontWeight:normal"> one more</span> owner',
+    'one_more_owner':'<strong> add at least one more</strong> owner',
+    // 'second_owner': '<span style="fontWeight:normal"> one more</span> owner',
     'select': '<span style="fontWeight:normal"> select </span>',
 
 

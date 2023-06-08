@@ -103,6 +103,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
       width: '40%',
       height: 'auto',
       borderRadius: '15px',
+      boxShadow: 'rgb(0 0 0 / 58%) 0px 8px 16px'
     },
     beak: {
       top: '20px!important',
@@ -125,10 +126,6 @@ export default class Callouts extends React.Component< ICalloutsProps > {
     body: {
       height: 'auto',
       padding: '10px',
-      borderRadius: '10px;',
-      borderBottom: '1px solid lightgray',
-      borderRight : '1px solid lightgray',
-      borderLeft:'1px solid lightgray'
     },
     title: {
       fontSize: '16px',

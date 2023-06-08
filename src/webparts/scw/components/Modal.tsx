@@ -108,7 +108,7 @@ export default class ErrorModal extends React.Component<
       { name: `${ this.strings.frCommName_Modal }`, value: `${frCommName}` },
       { name: `${ this.strings.shEngDesc_Modal }`, value: `${shEngDesc}` },
       { name: `${ this.strings.shFrDesc_Modal }`, value: `${shFrDesc}` },
-      { name: `${ this.strings.second_owner }`, value: `${ownerList.length}` },
+      { name: `${ this.strings.one_more_owner }`, value: `${ownerList.length}` },
     ];
 
     let message: string = "";

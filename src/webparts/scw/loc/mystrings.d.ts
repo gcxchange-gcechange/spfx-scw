@@ -111,7 +111,7 @@ declare interface IScwWebPartStrings {
   unclassified_cardTitle: string;
   protected_cardTitle: string;
   one_more_owner: string;
-  second_owner: string;
+  // second_owner: string;
   // agree: string;
   shEngDesc_Modal: string;
   shFrDesc_Modal: string;

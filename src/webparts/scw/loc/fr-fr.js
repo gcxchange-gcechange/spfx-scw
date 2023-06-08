@@ -105,8 +105,8 @@ define([], function() {
         // 'owners_and_members': 'Propriétaires et membres',
         // 'unclassified_cardTitle': 'Collectivité non classifiée',
         // 'protected_cardTitle': 'Collectivité Protégé A ou B',
-        'one_more_owner':'<span style="fontWeight:normal"> ajouter au moins un autre</span>  propriétaire',
-        'second_owner': '<span style="fontWeight:normal"> un autre</span>  propriétaire',
+        'one_more_owner':'<strong> ajouter au moins un autre</strong>  propriétaire',
+        // 'second_owner': '<span style="fontWeight:normal"> un autre</span>  propriétaire',
         'select': '<span style="fontWeight:normal"> sélectionner </span>',
 
     } 
