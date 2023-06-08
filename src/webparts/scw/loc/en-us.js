@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 define([], function() {
   return {
+    // "userLang": "EN",
     "PropertyPaneDescription": "Description",
     "BasicGroupName": "Group Name",
     "DescriptionFieldLabel": "Description Field",
@@ -25,7 +26,7 @@ define([], function() {
     "CommPurpose": 'The GCX Support Team needs the purpose of the new community to determine whether it can be <strong>approved</strong>.<br/> This will not show up on your site. Write it in the official language of your choice. Max. 500 characters.',
     "title_complete": "Complete!",
     "thank_you": "Thank you for your submission.",
-    "complete_content":"You will receive an email when your community has been created with everything you need to get started! (Within 48 hours Monday to Friday). <p> If you do not receive the email or have any questions, please submit a service request using the <u>GCXchange Support portal</u>.</p>",
+    "complete_content":"You will receive an email when your community has been created with everything you need to get started! Our team will respond withing 24 to 48 hours Monday to Friday. <p> If you do not receive the email or have any questions, please submit a service request using the <u>GCXchange Support portal</u>.</p>",
     "complete_img_alt":"Three people celebrating",
     "complete_button": "GCXchange Homepage",
     "commPurpose_title": "Community purpose",
@@ -115,10 +116,17 @@ define([], function() {
     'one_more_owner':'<span style="fontWeight:normal"> add at least one more</span> owner',
     'second_owner': '<span style="fontWeight:normal"> one more</span> owner',
     'select': '<span style="fontWeight:normal"> select </span>',
+    'failed_oops': 'Oops, something went wrong!',
+    'failed_txt1': 'Let us try to make it right.',
+    'failed_txt2': 'The GCX Support team will create the community on your behalf. Once created, you will receive and email with everything in you need to get started!',
+    'failed_txt3': 'Our team will respond within 24 to 48 hours Monday to Friday.',
+    'failed_txt4': 'If you do not receive the email or you do have any questions, please submit a service request using the',
+    "submissionFailed": "Submission failed",
+    'submitting_your_information': 'Grab a sip of coffee, we are submitting your information.',    
     'max500_validation': 'Max. 500 characters.',
     'special_char_validation': 'Special characters are not permitted.',
     'between_5_125_char_validation': 'Must be between 5 and 125 characters in length.',
     'max33_validation':'Max. 33 characters.',
-
+  
   }
 })

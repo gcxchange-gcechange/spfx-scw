@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import styles from './Scw.module.scss';
-import  { Steps, Button, Result } from 'antd';
+import  { Steps, Button } from 'antd';
 // import  { message} from 'antd';
 import FirstStep from "./FirstStep";
 import  { IScwProps } from './IScwProps';
@@ -22,8 +22,9 @@ import { AadHttpClient, HttpClientResponse, IHttpClientOptions } from '@microsof
 import Title from './Title';
 import Complete from './Complete';
 import { Spinner, SpinnerSize } from '@fluentui/react/lib/Spinner';
-import { CloseCircleOutlined } from '@ant-design/icons';
+// import { CloseCircleOutlined } from '@ant-design/icons';
 import Callouts from './Callouts';
+import Failed from './Failed';
 
 
 
@@ -256,21 +257,13 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 .then((response: HttpClientResponse) => {
                   console.log(`Status code: ${response.status}`);
 
-                  if ( response.status === 200 ) {
+                  if ( response.status) {
                     this.setState({
                         current: current + 1,
                         isLoading: false,
                         validationStatus: response.status,
                     })
-                  } else {
-                    
-                    this.setState({
-                        isLoading: false,
-                        validationStatus: response.status,
-                    });
-                  
-                  }
-                
+                  } 
                   
                   response.json().then((responseJSON: JSON) => {
                     responseText = JSON.stringify(responseJSON);
@@ -524,8 +517,20 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 step:"6",
                 title: this.strings.title_complete,
                 content: (
+                    this.state.validationStatus === 200 ?
                     <Complete 
                         prefLang={this.props.prefLang}
+                    />   
+                    :
+                    <Failed
+                    prefLang={this.props.prefLang}
+                    engName= { engName }
+                    frCommName= { frCommName }
+                    ownerList= { ownerList }
+                    commPurpose= { commPurpose }
+                    shEngDesc= { shEngDesc }
+                    shFrDesc= { shFrDesc }
+                    validationStatus = { this.state.validationStatus }
                     />
                 ),
                
@@ -537,8 +542,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
        
 
         return (
+            <>        
             <div className= { styles.scw }>
-                <Title current={ current } step={ step } prefLang={this.props.prefLang} />
+                <Title current={ current } step={ step } prefLang={this.props.prefLang} status={this.state.validationStatus} />
                 { step === 0 
                 ? <>
                         <Initial
@@ -554,15 +560,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                         {  showCallout && <Callouts prefLang={ this.props.prefLang } showCallout={ showCallout }  targetId= { targetId } openCallout = {this.isCalloutVisible} /> }
                         { this.state.showModal === true && <ErrorModal prefLang={ this.props.prefLang } current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } selectedChoice={ selectedChoice } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } /> } 
                         <div className="steps-content"> 
+                        
                             { this.state.isLoading ? 
-                                (<Spinner size={ SpinnerSize.large }/>) : this.state.validationStatus === 400 && steps[this.state.current].step ==='5'
-                                ? 
-                                <Result
-                                    icon={<CloseCircleOutlined/>}
-                                    title="Submission Failed"
-                                    subTitle="Please send GCXchange and email."
-                                    extra={<Button type="primary">Email us</Button>}
-                                /> 
+                                ( <Spinner label={ this.strings.submitting_your_information } labelPosition="right"   size={ SpinnerSize.large }/>) 
                                 :
                                 steps[ this.state.current ].content
                             }   
@@ -584,6 +584,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 </div>
                 }
             </div>
+        </>
         );
     }
     
