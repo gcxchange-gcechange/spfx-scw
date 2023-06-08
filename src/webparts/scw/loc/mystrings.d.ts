@@ -24,6 +24,7 @@ declare interface IScwWebPartStrings {
   title_complete: string;
   thank_you: string;
   complete_content: string;
+  complete_content2: string;
   complete_img_alt: string;
   complete_button: string;
 

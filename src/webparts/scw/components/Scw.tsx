@@ -9,7 +9,7 @@ import  { Steps, Button } from 'antd';
 import FirstStep from "./FirstStep";
 import  { IScwProps } from './IScwProps';
 import  { Initial } from './InitialPage/Initial';
-import  { PrimaryButton, Stack } from 'office-ui-fabric-react';
+import  { ISpinnerStyles, PrimaryButton, Stack } from 'office-ui-fabric-react';
 import  { IButtonStyles } from 'office-ui-fabric-react';
 import LastStep from './LastStep';
 // import  { MessageType } from 'antd/es/message/interface';
@@ -206,9 +206,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             } else {
                 owner1 = ownerList[0] + "," + ownerList[1] + "," + ownerList[2];
             }
-            console.log("ownerList",owner1);
+            // console.log("ownerList",owner1);
             // let memberlist = "";
-            // for (let i = 0; i < memberList.length; i++) {
+            // // for (let i = 0; i < memberList.length; i++) {
             //     if (i === memberList.length - 1) {
             //         memberlist += memberList[i]
             //     } else {
@@ -234,6 +234,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     "RequesterEmail": "${this.props.context.pageContext.user.email}",
                     "SecurityCategory": "unclassified",
                     "Status": "Submitted",
+                    
                 }`
             };
 
@@ -537,7 +538,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         const items = steps.map( item => ( item.step !== '6' ?  { key: item.step, title: item.title} : null));
        
-        console.log("page", current);
+
+        const labelSpinnerStyles: Partial<ISpinnerStyles> = { root: { padding: 20 } };
 
         return (
             <>        
@@ -560,7 +562,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                         <div className="steps-content"> 
                         
                             { this.state.isLoading ? 
-                                ( <Spinner label={ this.strings.submitting_your_information } labelPosition="right"   size={ SpinnerSize.large }/>) 
+                                ( <Spinner label={ this.strings.submitting_your_information } labelPosition="right"   size={ SpinnerSize.large } styles={labelSpinnerStyles}/>) 
                                 :
                                 steps[ this.state.current ].content
                             }   
