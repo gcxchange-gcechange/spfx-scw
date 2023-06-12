@@ -556,11 +556,13 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 :
                 <div className= { styles.container }>
                     <div className= { styles.row }> 
-                        <Steps current= { this.state.current } labelPlacement='vertical' items= { items } />
+                        <Stack horizontalAlign="center">
+                            <Steps current= { this.state.current } labelPlacement='vertical' items= { items } />
+                        </Stack>
                         {  showCallout && <Callouts prefLang={ this.props.prefLang } showCallout={ showCallout }  targetId= { targetId } openCallout = {this.isCalloutVisible} /> }
                         { this.state.showModal === true && <ErrorModal prefLang={ this.props.prefLang } current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } /> } 
-                        <div className="steps-content"> 
                         
+                        <div className="steps-content"> 
                             { this.state.isLoading ? 
                                 ( <Spinner label={ this.strings.submitting_your_information } labelPosition="right"   size={ SpinnerSize.large } styles={labelSpinnerStyles}/>) 
                                 :

@@ -79,15 +79,11 @@
 :global {
 
     .ant-steps {
-        width: 80%;
+        width: 50%;
         margin-left: 100px;
     }
     
 
-    .ant-steps {
-        width: 80%;
-        margin-left: 100px;
-    }
     .steps-content {
         min-height: 200px;
         padding-top: 50px;
@@ -330,7 +326,7 @@
     border-bottom-right-radius: 5px;
 }
 
-.inviteContainer{
+.inviteContainer {
     display:flex;
     flex-direction: column;
     align-items: 'center';
@@ -371,27 +367,6 @@
     width: 250px;
 }
 
-.btmSpace {
-    padding-bottom: 18px;
-}
-
-
-:global {
-     .ms-Label::before {
-        content: "*";
-        display: inline-block;
-        margin-right: 4px;
-        font-size: 16px;
-        color: red
-     }
-     .ms-Label::after{
-        display: none;
-     }
-}
-
-.largebtn {
-    width: 250px;
-}
 
 :global {
     .ms-Checkbox.is-enabled .ms-Checkbox-checkbox {
