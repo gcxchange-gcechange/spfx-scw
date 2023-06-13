@@ -1,7 +1,7 @@
 import { IImageProps, ImageFit, IStackStyles, IStackTokens, Stack, StackItem } from 'office-ui-fabric-react';
 import * as React from 'react';
 import styles from  '../InitialPage/Initial.module.scss';
-import {faUsers, faGlobe, faLock } from '@fortawesome/free-solid-svg-icons';
+import {faUsers, faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IScwProps } from '../IScwProps';
 import { SelectLanguage } from '../SelectLanguage';
@@ -15,15 +15,15 @@ export class Initial extends React.Component<IScwProps> {
 
         const imageProps: Partial<IImageProps> = {
             src: (require("../../assets/sharepoint_teams_graphic.png")),
-            width: 400,
+            width: 500,
             imageFit: ImageFit.contain,
             
       };
 
-        const stackStyles: IStackStyles = {
+        const stackStyles: IStackStyles = { 
             root: {
                 display:'flex',
-                width:'80%',
+                // width:'80%',
                 fontSize: '18px;'
           },
         };
@@ -42,7 +42,7 @@ export class Initial extends React.Component<IScwProps> {
             <h2 className={ styles.mgBottom0 }>{this.strings.create_a_community}</h2>
             <Stack horizontal verticalAlign="center" styles={ flexStyles }>
                 <Stack.Item grow={ 2 } >
-                    <p style={{ fontSize:'18px' }}className={ styles.mg0 }>{ this.strings.collaborate }</p>
+                    <p style={{ fontSize:'18px', width: '600px' }} className={ styles.mg0 }>{parse(this.strings.collaborate)}</p>
                 </Stack.Item>
                 <Stack.Item grow={ 4 }>
                     <img { ...imageProps } alt={"teams" }/> 
@@ -52,7 +52,7 @@ export class Initial extends React.Component<IScwProps> {
             <h3>{ this.strings.a_few_things }</h3>
             <p>{ this.strings.to_create }</p>
  
-            <Stack horizontal styles={stackStyles } horizontalAlign='center' verticalAlign="baseline" tokens={ sectionStackTokens }>
+            <Stack horizontal styles={stackStyles } horizontalAlign='space-around' verticalAlign="baseline" tokens={ sectionStackTokens }>
                 <StackItem align="start">
                     <div className={ styles.card }>
                         <FontAwesomeIcon icon={ faGlobe } size='3x' className={ styles.blue } />
@@ -67,13 +67,13 @@ export class Initial extends React.Component<IScwProps> {
                     <small>{ this.strings.indentify_one_more_owner_smallText }</small>
                 </div>
                </StackItem>
-               <StackItem>
+               {/* <StackItem>
                 <div className={ styles.card }>
-                    <FontAwesomeIcon icon={faLock } size='3x' className={ styles.blue } />
-                    <p>{ parse( this.strings.protected_or_unclassified ) }</p>
-                    <small>{ this.strings.protected_or_unclassified_smallText }</small>
+                    <FontAwesomeIcon icon={ faUsers } size='3x' className={ styles.blue } />
+                    <p>{ parse( this.strings.protected_or_unclassified ) }</p> 
+                    <small>{ parse( this.strings.protected_or_unclassified_smallText )}<Icon className={styles.blue} iconName='NavigateExternalInLine'/></small>
                 </div>
-               </StackItem>
+               </StackItem> */}
             </Stack>
             </section>
             </>
