@@ -7,13 +7,14 @@ import { SelectLanguage } from './SelectLanguage';
 
 
 
+
 export interface IAddUsersProps {
     context: WebPartContext;
     ownerList: string[];
-    memberList: string[];
+    // memberList: string[];
     prefLang: string;
     getOwnersCallback?: ( item: [] )  => void;
-    getMemberCallback?: ( item: [] )  => void;
+    // getMemberCallback?: ( item: [] )  => void;
     handleButtonClick? :(event: any) => void;
 
 }
@@ -34,13 +35,13 @@ export default class AUsers extends React.Component<IAddUsersProps> {
     };
 
   
-    public _getMemberItems = ( items: [] ):void  => {
-        this.setState({    
-            memberList: items
-    });
+    // public _getMemberItems = ( items: [] ):void  => {
+    //     this.setState({    
+    //         memberList: items
+    // });
    
-        this.props.getMemberCallback( items );//pass to parent
-    };
+    //     this.props.getMemberCallback( items );//pass to parent
+    // };
 
 
 
@@ -56,7 +57,6 @@ export default class AUsers extends React.Component<IAddUsersProps> {
                 <PeoplePicker
                     context = { this.props.context }
                     required = { true }
-                    titleText ={`${ this.strings.invite_owners}`}
                     personSelectionLimit = { 3 }
                     groupName = { "" } // Leave this blank in case you want to filter from all users
                     onChange = { this._getOwnerItems }
@@ -69,7 +69,7 @@ export default class AUsers extends React.Component<IAddUsersProps> {
                     tooltipDirectional  = { DirectionalHint.topCenter }
                 />
 
-
+{/* 
                 <PeoplePicker
                     context = { this.props.context }
                     titleText ={`${ this.strings.invite_members}`}
@@ -83,7 +83,7 @@ export default class AUsers extends React.Component<IAddUsersProps> {
                     showtooltip = { true }
                     tooltipMessage = { `${ this.strings.owners_Instruction}` }
                     tooltipDirectional  = { DirectionalHint.topCenter }
-                />
+                /> */}
             </>
         );
 
