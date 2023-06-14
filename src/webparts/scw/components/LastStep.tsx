@@ -235,32 +235,17 @@ export default class LastStep extends React.Component<ILastStepProps> {
 
     private validateInput = (value: string): string => {
 
-        const hasSpecialChar = /[?<>*]/.test(value);
-        const startsWithSpecialChar = /^[~`!@#$%^&()_+={\x5B:;"',.|\x2F\x5D\x5C\x99-]/.test(value);
-
-        if (value.length >= 5 && value.length <= 125 ) {
-            if (hasSpecialChar) {
-                console.log("Value has special character: ?<>*");
-                return  `${this.strings.special_char_validation}`;
-              }
+         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value);
     
-              else if (startsWithSpecialChar) {
-                console.log("Value statrts with special character");
-                return `${this.strings.special_char_validation}`;
-              }
-        } else {
-        
-            if (value.length < 5 && (startsWithSpecialChar || hasSpecialChar)) {
-              console.log("less than 5 characters.");
-              return `${this.strings.special_char_validation}`;
-            }
-          
-            if (value.length <5 || value.length > 125) {
-              console.log("Value must be less than 125 characters.");
-              return `${this.strings.between_5_125_char_validation}`;
-            }
-  
-          } 
+
+      if (charAllowed) {
+        // console.log("Value has special char")
+        return `${this.strings.special_char_validation}`
+      }
+
+      if ( value.length < 5 || value.length > 125 )  {
+        return `${this.strings.between_5_125_char_validation}`
+      }
     
        
     };
