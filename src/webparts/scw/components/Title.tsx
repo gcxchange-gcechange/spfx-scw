@@ -22,23 +22,22 @@ export default class Title extends React.Component<ITitleProps> {
 
     private pageTitle = ():string  => {
         const { current, step, status } = this.props;
-
-        console.log("current", current);
-        console.log("step", step);
         
         const titles: string[] = [ 
 					`${this.strings.community_details}`, 
-					`${this.strings.community_classification}`, 
-					`${this.strings.terms}`,
-					`${this.strings.invite_owners_members}`,
+					// `${this.strings.community_classification}`, 
+					// `${this.strings.terms}`,
+					`${this.strings.invite_owners_title}`,
 					`${this.strings.review_submit}`,
                     `${this.strings.submissionFailed}`,
                     `${ this.strings.title_complete }`
-				]
+		]
+
         
         let title:string = '';
         
-
+  
+        
         if ( step === 0) {
             title = null;
         }
@@ -51,20 +50,22 @@ export default class Title extends React.Component<ITitleProps> {
         else if ( current === 2 ) {
             title = `${ titles[2] }`;
         }
-        else if ( current === 3 ) {
-            title=`${ titles[3] }`;
-        } 
-        else if ( current === 4 ) {
-                title= `${ titles[4] }`;
-        }
-        else if ( current === 5 && status !== 200 ) {
-            title= `${ titles[5] }`;
+        // else if ( current === 3 ) {
+        //     title=`${ titles[3] }`;
+        // } 
+        // else if ( current === 4 ) {
+        //         title= `${ titles[4] }`;
+        // }
+        else if ( current === 3 && status !== 200 ) {
+            title= `${ titles[3] }`;
         } else  {
-            title= `${ titles[6] }`;
+            title= `${ titles[4] }`;
         }
     
        
         return title;
+
+
      }
 
 

@@ -9,15 +9,15 @@ import  { Steps, Button } from 'antd';
 import FirstStep from "./FirstStep";
 import  { IScwProps } from './IScwProps';
 import  { Initial } from './InitialPage/Initial';
-import  { PrimaryButton, Stack } from 'office-ui-fabric-react';
+import  { ISpinnerStyles, PrimaryButton, Stack } from 'office-ui-fabric-react';
 import  { IButtonStyles } from 'office-ui-fabric-react';
 import LastStep from './LastStep';
 // import  { MessageType } from 'antd/es/message/interface';
 import ErrorModal from './Modal';
 import FourthStep from './FourthStep';
-import SecondStep from './SecondStep';
+// import SecondStep from './SecondStep';
 import { SelectLanguage } from './SelectLanguage';
-import ThirdStep from './ThirdStep';
+// import ThirdStep from './ThirdStep';
 import { AadHttpClient, HttpClientResponse, IHttpClientOptions } from '@microsoft/sp-http-base';
 import Title from './Title';
 import Complete from './Complete';
@@ -33,7 +33,7 @@ export interface IScwState  {
     step: number;
     engName: string;
     ownerList: string[];
-    memberList: string[];
+    // memberList: string[];
     commPurpose: string;
     frCommName: string;
     shEngDesc: string;
@@ -64,7 +64,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             step: 0,
             engName:'', 
             ownerList: [this.owner],
-            memberList: [this.owner],
+            // memberList: [this.owner],
             commPurpose: '',
             frCommName: '',
             shEngDesc: '',
@@ -87,7 +87,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     private next = (): void =>  { 
 
        
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, selectedChoice, checkedValues, ownerList } = this.state
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose,  checkedValues, ownerList } = this.state
 
         const filtered = checkedValues.filter((value, index) => {
             return checkedValues.indexOf(value) === index
@@ -100,16 +100,16 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             this.setState({ showModal: true });
        } 
 
-       else if ( current === 1 && selectedChoice === '' ) {
+    //    else if ( current === 1 && selectedChoice === '' ) {
             
-             this.setState({ showModal: true });
-       }
+    //          this.setState({ showModal: true });
+    //    }
        
-       else if ( current === 2 &&  selectedChoice === `${this.strings.protected_cardTitle}` && filtered.length < 7 ) {
+    //    else if ( current === 2 &&  selectedChoice === `${this.strings.protected_cardTitle}` && filtered.length < 7 ) {
                 
-                this.setState({ showModal: true });
-       } 
-        else if ( current === 3 && ownerList.length === 1 ) {
+    //             this.setState({ showModal: true });
+    //    } 
+        else if ( current === 1 && ownerList.length === 1 ) {
             
                 this.setState({ showModal: true });
 
@@ -137,18 +137,18 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     private prev = (): void =>  { 
         const prevPage = this.state.current - 1;   
 
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, selectedChoice } = this.state
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList  } = this.state
 
        
 
-        if ( current === 4 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 1)) {
+        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 1)) {
            
             this.setState({ showModal: true });
         }
-        else    if ( current === 2 && selectedChoice === `${ this.strings.protected_cardTitle }`) {
+        // else    if ( current === 2 && selectedChoice === `${ this.strings.protected_cardTitle }`) {
 
-            this.setState({ selectedChoice: `${ this.strings.unclassified_cardTitle }`})
-        }
+        //     this.setState({ selectedChoice: `${ this.strings.unclassified_cardTitle }`})
+        // }
         else {
             
             this.setState({ current: prevPage})
@@ -183,10 +183,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     
     public successMessage = (): void =>  { 
         
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, memberList, selectedChoice } = this.state
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList } = this.state
 
         
-        if ( current === 4 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length === 1)) {
+        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length === 1)) {
             
             this.setState({ showModal: true });
         }
@@ -206,16 +206,16 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             } else {
                 owner1 = ownerList[0] + "," + ownerList[1] + "," + ownerList[2];
             }
-            console.log("ownerList",owner1);
-            let memberlist = "";
-            for (let i = 0; i < memberList.length; i++) {
-                if (i === memberList.length - 1) {
-                    memberlist += memberList[i]
-                } else {
-                    memberlist += memberList[i] + ","
-                }
-            }
-            console.log("memberList",memberlist);
+            // console.log("ownerList",owner1);
+            // let memberlist = "";
+            // // for (let i = 0; i < memberList.length; i++) {
+            //     if (i === memberList.length - 1) {
+            //         memberlist += memberList[i]
+            //     } else {
+            //         memberlist += memberList[i] + ","
+            //     }
+            // }
+            // console.log("memberList",memberlist);
 
 
             const postOptions: IHttpClientOptions = {
@@ -232,9 +232,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     "TemplateTitle": "Generic",
                     "RequesterName": "${this.props.context.pageContext.user.displayName}",
                     "RequesterEmail": "${this.props.context.pageContext.user.email}",
-                    "SecurityCategory": "${selectedChoice}",
+                    "SecurityCategory": "unclassified",
                     "Status": "Submitted",
-                    "Members": "${memberList}"
+                    
                 }`
             };
 
@@ -341,14 +341,14 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         
     }
 
-    public selectedChoiceCallback = ( selectedChoice: string ): void =>  { 
+    // public selectedChoiceCallback = ( selectedChoice: string ): void =>  { 
 
-        const saveSelectedChoice = selectedChoice;
+    //     const saveSelectedChoice = selectedChoice;
 
-        this.setState( { 
-            selectedChoice: saveSelectedChoice
-        })
-    } 
+    //     this.setState( { 
+    //         selectedChoice: saveSelectedChoice
+    //     })
+    // } 
 
   
     public handleOwnerCallback = ( items: [] ): void =>  { 
@@ -364,19 +364,19 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         }) ; 
     }
 
-    public handleMemberCallback = ( items: [] ): void =>  { 
-        const MemberArr: string[] = [];
+    // public handleMemberCallback = ( items: [] ): void =>  { 
+    //     const MemberArr: string[] = [];
 
-        items.forEach(user =>  { 
-            // eslint-disable-next-line dot-notation
-            MemberArr.push( user['secondaryText'] )
-        })
+    //     items.forEach(user =>  { 
+    //         // eslint-disable-next-line dot-notation
+    //         MemberArr.push( user['secondaryText'] )
+    //     })
   
-        this.setState( { 
-            memberList: MemberArr
-        }) ; 
+    //     // this.setState( { 
+    //     //     memberList: MemberArr
+    //     // }) ; 
 
-    }
+    // }
 
     public handleErrorMessage = ( errorMessage: string ):void  => {
         const errorM = errorMessage;
@@ -385,27 +385,27 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         });
     }
 
-    public checkedTerms = ( event: any, isChecked:boolean ):void => {
-        const id = event;
+    // public checkedTerms = ( event: any, isChecked:boolean ):void => {
+    //     const id = event;
 
-        if ( isChecked === true ) {
+    //     if ( isChecked === true ) {
            
-            this.setState(prevState => ({
-                checkedValues: [...prevState.checkedValues, id]
-            }));
-        } 
+    //         this.setState(prevState => ({
+    //             checkedValues: [...prevState.checkedValues, id]
+    //         }));
+    //     } 
 
-        else {
-            const newArray = this.state.checkedValues.filter((item) => item !== id)
+    //     else {
+    //         const newArray = this.state.checkedValues.filter((item) => item !== id)
             
-            this.setState({
-                checkedValues: newArray
-            })
+    //         this.setState({
+    //             checkedValues: newArray
+    //         })
            
-        }
+    //     }
 
       
-    }
+    // }
    
 
      
@@ -431,7 +431,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     
     public render(): React.ReactElement<IScwProps>  { 
 
-        const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, memberList, errorMessage, showModal, checkedValues, showCallout, targetId } = this.state;
+        const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, errorMessage, showModal, checkedValues, showCallout, targetId } = this.state;
 
         const steps = [
         
@@ -453,33 +453,33 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 />
                 ),
             },
-            { 
-                step: "2",
-                title: this.strings.classification,
-                content: (
-                <SecondStep
-                    prefLang = { this.props.prefLang }
-                    selectedChoice= { selectedChoice }
-                    handleSelectedChoice= { this.selectedChoiceCallback}
-                />
-                ),
-            },
-            { 
-                step: "3",
-                title: this.strings.term_of_use,
-                content: <ThirdStep prefLang={this.props.prefLang} checkedValues= { checkedValues } checkedTerms = { this.checkedTerms } selectedChoice = { selectedChoice }/>,
-            },
+            // { 
+            //     step: "2",
+            //     title: this.strings.classification,
+            //     content: (
+            //     // <SecondStep
+            //     //     prefLang = { this.props.prefLang }
+            //     //     selectedChoice= { selectedChoice }
+            //     //     handleSelectedChoice= { this.selectedChoiceCallback}
+            //     // />
+            //     ),
+            // },
+            // { 
+            //     step: "3",
+            //     title: this.strings.term_of_use,
+            //     content: <ThirdStep prefLang={this.props.prefLang} checkedValues= { checkedValues } checkedTerms = { this.checkedTerms }/>,
+            // },
             { 
                 step: "4",
-                title: this.strings.owners_and_members,
+                title: this.strings.owners,
                 content: (
                 <FourthStep
                     prefLang={this.props.prefLang}
                     context= { this.props.context }
                     ownerList= { ownerList }
-                    memberList= { memberList }
+                    // memberList= { memberList }
                     getOwnersCallback= { this.handleOwnerCallback }
-                    getMemberCallback= { this.handleMemberCallback }
+                    // getMemberCallback= { this.handleMemberCallback }
                 />
                 ),
             },
@@ -497,7 +497,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     shEngDesc= { shEngDesc }
                     shFrDesc= { shFrDesc }
                     ownerList= { ownerList }
-                    memberList= { memberList }
+                    // memberList= { memberList }
                     context= { this.props.context }
                     showCallout = { showCallout}
                     targetId = { targetId }
@@ -505,7 +505,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     handleEngNameCallback= { this.handleEngNameCallback }
                     frNameCallBack= { this.frNameCallback }
                     getOwnersCallback= { this.handleOwnerCallback }
-                    getMemberCallback= { this.handleMemberCallback }
+                    // getMemberCallback= { this.handleMemberCallback }
                     handleFrDescCallback= { this.frDescCallback }
                     handleEngDescCallback= { this.engDescCallback }
                     isCalloutVisible ={ this.isCalloutVisible }
@@ -541,6 +541,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         const items = steps.map( item => ( item.step !== '6' ?  { key: item.step, title: item.title} : null));
        
 
+        const labelSpinnerStyles: Partial<ISpinnerStyles> = { root: { padding: 20 } };
+
         return (
             <>        
             <div className= { styles.scw }>
@@ -556,13 +558,15 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 :
                 <div className= { styles.container }>
                     <div className= { styles.row }> 
-                        <Steps current= { this.state.current } labelPlacement='vertical' items= { items } />
+                        <Stack horizontalAlign="center">
+                            <Steps current= { this.state.current } labelPlacement='vertical' items= { items } />
+                        </Stack>
                         {  showCallout && <Callouts prefLang={ this.props.prefLang } showCallout={ showCallout }  targetId= { targetId } openCallout = {this.isCalloutVisible} /> }
-                        { this.state.showModal === true && <ErrorModal prefLang={ this.props.prefLang } current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } selectedChoice={ selectedChoice } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } /> } 
-                        <div className="steps-content"> 
+                        { this.state.showModal === true && <ErrorModal prefLang={ this.props.prefLang } current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } /> } 
                         
+                        <div className="steps-content"> 
                             { this.state.isLoading ? 
-                                ( <Spinner label={ this.strings.submitting_your_information } labelPosition="right"   size={ SpinnerSize.large }/>) 
+                                ( <Spinner label={ this.strings.submitting_your_information } labelPosition="right"   size={ SpinnerSize.large } styles={labelSpinnerStyles}/>) 
                                 :
                                 steps[ this.state.current ].content
                             }   
@@ -571,11 +575,15 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                         <div className="steps-action">
                             <Stack horizontal horizontalAlign='space-between'>
                                 { this.state.current === 0 &&   <Button className={ styles.previousbtn }  onClick= { () => this.goToInitalPage() } >{ this.strings.prev_btn }</Button> }
-                                { this.state.current > 0 &&  (this.state.current !== 4 && steps[this.state.current].step !== '5' || steps[this.state.current].step !== '6')
+                                {/* { this.state.current > 0 &&  (this.state.current !== 4 && steps[this.state.current].step !== '5' || steps[this.state.current].step !== '6')
                                 && ( <Button id='prev'className={ styles.previousbtn } style={{ display: 'inline-block', overflow: 'visible', whiteSpace: 'break-spaces', height:'auto'}}  onClick= { () => this.prev() } > { this.state.current === 2 && selectedChoice === `${this.strings.protected_cardTitle}` ?  `${ this.strings.unclassified_button }` : `${ this.strings.prev_btn }` } </Button> ) 
+                                 } */}
+                                 { this.state.current > 0 &&  (this.state.current !== 4 && steps[this.state.current].step !== '5' || steps[this.state.current].step !== '6')
+                                && ( <Button id='prev'className={ styles.previousbtn } style={{ display: 'inline-block', overflow: 'visible', whiteSpace: 'break-spaces', height:'auto'}}  onClick= { () => this.prev() } > { `${ this.strings.prev_btn }` } </Button> ) 
                                  }
-                                { this.state.current < steps.length - 2 && ( this.state.current !== 2 || selectedChoice === `${ this.strings.unclassified_cardTitle }` ) && (<Button className={ styles.largebtn } type="primary" onClick= { this.next} > { this.strings.next_btn } </Button> )}
-                                { this.state.current < steps.length - 2 && ( this.state.current === 2 && selectedChoice === `${ this.strings.protected_cardTitle }` ) && (<Button className={ styles.largebtn } style={{ height: '54px'}} type="primary" onClick= { this.next} >{ this.strings.next_btn }</Button> ) }
+                                { this.state.current < steps.length - 2 && (<Button className={ styles.largebtn } type="primary" onClick= { this.next} > { this.strings.next_btn } </Button> )}
+                                {/* { this.state.current < steps.length - 2 && ( this.state.current !== 2 || selectedChoice === `${ this.strings.unclassified_cardTitle }` ) && (<Button className={ styles.largebtn } type="primary" onClick= { this.next} > { this.strings.next_btn } </Button> )}
+                                { this.state.current < steps.length - 2 && ( this.state.current === 2 && selectedChoice === `${ this.strings.protected_cardTitle }` ) && (<Button className={ styles.largebtn } style={{ height: '54px'}} type="primary" onClick= { this.next} >{ this.strings.next_btn }</Button> ) } */}
                                 { this.state.current === steps.length - 2 && 
                                 ( <Button id="submit" className={ styles.largebtn } type="primary" onClick= { this.successMessage} > { this.strings.submit_btn } </Button> )}
                             </Stack>

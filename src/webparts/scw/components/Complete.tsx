@@ -46,7 +46,8 @@ export default class Complete extends React.Component<ICompleteProps, ICompleteS
                 <img { ...imageProps } alt={ this.strings.complete_img_alt }/>   
             </Stack>
             <h3>{ this.strings.thank_you }</h3>
-            <p>{ parse( this.strings.complete_content ) } <Icon className='NavigateExternalInline'/></p>
+            <p>{ parse( this.strings.complete_content ) }</p>
+            <p>{ parse( this.strings.complete_content2 ) } <Icon style={{ color: '#004DB8' }} iconName='NavigateExternalInLine'/></p>
             <Stack horizontal horizontalAlign="center">
                 <PrimaryButton id="GCXHomepage" text={this.strings.complete_button} href={'https://devgcx.sharepoint.com/'}/>
             </Stack>

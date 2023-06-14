@@ -13,7 +13,7 @@ import { SelectLanguage } from './SelectLanguage';
 export interface ILastStepProps { 
     context: WebPartContext;
     engName: string;
-    memberList: string[];
+    // memberList: string[];
     ownerList: string[];
     commPurpose: string;
     frCommName: string;
@@ -130,11 +130,11 @@ export default class LastStep extends React.Component<ILastStepProps> {
     };
 
   
-    public updateDefaultMemberValues = ( items: [] ):void  => { 
-           const newValues = items;
+    // public updateDefaultMemberValues = ( items: [] ):void  => { 
+    //        const newValues = items;
            
-        this.props.getMemberCallback( newValues );//pass to parent
-    };
+    //     this.props.getMemberCallback( newValues );//pass to parent
+    // };
 
    
 
@@ -143,7 +143,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
     public render(): React.ReactElement<ILastStepProps> {
 
 
-        const { engName, frCommName, shEngDesc, shFrDesc, selectedChoice } = this.props
+        const { engName, frCommName, shEngDesc, shFrDesc } = this.props
         
         const infoIcon: IIconProps = { iconName: 'UnknownSolid' }; 
 
@@ -178,22 +178,22 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 <TextField id='FrCommName' defaultValue={ frCommName } onChange={ this.onUpdateFrName } onGetErrorMessage={ this.validateInput }/>
 
                 <Stack horizontal verticalAlign='end'>
-                    <Label htmlFor='shEngDesc'required >{ this.strings.eng_desc }</Label>
+                    <Label htmlFor='shEngDesc'required >{ this.strings.shEngDesc_title }</Label>
                     <IconButton  ariaLabel="information" id='shEngDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='shEngDesc' defaultValue={ shEngDesc } onChange={ this.onUpdateEngDesc } onGetErrorMessage={ value => { if (value.length > 33 || value === '') return `${this.strings.max33_validation}` }}/>
 
                 <Stack horizontal verticalAlign='end'>
-                    <Label htmlFor='shFrDesc'required >{ this.strings.fr_desc }</Label>
+                    <Label htmlFor='shFrDesc'required >{ this.strings.shFrDesc_title }</Label>
                     <IconButton  ariaLabel="information" id='shFrDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } onGetErrorMessage={ value => { if (value.length > 33 || value === '') return `${this.strings.max33_validation}` }}/>
 
-                <Stack horizontal verticalAlign='end'>
+                {/* <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='classification'required >{ this.strings.community_classification }</Label>
                     <IconButton ariaLabel="information" id='classification' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
-                </Stack>
-                <TextField style={{ background:'#eaeaea'}} id='classification' value={selectedChoice}/>
+                </Stack> */}
+                {/* <TextField style={{ background:'#eaeaea'}} id='classification' value={selectedChoice}/> */}
 
 
 
@@ -213,11 +213,11 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     defaultSelectedUsers  = { this.props.ownerList }
                 />
 
-                <Stack horizontal verticalAlign ="end">
+                {/* <Stack horizontal verticalAlign ="end">
                     <Label>{ this.strings.members }</Label>
                     <IconButton id ="members" styles  = { iconStyles } iconProps = { infoIcon } ariaLabel ="InfoIcon" onClick={this.showCalloutVisible }/>
-                </Stack>
-                <PeoplePicker
+                </Stack> */}
+                {/* <PeoplePicker
                     context = { this.props.context }
                     required = { true }
                     personSelectionLimit = { 3 }
@@ -227,7 +227,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     showHiddenInUI = {false }
                     resolveDelay = {1000}
                     defaultSelectedUsers  = { this.props.memberList }
-                />      
+                />       */}
 
             </>
         );

@@ -45,11 +45,11 @@ export default class Callouts extends React.Component< ICalloutsProps > {
     else if ( targetId === 'shFrDesc' ) {
       message = `${ this.strings.shFrDesc_desc } <br/> ${ this.strings.shFrDesc_Instruction}`
     }
-    else if ( targetId === 'classification' ) {
-      message = `${ this.strings.community_classification_desc } <br/><br/> ${this.strings.community_classification_link}`
-    }
-    else if ( targetId === 'owners' || targetId === 'members') {
-      message = `${this.strings.owners_Instruction}`
+    // else if ( targetId === 'classification' ) {
+    //   message = `${ this.strings.community_classification_desc } <br/><br/> ${this.strings.community_classification_link}`
+    // }
+    else if ( targetId === 'owners' ) {
+      message = `${this.strings.owners_instruction_Callout}`
     }
 
     return message
@@ -76,15 +76,15 @@ export default class Callouts extends React.Component< ICalloutsProps > {
     else if ( targetId === 'shFrDesc' ) {
       title = `${ this.strings.shFrDesc_title }`
     }
-    else if ( targetId === 'classification' ) {
-      title = ` ${ this.strings.community_classification}`
-    }
+    // else if ( targetId === 'classification' ) {
+    //   title = ` ${ this.strings.community_classification}`
+    // }
     else if ( targetId === 'owners' ) {
       title = `${this.strings.owners}`
     }
-    else if ( targetId === 'members' ) {
-      title = `${this.strings.members}`
-    }
+    // else if ( targetId === 'members' ) {
+    //   title = `${this.strings.members}`
+    // }
 
     return title
   }
@@ -100,9 +100,10 @@ export default class Callouts extends React.Component< ICalloutsProps > {
   
   const calloutStyle = {
     root: {
-      width: '60%',
+      width: '40%',
       height: 'auto',
       borderRadius: '15px',
+      boxShadow: 'rgb(0 0 0 / 58%) 0px 8px 16px'
     },
     beak: {
       top: '20px!important',
@@ -124,7 +125,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
     },
     body: {
       height: 'auto',
-      padding: '10px'
+      padding: '10px',
     },
     title: {
       fontSize: '16px',

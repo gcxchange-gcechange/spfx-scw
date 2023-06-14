@@ -16,7 +16,7 @@ export interface IErrorModalProps {
   commPurpose: string;
   shEngDesc: string;
   shFrDesc: string;
-  selectedChoice: string;
+  // selectedChoice: string;
   checkedValues: string[];
   ownerList: string[];
   current: number;
@@ -69,14 +69,14 @@ export default class ErrorModal extends React.Component<
       frCommName,
       shEngDesc,
       shFrDesc,
-      selectedChoice,
-      checkedValues,
+      // selectedChoice,
+      // checkedValues,
       ownerList,
     } = this.props;
 
-  const filtered = checkedValues.filter((value, index) => {
-    return checkedValues.indexOf(value) === index
-  });
+  // const filtered = checkedValues.filter((value, index) => {
+  //   return checkedValues.indexOf(value) === index
+  // });
 
     interface PropValues {
       name: string;
@@ -91,13 +91,13 @@ export default class ErrorModal extends React.Component<
       { name: `${ this.strings.shFrDesc_Modal }`, value: `${shFrDesc}` },
     ];
 
-    const secondValues: PropValues[] = [
-      { name: `${ this.strings.community_classification_Modal }`, value: `${selectedChoice}` },
-    ];
+    // const secondValues: PropValues[] = [
+    //   { name: `${ this.strings.community_classification_Modal }`, value: `${selectedChoice}` },
+    // ];
    
-    const thirdValues: PropValues[] = [
-      { name: `${ this.strings.term_of_use.toLowerCase() }`, value: `${filtered.length}` },
-    ];
+    // const thirdValues: PropValues[] = [
+    //   { name: `${ this.strings.term_of_use.toLowerCase() }`, value: `${filtered.length}` },
+    // ];
 
     const fourthValues: PropValues[] = [
       { name: `${ this.strings.one_more_owner }`, value: `${ownerList.length}` },
@@ -108,7 +108,7 @@ export default class ErrorModal extends React.Component<
       { name: `${ this.strings.frCommName_Modal }`, value: `${frCommName}` },
       { name: `${ this.strings.shEngDesc_Modal }`, value: `${shEngDesc}` },
       { name: `${ this.strings.shFrDesc_Modal }`, value: `${shFrDesc}` },
-      { name: `${ this.strings.second_owner }`, value: `${ownerList.length}` },
+      { name: `${ this.strings.one_more_owner }`, value: `${ownerList.length}` },
     ];
 
     let message: string = "";
@@ -129,27 +129,27 @@ export default class ErrorModal extends React.Component<
       }
     }
 
-    for (const obj of secondValues) {
-      if (current === 1 && obj.value === "") {
-        message = `${this.strings.select }  ${obj.name}`;
-      }
-    }
+    // for (const obj of secondValues) {
+    //   if (current === 1 && obj.value === "") {
+    //     message = `${this.strings.select }  ${obj.name}`;
+    //   }
+    // }
 
-    for (const obj of thirdValues) {
-      console.log("thirdValues", obj.value)
-      if (current === 2 && (obj.value === '' || obj.value < 7)) {
-        message += `${this.strings.agree} ${ obj.name }`;
-      }
-    }
+    // for (const obj of thirdValues) {
+    //   console.log("thirdValues", obj.value)
+    //   if (current === 2 && (obj.value === '' || obj.value < 7)) {
+    //     message += `${this.strings.agree} ${ obj.name }`;
+    //   }
+    // }
 
     for (const obj of fourthValues) {
-      if (current === 3 && obj.value < 2) {
+      if (current === 1 && obj.value < 2) {
         message += `${obj.name}`;
       }
     }
 
     for (const obj of lastValues) {
-      if (current === 4 && (obj.value === '' || obj.value < 2)) {
+      if (current === 2 && (obj.value === '' || obj.value < 2)) {
         results.push(obj.name);
      
         if ( results.length > 1 ) {
