@@ -37,7 +37,6 @@ export default class Complete extends React.Component<ICompleteProps, ICompleteS
         
     };
   
-    console.log("URL", this.props.url)
 
     return (
       <>
