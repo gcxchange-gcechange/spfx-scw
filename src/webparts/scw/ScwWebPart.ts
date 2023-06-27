@@ -58,9 +58,6 @@ export default class ScwWebPart extends BaseClientSideWebPart<IScwWebPartProps> 
     const absoluteWebUrl: string = `${pageContext.web.absoluteUrl}`;
     this.rootUrl = absoluteWebUrl.replace(pageContext.web.serverRelativeUrl, '');
 
-
-    console.log("Main", this.rootUrl);
-
   }
 
 
