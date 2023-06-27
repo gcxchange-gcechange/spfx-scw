@@ -52,7 +52,6 @@ export interface IScwState  {
 
 
 
-
 export default class AntDesignStep extends React.Component<IScwProps, IScwState>  { 
    public strings = SelectLanguage(this.props.prefLang);
    private owner = this.props.context.pageContext.user.email;
@@ -520,6 +519,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     this.state.validationStatus === 200 ?
                     <Complete 
                         prefLang={this.props.prefLang}
+                        url={this.props.url}
                     />   
                     :
                     <Failed
@@ -542,17 +542,18 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
        
 
         const labelSpinnerStyles: Partial<ISpinnerStyles> = { root: { padding: 20 } };
-
+        console.log('URL = ' ,this.props.url);
         return (
-            <>        
-            <div className= { styles.scw }>
+            <>       
+            <div className= { styles.scw }>   
                 <Title current={ current } step={ step } prefLang={this.props.prefLang} status={this.state.validationStatus} />
                 { step === 0 
-                ? <>
-                        <Initial
-                            context={ this.props.context }
-                            prefLang={ this.props.prefLang }
-                        />
+                ? 
+                <>
+                    <Initial
+                        context={ this.props.context }
+                        prefLang={ this.props.prefLang }
+                    />
                 <PrimaryButton styles= { this.buttonStyle } text={ this.strings.Lets_go } ariaLabel="Let's go" onClick= { () =>  { this.handleClickEvent()} } className= { styles.centerButton }/>
                 </>
                 :

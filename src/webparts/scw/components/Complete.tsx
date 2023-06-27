@@ -10,6 +10,7 @@ import parse from 'html-react-parser';
 
 export interface ICompleteProps {
   prefLang: string;
+  url: string;
 }
 
 export interface ICompleteState {}
@@ -26,7 +27,6 @@ export default class Complete extends React.Component<ICompleteProps, ICompleteS
 
 
 
-
   
   public render(): React.ReactElement<ICompleteProps> {
 
@@ -37,22 +37,22 @@ export default class Complete extends React.Component<ICompleteProps, ICompleteS
         
     };
   
-
+    console.log("URL", this.props.url)
 
     return (
       <>
-        <div>
+        <Stack verticalAlign="center">
             <Stack horizontal horizontalAlign="center">
-                <img { ...imageProps } alt={ this.strings.complete_img_alt }/>   
+                <img { ...imageProps } alt={ this.strings.complete_img_alt } />   
             </Stack>
             <h3>{ this.strings.thank_you }</h3>
             <p>{ parse( this.strings.complete_content ) }</p>
             <p>{ parse( this.strings.complete_content2 ) } <Icon style={{ color: '#004DB8' }} iconName='NavigateExternalInLine'/></p>
             <Stack horizontal horizontalAlign="center">
-                <PrimaryButton id="GCXHomepage" text={this.strings.complete_button} href={'https://devgcx.sharepoint.com/'}/>
+                <PrimaryButton id="GCXHomepage" text={this.strings.complete_button} href={this.props.url}/>
             </Stack>
            
-        </div>
+        </Stack>
       </>
     );
   }
