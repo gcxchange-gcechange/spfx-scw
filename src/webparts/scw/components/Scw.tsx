@@ -542,7 +542,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
        
 
         const labelSpinnerStyles: Partial<ISpinnerStyles> = { root: { padding: 20 } };
-        console.log('URL = ' ,this.props.url);
+        
         return (
             <>       
             <div className= { styles.scw }>   
