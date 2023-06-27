@@ -51,17 +51,51 @@ export default class LastStep extends React.Component<ILastStepProps> {
     public strings = SelectLanguage(this.props.prefLang);
   
     private  onUpdateCommPurpose = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-        const updatedPurpose = event.target.value.trim();    
+        let value = event.target.value;
+        const invalidInput: string = '';
+        
+        if (value.length > 500 ) {
+            value = invalidInput;
+        }
+
+        const updatedPurpose = value.trim();  
         this.props.commPurposeCallback(updatedPurpose); 
      }
 
     private  onUpdateEngName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-        const updatedName = event.target.value.trim();    
+
+        let value = event.target.value;
+        const hasSpecialChar = /[?<>*]/.test(value);
+        const startsWithSpecialChar = /^[~`!@#$%^&()_+={\x5B:;"',.|\x2F\x5D\x5C\x99-]/.test(value);
+        const invalidInput: string = '';
+
+        if ((value.length >= 5 && value.length <= 125) && startsWithSpecialChar ||  hasSpecialChar ) {
+            console.log("Value ")
+            value = invalidInput;
+        } else if (value.length < 5 || value.length > 125) {
+            console.log("length is less that 5 or more than 125");
+            value = invalidInput;
+        }
+
+        const updatedName = value.trim();
+
         this.props.handleEngNameCallback(updatedName); 
      }
     
     private  onUpdateFrName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-        const updateFrName = event.target.value.trim();
+
+        let value = event.target.value;
+        const hasSpecialChar = /[?<>*]/.test(value);
+        const startsWithSpecialChar = /^[~`!@#$%^&()_+={\x5B:;"',.|\x2F\x5D\x5C\x99-]/.test(value);
+        const invalidInput: string = '';
+
+        if ((value.length >= 5 && value.length <= 125) && startsWithSpecialChar ||  hasSpecialChar ) { 
+            value = invalidInput;
+        } else if (value.length < 5 || value.length > 125) {
+            value = invalidInput;
+        }
+        const updateFrName = value.trim();
+        
         this.props.frNameCallBack(updateFrName)    
      }
 
@@ -128,32 +162,32 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     <Label htmlFor='commPurpose' required >{ this.strings.commPurpose_title }</Label>
                     <IconButton ariaLabel="information" id='commPurpose' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
-                <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={ this.onUpdateCommPurpose }  onGetErrorMessage={ this.getErrorMessage } /> 
+                <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={ this.onUpdateCommPurpose }   onGetErrorMessage={ value => { if (value.length > 500 || value.trim() === '') return `${this.strings.max500_validation}` } } /> 
                 
 
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='name'required >{ this.strings.engName_title }</Label>
                     <IconButton  ariaLabel="information" id='Engname' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
-                <TextField id='name' defaultValue={ engName }  onChange={ this.onUpdateEngName } onGetErrorMessage={ this.getErrorMessage }  />  
+                <TextField id='name' defaultValue={ engName }  onChange={ this.onUpdateEngName } onGetErrorMessage={ this.validateInput }  />  
 
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='FrCommName' required >{ this.strings.frCommName_title }</Label>
                     <IconButton  ariaLabel="information" id='FrCommName' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
-                <TextField id='FrCommName' defaultValue={ frCommName } onChange={ this.onUpdateFrName } onGetErrorMessage={ this.getErrorMessage }/>
+                <TextField id='FrCommName' defaultValue={ frCommName } onChange={ this.onUpdateFrName } onGetErrorMessage={ this.validateInput }/>
 
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='shEngDesc'required >{ this.strings.shEngDesc_title }</Label>
                     <IconButton  ariaLabel="information" id='shEngDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
-                <TextField id='shEngDesc' defaultValue={ shEngDesc } onChange={ this.onUpdateEngDesc } onGetErrorMessage={ this.getErrorMessage }/>
+                <TextField id='shEngDesc' defaultValue={ shEngDesc } onChange={ this.onUpdateEngDesc } onGetErrorMessage={ value => { if (value.length > 33 || value === '') return `${this.strings.max33_validation}` }}/>
 
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='shFrDesc'required >{ this.strings.shFrDesc_title }</Label>
                     <IconButton  ariaLabel="information" id='shFrDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
-                <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } onGetErrorMessage={ this.getErrorMessage }/>
+                <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } onGetErrorMessage={ value => { if (value.length > 33 || value === '') return `${this.strings.max33_validation}` }}/>
 
                 {/* <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='classification'required >{ this.strings.community_classification }</Label>
@@ -199,12 +233,22 @@ export default class LastStep extends React.Component<ILastStepProps> {
         );
      }
 
-     private getErrorMessage = (value: string): string => {
+    private validateInput = (value: string): string => {
 
-        const trimmedValue = value.trim() === '';
+         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value);
+    
 
-        return trimmedValue ? 'field is required' : '';
-      };
+      if (charAllowed) {
+        // console.log("Value has special char")
+        return `${this.strings.special_char_validation}`
+      }
+
+      if ( value.length < 5 || value.length > 125 )  {
+        return `${this.strings.between_5_125_char_validation}`
+      }
+    
+       
+    };
 
 
  }

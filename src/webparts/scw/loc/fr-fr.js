@@ -118,6 +118,10 @@ define([], function() {
         "submissionFailed" : "Échec de la soumission",
         'submitting_your_information': 'Prenez le temps de savourer votre café ou thé; nous sommes en train de soumettre vos renseignements.',
 
+        'max500_validation': ' Max. 500 caractères.',
+        'special_char_validation': 'Les caractères spéciaux ne sont pas autorisés.',
+        'between_5_125_char_validation': 'La longueur doit être de 5 à 125 caractères.',
+        'max33_validation':'Max. 33 caractères.',
 
     } 
 });

@@ -250,11 +250,11 @@
     }
 }
 
-:global {
-    .ms-TextField-errorMessage {
-        display: none;
-      }
-}
+// :global {
+//     .ms-TextField-errorMessage {
+//         display: none;
+//       }
+// }
 
 .terms {
     margin: 0px!important;
@@ -349,19 +349,6 @@
     padding-bottom: 18px;
 }
 
-:global{
-    .ms-Label::before {
-        content: "*";
-        display: inline-block;
-        margin-right: 4px;
-        margin-left: -10px;
-        font-size: 16px;
-        color: red; 
-    }
-    .ms-Label::after {
-        display: none;
-    }
-}
 
 .largebtn {
     width: 250px;

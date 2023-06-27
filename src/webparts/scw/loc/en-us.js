@@ -124,7 +124,11 @@ define([], function() {
     'failed_txt3': 'Our team will respond within 24 to 48 hours Monday to Friday.',
     'failed_txt4': 'If you do not receive the email or you do have any questions, please submit a service request using the',
     "submissionFailed": "Submission failed",
-    'submitting_your_information': 'Grab a sip of coffee, we are submitting your information.',
+    'submitting_your_information': 'Grab a sip of coffee, we are submitting your information.',    
+    'max500_validation': 'Max. 500 characters.',
+    'special_char_validation': 'Special characters are not permitted.',
+    'between_5_125_char_validation': 'Must be between 5 and 125 characters in length.',
+    'max33_validation':'Max. 33 characters.',
   
   }
 })
