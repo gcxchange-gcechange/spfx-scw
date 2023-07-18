@@ -97,22 +97,31 @@
     .ant-steps .ant-steps-item-process .ant-steps-item-icon >.ant-steps-icon {
         color:#004DB8;
         font-weight: bold;
+        vertical-align: middle;
     }
 
-    .ant-steps .ant-steps-item-icon .ant-steps-icon {
-        top: -2.5px;
-    }
+    // .ant-steps .ant-steps-item-icon .ant-steps-icon {
+    //     // top: -2.5px;
+    //     vertical-align: middle;
+    // }
 
     .ant-steps .ant-steps-item-process .ant-steps-item-icon {
         background-color: white;
         border: 2px solid #004DB8!important;
+        
     }
 
     .ant-steps .ant-steps-item-wait .ant-steps-item-icon {
         border: 2px solid #605E5C;
         background-color: white;
         
+        
     }
+
+    // .ant-steps .ant-steps-item-wait .ant-steps-item-icon>.ant-steps-icon {
+    //     vertical-align: middle;
+    // }
+
 
     .ant-steps .ant-steps-item-wait .ant-steps-item-icon >.ant-steps-icon {
         font-weight: bold;
@@ -122,9 +131,9 @@
         background-color: #004DB8;
     }
 
-    .anticon {
-        vertical-align: -0.225em;
-    }
+    // .anticon {
+    //     vertical-align: middle;
+    // }
 
     .anticon svg{
         color: white;
