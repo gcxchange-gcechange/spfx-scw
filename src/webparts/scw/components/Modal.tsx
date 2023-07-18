@@ -183,6 +183,7 @@ export default class ErrorModal extends React.Component<
             <div style={ this.modalStyle.header}>
               <h2>{ this.strings.forget }</h2>
               <IconButton
+                aria-label= { this.strings.close }
                 className={styles.cancelIcon}
                 iconProps={{ iconName: "Cancel" }}
                 onClick={ this.props.onClose}
