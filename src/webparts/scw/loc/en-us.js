@@ -55,7 +55,7 @@ define([], function() {
     // "members_Instruction": 'Start typing an owner’s last name to find and add them.',
     // "community_classification_desc": "To change the classification of your community, you need to go back to the Community classification page, and read the terms of use.",
     // "community_classification_link": "<u> Go to the <i>Community classification</i> page</u> ",
-    "collaborate":"Collaborate with colleagues across departments using Microsoft Teams\n and Sharepoint to share ideas, documents, and much more. Make sure to only store <strong>unclassified documents</strong>",
+    "collaborate":"Collaborate with colleagues across departments using Microsoft Teams\n and SharePoint to share ideas, documents, and much more. Make sure to only store <strong>unclassified documents</strong>",
     "a_few_things":"A few things before you start",
     "to_create": "To create a community, you will need to:",
     "bilingual_name_smallText": "Community name and description need to be fully bilingual to comply with the <i>Official Languages Act</i>",
