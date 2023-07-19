@@ -55,17 +55,22 @@ export class Initial extends React.Component<IScwProps> {
             <Stack horizontal styles={stackStyles } horizontalAlign='space-around' verticalAlign="baseline" tokens={ sectionStackTokens }>
                 <StackItem align="start">
                     <div className={ styles.card }>
-                        <FontAwesomeIcon icon={ faGlobe } size='3x' className={ styles.blue } />
-                        <p>{ parse( this.strings.provide_bilingual_name ) }</p>
-                        <small>{ parse( this.strings.bilingual_name_smallText ) }</small>
+                        <div className={styles.cardBody}>
+                            <FontAwesomeIcon icon={ faGlobe } size='3x' className={ styles.blue } />
+                            <p>{ parse( this.strings.provide_bilingual_name ) }</p>
+                            <small>{ parse( this.strings.bilingual_name_smallText ) }</small>
+                        </div>
+                        
                     </div>
                 </StackItem>
                 <StackItem>
-                <div className={ styles.card }>
-                    <FontAwesomeIcon icon={faUsers } size='3x' className={ styles.blue } />
-                    <p>{ parse( this.strings.indentify_one_more_owner ) }</p>
-                    <small>{ this.strings.indentify_one_more_owner_smallText }</small>
-                </div>
+                    <div className={ styles.card }>
+                        <div className={styles.cardBody}>
+                            <FontAwesomeIcon icon={faUsers } size='3x' className={ styles.blue } />
+                            <p>{ parse( this.strings.indentify_one_more_owner ) }</p>
+                            <small>{ this.strings.indentify_one_more_owner_smallText }</small>
+                        </div>
+                    </div>
                </StackItem>
                {/* <StackItem>
                 <div className={ styles.card }>
