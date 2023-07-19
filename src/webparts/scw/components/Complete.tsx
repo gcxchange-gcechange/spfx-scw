@@ -48,7 +48,7 @@ export default class Complete extends React.Component<ICompleteProps, ICompleteS
             <p>{ parse( this.strings.complete_content ) }</p>
             <p>{ parse( this.strings.complete_content2 ) } <Icon style={{ color: '#004DB8' }} iconName='NavigateExternalInLine'/></p>
             <Stack horizontal horizontalAlign="center">
-                <PrimaryButton id="GCXHomepage" text={this.strings.complete_button} href={this.props.url}/>
+                <PrimaryButton id="GCXHomepage" text={this.strings.complete_button} href={this.props.url} target="_blank" rel="noopener"/>
             </Stack>
            
         </Stack>
