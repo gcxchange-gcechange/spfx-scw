@@ -121,7 +121,7 @@ define([], function() {
         'max500_validation': ' Max. 500 caractères.',
         'special_char_validation': 'Les caractères spéciaux ne sont pas autorisés.',
         'between_5_125_char_validation': 'La longueur doit être de 5 à 125 caractères.',
-        'max33_validation':'Max. 33 caractères.',
+        'max100_validation':'La longueur doit être de 5 à 100 caractères.',
 
     } 
 });
