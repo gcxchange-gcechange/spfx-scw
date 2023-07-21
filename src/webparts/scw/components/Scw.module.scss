@@ -97,7 +97,11 @@
     .ant-steps .ant-steps-item-process .ant-steps-item-icon >.ant-steps-icon {
         color:#004DB8;
         font-weight: bold;
-        vertical-align: middle;
+        // vertical-align: middle;
+    }
+
+    .ant-steps .ant-steps-item-icon .ant-steps-icon {
+        top: -2.4px;
     }
 
 
