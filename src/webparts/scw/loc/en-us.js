@@ -129,7 +129,7 @@ define([], function() {
     'special_char_validation': 'Special characters are not permitted.',
     'between_5_125_char_validation': 'Must be between 5 and 125 characters in length.',
     'max33_validation':'Max. 33 characters.',
-    'required': 'required',
+    'required': 'required field',
   
   }
 })
