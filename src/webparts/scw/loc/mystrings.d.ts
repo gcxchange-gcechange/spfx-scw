@@ -139,7 +139,7 @@ declare interface IScwWebPartStrings {
 
 }
 
-declare module  ScwWebPartStrings  {
+declare module  'ScwWebPartStrings'  {
   const strings: IScwWebPartStrings;
   export = strings;
 }
