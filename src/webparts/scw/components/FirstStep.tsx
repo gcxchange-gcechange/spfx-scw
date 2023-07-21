@@ -111,20 +111,20 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
         // const startsWithSpecialChar = /^[~`!@#$%^&()_+={\x5B:;"',.|\x2F\x5D\x5C\x99-]/.test(value);
         const invalidInput: string = '';
 
-        if ((eventName === 'engName'|| eventName === 'frCommName') && value.length >= 5 && value.length <= 125) {
+        if ((eventName === 'engName'|| eventName === 'frCommName') && value.length >= 5 && value.length <= 80) {
             if (charAllowed) {
                 console.log("value has special character");
                 value = invalidInput;
             }
         }
 
-        if ((eventName === 'engName' || eventName === 'frCommName') && value.length < 5 || value.length > 125) {
-            console.log("Value for engName and frName must be less than  5 greater than 125 characters.");
+        if ((eventName === 'engName' || eventName === 'frCommName') && value.length < 5 || value.length > 80) {
+            // console.log("Value for engName and frName must be less than  5 greater than 80 characters.");
             value = invalidInput;
         }
 
         if (eventName === 'commPurpose' && value.length > 500) {
-            console.log("Condition for 'commPurpose' event name and value length greater than 500");
+            // console.log("Condition for 'commPurpose' event name and value length greater than 500");
             value = invalidInput;
         }
 
@@ -158,8 +158,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
         return `${this.strings.special_char_validation}`
       }
 
-      if ( value.length < 5 || value.length > 125 )  {
-        return `${this.strings.between_5_125_char_validation}`
+      if ( value.length < 5 || value.length > 80 )  {
+        return `${this.strings.between_5_80_char_validation}`
       }
     
     

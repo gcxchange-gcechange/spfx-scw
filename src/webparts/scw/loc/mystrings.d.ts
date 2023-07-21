@@ -125,7 +125,7 @@ declare interface IScwWebPartStrings {
   submissionFailed: string;
   submitting_your_information: string;  max500_validation: string;
   special_char_validation: string;
-  between_5_125_char_validation: string;
+  between_5_80_char_validation: string;
   max33_validation: string;
 
 

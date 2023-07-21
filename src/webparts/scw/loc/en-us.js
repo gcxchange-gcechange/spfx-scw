@@ -37,11 +37,11 @@ define([], function() {
     "engName_title": 'English community name',
     "engName_Modal": '<span style=fontWeight:normal>the</span> English community name',
     "engName_desc": 'The community’s name is the title of your community. Create a short descriptive name. A bilingual name complies with the Official Languages Act and makes it easier for others to find your community in the GCXchange Catalogue.',
-    "engName_Instruction": "Use keywords, not abbreviations for better discoverability. Must be between 5 and 125 characters in length and special characters are not permitted.",
+    "engName_Instruction": "Use keywords, not abbreviations, to help people find your community. Must be between 5 and 80 characters in length. Only alphabets (with French accents), numbers, spaces and apostrophes are allowed.",
     "frCommName_title": "French community name",
     "frCommName_Modal": "<span style=fontWeight:normal>the</span> French community name",
     "frCommName_desc":"The community’s name is the title of your community. Create a short descriptive name. A bilingual name complies with the Official Languages Act and makes it easier for others to find your community in the GCXchange Catalogue. ",
-    "frCommName_Instruction": "Use keywords, not abbreviations for better discoverability. Must be between 5 and 125 characters in length and special characters are not permitted.",
+    "frCommName_Instruction": "Use keywords, not abbreviations, to help people find your community. Must be between 5 and 80 characters in length. Only alphabets (with French accents), numbers, spaces and apostrophes are allowed.",
     "shEngDesc_title": 'Short English description',
     "shEngDesc_Modal": "<span style=fontWeight:normal>the</span> Short English description",
     "shEngDesc_desc": 'The community description will be visible to users when they use the “All Communities” page and when they search for it. ',
@@ -127,7 +127,7 @@ define([], function() {
     'submitting_your_information': 'Grab a sip of coffee, we are submitting your information.',    
     'max500_validation': 'Max. 500 characters.',
     'special_char_validation': 'Special characters are not permitted.',
-    'between_5_125_char_validation': 'Must be between 5 and 125 characters in length.',
+    'between_5_80_char_validation': 'Must be between 5 and 80 characters in length.',
     'max33_validation':'Max. 33 characters.',
   
   }

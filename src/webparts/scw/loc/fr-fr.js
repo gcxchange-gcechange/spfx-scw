@@ -29,11 +29,11 @@ define([], function() {
         "engName_title": 'Nom de la collectivité en anglais',
         "engName_Modal": '<span style=fontWeight:normal>le</span> nom de la collectivité en anglais',
         "engName_desc": "Le nom de la collectivité est le titre de votre collectivité. Créer un nom court et descriptif. Un nom bilingue respecte la Loi sur les langues officielles et permet aux autres de trouver plus facilement votre collectivité dans le catalogue GCÉchange. ",
-        "engName_Instruction": "Utiliser des mots-clés, et non des abréviations, pour une meilleure visibilité. La longueur doit être de 5 à 125 caractères et les caractères spéciaux ne sont pas autorisés",
+        "engName_Instruction": "Utiliser des mots-clés, et non des abréviations, pour aider les gens à repérer votre collectivité. La longueur doit être de 5 à 80 caractères. Seuls les caractères alphabétiques (avec accents français), les nombres, les espaces et les apostrophes sont permis.",
         "frCommName_title": "Nom de la collectivité en français",
         "frCommName_Modal": "<span style=fontWeight:normal>le</span> nom de la collectivité en français",
         "frCommName_desc": "Le nom de la collectivité est le titre de votre collectivité. Créer un nom court et descriptif. Un nom bilingue respecte la Loi sur les langues officielles et permet aux autres de trouver plus facilement votre collectivité dans le catalogue GCÉchange. ",
-        "frCommName_Instruction": 'Utiliser des mots-clés, et non des abréviations, pour une meilleure visibilité. La longueur doit être de 5 à 125 caractères et les caractères spéciaux ne sont pas autorisés.',
+        "frCommName_Instruction": 'Utiliser des mots-clés, et non des abréviations, pour aider les gens à repérer votre collectivité. La longueur doit être de 5 à 80 caractères. Seuls les caractères alphabétiques (avec accents français), les nombres, les espaces et les apostrophes sont permis.',
         "shEngDesc_title": 'Brève description en anglais',
         "shEngDesc_Modal": "<span style=fontWeight:normal>une</span> brève description en anglais",
         "shEngDesc_desc": 'La description de la collectivité sera visible pour les utilisateurs lorsqu’ils utiliseront la page « Toutes les collectivités » et lorsqu’ils font une recherche.',
@@ -120,7 +120,7 @@ define([], function() {
 
         'max500_validation': ' Max. 500 caractères.',
         'special_char_validation': 'Les caractères spéciaux ne sont pas autorisés.',
-        'between_5_125_char_validation': 'La longueur doit être de 5 à 125 caractères.',
+        'between_5_80_char_validation': 'La longueur doit être de 5 à 80 caractères.',
         'max33_validation':'Max. 33 caractères.',
 
     } 
