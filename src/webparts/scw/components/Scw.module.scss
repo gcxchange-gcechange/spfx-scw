@@ -149,13 +149,17 @@
         font-size: 12px;
     }
 
+    .ant-steps .ant-steps-item-wait>.ant-steps-item-container>.ant-steps-item-content>.ant-steps-item-title{
+        color: #605E5C;
+    }
+
     .ant-steps .ant-steps-item-process>.ant-steps-item-container>.ant-steps-item-content>.ant-steps-item-title{
         color: #004DB8;
     }
     
     .ant-steps .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-content>.ant-steps-item-title{
         color: #004DB8;
-        opacity: 0.4;
+        opacity: 0.5;
     }
 
     .ant-steps.ant-steps.ant-steps-label-vertical .ant-steps-item-content{
@@ -167,7 +171,7 @@
         margin-top: 16px;
         border: 1px dashed #303030;
         background-color: rgba(255, 255, 255, 0.04);
-        color: rgba(255, 255, 255, 0.65);
+        color: #605E5C;
         padding-top: 80px;
     }
 }
@@ -265,10 +269,16 @@
     display:flex;
     justify-content: center;
     background: #c0c0cc!important;
-    color:#004DB8;
+    color:#335075;
     width: 250px;
     font-size: 14px;
 }
+
+.previousbtn:hover{
+    color:#335075!important ;
+}
+
+
 
 
 .modalContent {

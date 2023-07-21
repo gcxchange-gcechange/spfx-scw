@@ -183,6 +183,7 @@ export default class ErrorModal extends React.Component<
             <div style={ this.modalStyle.header}>
               <h2>{ this.strings.forget }</h2>
               <IconButton
+                aria-label= { this.strings.close }
                 className={styles.cancelIcon}
                 iconProps={{ iconName: "Cancel" }}
                 onClick={ this.props.onClose}
@@ -194,7 +195,7 @@ export default class ErrorModal extends React.Component<
                   <p className={ styles.modalContent }>{ this.strings.you_must } <strong>{messages}</strong> { this.strings.before_proceeding }</p>
                 </Stack.Item>
                 <Stack.Item>
-                  <hr className={styles.horizontalLine} />
+                  <hr  aria-hidden= 'true' className={styles.horizontalLine} />
                 </Stack.Item>
                 <Stack.Item align="center">
                   <PrimaryButton
