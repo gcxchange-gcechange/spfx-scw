@@ -161,7 +161,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 <p>{ this.strings.review_info }</p>
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='commPurpose'> 
-                        <span className={styles.asterik}  aria-label='required'>*</span>
+                        <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
                         { this.strings.commPurpose_title }
                     </Label>
                     <IconButton ariaLabel="information" id='commPurpose' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
@@ -171,7 +171,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
 
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='name'>
-                        <span className={styles.asterik}  aria-label='required'>*</span>
+                        <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
                         { this.strings.engName_title }
                     </Label>
                     <IconButton  ariaLabel="information" id='Engname' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
@@ -180,7 +180,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
 
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='FrCommName'>
-                        <span className={styles.asterik}  aria-label='required'>*</span>
+                        <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
                         { this.strings.frCommName_title }
                     </Label>
                     <IconButton  ariaLabel="information" id='FrCommName' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
@@ -189,7 +189,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
 
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='shEngDesc'>
-                        <span className={styles.asterik}  aria-label='required'>*</span>
+                        <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
                         { this.strings.shEngDesc_title }
                     </Label>
                     <IconButton  ariaLabel="information" id='shEngDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
@@ -198,7 +198,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
 
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='shFrDesc'>
-                        <span className={styles.asterik}  aria-label='required'>*</span>
+                        <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
                         { this.strings.shFrDesc_title }
                     </Label>
                     <IconButton  ariaLabel="information" id='shFrDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
@@ -215,7 +215,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
 
                 <Stack horizontal verticalAlign ="end">
                     <Label>
-                        <span className={styles.asterik}  aria-label='required'>*</span>
+                        <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
                         { this.strings.owners }
                     </Label>
                     <IconButton id ="owners" styles  = { iconStyles } iconProps = { infoIcon } ariaLabel ="InfoIcon" onClick={this.showCalloutVisible }/>
