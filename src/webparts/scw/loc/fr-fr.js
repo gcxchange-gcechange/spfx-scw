@@ -19,7 +19,7 @@ define([], function() {
         "title_complete": "Terminé!",
         "thank_you": "Merci de nous avoir fourni ces renseignements.",
         "complete_content":"Vous recevrez un courriel lorsque votre collectivité aura été créée et tous les renseignements nécessaires pour commencer! (Dans les 48 heures du lundi au vendredi).",
-        "complete_content2": "Si vous ne recevez pas de courriel ou si vous avez des questions, veuillez soumettre une demande de service à l’aide du <a href=https://devgcx.sharepoint.com/sites/Support/SitePages/fr/Home.aspx >portail de soutien GCÉchange</a>",
+        "complete_content2": "Si vous ne recevez pas de courriel ou si vous avez des questions, veuillez soumettre une demande de service à l’aide du <a href=https://devgcx.sharepoint.com/sites/Support/SitePages/fr/Home.aspx target={_blank} rel={noopener} >portail de soutien GCÉchange</a>",
         "complete_img_alt":"Trois personnes qui font la fête",
         "complete_button": "Page d’accueil de GCÉchange",
         "commPurpose_title": "Objet de la collectivité",
