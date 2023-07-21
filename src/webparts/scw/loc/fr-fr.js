@@ -125,7 +125,7 @@ define([], function() {
         'infoIcon_CommPurpose':'Renseignements sur l’objet de la collectivité',
         'infoIcon_engName':'Renseignements sur le nom de la collectivité en anglais',
         'infoIcon_frName':'Renseignements sur le nom de la collectivité en français',
-        'inforIcon_engDesc':'Renseignements sur la description de la collectivité en anglais',
+        'infoIcon_engDesc':'Renseignements sur la description de la collectivité en anglais',
         'infoIcon_frDesc':'Renseignements sur la description de la collectivité en français',
         'infoIcon_Owners':'Renseignements sur les propriétaires',
 
