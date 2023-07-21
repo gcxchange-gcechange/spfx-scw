@@ -27,7 +27,7 @@ define([], function() {
     "title_complete": "Complete!",
     "thank_you": "Thank you for your submission.",
     "complete_content":"You will receive an email when your community has been created with everything you need to get started! (Within 48 hours Monday to Friday).",
-    "complete_content2": "If you do not receive the email or have any questions, please submit a service request using the <a href=https://devgcx.sharepoint.com/sites/Support>GCXchange Support portal</a>",
+    "complete_content2": "If you do not receive the email or have any questions, please submit a service request using the <a href=https://devgcx.sharepoint.com/sites/Support  target={_blank} rel={noopener}>GCXchange Support portal</a>",
     "complete_img_alt":"Three people celebrating",
     "complete_button": "GCXchange Homepage",
     "commPurpose_title": "Community purpose",
