@@ -97,15 +97,18 @@
     .ant-steps .ant-steps-item-process .ant-steps-item-icon >.ant-steps-icon {
         color:#004DB8;
         font-weight: bold;
+        // vertical-align: middle;
     }
 
     .ant-steps .ant-steps-item-icon .ant-steps-icon {
-        top: -2.5px;
+        top: -2.4px;
     }
+
 
     .ant-steps .ant-steps-item-process .ant-steps-item-icon {
         background-color: white;
         border: 2px solid #004DB8!important;
+        
     }
 
     .ant-steps .ant-steps-item-wait .ant-steps-item-icon {
@@ -113,6 +116,7 @@
         background-color: white;
         
     }
+
 
     .ant-steps .ant-steps-item-wait .ant-steps-item-icon >.ant-steps-icon {
         font-weight: bold;
@@ -122,9 +126,6 @@
         background-color: #004DB8;
     }
 
-    .anticon {
-        vertical-align: -0.225em;
-    }
 
     .anticon svg{
         color: white;
@@ -158,8 +159,7 @@
     }
     
     .ant-steps .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-content>.ant-steps-item-title{
-        color: #004DB8;
-        opacity: 0.5;
+        color: #106EBE;
     }
 
     .ant-steps.ant-steps.ant-steps-label-vertical .ant-steps-item-content{
