@@ -129,6 +129,13 @@ define([], function() {
     'special_char_validation': 'Special characters are not permitted.',
     'between_5_125_char_validation': 'Must be between 5 and 125 characters in length.',
     'max33_validation':'Max. 33 characters.',
+    'infoIcon_CommPurpose':'Information about Community purpose',
+    'infoIcon_engName':'Information about English community name',
+    'infoIcon_frName':'Information about French community name',
+    'inforIcon_engDesc':'Information about English community description',
+    'infoIcon_frDesc':'Information about French community description',
+    'infoIcon_Owners':'Information about owners',
+
   
   }
 })

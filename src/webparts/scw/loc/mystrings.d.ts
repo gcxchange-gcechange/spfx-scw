@@ -127,13 +127,19 @@ declare interface IScwWebPartStrings {
   special_char_validation: string;
   between_5_125_char_validation: string;
   max33_validation: string;
+  infoIcon_CommPurpose : string,
+  infoIcon_engName : string,
+  infoIcon_frName : string,
+  inforIcon_engDesc : string,
+  infoIcon_frDesc : string,
+  infoIcon_Owners : string,
 
 
 
 
 }
 
-declare module 'ScwWebPartStrings' {
+declare module  ScwWebPartStrings  {
   const strings: IScwWebPartStrings;
   export = strings;
 }

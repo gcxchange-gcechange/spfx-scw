@@ -122,6 +122,12 @@ define([], function() {
         'special_char_validation': 'Les caractères spéciaux ne sont pas autorisés.',
         'between_5_125_char_validation': 'La longueur doit être de 5 à 125 caractères.',
         'max33_validation':'Max. 33 caractères.',
+        'infoIcon_CommPurpose':'Renseignements sur l’objet de la collectivité',
+        'infoIcon_engName':'Renseignements sur le nom de la collectivité en anglais',
+        'infoIcon_frName':'Renseignements sur le nom de la collectivité en français',
+        'inforIcon_engDesc':'Renseignements sur la description de la collectivité en anglais',
+        'infoIcon_frDesc':'Renseignements sur la description de la collectivité en français',
+        'infoIcon_Owners':'Renseignements sur les propriétaires',
 
     } 
 });
