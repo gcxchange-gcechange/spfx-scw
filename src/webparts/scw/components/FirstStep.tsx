@@ -60,7 +60,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             <Label htmlFor='Communitypurpose' required styles={ labelStyle }>{ this.strings.commPurpose_title } </Label>
             <p id="commPurposeDesc"  className={ styles.instruction }>{ this.strings.commPurpose_Instruction}</p>
             <TextField aria-describedby="commPurposeDesc" type='text' name='commPurpose' id='Communitypurpose' multiline rows={3} onChange={ this.onhandleChangeEvent } 
-            defaultValue={ commPurpose }  validateOnLoad= { false }  onGetErrorMessage={ value => { if (value.length > 500 || value.trim() === '') return `${this.strings.max500_validation}` } }
+            defaultValue={ commPurpose }  validateOnLoad= { false }  onGetErrorMessage={ value => { if (value.trim().length === 0 || value.length < 5 || value.length > 500 ) return `${this.strings.max500_validation}` } }
             />
 
             <h3>{ this.strings.comm_name }</h3>
@@ -98,9 +98,12 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
     }
 
     private onhandleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+        debugger
     
         const eventName = event.target.name;
         let value = event.target.value;
+        
+        console.log(value);
 
         // const charAllowed = /[\p{L}\p{N}ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü']/.test(value);
         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value);
@@ -110,22 +113,26 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
         // const startsWithSpecialChar = /^[~`!@#$%^&()_+={\x5B:;"',.|\x2F\x5D\x5C\x99-]/.test(value);
         const invalidInput: string = '';
 
-        if ((eventName === 'engName'|| eventName === 'frCommName') && value.length >= 5 && value.length <= 125) {
+        if (eventName === 'commPurpose' && (value.length < 5 || value.length > 500)) {
+            console.log(eventName);
+            console.log("valueLength",value.length)
+            console.log("Condition for 'commPurpose' event name and value length greater than 500 less than 5");
+            value = invalidInput;
+        } else
+
+        if (eventName === 'engName'|| eventName === 'frCommName' && (value.length >= 5 && value.length <= 125)) {
             if (charAllowed) {
                 console.log("value has special character");
                 value = invalidInput;
             }
-        }
+        } else
 
-        if ((eventName === 'engName' || eventName === 'frCommName') && value.length < 5 || value.length > 125) {
+        if (eventName === 'engName' || eventName === 'frCommName' && (value.length < 5 || value.length > 125)) {
             console.log("Value for engName and frName must be less than  5 greater than 125 characters.");
             value = invalidInput;
-        }
+        } else
 
-        if (eventName === 'commPurpose' && value.length > 500) {
-            console.log("Condition for 'commPurpose' event name and value length greater than 500");
-            value = invalidInput;
-        }
+       
 
         if ((eventName === 'shEngDesc' || eventName === 'shFrDesc') && value.length > 33 ) {
             value = invalidInput;
@@ -158,6 +165,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
       }
 
       if ( value.length < 5 || value.length > 125 )  {
+        console.log("hello")
         return `${this.strings.between_5_125_char_validation}`
       }
     

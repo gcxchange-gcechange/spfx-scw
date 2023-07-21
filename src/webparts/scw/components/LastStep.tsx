@@ -54,7 +54,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
         let value = event.target.value;
         const invalidInput: string = '';
         
-        if (value.length > 500 ) {
+        if (value.length < 5 || value.length > 500 ) {
             value = invalidInput;
         }
 
@@ -162,7 +162,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     <Label htmlFor='commPurpose' required >{ this.strings.commPurpose_title }</Label>
                     <IconButton ariaLabel="information" id='commPurpose' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
-                <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={ this.onUpdateCommPurpose }   onGetErrorMessage={ value => { if (value.length > 500 || value.trim() === '') return `${this.strings.max500_validation}` } } /> 
+                <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={ this.onUpdateCommPurpose }   onGetErrorMessage={ value => { if ((value.trim().length === 0 || value.length < 5 || value.length > 500 ))return `${this.strings.max500_validation}` } } /> 
                 
 
                 <Stack horizontal verticalAlign='end'>
