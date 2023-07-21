@@ -85,12 +85,12 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 <StackItem>
                     <Label htmlFor='shEngDesc' required  styles={ labelStyle } >{ this.strings.shEngDesc_title }</Label>
                     <p id="shEngDescription" className={ styles.instruction }>{ this.strings.shEngDesc_Instruction }</p>
-                    <TextField aria-describedby="shEngDescription" id='shEngDesc' name='shEngDesc'onChange={ this.onhandleChangeEvent} defaultValue={ shEngDesc } validateOnLoad= { false }  onGetErrorMessage={ value => { if (value.length > 33 || value === '') return `${this.strings.max33_validation}` }} />
+                    <TextField aria-describedby="shEngDescription" id='shEngDesc' name='shEngDesc'onChange={ this.onhandleChangeEvent} defaultValue={ shEngDesc } validateOnLoad= { false }  onGetErrorMessage={ value => { if ( value.length < 5 || value.length > 100  || value === '') return `${this.strings.max100_validation}` }} />
                 </StackItem>
                 <StackItem>
                     <Label htmlFor='shFrDesc' required  styles={ labelStyle } >{ this.strings.shFrDesc_title }</Label>
                     <p id="FrDesc" className={ styles.instruction }>{ this.strings.shFrDesc_Instruction }</p>
-                    <TextField aria-describedby="FrDesc" id='shFrDesc' name='shFrDesc' onChange={ this.onhandleChangeEvent} defaultValue={ shFrDesc } validateOnLoad= { false }  onGetErrorMessage={ value => { if (value.length > 33 || value === '') return `${this.strings.max33_validation}` }}/> 
+                    <TextField aria-describedby="FrDesc" id='shFrDesc' name='shFrDesc' onChange={ this.onhandleChangeEvent} defaultValue={ shFrDesc } validateOnLoad= { false }  onGetErrorMessage={ value => { if ( value.length < 5 || value.length > 100 || value === '') return `${this.strings.max100_validation}` }}/> 
                 </StackItem>
             </Stack>
             </>
@@ -127,7 +127,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             value = invalidInput;
         }
 
-        if ((eventName === 'shEngDesc' || eventName === 'shFrDesc') && value.length > 33 ) {
+        if ((eventName === 'shEngDesc' || eventName === 'shFrDesc') && value.length < 5 || value.length > 100 ) {
             value = invalidInput;
         }
 

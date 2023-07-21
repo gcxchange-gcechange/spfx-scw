@@ -100,12 +100,30 @@ export default class LastStep extends React.Component<ILastStepProps> {
      }
 
      private onUpdateEngDesc = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-        const updateEngDesc = event.target.value;
+        let value = event.target.value;
+        const invalidInput: string = '';
+        // const updateEngDesc = event.target.value;
+
+        if (value.length < 5 || value.length > 100 ) {
+            value = invalidInput
+        }
+
+        const updateEngDesc = value.trim();
+
         this.props.handleEngDescCallback(updateEngDesc)    
      }
 
     private  onUpdateFrDesc = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-        const updateFrDesc = event.target.value.trim();
+        let value = event.target.value;
+        const invalidInput: string = '';
+        
+
+        if(value.length < 5 || value.length > 100 ) {
+            value = invalidInput
+        }
+
+        const updateFrDesc = value.trim();
+        
         this.props.handleFrDescCallback(updateFrDesc)    
      }
 
@@ -181,13 +199,13 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     <Label htmlFor='shEngDesc'required >{ this.strings.shEngDesc_title }</Label>
                     <IconButton  ariaLabel="information" id='shEngDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
-                <TextField id='shEngDesc' defaultValue={ shEngDesc } onChange={ this.onUpdateEngDesc } onGetErrorMessage={ value => { if (value.length > 33 || value === '') return `${this.strings.max33_validation}` }}/>
+                <TextField id='shEngDesc' defaultValue={ shEngDesc } onChange={ this.onUpdateEngDesc } onGetErrorMessage={ value => { if (value.length < 5 || value.length > 100  || value === '') return `${this.strings.max100_validation}` }}/>
 
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='shFrDesc'required >{ this.strings.shFrDesc_title }</Label>
                     <IconButton  ariaLabel="information" id='shFrDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
-                <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } onGetErrorMessage={ value => { if (value.length > 33 || value === '') return `${this.strings.max33_validation}` }}/>
+                <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } onGetErrorMessage={ value => { if (value.length < 5 || value.length > 100  || value === '') return `${this.strings.max100_validation}` }}/>
 
                 {/* <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='classification'required >{ this.strings.community_classification }</Label>
