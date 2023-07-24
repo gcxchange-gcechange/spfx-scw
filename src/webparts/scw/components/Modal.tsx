@@ -124,7 +124,7 @@ export default class ErrorModal extends React.Component<
           
         } 
         else if ( results.length === 1 ) {
-          message = `${obj.name}`
+          message = `${this.strings.provide} ${obj.name}`
         }
       }
     }
@@ -195,7 +195,7 @@ export default class ErrorModal extends React.Component<
                   <p className={ styles.modalContent }>{ this.strings.you_must } <strong>{messages}</strong> { this.strings.before_proceeding }</p>
                 </Stack.Item>
                 <Stack.Item>
-                  <hr className={styles.horizontalLine} />
+                  <hr  aria-hidden= 'true' className={styles.horizontalLine} />
                 </Stack.Item>
                 <Stack.Item align="center">
                   <PrimaryButton
