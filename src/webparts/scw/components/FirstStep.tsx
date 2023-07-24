@@ -115,12 +115,11 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
     }
 
     private onhandleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-        debugger
+        
     
         const eventName = event.target.name;
         let value = event.target.value;
         
-        console.log(value);
 
         // const charAllowed = /[\p{L}\p{N}ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü']/.test(value);
         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value);
@@ -131,21 +130,18 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
         const invalidInput: string = '';
 
         if (eventName === 'commPurpose' && (value.length < 5 || value.length > 500)) {
-            console.log(eventName);
-            console.log("valueLength",value.length)
-            console.log("Condition for 'commPurpose' event name and value length greater than 500 less than 5");
             value = invalidInput;
         } else
 
         if (eventName === 'engName'|| eventName === 'frCommName' && (value.length >= 5 && value.length <= 125)) {
             if (charAllowed) {
-                console.log("value has special character");
+                // console.log("value has special character");
                 value = invalidInput;
             }
         } else
 
         if (eventName === 'engName' || eventName === 'frCommName' && (value.length < 5 || value.length > 125)) {
-            console.log("Value for engName and frName must be less than  5 greater than 125 characters.");
+            // console.log("Value for engName and frName must be less than  5 greater than 125 characters.");
             value = invalidInput;
         } else
 
@@ -177,12 +173,10 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
     
 
       if (charAllowed) {
-        console.log("Value has special char")
         return `${this.strings.special_char_validation}`
       }
 
       if ( value.length < 5 || value.length > 125 )  {
-        console.log("hello")
         return `${this.strings.between_5_125_char_validation}`
       }
     
