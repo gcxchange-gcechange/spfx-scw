@@ -51,7 +51,7 @@ define([], function() {
         "a_few_things": "Quelques directives avant de commencer",
         "to_create": "Pour créer une collectivité, vous devrez :",
         "bilingual_name_smallText": "Indiquer le nom et la description de la collectivité et le tout doit être entièrement bilingue pour respecter la <i>Loi sur les langues officielles</i>",
-        "indentify_one_more_owner": "Indiquer au moins <strong className={ styles.blue }>un autre responsable</strong> déjà inscrit à GCÉchange",
+        "indentify_one_more_owner": "Indiquer au moins <strong className={ styles.blue }>un autre responsable</strong> \ndéjà inscrit à GCÉchange",
         "indentify_one_more_owner_smallText": "La désignation de plus d’un responsable garantit la continuité de la collectivité en cas de départ d’un responsable",
         // "protected_or_unclassified": "Invite colleagues to <strong className={ styles.blue }>register to GCXchange</strong>",
         // "protected_or_unclassified_smallText": "Les conditions de création d’une collectivité protégée devront être acceptées avant la création d’une collectivité",
