@@ -122,6 +122,7 @@ define([], function() {
         'special_char_validation': 'Les caractères spéciaux ne sont pas autorisés.',
         'between_5_125_char_validation': 'La longueur doit être de 5 à 125 caractères.',
         'max33_validation':'Max. 33 caractères.',
+        'required': 'champ obligatoire',
 
     } 
 });

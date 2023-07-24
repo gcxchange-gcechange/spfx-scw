@@ -5,6 +5,7 @@ import { IButtonStyles, IconButton, IIconProps, Label, Stack, TextField  } from 
 import {  WebPartContext  } from '@microsoft/sp-webpart-base';
 import { PeoplePicker, PrincipalType } from '@pnp/spfx-controls-react/lib/PeoplePicker';
 import { SelectLanguage } from './SelectLanguage';
+import styles from './Scw.module.scss';
 
 
 
@@ -159,32 +160,47 @@ export default class LastStep extends React.Component<ILastStepProps> {
                
                 <p>{ this.strings.review_info }</p>
                 <Stack horizontal verticalAlign='end'>
-                    <Label htmlFor='commPurpose' required >{ this.strings.commPurpose_title }</Label>
+                    <Label htmlFor='commPurpose'> 
+                        <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
+                        { this.strings.commPurpose_title }
+                    </Label>
                     <IconButton ariaLabel="information" id='commPurpose' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={ this.onUpdateCommPurpose }   onGetErrorMessage={ value => { if (value.length > 500 || value.trim() === '') return `${this.strings.max500_validation}` } } /> 
                 
 
                 <Stack horizontal verticalAlign='end'>
-                    <Label htmlFor='name'required >{ this.strings.engName_title }</Label>
+                    <Label htmlFor='name'>
+                        <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
+                        { this.strings.engName_title }
+                    </Label>
                     <IconButton  ariaLabel="information" id='Engname' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='name' defaultValue={ engName }  onChange={ this.onUpdateEngName } onGetErrorMessage={ this.validateInput }  />  
 
                 <Stack horizontal verticalAlign='end'>
-                    <Label htmlFor='FrCommName' required >{ this.strings.frCommName_title }</Label>
+                    <Label htmlFor='FrCommName'>
+                        <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
+                        { this.strings.frCommName_title }
+                    </Label>
                     <IconButton  ariaLabel="information" id='FrCommName' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='FrCommName' defaultValue={ frCommName } onChange={ this.onUpdateFrName } onGetErrorMessage={ this.validateInput }/>
 
                 <Stack horizontal verticalAlign='end'>
-                    <Label htmlFor='shEngDesc'required >{ this.strings.shEngDesc_title }</Label>
+                    <Label htmlFor='shEngDesc'>
+                        <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
+                        { this.strings.shEngDesc_title }
+                    </Label>
                     <IconButton  ariaLabel="information" id='shEngDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='shEngDesc' defaultValue={ shEngDesc } onChange={ this.onUpdateEngDesc } onGetErrorMessage={ value => { if (value.length > 33 || value === '') return `${this.strings.max33_validation}` }}/>
 
                 <Stack horizontal verticalAlign='end'>
-                    <Label htmlFor='shFrDesc'required >{ this.strings.shFrDesc_title }</Label>
+                    <Label htmlFor='shFrDesc'>
+                        <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
+                        { this.strings.shFrDesc_title }
+                    </Label>
                     <IconButton  ariaLabel="information" id='shFrDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } onGetErrorMessage={ value => { if (value.length > 33 || value === '') return `${this.strings.max33_validation}` }}/>
@@ -198,7 +214,10 @@ export default class LastStep extends React.Component<ILastStepProps> {
 
 
                 <Stack horizontal verticalAlign ="end">
-                    <Label>{ this.strings.owners }</Label>
+                    <Label>
+                        <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
+                        { this.strings.owners }
+                    </Label>
                     <IconButton id ="owners" styles  = { iconStyles } iconProps = { infoIcon } ariaLabel ="InfoIcon" onClick={this.showCalloutVisible }/>
                 </Stack>
                 <PeoplePicker
