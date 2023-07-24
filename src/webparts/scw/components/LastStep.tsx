@@ -55,7 +55,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
         let value = event.target.value;
         const invalidInput: string = '';
         
-        if (value.length > 500 ) {
+        if (value.length < 5 || value.length > 500 ) {
             value = invalidInput;
         }
 
@@ -70,10 +70,10 @@ export default class LastStep extends React.Component<ILastStepProps> {
         const startsWithSpecialChar = /^[~`!@#$%^&()_+={\x5B:;"',.|\x2F\x5D\x5C\x99-]/.test(value);
         const invalidInput: string = '';
 
-        if ((value.length >= 5 && value.length <= 125) && startsWithSpecialChar ||  hasSpecialChar ) {
+        if ((value.length >= 5 && value.length <= 80) && startsWithSpecialChar ||  hasSpecialChar ) {
             console.log("Value ")
             value = invalidInput;
-        } else if (value.length < 5 || value.length > 125) {
+        } else if (value.length < 5 || value.length > 80) {
             console.log("length is less that 5 or more than 125");
             value = invalidInput;
         }
@@ -90,9 +90,9 @@ export default class LastStep extends React.Component<ILastStepProps> {
         const startsWithSpecialChar = /^[~`!@#$%^&()_+={\x5B:;"',.|\x2F\x5D\x5C\x99-]/.test(value);
         const invalidInput: string = '';
 
-        if ((value.length >= 5 && value.length <= 125) && startsWithSpecialChar ||  hasSpecialChar ) { 
+        if ((value.length >= 5 && value.length <= 80) && startsWithSpecialChar ||  hasSpecialChar ) { 
             value = invalidInput;
-        } else if (value.length < 5 || value.length > 125) {
+        } else if (value.length < 5 || value.length > 80) {
             value = invalidInput;
         }
         const updateFrName = value.trim();
@@ -101,12 +101,30 @@ export default class LastStep extends React.Component<ILastStepProps> {
      }
 
      private onUpdateEngDesc = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-        const updateEngDesc = event.target.value;
+        let value = event.target.value;
+        const invalidInput: string = '';
+        // const updateEngDesc = event.target.value;
+
+        if (value.length < 5 || value.length > 100 ) {
+            value = invalidInput
+        }
+
+        const updateEngDesc = value.trim();
+
         this.props.handleEngDescCallback(updateEngDesc)    
      }
 
     private  onUpdateFrDesc = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-        const updateFrDesc = event.target.value.trim();
+        let value = event.target.value;
+        const invalidInput: string = '';
+        
+
+        if(value.length < 5 || value.length > 100 ) {
+            value = invalidInput
+        }
+
+        const updateFrDesc = value.trim();
+        
         this.props.handleFrDescCallback(updateFrDesc)    
      }
 
@@ -166,7 +184,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     </Label>
                     <IconButton ariaLabel="information" id='commPurpose' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
-                <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={ this.onUpdateCommPurpose }   onGetErrorMessage={ value => { if (value.length > 500 || value.trim() === '') return `${this.strings.max500_validation}` } } /> 
+                <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={ this.onUpdateCommPurpose }   onGetErrorMessage={ value => { if ((value.trim().length === 0 || value.length < 5 || value.length > 500 ))return `${this.strings.max500_validation}` } } /> 
                 
 
                 <Stack horizontal verticalAlign='end'>
@@ -194,7 +212,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     </Label>
                     <IconButton  ariaLabel="information" id='shEngDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
-                <TextField id='shEngDesc' defaultValue={ shEngDesc } onChange={ this.onUpdateEngDesc } onGetErrorMessage={ value => { if (value.length > 33 || value === '') return `${this.strings.max33_validation}` }}/>
+                <TextField id='shEngDesc' defaultValue={ shEngDesc } onChange={ this.onUpdateEngDesc } onGetErrorMessage={ value => { if (value.length < 5 || value.length > 100  || value === '') return `${this.strings.max100_validation}` }}/>
 
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='shFrDesc'>
@@ -203,7 +221,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     </Label>
                     <IconButton  ariaLabel="information" id='shFrDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
-                <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } onGetErrorMessage={ value => { if (value.length > 33 || value === '') return `${this.strings.max33_validation}` }}/>
+                <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } onGetErrorMessage={ value => { if (value.length < 5 || value.length > 100  || value === '') return `${this.strings.max100_validation}` }}/>
 
                 {/* <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='classification'required >{ this.strings.community_classification }</Label>
@@ -254,7 +272,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
 
     private validateInput = (value: string): string => {
 
-         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value);
+         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
     
 
       if (charAllowed) {
@@ -262,8 +280,8 @@ export default class LastStep extends React.Component<ILastStepProps> {
         return `${this.strings.special_char_validation}`
       }
 
-      if ( value.length < 5 || value.length > 125 )  {
-        return `${this.strings.between_5_125_char_validation}`
+      if ( value.length < 5 || value.length > 80 )  {
+        return `${this.strings.between_5_80_char_validation}`
       }
     
        
