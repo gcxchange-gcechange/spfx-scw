@@ -164,6 +164,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
               <Stack horizontal horizontalAlign="space-between" verticalAlign="center" className={ stylesCallout.title }>
                 <Text>{ this.getTitles() }</Text>
                 <IconButton
+                  aria-Label=  { this.strings.close }
                   className={ styles.cancelIcon }
                   iconProps={{ iconName: "Cancel" }}
                   onClick={ this.props.openCallout }

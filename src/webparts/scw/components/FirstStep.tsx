@@ -46,6 +46,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             root: {
                 paddingBottom: '5px',
             },
+            
 
            
         }
@@ -57,24 +58,33 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
            
             <h3>{ parse( this.strings.commPurpose_title ) }</h3>
             <p>{ parse( this.strings.commPurpose_desc) }</p>
-            <Label htmlFor='Community purpose' required styles={ labelStyle }>{ this.strings.commPurpose_title }</Label>
+            <Label htmlFor='Community purpose'styles={ labelStyle } >
+                <span className={styles.asterik}  aria-label='required'>*</span>
+                { this.strings.commPurpose_title }
+            </Label>
             <p className={ styles.instruction }>{ this.strings.commPurpose_Instruction}</p>
             
             <TextField type='text' name='commPurpose' id='Community purpose' multiline rows={3} onChange={ this.onhandleChangeEvent } 
-            defaultValue={ commPurpose }  validateOnLoad= { false }  onGetErrorMessage={ value => { if (value.length > 500 || value.trim() === '') return `${this.strings.max500_validation}` } }
+            defaultValue={ commPurpose }  validateOnLoad= { false }  onGetErrorMessage={ value => { if (value.trim().length === 0 || value.length < 5 || value.length > 500 ) return `${this.strings.max500_validation}` } }
             />
 
             <h3>{ this.strings.comm_name }</h3>
             <p className={ styles.topMgn0 }>{ this.strings.engName_desc}</p>
             <Stack tokens={ stackTokens }>
                 <StackItem>
-                    <Label htmlFor='engName' required styles={ labelStyle } >{ this.strings.engName_title }</Label>
+                    <Label htmlFor='engName' styles={ labelStyle } >
+                        <span className={styles.asterik}  aria-label='required'>*</span>
+                        { this.strings.engName_title }
+                    </Label>
                     <p className={ styles.instruction }>{ this.strings.engName_Instruction}</p>
                     <TextField  id='engName' name='engName' onChange={ this.onhandleChangeEvent } defaultValue={ engName }  validateOnLoad= { false }  
-                    onGetErrorMessage={ this.validateInput }/>
+                    onGetErrorMessage={ this.validateInput } />
                 </StackItem>
                 <StackItem>
-                    <Label htmlFor='frCommName' required>{ this.strings.frCommName_title }</Label>
+                    <Label htmlFor='frCommName'>
+                        <span className={styles.asterik}  aria-label='required'>*</span>
+                        {this.strings.frCommName_title }
+                    </Label>
                     <p className={ styles.instruction }>{ this.strings.frCommName_Instruction}</p>
                     <TextField id='frCommName' name='frCommName' onChange={ this.onhandleChangeEvent } defaultValue={ frCommName } validateOnLoad= { false } onGetErrorMessage={ this.validateInput } />
                 </StackItem>
@@ -84,14 +94,20 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             <p className={ styles.topMgn0 }> { this.strings.shEngDesc_desc }</p>
             <Stack tokens={ stackTokens }>
                 <StackItem>
-                    <Label htmlFor='shEngDesc' required  styles={ labelStyle } >{ this.strings.shEngDesc_title }</Label>
+                    <Label htmlFor='shEngDesc' styles={ labelStyle } >
+                        <span className={styles.asterik}  aria-label='required'>*</span>
+                        { this.strings.shEngDesc_title }
+                    </Label>
                     <p className={ styles.instruction }>{ this.strings.shEngDesc_Instruction }</p>
-                    <TextField id='shEngDesc' name='shEngDesc'onChange={ this.onhandleChangeEvent} defaultValue={ shEngDesc } validateOnLoad= { false }  onGetErrorMessage={ value => { if (value.length > 33 || value === '') return `${this.strings.max33_validation}` }} />
+                    <TextField id='shEngDesc' name='shEngDesc'onChange={ this.onhandleChangeEvent} defaultValue={ shEngDesc } validateOnLoad= { false }  onGetErrorMessage={ value => { if ( value.length < 5 || value.length > 100  || value === '') return `${this.strings.max100_validation}` }} />
                 </StackItem>
                 <StackItem>
-                    <Label htmlFor='shFrDesc' required  styles={ labelStyle } >{ this.strings.shFrDesc_title }</Label>
+                    <Label htmlFor='shFrDesc' styles={ labelStyle } >
+                        <span className={styles.asterik}  aria-label='required'>*</span>
+                        { this.strings.shFrDesc_title }
+                    </Label>
                     <p className={ styles.instruction }>{ this.strings.shFrDesc_Instruction }</p>
-                    <TextField id='shFrDesc' name='shFrDesc' onChange={ this.onhandleChangeEvent} defaultValue={ shFrDesc } validateOnLoad= { false }  onGetErrorMessage={ value => { if (value.length > 33 || value === '') return `${this.strings.max33_validation}` }}/> 
+                    <TextField id='shFrDesc' name='shFrDesc' onChange={ this.onhandleChangeEvent} defaultValue={ shFrDesc } validateOnLoad= { false }  onGetErrorMessage={ value => { if ( value.length < 5 || value.length > 100 || value === '') return `${this.strings.max100_validation}` }}/> 
                 </StackItem>
             </Stack>
             </>
@@ -99,9 +115,11 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
     }
 
     private onhandleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+        
     
         const eventName = event.target.name;
         let value = event.target.value;
+        
 
         // const charAllowed = /[\p{L}\p{N}ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü']/.test(value);
         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value);
@@ -111,24 +129,25 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
         // const startsWithSpecialChar = /^[~`!@#$%^&()_+={\x5B:;"',.|\x2F\x5D\x5C\x99-]/.test(value);
         const invalidInput: string = '';
 
-        if ((eventName === 'engName'|| eventName === 'frCommName') && value.length >= 5 && value.length <= 80) {
+        if (eventName === 'commPurpose' && (value.length < 5 || value.length > 500)) {
+            value = invalidInput;
+        } else
+
+        if (eventName === 'engName'|| eventName === 'frCommName' && (value.length >= 5 && value.length <= 80)) {
             if (charAllowed) {
-                console.log("value has special character");
+                // console.log("value has special character");
                 value = invalidInput;
             }
-        }
+        } else
 
-        if ((eventName === 'engName' || eventName === 'frCommName') && value.length < 5 || value.length > 80) {
-            // console.log("Value for engName and frName must be less than  5 greater than 80 characters.");
+        if (eventName === 'engName' || eventName === 'frCommName' && (value.length < 5 || value.length > 80)) {
+            // // console.log("Value for engName and frName must be less than  5 greater than 80 characters.");
             value = invalidInput;
-        }
+        } else
 
-        if (eventName === 'commPurpose' && value.length > 500) {
-            // console.log("Condition for 'commPurpose' event name and value length greater than 500");
-            value = invalidInput;
-        }
+       
 
-        if ((eventName === 'shEngDesc' || eventName === 'shFrDesc') && value.length > 33 ) {
+        if ((eventName === 'shEngDesc' || eventName === 'shFrDesc') && value.length < 5 || value.length > 100 ) {
             value = invalidInput;
         }
 
@@ -154,7 +173,6 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
     
 
       if (charAllowed) {
-        console.log("Value has special char")
         return `${this.strings.special_char_validation}`
       }
 
