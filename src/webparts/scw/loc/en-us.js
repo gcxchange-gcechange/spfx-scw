@@ -33,7 +33,7 @@ define([], function() {
     "commPurpose_title": "Community purpose",
     "commPurpose_Modal": "<span style=fontWeight:normal>the</span> Community purpose",
     "commPurpose_desc": 'The GCX Support Team needs to know the purpose of the new community to determine whether it can be <strong>approved</strong>.',
-    "commPurpose_Instruction":"This will not show up on your site. Write it in the official language of your choice. Max. 500 characters.",
+    "commPurpose_Instruction":"This will not show up on your site. Write it in the official language of your choice. Must be between 5 and 500 characters in length.",
     "engName_title": 'English community name',
     "engName_Modal": '<span style=fontWeight:normal>the</span> English community name',
     "engName_desc": 'The community’s name is the title of your community. Create a short descriptive name. A bilingual name complies with the Official Languages Act and makes it easier for others to find your community in the GCXchange Catalogue.',

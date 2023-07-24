@@ -25,7 +25,7 @@ define([], function() {
         "commPurpose_title": "Objet de la collectivité",
         "commPurpose_Modal": "<span style=fontWeight:normal>l'</span>objet de la collectivité",
         "commPurpose_desc": 'L’équipe de soutien GCÉ doit connaître l’objectif de la nouvelle collectivité pour déterminer si elle peut être <strong>approuvée</strong>.',
-        "commPurpose_Instruction": "Cette information n’apparaîtra pas sur votre site. Rédiger l’information dans la langue officielle de votre choix. Max. 500 caractères.",
+        "commPurpose_Instruction": "Cette information n’apparaîtra pas sur votre site. Rédiger l’information dans la langue officielle de votre choix. La longueur doit être de 5 à 500 caractères.",
         "engName_title": 'Nom de la collectivité en anglais',
         "engName_Modal": '<span style=fontWeight:normal>le</span> nom de la collectivité en anglais',
         "engName_desc": "Le nom de la collectivité est le titre de votre collectivité. Créer un nom court et descriptif. Un nom bilingue respecte la Loi sur les langues officielles et permet aux autres de trouver plus facilement votre collectivité dans le catalogue GCÉchange. ",
