@@ -124,7 +124,7 @@ export default class ErrorModal extends React.Component<
           
         } 
         else if ( results.length === 1 ) {
-          message = `${obj.name}`
+          message = `${this.strings.provide} ${obj.name}`
         }
       }
     }
