@@ -125,10 +125,11 @@ define([], function() {
     'failed_txt4': 'If you do not receive the email or you do have any questions, please submit a service request using the',
     "submissionFailed": "Submission failed",
     'submitting_your_information': 'Grab a sip of coffee, we are submitting your information.',    
-    'max500_validation': 'Max. 500 characters.',
+    'max500_validation': 'Must be between 5 and 500 characters in length.',
     'special_char_validation': 'Special characters are not permitted.',
     'between_5_125_char_validation': 'Must be between 5 and 125 characters in length.',
     'max100_validation':'Must be between 5 and 100 characters.',
+    'required': 'required field',
   
   }
 })
