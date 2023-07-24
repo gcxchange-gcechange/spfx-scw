@@ -6,7 +6,7 @@ define([], function() {
         "PropertyPaneDescription": "Description",
         "BasicGroupName": "Nom de groupe",
         "title_details": "Détails",
-        "provide_bilingual_name": "Fournir des noms et des descriptions bilingues",
+        "provide_bilingual_name": "Fournir des noms \net des descriptions <strong className={ styles.blue }>bilingues</strong>",
         "create_a_community": "Créer une collectivité",
         "community_details": "Détails de la collectivité",
         "community_classification": "Classification de la collectivité",
