@@ -16,11 +16,9 @@ p { font-size:18px }
 .card {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width:400px;
     height:225px;
-    padding: 10px;
+
 
 
     p {
@@ -29,10 +27,6 @@ p { font-size:18px }
         white-space: break-spaces;
     }
 
-    // p .mgsides{
-    //     margin-left:10px;
-    //     margin-right:10px;
-    // }
 
     strong{
         // color: rgb(0, 120, 212);
@@ -44,19 +38,6 @@ p { font-size:18px }
         color: #004DB8;
     }
 
-}
-.cardHeader{
-    display:flex;
-    align-items: center;
-}
-.cardBody {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: 20px;
-    padding-right: 10px;
-    padding-left: 10px;
-    
 }
 
 
