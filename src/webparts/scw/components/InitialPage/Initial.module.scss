@@ -18,20 +18,17 @@ p { font-size:18px }
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width:300px;
+    width:400px;
     height:225px;
-    padding: 10px;
+
 
 
     p {
+        text-align-last: center;
         font-size: 18px!important;
-        text-align: center;
+        white-space: break-spaces;
     }
 
-    p .mgsides{
-        margin-left:10px;
-        margin-right:10px;
-    }
 
     strong{
         // color: rgb(0, 120, 212);
@@ -42,7 +39,9 @@ p { font-size:18px }
     a {
         color: #004DB8;
     }
+
 }
+
 
 .blue {
 //    color:  rgb(0, 120, 212);

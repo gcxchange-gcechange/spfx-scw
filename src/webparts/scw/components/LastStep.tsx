@@ -181,7 +181,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                         <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
                         { this.strings.commPurpose_title }
                     </Label>
-                    <IconButton ariaLabel="information" id='commPurpose' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
+                    <IconButton ariaLabel={ this.strings.infoIcon_CommPurpose } id='commPurpose' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='commPurpose' defaultValue={ this.props.commPurpose } onChange={ this.onUpdateCommPurpose }   onGetErrorMessage={ value => { if ((value.trim().length === 0 || value.length < 5 || value.length > 500 ))return `${this.strings.max500_validation}` } } /> 
                 
@@ -191,7 +191,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                         <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
                         { this.strings.engName_title }
                     </Label>
-                    <IconButton  ariaLabel="information" id='Engname' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
+                    <IconButton  ariaLabel={ this.strings.infoIcon_engName} id='Engname' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='name' defaultValue={ engName }  onChange={ this.onUpdateEngName } onGetErrorMessage={ this.validateInput }  />  
 
@@ -200,7 +200,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                         <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
                         { this.strings.frCommName_title }
                     </Label>
-                    <IconButton  ariaLabel="information" id='FrCommName' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
+                    <IconButton  ariaLabel={ this.strings.infoIcon_frName} id='FrCommName' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='FrCommName' defaultValue={ frCommName } onChange={ this.onUpdateFrName } onGetErrorMessage={ this.validateInput }/>
 
@@ -209,7 +209,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                         <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
                         { this.strings.shEngDesc_title }
                     </Label>
-                    <IconButton  ariaLabel="information" id='shEngDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
+                    <IconButton  ariaLabel={ this.strings.infoIcon_engDesc} id='shEngDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='shEngDesc' defaultValue={ shEngDesc } onChange={ this.onUpdateEngDesc } onGetErrorMessage={ value => { if (value.length < 5 || value.length > 100  || value === '') return `${this.strings.max100_validation}` }}/>
 
@@ -218,7 +218,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                         <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
                         { this.strings.shFrDesc_title }
                     </Label>
-                    <IconButton  ariaLabel="information" id='shFrDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
+                    <IconButton  ariaLabel={ this.strings.infoIcon_frDesc } id='shFrDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
                 <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } onGetErrorMessage={ value => { if (value.length < 5 || value.length > 100  || value === '') return `${this.strings.max100_validation}` }}/>
 
@@ -235,7 +235,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                         <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
                         { this.strings.owners }
                     </Label>
-                    <IconButton id ="owners" styles  = { iconStyles } iconProps = { infoIcon } ariaLabel ="InfoIcon" onClick={this.showCalloutVisible }/>
+                    <IconButton id ="owners" styles  = { iconStyles } iconProps = { infoIcon } ariaLabel = { this.strings.infoIcon_Owners } onClick= { this.showCalloutVisible }/>
                 </Stack>
                 <PeoplePicker
                     context = { this.props.context }

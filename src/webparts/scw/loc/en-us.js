@@ -14,7 +14,7 @@ define([], function() {
     "AppOfficeEnvironment": "The app is running in office.com",
     "AppOutlookEnvironment": "The app is running in Outlook",
     "title_details": "Details",
-    "provide_bilingual_name": "Provide <strong className={ styles.blue }>bilingual</strong> names and descriptions",
+    "provide_bilingual_name": "Provide <strong className={ styles.blue }>bilingual</strong>\nnames and descriptions",
     "create_a_community": "Create a community",
     "community_details": "Community details",
     "community_classification": "Community classification",
@@ -59,7 +59,7 @@ define([], function() {
     "a_few_things":"A few things before you start",
     "to_create": "To create a community, you will need to:",
     "bilingual_name_smallText": "Community name and description need to be fully bilingual to comply with the <i>Official Languages Act</i>",
-    "indentify_one_more_owner": "Identify at least <strong className={ styles.blue }>one more owner</strong> already registered to GCXchange",
+    "indentify_one_more_owner": "Identify at least <strong className={ styles.blue }>one more owner</strong>\n already registered to GCXchange",
     "indentify_one_more_owner_smallText": "Identifying more than one owner ensures the continuity of the community if one owner leaves",
     // "protected_or_unclassified": "Invite colleagues to <strong className={ styles.blue }>register to GCXchange</strong> prior to adding them to a community",
     // "protected_or_unclassified_smallText": "Colleagues not yet registered for GCXchange can <a href=https://devgcx.sharepoint.com >register to GCXchange</a>",
@@ -129,6 +129,13 @@ define([], function() {
     'special_char_validation': 'Special characters are not permitted.',
     'between_5_80_char_validation': 'Must be between 5 and 80 characters in length.',
     'max100_validation':'Must be between 5 and 100 characters.',
+    'infoIcon_CommPurpose':'Information about Community purpose',
+    'infoIcon_engName':'Information about English community name',
+    'infoIcon_frName':'Information about French community name',
+    'infoIcon_engDesc':'Information about English community description',
+    'infoIcon_frDesc':'Information about French community description',
+    'infoIcon_Owners':'Information about owners',
+
     'required': 'required field',
   
   }
