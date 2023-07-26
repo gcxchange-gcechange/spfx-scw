@@ -128,6 +128,7 @@ define([], function() {
         'infoIcon_frDesc':'Renseignements sur la description de la collectivité en français',
         'infoIcon_Owners':'Renseignements sur les propriétaires',
         'required': 'champ obligatoire',
+        "SP_TeamsLogos": "Logos SharePoint et Teams avec des flèches indiquant la capacité de partage entre les outils."
 
     } 
 });

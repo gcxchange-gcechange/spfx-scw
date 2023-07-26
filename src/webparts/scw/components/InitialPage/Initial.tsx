@@ -45,7 +45,7 @@ export class Initial extends React.Component<IScwProps> {
                     <p style={{ fontSize:'18px', width: '600px' }} className={ styles.mg0 }>{parse(this.strings.collaborate)}</p>
                 </Stack.Item>
                 <Stack.Item grow={ 4 }>
-                    <img { ...imageProps } alt={"teams" }/> 
+                    <img { ...imageProps } alt={ this.strings.SP_TeamsLogos }/> 
                 </Stack.Item>
             </Stack>
 
