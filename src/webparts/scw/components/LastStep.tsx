@@ -245,9 +245,10 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     groupName = { "" } // Leave this blank in case you want to filter from all users
                     onChange = { this.updateDefaultOwnerValues }
                     principalTypes = { [ PrincipalType.User ] }
-                    showHiddenInUI = {false }
                     resolveDelay = {1000}
                     defaultSelectedUsers  = { this.props.ownerList }
+                    ensureUser={ true }
+                    allowUnvalidated={ true }
                 />
 
                 {/* <Stack horizontal verticalAlign ="end">
