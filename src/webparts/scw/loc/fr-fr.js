@@ -121,6 +121,12 @@ define([], function() {
         'special_char_validation': 'Les caractères spéciaux ne sont pas autorisés.',
         'between_5_80_char_validation': 'La longueur doit être de 5 à 80 caractères.',
         'max100_validation':'La longueur doit être de 5 à 100 caractères.',
+        'infoIcon_CommPurpose':'Renseignements sur l’objet de la collectivité',
+        'infoIcon_engName':'Renseignements sur le nom de la collectivité en anglais',
+        'infoIcon_frName':'Renseignements sur le nom de la collectivité en français',
+        'infoIcon_engDesc':'Renseignements sur la description de la collectivité en anglais',
+        'infoIcon_frDesc':'Renseignements sur la description de la collectivité en français',
+        'infoIcon_Owners':'Renseignements sur les propriétaires',
         'required': 'champ obligatoire',
 
     } 
