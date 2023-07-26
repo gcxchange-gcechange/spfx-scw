@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
-import { Modal, PrimaryButton } from "@fluentui/react";
+import { Modal } from "@fluentui/react";
 import { IconButton } from "@fluentui/react/lib/Button";
 import styles from "./Scw.module.scss";
 import { Stack } from "office-ui-fabric-react/lib/Stack";
@@ -171,7 +171,7 @@ export default class ErrorModal extends React.Component<
 
     return (
       <>
-        <div>
+        {/* <div> */}
           <Modal
             isOpen={ this.props.showModal}
             onDismiss={ this.props.onClose}
@@ -183,6 +183,7 @@ export default class ErrorModal extends React.Component<
             <div style={ this.modalStyle.header}>
               <h2>{ this.strings.forget }</h2>
               <IconButton
+                tabIndex={0}
                 aria-label= { this.strings.close }
                 className={styles.cancelIcon}
                 iconProps={{ iconName: "Cancel" }}
@@ -198,17 +199,27 @@ export default class ErrorModal extends React.Component<
                   <hr  aria-hidden= 'true' className={styles.horizontalLine} />
                 </Stack.Item>
                 <Stack.Item align="center">
-                  <PrimaryButton
+                <button
+                    tabIndex={1}
+                    aria-label= { this.strings.close }
                     onClick={ this.props.onClose}
                     className={styles.close}
                   >
                     { this.strings.close }
-                  </PrimaryButton>
+                  </button>
+                  {/* <PrimaryButton
+                    tabIndex={1}
+                    aria-label= { this.strings.close }
+                    onClick={ this.props.onClose}
+                    className={styles.close}
+                  >
+                    { this.strings.close }
+                  </PrimaryButton> */}
                 </Stack.Item>
               </Stack>
             </div>
           </Modal>
-        </div>
+        {/* </div> */}
       </>
     );
   }
