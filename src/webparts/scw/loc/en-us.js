@@ -137,6 +137,7 @@ define([], function() {
     'infoIcon_Owners':'Information about owners',
 
     'required': 'required field',
+    "SP_TeamsLogos": "SharePoint and Teams logos with arrows indicating the sharing capability between the tools."
   
   }
 })

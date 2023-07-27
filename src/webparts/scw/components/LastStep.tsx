@@ -142,7 +142,6 @@ export default class LastStep extends React.Component<ILastStepProps> {
     }
 
     public updateDefaultOwnerValues = ( username: []):void  => {   
-        
         const newValues = username;
 
         this.props.getOwnersCallback( newValues );//pass to parent
@@ -247,6 +246,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     principalTypes = { [ PrincipalType.User ] }
                     resolveDelay = {1000}
                     defaultSelectedUsers  = { this.props.ownerList }
+                    peoplePickerCntrlclassName={styles.peoplePickerTest}
                     ensureUser={ true }
                     allowUnvalidated={ true }
                 />

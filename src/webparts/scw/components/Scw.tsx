@@ -76,7 +76,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             validationStatus: 0,
             showCallout: false,
             targetId: ''
-            
+
         };
 
     }
@@ -108,8 +108,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 
     //             this.setState({ showModal: true });
     //    } 
-        else if ( current === 1 && ownerList.length === 1 ) {
-            
+        else if ( current === 1 && ownerList.length <= 1 ) {
+
                 this.setState({ showModal: true });
 
         } else {
@@ -140,7 +140,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
        
 
-        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 1)) {
+        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length <= 1)) {
            
             this.setState({ showModal: true });
         }
@@ -185,7 +185,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList } = this.state
 
         
-        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length === 1)) {
+        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length <= 1)) {
             
             this.setState({ showModal: true });
         }
@@ -351,9 +351,11 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
   
     public handleOwnerCallback = ( items: [] ): void =>  { 
+        console.log("calbback",items)
         const OwnerArr: string[] = [];
 
         items.forEach(user =>  { 
+            console.log('user', user)
             // eslint-disable-next-line dot-notation
             OwnerArr.push( user['secondaryText'] )
         })
@@ -361,6 +363,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         this.setState( { 
             ownerList: OwnerArr
         }) ; 
+
     }
 
     // public handleMemberCallback = ( items: [] ): void =>  { 
