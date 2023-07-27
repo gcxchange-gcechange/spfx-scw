@@ -30,6 +30,7 @@ export interface IFourthStepProps  {
  
 
 export default class FourthStep extends React.Component<IFourthStepProps> {
+    
     public strings = SelectLanguage(this.props.prefLang);
    
 
@@ -88,7 +89,7 @@ export default class FourthStep extends React.Component<IFourthStepProps> {
                     <p>{ this.strings.invite_owners_para1 }</p>
                     <p>{ parse( this.strings.invite_owners_para2 ) }</p>
                     {/* <p>{ parse( this.strings.invite_owners_para3 ) }</p> */}
-                    <form tabIndex={1} role="form">
+                    <div tabIndex={1}>
                         <div>
                             <Label  htmlFor="peoplePicker">{this.strings.invite_owners_label}</Label>
                             <p id='ownerInstructions' className={ styles.instruction }>{ this.strings.owners_Instruction}</p>
@@ -104,9 +105,10 @@ export default class FourthStep extends React.Component<IFourthStepProps> {
                                 getOwnersCallback={this.handleOwnerCallback} 
                                 // getMemberCallback={this.handleMemberCallback}
                                 />
+
                             </div>
                         </div>
-                    </form>
+                    </div>
                     {/* <div className={styles.inviteContainer}>
                         
                         <Stack horizontal>

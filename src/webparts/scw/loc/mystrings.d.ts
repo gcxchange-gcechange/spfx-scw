@@ -134,6 +134,7 @@ declare interface IScwWebPartStrings {
   infoIcon_frDesc : string;
   infoIcon_Owners : string;
   required: string;
+  SP_TeamsLogos: string;
 
 
 

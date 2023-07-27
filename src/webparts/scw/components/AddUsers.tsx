@@ -4,6 +4,7 @@ import { PeoplePicker, PrincipalType } from "@pnp/spfx-controls-react/lib/People
 import { DirectionalHint } from "office-ui-fabric-react";
 import * as React from "react";
 import { SelectLanguage } from './SelectLanguage';
+import styles from "./Scw.module.scss";
 
 
 
@@ -20,6 +21,7 @@ export interface IAddUsersProps {
 }
 
 export default class AUsers extends React.Component<IAddUsersProps> {
+     
     public strings = SelectLanguage( this.props.prefLang );
  
     constructor( props: IAddUsersProps ) {
@@ -27,11 +29,11 @@ export default class AUsers extends React.Component<IAddUsersProps> {
     }
 
     public _getOwnerItems = ( items: []):void  => {   
-        this.setState({
-            ownerList: items
-        });
-   
-        this.props.getOwnersCallback( items );//pass to parent
+            this.setState({
+                ownerList: items
+            });
+
+        this.props.getOwnersCallback(items);//pass to parent 
     };
 
   
@@ -67,6 +69,7 @@ export default class AUsers extends React.Component<IAddUsersProps> {
                     showtooltip = { true }
                     tooltipMessage = { `${ this.strings.owners_Instruction}`}
                     tooltipDirectional  = { DirectionalHint.topCenter }
+                    peoplePickerCntrlclassName={styles.peoplePickerTest}
                 />
 
 {/* 
