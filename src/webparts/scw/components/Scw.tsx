@@ -1,3 +1,4 @@
+/* eslint-disable dot-notation */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 
 /* eslint-disable react/no-unescaped-entities */
@@ -86,18 +87,30 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     private next = (): void =>  { 
 
        
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose,  checkedValues, ownerList } = this.state
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose,  ownerList } = this.state
 
-        const filtered = checkedValues.filter((value, index) => {
-            return checkedValues.indexOf(value) === index
-          });
-        console.log("filtered",filtered)
+        // const filtered = checkedValues.filter((value, index) => {
+        //     return checkedValues.indexOf(value) === index
+        //   });
+        // console.log("filtered",filtered)
+        const invalidUser: any = [];
+
+
+       ownerList.forEach((user) => {
+
+        console.log("NextU", user[0])
+
+        if ( user[0] === undefined) {
+            invalidUser.push(user)
+        }
+       })
 
         
        if ( !commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc) {
    
             this.setState({ showModal: true });
        } 
+    
 
     //    else if ( current === 1 && selectedChoice === '' ) {
             
@@ -352,12 +365,15 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
   
     public handleOwnerCallback = ( items: [] ): void =>  { 
         console.log("calbback",items)
-        const OwnerArr: string[] = [];
+        const OwnerArr: any[]  = [];
 
         items.forEach(user =>  { 
-            console.log('user', user)
-            // eslint-disable-next-line dot-notation
-            OwnerArr.push( user['secondaryText'] )
+            console.log('user', user['id'])
+            
+            // if ( user['id'] !== undefined ) {
+
+                OwnerArr.push( {id: user['id'], email:user['secondaryText']  })
+            // } 
         })
   
         this.setState( { 
@@ -545,7 +561,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         const labelSpinnerStyles: Partial<ISpinnerStyles> = { root: { padding: 20 } };
 
-        console.log(this.state.ownerList)
+      
         
         return (
             <>       
