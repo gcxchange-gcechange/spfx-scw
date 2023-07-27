@@ -6,6 +6,8 @@ import styles from "./Scw.module.scss";
 import { Stack } from "office-ui-fabric-react/lib/Stack";
 import parse from 'html-react-parser';
 import { SelectLanguage } from './SelectLanguage';
+// import { IButtonStyles } from "office-ui-fabric-react";
+// import { PrimaryButton } from "office-ui-fabric-react";
 
 export interface IErrorModalProps {
   showModal: boolean;
@@ -25,10 +27,7 @@ export interface IErrorModalProps {
 
 export interface IErrorModalState {}
 
-export default class ErrorModal extends React.Component<
-  IErrorModalProps,
-  IErrorModalState
-> {
+export default class ErrorModal extends React.Component<IErrorModalProps, IErrorModalState> {
   public constructor(props: IErrorModalProps, state: IErrorModalState) {
     super(props);
   }
@@ -173,6 +172,7 @@ export default class ErrorModal extends React.Component<
       <>
         {/* <div> */}
           <Modal
+            titleAriaId={ this.strings.forget }
             isOpen={ this.props.showModal}
             onDismiss={ this.props.onClose}
             isBlocking={ true}
@@ -180,10 +180,11 @@ export default class ErrorModal extends React.Component<
               main: this.modalStyle.main,
             }}
           >
+            <div>
             <div style={ this.modalStyle.header}>
               <h2>{ this.strings.forget }</h2>
               <IconButton
-                tabIndex={0}
+                tabIndex={1}
                 aria-label= { this.strings.close }
                 className={styles.cancelIcon}
                 iconProps={{ iconName: "Cancel" }}
@@ -199,24 +200,17 @@ export default class ErrorModal extends React.Component<
                   <hr  aria-hidden= 'true' className={styles.horizontalLine} />
                 </Stack.Item>
                 <Stack.Item align="center">
-                <button
-                    tabIndex={1}
+                  <button
+                    tabIndex={2}
                     aria-label= { this.strings.close }
                     onClick={ this.props.onClose}
                     className={styles.close}
                   >
                     { this.strings.close }
                   </button>
-                  {/* <PrimaryButton
-                    tabIndex={1}
-                    aria-label= { this.strings.close }
-                    onClick={ this.props.onClose}
-                    className={styles.close}
-                  >
-                    { this.strings.close }
-                  </PrimaryButton> */}
                 </Stack.Item>
               </Stack>
+            </div>
             </div>
           </Modal>
         {/* </div> */}
