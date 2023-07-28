@@ -1,3 +1,4 @@
+/* eslint-disable dot-notation */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { WebPartContext } from "@microsoft/sp-webpart-base";
 import { PeoplePicker, PrincipalType } from "@pnp/spfx-controls-react/lib/PeoplePicker";
@@ -26,14 +27,21 @@ export default class AUsers extends React.Component<IAddUsersProps> {
  
     constructor( props: IAddUsersProps ) {
         super( props );
+
+        this.state = {
+            ownerList: this.props.ownerList
+        }
     }
 
-    public _getOwnerItems = ( items: []):void  => {   
+    public _getOwnerItems = ( items: []):void  => {  
+        console.log("items", items)  
+         
             this.setState({
                 ownerList: items
             });
 
         this.props.getOwnersCallback(items);//pass to parent 
+       
     };
 
   
@@ -65,7 +73,7 @@ export default class AUsers extends React.Component<IAddUsersProps> {
                     principalTypes = { [ PrincipalType.User ] }
                     showHiddenInUI = {false }
                     resolveDelay = {1000}
-                    defaultSelectedUsers  = { this.props.ownerList }
+                    defaultSelectedUsers  = { this.props.ownerList}
                     showtooltip = { true }
                     tooltipMessage = { `${ this.strings.owners_Instruction}`}
                     tooltipDirectional  = { DirectionalHint.topCenter }

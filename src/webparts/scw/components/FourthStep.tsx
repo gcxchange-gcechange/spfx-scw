@@ -19,7 +19,7 @@ export interface IFourthStepProps  {
     prefLang: string;
     getOwnersCallback?: (item: []) => void;
     getMemberCallback?: (item: []) => void;
-
+   
  }
 
  export interface IPerson {
@@ -42,6 +42,7 @@ export default class FourthStep extends React.Component<IFourthStepProps> {
       
     //update state in parent 
     public handleOwnerCallback = (items: []): void => {
+        console.log('4', items)
         this.setState({ 
             ownerList: items
         }) ; 

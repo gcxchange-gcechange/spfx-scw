@@ -21,6 +21,7 @@ export interface IErrorModalProps {
   ownerList: string[];
   current: number;
   prefLang: string;
+  invalidUser: string;
 }
 
 export interface IErrorModalState {}
@@ -61,6 +62,7 @@ export default class ErrorModal extends React.Component<
   };
 
   public errorMessage = (): string => {
+
    
     const {
       current,
@@ -72,6 +74,7 @@ export default class ErrorModal extends React.Component<
       // selectedChoice,
       // checkedValues,
       ownerList,
+      // invalidUser
     } = this.props;
 
   // const filtered = checkedValues.filter((value, index) => {
@@ -100,7 +103,9 @@ export default class ErrorModal extends React.Component<
     // ];
 
     const fourthValues: PropValues[] = [
-      { name: `${ this.strings.one_more_owner }`, value: `${ownerList.length}` },
+      { name: `${ this.strings.one_more_owner }`, value: `${ownerList.length}` }
+      // { name: `Invalid Email`, value: `${invalidUser}` }
+    
     ];
     const lastValues: PropValues[] = [
       { name: `${ this.strings.commPurpose_Modal }`, value: `${commPurpose}` },
@@ -114,6 +119,7 @@ export default class ErrorModal extends React.Component<
     let message: string = "";
     const results: string[] = [];
     const comma = `<span style="fontWeight:normal">, </span>`;
+
 
     for (const obj of firstValues) {
       if (current === 0 && obj.value === "") {
@@ -147,6 +153,41 @@ export default class ErrorModal extends React.Component<
         message += `${obj.name}`;
       }
     }
+    
+
+    // for (const obj of fourthValues) {
+    //   if (current === 1 && (obj.name === `${ this.strings.one_more_owner }` && obj.value < 2 )) {
+    //     console.log(obj.value.length)
+        
+    //       message += `${obj.name}`
+        
+    //   } 
+      
+    //   if (current === 1 && (obj.name === `Invalid Email` && obj.value.trim() !== '' )) {
+           
+    //         message =  `${this.strings.provide} a valid email ${obj.value } is not valid`
+         
+    //   } 
+    // }
+
+    // for (const obj of fourthValues) {
+    //   console.log("obj", obj.value[1]);
+    //   console.log("fourth", fourthValues)
+
+    //   if (current === 1 && obj.value[1] !== undefined) {
+    //     results.push(obj.value);
+    //     console.log("res", results)
+
+    //     if(results[1] !== '') {
+    //       message =  `${this.strings.provide} a valid email ${obj.value } is not valid`; 
+    //     }
+       
+    //   }
+    //   else  if (current === 1 && obj.value[0] < 2) {
+    //     message += `${obj.name}`;
+    //   }
+    // }
+
 
     for (const obj of lastValues) {
       if (current === 2 && (obj.value === '' || obj.value < 2)) {
@@ -192,7 +233,12 @@ export default class ErrorModal extends React.Component<
             <div style={ this.modalStyle.footer}>
               <Stack>
                 <Stack.Item align="center">
+                  {this.props.invalidUser ? 
+                  <p className={ styles.modalContent }>{ this.strings.you_must }<strong>{messages}</strong> is not valid. </p>
+                  :
                   <p className={ styles.modalContent }>{ this.strings.you_must } <strong>{messages}</strong> { this.strings.before_proceeding }</p>
+                  }
+                  
                 </Stack.Item>
                 <Stack.Item>
                   <hr  aria-hidden= 'true' className={styles.horizontalLine} />
