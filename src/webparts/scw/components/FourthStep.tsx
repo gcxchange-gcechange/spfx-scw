@@ -43,9 +43,9 @@ export default class FourthStep extends React.Component<IFourthStepProps> {
     //update state in parent 
     public handleOwnerCallback = (items: []): void => {
         console.log('4', items)
-        this.setState({ 
-            ownerList: items
-        }) ; 
+        // this.setState({ 
+        //     ownerList: items
+        // }) ; 
 
         this.props.getOwnersCallback(items)
     }

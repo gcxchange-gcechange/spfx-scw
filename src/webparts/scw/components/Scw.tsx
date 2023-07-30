@@ -95,10 +95,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         //     return checkedValues.indexOf(value) === index
         //   });
         // console.log("filtered",filtered)
-        console.log('invalidUsedState', this.state.invalidEmail)
-        console.log('le', this.state.ownerList)
-    
-
         
        if ( !commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc) {
    
@@ -115,10 +111,13 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 
     //             this.setState({ showModal: true });
     //    } 
-        else if ( current === 1 && (ownerList.length < 2 || invalidEmail !== undefined || invalidEmail !== '')) {
+        else if ( current === 1 && ownerList.length < 2 ) {
             this.setState({ showModal: true });
-                
-        } 
+        }        
+         else if (current === 1 &&  invalidEmail !== '' ) {
+            this.setState({ showModal: true });
+            
+        }
         else {
             
             this.goToNextPg(current);
@@ -361,26 +360,33 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     public handleOwnerCallback = ( items: []): void =>  { 
         console.log("calbback",items)
         const OwnerArr: any[]  = [];
-        let invalid: string= '';
 
-
-        items.forEach(user =>  { 
-            console.log('user', user)
-            
-            if ( user['id'] === undefined ) {
-
-              invalid = user['secondaryText']
-
-            }  else {
-                
+        items.forEach(user =>  {             
                 OwnerArr.push( user['secondaryText'] )
-            }    
         })
   
         this.setState( { 
-            ownerList: OwnerArr,
-            invalidEmail: invalid
+            ownerList: OwnerArr
         }) ; 
+
+        this.getInvalidUsers(items);
+
+    }
+
+    public getInvalidUsers = (users: any[]):void => {
+
+        let invalidEmailUsers: string = '';
+
+        users.forEach(user => {
+            if ( user['id'] === undefined) {
+               invalidEmailUsers = user['secondaryText']
+            }
+        
+        })
+
+        this.setState({
+            invalidEmail: invalidEmailUsers
+        })
 
     }
 

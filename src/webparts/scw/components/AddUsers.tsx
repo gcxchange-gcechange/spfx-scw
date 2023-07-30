@@ -36,9 +36,9 @@ export default class AUsers extends React.Component<IAddUsersProps> {
     public _getOwnerItems = ( items: []):void  => {  
         console.log("items", items)  
          
-            this.setState({
-                ownerList: items
-            });
+            // this.setState({
+            //     ownerList: items
+            // });
 
         this.props.getOwnersCallback(items);//pass to parent 
        

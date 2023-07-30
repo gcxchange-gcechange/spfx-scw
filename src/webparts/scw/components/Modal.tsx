@@ -73,7 +73,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       // selectedChoice,
       // checkedValues,
       ownerList,
-      // invalidUser
+      invalidUser
     } = this.props;
 
   // const filtered = checkedValues.filter((value, index) => {
@@ -102,8 +102,8 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     // ];
 
     const fourthValues: PropValues[] = [
-      { name: `${ this.strings.one_more_owner }`, value: `${ownerList.length}` }
-      // { name: `Invalid Email`, value: `${invalidUser}` }
+      { name: `${ this.strings.one_more_owner }`, value: `${ownerList.length}` },
+      { name: `Invalid Email`, value: `${invalidUser}` }
     
     ];
     const lastValues: PropValues[] = [
@@ -148,44 +148,25 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     // }
 
     for (const obj of fourthValues) {
-      if (current === 1 && obj.value < 2) {
-        message += `${obj.name}`;
-      }
-    }
-    
+      if (current === 1 && obj.value !== '' ) {
+        results.push(obj.value)
+        // console.log('results', results);
 
-    // for (const obj of fourthValues) {
-    //   if (current === 1 && (obj.name === `${ this.strings.one_more_owner }` && obj.value < 2 )) {
-    //     console.log(obj.value.length)
-        
-    //       message += `${obj.name}`
-        
-    //   } 
-      
-    //   if (current === 1 && (obj.name === `Invalid Email` && obj.value.trim() !== '' )) {
-           
-    //         message =  `${this.strings.provide} a valid email ${obj.value } is not valid`
+        if (current === 1 && ownerList.length !== 2 && invalidUser !== '') {
+          message = `${obj.value }`
+        }
+        else if (current === 1 && ownerList.length === 2 && invalidUser !== '') {
+          message = `${obj.value }`
+        }
          
-    //   } 
-    // }
+        else if ( current === 1 && ownerList.length <=1 && invalidUser === '') {
+        message += `${ this.strings.one_more_owner }`
+        }
+              
+      }
 
-    // for (const obj of fourthValues) {
-    //   console.log("obj", obj.value[1]);
-    //   console.log("fourth", fourthValues)
+    }
 
-    //   if (current === 1 && obj.value[1] !== undefined) {
-    //     results.push(obj.value);
-    //     console.log("res", results)
-
-    //     if(results[1] !== '') {
-    //       message =  `${this.strings.provide} a valid email ${obj.value } is not valid`; 
-    //     }
-       
-    //   }
-    //   else  if (current === 1 && obj.value[0] < 2) {
-    //     message += `${obj.name}`;
-    //   }
-    // }
 
 
     for (const obj of lastValues) {
@@ -211,7 +192,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
 
     return (
       <>
-        {/* <div> */}
+       
           <Modal
             titleAriaId={ this.strings.forget }
             isOpen={ this.props.showModal}
@@ -235,10 +216,10 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
             <div style={ this.modalStyle.footer}>
               <Stack>
                 <Stack.Item align="center">
-                  {this.props.invalidUser ? 
-                  <p className={ styles.modalContent }>{ this.strings.you_must }<strong>{messages}</strong> is not valid. </p>
-                  :
-                  <p className={ styles.modalContent }>{ this.strings.you_must } <strong>{messages}</strong> { this.strings.before_proceeding }</p>
+                  {this.props.invalidUser ?
+                    <p className={ styles.modalContent }>{ this.strings.you_must } {parse(`${this.strings.provide}`)}  a valid email <strong>{messages}</strong> is not valid</p>
+                    :
+                    <p className={ styles.modalContent }>{ this.strings.you_must } <strong>{messages}</strong> { this.strings.before_proceeding }</p>
                   }
                   
                 </Stack.Item>
@@ -259,7 +240,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
             </div>
             </div>
           </Modal>
-        {/* </div> */}
+       
       </>
     );
   }
