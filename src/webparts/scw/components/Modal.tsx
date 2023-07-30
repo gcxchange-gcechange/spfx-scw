@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
-import { Modal, PrimaryButton } from "@fluentui/react";
+import { Modal } from "@fluentui/react";
 import { IconButton } from "@fluentui/react/lib/Button";
 import styles from "./Scw.module.scss";
 import { Stack } from "office-ui-fabric-react/lib/Stack";
 import parse from 'html-react-parser';
 import { SelectLanguage } from './SelectLanguage';
+// import { IButtonStyles } from "office-ui-fabric-react";
+// import { PrimaryButton } from "office-ui-fabric-react";
 
 export interface IErrorModalProps {
   showModal: boolean;
@@ -26,10 +28,7 @@ export interface IErrorModalProps {
 
 export interface IErrorModalState {}
 
-export default class ErrorModal extends React.Component<
-  IErrorModalProps,
-  IErrorModalState
-> {
+export default class ErrorModal extends React.Component<IErrorModalProps, IErrorModalState> {
   public constructor(props: IErrorModalProps, state: IErrorModalState) {
     super(props);
   }
@@ -212,8 +211,9 @@ export default class ErrorModal extends React.Component<
 
     return (
       <>
-        <div>
+        {/* <div> */}
           <Modal
+            titleAriaId={ this.strings.forget }
             isOpen={ this.props.showModal}
             onDismiss={ this.props.onClose}
             isBlocking={ true}
@@ -221,9 +221,11 @@ export default class ErrorModal extends React.Component<
               main: this.modalStyle.main,
             }}
           >
+            <div>
             <div style={ this.modalStyle.header}>
               <h2>{ this.strings.forget }</h2>
               <IconButton
+                tabIndex={1}
                 aria-label= { this.strings.close }
                 className={styles.cancelIcon}
                 iconProps={{ iconName: "Cancel" }}
@@ -244,17 +246,20 @@ export default class ErrorModal extends React.Component<
                   <hr  aria-hidden= 'true' className={styles.horizontalLine} />
                 </Stack.Item>
                 <Stack.Item align="center">
-                  <PrimaryButton
+                  <button
+                    tabIndex={2}
+                    aria-label= { this.strings.close }
                     onClick={ this.props.onClose}
                     className={styles.close}
                   >
                     { this.strings.close }
-                  </PrimaryButton>
+                  </button>
                 </Stack.Item>
               </Stack>
             </div>
+            </div>
           </Modal>
-        </div>
+        {/* </div> */}
       </>
     );
   }

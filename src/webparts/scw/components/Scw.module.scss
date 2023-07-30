@@ -218,6 +218,7 @@
 .cancelIcon {
     color: white;
     background-color: transparent;
+    padding-top:5px;
     // font-weight: 900;
 }
 
@@ -225,6 +226,10 @@
     background-color: transparent;
     color: white;
 //     font-weight: 900;
+}
+
+.cancelIcon:focus {
+    outline:#c0c0cc;
 }
 
 .close{
@@ -237,8 +242,15 @@
         background-color: white;
         color: #FF510F;
         font-weight: bolder;
-        border:none; 
+        border:1px solid #FF510F ; 
     }
+    
+}
+
+.close:focus {
+    
+        outline-color: #FF510F ;
+  
 }
 
 
