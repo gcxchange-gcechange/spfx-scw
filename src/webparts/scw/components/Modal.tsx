@@ -217,7 +217,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
               <Stack>
                 <Stack.Item align="center">
                   {this.props.invalidUser ?
-                    <p className={ styles.modalContent }>{ this.strings.you_must } {parse(`${this.strings.provide}`)} { this.strings.valid_email }<strong>{messages}</strong> {this.strings.is_not_valid}</p>
+                    <p className={ styles.modalContent }>{ this.strings.you_must } {parse(`${this.strings.provide}`)} { this.strings.valid_email } <strong>{messages}</strong> {this.strings.is_not_valid}</p>
                     :
                     <p className={ styles.modalContent }>{ this.strings.you_must } <strong>{messages}</strong> { this.strings.before_proceeding }</p>
                   }

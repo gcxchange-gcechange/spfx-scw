@@ -138,7 +138,7 @@ define([], function() {
 
     'required': 'required field',
     "SP_TeamsLogos": "SharePoint and Teams logos with arrows indicating the sharing capability between the tools.",
-    "valid_email": "a valid email",
+    "valid_email": "a valid email.",
     "is_not_valid": "is not valid."
   
   }
