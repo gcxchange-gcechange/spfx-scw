@@ -202,9 +202,8 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
               main: this.modalStyle.main,
             }}
           >
-            <div>
-            <div style={ this.modalStyle.header}>
-              <h2>{ this.strings.forget }</h2>
+            <div aria-labelledby= {this.strings.forget } style={ this.modalStyle.header}>
+              <h2 id= {this.strings.forget }>{ this.strings.forget }</h2>
               <IconButton
                 tabIndex={1}
                 aria-label= { this.strings.close }
@@ -229,7 +228,6 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
                 <Stack.Item align="center">
                   <button
                     tabIndex={2}
-                    aria-label= { this.strings.close }
                     onClick={ this.props.onClose}
                     className={styles.close}
                   >
@@ -237,7 +235,6 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
                   </button>
                 </Stack.Item>
               </Stack>
-            </div>
             </div>
           </Modal>
        

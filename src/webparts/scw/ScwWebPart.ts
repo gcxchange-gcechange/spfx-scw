@@ -1,4 +1,5 @@
-﻿/* eslint-disable @typescript-eslint/no-explicit-any */
+﻿/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-useless-escape */
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
@@ -43,7 +44,8 @@ export default class ScwWebPart extends BaseClientSideWebPart<IScwWebPartProps> 
   protected onDispose(): void {
     ReactDom.unmountComponentAtNode(this.domElement);
   }
-
+  
+// @ts-ignore
   protected get dataVersion(): Version {
     return Version.parse('1.0');
   }
