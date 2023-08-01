@@ -92,7 +92,10 @@ export default class FourthStep extends React.Component<IFourthStepProps> {
                     {/* <p>{ parse( this.strings.invite_owners_para3 ) }</p> */}
                     <div tabIndex={1}>
                         <div>
-                            <Label  htmlFor="peoplePicker">{this.strings.invite_owners_label}</Label>
+                            <Label  htmlFor="peoplePicker">
+                                <span className={styles.asterik}  aria-label='required'>*</span>
+                                {this.strings.invite_owners_label}
+                            </Label>
                             <p id='ownerInstructions' className={ styles.instruction }>{ this.strings.owners_Instruction}</p>
                         
                         
