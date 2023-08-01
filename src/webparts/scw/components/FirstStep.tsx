@@ -61,10 +61,10 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             <Label htmlFor='Community purpose'styles={ labelStyle } >
                 <span className={styles.asterik}  aria-label='required'>*</span>
                 { this.strings.commPurpose_title }
-            </Label>
-            <p className={ styles.instruction }>{ this.strings.commPurpose_Instruction}</p>
+            </Label> 
+            <p id='commPurposeDesc' className={ styles.instruction }>{ this.strings.commPurpose_Instruction}</p>
             
-            <TextField type='text' name='commPurpose' id='Community purpose' multiline rows={3} onChange={ this.onhandleChangeEvent } 
+            <TextField aria-describedby="commPurposeDesc" type='text' name='commPurpose' id='Community purpose' multiline rows={3} onChange={ this.onhandleChangeEvent } 
             defaultValue={ commPurpose }  validateOnLoad= { false }  onGetErrorMessage={ value => { if (value.trim().length === 0 || value.length < 5 || value.length > 500 ) return `${this.strings.max500_validation}` } }
             />
 
@@ -76,8 +76,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                         <span className={styles.asterik}  aria-label='required'>*</span>
                         { this.strings.engName_title }
                     </Label>
-                    <p className={ styles.instruction }>{ this.strings.engName_Instruction}</p>
-                    <TextField  id='engName' name='engName' onChange={ this.onhandleChangeEvent } defaultValue={ engName }  validateOnLoad= { false }  
+                    <p id="engNameDesc" className={ styles.instruction }>{ this.strings.engName_Instruction}</p>
+                    <TextField aria-describedby="engNameDesc" id='engName' name='engName' onChange={ this.onhandleChangeEvent } defaultValue={ engName }  validateOnLoad= { false }  
                     onGetErrorMessage={ this.validateInput } />
                 </StackItem>
                 <StackItem>
@@ -85,8 +85,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                         <span className={styles.asterik}  aria-label='required'>*</span>
                         {this.strings.frCommName_title }
                     </Label>
-                    <p className={ styles.instruction }>{ this.strings.frCommName_Instruction}</p>
-                    <TextField id='frCommName' name='frCommName' onChange={ this.onhandleChangeEvent } defaultValue={ frCommName } validateOnLoad= { false } onGetErrorMessage={ this.validateInput } />
+                    <p id="frNameDesc" className={ styles.instruction }>{ this.strings.frCommName_Instruction}</p>
+                    <TextField aria-describedby="frNameDesc" id='frCommName' name='frCommName' onChange={ this.onhandleChangeEvent } defaultValue={ frCommName } validateOnLoad= { false } onGetErrorMessage={ this.validateInput } />
                 </StackItem>
             </Stack>
 
@@ -98,16 +98,16 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                         <span className={styles.asterik}  aria-label='required'>*</span>
                         { this.strings.shEngDesc_title }
                     </Label>
-                    <p className={ styles.instruction }>{ this.strings.shEngDesc_Instruction }</p>
-                    <TextField id='shEngDesc' name='shEngDesc'onChange={ this.onhandleChangeEvent} defaultValue={ shEngDesc } validateOnLoad= { false }  onGetErrorMessage={ value => { if ( value.length < 5 || value.length > 100  || value === '') return `${this.strings.max100_validation}` }} />
+                    <p id="shEngDescription" className={ styles.instruction }>{ this.strings.shEngDesc_Instruction }</p>
+                    <TextField aria-describedby="shEngDescription" id='shEngDesc' name='shEngDesc'onChange={ this.onhandleChangeEvent} defaultValue={ shEngDesc } validateOnLoad= { false }  onGetErrorMessage={ value => { if ( value.length < 5 || value.length > 100  || value === '') return `${this.strings.max100_validation}` }} />
                 </StackItem>
                 <StackItem>
                     <Label htmlFor='shFrDesc' styles={ labelStyle } >
                         <span className={styles.asterik}  aria-label='required'>*</span>
                         { this.strings.shFrDesc_title }
                     </Label>
-                    <p className={ styles.instruction }>{ this.strings.shFrDesc_Instruction }</p>
-                    <TextField id='shFrDesc' name='shFrDesc' onChange={ this.onhandleChangeEvent} defaultValue={ shFrDesc } validateOnLoad= { false }  onGetErrorMessage={ value => { if ( value.length < 5 || value.length > 100 || value === '') return `${this.strings.max100_validation}` }}/> 
+                    <p id="FrDesc" className={ styles.instruction }>{ this.strings.shFrDesc_Instruction }</p>
+                    <TextField aria-describedby="FrDesc" id='shFrDesc' name='shFrDesc' onChange={ this.onhandleChangeEvent} defaultValue={ shFrDesc } validateOnLoad= { false }  onGetErrorMessage={ value => { if ( value.length < 5 || value.length > 100 || value === '') return `${this.strings.max100_validation}` }}/> 
                 </StackItem>
             </Stack>
             </>
