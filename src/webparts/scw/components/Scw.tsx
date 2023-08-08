@@ -206,7 +206,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             requestHeaders.append("Cache-Control", "no-cache");
             
             const owner1 = [...ownerList, this.props.requestor].join(',');
-            console.log("ownerList",owner1);
+            // console.log("ownerList",owner1);
             
             // let memberlist = "";
             // // for (let i = 0; i < memberList.length; i++) {
