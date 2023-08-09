@@ -95,12 +95,26 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         //     return checkedValues.indexOf(value) === index
         //   });
         // console.log("filtered",filtered)
+        console.log("OwnerList", ownerList);
+
+        let requestorEmail: string = '';
+
+        for (let i = 0; i < ownerList.length; i++) {
+            if ( ownerList[i] === this.props.requestor) {
+                console.log("found")
+                requestorEmail = ownerList[i];
+
+                console.log("email",requestorEmail);
+            }
+            
+        }
         
        if ( !commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc) {
    
             this.setState({ showModal: true });
        } 
-    
+       
+
 
     //    else if ( current === 1 && selectedChoice === '' ) {
             
@@ -118,11 +132,16 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             this.setState({ showModal: true });
             
         }
+        else if ( current  === 1 && requestorEmail !== '') {
+            this.setState({ showModal: true });
+        }
+      
         else {
             
             this.goToNextPg(current);
             // this.setState({invalidEmail: ''})
         }
+
        
     }
 
@@ -591,7 +610,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                             <Steps current= { this.state.current } labelPlacement='vertical' items= { items } />
                         </Stack>
                         {  showCallout && <Callouts prefLang={ this.props.prefLang } showCallout={ showCallout }  targetId= { targetId } openCallout = {this.isCalloutVisible} /> }
-                        { this.state.showModal === true && <ErrorModal invalidUser ={ this.state.invalidEmail } prefLang={ this.props.prefLang } current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } /> } 
+                        { this.state.showModal === true && <ErrorModal requestor={ this.props.requestor } invalidUser ={ this.state.invalidEmail } prefLang={ this.props.prefLang } current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } /> } 
                         
                         <div className="steps-content"> 
                             { this.state.isLoading ? 
