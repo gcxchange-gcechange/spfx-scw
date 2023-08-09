@@ -24,6 +24,7 @@ export interface IErrorModalProps {
   current: number;
   prefLang: string;
   invalidUser: string;
+  requestor: any;
 }
 
 export interface IErrorModalState {}
@@ -73,11 +74,11 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       // selectedChoice,
       // checkedValues,
       ownerList,
-      invalidUser
+      invalidUser,
     } = this.props;
 
-  // const filtered = checkedValues.filter((value, index) => {
-  //   return checkedValues.indexOf(value) === index
+  // const filtered = checkedValues.filter((value, i) => {
+  //   return checkedValues.iOf(value) === i
   // });
 
     interface PropValues {
@@ -102,10 +103,11 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     // ];
 
     const fourthValues: PropValues[] = [
-      { name: `${ this.strings.one_more_owner }`, value: `${ownerList.length}` },
-      { name: `Invalid Email`, value: `${invalidUser}` }
+      { name: `${ this.strings.one_more_owner }`, value: `${ownerList}` },
+      { name: `Invalid Email`, value: `${invalidUser}` },
     
     ];
+
     const lastValues: PropValues[] = [
       { name: `${ this.strings.commPurpose_Modal }`, value: `${commPurpose}` },
       { name: `${ this.strings.engName_Modal }`, value: `${engName}` },
@@ -150,7 +152,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     for (const obj of fourthValues) {
       if (current === 1 && obj.value !== '' ) {
         results.push(obj.value)
-        // console.log('results', results);
+        console.log('results', obj);
 
         if (current === 1 && ownerList.length !== 2 && invalidUser !== '') {
           message = `${obj.value }`
@@ -162,9 +164,17 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
         else if ( current === 1 && ownerList.length <=1 && invalidUser === '') {
         message += `${ this.strings.one_more_owner }`
         }
+       
               
       }
 
+    }
+
+    for (let i = 0; i < ownerList.length; i++) {
+      if( current === 1 && (ownerList[i] === this.props.requestor)) {
+        message = `${this.strings.owners_modal}`
+      }
+      
     }
 
 
@@ -182,6 +192,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
         }
       }
     }
+
 
     return  message;
   };
@@ -204,7 +215,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
           >
             <div>
             <div style={ this.modalStyle.header}>
-              <h2>{ this.strings.forget }</h2>
+              <h2>{this.strings.forget}</h2>
               <IconButton
                 tabIndex={1}
                 aria-label= { this.strings.close }
@@ -216,9 +227,11 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
             <div style={ this.modalStyle.footer}>
               <Stack>
                 <Stack.Item align="center">
-                  {this.props.invalidUser ?
-                    <p className={ styles.modalContent }>{ this.strings.you_must } {parse(`${this.strings.provide}`)} { this.strings.valid_email } <strong>{messages}</strong> {this.strings.is_not_valid}</p>
-                    :
+                  { this.props.invalidUser  ?
+                  ( <p className={ styles.modalContent }>{ this.strings.you_must } {parse(`${this.strings.provide}`)} { this.strings.valid_email } <strong>{messages}</strong> {this.strings.is_not_valid}</p>)
+                  : this.props.requestor ? 
+                  ( <p className={ styles.modalContent }><strong>{messages}</strong></p> )
+                  :
                     <p className={ styles.modalContent }>{ this.strings.you_must } <strong>{messages}</strong> { this.strings.before_proceeding }</p>
                   }
                   

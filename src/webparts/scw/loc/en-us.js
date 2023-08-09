@@ -88,7 +88,7 @@ define([], function() {
     // "chk7":"GCXchange has a retention policy of 2 years for all documents and should only be used to store transitory information.",
     // "chk7b":"I agree to back up my community documents on my department's official repository if they contain information of business value.",
     "invite_owners_para1": "As a GCXchange owner you can modify your community and invite other users to your site so they can collaborate with you in Microsoft Teams.",
-    "invite_owners_para2": "We need you to <strong>add at least one more owner</strong> before your community can be created.",
+    "invite_owners_para2": "We need you to <strong>add at least one more owner other than yourself</strong> before your community can be created.",
     // "invite_owners_para3": "If you don’t want to invite members just yet, no problem. We will provide detailed instructions on how to do this once your community has been created.",
     "invite_owners_label":"Invite owners already registered to GCXchange.",
     // "invite_members":"Invite members",
@@ -107,7 +107,7 @@ define([], function() {
     'provide': '<span style="fontWeight:normal"> provide </span>',
     'agree':'<span style="fontWeight:normal"> agree to all </span>',
     'forget':'Did you forget something?',
-    'before_proceeding': 'before proceeding',
+    'before_proceeding': 'before proceeding.',
     'and': '<span style="fontWeight:normal"> and </span>',
     'the': '',
     'classification': 'Classification',
@@ -139,7 +139,11 @@ define([], function() {
     'required': 'required field',
     "SP_TeamsLogos": "SharePoint and Teams logos with arrows indicating the sharing capability between the tools.",
     "valid_email": "a valid email.",
-    "is_not_valid": "is not valid."
+    "is_not_valid": "is not valid.",
+    "owners_modal":"<span style= fontWeight:normal >As the requester of this community, you are automatically added as an owner. You </span>cannot invite yourself as an owner</strong>.<span style= fontWeight:normal > Please remove yourself before proceeding.</span>",
+
+
+
   
   }
 })

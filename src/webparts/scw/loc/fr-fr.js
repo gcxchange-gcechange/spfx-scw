@@ -80,7 +80,7 @@ define([], function() {
         // "chk7": "La politique de conservation de GCÉchange est limitée à 2 ans pour tous les documents et on devrait seulement s’en servir pour stocker des renseignements transitoires.",
         // "chk7b": "J’accepte de sauvegarder les documents de ma collectivité dans le dépôt officiel de mon ministère s’ils contiennent des renseignements à valeur opérationnelle.",
         "invite_owners_para1": "En tant que responsable de GCÉchange, vous pouvez modifier votre collectivité et inviter d’autres utilisateurs sur votre site qui peuvent collaborer avec vous dans Microsoft Teams.",
-        "invite_owners_para2": "Vous devez <strong>ajouter au moins un autre responsable</strong>  pour que votre collectivité puisse être créée.",
+        "invite_owners_para2": "Vous devez <strong>ajouter au moins un autre propriétaire que vous-même</strong>  pour que votre collectivité puisse être créée.",
         // "invite_owners_para3": "Si vous ne souhaitez pas encore inviter de membres, c’est correct. Nous vous fournirons des instructions détaillées sur la manière de procéder une fois que votre collectivité aura été créée.",
         "invite_owners_label": "Inviter les responsables déjà inscrits à GCÉchange.",
         // "invite_members": "Inviter les membres",
@@ -131,6 +131,7 @@ define([], function() {
         "SP_TeamsLogos": "Logos SharePoint et Teams avec des flèches indiquant la capacité de partage entre les outils.",
         "valid_email": "un courriel valide.",
         "is_not_valid": "n'est pas valide.",
+        "owners_modal":"<span style= fontWeight:normal >En tant que demandeur de la création de cette collectivité, vous êtes automatiquement ajouté comme propriétaire.</span> <strong>Vous ne pouvez pas vous inviter en tant que propriétaire</strong>. Veuillez vous désinscrire avant de poursuivre.",
 
     } 
 });
