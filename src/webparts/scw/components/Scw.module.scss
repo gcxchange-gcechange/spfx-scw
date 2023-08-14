@@ -434,12 +434,3 @@ u {
     padding-right: 2px
 }
 
-.peoplePickerTest {
-    span > div:nth-child(1) > button {
-        display: none !important;
-      }
-      span > div:nth-child(1) {
-        user-select: none!important;
-        pointer-events: none!important;
-      }
-}

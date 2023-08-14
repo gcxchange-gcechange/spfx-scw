@@ -4,7 +4,7 @@ import { PeoplePicker, PrincipalType } from "@pnp/spfx-controls-react/lib/People
 import { DirectionalHint } from "office-ui-fabric-react";
 import * as React from "react";
 import { SelectLanguage } from './SelectLanguage';
-import styles from "./Scw.module.scss";
+ 
 
 
 
@@ -76,7 +76,6 @@ export default class AUsers extends React.Component<IAddUsersProps> {
                     showtooltip = { true }
                     tooltipMessage = { `${ this.strings.owners_Instruction}`}
                     tooltipDirectional  = { DirectionalHint.topCenter }
-                    peoplePickerCntrlclassName={styles.peoplePickerTest}
                     ensureUser={ true }
                     allowUnvalidated={ true }
                 />

@@ -245,7 +245,6 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     principalTypes = { [ PrincipalType.User ] }
                     resolveDelay = {1000}
                     defaultSelectedUsers  = { this.props.ownerList }
-                    peoplePickerCntrlclassName={styles.peoplePickerTest}
                     ensureUser={ true }
                     allowUnvalidated={ true }
                 />
