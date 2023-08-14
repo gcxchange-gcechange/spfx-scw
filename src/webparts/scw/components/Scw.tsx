@@ -19,7 +19,7 @@ import FourthStep from './FourthStep';
 // import SecondStep from './SecondStep';
 import { SelectLanguage } from './SelectLanguage';
 // import ThirdStep from './ThirdStep';
-import { AadHttpClient, HttpClientResponse, IHttpClientOptions } from '@microsoft/sp-http-base';
+import { AadHttpClient, HttpClientResponse, IHttpClientOptions } from '@microsoft/sp-http';
 import Title from './Title';
 import Complete from './Complete';
 import { Spinner, SpinnerSize } from '@fluentui/react/lib/Spinner';
