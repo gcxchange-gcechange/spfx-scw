@@ -2,7 +2,6 @@
 /* eslint-disable dot-notation */
 import * as React from 'react';
 import { IButtonStyles, IconButton, IIconProps, Label, Stack, TextField  } from 'office-ui-fabric-react';
-import {  WebPartContext  } from '@microsoft/sp-webpart-base';
 import { PeoplePicker, PrincipalType } from '@pnp/spfx-controls-react/lib/PeoplePicker';
 import { SelectLanguage } from './SelectLanguage';
 import styles from './Scw.module.scss';
@@ -12,7 +11,7 @@ import styles from './Scw.module.scss';
 
 
 export interface ILastStepProps { 
-    context: WebPartContext;
+    context: any;
     engName: string;
     // memberList: string[];
     ownerList: string[];

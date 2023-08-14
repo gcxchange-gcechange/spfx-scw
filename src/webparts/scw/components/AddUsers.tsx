@@ -1,6 +1,5 @@
 /* eslint-disable dot-notation */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { WebPartContext } from "@microsoft/sp-webpart-base";
 import { PeoplePicker, PrincipalType } from "@pnp/spfx-controls-react/lib/PeoplePicker";
 import { DirectionalHint } from "office-ui-fabric-react";
 import * as React from "react";
@@ -11,7 +10,7 @@ import styles from "./Scw.module.scss";
 
 
 export interface IAddUsersProps {
-    context: WebPartContext;
+    context: any;
     ownerList: string[];
     // memberList: string[];
     prefLang: string;

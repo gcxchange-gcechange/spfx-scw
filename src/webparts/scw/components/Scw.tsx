@@ -56,7 +56,7 @@ export interface IScwState  {
 
 export default class AntDesignStep extends React.Component<IScwProps, IScwState>  { 
    public strings = SelectLanguage(this.props.prefLang);
-   private owner = this.props.context.pageContext.user.email;
+//    private owner = this.props.context.pageContext.user.email;
 
     public constructor( props: IScwProps, state: IScwState )  { 
         super( props );
@@ -64,7 +64,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             current: 0,
             step: 0,
             engName:'', 
-            ownerList: [this.owner],
+            ownerList: [],
             // memberList: [this.owner],
             commPurpose: '',
             frCommName: '',
@@ -204,15 +204,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             const requestHeaders: Headers = new Headers();
             requestHeaders.append("Content-type", "application/json");
             requestHeaders.append("Cache-Control", "no-cache");
-
-            let owner1: any;
-     
-            if (ownerList.length === 2) {
-                owner1 = ownerList[0] + "," + ownerList[1];
-            } else {
-                owner1 = ownerList[0] + "," + ownerList[1] + "," + ownerList[2];
-            }
+            
+            const owner1 = [...ownerList, this.props.requestor].join(',');
             // console.log("ownerList",owner1);
+            
             // let memberlist = "";
             // // for (let i = 0; i < memberList.length; i++) {
             //     if (i === memberList.length - 1) {
@@ -223,7 +218,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             // }
             // console.log("memberList",memberlist);
 
-
+          
             const postOptions: IHttpClientOptions = {
                 headers: requestHeaders,
                 body: `
@@ -237,7 +232,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     "TeamPurpose":"${commPurpose}",
                     "TemplateTitle": "Generic",
                     "RequesterName": "${this.props.context.pageContext.user.displayName}",
-                    "RequesterEmail": "${this.props.context.pageContext.user.email}",
+                    "RequesterEmail": "${this.props.requestor}",
                     "SecurityCategory": "unclassified",
                     "Status": "Submitted",
                     

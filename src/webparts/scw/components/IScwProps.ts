@@ -5,4 +5,5 @@ export interface IScwProps {
   context: WebPartContext;
   prefLang: string;
   url?: any;
+  requestor?: any;
 }
