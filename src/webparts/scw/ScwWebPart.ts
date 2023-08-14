@@ -32,7 +32,8 @@ export default class ScwWebPart extends BaseClientSideWebPart<IScwWebPartProps> 
       {
         context: this.context,
         prefLang: this.properties.prefLang,
-        url: this.rootUrl
+        url: this.rootUrl,
+        requestor: this.context.pageContext.user.email
         
       }
     );
