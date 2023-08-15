@@ -37,7 +37,7 @@ export default class Complete extends React.Component<ICompleteProps, ICompleteS
         
     };
   
-
+    console.log("url", this.props.url);
     return (
       <>
         <Stack verticalAlign="center">

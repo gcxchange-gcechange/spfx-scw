@@ -47,9 +47,9 @@ export default class Failed  extends React.Component<IFailedProps> {
                 <p>{ this.strings.failed_txt2 }</p> 
                 <p>{ this.strings.failed_txt3 }</p>
                 {  this.props.prefLang === "fr-fr" ?
-                    <p>{parse( this.strings.failed_txt4 )}  <a style={{ color:'#004DB8'}} href={`mailto: ${mailtoFR}`} > le portail de soutien GCÉchange</a> <Icon style={{ color: '#004DB8' }} iconName='NavigateExternalInline'/></p>
+                    <p>{parse( this.strings.failed_txt4 )}  <a style={{ color:'#004DB8'}} href={`https://gcxgce.sharepoint.com/sites/Support/SitePages/fr/Home.aspx`} > le portail de soutien GCÉchange</a> <Icon style={{ color: '#004DB8' }} iconName='NavigateExternalInline'/></p>
                     :
-                    <p>{parse( this.strings.failed_txt4 )}  <a style={{ color:'#004DB8'}}  href={`mailto: ${mailtoFR}`}>GCXchange Support portal</a> <Icon style={{ color: '#004DB8' }} iconName='NavigateExternalInline'/></p>
+                    <p>{parse( this.strings.failed_txt4 )}  <a style={{ color:'#004DB8'}}  href={`https://gcxgce.sharepoint.com/sites/Support`}>GCXchange Support portal</a> <Icon style={{ color: '#004DB8' }} iconName='NavigateExternalInline'/></p>
                 }
                
             </div>
