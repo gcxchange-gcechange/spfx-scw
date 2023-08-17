@@ -235,7 +235,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 <PeoplePicker
                     context = { this.props.context }
                     required = { true }
-                    personSelectionLimit = { 3 }
+                    personSelectionLimit = { 99 }
                     groupName = { "" } // Leave this blank in case you want to filter from all users
                     onChange = { this.updateDefaultOwnerValues }
                     principalTypes = { [ PrincipalType.User ] }

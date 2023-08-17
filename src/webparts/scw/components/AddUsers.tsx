@@ -4,7 +4,6 @@ import { PeoplePicker, PrincipalType } from "@pnp/spfx-controls-react/lib/People
 import { DirectionalHint } from "office-ui-fabric-react";
 import * as React from "react";
 import { SelectLanguage } from './SelectLanguage';
- 
 
 
 
@@ -66,7 +65,7 @@ export default class AUsers extends React.Component<IAddUsersProps> {
                 <PeoplePicker
                     context = { this.props.context }
                     required = { true }
-                    personSelectionLimit = { 3 }
+                    personSelectionLimit = { 99 }
                     groupName = { "" } // Leave this blank in case you want to filter from all users
                     onChange = { this._getOwnerItems }
                     principalTypes = { [ PrincipalType.User ] }
