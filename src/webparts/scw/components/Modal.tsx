@@ -116,7 +116,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     const fourthValues: PropValues[] = [
       { name: `You must add a valid email. <strong>${invalidUser}</strong> is not a valid email. `, value: `${invalidUser}` },
       { name: `${ this.strings.owners_modal }`, value: `${user}` },
-      { name: ` owners`, value: `${ownerList.length}`}
+      { name: `length of Owners`, value: `${ownerList.length}`}
 
     
     ];
@@ -166,20 +166,19 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     for  (const obj of fourthValues) {
       console.log("foruth", obj)
 
-      if ( current === 1 && obj.value !== '') {
-        results.push(obj.value);
-        const owners = results.length -1;
+      if ( current === 1 && obj.value !== ''|| obj.value < 2) {
+        results.push(obj.name);
+        const owners = results.slice(0, -1);
 
-        if ( results.length > 1 ) {
-          message =  `${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` + results.slice(-1)
+        console.log("owners", owners);
+
+        if ( owners.length > 1 ) {
+          message =  `${ this.strings.you_must } ${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` + results.slice(-1)
         } 
-        else if (results.length === 1) {
-          message = `${this.strings.provide} ${obj.name}`
+        else if (owners.length === 1) {
+          message = `${obj.name}`
         }
-        else if ( owners <= 1) {
-          message = "NOTHING"
-        }
-
+        
       }
       console.log("res", results);
 
@@ -266,7 +265,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
                   {  
                   // ( <p className={ styles.modalContent }>{ this.strings.you_must } {parse(`${this.strings.provide}`)} { this.strings.valid_email } <strong>{messages}</strong> {this.strings.is_not_valid}</p>)
                   // :
-                  <p className={ styles.modalContent }>{ this.strings.you_must } <strong>{messages}</strong> { this.strings.before_proceeding }</p>
+                  <p className={ styles.modalContent }> <strong>{messages}</strong> { this.strings.before_proceeding }</p>
                   }
                   
                 </Stack.Item>
