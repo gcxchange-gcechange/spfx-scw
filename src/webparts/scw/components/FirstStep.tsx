@@ -59,7 +59,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             <h3>{ parse( this.strings.commPurpose_title ) }</h3>
             <p>{ parse( this.strings.commPurpose_desc) }</p>
             <Label htmlFor='Community purpose'styles={ labelStyle } >
-                <span className={styles.asterik}  aria-label='required'>*</span>
+                <span className={styles.asterik}  aria-label={ this.strings.required }>*</span>
                 { this.strings.commPurpose_title }
             </Label> 
             <p id='commPurposeDesc' className={ styles.instruction }>{ this.strings.commPurpose_Instruction}</p>
@@ -73,7 +73,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             <Stack tokens={ stackTokens }>
                 <StackItem>
                     <Label htmlFor='engName' styles={ labelStyle } >
-                        <span className={styles.asterik}  aria-label='required'>*</span>
+                        <span className={styles.asterik}  aria-label={ this.strings.required }>*</span>
                         { this.strings.engName_title }
                     </Label>
                     <p id="engNameDesc" className={ styles.instruction }>{ this.strings.engName_Instruction}</p>
@@ -82,7 +82,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 </StackItem>
                 <StackItem>
                     <Label htmlFor='frCommName'>
-                        <span className={styles.asterik}  aria-label='required'>*</span>
+                        <span className={styles.asterik}  aria-label={ this.strings.required }>*</span>
                         {this.strings.frCommName_title }
                     </Label>
                     <p id="frNameDesc" className={ styles.instruction }>{ this.strings.frCommName_Instruction}</p>
@@ -95,7 +95,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             <Stack tokens={ stackTokens }>
                 <StackItem>
                     <Label htmlFor='shEngDesc' styles={ labelStyle } >
-                        <span className={styles.asterik}  aria-label='required'>*</span>
+                        <span className={styles.asterik}  aria-label={ this.strings.required }>*</span>
                         { this.strings.shEngDesc_title }
                     </Label>
                     <p id="shEngDescription" className={ styles.instruction }>{ this.strings.shEngDesc_Instruction }</p>
@@ -103,7 +103,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 </StackItem>
                 <StackItem>
                     <Label htmlFor='shFrDesc' styles={ labelStyle } >
-                        <span className={styles.asterik}  aria-label='required'>*</span>
+                        <span className={styles.asterik}  aria-label={ this.strings.required }>*</span>
                         { this.strings.shFrDesc_title }
                     </Label>
                     <p id="FrDesc" className={ styles.instruction }>{ this.strings.shFrDesc_Instruction }</p>
