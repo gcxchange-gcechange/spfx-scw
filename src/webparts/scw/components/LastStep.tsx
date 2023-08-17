@@ -65,15 +65,12 @@ export default class LastStep extends React.Component<ILastStepProps> {
     private  onUpdateEngName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
 
         let value = event.target.value;
-        const hasSpecialChar = /[?<>*]/.test(value);
-        const startsWithSpecialChar = /^[~`!@#$%^&()_+={\x5B:;"',.|\x2F\x5D\x5C\x99-]/.test(value);
+        const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value);
         const invalidInput: string = '';
 
-        if ((value.length >= 5 && value.length <= 80) && startsWithSpecialChar ||  hasSpecialChar ) {
-            console.log("Value ")
-            value = invalidInput;
+        if (charAllowed ) {
+           value = invalidInput  
         } else if (value.length < 5 || value.length > 80) {
-            console.log("length is less that 5 or more than 125");
             value = invalidInput;
         }
 
@@ -85,11 +82,10 @@ export default class LastStep extends React.Component<ILastStepProps> {
     private  onUpdateFrName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
 
         let value = event.target.value;
-        const hasSpecialChar = /[?<>*]/.test(value);
-        const startsWithSpecialChar = /^[~`!@#$%^&()_+={\x5B:;"',.|\x2F\x5D\x5C\x99-]/.test(value);
+        const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value);
         const invalidInput: string = '';
 
-        if ((value.length >= 5 && value.length <= 80) && startsWithSpecialChar ||  hasSpecialChar ) { 
+        if ( charAllowed  ) {              
             value = invalidInput;
         } else if (value.length < 5 || value.length > 80) {
             value = invalidInput;
