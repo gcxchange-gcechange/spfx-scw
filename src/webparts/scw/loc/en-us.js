@@ -88,7 +88,7 @@ define([], function() {
     // "chk7":"GCXchange has a retention policy of 2 years for all documents and should only be used to store transitory information.",
     // "chk7b":"I agree to back up my community documents on my department's official repository if they contain information of business value.",
     "invite_owners_para1": "As a GCXchange owner you can modify your community and invite other users to your site so they can collaborate with you in Microsoft Teams.",
-    "invite_owners_para2": "We need you to <strong>add at least one more owner</strong> before your community can be created.",
+    "invite_owners_para2": "We need you to <strong>add at least one more owner other than yourself</strong> before your community can be created.",
     // "invite_owners_para3": "If you don’t want to invite members just yet, no problem. We will provide detailed instructions on how to do this once your community has been created.",
     "invite_owners_label":"Invite owners already registered to GCXchange.",
     // "invite_members":"Invite members",
