@@ -55,7 +55,7 @@ define([], function() {
         "indentify_one_more_owner_smallText": "La désignation de plus d’un responsable garantit la continuité de la collectivité en cas de départ d’un responsable",
         // "protected_or_unclassified": "Invite colleagues to <strong className={ styles.blue }>register to GCXchange</strong>",
         // "protected_or_unclassified_smallText": "Les conditions de création d’une collectivité protégée devront être acceptées avant la création d’une collectivité",
-        "Lets_go": "C’est parti…",
+        "Lets_go": "C’est parti",
         "comm_desc_title": "Description de la collectivité",
         "comm_name": "Nom de la collectivité",
         // "unclassified_cardText": "Non, je n’ai pas besoin de stocker des renseignements protégés. <strong>Tous les utilisateurs pourront trouver votre collectivité et en faire la recherche</strong>.",
