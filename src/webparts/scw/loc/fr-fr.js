@@ -131,7 +131,7 @@ define([], function() {
         "SP_TeamsLogos": "Logos SharePoint et Teams avec des flèches indiquant la capacité de partage entre les outils.",
         "valid_email": "un courriel valide.",
         "is_not_valid": "n'est pas valide.",
-        "owners_modal":"<span style= fontWeight:normal >En tant que demandeur de la création de cette collectivité, vous êtes automatiquement ajouté comme propriétaire.</span> <strong>Vous ne pouvez pas vous inviter en tant que propriétaire</strong>. Veuillez vous désinscrire",
+        "requestorUser":"<span style= fontWeight:normal >En tant que demandeur de la création de cette collectivité, vous êtes automatiquement ajouté comme propriétaire.</span> <strong>Vous ne pouvez pas vous inviter en tant que propriétaire</strong>. Veuillez vous désinscrire",
 
     } 
 });

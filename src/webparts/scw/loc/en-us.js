@@ -140,7 +140,7 @@ define([], function() {
     "SP_TeamsLogos": "SharePoint and Teams logos with arrows indicating the sharing capability between the tools.",
     "valid_email": "<span style= fontWeight:normal>add a valid email.</span>",
     "is_not_valid": "<span style= fontWeight:normal>is not valid.</span>",
-    "owners_modal":"<span style= fontWeight:normal >As the requester of this community, you are automatically added as an owner. You </span>cannot invite yourself as an owner</strong>.<span style= fontWeight:normal > Please remove yourself</span>",
+    "requestorUser":"<span style= fontWeight:normal >As the requester of this community, you are automatically added as an owner. You </span>cannot invite yourself as an owner.<span style= fontWeight:normal > Please remove yourself</span>",
 
 
 

@@ -137,7 +137,7 @@ declare interface IScwWebPartStrings {
   SP_TeamsLogos: string;
   valid_email :string;
   is_not_valid: string;
-  owners_modal: string;
+  requestorUser: string;
 
 
 

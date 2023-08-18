@@ -116,8 +116,8 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
 
     const fourthValues: PropValues[] = [
       { name: `${this.strings.you_must} ${this.strings.valid_email} ${invalidUser} ${this.strings.is_not_valid}`, value: `${invalidUser}` },
-      { name: `${this.strings.owners_modal }`, value: `${requestingUser}` },
-      { name: `${this.strings.you_must} ${this.strings.provide} ${this.strings.one_more_owner}`, value: `${ownerList.length}`}
+      { name: `${this.strings.requestorUser }`, value: `${requestingUser}` },
+      { name: `${this.strings.you_must} ${this.strings.one_more_owner}`, value: `${ownerList.length}`}
     ];
 
     const lastValues: PropValues[] = [
@@ -189,11 +189,11 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     if (current === 1 ) {
       for (const obj of fourthValues) {
         console.log("obj", obj)
-        if (( obj.name === `${this.strings.you_must} ${this.strings.provide} ${this.strings.one_more_owner}` && obj.value <= 1 ) || (obj.name === `${this.strings.you_must} ${this.strings.valid_email} ${invalidUser} ${this.strings.is_not_valid}` && obj.value !== '') || (obj.name === `${this.strings.owners_modal }` && obj.value !== '') )  {
+        if (( obj.name === `${this.strings.you_must} ${this.strings.one_more_owner}` && obj.value <= 1 ) || (obj.name === `${this.strings.you_must} ${this.strings.valid_email} ${invalidUser} ${this.strings.is_not_valid}` && obj.value !== '') || (obj.name === `${this.strings.requestorUser }` && obj.value !== '') )  {
           results.push(obj.name);
 
           if (results.length > 1) {
-            message =   results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` + results.slice(-1)
+            message =   results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` +  results.slice(-1)[0].toLowerCase()
           }
           else if (results.length === 1){
             message = `${obj.name}`
@@ -225,7 +225,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
 
     if (current === 2 ) {
       for (const obj of lastValues) {
-        if (obj.value === '' || obj.value < 2) {
+        if (obj.value === '' || obj.value <= 1) {
           results.push(obj.name);
           console.log("obj", obj);
           console.log("results", results);
