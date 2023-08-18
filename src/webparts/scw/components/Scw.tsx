@@ -162,11 +162,11 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     private prev = (): void =>  { 
         const prevPage = this.state.current - 1;   
 
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList  } = this.state
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail  } = this.state
 
        
 
-        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length <= 1)) {
+        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length <= 1 || invalidEmail !== '')) {
            
             this.setState({ showModal: true });
         }
@@ -174,6 +174,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         //     this.setState({ selectedChoice: `${ this.strings.unclassified_cardTitle }`})
         // }
+
         else {
             
             this.setState({ current: prevPage})
@@ -208,10 +209,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     
     public successMessage = (): void =>  { 
         
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList } = this.state
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail } = this.state
 
         
-        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length <= 1)) {
+        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length <= 1 || invalidEmail !== '')) {
             
             this.setState({ showModal: true });
         }
@@ -219,7 +220,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
 
 
-            const functionUrl = "https://appsvc-fnc-dev-scw-list-dotnet001.azurewebsites.net/api/CreateItem?";
+            const functionUrl = "";
             const requestHeaders: Headers = new Headers();
             requestHeaders.append("Content-type", "application/json");
             requestHeaders.append("Cache-Control", "no-cache");
@@ -270,7 +271,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             document.getElementById("submit").style.display = 'none';
                 
               this.props.context.aadHttpClientFactory
-              .getClient("3385e8cd-40a4-41f5-bd2f-68690654a54b")
+              .getClient("")
               .then((client: AadHttpClient) => {
                
                 client.post(functionUrl, AadHttpClient.configurations.v1, postOptions)
