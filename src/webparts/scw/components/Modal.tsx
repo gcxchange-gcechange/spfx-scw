@@ -92,7 +92,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
 
     for (let i = 0; i < ownerList.length; i++) {
       console.log("O",ownerList[i])
-      if ( current === 1 && (ownerList[i] === this.props.requestor)) {
+      if ( ownerList[i] === this.props.requestor) {
         requestingUser = this.props.requestor
       } 
       
@@ -115,7 +115,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     // ];
 
     const fourthValues: PropValues[] = [
-      { name: `${this.strings.you_must} ${this.strings.valid_email} ${invalidUser} ${this.strings.is_not_valid}`, value: `${invalidUser}` },
+      { name: `${this.strings.valid_email} ${invalidUser} ${this.strings.is_not_valid}`, value: `${invalidUser}` },
       { name: `${this.strings.requestorUser }`, value: `${requestingUser}` },
       { name: `${this.strings.you_must} ${this.strings.one_more_owner}`, value: `${ownerList.length}`}
     ];
@@ -126,12 +126,14 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       { name: `${ this.strings.frCommName_Modal }`, value: `${frCommName}` },
       { name: `${ this.strings.shEngDesc_Modal }`, value: `${shEngDesc}` },
       { name: `${ this.strings.shFrDesc_Modal }`, value: `${shFrDesc}` },
-      { name: `${ this.strings.one_more_owner }`, value: `${ownerList.length}` },
+      { name: `${this.strings.invalidEmail} ${invalidUser} ${this.strings.is_not_valid}`, value: `${invalidUser}` },
+      { name: `${this.strings.requestorUser }`, value: `${requestingUser}` },
+      { name: `${this.strings.one_more_owner}`, value: `${ownerList.length}`}
     ];
 
     let message: string = "";
     const results: string[] = [];
-    const comma = `<span style="fontWeight:normal">, </span>`;
+    const comma = `<span style=fontWeight:normal>, </span>`;
    
 
     if (current === 0) {
@@ -188,10 +190,9 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
 
     if (current === 1 ) {
       for (const obj of fourthValues) {
-        console.log("obj", obj)
-        if (( obj.name === `${this.strings.you_must} ${this.strings.one_more_owner}` && obj.value <= 1 ) || (obj.name === `${this.strings.you_must} ${this.strings.valid_email} ${invalidUser} ${this.strings.is_not_valid}` && obj.value !== '') || (obj.name === `${this.strings.requestorUser }` && obj.value !== '') )  {
+        // console.log("obj", obj)
+        if (( obj.name === `${this.strings.you_must} ${this.strings.one_more_owner}` && obj.value <= 1 ) || (obj.name === `${this.strings.valid_email} ${invalidUser} ${this.strings.is_not_valid}` && obj.value !== '') || (obj.name === `${this.strings.requestorUser }` && obj.value !== '') )  {
           results.push(obj.name);
-
           if (results.length > 1) {
             message =   results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` +  results.slice(-1)[0].toLowerCase()
           }
@@ -199,7 +200,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
             message = `${obj.name}`
           }
         }
-        console.log("results", results)
+        // console.log("results", results)
       }
       // if (ownerList.length <= 1 && invalidUser === '' || requestingUser === '') {
         //     message = `${this.strings.one_more_owner }`
@@ -223,28 +224,67 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
    
 
 
-    if (current === 2 ) {
-      for (const obj of lastValues) {
-        if (obj.value === '' || obj.value <= 1) {
-          results.push(obj.name);
-          console.log("obj", obj);
-          console.log("results", results);
+    // if (current === 2 ) {
+    //   debugger
+    //   for (const obj of lastValues) {
+    //     console.log('obj', obj);
+    //     if (obj.value === '' || obj.value <= 1  ) {
+    //       results.push(obj.name);
+    //       console.log("obj", obj);
+    //       console.log("results", results);
        
-          if ( results.length > 1 ) {
-            message =  `${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` + results.slice(-1)
-          } 
+    //       if ( results.length > 1 ) {
+    //         message =  `${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` + results.slice(-1)
+    //       } 
          
-          else if (results.length === 1) {
-            message = `${this.strings.provide} ${obj.name}`
-          }
+    //       else if (results.length === 1) {
+    //         message = `${this.strings.provide} ${obj.name}`
+    //       }
+    //     }
+    //   }
+      
+    // }
+
+    if (current === 2) {
+      for (const obj of lastValues) {
+        console.log('obj', obj);
+        if (
+          // Check if specific input fields are empty
+          (obj.name === `${this.strings.commPurpose_Modal}` && obj.value === "") ||
+          (obj.name === `${this.strings.engName_Modal}` && obj.value === "") ||
+          (obj.name === `${this.strings.frCommName_Modal}` && obj.value === "") ||
+          (obj.name === `${this.strings.shEngDesc_Modal}` && obj.value === "") ||
+          (obj.name === `${this.strings.shFrDesc_Modal}` && obj.value === "") ||
+        
+          // Check for invalid email format
+          (obj.name === `${this.strings.invalidEmail} ${invalidUser} ${this.strings.is_not_valid}` && obj.value !== "") ||
+        
+          // Check if requestor user is provided
+          (obj.name === `${this.strings.requestorUser }` && obj.value !== "") ||
+        
+          // Check if there is at least one more owner
+          (obj.name === `${this.strings.one_more_owner}` && obj.value <= 1)
+        ) {
+          results.push(obj.name);
         }
+        console.log("RES", results)   
+        // const regex = /[>]/g;
+
+        const findLetter = results.slice(-1)
+        console.log("f",findLetter)
+        // const getInitial = findLetter.search(regex)
+    
+        if (results.length > 1) {
+          message =  `${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` +  results.slice(-1)
+        }
+        else if (results.length === 1){
+          message = `${this.strings.provide} ${obj.name}`
+        }  
       }
-      if ( invalidUser ) {
-        message = `${this.strings.valid_email} ${invalidUser} ${this.strings.is_not_valid}`
-      }
-      else if ( ownerList.length <= 1 ) {
-        message = `${this.strings.one_more_owner }`
-      }
+    
+      // if (results.length > 0) {
+      //   message = `${this.strings.provide} ${results.join(', ')}`;
+      // }
     }
     
    
@@ -298,7 +338,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
                   this.props.current === 1 ? 
                   <p><strong>{messages}</strong> { this.strings.before_proceeding }</p>
                   :
-                  <p className={ styles.modalContent }>{this.strings.you_must } <strong>{messages}</strong> { this.strings.before_proceeding }</p>
+                  <p className={ styles.modalContent }>{ parse( this.strings.you_must )} <strong>{messages}</strong> { this.strings.before_proceeding }</p>
                   }
                   
                 </Stack.Item>

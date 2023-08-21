@@ -103,7 +103,7 @@ define([], function() {
     'owners':'Owners',
     // 'members':'Members',
     'close': 'Close',
-    'you_must':'<span style= fontWeight:normal >You must</span>',
+    'you_must':'You must',
     'provide': '<span style="fontWeight:normal"> provide </span>',
     'agree':'<span style="fontWeight:normal"> agree to all </span>',
     'forget':'Did you forget something?',
@@ -138,7 +138,8 @@ define([], function() {
 
     'required': 'required field',
     "SP_TeamsLogos": "SharePoint and Teams logos with arrows indicating the sharing capability between the tools.",
-    "valid_email": "<span style= fontWeight:normal>add a valid email.</span>",
+    "valid_email": "<span style= fontWeight:normal>You must add a valid email.</span>",
+    "invalidEmail":"<span style= fontWeight:normal>add a valid email.</span>",
     "is_not_valid": "<span style= fontWeight:normal>is not valid.</span>",
     "requestorUser":"<span style= fontWeight:normal >As the requester of this community, you are automatically added as an owner. You </span>cannot invite yourself as an owner.<span style= fontWeight:normal > Please remove yourself</span>",
 

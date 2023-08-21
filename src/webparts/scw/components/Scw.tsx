@@ -212,7 +212,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail } = this.state
 
         
-        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length <= 1 || invalidEmail !== '')) {
+        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length <= 1 || invalidEmail !== '' || this.props.requestor !== '')) {
             
             this.setState({ showModal: true });
         }

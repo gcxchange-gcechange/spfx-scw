@@ -95,7 +95,7 @@ define([], function() {
         'owners': 'Propriétaires',
         // 'members': 'Membres',
         'close': 'Fermer',
-        'you_must': 'Vous devez',
+        'you_must': '<span style="fontWeight:normal">Vous devez</span>',
         'provide': '<span style="fontWeight:normal"> fournir </span>',
         'agree':'<span style="fontWeight:normal"> accepter toutes les </span>',
         'forget': 'Vous avez oublié quelque chose?',
@@ -129,7 +129,8 @@ define([], function() {
         'infoIcon_Owners':'Renseignements sur les propriétaires',
         'required': 'champ obligatoire',
         "SP_TeamsLogos": "Logos SharePoint et Teams avec des flèches indiquant la capacité de partage entre les outils.",
-        "valid_email": "un courriel valide.",
+        "valid_email": "Vous devez fournir un courriel valide.",
+        "invalidEmail":"un courriel valide.",
         "is_not_valid": "n'est pas valide.",
         "requestorUser":"<span style= fontWeight:normal >En tant que demandeur de la création de cette collectivité, vous êtes automatiquement ajouté comme propriétaire.</span> <strong>Vous ne pouvez pas vous inviter en tant que propriétaire</strong>. Veuillez vous désinscrire",
 
