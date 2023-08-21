@@ -263,24 +263,19 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
           (obj.name === `${this.strings.requestorUser }` && obj.value !== "") ||
         
           // Check if there is at least one more owner
-          (obj.name === `${this.strings.one_more_owner}` && obj.value <= 1)
+          (obj.name === `${this.strings.one_more_owner}` && obj.value < 1)
         ) {
           results.push(obj.name);
         }
         console.log("RES", results)   
-        // const regex = /[>]/g;
-
-        const findLetter = results.slice(-1)
-        console.log("f",findLetter)
-        // const getInitial = findLetter.search(regex)
     
-        if (results.length > 1) {
-          message =  `${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` +  results.slice(-1)
-        }
-        else if (results.length === 1){
-          message = `${this.strings.provide} ${obj.name}`
-        }  
       }
+      if (results.length > 1) {
+        message =  `${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` +  results.slice(-1)[0].toLowerCase()
+      }
+      else if (results.length === 1){
+        message = `${this.strings.provide} ${results}`
+      }  
     
       // if (results.length > 0) {
       //   message = `${this.strings.provide} ${results.join(', ')}`;
@@ -289,7 +284,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     
    
 
-
+    console.log('m',message);
     return  message;
   };
 
@@ -336,9 +331,9 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
                   // ( <p className={ styles.modalContent }>{ this.strings.you_must } {parse(`${this.strings.provide}`)} { this.strings.valid_email } <strong>{messages}</strong> {this.strings.is_not_valid}</p>)
                   // :
                   this.props.current === 1 ? 
-                  <p><strong>{messages}</strong> { this.strings.before_proceeding }</p>
+                  <p>{messages} { this.strings.before_proceeding }</p>
                   :
-                  <p className={ styles.modalContent }>{ parse( this.strings.you_must )} <strong>{messages}</strong> { this.strings.before_proceeding }</p>
+                  <p className={ styles.modalContent }>{ parse( this.strings.you_must )} {messages} { this.strings.before_proceeding }</p>
                   }
                   
                 </Stack.Item>
