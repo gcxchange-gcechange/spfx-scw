@@ -120,7 +120,7 @@ define([], function() {
     'select': '<span style="fontWeight:normal"> select </span>',
     'failed_oops': 'Oops, something went wrong!',
     'failed_txt1': 'Let us try to make it right.',
-    'failed_txt2': 'The GCX Support team will create the community on your behalf. Once created, you will receive and email with everything in you need to get started!',
+    'failed_txt2': 'The GCXchange Support team will create the community on your behalf. Once created, you will receive an email with everything you need to get started!',
     'failed_txt3': 'Our team will respond within 24 to 48 hours Monday to Friday.',
     'failed_txt4': 'If you do not receive the email or you do have any questions, please submit a service request using the',
     "submissionFailed": "Submission failed",
