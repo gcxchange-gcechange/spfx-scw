@@ -271,11 +271,26 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
         console.log("RES", results)   
     
       }
-      if (results.length > 1) {
-        message =  `${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` +  results.slice(-1)[0].toLowerCase()
+        if (results.length > 1) {
+            var tolower = results.slice(-1)[0];
+           // message = results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
+            console.log("slice 0 " + results.slice(0)[0])
+
+            if (results.slice(0)[0].includes('add a valid email')) {
+                message = results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
+
+            } else {
+                message = `${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
+            }
+ 
       }
-      else if (results.length === 1){
-        message = `${this.strings.provide} ${results}`
+        else if (results.length === 1) {
+            if (results[0] === `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}`) {
+                message = `${results}`
+            } else {
+                message = `${this.strings.provide} ${results}`
+            }
+                
       }  
     
       // if (results.length > 0) {
@@ -334,7 +349,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
                   this.props.current === 1 ? 
                   <p>{messages} { this.strings.before_proceeding }</p>
                   :
-                  <p className={ styles.modalContent }>{ parse( this.strings.you_must )} {messages} { this.strings.before_proceeding }</p>
+                  <p className={ styles.modalContent }>{ parse( this.strings.you_must )} {messages} </p>//{ this.strings.before_proceeding }
                   }
                   
                 </Stack.Item>
