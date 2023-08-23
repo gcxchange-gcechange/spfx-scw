@@ -105,7 +105,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       { name: `${ this.strings.shEngDesc_Modal }`, value: `${shEngDesc}` },
       { name: `${ this.strings.shFrDesc_Modal }`, value: `${shFrDesc}` },
     ];
-
+      var invalidUserBold = "<strong>" + invalidUser + "</strong>"; //unvalid email need to be bold
     // const secondValues: PropValues[] = [
     //   { name: `${ this.strings.community_classification_Modal }`, value: `${selectedChoice}` },
     // ];
@@ -115,7 +115,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     // ];
 
     const fourthValues: PropValues[] = [
-      { name: `${this.strings.valid_email} ${invalidUser} ${this.strings.is_not_valid}`, value: `${invalidUser}` },
+        { name: `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}` },
       { name: `${this.strings.requestorUser }`, value: `${requestingUser}` },
       { name: `${this.strings.you_must} ${this.strings.one_more_owner}`, value: `${ownerList.length}`}
     ];
@@ -126,7 +126,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       { name: `${ this.strings.frCommName_Modal }`, value: `${frCommName}` },
       { name: `${ this.strings.shEngDesc_Modal }`, value: `${shEngDesc}` },
       { name: `${ this.strings.shFrDesc_Modal }`, value: `${shFrDesc}` },
-      { name: `${this.strings.invalidEmail} ${invalidUser} ${this.strings.is_not_valid}`, value: `${invalidUser}` },
+        { name: `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}` },
       { name: `${this.strings.requestorUser }`, value: `${requestingUser}` },
       { name: `${this.strings.one_more_owner}`, value: `${ownerList.length}`}
     ];
@@ -190,11 +190,12 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
 
     if (current === 1 ) {
       for (const obj of fourthValues) {
-        // console.log("obj", obj)
-        if (( obj.name === `${this.strings.you_must} ${this.strings.one_more_owner}` && obj.value <= 1 ) || (obj.name === `${this.strings.valid_email} ${invalidUser} ${this.strings.is_not_valid}` && obj.value !== '') || (obj.name === `${this.strings.requestorUser }` && obj.value !== '') )  {
+         // console.log("obj", obj)
+          if ((obj.name === `${this.strings.you_must} ${this.strings.one_more_owner}` && obj.value <= 1 && invalidUser == '') || (obj.name === `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}` && obj.value !== '') || (obj.name === `${this.strings.requestorUser}` && obj.value !== '')) {
           results.push(obj.name);
-          if (results.length > 1) {
-            message =   results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` +  results.slice(-1)[0].toLowerCase()
+              if (results.length > 1) {
+                  var tolower = results.slice(-1)[0];
+                  message = results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
           }
           else if (results.length === 1){
             message = `${obj.name}`
@@ -257,7 +258,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
           (obj.name === `${this.strings.shFrDesc_Modal}` && obj.value === "") ||
         
           // Check for invalid email format
-          (obj.name === `${this.strings.invalidEmail} ${invalidUser} ${this.strings.is_not_valid}` && obj.value !== "") ||
+            (obj.name === `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}` && obj.value !== "") ||
         
           // Check if requestor user is provided
           (obj.name === `${this.strings.requestorUser }` && obj.value !== "") ||
