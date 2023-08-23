@@ -349,7 +349,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
                   this.props.current === 1 ? 
                   <p>{messages} { this.strings.before_proceeding }</p>
                   :
-                  <p className={ styles.modalContent }>{ parse( this.strings.you_must )} {messages} </p>//{ this.strings.before_proceeding }
+                  <p className={styles.modalContent}>{parse(this.strings.you_must)} {messages} {this.strings.before_proceeding}</p>
                   }
                   
                 </Stack.Item>
