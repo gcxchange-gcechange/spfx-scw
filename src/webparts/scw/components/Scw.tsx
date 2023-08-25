@@ -211,16 +211,11 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         
         const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail } = this.state
         console.log("OWN", ownerList.length);
-
         
-        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length === 0 || invalidEmail !== '' || this.props.requestor !== '')) {
-            
+        if (current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 0 || invalidEmail !== '')) {
             this.setState({ showModal: true });
         }
         else {
-
-
-
             const functionUrl = "";
             const requestHeaders: Headers = new Headers();
             requestHeaders.append("Content-type", "application/json");
