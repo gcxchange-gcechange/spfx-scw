@@ -285,9 +285,10 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
  
       }
         else if (results.length === 1) {
-            if (results[0] === `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}`) {
+            if (results[0] === `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}` || `${this.strings.requestorUser }`) {
                 message = `${results}`
-            } else {
+            } 
+            else {
                 message = `${this.strings.provide} ${results}`
             }
                 
@@ -349,7 +350,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
                   this.props.current === 1 ? 
                   <p>{messages} { this.strings.before_proceeding }</p>
                   :
-                  <p className={styles.modalContent}>{parse(this.strings.you_must)} {messages} {this.strings.before_proceeding}</p>
+                  <p className={styles.modalContent}>{messages !== `${this.strings.requestorUser }` ? parse(this.strings.you_must) :  null } {messages} {this.strings.before_proceeding}</p>
                   }
                   
                 </Stack.Item>

@@ -211,8 +211,19 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         
         const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail } = this.state
         console.log("OWN", ownerList.length);
+
+        let requestingUser: string = '';
+        // const owners = ownerList.length;
+    
+        for (let i = 0; i < ownerList.length; i++) {
+          if ( ownerList[i] === this.props.requestor) {
+            requestingUser = this.props.requestor
+          } 
+          
+        }
+       
         
-        if (current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 0 || invalidEmail !== '')) {
+        if (current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 0 || invalidEmail !== '' || requestingUser !== '')) {
             this.setState({ showModal: true });
         }
         else {
