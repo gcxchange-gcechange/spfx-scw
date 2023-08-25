@@ -105,7 +105,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       { name: `${ this.strings.shEngDesc_Modal }`, value: `${shEngDesc}` },
       { name: `${ this.strings.shFrDesc_Modal }`, value: `${shFrDesc}` },
     ];
-      var invalidUserBold = "<strong>" + invalidUser + "</strong>"; //unvalid email need to be bold
+      const invalidUserBold = "<strong>" + invalidUser + "</strong>"; //unvalid email need to be bold
     // const secondValues: PropValues[] = [
     //   { name: `${ this.strings.community_classification_Modal }`, value: `${selectedChoice}` },
     // ];
@@ -191,10 +191,10 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     if (current === 1 ) {
       for (const obj of fourthValues) {
          // console.log("obj", obj)
-          if ((obj.name === `${this.strings.you_must} ${this.strings.one_more_owner}` && obj.value <= 1 && invalidUser == '') || (obj.name === `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}` && obj.value !== '') || (obj.name === `${this.strings.requestorUser}` && obj.value !== '')) {
+          if ((obj.name === `${this.strings.you_must} ${this.strings.one_more_owner}` && obj.value <= 1 && invalidUser === '') || (obj.name === `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}` && obj.value !== '') || (obj.name === `${this.strings.requestorUser}` && obj.value !== '')) {
           results.push(obj.name);
               if (results.length > 1) {
-                  var tolower = results.slice(-1)[0];
+                  const tolower = results.slice(-1)[0];
                   message = results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
           }
           else if (results.length === 1){
@@ -272,7 +272,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     
       }
         if (results.length > 1) {
-            var tolower = results.slice(-1)[0];
+            const tolower = results.slice(-1)[0];
            // message = results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
             console.log("slice 0 " + results.slice(0)[0])
 

@@ -125,7 +125,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 
     //             this.setState({ showModal: true });
     //    } 
-        else if ( current === 1 && ownerList.length < 2 ) {
+        else if ( current === 1 && ownerList.length < 1 ) {
             this.setState({ showModal: true });
         }        
          else if (current === 1 &&  invalidEmail !== '' ) {
@@ -166,7 +166,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
        
 
-        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length <= 1 || invalidEmail !== '')) {
+        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 0 || invalidEmail !== '')) {
            
             this.setState({ showModal: true });
         }
@@ -210,9 +210,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     public successMessage = (): void =>  { 
         
         const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail } = this.state
+        console.log("OWN", ownerList.length);
 
         
-        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length <= 1 || invalidEmail !== '' || this.props.requestor !== '')) {
+        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length === 0 || invalidEmail !== '' || this.props.requestor !== '')) {
             
             this.setState({ showModal: true });
         }
