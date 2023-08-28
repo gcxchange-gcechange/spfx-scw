@@ -191,7 +191,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     if (current === 1 ) {
       for (const obj of fourthValues) {
          // console.log("obj", obj)
-          if ((obj.name === `${this.strings.you_must} ${this.strings.one_more_owner}` && obj.value <= 1 && invalidUser === '') || (obj.name === `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}` && obj.value !== '') || (obj.name === `${this.strings.requestorUser}` && obj.value !== '')) {
+          if ((obj.name === `${this.strings.you_must} ${this.strings.one_more_owner}` && obj.value < 1 && invalidUser === '') || (obj.name === `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}` && obj.value !== '') || (obj.name === `${this.strings.requestorUser}` && obj.value !== '')) {
           results.push(obj.name);
               if (results.length > 1) {
                   const tolower = results.slice(-1)[0];
