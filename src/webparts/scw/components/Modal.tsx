@@ -126,9 +126,9 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       { name: `${ this.strings.frCommName_Modal }`, value: `${frCommName}` },
       { name: `${ this.strings.shEngDesc_Modal }`, value: `${shEngDesc}` },
       { name: `${ this.strings.shFrDesc_Modal }`, value: `${shFrDesc}` },
-        { name: `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}` },
+        { name: `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}` },
       { name: `${this.strings.requestorUser }`, value: `${requestingUser}` },
-      { name: `${this.strings.one_more_owner}`, value: `${ownerList.length}`}
+        { name: `${this.strings.you_must} ${this.strings.one_more_owner}`, value: `${ownerList.length}`}
     ];
 
     let message: string = "";
@@ -258,13 +258,13 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
           (obj.name === `${this.strings.shFrDesc_Modal}` && obj.value === "") ||
         
           // Check for invalid email format
-            (obj.name === `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}` && obj.value !== "") ||
+            (obj.name === `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}` && obj.value !== "") ||
         
           // Check if requestor user is provided
           (obj.name === `${this.strings.requestorUser }` && obj.value !== "") ||
         
           // Check if there is at least one more owner
-          (obj.name === `${this.strings.one_more_owner}` && obj.value < 1)
+            (obj.name === `${this.strings.you_must} ${this.strings.one_more_owner}` && obj.value < 1)
         ) {
           results.push(obj.name);
         }
@@ -350,7 +350,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
                   this.props.current === 1 ? 
                   <p>{messages} { this.strings.before_proceeding }</p>
                   :
-                  <p className={styles.modalContent}>{messages !== `${this.strings.requestorUser }` ? parse(this.strings.you_must) :  null } {messages} {this.strings.before_proceeding}</p>
+                  <p className={styles.modalContent}> {messages} {this.strings.before_proceeding}</p>
                   }
                   
                 </Stack.Item>
