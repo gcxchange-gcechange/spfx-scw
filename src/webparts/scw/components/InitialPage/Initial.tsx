@@ -1,4 +1,4 @@
-import { IImageProps, ImageFit, IStackStyles, IStackTokens, Stack} from 'office-ui-fabric-react';
+import { IImageProps, ImageFit, IStackStyles, Stack} from 'office-ui-fabric-react';
 import * as React from 'react';
 import styles from  '../InitialPage/Initial.module.scss';
 import {faUsers, faGlobe } from '@fortawesome/free-solid-svg-icons';
@@ -34,7 +34,7 @@ export class Initial extends React.Component<IScwProps> {
           },
         };
 
-          const sectionStackTokens: IStackTokens = { childrenGap: 20 };
+        //   const sectionStackTokens: IStackTokens = { childrenGap: 10 };
 
         return (
             <>
@@ -52,7 +52,7 @@ export class Initial extends React.Component<IScwProps> {
             <h3>{ this.strings.a_few_things }</h3>
             <p>{ this.strings.to_create }</p>
  
-            <Stack horizontal styles={stackStyles } horizontalAlign='space-around' verticalAlign="center" tokens={ sectionStackTokens }>
+            <Stack horizontal styles={stackStyles } horizontalAlign='space-around' verticalAlign="center" >
                
                     <div className={ styles.card }>
                             <FontAwesomeIcon icon={ faGlobe } size='3x' className={ styles.blue } />
