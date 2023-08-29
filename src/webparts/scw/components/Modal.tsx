@@ -246,37 +246,37 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       
     // }
 
-    if (current === 2) {
-      for (const obj of lastValues) {
-        console.log('obj', obj);
-        if (
-          // Check if specific input fields are empty
-          (obj.name === `${this.strings.commPurpose_Modal}` && obj.value === "") ||
-          (obj.name === `${this.strings.engName_Modal}` && obj.value === "") ||
-          (obj.name === `${this.strings.frCommName_Modal}` && obj.value === "") ||
-          (obj.name === `${this.strings.shEngDesc_Modal}` && obj.value === "") ||
-          (obj.name === `${this.strings.shFrDesc_Modal}` && obj.value === "") ||
-        
-          // Check for invalid email format
-            (obj.name === `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}` && obj.value !== "") ||
-        
-          // Check if requestor user is provided
-          (obj.name === `${this.strings.requestorUser }` && obj.value !== "") ||
-        
-          // Check if there is at least one more owner
-            (obj.name === `${this.strings.you_must} ${this.strings.one_more_owner}` && obj.value < 1)
-        ) {
-          results.push(obj.name);
-        }
-        console.log("RES", results)   
-    
-      }
-        if (results.length > 1) {
-            const tolower = results.slice(-1)[0];
-           // message = results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
-            console.log("slice 0 " + results.slice(0)[0])
+      if (current === 2) {
+          for (const obj of lastValues) {
+              console.log('obj', obj);
+              if (
+                  // Check if specific input fields are empty
+                  (obj.name === `${this.strings.commPurpose_Modal}` && obj.value === "") ||
+                  (obj.name === `${this.strings.engName_Modal}` && obj.value === "") ||
+                  (obj.name === `${this.strings.frCommName_Modal}` && obj.value === "") ||
+                  (obj.name === `${this.strings.shEngDesc_Modal}` && obj.value === "") ||
+                  (obj.name === `${this.strings.shFrDesc_Modal}` && obj.value === "") ||
 
-            if (results.slice(0)[0].includes('add a valid email')) {
+                  // Check for invalid email format
+                  (obj.name === `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}` && obj.value !== "") ||
+
+                  // Check if requestor user is provided
+                  (obj.name === `${this.strings.requestorUser}` && obj.value !== "") ||
+
+                  // Check if there is at least one more owner
+                  (obj.name === `${this.strings.you_must} ${this.strings.one_more_owner}` && obj.value < 1)
+              ) {
+                  results.push(obj.name);
+              }
+              console.log("RES", results)
+
+          }
+          if (results.length > 1) {
+              const tolower = results.slice(-1)[0];
+              // message = results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
+              console.log("slice 0 " + results.slice(0)[0])
+
+              if (results.slice(0)[0].includes('add a valid email') || results.slice(0)[0].includes('un courriel valide')) {
                 message = results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
 
             } else {
