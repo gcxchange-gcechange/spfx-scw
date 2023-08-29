@@ -99,7 +99,7 @@ define([], function() {
         'provide': '<span style="fontWeight:normal"> fournir </span>',
         'agree':'<span style="fontWeight:normal"> accepter toutes les </span>',
         'forget': 'Vous avez oublié quelque chose?',
-        'before_proceeding': 'avant de poursuivre',
+        'before_proceeding': 'avant de poursuivre.',
         'and': '<span style="fontWeight:normal"> et </span>',
         'the': 'le',
         'classification': 'Classification',
@@ -131,8 +131,8 @@ define([], function() {
         "SP_TeamsLogos": "Logos SharePoint et Teams avec des flèches indiquant la capacité de partage entre les outils.",
         "valid_email": "Vous devez fournir un courriel valide;",
         "invalidEmail":"un courriel valide;",
-        "is_not_valid": "n'est pas valide. Veuillez fournir un courriel valide.",
-        "requestorUser":"<span style= fontWeight:normal >En tant que demandeur de la création de cette collectivité, vous êtes automatiquement ajouté comme propriétaire.</span> <strong>Vous ne pouvez pas vous inviter en tant que propriétaire</strong>. Veuillez vous désinscrire",
+        "is_not_valid": "n'est pas valide. Veuillez fournir un courriel valide",
+        "requestorUser":"En tant que demandeur de la création de cette collectivité, vous êtes automatiquement ajouté comme propriétaire.</span> <strong>Vous ne pouvez pas vous inviter en tant que propriétaire</strong>. Veuillez vous désinscrire",
 
     } 
 });
