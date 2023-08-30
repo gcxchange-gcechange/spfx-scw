@@ -95,7 +95,7 @@ define([], function() {
         'owners': 'Propriétaires',
         // 'members': 'Membres',
         'close': 'Fermer',
-        'you_must': '<span style="fontWeight:normal">Vous devez</span>',
+        'you_must': 'Vous devez',
         'provide': '<span style="fontWeight:normal"> fournir </span>',
         'agree':'<span style="fontWeight:normal"> accepter toutes les </span>',
         'forget': 'Vous avez oublié quelque chose?',
