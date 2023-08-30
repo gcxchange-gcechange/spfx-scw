@@ -24,6 +24,7 @@ export interface IErrorModalProps {
   current: number;
   prefLang: string;
   invalidUser: string;
+  requestor: any;
 }
 
 export interface IErrorModalState {}
@@ -62,6 +63,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
 
   public errorMessage = (): string => {
 
+
    
     const {
       current,
@@ -73,16 +75,27 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       // selectedChoice,
       // checkedValues,
       ownerList,
-      invalidUser
+      invalidUser,
     } = this.props;
 
-  // const filtered = checkedValues.filter((value, index) => {
-  //   return checkedValues.indexOf(value) === index
+  // const filtered = checkedValues.filter((value, i) => {
+  //   return checkedValues.iOf(value) === i
   // });
 
     interface PropValues {
       name: string;
       value: any;
+    }
+
+    let requestingUser: string = '';
+    // const owners = ownerList.length;
+
+    for (let i = 0; i < ownerList.length; i++) {
+      console.log("O",ownerList[i])
+      if ( ownerList[i] === this.props.requestor) {
+        requestingUser = this.props.requestor
+      } 
+      
     }
 
     const firstValues: PropValues[] = [
@@ -92,7 +105,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       { name: `${ this.strings.shEngDesc_Modal }`, value: `${shEngDesc}` },
       { name: `${ this.strings.shFrDesc_Modal }`, value: `${shFrDesc}` },
     ];
-
+      const invalidUserBold = "<strong>" + invalidUser + "</strong>"; //unvalid email need to be bold
     // const secondValues: PropValues[] = [
     //   { name: `${ this.strings.community_classification_Modal }`, value: `${selectedChoice}` },
     // ];
@@ -102,36 +115,41 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     // ];
 
     const fourthValues: PropValues[] = [
-      { name: `${ this.strings.one_more_owner }`, value: `${ownerList.length}` },
-      { name: `Invalid Email`, value: `${invalidUser}` }
-    
+        { name: `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}` },
+      { name: `${this.strings.requestorUser }`, value: `${requestingUser}` },
+      { name: `${this.strings.you_must} ${this.strings.one_more_owner}`, value: `${ownerList.length}`}
     ];
+
     const lastValues: PropValues[] = [
       { name: `${ this.strings.commPurpose_Modal }`, value: `${commPurpose}` },
       { name: `${ this.strings.engName_Modal }`, value: `${engName}` },
       { name: `${ this.strings.frCommName_Modal }`, value: `${frCommName}` },
       { name: `${ this.strings.shEngDesc_Modal }`, value: `${shEngDesc}` },
       { name: `${ this.strings.shFrDesc_Modal }`, value: `${shFrDesc}` },
-      { name: `${ this.strings.one_more_owner }`, value: `${ownerList.length}` },
+        { name: `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}` }, //remove you must provide
+      { name: `${this.strings.requestorUser }`, value: `${requestingUser}` },
+        { name: `${this.strings.you_must} ${this.strings.one_more_owner}`, value: `${ownerList.length}`}
     ];
 
     let message: string = "";
     const results: string[] = [];
-    const comma = `<span style="fontWeight:normal">, </span>`;
+    const comma = `<span style=fontWeight:normal>, </span>`;
+   
 
-
-    for (const obj of firstValues) {
-      if (current === 0 && obj.value === "") {
-        results.push(obj.name);
-        
-        if (results.length > 1) {
-          message =  `${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` + results.slice(-1)
+    if (current === 0) {
+      for (const obj of firstValues) {
+        if( obj.value === "") {
+          results.push(obj.name);
           
-        } 
-        else if ( results.length === 1 ) {
-          message = `${this.strings.provide} ${obj.name}`
+            if (results.length > 1) {
+                message = `${this.strings.you_must} ${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + results.slice(-1)
+            
+          } 
+          else if ( results.length === 1 ) {
+                message = `${this.strings.you_must} ${this.strings.provide} ${obj.name}`
+          }
         }
-      }
+      }   
     }
 
     // for (const obj of secondValues) {
@@ -147,48 +165,152 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     //   }
     // }
 
-    for (const obj of fourthValues) {
-      if (current === 1 && obj.value !== '' ) {
-        results.push(obj.value)
-        // console.log('results', results);
+    // for  (const obj of fourthValues) {
+    //   console.log("foruth", obj)
 
-        if (current === 1 && ownerList.length !== 2 && invalidUser !== '') {
-          message = `${obj.value }`
+    //   if ( (current === 1 && obj.value < 2 ) || invalidUser !== null || user !== null ) {
+    //     results.push(obj.name);
+    //     const owners = results.slice(0, -1);
+
+    //     console.log("owners", owners);
+
+    //     if ( owners.length > 1 ) {
+    //       message =  `${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` + results.slice(-1)
+    //     } 
+    //     else if (owners.length === 1) {
+    //       message = `${obj.name}`
+    //     }
+        
+    //   }
+    //   console.log("res", results);
+
+  
+    // }
+
+
+    if (current === 1 ) {
+      for (const obj of fourthValues) {
+         // console.log("obj", obj)
+          if ((obj.name === `${this.strings.you_must} ${this.strings.one_more_owner}` && obj.value < 1 && invalidUser === '') || (obj.name === `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}` && obj.value !== '') || (obj.name === `${this.strings.requestorUser}` && obj.value !== '')) {
+          results.push(obj.name);
+              if (results.length > 1) {
+                  const tolower = results.slice(-1)[0];
+                  message = results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
+          }
+          else if (results.length === 1){
+            message = `${obj.name}`
+          }
         }
-        else if (current === 1 && ownerList.length === 2 && invalidUser !== '') {
-          message = `${obj.value }`
-        }
-         
-        else if ( current === 1 && ownerList.length <=1 && invalidUser === '') {
-        message += `${ this.strings.one_more_owner }`
-        }
-              
+        // console.log("results", results)
       }
-
+      // if (ownerList.length <= 1 && invalidUser === '' || requestingUser === '') {
+        //     message = `${this.strings.one_more_owner }`
+        //  }
     }
+   
+   
+    // if (current ===  1) {
+      
+    //   if ( invalidUser ) {
+    //     message = `You must add a valid email. <strong>${invalidUser}</strong> is not a valid email. `
+    //   }
+    //   else if (user) {
+    //     message = `${user}`
+    //   }
+    //   else if ( ownerList.length <= 1 ) {
+    //     message = `${this.strings.one_more_owner }`
+    //   }
+ 
+    // }
+   
 
 
-
-    for (const obj of lastValues) {
-      if (current === 2 && (obj.value === '' || obj.value < 2)) {
-        results.push(obj.name);
-     
-        if ( results.length > 1 ) {
-          message =  `${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` + results.slice(-1)
-        } 
+    // if (current === 2 ) {
+    //   debugger
+    //   for (const obj of lastValues) {
+    //     console.log('obj', obj);
+    //     if (obj.value === '' || obj.value <= 1  ) {
+    //       results.push(obj.name);
+    //       console.log("obj", obj);
+    //       console.log("results", results);
        
-        else if (results.length === 1) {
-          message = `${this.strings.provide} ${obj.name}`
-        }
-      }
-    }
+    //       if ( results.length > 1 ) {
+    //         message =  `${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` + results.slice(-1)
+    //       } 
+         
+    //       else if (results.length === 1) {
+    //         message = `${this.strings.provide} ${obj.name}`
+    //       }
+    //     }
+    //   }
+      
+    // }
 
+      if (current === 2) {
+          for (const obj of lastValues) {
+              console.log('obj', obj);
+              if (
+                  // Check if specific input fields are empty
+                  (obj.name === `${this.strings.commPurpose_Modal}` && obj.value === "") ||
+                  (obj.name === `${this.strings.engName_Modal}` && obj.value === "") ||
+                  (obj.name === `${this.strings.frCommName_Modal}` && obj.value === "") ||
+                  (obj.name === `${this.strings.shEngDesc_Modal}` && obj.value === "") ||
+                  (obj.name === `${this.strings.shFrDesc_Modal}` && obj.value === "") ||
+
+                  // Check for invalid email format
+                  (obj.name === `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}` && obj.value !== "") ||
+
+                  // Check if requestor user is provided
+                  (obj.name === `${this.strings.requestorUser}` && obj.value !== "") ||
+
+                  // Check if there is at least one more owner
+                  (obj.name === `${this.strings.you_must} ${this.strings.one_more_owner}` && obj.value < 1)
+              ) {
+                  results.push(obj.name);
+              }
+              console.log("RES", results)
+
+          }
+          if (results.length > 1) {
+              const tolower = results.slice(-1)[0];
+              // message = results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
+              console.log("slice 0 " + results.slice(0)[0])
+
+             // if (results.slice(0)[0].includes('add a valid email') || results.slice(0)[0].includes('un courriel valide')) {
+                //  console.log("contain valid email");
+              //  message = results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
+// } else {
+                  //console.log("do not contain valid email");
+                  message = `${this.strings.you_must} ${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
+          //  }
+ 
+      }
+        else if (results.length === 1) {
+           // if (results[0] === `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}` || `${this.strings.requestorUser }`) {
+            //    message = `${results}`
+          //  } 
+          //  else {
+                message = `${this.strings.you_must} ${this.strings.provide} ${results}`
+          //  }
+                
+      }  
+    
+      // if (results.length > 0) {
+      //   message = `${this.strings.provide} ${results.join(', ')}`;
+      // }
+    }
+    
+   
+
+    console.log('m',message);
     return  message;
   };
 
   public render(): React.ReactElement<IErrorModalProps> {
 
     const messages = parse(this.errorMessage());
+
+    console.log("currnet page", this.props.current)
 
     return (
       <>
@@ -204,7 +326,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
           >
             <div>
             <div style={ this.modalStyle.header}>
-              <h2>{ this.strings.forget }</h2>
+              <h2>{this.strings.forget}</h2>
               <IconButton
                 tabIndex={1}
                 aria-label= { this.strings.close }
@@ -216,10 +338,20 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
             <div style={ this.modalStyle.footer}>
               <Stack>
                 <Stack.Item align="center">
-                  {this.props.invalidUser ?
-                    <p className={ styles.modalContent }>{ this.strings.you_must } {parse(`${this.strings.provide}`)} { this.strings.valid_email } <strong>{messages}</strong> {this.strings.is_not_valid}</p>
-                    :
+                  {/* { this.props.invalidUser  ?
+                  ( <p className={ styles.modalContent }>{ this.strings.you_must } {parse(`${this.strings.provide}`)} { this.strings.valid_email } <strong>{messages}</strong> {this.strings.is_not_valid}</p>)
+                  : this.props.requestor ? 
+                  ( <p className={ styles.modalContent }><strong>{messages}</strong></p> )
+                  :
                     <p className={ styles.modalContent }>{ this.strings.you_must } <strong>{messages}</strong> { this.strings.before_proceeding }</p>
+                  } */}
+                  {  
+                  // ( <p className={ styles.modalContent }>{ this.strings.you_must } {parse(`${this.strings.provide}`)} { this.strings.valid_email } <strong>{messages}</strong> {this.strings.is_not_valid}</p>)
+                  // :
+                  this.props.current === 1 ? 
+                  <p>{messages} { this.strings.before_proceeding }</p>
+                  :
+                  <p className={styles.modalContent}> {messages} {this.strings.before_proceeding}</p>
                   }
                   
                 </Stack.Item>

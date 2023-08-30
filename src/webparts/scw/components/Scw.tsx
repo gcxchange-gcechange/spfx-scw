@@ -95,12 +95,26 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         //     return checkedValues.indexOf(value) === index
         //   });
         // console.log("filtered",filtered)
+        console.log("OwnerList", ownerList);
+
+        let requestorEmail: string = '';
+
+        for (let i = 0; i < ownerList.length; i++) {
+            if ( ownerList[i] === this.props.requestor) {
+                console.log("found")
+                requestorEmail = ownerList[i];
+
+                console.log("email",requestorEmail);
+            }
+            
+        }
         
        if ( !commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc) {
    
             this.setState({ showModal: true });
        } 
-    
+       
+
 
     //    else if ( current === 1 && selectedChoice === '' ) {
             
@@ -111,18 +125,23 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 
     //             this.setState({ showModal: true });
     //    } 
-        else if ( current === 1 && ownerList.length < 2 ) {
+        else if ( current === 1 && ownerList.length < 1 ) {
             this.setState({ showModal: true });
         }        
          else if (current === 1 &&  invalidEmail !== '' ) {
             this.setState({ showModal: true });
             
         }
+        else if ( current  === 1 && requestorEmail !== '') {
+            this.setState({ showModal: true });
+        }
+      
         else {
             
             this.goToNextPg(current);
             // this.setState({invalidEmail: ''})
         }
+
        
     }
 
@@ -143,11 +162,11 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     private prev = (): void =>  { 
         const prevPage = this.state.current - 1;   
 
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList  } = this.state
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail  } = this.state
 
        
 
-        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length <= 1)) {
+        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 0 || invalidEmail !== '')) {
            
             this.setState({ showModal: true });
         }
@@ -155,6 +174,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         //     this.setState({ selectedChoice: `${ this.strings.unclassified_cardTitle }`})
         // }
+
         else {
             
             this.setState({ current: prevPage})
@@ -189,18 +209,25 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     
     public successMessage = (): void =>  { 
         
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList } = this.state
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail } = this.state
+        console.log("OWN", ownerList.length);
 
+        let requestingUser: string = '';
+        // const owners = ownerList.length;
+    
+        for (let i = 0; i < ownerList.length; i++) {
+          if ( ownerList[i] === this.props.requestor) {
+            requestingUser = this.props.requestor
+          } 
+          
+        }
+       
         
-        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc ||   ownerList.length <= 1)) {
-            
+        if (current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 0 || invalidEmail !== '' || requestingUser !== '')) {
             this.setState({ showModal: true });
         }
         else {
-
-
-
-            const functionUrl = "https://appsvc-fnc-dev-scw-list-dotnet001.azurewebsites.net/api/CreateItem?";
+            const functionUrl = "";
             const requestHeaders: Headers = new Headers();
             requestHeaders.append("Content-type", "application/json");
             requestHeaders.append("Cache-Control", "no-cache");
@@ -251,7 +278,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             document.getElementById("submit").style.display = 'none';
                 
               this.props.context.aadHttpClientFactory
-              .getClient("3385e8cd-40a4-41f5-bd2f-68690654a54b")
+              .getClient("")
               .then((client: AadHttpClient) => {
                
                 client.post(functionUrl, AadHttpClient.configurations.v1, postOptions)
@@ -586,7 +613,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                             <Steps current= { this.state.current } labelPlacement='vertical' items= { items } />
                         </Stack>
                         {  showCallout && <Callouts prefLang={ this.props.prefLang } showCallout={ showCallout }  targetId= { targetId } openCallout = {this.isCalloutVisible} /> }
-                        { this.state.showModal === true && <ErrorModal invalidUser ={ this.state.invalidEmail } prefLang={ this.props.prefLang } current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } /> } 
+                        { this.state.showModal === true && <ErrorModal requestor={ this.props.requestor } invalidUser ={ this.state.invalidEmail } prefLang={ this.props.prefLang } current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } /> } 
                         
                         <div className="steps-content"> 
                             { this.state.isLoading ? 
