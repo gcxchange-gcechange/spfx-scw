@@ -31,23 +31,23 @@ define([], function() {
     "complete_img_alt":"Three people celebrating",
     "complete_button": "GCXchange Homepage",
     "commPurpose_title": "Community purpose",
-    "commPurpose_Modal": "<span style=fontWeight:normal>the</span> Community purpose",
+    "commPurpose_Modal": "<span style=fontWeight:normal>the</span><strong> Community purpose</strong>",
     "commPurpose_desc": 'The GCX Support Team needs to know the purpose of the new community to determine whether it can be <strong>approved</strong>.',
     "commPurpose_Instruction":"This will not show up on your site. Write it in the official language of your choice. Must be between 5 and 500 characters in length.",
     "engName_title": 'English community name',
-    "engName_Modal": '<span style=fontWeight:normal>the</span> English community name',
+    "engName_Modal": '<span style=fontWeight:normal>the</span><strong> English community name</strong>',
     "engName_desc": 'The community’s name is the title of your community. Create a short descriptive name. A bilingual name complies with the Official Languages Act and makes it easier for others to find your community in the GCXchange Catalogue.',
     "engName_Instruction": "Use keywords, not abbreviations, to help people find your community. Must be between 5 and 80 characters in length. Only alphabets (with French accents), numbers, spaces and apostrophes are allowed.",
     "frCommName_title": "French community name",
-    "frCommName_Modal": "<span style=fontWeight:normal>the</span> French community name",
+    "frCommName_Modal": "<span style=fontWeight:normal>the</span><strong> French community name</strong>",
     "frCommName_desc":"The community’s name is the title of your community. Create a short descriptive name. A bilingual name complies with the Official Languages Act and makes it easier for others to find your community in the GCXchange Catalogue. ",
     "frCommName_Instruction": "Use keywords, not abbreviations, to help people find your community. Must be between 5 and 80 characters in length. Only alphabets (with French accents), numbers, spaces and apostrophes are allowed.",
     "shEngDesc_title": 'Short English description',
-    "shEngDesc_Modal": "<span style=fontWeight:normal>the</span> Short English description",
+    "shEngDesc_Modal": "<span style=fontWeight:normal>the</span><strong> Short English description</strong>",
     "shEngDesc_desc": 'The community description will be visible to users when they use the “All Communities” page and when they search for it. ',
     "shEngDesc_Instruction": 'Must be between 5 and 100 characters.',
     "shFrDesc_title": 'Short French description ',
-    "shFrDesc_Modal": '<span style=fontWeight:normal>the</span> Short French description ',
+    "shFrDesc_Modal": '<span style=fontWeight:normal>the</span><strong> Short French description </strong>',
     "shFrDesc_desc": 'The community description will be visible to users when they use the “All Communities” page and when they search for it. ',
     "shFrDesc_Instruction": 'Must be between 5 and 100 characters.',
     "owners_Instruction": ' Start typing an owner’s email address to find and add them.',
@@ -107,7 +107,7 @@ define([], function() {
     'provide': '<span style="fontWeight:normal"> provide </span>',
     'agree':'<span style="fontWeight:normal"> agree to all </span>',
     'forget':'Did you forget something?',
-    'before_proceeding': 'before proceeding',
+    'before_proceeding': 'before proceeding.',
     'and': '<span style="fontWeight:normal"> and </span>',
     'the': '',
     'classification': 'Classification',
@@ -138,8 +138,13 @@ define([], function() {
 
     'required': 'required field',
     "SP_TeamsLogos": "SharePoint and Teams logos with arrows indicating the sharing capability between the tools.",
-    "valid_email": "a valid email.",
-    "is_not_valid": "is not valid."
+    "valid_email": "<span style= fontWeight:normal>You must add a valid email;</span>",
+    "invalidEmail":"<span style= fontWeight:normal>add a valid email;</span>",
+      "is_not_valid": "<span style= fontWeight:normal>is not valid. Please add a valid email</span>",
+    "requestorUser":"As the requester of this community, you are automatically added as an owner. You <strong>cannot invite yourself as an owner.</strong> Please remove yourself",
+
+
+
   
   }
 })
