@@ -126,7 +126,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       { name: `${ this.strings.frCommName_Modal }`, value: `${frCommName}` },
       { name: `${ this.strings.shEngDesc_Modal }`, value: `${shEngDesc}` },
       { name: `${ this.strings.shFrDesc_Modal }`, value: `${shFrDesc}` },
-        { name: `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}` },
+        { name: `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}` }, //remove you must provide
       { name: `${this.strings.requestorUser }`, value: `${requestingUser}` },
         { name: `${this.strings.you_must} ${this.strings.one_more_owner}`, value: `${ownerList.length}`}
     ];
@@ -141,12 +141,12 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
         if( obj.value === "") {
           results.push(obj.name);
           
-          if (results.length > 1) {
-            message =  `${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` + results.slice(-1)
+            if (results.length > 1) {
+                message = `${this.strings.you_must} ${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + results.slice(-1)
             
           } 
           else if ( results.length === 1 ) {
-            message = `${this.strings.provide} ${obj.name}`
+                message = `${this.strings.you_must} ${this.strings.provide} ${obj.name}`
           }
         }
       }   
@@ -258,7 +258,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
                   (obj.name === `${this.strings.shFrDesc_Modal}` && obj.value === "") ||
 
                   // Check for invalid email format
-                  (obj.name === `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}` && obj.value !== "") ||
+                  (obj.name === `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}` && obj.value !== "") ||
 
                   // Check if requestor user is provided
                   (obj.name === `${this.strings.requestorUser}` && obj.value !== "") ||
@@ -276,21 +276,22 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
               // message = results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
               console.log("slice 0 " + results.slice(0)[0])
 
-              if (results.slice(0)[0].includes('add a valid email') || results.slice(0)[0].includes('un courriel valide')) {
-                message = results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
-
-            } else {
-                message = `${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
-            }
+             // if (results.slice(0)[0].includes('add a valid email') || results.slice(0)[0].includes('un courriel valide')) {
+                //  console.log("contain valid email");
+              //  message = results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
+// } else {
+                  //console.log("do not contain valid email");
+                  message = `${this.strings.you_must} ${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
+          //  }
  
       }
         else if (results.length === 1) {
-            if (results[0] === `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}` || `${this.strings.requestorUser }`) {
-                message = `${results}`
-            } 
-            else {
-                message = `${this.strings.provide} ${results}`
-            }
+           // if (results[0] === `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}` || `${this.strings.requestorUser }`) {
+            //    message = `${results}`
+          //  } 
+          //  else {
+                message = `${this.strings.you_must} ${this.strings.provide} ${results}`
+          //  }
                 
       }  
     
