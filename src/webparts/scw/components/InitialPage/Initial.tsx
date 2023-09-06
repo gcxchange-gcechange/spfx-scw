@@ -1,4 +1,4 @@
-import { IImageProps, ImageFit, IStackStyles, Stack} from 'office-ui-fabric-react';
+import { FocusZone, IImageProps, ImageFit, IStackStyles, Stack} from 'office-ui-fabric-react';
 import * as React from 'react';
 import styles from  '../InitialPage/Initial.module.scss';
 import {faUsers, faGlobe } from '@fortawesome/free-solid-svg-icons';
@@ -51,20 +51,27 @@ export class Initial extends React.Component<IScwProps> {
 
             <h3>{ this.strings.a_few_things }</h3>
             <p>{ this.strings.to_create }</p>
- 
-            <Stack horizontal styles={stackStyles } horizontalAlign='space-around' verticalAlign="center" >
-               
-                    <div className={ styles.card }>
-                            <FontAwesomeIcon icon={ faGlobe } size='3x' className={ styles.blue } />
-                            <p>{ parse( this.strings.provide_bilingual_name ) }</p>
-                            <small>{ parse( this.strings.bilingual_name_smallText ) }</small>  
-                    </div>
+
+            <FocusZone as="ul">
+                <Stack horizontal styles={stackStyles } horizontalAlign='space-around' verticalAlign="center" >
                 
-                    <div className={ styles.card }>
-                            <FontAwesomeIcon icon={faUsers } size='3x' className={ styles.blue } />
-                            <p>{ parse( this.strings.indentify_one_more_owner ) }</p>
-                            <small>{ this.strings.indentify_one_more_owner_smallText }</small> 
-                    </div>
+                <li className={ styles.card }  data-is-focusable>
+                        <FontAwesomeIcon icon={ faGlobe } size='3x' className={ styles.blue } />
+                        <p>{ parse( this.strings.provide_bilingual_name ) }</p>
+                        <small>{ parse( this.strings.bilingual_name_smallText ) }</small>  
+                </li>
+            
+                <li className={ styles.card }  data-is-focusable>
+                        <FontAwesomeIcon icon={faUsers } size='3x' className={ styles.blue } />
+                        <p>{ parse( this.strings.indentify_one_more_owner ) }</p>
+                        <small>{ this.strings.indentify_one_more_owner_smallText }</small> 
+                </li>
+
+                </Stack>
+
+            </FocusZone>
+ 
+      
                  
                {/* <StackItem>
                 <div className={ styles.card }>
@@ -73,7 +80,7 @@ export class Initial extends React.Component<IScwProps> {
                     <small>{ parse( this.strings.protected_or_unclassified_smallText )}<Icon className={styles.blue} iconName='NavigateExternalInLine'/></small>
                 </div>
                </StackItem> */}
-            </Stack>
+          
             </section>
             </>
 
