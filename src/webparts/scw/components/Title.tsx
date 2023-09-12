@@ -73,15 +73,10 @@ export default class Title extends React.Component<ITitleProps> {
 
         return(
             <>
-				{/* { this.props.step !== 0 && 
-                <h2 className={ styles.mainTitle }> { this.strings.create_a_community } <br/> 
-                    <span style={{ marginTop: '0px' }}>{ this.pageTitle() }</span>
-                </h2> 
-                } */}
                 { this.props.step !== 0 && 
                 <h2 style={{display:'flex', flexDirection:'column'}}> 
                 <span className={ styles.mainTitle }>{ this.strings.create_a_community }</span> 
-                <span style={{ marginTop: '0px', fontSize: '32px'}}>{ this.pageTitle() }</span>
+                <span>{ this.pageTitle() }</span>
                 </h2> 
                 }
             </>
