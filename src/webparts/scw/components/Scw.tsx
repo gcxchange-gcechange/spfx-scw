@@ -137,7 +137,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         }
       
         else {
-            
+
             this.goToNextPg(current);
             // this.setState({invalidEmail: ''})
         }
@@ -152,8 +152,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         })
     }
 
-    private goToNextPg = (pageNumber: number): void =>  { 
-            
+    private goToNextPg = (pageNumber: number): void =>  {             
         this.setState ((prevState) => ({
             current: prevState.current + 1
         }))
@@ -227,7 +226,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             this.setState({ showModal: true });
         }
         else {
-            const functionUrl = "";
+            const functionUrl = " ";
             const requestHeaders: Headers = new Headers();
             requestHeaders.append("Content-type", "application/json");
             requestHeaders.append("Cache-Control", "no-cache");
@@ -278,7 +277,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             document.getElementById("submit").style.display = 'none';
                 
               this.props.context.aadHttpClientFactory
-              .getClient("")
+              .getClient(" ")
               .then((client: AadHttpClient) => {
                
                 client.post(functionUrl, AadHttpClient.configurations.v1, postOptions)
@@ -474,10 +473,23 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         });
     };
 
+    componentDidUpdate(prevProps: Readonly<IScwProps>, prevState: Readonly<IScwState>): void {
 
+        if ( this.state.current !== prevState.current) {
+
+            const getCheckMark = document.getElementsByClassName('anticon anticon-check ant-steps-finish-icon');
+            
     
-    public render(): React.ReactElement<IScwProps>  { 
+            for (let i = 0; i < getCheckMark.length; i++) {
+                const element = getCheckMark[i];
+    
+                element.setAttribute('aria-Label', 'complete')
+            }
 
+        }
+    }
+
+    public render(): React.ReactElement<IScwProps>  { 
         const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, errorMessage, showModal, checkedValues, showCallout, targetId } = this.state;
 
         const steps = [
@@ -498,7 +510,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     handleOnChange={this.handleOnChange}
                 
                 />
-                ),
+                )
             },
             // { 
             //     step: "2",
@@ -528,7 +540,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     getOwnersCallback= { this.handleOwnerCallback }
                     // getMemberCallback= { this.handleMemberCallback }
                 />
-                ),
+                )
             },
             { 
                 step: "5",
@@ -587,7 +599,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
 
         const items = steps.map( item => ( item.step !== '6' ?  { key: item.step, title: item.title} : null));
-       
 
         const labelSpinnerStyles: Partial<ISpinnerStyles> = { root: { padding: 20 } };
 
@@ -610,7 +621,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 <div className= { styles.container }>
                     <div className= { styles.row }> 
                         <Stack horizontalAlign="center">
-                            <Steps current= { this.state.current } labelPlacement='vertical' items= { items } />
+                            <Steps aria-current='step' current= { this.state.current } labelPlacement='vertical' items= { items } />
                         </Stack>
                         {  showCallout && <Callouts prefLang={ this.props.prefLang } showCallout={ showCallout }  targetId= { targetId } openCallout = {this.isCalloutVisible} /> }
                         { this.state.showModal === true && <ErrorModal requestor={ this.props.requestor } invalidUser ={ this.state.invalidEmail } prefLang={ this.props.prefLang } current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } /> } 
