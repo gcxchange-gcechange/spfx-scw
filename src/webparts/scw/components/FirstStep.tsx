@@ -147,7 +147,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
 
        
 
-        if ((eventName === 'shEngDesc' || eventName === 'shFrDesc') && value.length < 5 || value.length > 100 ) {
+        if (eventName === 'shEngDesc' || eventName === 'shFrDesc' && (value.length < 5 || value.length > 100) ) {
             value = invalidInput;
         }
 
