@@ -99,7 +99,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                         { this.strings.shEngDesc_title }
                     </Label>
                     <p id="shEngDescription" className={ styles.instruction }>{ this.strings.shEngDesc_Instruction }</p>
-                    <TextField aria-describedby="shEngDescription" id='shEngDesc' name='shEngDesc'onChange={ this.onhandleChangeEvent} defaultValue={ shEngDesc } validateOnLoad= { false }  onGetErrorMessage={ value => { if ( value.length < 5 || value.length > 100  || value === '') return `${this.strings.max100_validation}` }} />
+                    <TextField aria-describedby="shEngDescription" id='shEngDesc' name='shEngDesc'onChange={ this.onhandleChangeEvent} defaultValue={ shEngDesc } validateOnLoad= { false }  onGetErrorMessage={ value => { if ( value.trim().length < 5 || value.length > 100  || value === '') return `${this.strings.max100_validation}` }} />
                 </StackItem>
                 <StackItem>
                     <Label htmlFor='shFrDesc' styles={ labelStyle } >
@@ -107,7 +107,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                         { this.strings.shFrDesc_title }
                     </Label>
                     <p id="FrDesc" className={ styles.instruction }>{ this.strings.shFrDesc_Instruction }</p>
-                    <TextField aria-describedby="FrDesc" id='shFrDesc' name='shFrDesc' onChange={ this.onhandleChangeEvent} defaultValue={ shFrDesc } validateOnLoad= { false }  onGetErrorMessage={ value => { if ( value.length < 5 || value.length > 100 || value === '') return `${this.strings.max100_validation}` }}/> 
+                    <TextField aria-describedby="FrDesc" id='shFrDesc' name='shFrDesc' onChange={ this.onhandleChangeEvent} defaultValue={ shFrDesc } validateOnLoad= { false }  onGetErrorMessage={ value => { if ( value.trim().length < 5 || value.length > 100 || value === '') return `${this.strings.max100_validation}` }}/> 
                 </StackItem>
             </Stack>
             </>
@@ -115,11 +115,10 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
     }
 
     private onhandleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-        
+      
     
         const eventName = event.target.name;
         let value = event.target.value;
-        
 
         // const charAllowed = /[\p{L}\p{N}ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü']/.test(value);
         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value);
@@ -128,28 +127,33 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
         // const hasSpecialChar = /[~`!@#$%^&()_+={:;",.|?<>*\x2F\x5D\x5C\x99\x5B-]/.test(value);
         // const startsWithSpecialChar = /^[~`!@#$%^&()_+={\x5B:;"',.|\x2F\x5D\x5C\x99-]/.test(value);
         const invalidInput: string = '';
+        const lessthan5 = value.length < 5;
+        const over100 = value.length > 100;
 
         if (eventName === 'commPurpose' && (value.length < 5 || value.length > 500)) {
             value = invalidInput;
         } else
 
-        if (eventName === 'engName'|| eventName === 'frCommName' && (value.length >= 5 && value.length <= 80)) {
+        if ((eventName === 'engName'|| eventName === 'frCommName') && (value.length >= 5 && value.length <= 80)) {
             if (charAllowed) {
                 // console.log("value has special character");
                 value = invalidInput;
             }
         } else
 
-        if (eventName === 'engName' || eventName === 'frCommName' && (value.length < 5 || value.length > 80)) {
+        if ((eventName === 'engName' || eventName === 'frCommName') && (value.length < 5 || value.length > 80)) {
             // // console.log("Value for engName and frName must be less than  5 greater than 80 characters.");
             value = invalidInput;
         } else
 
-       
-
-        if (eventName === 'shEngDesc' || eventName === 'shFrDesc' && (value.length < 5 || value.length > 100) ) {
+        if ((eventName ===  'shEngDesc' || eventName === 'shFrDesc' ) &&  ( lessthan5 || over100 )) {
             value = invalidInput;
-        }
+        } 
+        // else 
+
+        // if (eventName === 'shFrDesc' && ( lessthan5 || over100 ) ) {
+        //     value = invalidInput;
+        // }
 
         
         const trimmedValue = value.trim();
@@ -176,7 +180,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
         return `${this.strings.special_char_validation}`
       }
 
-      if ( value.length < 5 || value.length > 80 )  {
+      if ( value.trim().length < 5 || value.trim().length > 80 )  {
         return `${this.strings.between_5_80_char_validation}`
       }
     
