@@ -206,7 +206,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     </Label>
                     <IconButton  ariaLabel={ this.strings.infoIcon_engDesc} id='shEngDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
-                <TextField id='shEngDesc' defaultValue={ shEngDesc } onChange={ this.onUpdateEngDesc } onGetErrorMessage={ value => { if (value.length < 5 || value.length > 100  || value === '') return `${this.strings.max100_validation}` }}/>
+                <TextField id='shEngDesc' defaultValue={ shEngDesc } onChange={ this.onUpdateEngDesc } onGetErrorMessage={ value => { if (value.trim().length < 5 || value.length > 100  || value === '') return `${this.strings.max100_validation}` }}/>
 
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='shFrDesc'>
@@ -215,7 +215,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     </Label>
                     <IconButton  ariaLabel={ this.strings.infoIcon_frDesc } id='shFrDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
                 </Stack>
-                <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } onGetErrorMessage={ value => { if (value.length < 5 || value.length > 100  || value === '') return `${this.strings.max100_validation}` }}/>
+                <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } onGetErrorMessage={ value => { if (value.trim().length < 5 || value.length > 100  || value === '') return `${this.strings.max100_validation}` }}/>
 
                 {/* <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='classification'required >{ this.strings.community_classification }</Label>
@@ -275,7 +275,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
         return `${this.strings.special_char_validation}`
       }
 
-      if ( value.length < 5 || value.length > 80 )  {
+      if ( value.trim().length < 5 || value.length > 80 )  {
         return `${this.strings.between_5_80_char_validation}`
       }
     
