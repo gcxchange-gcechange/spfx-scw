@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable dot-notation */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 
@@ -203,13 +204,18 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             backgroundColor:'#004DB8'
         }
     }   
-    
-    
+
+
+
+    public escapeQuotes = (str:any) => {
+        console.log("string",str)
+        return  str.replace(/"/g, '\\"');
+      };
+      
     
     public successMessage = (): void =>  { 
-        
+
         const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail } = this.state
-        console.log("OWN", ownerList.length);
 
         let requestingUser: string = '';
         // const owners = ownerList.length;
@@ -226,7 +232,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             this.setState({ showModal: true });
         }
         else {
-            const functionUrl = " ";
+            const functionUrl = "https://appsvc-fnc-dev-scw-list-dotnet001.azurewebsites.net/api/CreateItem? ";
             const requestHeaders: Headers = new Headers();
             requestHeaders.append("Content-type", "application/json");
             requestHeaders.append("Cache-Control", "no-cache");
@@ -252,10 +258,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     "SpaceName": "${engName}",
                     "SpaceNameFR": "${frCommName}",
                     "Owner1": "${owner1}",
-                    "SpaceDescription": "${shEngDesc}",
-                    "SpaceDescriptionFR": "${shFrDesc}",
-                    "BusinessJustification":"${commPurpose}",
-                    "TeamPurpose":"${commPurpose}",
+                    "SpaceDescription": "${this.escapeQuotes(shEngDesc)}",
+                    "SpaceDescriptionFR": "${this.escapeQuotes(shFrDesc)}",
+                    "BusinessJustification":"${this.escapeQuotes(commPurpose)}",
+                    "TeamPurpose":"${this.escapeQuotes(commPurpose)}",
                     "TemplateTitle": "Generic",
                     "RequesterName": "${this.props.context.pageContext.user.displayName}",
                     "RequesterEmail": "${this.props.requestor}",
@@ -264,6 +270,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     
                 }`
             };
+
+            console.log("BODY", postOptions.body);
 
             
             let responseText: string = "";
@@ -277,7 +285,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             document.getElementById("submit").style.display = 'none';
                 
               this.props.context.aadHttpClientFactory
-              .getClient(" ")
+              .getClient("3385e8cd-40a4-41f5-bd2f-68690654a54b")
               .then((client: AadHttpClient) => {
                
                 client.post(functionUrl, AadHttpClient.configurations.v1, postOptions)
@@ -320,6 +328,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     public handleOnChange =(event: any, value:string):void => {
         const eventValue = event;
         const values = value
+
+        console.log("Parent Value", values);
         
             this.setState({
                 ...this.state,
@@ -330,6 +340,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     public commPurposeCallback = ( commPurpose: string ): void =>   { 
         const savePurpose = commPurpose;
+
         this.setState ( { 
             commPurpose: savePurpose
         });
