@@ -3,7 +3,7 @@
   "solution": {
     "name": "spfx-scw-client-side-solution",
     "id": "d5083a59-3bd5-4793-9717-da489ac426e7",
-    "version": "2.0.0.2",
+    "version": "2.0.0.3",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
