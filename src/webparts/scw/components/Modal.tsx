@@ -115,7 +115,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     // ];
 
     const fourthValues: PropValues[] = [
-        { name: `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}` },
+      { name: `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}` },
       { name: `${this.strings.requestorUser }`, value: `${requestingUser}` },
       { name: `${this.strings.you_must} ${this.strings.one_more_owner}`, value: `${ownerList.length}`}
     ];
@@ -126,30 +126,70 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       { name: `${ this.strings.frCommName_Modal }`, value: `${frCommName}` },
       { name: `${ this.strings.shEngDesc_Modal }`, value: `${shEngDesc}` },
       { name: `${ this.strings.shFrDesc_Modal }`, value: `${shFrDesc}` },
-        { name: `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}` }, //remove you must provide
+      { name: `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}` }, //remove you must provide
       { name: `${this.strings.requestorUser }`, value: `${requestingUser}` },
-        { name: `${this.strings.you_must} ${this.strings.one_more_owner}`, value: `${ownerList.length}`}
+      { name: `${this.strings.you_must} ${this.strings.one_more_owner}`, value: `${ownerList.length}`}
     ];
 
     let message: string = "";
     const results: string[] = [];
     const comma = `<span style=fontWeight:normal>, </span>`;
-   
+  
+    // if (current === 0) {
+    //   for (const obj of firstValues) {
+    //     if( obj.value === "") {
+    //       results.push(obj.name);
+    //       console.log("RESULTS", results);
+          
+    //         if (results.length > 1) {
+    //             message = `${this.strings.you_must} ${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + results.slice(-1)
+            
+    //       } 
+    //       else if ( results.length === 1 ) {
+    //             message = `${this.strings.you_must} ${this.strings.provide} ${obj.name}`
+    //       }
+    //     }
+       
+    //   }   
+    // }
 
     if (current === 0) {
-      for (const obj of firstValues) {
-        if( obj.value === "") {
-          results.push(obj.name);
-          
-            if (results.length > 1) {
-                message = `${this.strings.you_must} ${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + results.slice(-1)
-            
-          } 
-          else if ( results.length === 1 ) {
-                message = `${this.strings.you_must} ${this.strings.provide} ${obj.name}`
-          }
+      const emptyValues: string[] = [];
+      const minArray: string[] = [];
+      const maxArray: string [] = [];
+      const hasSpecialCharacter: string [] =[];
+
+      console.log("propsLength:",this.props.commPurpose.length);
+
+      for(const obj of firstValues ) {
+        const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(obj.value);
+
+        if ( obj.value === "") {
+          emptyValues.push(obj.name);
         }
-      }   
+        else if (obj.value.length >= 1 && obj.value.length <= 5 ) {
+          minArray.push(obj.name);
+        } 
+        else if (this.props.commPurpose && obj.value.length > 500) {
+          maxArray.push(obj.name);
+        } 
+        else if ((this.props.engName || this.props.frCommName) && obj.value.length > 80){
+          maxArray.push(obj.name);
+        
+        } 
+        else if ((this.props.engName || this.props.frCommName) && (obj.value.length >= 1 && obj.value.length <= 80)) {
+          if(charAllowed) {
+            hasSpecialCharacter.push(obj.name)
+          }
+         
+        }
+       
+
+      }
+      console.log('minArray', minArray);
+      console.log('maxArray', maxArray);
+      console.log('sChar', hasSpecialCharacter);
+      console.log('empty:',emptyValues);
     }
 
     // for (const obj of secondValues) {
@@ -302,7 +342,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     
    
 
-    console.log('m',message);
+    console.log('MES',message);
     return  message;
   };
 
