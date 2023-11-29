@@ -159,15 +159,16 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       const maxArray: string [] = [];
       const hasSpecialCharacter: string [] =[];
 
-      console.log("propsLength:",this.props.commPurpose.length);
-
       for(const obj of firstValues ) {
         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(obj.value);
 
         if ( obj.value === "") {
           emptyValues.push(obj.name);
         }
-        else if (obj.value.length >= 1 && obj.value.length <= 5 ) {
+        else if (obj.value.length >= 1 && obj.value.length <= 5  ) {
+          if ((this.props.engName || this.props.frCommName) && charAllowed) {
+            hasSpecialCharacter.push(obj.name.concat(` ${this.strings.special_char_validation}`))
+          }
           minArray.push(obj.name);
         } 
         else if (this.props.commPurpose && obj.value.length > 500) {
@@ -177,19 +178,26 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
           maxArray.push(obj.name);
         
         } 
-        else if ((this.props.engName || this.props.frCommName) && (obj.value.length >= 1 && obj.value.length <= 80)) {
+        else if ((this.props.engName || this.props.frCommName) && (obj.value.length >= 5 && obj.value.length <= 80)) {
           if(charAllowed) {
             hasSpecialCharacter.push(obj.name)
           }
          
         }
        
-
       }
+
+
       console.log('minArray', minArray);
       console.log('maxArray', maxArray);
-      console.log('sChar', hasSpecialCharacter);
+      console.log('spChar', hasSpecialCharacter);
       console.log('empty:',emptyValues);
+
+     
+
+      const messageArray: string[] = [...minArray, ...maxArray, ...hasSpecialCharacter, ...emptyValues];
+      message = messageArray.toString();
+      console.log("MARRAY", messageArray);
     }
 
     // for (const obj of secondValues) {

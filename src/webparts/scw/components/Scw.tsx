@@ -113,7 +113,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
        if ( !commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc) {
    
             this.setState({ showModal: true });
-       } 
+       } else if ((commPurpose.length || engName.length || frCommName.length || shEngDesc.length || shFrDesc.length) < 5 ) {
+            this.setState({ showModal: true });
+       }
        
 
 
