@@ -92,6 +92,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
        
         const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail } = this.state
 
+
         // const filtered = checkedValues.filter((value, index) => {
         //     return checkedValues.indexOf(value) === index
         //   });
@@ -110,12 +111,29 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             
         }
         
+        
+        const engNameCharAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(this.state.engName);
+        const frNamecharAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(this.state.frCommName);
+        console.log("FRNAME", frNamecharAllowed);
+        console.log("EngName", engNameCharAllowed);
+
        if ( !commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc) {
    
             this.setState({ showModal: true });
-       } else if ((commPurpose.length || engName.length || frCommName.length || shEngDesc.length || shFrDesc.length) < 5 ) {
+
+       } else if ((commPurpose.length  || engName.length || frCommName.length || shEngDesc.length || shFrDesc.length ) > 5 ) {
             this.setState({ showModal: true });
        }
+       else if (commPurpose.length < 500) {
+            this.setState({ showModal: true});
+       }
+       else if ((engName.length || frCommName.length ) < 80 ) {
+            this.setState({ showModal: true});
+       }
+       else if ((shEngDesc.length || shFrDesc.length ) < 100 ) {
+            this.setState({ showModal: true});
+       }
+       
        
 
 
