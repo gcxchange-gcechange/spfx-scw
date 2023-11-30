@@ -133,6 +133,7 @@ define([], function() {
         "invalidEmail":"un courriel valide;",
         "is_not_valid": "n'est pas valide. Veuillez fournir un courriel valide",
         "requestorUser":"En tant que demandeur de la création de cette collectivité, vous êtes automatiquement ajouté comme propriétaire.</span> <strong>Vous ne pouvez pas vous inviter en tant que propriétaire</strong>. Veuillez vous désinscrire",
+        "onlyAlphabets":"Seuls les caractères alphabétiques (avec accents français), les nombres, les espaces et les apostrophes sont permis.",
 
     } 
 });

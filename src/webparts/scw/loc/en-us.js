@@ -142,6 +142,8 @@ define([], function() {
     "invalidEmail":"<span style= fontWeight:normal>add a valid email;</span>",
       "is_not_valid": "<span style= fontWeight:normal>is not valid. Please add a valid email</span>",
     "requestorUser":"As the requester of this community, you are automatically added as an owner. You <strong>cannot invite yourself as an owner.</strong> Please remove yourself",
+    "onlyAlphabets": "Only alphabets (with French accents), numbers, spaces and apostrophes are allowed.",
+    
 
 
 

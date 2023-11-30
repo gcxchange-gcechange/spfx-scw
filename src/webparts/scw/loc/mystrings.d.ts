@@ -139,6 +139,7 @@ declare interface IScwWebPartStrings {
   invalidEmail:string;
   is_not_valid: string;
   requestorUser: string;
+  onlyAlphabets: string;
 
 
 

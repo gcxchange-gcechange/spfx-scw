@@ -167,9 +167,9 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
         }
         else if (obj.value.length >= 1 && obj.value.length <= 5  ) {
           if ((this.props.engName || this.props.frCommName) && charAllowed) {
-            hasSpecialCharacter.push(obj.name.concat(` ${this.strings.special_char_validation}`))
+            hasSpecialCharacter.push(obj.name.concat(` - ${this.strings.onlyAlphabets}`))
           }
-          minArray.push(obj.name);
+          minArray.push(obj.name.concat(` - `));
         } 
         else if (this.props.commPurpose && obj.value.length > 500) {
           maxArray.push(obj.name);

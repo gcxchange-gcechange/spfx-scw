@@ -117,11 +117,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         console.log("FRNAME", frNamecharAllowed);
         console.log("EngName", engNameCharAllowed);
 
-       if ( !commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc) {
-   
-            this.setState({ showModal: true });
-
-       } else if ((commPurpose.length  || engName.length || frCommName.length || shEngDesc.length || shFrDesc.length ) > 5 ) {
+        if ((commPurpose.length  || engName.length || frCommName.length || shEngDesc.length || shFrDesc.length ) > 5 ) {
             this.setState({ showModal: true });
        }
        else if (commPurpose.length < 500) {
@@ -350,6 +346,11 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         const values = value
 
         console.log("Parent Value", values);
+        console.log("Parent Event", event);
+       
+        if(eventValue === "engName" || values.length <= 5) {
+            this.setState({ ...this.state, [eventValue]: values})
+        }
         
             this.setState({
                 ...this.state,

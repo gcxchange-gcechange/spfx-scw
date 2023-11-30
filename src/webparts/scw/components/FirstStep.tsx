@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import styles from './Scw.module.scss';
-import { ILabelStyles, Label, Stack, StackItem, TextField } from 'office-ui-fabric-react';
+import { ILabelStyles, Icon, Label, Stack, StackItem, TextField } from 'office-ui-fabric-react';
 import { SelectLanguage } from './SelectLanguage';
 import parse from 'html-react-parser';
 
@@ -171,18 +172,37 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
     }
 
 
-    private validateInput = (value: string): string => {
+    private validateInput = (value: string) => {
 
         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
     
+    //   if (charAllowed) {
+    //     return `${this.strings.special_char_validation}`
+    //   }
 
-      if (charAllowed) {
-        return `${this.strings.special_char_validation}`
-      }
+    //   if ( value.trim().length < 5 || value.trim().length > 80 )  {
+    //     return `${this.strings.between_5_80_char_validation}`
+    //   }
 
-      if ( value.trim().length < 5 || value.trim().length > 80 )  {
-        return `${this.strings.between_5_80_char_validation}`
-      }
+        if (charAllowed) {
+            return (
+                <Stack horizontal horizontalAlign='center'>
+                    <Icon iconName="Error" className={styles.errorIcon}/>
+                    <p  className={styles.fieldInstruction}>{this.strings.special_char_validation}</p>
+                </Stack>
+    
+            )
+        }
+        
+        if (value.trim().length < 5 || value.trim().length > 80) {
+            return (
+                <Stack horizontal horizontalAlign='center'>
+                    <Icon iconName="Error" className={styles.errorIcon}/>
+                    <p className={styles.fieldInstruction}>{this.strings.between_5_80_char_validation}</p>
+                </Stack>
+    
+            )
+        }
     
     
     };
