@@ -3,7 +3,7 @@ import * as React from "react";
 import { Modal } from "@fluentui/react";
 import { IconButton } from "@fluentui/react/lib/Button";
 import styles from "./Scw.module.scss";
-import { Stack } from "office-ui-fabric-react/lib/Stack";
+import { Stack, StackItem } from "office-ui-fabric-react/lib/Stack";
 import parse from 'html-react-parser';
 import { SelectLanguage } from './SelectLanguage';
 // import { IButtonStyles } from "office-ui-fabric-react";
@@ -50,9 +50,8 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       paddingBottom: "10px",
       paddingLeft: "30px",
       paddingRight: "30px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
+     
+      
     },
     footer: {
       padding: "10px",
@@ -364,7 +363,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       <>
        
           <Modal
-            titleAriaId={ this.strings.forget }
+            titleAriaId={this.strings.oops}
             isOpen={ this.props.showModal}
             onDismiss={ this.props.onClose}
             isBlocking={ true}
@@ -374,14 +373,27 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
           >
             <div>
             <div style={ this.modalStyle.header}>
-              <h2>{this.strings.forget}</h2>
               <IconButton
-                tabIndex={1}
-                aria-label= { this.strings.close }
-                className={styles.cancelIcon}
-                iconProps={{ iconName: "Cancel" }}
-                onClick={ this.props.onClose}
+                  tabIndex={1}
+                  aria-label= { this.strings.close }
+                  className={styles.cancelIcon}
+                  iconProps={{ iconName: "Cancel" }}
+                  onClick={ this.props.onClose}
               />
+              <Stack>
+                <StackItem align="center" >
+                  <IconButton
+                  tabIndex={1}
+                  aria-label= { this.strings.oops}
+                  className={styles.oopsIcon}
+                  iconProps={{ iconName: "Error" }}
+                  />
+                </StackItem>
+                <Stack.Item align="center" >
+                  <h2>{this.strings.oops}</h2>
+                </Stack.Item>
+              </Stack>
+
             </div>
             <div style={ this.modalStyle.footer}>
               <Stack>

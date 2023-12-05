@@ -102,7 +102,7 @@ declare interface IScwWebPartStrings {
   close: string;
   you_must: string;
   provide: string;
-  forget: string;
+  // forget: string;
   before_proceeding: string,
   and: string;
   the: string;
@@ -140,6 +140,7 @@ declare interface IScwWebPartStrings {
   is_not_valid: string;
   requestorUser: string;
   onlyAlphabets: string;
+  oops: string;
 
 
 

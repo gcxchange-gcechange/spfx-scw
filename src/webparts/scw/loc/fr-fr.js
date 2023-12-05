@@ -98,7 +98,7 @@ define([], function() {
         'you_must': 'Vous devez',
         'provide': '<span style="fontWeight:normal"> fournir </span>',
         'agree':'<span style="fontWeight:normal"> accepter toutes les </span>',
-        'forget': 'Vous avez oublié quelque chose?',
+        // 'forget': 'Vous avez oublié quelque chose?',
         'before_proceeding': 'avant de poursuivre.',
         'and': '<span style="fontWeight:normal"> et </span>',
         'the': 'le',
@@ -134,6 +134,7 @@ define([], function() {
         "is_not_valid": "n'est pas valide. Veuillez fournir un courriel valide",
         "requestorUser":"En tant que demandeur de la création de cette collectivité, vous êtes automatiquement ajouté comme propriétaire.</span> <strong>Vous ne pouvez pas vous inviter en tant que propriétaire</strong>. Veuillez vous désinscrire",
         "onlyAlphabets":"Seuls les caractères alphabétiques (avec accents français), les nombres, les espaces et les apostrophes sont permis.",
+        "oops": "Oops!",
 
     } 
 });

@@ -111,26 +111,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             
         }
         
-        
-        const engNameCharAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(this.state.engName);
-        const frNamecharAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(this.state.frCommName);
-        console.log("FRNAME", frNamecharAllowed);
-        console.log("EngName", engNameCharAllowed);
-
-        if ((commPurpose.length  || engName.length || frCommName.length || shEngDesc.length || shFrDesc.length ) > 5 ) {
-            this.setState({ showModal: true });
-       }
-       else if (commPurpose.length < 500) {
-            this.setState({ showModal: true});
-       }
-       else if ((engName.length || frCommName.length ) < 80 ) {
-            this.setState({ showModal: true});
-       }
-       else if ((shEngDesc.length || shFrDesc.length ) < 100 ) {
-            this.setState({ showModal: true});
-       }
        
-       
+       if ( current === 0 && (!commPurpose  || !engName || !frCommName  || !shEngDesc || !shFrDesc )) {
+        this.setState({showModal: true});
+       }
 
 
     //    else if ( current === 1 && selectedChoice === '' ) {
@@ -344,18 +328,19 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     public handleOnChange =(event: any, value:string):void => {
         const eventValue = event;
         const values = value
+        const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
 
         console.log("Parent Value", values);
         console.log("Parent Event", event);
-       
-        if(eventValue === "engName" || values.length <= 5) {
-            this.setState({ ...this.state, [eventValue]: values})
+
+        if (eventValue === "engName" && charAllowed) {
+            this.setState({showModal: true});
         }
         
-            this.setState({
-                ...this.state,
-                [eventValue]: values
-            });
+        this.setState({
+            ...this.state,
+            [eventValue]: values
+        });
         
     }
 

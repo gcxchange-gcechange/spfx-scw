@@ -106,7 +106,7 @@ define([], function() {
     'you_must':'You must',
     'provide': '<span style="fontWeight:normal"> provide </span>',
     'agree':'<span style="fontWeight:normal"> agree to all </span>',
-    'forget':'Did you forget something?',
+    // 'forget':'Did you forget something?',
     'before_proceeding': 'before proceeding.',
     'and': '<span style="fontWeight:normal"> and </span>',
     'the': '',
@@ -143,6 +143,7 @@ define([], function() {
       "is_not_valid": "<span style= fontWeight:normal>is not valid. Please add a valid email</span>",
     "requestorUser":"As the requester of this community, you are automatically added as an owner. You <strong>cannot invite yourself as an owner.</strong> Please remove yourself",
     "onlyAlphabets": "Only alphabets (with French accents), numbers, spaces and apostrophes are allowed.",
+    "oops": "Oops!",
     
 
 

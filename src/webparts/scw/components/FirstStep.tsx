@@ -53,21 +53,27 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
         }
 
        const stackTokens = { childrenGap: 18 }
+       const isError = document.getElementsByClassName("errorMessage-219");
 
         return (
             <>
+          
            
             <h3>{ parse( this.strings.commPurpose_title ) }</h3>
             <p>{ parse( this.strings.commPurpose_desc) }</p>
-            <Label htmlFor='Community purpose'styles={ labelStyle } >
-                <span className={styles.asterik}  aria-label={ this.strings.required }>*</span>
-                { this.strings.commPurpose_title }
-            </Label> 
-            <p id='commPurposeDesc' className={ styles.instruction }>{ this.strings.commPurpose_Instruction}</p>
+            <div  className={isError.length > 0 ? styles.errorBorder : null}>
+                
+                <Label htmlFor='Community purpose'styles={ labelStyle } >
+                    <span className={styles.asterik}  aria-label={ this.strings.required }>*</span>
+                    { this.strings.commPurpose_title }
+                </Label> 
+                <p id='commPurposeDesc' className={ styles.instruction }>{ this.strings.commPurpose_Instruction}</p>
+                
+                <TextField aria-describedby="commPurposeDesc" type='text' name='commPurpose' id='Community purpose' multiline rows={3} onChange={ this.onhandleChangeEvent } 
+                defaultValue={ commPurpose }  validateOnLoad= { false }  onGetErrorMessage={ value => { if (value.trim().length === 0 || value.length < 5 || value.length > 500 ) return `${this.strings.max500_validation}` } }
+                />
+            </div>
             
-            <TextField aria-describedby="commPurposeDesc" type='text' name='commPurpose' id='Community purpose' multiline rows={3} onChange={ this.onhandleChangeEvent } 
-            defaultValue={ commPurpose }  validateOnLoad= { false }  onGetErrorMessage={ value => { if (value.trim().length === 0 || value.length < 5 || value.length > 500 ) return `${this.strings.max500_validation}` } }
-            />
 
             <h3>{ this.strings.comm_name }</h3>
             <p className={ styles.topMgn0 }>{ this.strings.engName_desc}</p>
@@ -114,6 +120,12 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             </>
         );
     }
+
+    // private addBorder = ():void => {
+    //     if(document.getElementsByClassName('errorMessage-219').length > 0) {
+
+    //     }
+    // }
 
     private onhandleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) :void => {
       
@@ -198,7 +210,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             return (
                 <Stack horizontal horizontalAlign='center'>
                     <Icon iconName="Error" className={styles.errorIcon}/>
-                    <p className={styles.fieldInstruction}>{this.strings.between_5_80_char_validation}</p>
+                    <span className={styles.fieldInstruction}>{this.strings.between_5_80_char_validation}</span>
                 </Stack>
     
             )
