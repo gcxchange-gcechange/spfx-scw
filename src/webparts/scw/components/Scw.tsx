@@ -49,6 +49,7 @@ export interface IScwState  {
     showCallout: boolean;
     targetId: string;
     invalidEmail: string;
+    isError: boolean;
    
     
 }
@@ -79,7 +80,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             validationStatus: 0,
             showCallout: false,
             targetId: '',
-            invalidEmail: ''
+            invalidEmail: '',
+            isError: false,
 
         };
 
@@ -337,6 +339,15 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             this.setState({showModal: true});
         }
         
+        const newValueIsError = values.length < 5 ;
+        console.log("ERR",newValueIsError);
+        
+          this.setState({
+            isError: newValueIsError
+          });
+
+        
+
         this.setState({
             ...this.state,
             [eventValue]: values
@@ -449,6 +460,15 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         });
     }
 
+    public handleInvalidInput = ( value: string ):void  => {
+        
+     console.log('value', value);
+     
+
+
+        
+    }
+
     // public checkedTerms = ( event: any, isChecked:boolean ):void => {
     //     const id = event;
 
@@ -488,6 +508,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         this.setState({
             targetId: id
         });
+
     };
 
     componentDidUpdate(prevProps: Readonly<IScwProps>, prevState: Readonly<IScwState>): void {
@@ -504,10 +525,19 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             }
 
         }
+
+        // if(this.state.commPurpose !== prevState.commPurpose) {
+        //     const getInvalid = document.getElementsByClassName("errorMessage-219");
+        //    console.log("UPDATE:",getInvalid);
+        // } 
+
+
     }
 
     public render(): React.ReactElement<IScwProps>  { 
-        const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, errorMessage, showModal, checkedValues, showCallout, targetId } = this.state;
+      
+        
+        const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, errorMessage, showModal, checkedValues, showCallout, targetId, isError } = this.state;
 
         const steps = [
         
@@ -525,6 +555,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     shFrDesc= { shFrDesc }
                     errorMessage ={ errorMessage }
                     handleOnChange={this.handleOnChange}
+                    isError = {isError}
                 
                 />
                 )

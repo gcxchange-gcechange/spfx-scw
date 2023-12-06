@@ -19,9 +19,11 @@ export interface IFirstStepProps {
     shFrDesc: string;
     errorMessage: string;
     showModal: boolean;
+    isError: boolean;
 
     handleOnChange?:(event:any, value: string)=> void;
     handleErrorMessage?: (errorMessage: string) => void;
+    handleInvalidInput?:(value: string) => void;
 
 
 
@@ -36,12 +38,17 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
 
     }
     public strings = SelectLanguage(this.props.prefLang);
+   
 
+    // private  isError = document.getElementsByClassName("errorMessage-219");
 
+    
     public render(): React.ReactElement<IFirstStepProps> {
         
 
-        const {engName, commPurpose,  frCommName, shEngDesc, shFrDesc} = this.props;
+        const {engName, commPurpose,  frCommName, shEngDesc, shFrDesc, isError} = this.props;
+
+        console.log("ISERROR", isError);
 
         const labelStyle: Partial<ILabelStyles> = {
             root: {
@@ -53,7 +60,6 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
         }
 
        const stackTokens = { childrenGap: 18 }
-       const isError = document.getElementsByClassName("errorMessage-219");
 
         return (
             <>
@@ -61,7 +67,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
            
             <h3>{ parse( this.strings.commPurpose_title ) }</h3>
             <p>{ parse( this.strings.commPurpose_desc) }</p>
-            <div  className={isError.length > 0 ? styles.errorBorder : null}>
+            <div  className={isError && styles.errorBorder }>
                 
                 <Label htmlFor='Community purpose'styles={ labelStyle } >
                     <span className={styles.asterik}  aria-label={ this.strings.required }>*</span>
@@ -69,9 +75,16 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 </Label> 
                 <p id='commPurposeDesc' className={ styles.instruction }>{ this.strings.commPurpose_Instruction}</p>
                 
-                <TextField aria-describedby="commPurposeDesc" type='text' name='commPurpose' id='Community purpose' multiline rows={3} onChange={ this.onhandleChangeEvent } 
-                defaultValue={ commPurpose }  validateOnLoad= { false }  onGetErrorMessage={ value => { if (value.trim().length === 0 || value.length < 5 || value.length > 500 ) return `${this.strings.max500_validation}` } }
+                <TextField aria-describedby="commPurposeDesc" type='text' name='commPurpose' id='Community purpose' multiline rows={3} onChange={ this.onhandleChangeEvent } description={`${commPurpose.length}/500`}
+                defaultValue={ commPurpose }  validateOnLoad= { false }  onGetErrorMessage={ value => { if (value.trim().length === 0 || value.length < 5 || value.length > 500 ) return (
+                    <Stack horizontal horizontalAlign='center'>
+                        <Icon iconName="AlertSolid" className={styles.errorIcon}/>
+                        <p  className={styles.fieldInstruction}>{this.strings.special_char_validation}</p>
+                    </Stack>
+        
+                )}}
                 />
+
             </div>
             
 
@@ -132,6 +145,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
     
         const eventName = event.target.name;
         const value = event.target.value;
+  
 
         // const charAllowed = /[\p{L}\p{N}ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü']/.test(value);
        // const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value);
@@ -173,7 +187,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
         
 
         try {
-                this.props.handleOnChange(eventName, trimmedValue)
+                this.props.handleOnChange(eventName, trimmedValue) 
+                               
             
 
         } catch (error) {
@@ -187,6 +202,10 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
     private validateInput = (value: string) => {
 
         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
+
+        // const invalid = document.getElementById("Community purpose").getAttribute("aria-invalid") 
+        // console.log("INVALID:", invalid);
+   
     
     //   if (charAllowed) {
     //     return `${this.strings.special_char_validation}`
@@ -197,11 +216,14 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
     //   }
 
         if (charAllowed) {
+
             return (
+                <>
                 <Stack horizontal horizontalAlign='center'>
                     <Icon iconName="Error" className={styles.errorIcon}/>
                     <p  className={styles.fieldInstruction}>{this.strings.special_char_validation}</p>
                 </Stack>
+                </>
     
             )
         }
