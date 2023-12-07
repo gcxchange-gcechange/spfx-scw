@@ -30,6 +30,7 @@ import Failed from './Failed';
 
 
 
+
 export interface IScwState  { 
     current: number;
     step: number;
@@ -337,16 +338,24 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         if (eventValue === "engName" && charAllowed) {
             this.setState({showModal: true});
+            this.setState({isError: true});
         }
-        
-        const newValueIsError = values.length < 5 ;
-        console.log("ERR",newValueIsError);
-        
-          this.setState({
-            isError: newValueIsError
-          });
 
+        const invalid = document.getElementById("Community purpose").getAttribute("aria-invalid");
+        console.log("IN", invalid); 
+
+        const divNode = document.getElementById('first-line');
+        if (eventValue === "commPurpose" && value.length < 5)  {
+            divNode.classList.add(styles.errorBorder)
+            console.log("divNode", divNode);
+
+        } else {
+                divNode.classList.remove(styles.errorBorder)
+            }
         
+        
+
+   
 
         this.setState({
             ...this.state,
@@ -460,13 +469,14 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         });
     }
 
-    public handleInvalidInput = ( value: string ):void  => {
-        
-     console.log('value', value);
-     
+    public handleInvalidInput = (newValue: any ):void  => {
+        console.log("NEWVALUE", newValue);
 
-
+        const newValueError = newValue.length < 5;
         
+        this.setState({
+            isError: newValueError
+        });
     }
 
     // public checkedTerms = ( event: any, isChecked:boolean ):void => {
@@ -511,7 +521,11 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     };
 
+
     componentDidUpdate(prevProps: Readonly<IScwProps>, prevState: Readonly<IScwState>): void {
+
+        const { engName} = this.state;
+        // const values =  { commPurpose, engName, frCommName, shEngDesc, shFrDesc}
 
         if ( this.state.current !== prevState.current) {
 
@@ -526,13 +540,34 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         }
 
-        // if(this.state.commPurpose !== prevState.commPurpose) {
-        //     const getInvalid = document.getElementsByClassName("errorMessage-219");
-        //    console.log("UPDATE:",getInvalid);
+      
+          if (engName !== prevState.engName) {
+
+            this.handleInvalidInput(engName);
+        }
+        //   if (frCommName !== prevState.frCommName) {
+        //     const newValueIsError = this.state.commPurpose.length < 5;
+        //     this.setState({
+        //         isError: newValueIsError
+        //     });   
+        // } 
+        
+        // if (shEngDesc !== prevState.shEngDesc) {
+        //     const newValueIsError = this.state.commPurpose.length < 5;
+        //     this.setState({
+        //         isError: newValueIsError
+        //     });   
+        // } 
+        
+        // if (shFrDesc !== prevState.shFrDesc) {
+        //     const newValueIsError = this.state.commPurpose.length < 5;
+        //     this.setState({
+        //         isError: newValueIsError
+        //     });   
         // } 
 
-
     }
+
 
     public render(): React.ReactElement<IScwProps>  { 
       
