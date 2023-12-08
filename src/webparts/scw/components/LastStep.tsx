@@ -169,7 +169,6 @@ export default class LastStep extends React.Component<ILastStepProps> {
         return (
             
             <>
-               
                 <p>{ this.strings.review_info }</p>
                 <Stack horizontal verticalAlign='end'>
                     <Label htmlFor='commPurpose'> 

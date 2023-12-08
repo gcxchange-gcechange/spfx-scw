@@ -23,9 +23,6 @@ export interface IFirstStepProps {
 
     handleOnChange?:(event:any, value: string)=> void;
     handleErrorMessage?: (errorMessage: string) => void;
-    // handleInvalidInput?:(value: string) => void;
-
-
 
 }
 
@@ -50,7 +47,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
     public render(): React.ReactElement<IFirstStepProps> {
         
 
-        const {engName, commPurpose,  frCommName, shEngDesc, shFrDesc, isError} = this.props;
+        const {engName, commPurpose,  frCommName, shEngDesc, shFrDesc } = this.props;
 
         const labelStyle: Partial<ILabelStyles> = {
             root: {
@@ -87,23 +84,30 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             <h3>{ parse( this.strings.commPurpose_title ) }</h3>
             <p>{ parse( this.strings.commPurpose_desc) }</p>
             <div id='first-line'  >
-                
                 <Label htmlFor='Community purpose'styles={ labelStyle } >
                     <span className={styles.asterik}  aria-label={ this.strings.required }>*</span>
                     { this.strings.commPurpose_title }
                 </Label> 
-                <p id='commPurposeDesc' className={ styles.instruction }>{ this.strings.commPurpose_Instruction}</p>
-                
-                <TextField styles={ errorText.length === 1 ? errorCharacterLimitStyle : characterLimitStyle } aria-describedby="commPurposeDesc" type='text' name='commPurpose' id='Community purpose' multiline rows={3} onChange={ this.onhandleChangeEvent } description={`${commPurpose.length}/500`}
-                defaultValue={ commPurpose }  validateOnLoad= { false }  onGetErrorMessage={ value => { if (value.trim().length === 0 || value.length < 5 || value.length > 500 ) return (
-                    <Stack horizontal horizontalAlign='center'>
-                        <Icon iconName="AlertSolid" className={styles.errorIcon}/>
-                        <p  className={styles.fieldInstruction}>{this.strings.special_char_validation}</p>
-                    </Stack>
+                <p id='commPurposeDesc' className={ styles.instruction }>{ this.strings.commPurpose_Instruction}</p>  
+                <TextField styles={ errorText.length === 1 ? errorCharacterLimitStyle : characterLimitStyle } 
+                    aria-describedby="commPurposeDesc" 
+                    name='commPurpose' 
+                    id='Community purpose' 
+                    multiline rows={3} 
+                    onChange={ this.onhandleChangeEvent } 
+                    description={`${commPurpose.length}/500`}
+                    defaultValue={ commPurpose }  
+                    validateOnLoad= { false }  
+                    maxLength={500} 
+                    onGetErrorMessage={ value => { if (value.trim().length < 5 || value.length > 500 ) 
+                        return (
+                        <Stack horizontal horizontalAlign='center'>
+                            <Icon iconName="AlertSolid" className={styles.errorIcon}/>
+                            <p  className={styles.fieldInstruction}>{this.strings.special_char_validation}</p>
+                        </Stack>
         
-                )}}
+                    )}}
                 />
-
             </div>
             
 
@@ -111,24 +115,45 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             <p className={ styles.topMgn0 }>{ this.strings.engName_desc}</p>
             <Stack tokens={ stackTokens }>
                 <StackItem>
-                    <div  className={isError && styles.errorBorder }>
+                    <div id='second-line'>
                         <Label htmlFor='engName' styles={ labelStyle } >
                             <span className={styles.asterik}  aria-label={ this.strings.required }>*</span>
                             { this.strings.engName_title }
                         </Label>
                         <p id="engNameDesc" className={ styles.instruction }>{ this.strings.engName_Instruction}</p>
-                        <TextField aria-describedby="engNameDesc" id='engName' name='engName' onChange={ this.onhandleChangeEvent } defaultValue={ engName }  validateOnLoad= { false }  
-                        onGetErrorMessage={ this.validateInput } />
+                        <TextField 
+                            styles={ errorText.length === 1 ? errorCharacterLimitStyle : characterLimitStyle } 
+                            aria-describedby="engNameDesc" 
+                            id='engName' 
+                            name='engName' 
+                            maxLength={80} 
+                            onChange={ this.onhandleChangeEvent } 
+                            defaultValue={ engName }  
+                            validateOnLoad= { false }  
+                            onGetErrorMessage={ this.validateInput }
+                            description={`${engName.length}/80`}
+                        />
                     </div>
                 </StackItem>
                 <StackItem>
-                    <div  className={isError && styles.errorBorder }>
+                    <div id='third-line'>
                         <Label htmlFor='frCommName'>
                             <span className={styles.asterik}  aria-label={ this.strings.required }>*</span>
                             {this.strings.frCommName_title }
                         </Label>
                         <p id="frNameDesc" className={ styles.instruction }>{ this.strings.frCommName_Instruction}</p>
-                        <TextField aria-describedby="frNameDesc" id='frCommName' name='frCommName' onChange={ this.onhandleChangeEvent } defaultValue={ frCommName } validateOnLoad= { false } onGetErrorMessage={ this.validateInput } />
+                        <TextField 
+                            styles={ errorText.length === 1 ? errorCharacterLimitStyle : characterLimitStyle } 
+                            aria-describedby="frNameDesc" 
+                            id='frCommName' 
+                            name='frCommName'  
+                            maxLength={80} 
+                            onChange={ this.onhandleChangeEvent } 
+                            defaultValue={ frCommName } 
+                            validateOnLoad= { false } 
+                            onGetErrorMessage={ this.validateInput }
+                            description={`${frCommName.length}/80`}
+                        />
                     </div>
                 </StackItem>
             </Stack>
@@ -137,31 +162,58 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             <p className={ styles.topMgn0 }> { this.strings.shEngDesc_desc }</p>
             <Stack tokens={ stackTokens }>
                 <StackItem>
-                    <Label htmlFor='shEngDesc' styles={ labelStyle } >
-                        <span className={styles.asterik}  aria-label={ this.strings.required }>*</span>
-                        { this.strings.shEngDesc_title }
-                    </Label>
-                    <p id="shEngDescription" className={ styles.instruction }>{ this.strings.shEngDesc_Instruction }</p>
-                    <TextField aria-describedby="shEngDescription" id='shEngDesc' name='shEngDesc'onChange={ this.onhandleChangeEvent} defaultValue={ shEngDesc } validateOnLoad= { false }  onGetErrorMessage={ value => { if ( value.trim().length < 5 || value.length > 100  || value === '') return `${this.strings.max100_validation}` }} />
+                    <div id='fourth-line'>
+                        <Label htmlFor='shEngDesc' styles={ labelStyle } >
+                            <span className={styles.asterik}  aria-label={ this.strings.required }>*</span>
+                            { this.strings.shEngDesc_title }
+                        </Label>
+                        <p id="shEngDescription" className={ styles.instruction }>{ this.strings.shEngDesc_Instruction }</p>
+                        <TextField 
+                            styles={ errorText.length === 1 ? errorCharacterLimitStyle : characterLimitStyle } 
+                            aria-describedby="shEngDescription" 
+                            id='shEngDesc'
+                            name='shEngDesc' 
+                            maxLength={100} 
+                            onChange={ this.onhandleChangeEvent} 
+                            defaultValue={ shEngDesc } 
+                            validateOnLoad= { false }  
+                            onGetErrorMessage={ value => { 
+                                if ( value.trim().length < 5 || value.length > 100  || value === '') 
+                                return `${this.strings.max100_validation}` 
+                            }} 
+                            description={`${shEngDesc.length}/100`}
+                        />
+                    </div>
                 </StackItem>
                 <StackItem>
-                    <Label htmlFor='shFrDesc' styles={ labelStyle } >
-                        <span className={styles.asterik}  aria-label={ this.strings.required }>*</span>
-                        { this.strings.shFrDesc_title }
-                    </Label>
-                    <p id="FrDesc" className={ styles.instruction }>{ this.strings.shFrDesc_Instruction }</p>
-                    <TextField aria-describedby="FrDesc" id='shFrDesc' name='shFrDesc' onChange={ this.onhandleChangeEvent} defaultValue={ shFrDesc } validateOnLoad= { false }  onGetErrorMessage={ value => { if ( value.trim().length < 5 || value.length > 100 || value === '') return `${this.strings.max100_validation}` }}/> 
+                    <div id='fifth-line'>
+                        <Label htmlFor='shFrDesc' styles={ labelStyle } >
+                            <span className={styles.asterik}  aria-label={ this.strings.required }>*</span>
+                            { this.strings.shFrDesc_title }
+                        </Label>
+                        <p id="FrDesc" className={ styles.instruction }>{ this.strings.shFrDesc_Instruction }</p>
+                        <TextField 
+                            styles={ errorText.length === 1 ? errorCharacterLimitStyle : characterLimitStyle } 
+                            aria-describedby="FrDesc" 
+                            id='shFrDesc' 
+                            name='shFrDesc' 
+                            maxLength={100} 
+                            onChange={ this.onhandleChangeEvent} 
+                            defaultValue={ shFrDesc } 
+                            validateOnLoad= { false }  
+                            onGetErrorMessage={ value => { 
+                                if ( value.trim().length < 5 || value.length > 100 || value === '') 
+                                return `${this.strings.max100_validation}` 
+                                }}
+                            description={`${shFrDesc.length}/100`}
+                        /> 
+                    </div>
                 </StackItem>
             </Stack>
             </>
         );
     }
 
-    // private addBorder = ():void => {
-    //     if(document.getElementsByClassName('errorMessage-219').length > 0) {
-
-    //     }
-    // }
 
     private onhandleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) :void => {
       
@@ -206,6 +258,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
         // }
 
         
+
+        
         const trimmedValue = value.trim();
         try {
                 this.props.handleOnChange(eventName, trimmedValue) 
@@ -230,7 +284,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             return (
                 <>
                 <Stack horizontal horizontalAlign='center'>
-                    <Icon iconName="Error" className={styles.errorIcon}/>
+                    <Icon iconName="AlertSolid" className={styles.errorIcon}/>
                     <p  className={styles.fieldInstruction}>{this.strings.special_char_validation}</p>
                 </Stack>
                 </>
@@ -241,7 +295,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
         if (value.trim().length < 5 || value.trim().length > 80) {
             return (
                 <Stack horizontal horizontalAlign='center'>
-                    <Icon iconName="Error" className={styles.errorIcon}/>
+                    <Icon iconName="AlertSolid" className={styles.errorIcon}/>
                     <span className={styles.fieldInstruction}>{this.strings.between_5_80_char_validation}</span>
                 </Stack>
     
