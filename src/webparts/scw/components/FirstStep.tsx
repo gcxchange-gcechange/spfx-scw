@@ -97,7 +97,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                     onChange={ this.onhandleChangeEvent } 
                     description={`${commPurpose.length}/500`}
                     defaultValue={ commPurpose }  
-                    validateOnLoad= { false }  
+                    validateOnLoad= { false } 
+                    validateOnFocusOut={true}
                     maxLength={500} 
                     onGetErrorMessage={ value => { if (value.trim().length < 5 || value.length > 500 ) 
                         return (

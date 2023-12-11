@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
-import { Modal } from "@fluentui/react";
+import { IIconStyles, Icon, Modal } from "@fluentui/react";
 import { IconButton } from "@fluentui/react/lib/Button";
 import styles from "./Scw.module.scss";
 import { Stack, StackItem } from "office-ui-fabric-react/lib/Stack";
@@ -42,6 +42,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       borderRadius: "5px",
       minWidth: "600px",
       maxWidth: "600px",
+      padding: "20px;"
     },
     header: {
       backgroundColor: "#106EBE",
@@ -357,83 +358,128 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
 
     const messages = parse(this.errorMessage());
 
+    const iconStyles: Partial<IIconStyles> = { 
+      root: { fontSize: '70px',
+              color: 'white'
+    
+            } 
+    };
+
+
     console.log("currnet page", this.props.current)
+
+    // return (
+    //   <>
+       
+    //       <Modal
+    //         titleAriaId={this.strings.oops}
+    //         isOpen={ this.props.showModal}
+    //         onDismiss={ this.props.onClose}
+    //         isBlocking={ true}
+    //         styles={{
+    //           main: this.modalStyle.main,
+    //         }}
+    //       >
+    //         <div>
+    //         <div style={ this.modalStyle.header}>
+    //           <IconButton
+    //               tabIndex={1}
+    //               aria-label= { this.strings.close }
+    //               className={styles.cancelIcon}
+    //               iconProps={{ iconName: "Cancel" }}
+    //               onClick={ this.props.onClose}
+    //           />
+    //           <Stack>
+    //             <StackItem align="center" >
+    //               <IconButton
+    //               tabIndex={1}
+    //               aria-label={ this.strings.oops }
+    //               styles={ iconStyles }
+    //               // className={styles.oopsIcon}
+    //               iconProps={ iconProps }
+    //               />
+    //             </StackItem>
+    //             <Stack.Item align="center" >
+    //               <h2>{this.strings.oops}</h2>
+    //             </Stack.Item>
+    //           </Stack>
+
+    //         </div>
+    //         <div style={ this.modalStyle.footer}>
+    //           <Stack>
+    //             <Stack.Item align="center">
+    //               {/* { this.props.invalidUser  ?
+    //               ( <p className={ styles.modalContent }>{ this.strings.you_must } {parse(`${this.strings.provide}`)} { this.strings.valid_email } <strong>{messages}</strong> {this.strings.is_not_valid}</p>)
+    //               : this.props.requestor ? 
+    //               ( <p className={ styles.modalContent }><strong>{messages}</strong></p> )
+    //               :
+    //                 <p className={ styles.modalContent }>{ this.strings.you_must } <strong>{messages}</strong> { this.strings.before_proceeding }</p>
+    //               } */}
+    //               {  
+    //               // ( <p className={ styles.modalContent }>{ this.strings.you_must } {parse(`${this.strings.provide}`)} { this.strings.valid_email } <strong>{messages}</strong> {this.strings.is_not_valid}</p>)
+    //               // :
+    //               this.props.current === 1 ? 
+    //               <p>{messages} { this.strings.before_proceeding }</p>
+    //               :
+    //               <p className={styles.modalContent}> {messages} {this.strings.before_proceeding}</p>
+    //               }
+                  
+    //             </Stack.Item>
+    //             <Stack.Item>
+    //               <hr  aria-hidden= 'true' className={styles.horizontalLine} />
+    //             </Stack.Item>
+    //             <Stack.Item align="center">
+    //               <button
+    //                 tabIndex={2}
+    //                 aria-label= { this.strings.close }
+    //                 onClick={ this.props.onClose}
+    //                 className={styles.close}
+    //               >
+    //                 { this.strings.close }
+    //               </button>
+    //             </Stack.Item>
+    //           </Stack>
+    //         </div>
+    //         </div>
+    //       </Modal>
+       
+    //   </>
+    // );
 
     return (
       <>
-       
-          <Modal
-            titleAriaId={this.strings.oops}
-            isOpen={ this.props.showModal}
-            onDismiss={ this.props.onClose}
-            isBlocking={ true}
-            styles={{
-              main: this.modalStyle.main,
-            }}
-          >
-            <div>
-            <div style={ this.modalStyle.header}>
-              <IconButton
-                  tabIndex={1}
-                  aria-label= { this.strings.close }
-                  className={styles.cancelIcon}
-                  iconProps={{ iconName: "Cancel" }}
-                  onClick={ this.props.onClose}
-              />
-              <Stack>
-                <StackItem align="center" >
-                  <IconButton
-                  tabIndex={1}
-                  aria-label= { this.strings.oops}
-                  className={styles.oopsIcon}
-                  iconProps={{ iconName: "Error" }}
-                  />
-                </StackItem>
-                <Stack.Item align="center" >
+        <Modal
+          titleAriaId={this.strings.oops}
+          isOpen={ this.props.showModal}
+          onDismiss={ this.props.onClose}
+          isBlocking={ true}
+          styles={{
+            main: this.modalStyle.main,
+          }}
+        >
+          <div>
+            <IconButton iconProps={{iconName: "ChromeClose"}} className ={styles.cancelIcon}/>
+              <div style={ this.modalStyle.header}>
+                <Stack>
+                  <StackItem align="center">
+                  <Icon iconName={"Error"} styles={iconStyles}/>
+                  </StackItem>
+                  <StackItem align="center">
                   <h2>{this.strings.oops}</h2>
-                </Stack.Item>
-              </Stack>
+                  </StackItem>   
+                </Stack>
+              </div>
+              <div>
+                Body
+                {messages}
+              </div>
+              <div>
+                Footer
+              </div>
+          </div>
 
-            </div>
-            <div style={ this.modalStyle.footer}>
-              <Stack>
-                <Stack.Item align="center">
-                  {/* { this.props.invalidUser  ?
-                  ( <p className={ styles.modalContent }>{ this.strings.you_must } {parse(`${this.strings.provide}`)} { this.strings.valid_email } <strong>{messages}</strong> {this.strings.is_not_valid}</p>)
-                  : this.props.requestor ? 
-                  ( <p className={ styles.modalContent }><strong>{messages}</strong></p> )
-                  :
-                    <p className={ styles.modalContent }>{ this.strings.you_must } <strong>{messages}</strong> { this.strings.before_proceeding }</p>
-                  } */}
-                  {  
-                  // ( <p className={ styles.modalContent }>{ this.strings.you_must } {parse(`${this.strings.provide}`)} { this.strings.valid_email } <strong>{messages}</strong> {this.strings.is_not_valid}</p>)
-                  // :
-                  this.props.current === 1 ? 
-                  <p>{messages} { this.strings.before_proceeding }</p>
-                  :
-                  <p className={styles.modalContent}> {messages} {this.strings.before_proceeding}</p>
-                  }
-                  
-                </Stack.Item>
-                <Stack.Item>
-                  <hr  aria-hidden= 'true' className={styles.horizontalLine} />
-                </Stack.Item>
-                <Stack.Item align="center">
-                  <button
-                    tabIndex={2}
-                    aria-label= { this.strings.close }
-                    onClick={ this.props.onClose}
-                    className={styles.close}
-                  >
-                    { this.strings.close }
-                  </button>
-                </Stack.Item>
-              </Stack>
-            </div>
-            </div>
-          </Modal>
-       
+        </Modal>
       </>
-    );
+    )
   }
 }
