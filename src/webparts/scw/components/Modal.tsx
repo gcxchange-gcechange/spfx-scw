@@ -41,8 +41,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       display: "flex",
       borderRadius: "5px",
       minWidth: "600px",
-      maxWidth: "600px",
-      padding: "20px;"
+      maxWidth: "600px"
     },
     header: {
       backgroundColor: "#106EBE",
@@ -53,6 +52,10 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       paddingRight: "30px",
      
       
+    },
+
+    body: {
+      padding: '20px'
     },
     footer: {
       padding: "10px",
@@ -458,8 +461,9 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
           }}
         >
           <div>
-            <IconButton iconProps={{iconName: "ChromeClose"}} className ={styles.cancelIcon}/>
+            
               <div style={ this.modalStyle.header}>
+                <IconButton iconProps={{iconName: "ChromeClose"}} className ={styles.cancelIcon} />
                 <Stack>
                   <StackItem align="center">
                   <Icon iconName={"Error"} styles={iconStyles}/>
@@ -469,12 +473,28 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
                   </StackItem>   
                 </Stack>
               </div>
-              <div>
-                Body
+              <div style={this.modalStyle.body}>
+                <h3>Please review the following fields</h3>
                 {messages}
               </div>
-              <div>
-                Footer
+              <div style={this.modalStyle.footer}>
+                <Stack>
+                  <StackItem>
+                    <hr  aria-hidden= 'true' className={styles.horizontalLine} />
+                  </StackItem>
+                  <StackItem align="center">
+                    <button
+                      tabIndex={2}
+                      aria-label= { this.strings.close }
+                      onClick={ this.props.onClose}
+                      className={styles.close}
+                    >
+                      { this.strings.close }
+                    </button>
+                  </StackItem>
+                </Stack>
+                 
+                 
               </div>
           </div>
 

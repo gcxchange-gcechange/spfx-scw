@@ -333,11 +333,13 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         const eventValue = event;
         const values = value
         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
+        const specialCharFound = /[[:punct:]]/.test(value);
         
         const firstDiv = document.getElementById('first-line');
 
         console.log("Parent Value", values);
         console.log("Parent Event Name", event);
+        console.log("charfound", specialCharFound);
 
 
 
