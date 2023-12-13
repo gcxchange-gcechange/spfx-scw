@@ -22,7 +22,7 @@
     "@microsoft/sp-property-pane": "1.17.4",
     "@microsoft/sp-webpart-base": "1.17.4",
     "@pnp/spfx-controls-react": "3.15.0",
-    "antd": "^5.1.7",
+    "antd": "5.1.7",
     "html-react-parser": "^3.0.12",
     "office-ui-fabric-react": "^7.199.1",
     "react": "17.0.1",

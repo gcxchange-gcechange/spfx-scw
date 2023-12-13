@@ -4,7 +4,7 @@ import { IIconStyles, Icon, Modal } from "@fluentui/react";
 import { IconButton } from "@fluentui/react/lib/Button";
 import styles from "./Scw.module.scss";
 import { Stack, StackItem } from "office-ui-fabric-react/lib/Stack";
-import parse from 'html-react-parser';
+//import parse from 'html-react-parser';
 import { SelectLanguage } from './SelectLanguage';
 // import { IButtonStyles } from "office-ui-fabric-react";
 // import { PrimaryButton } from "office-ui-fabric-react";
@@ -55,7 +55,11 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     },
 
     body: {
-      padding: '20px'
+      paddingTop: "20px",
+      paddingBottom: "20px",
+      paddingLeft: "30px",
+      paddingRight: "30px",
+     
     },
     footer: {
       padding: "10px",
@@ -357,9 +361,58 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     return  message;
   };
 
+  public renderMessages = ():JSX.Element => {
+
+    const {current, commPurpose, engName, frCommName, shEngDesc, shFrDesc } = this.props;
+    // const values = [ commPurpose, engName, frCommName, shEngDesc, shFrDesc];
+
+    interface PropValues {
+      name: string;
+      value: any;
+    }
+    
+    const firstValues: PropValues[] = [
+      { name: `${ this.strings.commPurpose_title }`, value: `${commPurpose}` },
+      { name: `${ this.strings.engName_title }`, value: `${engName}` },
+      { name: `${ this.strings.frCommName_title }`, value: `${frCommName}` },
+      { name: `${ this.strings.shEngDesc_title }`, value: `${shEngDesc}` },
+      { name: `${ this.strings.shFrDesc_title }`, value: `${shFrDesc}` },
+    ];
+
+    const emptyValues: any[] =[];
+
+    if(current === 0 ) {
+      firstValues.forEach((obj) => {
+          if(obj.value.length < 5) {
+            emptyValues.push({name: obj.name , value: obj.value});
+          }
+      })
+    }
+      return (
+        <>
+        {emptyValues.map((item, index) => (
+          <>
+          <h3 key={index}><strong>{item.name}</strong></h3>
+            {item.value.length >=1  ? (
+              <ul>
+                <li>Must be at least 5 characters in length. Please add a longer name.</li>
+              </ul>
+            ):(
+              <ul>
+                <li>Cannot be left blank. Please add </li>
+              </ul>
+              )
+            }
+          </>
+        ))}
+      </>
+      )
+  }
+
   public render(): React.ReactElement<IErrorModalProps> {
 
-    const messages = parse(this.errorMessage());
+    // const messages = parse(this.errorMessage());
+    const newMessage = this.renderMessages();
 
     const iconStyles: Partial<IIconStyles> = { 
       root: { fontSize: '70px',
@@ -449,6 +502,8 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     //   </>
     // );
 
+ 
+
     return (
       <>
         <Modal
@@ -475,7 +530,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
               </div>
               <div style={this.modalStyle.body}>
                 <h3>Please review the following fields</h3>
-                {messages}
+                {newMessage}
               </div>
               <div style={this.modalStyle.footer}>
                 <Stack>
