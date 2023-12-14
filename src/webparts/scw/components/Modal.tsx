@@ -380,29 +380,61 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     ];
 
     const emptyValues: any[] =[];
+    const specialChar: any[] = [];
 
     if(current === 0 ) {
       firstValues.forEach((obj) => {
+        const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(obj.value);
+        const matchChar = obj.value.match(/[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/g);
+        let special = "";
           if(obj.value.length < 5) {
+           
             emptyValues.push({name: obj.name , value: obj.value});
+
+              
+              console.log("MATCH", matchChar);
+
+              if(charAllowed) {
+
+                if(matchChar) {
+                  special = matchChar.join('');
+                  emptyValues[emptyValues.length - 1].specialChar = special;
+                  console.log("s", special)
+               }
+            }
+          } else if (charAllowed) {
+              if(matchChar) {
+                special = matchChar.join('');
+                specialChar.push({name: obj.name, value: obj.value, specialChar: special})
+                console.log("s", special)
+            }
+
           }
       })
     }
+    console.log("SARRAY",specialChar);
+    console.log("empty",emptyValues);
       return (
         <>
         {emptyValues.map((item, index) => (
           <>
           <h3 key={index}><strong>{item.name}</strong></h3>
-            {item.value.length >=1  ? (
+            {item.value.length >= 1  ? (
               <ul>
-                <li>Must be at least 5 characters in length. Please add a longer name.</li>
+                <li>Must be at least 5 characters in length. Please add a longer {item.name.split(" ").pop()}.</li>
+                {( item.specialChar && item.name === "English community name" || item.name === "French community name") && (
+                  <li>Please remove the following special characters: <span style={{color:'#C61515'}}> {item.specialChar} </span></li>
+                )}
               </ul>
             ):(
               <ul>
-                <li>Cannot be left blank. Please add </li>
+                <li>Cannot be left blank. Please add a {item.name.split(" ").pop()} </li>
               </ul>
               )
             }
+            {/* {specialChar.length > 0 && (
+              <li>Please remove the following special characters:</li>
+            )} */}
           </>
         ))}
       </>
@@ -518,7 +550,12 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
           <div>
             
               <div style={ this.modalStyle.header}>
-                <IconButton iconProps={{iconName: "ChromeClose"}} className ={styles.cancelIcon} />
+                <IconButton iconProps={{iconName: "ChromeClose"}} 
+                  className ={styles.cancelIcon}  
+                  tabIndex={1} 
+                  aria-label= { this.strings.close } 
+                  onClick={ this.props.onClose}
+                />
                 <Stack>
                   <StackItem align="center">
                   <Icon iconName={"Error"} styles={iconStyles}/>

@@ -46,7 +46,7 @@ define([], function() {
     "shEngDesc_Modal": "<span style=fontWeight:normal>the</span><strong> Short English description</strong>",
     "shEngDesc_desc": 'The community description will be visible to users when they use the “All Communities” page and when they search for it. ',
     "shEngDesc_Instruction": 'Must be between 5 and 100 characters.',
-    "shFrDesc_title": 'Short French description ',
+    "shFrDesc_title": 'Short French description',
     "shFrDesc_Modal": '<span style=fontWeight:normal>the</span><strong> Short French description </strong>',
     "shFrDesc_desc": 'The community description will be visible to users when they use the “All Communities” page and when they search for it. ',
     "shFrDesc_Instruction": 'Must be between 5 and 100 characters.',
