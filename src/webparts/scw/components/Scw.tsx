@@ -558,8 +558,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     public render(): React.ReactElement<IScwProps>  { 
       
-        
         const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, errorMessage, showModal, checkedValues, showCallout, targetId, isError } = this.state;
+        console.log("currentPage", current);
 
         const steps = [
         
