@@ -4,7 +4,7 @@ import { IIconStyles, Icon, Modal } from "@fluentui/react";
 import { IconButton } from "@fluentui/react/lib/Button";
 import styles from "./Scw.module.scss";
 import { Stack, StackItem } from "office-ui-fabric-react/lib/Stack";
-//import parse from 'html-react-parser';
+import parse from 'html-react-parser';
 import { SelectLanguage } from './SelectLanguage';
 // import { IButtonStyles } from "office-ui-fabric-react";
 // import { PrimaryButton } from "office-ui-fabric-react";
@@ -105,13 +105,13 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       
     }
 
-    const firstValues: PropValues[] = [
-      { name: `${ this.strings.commPurpose_Modal }`, value: `${commPurpose}` },
-      { name: `${ this.strings.engName_Modal }`, value: `${engName}` },
-      { name: `${ this.strings.frCommName_Modal }`, value: `${frCommName}` },
-      { name: `${ this.strings.shEngDesc_Modal }`, value: `${shEngDesc}` },
-      { name: `${ this.strings.shFrDesc_Modal }`, value: `${shFrDesc}` },
-    ];
+    // const firstValues: PropValues[] = [
+    //   { name: `${ this.strings.commPurpose_Modal }`, value: `${commPurpose}` },
+    //   { name: `${ this.strings.engName_Modal }`, value: `${engName}` },
+    //   { name: `${ this.strings.frCommName_Modal }`, value: `${frCommName}` },
+    //   { name: `${ this.strings.shEngDesc_Modal }`, value: `${shEngDesc}` },
+    //   { name: `${ this.strings.shFrDesc_Modal }`, value: `${shFrDesc}` },
+    // ];
       const invalidUserBold = "<strong>" + invalidUser + "</strong>"; //unvalid email need to be bold
     // const secondValues: PropValues[] = [
     //   { name: `${ this.strings.community_classification_Modal }`, value: `${selectedChoice}` },
@@ -160,52 +160,52 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     //   }   
     // }
 
-    if (current === 0) {
-      const emptyValues: string[] = [];
-      const minArray: string[] = [];
-      const maxArray: string [] = [];
-      const hasSpecialCharacter: string [] =[];
+    // if (current === 0) {
+    //   const emptyValues: string[] = [];
+    //   const minArray: string[] = [];
+    //   const maxArray: string [] = [];
+    //   const hasSpecialCharacter: string [] =[];
 
-      for(const obj of firstValues ) {
-        const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(obj.value);
+    //   for(const obj of firstValues ) {
+    //     const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(obj.value);
 
-        if ( obj.value === "") {
-          emptyValues.push(obj.name);
-        }
-        else if (obj.value.length >= 1 && obj.value.length <= 5  ) {
-          if ((this.props.engName || this.props.frCommName) && charAllowed) {
-            hasSpecialCharacter.push(obj.name.concat(` - ${this.strings.onlyAlphabets}`))
-          }
-          minArray.push(obj.name.concat(` - `));
-        } 
-        else if (this.props.commPurpose && obj.value.length > 500) {
-          maxArray.push(obj.name);
-        } 
-        else if ((this.props.engName || this.props.frCommName) && obj.value.length > 80){
-          maxArray.push(obj.name);
+    //     if ( obj.value === "") {
+    //       emptyValues.push(obj.name);
+    //     }
+    //     else if (obj.value.length >= 1 && obj.value.length <= 5  ) {
+    //       if ((this.props.engName || this.props.frCommName) && charAllowed) {
+    //         hasSpecialCharacter.push(obj.name.concat(` - ${this.strings.onlyAlphabets}`))
+    //       }
+    //       minArray.push(obj.name.concat(` - `));
+    //     } 
+    //     else if (this.props.commPurpose && obj.value.length > 500) {
+    //       maxArray.push(obj.name);
+    //     } 
+    //     else if ((this.props.engName || this.props.frCommName) && obj.value.length > 80){
+    //       maxArray.push(obj.name);
         
-        } 
-        else if ((this.props.engName || this.props.frCommName) && (obj.value.length >= 5 && obj.value.length <= 80)) {
-          if(charAllowed) {
-            hasSpecialCharacter.push(obj.name)
-          }
+    //     } 
+    //     else if ((this.props.engName || this.props.frCommName) && (obj.value.length >= 5 && obj.value.length <= 80)) {
+    //       if(charAllowed) {
+    //         hasSpecialCharacter.push(obj.name)
+    //       }
          
-        }
+    //     }
        
-      }
+    //   }
 
 
-      console.log('minArray', minArray);
-      console.log('maxArray', maxArray);
-      console.log('spChar', hasSpecialCharacter);
-      console.log('empty:',emptyValues);
+    //   console.log('minArray', minArray);
+    //   console.log('maxArray', maxArray);
+    //   console.log('spChar', hasSpecialCharacter);
+    //   console.log('empty:',emptyValues);
 
      
 
-      const messageArray: string[] = [...minArray, ...maxArray, ...hasSpecialCharacter, ...emptyValues];
-      message = messageArray.toString();
-      console.log("MARRAY", messageArray);
-    }
+    //   const messageArray: string[] = [...minArray, ...maxArray, ...hasSpecialCharacter, ...emptyValues];
+    //   message = messageArray.toString();
+    //   console.log("MARRAY", messageArray);
+    // }
 
     // for (const obj of secondValues) {
     //   if (current === 1 && obj.value === "") {
@@ -361,17 +361,11 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     return  message;
   };
 
-  public renderMessages = ():JSX.Element => {
+  public renderFirstPageMessage = ():JSX.Element => {
 
     const {current, commPurpose, engName, frCommName, shEngDesc, shFrDesc } = this.props;
-    // const values = [ commPurpose, engName, frCommName, shEngDesc, shFrDesc];
 
-    interface PropValues {
-      name: string;
-      value: any;
-    }
-    
-    const firstValues: PropValues[] = [
+    const firstValues: any[] = [
       { name: `${ this.strings.commPurpose_title }`, value: `${commPurpose}` },
       { name: `${ this.strings.engName_title }`, value: `${engName}` },
       { name: `${ this.strings.frCommName_title }`, value: `${frCommName}` },
@@ -380,71 +374,98 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     ];
 
     const emptyValues: any[] =[];
-    const specialChar: any[] = [];
 
-    if(current === 0 ) {
+    if (current === 0 ){
+
+      //iterate through the values in obj arary
+
       firstValues.forEach((obj) => {
+        console.log("obj", obj);
         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(obj.value);
         const matchChar = obj.value.match(/[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/g);
-        let special = "";
-          if(obj.value.length < 5) {
-           
-            emptyValues.push({name: obj.name , value: obj.value});
+        let special = '';
 
-              
-              console.log("MATCH", matchChar);
+        if ((obj.name === "English community name" || obj.name === "French community name") && matchChar ) {
+          special = matchChar.join('');
+          emptyValues.push({name: obj.name, value: obj.value, specialChar: special})
+        }
+        else if(obj.value.length < 5 && !charAllowed) {
+          emptyValues.push({name: obj.name, value: obj.value, specialChar: special })
+        }
 
-              if(charAllowed) {
-
-                if(matchChar) {
-                  special = matchChar.join('');
-                  emptyValues[emptyValues.length - 1].specialChar = special;
-                  console.log("s", special)
-               }
-            }
-          } else if (charAllowed) {
-              if(matchChar) {
-                special = matchChar.join('');
-                specialChar.push({name: obj.name, value: obj.value, specialChar: special})
-                console.log("s", special)
-            }
-
-          }
       })
+
     }
-    console.log("SARRAY",specialChar);
-    console.log("empty",emptyValues);
+
       return (
         <>
         {emptyValues.map((item, index) => (
           <>
+          <h3>Please review the following fields</h3>
           <h3 key={index}><strong>{item.name}</strong></h3>
-            {item.value.length >= 1  ? (
-              <ul>
-                <li>Must be at least 5 characters in length. Please add a longer {item.name.split(" ").pop()}.</li>
-                {( item.specialChar && item.name === "English community name" || item.name === "French community name") && (
-                  <li>Please remove the following special characters: <span style={{color:'#C61515'}}> {item.specialChar} </span></li>
-                )}
-              </ul>
-            ):(
-              <ul>
-                <li>Cannot be left blank. Please add a {item.name.split(" ").pop()} </li>
-              </ul>
-              )
-            }
-            {/* {specialChar.length > 0 && (
-              <li>Please remove the following special characters:</li>
-            )} */}
+          <ul>
+            {item.value.length >=1 && item.value.length < 5  && (<li>Must be at least 5 characters in length. Please add a longer {item.name.split(" ").pop()}.</li>) }
+            {item.specialChar && ( <li>Please remove the following special characters: <span style={{color:'#C61515'}}> {item.specialChar} </span></li>) }
+            {item.value === '' && (<li>Cannot be left blank. Please add a {item.name.split(" ").pop()}. </li>)}
+          </ul>
           </>
         ))}
       </>
-      )
+      );
+  }
+
+  public renderSecondPageMessage = ():string => {
+
+    const {current, invalidUser, ownerList, requestor } = this.props;
+
+    const invalidUserBold = "<strong>" + invalidUser + "</strong>";
+    let requestingUser: string = '';
+
+    const secondPageValues: any[] = [
+      { name: `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}` },
+      { name: `${this.strings.requestorUser }`, value: `${requestingUser}` },
+      { name: `${this.strings.you_must} ${this.strings.one_more_owner}`, value: `${ownerList.length}`}
+    ];
+
+    for (let i = 0; i < ownerList.length; i++) {
+      console.log("O",ownerList[i])
+      if ( ownerList[i] === requestor) {
+        requestingUser =  requestor
+      } 
+      
+    }
+
+    const resultValues: any[] =[];
+    let message = "";
+
+    if (current === 0 ){
+
+      //iterate through the values in obj arary
+
+      secondPageValues.forEach((obj) => {
+        console.log("obj", obj);
+        if ((obj.name === `${this.strings.you_must} ${this.strings.one_more_owner}` && obj.value < 1 && invalidUser === '') || (obj.name === `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}` && obj.value !== '') || (obj.name === `${this.strings.requestorUser}` && obj.value !== '')) {
+          resultValues.push(obj.name);
+              if (resultValues.length > 1) {
+                  const tolower = resultValues.slice(-1)[0];
+                  message = resultValues.slice(0, -1).join(`,`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
+          }
+          else if (resultValues.length === 1){
+            message = `${obj.name}`
+          }
+        }
+      })
+    }
+
+      return message;
+      
   }
 
   public render(): React.ReactElement<IErrorModalProps> {
 
     // const messages = parse(this.errorMessage());
-    const newMessage = this.renderMessages();
+    const firstPageErrorMessage = this.renderFirstPageMessage();
+    const secondPageErrorMessage = parse(this.renderSecondPageMessage());
 
     const iconStyles: Partial<IIconStyles> = { 
       root: { fontSize: '70px',
@@ -566,8 +587,9 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
                 </Stack>
               </div>
               <div style={this.modalStyle.body}>
-                <h3>Please review the following fields</h3>
-                {newMessage}
+                
+                {this.props.current === 0 && (firstPageErrorMessage)}
+                {this.props.current === 1 && (secondPageErrorMessage)} 
               </div>
               <div style={this.modalStyle.footer}>
                 <Stack>
