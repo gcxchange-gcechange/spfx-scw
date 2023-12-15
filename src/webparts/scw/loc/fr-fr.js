@@ -35,11 +35,11 @@ define([], function() {
         "frCommName_desc": "Le nom de la collectivité est le titre de votre collectivité. Créer un nom court et descriptif. Un nom bilingue respecte la Loi sur les langues officielles et permet aux autres de trouver plus facilement votre collectivité dans le catalogue GCÉchange. ",
         "frCommName_Instruction": 'Utiliser des mots-clés, et non des abréviations, pour aider les gens à repérer votre collectivité. La longueur doit être de 5 à 80 caractères. Seuls les caractères alphabétiques (avec accents français), les nombres, les espaces et les apostrophes sont permis.',
         "shEngDesc_title": 'Brève description en anglais',
-        "shEngDesc_Modal": "<span style=fontWeight:normal>une</span> <strong>brève description en anglais</strong>",
+        "shEngDesc_Modal": "description en anglais",
         "shEngDesc_desc": 'La description de la collectivité sera visible pour les utilisateurs lorsqu’ils utiliseront la page « Toutes les collectivités » et lorsqu’ils font une recherche.',
         "shEngDesc_Instruction": 'La longueur doit être de 5 à 100 caractères.',
         "shFrDesc_title": 'Brève description en français',
-        "shFrDesc_Modal": '<span style=fontWeight:normal>une</span> <strong>brève description en français</strong>',
+        "shFrDesc_Modal": 'description en français',
         "shFrDesc_desc": 'La description de la collectivité sera visible pour les utilisateurs lorsqu’ils utiliseront la page « Toutes les collectivités » et lorsqu’ils font une recherche.',
         "shFrDesc_Instruction": 'La longueur doit être de 5 à 100 caractères.',
         "owners_Instruction": 'Commencez à taper l’adresse courriel d’un propriétaire pour le trouver et l’ajouter.',
@@ -135,6 +135,12 @@ define([], function() {
         "requestorUser":"En tant que demandeur de la création de cette collectivité, vous êtes automatiquement ajouté comme propriétaire.</span> <strong>Vous ne pouvez pas vous inviter en tant que propriétaire</strong>. Veuillez vous désinscrire",
         "onlyAlphabets":"Seuls les caractères alphabétiques (avec accents français), les nombres, les espaces et les apostrophes sont permis.",
         "oops": "Oops!",
+        "minCharacters":"La longueur doit être d’au moins 5 caractères. Veuillez ajouter",
+        "remove": "Veuillez supprimer les caractères spéciaux suivants : ",
+        "blankField":"Ne pas laisser en blanc. Veuillez ajouter",
+        "aLonger":"plus long",
+        "purpose":"objet",
+        
 
     } 
 });

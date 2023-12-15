@@ -141,6 +141,11 @@ declare interface IScwWebPartStrings {
   requestorUser: string;
   onlyAlphabets: string;
   oops: string;
+  minCharacters: string;
+  remove: string;
+  blankField: string;
+  aLonger: string;
+  purpose: string;
 
 
 

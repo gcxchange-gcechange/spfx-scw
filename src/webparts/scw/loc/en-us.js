@@ -47,7 +47,7 @@ define([], function() {
     "shEngDesc_desc": 'The community description will be visible to users when they use the “All Communities” page and when they search for it. ',
     "shEngDesc_Instruction": 'Must be between 5 and 100 characters.',
     "shFrDesc_title": 'Short French description',
-    "shFrDesc_Modal": '<span style=fontWeight:normal>the</span><strong> Short French description </strong>',
+    "shFrDesc_Modal": 'Short French description',
     "shFrDesc_desc": 'The community description will be visible to users when they use the “All Communities” page and when they search for it. ',
     "shFrDesc_Instruction": 'Must be between 5 and 100 characters.',
     "owners_Instruction": ' Start typing an owner’s email address to find and add them.',
@@ -144,6 +144,11 @@ define([], function() {
     "requestorUser":"As the requester of this community, you are automatically added as an owner. You <strong>cannot invite yourself as an owner.</strong> Please remove yourself",
     "onlyAlphabets": "Only alphabets (with French accents), numbers, spaces and apostrophes are allowed.",
     "oops": "Oops!",
+    "minCharacters":"Must be at least 5 characters in length. Please add",
+    "remove": "Please remove the following special characters:",
+    "blankField":"Cannot be left blank. Please add",
+    "aLonger":"a longer",
+    "purpose":"purpose",
     
 
 
