@@ -121,11 +121,11 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     //   { name: `${ this.strings.term_of_use.toLowerCase() }`, value: `${filtered.length}` },
     // ];
 
-    const fourthValues: PropValues[] = [
-      { name: `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}` },
-      { name: `${this.strings.requestorUser }`, value: `${requestingUser}` },
-      { name: `${this.strings.you_must} ${this.strings.one_more_owner}`, value: `${ownerList.length}`}
-    ];
+    // const fourthValues: PropValues[] = [
+    //   { name: `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}` },
+    //   { name: `${this.strings.requestorUser }`, value: `${requestingUser}` },
+    //   { name: `${this.strings.you_must} ${this.strings.one_more_owner}`, value: `${ownerList.length}`}
+    // ];
 
     const lastValues: PropValues[] = [
       { name: `${ this.strings.commPurpose_Modal }`, value: `${commPurpose}` },
@@ -142,164 +142,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     const results: string[] = [];
     const comma = `<span style=fontWeight:normal>, </span>`;
   
-    // if (current === 0) {
-    //   for (const obj of firstValues) {
-    //     if( obj.value === "") {
-    //       results.push(obj.name);
-    //       console.log("RESULTS", results);
-          
-    //         if (results.length > 1) {
-    //             message = `${this.strings.you_must} ${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + results.slice(-1)
-            
-    //       } 
-    //       else if ( results.length === 1 ) {
-    //             message = `${this.strings.you_must} ${this.strings.provide} ${obj.name}`
-    //       }
-    //     }
-       
-    //   }   
-    // }
 
-    // if (current === 0) {
-    //   const emptyValues: string[] = [];
-    //   const minArray: string[] = [];
-    //   const maxArray: string [] = [];
-    //   const hasSpecialCharacter: string [] =[];
-
-    //   for(const obj of firstValues ) {
-    //     const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(obj.value);
-
-    //     if ( obj.value === "") {
-    //       emptyValues.push(obj.name);
-    //     }
-    //     else if (obj.value.length >= 1 && obj.value.length <= 5  ) {
-    //       if ((this.props.engName || this.props.frCommName) && charAllowed) {
-    //         hasSpecialCharacter.push(obj.name.concat(` - ${this.strings.onlyAlphabets}`))
-    //       }
-    //       minArray.push(obj.name.concat(` - `));
-    //     } 
-    //     else if (this.props.commPurpose && obj.value.length > 500) {
-    //       maxArray.push(obj.name);
-    //     } 
-    //     else if ((this.props.engName || this.props.frCommName) && obj.value.length > 80){
-    //       maxArray.push(obj.name);
-        
-    //     } 
-    //     else if ((this.props.engName || this.props.frCommName) && (obj.value.length >= 5 && obj.value.length <= 80)) {
-    //       if(charAllowed) {
-    //         hasSpecialCharacter.push(obj.name)
-    //       }
-         
-    //     }
-       
-    //   }
-
-
-    //   console.log('minArray', minArray);
-    //   console.log('maxArray', maxArray);
-    //   console.log('spChar', hasSpecialCharacter);
-    //   console.log('empty:',emptyValues);
-
-     
-
-    //   const messageArray: string[] = [...minArray, ...maxArray, ...hasSpecialCharacter, ...emptyValues];
-    //   message = messageArray.toString();
-    //   console.log("MARRAY", messageArray);
-    // }
-
-    // for (const obj of secondValues) {
-    //   if (current === 1 && obj.value === "") {
-    //     message = `${this.strings.select }  ${obj.name}`;
-    //   }
-    // }
-
-    // for (const obj of thirdValues) {
-    //   console.log("thirdValues", obj.value)
-    //   if (current === 2 && (obj.value === '' || obj.value < 7)) {
-    //     message += `${this.strings.agree} ${ obj.name }`;
-    //   }
-    // }
-
-    // for  (const obj of fourthValues) {
-    //   console.log("foruth", obj)
-
-    //   if ( (current === 1 && obj.value < 2 ) || invalidUser !== null || user !== null ) {
-    //     results.push(obj.name);
-    //     const owners = results.slice(0, -1);
-
-    //     console.log("owners", owners);
-
-    //     if ( owners.length > 1 ) {
-    //       message =  `${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` + results.slice(-1)
-    //     } 
-    //     else if (owners.length === 1) {
-    //       message = `${obj.name}`
-    //     }
-        
-    //   }
-    //   console.log("res", results);
-
-  
-    // }
-
-
-    if (current === 1 ) {
-      for (const obj of fourthValues) {
-         // console.log("obj", obj)
-          if ((obj.name === `${this.strings.you_must} ${this.strings.one_more_owner}` && obj.value < 1 && invalidUser === '') || (obj.name === `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}` && obj.value !== '') || (obj.name === `${this.strings.requestorUser}` && obj.value !== '')) {
-          results.push(obj.name);
-              if (results.length > 1) {
-                  const tolower = results.slice(-1)[0];
-                  message = results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
-          }
-          else if (results.length === 1){
-            message = `${obj.name}`
-          }
-        }
-        // console.log("results", results)
-      }
-      // if (ownerList.length <= 1 && invalidUser === '' || requestingUser === '') {
-        //     message = `${this.strings.one_more_owner }`
-        //  }
-    }
-   
-   
-    // if (current ===  1) {
-      
-    //   if ( invalidUser ) {
-    //     message = `You must add a valid email. <strong>${invalidUser}</strong> is not a valid email. `
-    //   }
-    //   else if (user) {
-    //     message = `${user}`
-    //   }
-    //   else if ( ownerList.length <= 1 ) {
-    //     message = `${this.strings.one_more_owner }`
-    //   }
- 
-    // }
-   
-
-
-    // if (current === 2 ) {
-    //   debugger
-    //   for (const obj of lastValues) {
-    //     console.log('obj', obj);
-    //     if (obj.value === '' || obj.value <= 1  ) {
-    //       results.push(obj.name);
-    //       console.log("obj", obj);
-    //       console.log("results", results);
-       
-    //       if ( results.length > 1 ) {
-    //         message =  `${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` + results.slice(-1)
-    //       } 
-         
-    //       else if (results.length === 1) {
-    //         message = `${this.strings.provide} ${obj.name}`
-    //       }
-    //     }
-    //   }
-      
-    // }
 
       if (current === 2) {
           for (const obj of lastValues) {
@@ -385,7 +228,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
         const matchChar = obj.value.match(/[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/g);
         let special = '';
 
-        if ((obj.name === "English community name" || obj.name === "French community name") && matchChar ) {
+        if ((obj.name === `${this.strings.engName_title}` || obj.name === `${ this.strings.frCommName_title }`) && matchChar ) {
           special = matchChar.join('');
           emptyValues.push({name: obj.name, value: obj.value, specialChar: special})
         }
@@ -401,12 +244,13 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
         <>
         {emptyValues.map((item, index) => (
           <>
-          <h3>Please review the following fields</h3>
           <h3 key={index}><strong>{item.name}</strong></h3>
           <ul>
-            {item.value.length >=1 && item.value.length < 5  && (<li>Must be at least 5 characters in length. Please add a longer {item.name.split(" ").pop()}.</li>) }
-            {item.specialChar && ( <li>Please remove the following special characters: <span style={{color:'#C61515'}}> {item.specialChar} </span></li>) }
-            {item.value === '' && (<li>Cannot be left blank. Please add a {item.name.split(" ").pop()}. </li>)}
+            {item.value.length >=1 && item.value.length < 5  && 
+            (<li>{`${this.strings.minCharacters}`} {this.props.prefLang === 'fr-fr' ? item.name.split(" ")[0].toLowerCase() : item.name.split(" ").pop()}.</li>) 
+            }
+            {item.specialChar && ( <li>{`${this.strings.remove}`}<span style={{color:'#C61515'}}> {item.specialChar} </span></li>) }
+            {item.value === '' && (<li>{`${this.strings.blankField}`} {item.name.split(" ").pop()}. </li>)}
           </ul>
           </>
         ))}
@@ -418,14 +262,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
 
     const {current, invalidUser, ownerList, requestor } = this.props;
 
-    const invalidUserBold = "<strong>" + invalidUser + "</strong>";
     let requestingUser: string = '';
-
-    const secondPageValues: any[] = [
-      { name: `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}` },
-      { name: `${this.strings.requestorUser }`, value: `${requestingUser}` },
-      { name: `${this.strings.you_must} ${this.strings.one_more_owner}`, value: `${ownerList.length}`}
-    ];
 
     for (let i = 0; i < ownerList.length; i++) {
       console.log("O",ownerList[i])
@@ -434,36 +271,46 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       } 
       
     }
+    const invalidUserBold = "<strong>" + invalidUser + "</strong>";  //unvalid email need to be bold
+
+    const secondPageValues: any[] = [
+      { name: `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}` },
+      { name: `${this.strings.requestorUser }`, value: `${requestingUser}` },
+      { name: `${this.strings.you_must} ${this.strings.one_more_owner}`, value: `${ownerList.length}`}
+    ];
+
+    
+
+  
 
     const resultValues: any[] =[];
+    const comma = `<span style=fontWeight:normal>, </span>`;
     let message = "";
 
-    if (current === 0 ){
+    if (current === 1 ){
 
-      //iterate through the values in obj arary
-
-      secondPageValues.forEach((obj) => {
+      for (const obj of secondPageValues){
         console.log("obj", obj);
         if ((obj.name === `${this.strings.you_must} ${this.strings.one_more_owner}` && obj.value < 1 && invalidUser === '') || (obj.name === `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}` && obj.value !== '') || (obj.name === `${this.strings.requestorUser}` && obj.value !== '')) {
           resultValues.push(obj.name);
               if (resultValues.length > 1) {
                   const tolower = resultValues.slice(-1)[0];
-                  message = resultValues.slice(0, -1).join(`,`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
+                  message = resultValues.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
           }
           else if (resultValues.length === 1){
             message = `${obj.name}`
           }
         }
-      })
+      }
     }
-
+      console.log("MESSAGE", message);
       return message;
       
   }
 
   public render(): React.ReactElement<IErrorModalProps> {
 
-    // const messages = parse(this.errorMessage());
+    //const messages = parse(this.errorMessage());
     const firstPageErrorMessage = this.renderFirstPageMessage();
     const secondPageErrorMessage = parse(this.renderSecondPageMessage());
 
@@ -588,8 +435,18 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
               </div>
               <div style={this.modalStyle.body}>
                 
-                {this.props.current === 0 && (firstPageErrorMessage)}
-                {this.props.current === 1 && (secondPageErrorMessage)} 
+                {this.props.current === 0 && (
+                  <>
+                  <h3>Please review the following fields</h3>
+                  {firstPageErrorMessage}
+                  </>
+                )}
+
+                {this.props.current === 1 && (
+                  <Stack>
+                    <p className={styles.modalContent}> {secondPageErrorMessage} {this.strings.before_proceeding}</p>
+                  </Stack>
+                )} 
               </div>
               <div style={this.modalStyle.footer}>
                 <Stack>

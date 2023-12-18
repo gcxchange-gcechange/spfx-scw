@@ -90,64 +90,100 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
    
 
-    private next = (): void =>  { 
-        
+    // private next = (): void =>  { 
        
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail } = this.state
+    //     const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail } = this.state
+    //     const values = {engName, frCommName, shEngDesc, shFrDesc, commPurpose}
 
 
-        // const filtered = checkedValues.filter((value, index) => {
-        //     return checkedValues.indexOf(value) === index
-        //   });
-        // console.log("filtered",filtered)
-        console.log("OwnerList", ownerList);
+    //     // const filtered = checkedValues.filter((value, index) => {
+    //     //     return checkedValues.indexOf(value) === index
+    //     //   });
+    //     // console.log("filtered",filtered)
+    //     console.log("OwnerList", ownerList);
 
-        let requestorEmail: string = '';
+    //     let requestorEmail: string = '';
 
-        for (let i = 0; i < ownerList.length; i++) {
-            if ( ownerList[i] === this.props.requestor) {
-                console.log("found")
-                requestorEmail = ownerList[i];
+    //     for (let i = 0; i < ownerList.length; i++) {
+    //         if ( ownerList[i] === this.props.requestor) {
+    //             console.log("found")
+    //             requestorEmail = ownerList[i];
 
-                console.log("email",requestorEmail);
-            }
+    //             console.log("email",requestorEmail);
+    //         }
             
-        }
-        
-       
-       if ( current === 0 && (!commPurpose  || !engName || !frCommName  || !shEngDesc || !shFrDesc )) {
-        this.setState({showModal: true});
-       }
+    //     }
+            //const validateStringLength = (value: string, minLength: number): boolean => value.length >= minLength;
+            //const isLessThanMin = Object.values(values).some((value) => !validateStringLength(value, 5));
+            //const hasSpecialChar = Object.entries(values).some(([key, value]) => (key === 'engName' || key === 'frCommName') && /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value));
 
+    //     if (current === 0 ) {
 
-    //    else if ( current === 1 && selectedChoice === '' ) {
-            
-    //          this.setState({ showModal: true });
-    //    }
-       
-    //    else if ( current === 2 &&  selectedChoice === `${this.strings.protected_cardTitle}` && filtered.length < 7 ) {
+    //         let isLessThanMin =  false;
+    //         let hasSpecialChar = false;
+    
+    
+
+    //         for (const [key, value] of Object.entries(values)) {
+
+    //             const isCharAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value);
+
+    //                 if (value.length < 5) {
+    //                     isLessThanMin = true;
+    //                     this.setState({showModal: true});
+    //                 } 
+                    
+    //                 if ((key === 'engName' || key === "frCommName") && isCharAllowed ) {
+    //                     hasSpecialChar = true;
+    //                     this.setState({showModal: true});
                 
-    //             this.setState({ showModal: true });
-    //    } 
-        else if ( current === 1 && ownerList.length < 1 ) {
-            this.setState({ showModal: true });
-        }        
-         else if (current === 1 &&  invalidEmail !== '' ) {
-            this.setState({ showModal: true });
-            
-        }
-        else if ( current  === 1 && requestorEmail !== '') {
-            this.setState({ showModal: true });
-        }
-      
-        else {
+    //                 }
+    //         }
 
-            this.goToNextPg(current);
-            // this.setState({invalidEmail: ''})
-        }
+    //     if (!isLessThanMin || !hasSpecialChar) {
+    //         this.goToNextPg(current);
+    //     } 
+    // }
+    //     else if ( current === 1 && ownerList.length < 1 ) {
+    //         this.setState({ showModal: true });
+    //     }        
+    //      else if (current === 1 &&  invalidEmail !== '' ) {
+    //         this.setState({ showModal: true });
+            
+    //     }
+    //     else if ( current  === 1 && requestorEmail !== '') {
+    //         this.setState({ showModal: true });
+    //     }
+      
+    //     else {
+          
+    //         this.goToNextPg(current);
+    //         // this.setState({invalidEmail: ''})
+    //     }
 
        
-    }
+    // }
+
+    private next = (): void => {
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail } = this.state;
+        const values = { engName, frCommName, shEngDesc, shFrDesc, commPurpose };
+    
+        const validateStringLength = (value: string, minLength: number): boolean => value.length >= minLength;
+    
+        const isLessThanMin = Object.values(values).some((value) => !validateStringLength(value, 5));
+        const hasSpecialChar = Object.entries(values).some(([key, value]) => (key === 'engName' || key === 'frCommName') && /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value));
+
+        const requestorEmail = ownerList.find((email) => email === this.props.requestor);
+    
+        const showModal = isLessThanMin || hasSpecialChar || (current === 1 && (ownerList.length < 1 || invalidEmail !== '' || requestorEmail !== ''));
+    
+        if (!showModal) {
+            this.goToNextPg(current);
+        } else {
+            this.setState({ showModal: true });
+        }
+    };
+    
 
 
     public closeModal = (): void => {
@@ -156,11 +192,11 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         })
     }
 
-    private goToNextPg = (pageNumber: number): void =>  {             
+        private goToNextPg = (pageNumber: number): void =>  {             
         this.setState ((prevState) => ({
             current: prevState.current + 1
         }))
-    }
+     }
 
     private prev = (): void =>  { 
         const prevPage = this.state.current - 1;   
