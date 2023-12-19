@@ -247,9 +247,9 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
           <h3 key={index}><strong>{item.name}</strong></h3>
           <ul>
             {item.value.length >=1 && item.value.length < 5  && 
-            (<li>{`${this.strings.minCharacters}`} {this.props.prefLang === 'fr-fr' ? item.name.split(" ")[0].toLowerCase() : item.name.split(" ").pop()}.</li>) 
+            (<li>{`${this.strings.minCharacters}`} {this.props.prefLang === 'fr-fr'  ? item.name.split(" ")[0].toLowerCase() : item.name.split(" ").pop()}.</li>) 
             }
-            {item.specialChar && ( <li>{`${this.strings.remove}`}<span style={{color:'#C61515'}}> {item.specialChar} </span></li>) }
+            {item.specialChar && ( <li>{`${this.strings.remove_special_char}`}<span style={{color:'#C61515'}}> {item.specialChar} </span></li>) }
             {item.value === '' && (<li>{`${this.strings.blankField}`} {item.name.split(" ").pop()}. </li>)}
           </ul>
           </>
@@ -287,11 +287,17 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     const comma = `<span style=fontWeight:normal>, </span>`;
     let message = "";
 
+ 
     if (current === 1 ){
 
       for (const obj of secondPageValues){
         console.log("obj", obj);
-        if ((obj.name === `${this.strings.you_must} ${this.strings.one_more_owner}` && obj.value < 1 && invalidUser === '') || (obj.name === `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}` && obj.value !== '') || (obj.name === `${this.strings.requestorUser}` && obj.value !== '')) {
+
+        const addOneMoreOwner = obj.name === `${this.strings.you_must} ${this.strings.one_more_owner}`;
+        const invalidEmail = obj.name === `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}`;
+        const removeRequestor = obj.name === `${this.strings.requestorUser}`;
+
+        if ((addOneMoreOwner && obj.value < 1 && invalidUser === '') || (invalidEmail && obj.value !== '') || (removeRequestor && obj.value !== '')) {
           resultValues.push(obj.name);
               if (resultValues.length > 1) {
                   const tolower = resultValues.slice(-1)[0];
@@ -324,86 +330,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
 
     console.log("currnet page", this.props.current)
 
-    // return (
-    //   <>
-       
-    //       <Modal
-    //         titleAriaId={this.strings.oops}
-    //         isOpen={ this.props.showModal}
-    //         onDismiss={ this.props.onClose}
-    //         isBlocking={ true}
-    //         styles={{
-    //           main: this.modalStyle.main,
-    //         }}
-    //       >
-    //         <div>
-    //         <div style={ this.modalStyle.header}>
-    //           <IconButton
-    //               tabIndex={1}
-    //               aria-label= { this.strings.close }
-    //               className={styles.cancelIcon}
-    //               iconProps={{ iconName: "Cancel" }}
-    //               onClick={ this.props.onClose}
-    //           />
-    //           <Stack>
-    //             <StackItem align="center" >
-    //               <IconButton
-    //               tabIndex={1}
-    //               aria-label={ this.strings.oops }
-    //               styles={ iconStyles }
-    //               // className={styles.oopsIcon}
-    //               iconProps={ iconProps }
-    //               />
-    //             </StackItem>
-    //             <Stack.Item align="center" >
-    //               <h2>{this.strings.oops}</h2>
-    //             </Stack.Item>
-    //           </Stack>
-
-    //         </div>
-    //         <div style={ this.modalStyle.footer}>
-    //           <Stack>
-    //             <Stack.Item align="center">
-    //               {/* { this.props.invalidUser  ?
-    //               ( <p className={ styles.modalContent }>{ this.strings.you_must } {parse(`${this.strings.provide}`)} { this.strings.valid_email } <strong>{messages}</strong> {this.strings.is_not_valid}</p>)
-    //               : this.props.requestor ? 
-    //               ( <p className={ styles.modalContent }><strong>{messages}</strong></p> )
-    //               :
-    //                 <p className={ styles.modalContent }>{ this.strings.you_must } <strong>{messages}</strong> { this.strings.before_proceeding }</p>
-    //               } */}
-    //               {  
-    //               // ( <p className={ styles.modalContent }>{ this.strings.you_must } {parse(`${this.strings.provide}`)} { this.strings.valid_email } <strong>{messages}</strong> {this.strings.is_not_valid}</p>)
-    //               // :
-    //               this.props.current === 1 ? 
-    //               <p>{messages} { this.strings.before_proceeding }</p>
-    //               :
-    //               <p className={styles.modalContent}> {messages} {this.strings.before_proceeding}</p>
-    //               }
-                  
-    //             </Stack.Item>
-    //             <Stack.Item>
-    //               <hr  aria-hidden= 'true' className={styles.horizontalLine} />
-    //             </Stack.Item>
-    //             <Stack.Item align="center">
-    //               <button
-    //                 tabIndex={2}
-    //                 aria-label= { this.strings.close }
-    //                 onClick={ this.props.onClose}
-    //                 className={styles.close}
-    //               >
-    //                 { this.strings.close }
-    //               </button>
-    //             </Stack.Item>
-    //           </Stack>
-    //         </div>
-    //         </div>
-    //       </Modal>
-       
-    //   </>
-    // );
-
  
-
     return (
       <>
         <Modal

@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import styles from './Scw.module.scss';
-import { ILabelStyles, ITextFieldStyles, Icon, Label, Stack, StackItem, TextField } from 'office-ui-fabric-react';
+import { ILabelStyles, Icon, Label, Stack, StackItem, TextField } from 'office-ui-fabric-react';
 import { SelectLanguage } from './SelectLanguage';
 import parse from 'html-react-parser';
 
@@ -20,6 +20,7 @@ export interface IFirstStepProps {
     errorMessage: string;
     showModal: boolean;
     isError: boolean;
+    color:string;
 
     handleOnChange?:(event:any, value: string)=> void;
     handleErrorMessage?: (errorMessage: string) => void;
@@ -40,14 +41,12 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
     }
     public strings = SelectLanguage(this.props.prefLang);
    
-
-  
-
-    
     public render(): React.ReactElement<IFirstStepProps> {
         
 
         const {engName, commPurpose,  frCommName, shEngDesc, shFrDesc } = this.props;
+        console.log("commPurpose",commPurpose);
+        
 
         const labelStyle: Partial<ILabelStyles> = {
             root: {
@@ -55,27 +54,29 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             },
             
         }
-        const characterLimitStyle: Partial<ITextFieldStyles> = {
-            description : {
-                float: 'right',
-                marginTop: '5px',
-                fontSize:'12px'
+
+        const charCountStyles = {
+            characterLimitStyle: {
+                    description : {
+                    float: 'right',
+                    marginTop: '5px',
+                    fontSize:'12px'
+                }
+            },
+            errorCharacterLimitStyle:  {
+                    description : {
+                    float: 'right',
+                    marginTop: '5px',
+                    fontSize:'12px',
+                    color: `${this.props.color}`,
+                    fontWeight: '700'
+                }
             }
-        }
 
-        const errorCharacterLimitStyle: Partial<ITextFieldStyles> = {
-            description : {
-                float: 'right',
-                marginTop: '5px',
-                fontSize:'12px',
-                color: '#C61515',
-                fontWeight: '700'
-            }
-        }
-
-        const errorText = document.getElementsByClassName('ms-TextField-errorMessage');
-
-        console.log("eT:",errorText);
+        };
+    
+    
+        //const errorText = document.getElementsByClassName('errorBorder');
 
        const stackTokens = { childrenGap: 18 }
 
@@ -89,7 +90,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                     { this.strings.commPurpose_title }
                 </Label> 
                 <p id='commPurposeDesc' className={ styles.instruction }>{ this.strings.commPurpose_Instruction}</p>  
-                <TextField styles={ errorText.length === 1 ? errorCharacterLimitStyle : characterLimitStyle } 
+                <TextField 
+                    styles={charCountStyles.errorCharacterLimitStyle  } 
                     aria-describedby="commPurposeDesc" 
                     name='commPurpose' 
                     id='Community purpose' 
@@ -98,16 +100,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                     description={`${commPurpose.length}/500`}
                     defaultValue={ commPurpose }  
                     validateOnLoad= { false } 
-                    validateOnFocusOut={true}
                     maxLength={500} 
-                    onGetErrorMessage={ value => { if (value.trim().length < 5 || value.length > 500 ) 
-                        return (
-                        <Stack horizontal horizontalAlign='center'>
-                            <Icon iconName="AlertSolid" className={styles.errorIcon}/>
-                            <p  className={styles.fieldInstruction}>{this.strings.special_char_validation}</p>
-                        </Stack>
-        
-                    )}}
+                    onGetErrorMessage={this.validateInput}
                 />
             </div>
             
@@ -123,7 +117,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                         </Label>
                         <p id="engNameDesc" className={ styles.instruction }>{ this.strings.engName_Instruction}</p>
                         <TextField 
-                            styles={ errorText.length === 1 ? errorCharacterLimitStyle : characterLimitStyle } 
+                            styles={(engName.length >=1 && engName.length)  < 5 ? charCountStyles.errorCharacterLimitStyle : charCountStyles.characterLimitStyle } 
                             aria-describedby="engNameDesc" 
                             id='engName' 
                             name='engName' 
@@ -131,7 +125,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                             onChange={ this.onhandleChangeEvent } 
                             defaultValue={ engName }  
                             validateOnLoad= { false }  
-                            onGetErrorMessage={ this.validateInput }
+                            onGetErrorMessage={ this.validateCommNameInput  }
                             description={`${engName.length}/80`}
                         />
                     </div>
@@ -144,7 +138,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                         </Label>
                         <p id="frNameDesc" className={ styles.instruction }>{ this.strings.frCommName_Instruction}</p>
                         <TextField 
-                            styles={ errorText.length === 1 ? errorCharacterLimitStyle : characterLimitStyle } 
+                            styles={  frCommName.length >=1 && frCommName.length < 5 ? charCountStyles.errorCharacterLimitStyle : charCountStyles.characterLimitStyle } 
                             aria-describedby="frNameDesc" 
                             id='frCommName' 
                             name='frCommName'  
@@ -152,7 +146,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                             onChange={ this.onhandleChangeEvent } 
                             defaultValue={ frCommName } 
                             validateOnLoad= { false } 
-                            onGetErrorMessage={ this.validateInput }
+                            onGetErrorMessage={ this.validateCommNameInput }
                             description={`${frCommName.length}/80`}
                         />
                     </div>
@@ -170,7 +164,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                         </Label>
                         <p id="shEngDescription" className={ styles.instruction }>{ this.strings.shEngDesc_Instruction }</p>
                         <TextField 
-                            styles={ errorText.length === 1 ? errorCharacterLimitStyle : characterLimitStyle } 
+                            styles={ shEngDesc.length >=1 && shEngDesc.length < 5 ? charCountStyles.errorCharacterLimitStyle : charCountStyles.characterLimitStyle } 
                             aria-describedby="shEngDescription" 
                             id='shEngDesc'
                             name='shEngDesc' 
@@ -178,10 +172,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                             onChange={ this.onhandleChangeEvent} 
                             defaultValue={ shEngDesc } 
                             validateOnLoad= { false }  
-                            onGetErrorMessage={ value => { 
-                                if ( value.trim().length < 5 || value.length > 100  || value === '') 
-                                return `${this.strings.max100_validation}` 
-                            }} 
+                            onGetErrorMessage={ this.validateInput } 
                             description={`${shEngDesc.length}/100`}
                         />
                     </div>
@@ -194,7 +185,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                         </Label>
                         <p id="FrDesc" className={ styles.instruction }>{ this.strings.shFrDesc_Instruction }</p>
                         <TextField 
-                            styles={ errorText.length === 1 ? errorCharacterLimitStyle : characterLimitStyle } 
+                            styles={ shFrDesc.length >=1 && shFrDesc.length < 5 ? charCountStyles.errorCharacterLimitStyle : charCountStyles.characterLimitStyle } 
                             aria-describedby="FrDesc" 
                             id='shFrDesc' 
                             name='shFrDesc' 
@@ -202,10 +193,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                             onChange={ this.onhandleChangeEvent} 
                             defaultValue={ shFrDesc } 
                             validateOnLoad= { false }  
-                            onGetErrorMessage={ value => { 
-                                if ( value.trim().length < 5 || value.length > 100 || value === '') 
-                                return `${this.strings.max100_validation}` 
-                                }}
+                            onGetErrorMessage={ this.validateInput }
                             description={`${shFrDesc.length}/100`}
                         /> 
                     </div>
@@ -215,57 +203,20 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
         );
     }
 
-
-    private onhandleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-      
-    
-        const eventName = event.target.name;
-        const value = event.target.value;
   
 
-        // const charAllowed = /[\p{L}\p{N}ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü']/.test(value);
-       // const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value);
 
 
-        // const hasSpecialChar = /[~`!@#$%^&()_+={:;",.|?<>*\x2F\x5D\x5C\x99\x5B-]/.test(value);
-        // const startsWithSpecialChar = /^[~`!@#$%^&()_+={\x5B:;"',.|\x2F\x5D\x5C\x99-]/.test(value);
-        // const invalidInput: string = '';
-        // const lessthan5 = value.length < 5;
-        // const over100 = value.length > 100;
 
-        // if (eventName === 'commPurpose' && (value.length < 5 || value.length > 500)) {
-        //     value = invalidInput;
-        // } else
-
-        // if ((eventName === 'engName'|| eventName === 'frCommName') && (value.length >= 5 && value.length <= 80)) {
-        //     if (charAllowed) {
-        //         // console.log("value has special character");
-        //         value = invalidInput;
-        //     }
-        // } else
-
-        // if ((eventName === 'engName' || eventName === 'frCommName') && (value.length < 5 || value.length > 80)) {
-        //     // // console.log("Value for engName and frName must be less than  5 greater than 80 characters.");
-        //     value = invalidInput;
-        // } else
-
-        // if ((eventName ===  'shEngDesc' || eventName === 'shFrDesc' ) &&  ( lessthan5 || over100 )) {
-        //     value = invalidInput;
-        // } 
-        // else 
-
-        // if (eventName === 'shFrDesc' && ( lessthan5 || over100 ) ) {
-        //     value = invalidInput;
-        // }
-
-        
-
-        
+    private onhandleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+          
+        const eventName = event.target.name;
+        const value = event.target.value;
         const trimmedValue = value.trim();
+
         try {
                 this.props.handleOnChange(eventName, trimmedValue) 
-                               
-            
+                            
 
         } catch (error) {
 
@@ -273,39 +224,65 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
         }
          
     }
+    private validateInput = (value: string)  => {
+      
+            const trimmedValue = value.trim();
+          
+            if (trimmedValue.length >=1 && trimmedValue.length < 5) {
+              return (
+                <Stack horizontal horizontalAlign='center'>
+                  <Icon iconName="AlertSolid" className={styles.errorIcon} />
+                  <p className={styles.fieldInstruction}>{this.strings.minCharacters}</p>
+                </Stack>
+              );
+            } else if (trimmedValue.length === 0) {
+              return (
+                <Stack horizontal horizontalAlign='center'>
+                  <Icon iconName="AlertSolid" className={styles.errorIcon} />
+                  <p className={styles.fieldInstruction}>{this.strings.blankField}</p>
+                </Stack>
+              );
+            } else {
 
+              return null;
+            }
+    }   
 
-    private validateInput = (value: string) => {
-
+    private validateCommNameInput = (value: string) => {
         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
-   
+        const matchChar = value.match(/[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/g);
 
-        if (charAllowed) {
-         
-            return (
-                <>
-                <Stack horizontal horizontalAlign='center'>
-                    <Icon iconName="AlertSolid" className={styles.errorIcon}/>
-                    <p  className={styles.fieldInstruction}>{this.strings.special_char_validation}</p>
-                </Stack>
-                </>
+        let specialCharFound = '';
+        specialCharFound = matchChar.join('');
     
-            )
-        }
-        
-        if (value.trim().length < 5 || value.trim().length > 80) {
-            return (
-                <Stack horizontal horizontalAlign='center'>
-                    <Icon iconName="AlertSolid" className={styles.errorIcon}/>
-                    <span className={styles.fieldInstruction}>{this.strings.between_5_80_char_validation}</span>
-                </Stack>
+        const renderErrorMessage = (message: string) => (
+            <Stack horizontal style={{paddingBottom: '5px'}}>
+                <Icon iconName="AlertSolid" className={styles.errorIcon}/>
+                <p className={styles.fieldInstruction}>{message}</p>
+            </Stack>
+        );
     
-            )
-        }
-    
-    
+        return (
+            <>
+                {value.trim().length >= 1 && value.trim().length < 5 && charAllowed &&
+                    <Stack >
+                        {renderErrorMessage(this.strings.minCharacters)}
+                        {renderErrorMessage(`${this.strings.remove_special_char} ${specialCharFound}`)}
+                    </Stack>
+                }
+                {(value.trim().length >= 1 && value.trim().length < 5 && !charAllowed) &&
+                    renderErrorMessage(this.strings.minCharacters)
+                }
+                {(value.trim().length > 5 && charAllowed) &&
+                    renderErrorMessage(`${this.strings.remove_special_char} ${specialCharFound}`)
+                }
+                {!value.trim().length &&
+                    renderErrorMessage(this.strings.blankField)
+                }
+            </>
+        );
     };
-
+    
 
 }
 

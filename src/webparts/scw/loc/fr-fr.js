@@ -136,7 +136,7 @@ define([], function() {
         "onlyAlphabets":"Seuls les caractères alphabétiques (avec accents français), les nombres, les espaces et les apostrophes sont permis.",
         "oops": "Oops!",
         "minCharacters":"La longueur doit être d’au moins 5 caractères. Veuillez ajouter",
-        "remove": "Veuillez supprimer les caractères spéciaux suivants : ",
+        "remove_special_char": "Veuillez supprimer les caractères spéciaux suivants : ",
         "blankField":"Ne pas laisser en blanc. Veuillez ajouter",
         "aLonger":"plus long",
         "purpose":"objet",

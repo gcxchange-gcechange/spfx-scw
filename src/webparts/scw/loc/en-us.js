@@ -145,7 +145,7 @@ define([], function() {
     "onlyAlphabets": "Only alphabets (with French accents), numbers, spaces and apostrophes are allowed.",
     "oops": "Oops!",
     "minCharacters":"Must be at least 5 characters in length. Please add",
-    "remove": "Please remove the following special characters:",
+    "remove_special_char": "Please remove the following special characters:",
     "blankField":"Cannot be left blank. Please add",
     "aLonger":"a longer",
     "purpose":"purpose",

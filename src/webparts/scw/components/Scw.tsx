@@ -51,6 +51,7 @@ export interface IScwState  {
     targetId: string;
     invalidEmail: string;
     isError: boolean;
+    color: string;
    
     
 }
@@ -83,6 +84,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             targetId: '',
             invalidEmail: '',
             isError: false,
+            color: 'green'
 
         };
 
@@ -175,7 +177,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         const requestorEmail = ownerList.find((email) => email === this.props.requestor);
     
-        const showModal = isLessThanMin || hasSpecialChar || (current === 1 && (ownerList.length < 1 || invalidEmail !== '' || requestorEmail !== ''));
+        const showModal = isLessThanMin || hasSpecialChar || (current === 1 && (ownerList.length < 1 || invalidEmail  || requestorEmail ));
     
         if (!showModal) {
             this.goToNextPg(current);
@@ -369,17 +371,11 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         const eventValue = event;
         const values = value
         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
-        const specialCharFound = /[[:punct:]]/.test(value);
         
         const firstDiv = document.getElementById('first-line');
 
-        console.log("Parent Value", values);
-        console.log("Parent Event Name", event);
-        console.log("charfound", specialCharFound);
-
-
-
         if (eventValue === "commPurpose" && value.length < 5)  {
+            this.setState({color: 'pink'});
             firstDiv.classList.add(styles.errorBorder)
         }
          else if (eventValue === "commPurpose"){
@@ -594,7 +590,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     public render(): React.ReactElement<IScwProps>  { 
       
-        const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, errorMessage, showModal, checkedValues, showCallout, targetId, isError } = this.state;
+        const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, errorMessage, showModal, checkedValues, showCallout, targetId, isError, color } = this.state;
         console.log("currentPage", current);
 
         const steps = [
@@ -614,6 +610,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     errorMessage ={ errorMessage }
                     handleOnChange={this.handleOnChange}
                     isError = {isError}
+                    color = {color}
                 
                 />
                 )

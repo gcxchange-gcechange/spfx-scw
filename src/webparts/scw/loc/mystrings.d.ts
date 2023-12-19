@@ -142,7 +142,7 @@ declare interface IScwWebPartStrings {
   onlyAlphabets: string;
   oops: string;
   minCharacters: string;
-  remove: string;
+  remove_special_char: string;
   blankField: string;
   aLonger: string;
   purpose: string;
