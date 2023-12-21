@@ -19,8 +19,6 @@ export interface IFirstStepProps {
     shFrDesc: string;
     errorMessage: string;
     showModal: boolean;
-    isError: boolean;
-    color:string;
 
     handleOnChange?:(event:any, value: string)=> void;
     handleErrorMessage?: (errorMessage: string) => void;
@@ -32,16 +30,12 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
   public constructor(props: IFirstStepProps) {
     super(props);
 
-    this.state = {
-      isError: props.isError,
-    };
   }
   public strings = SelectLanguage(this.props.prefLang);
 
   public render(): React.ReactElement<IFirstStepProps> {
-    const { engName, commPurpose, frCommName, shEngDesc, shFrDesc } =
-      this.props;
-    console.log("commPurpose", commPurpose);
+    const { engName, commPurpose, frCommName, shEngDesc, shFrDesc } = this.props;
+
 
     const labelStyle: Partial<ILabelStyles> = {
       root: {
@@ -49,7 +43,9 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
       },
     };
 
+
     const charCountStyles = {
+
       characterLimitStyle: {
         description: {
           float: "right",
@@ -62,7 +58,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
           float: "right",
           marginTop: "5px",
           fontSize: "12px",
-          color: `${this.props.color}`,
+          color: 'red',
           fontWeight: "700",
         },
       },
@@ -87,7 +83,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             {this.strings.commPurpose_Instruction}
           </p>
           <TextField
-            styles={charCountStyles.errorCharacterLimitStyle}
+            styles={charCountStyles.characterLimitStyle}
             aria-describedby="commPurposeDesc"
             name="commPurpose"
             id="Community purpose"
@@ -119,13 +115,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 {this.strings.engName_Instruction}
               </p>
               <TextField
-                styles={
-                  (engName.length >= 1 && engName.length) < 5
-                    ? charCountStyles.errorCharacterLimitStyle
-                    : charCountStyles.characterLimitStyle
-                }
-                aria-describedby="engNameDesc"
-                id="engName"
+                styles={charCountStyles.characterLimitStyle}
                 name="engName"
                 maxLength={80}
                 onChange={this.onhandleChangeEvent}
@@ -150,11 +140,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 {this.strings.frCommName_Instruction}
               </p>
               <TextField
-                styles={
-                  frCommName.length >= 1 && frCommName.length < 5
-                    ? charCountStyles.errorCharacterLimitStyle
-                    : charCountStyles.characterLimitStyle
-                }
+                styles={charCountStyles.characterLimitStyle}
                 aria-describedby="frNameDesc"
                 id="frCommName"
                 name="frCommName"
@@ -186,11 +172,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 {this.strings.shEngDesc_Instruction}
               </p>
               <TextField
-                styles={
-                  shEngDesc.length >= 1 && shEngDesc.length < 5
-                    ? charCountStyles.errorCharacterLimitStyle
-                    : charCountStyles.characterLimitStyle
-                }
+                styles={charCountStyles.characterLimitStyle}
                 aria-describedby="shEngDescription"
                 id="shEngDesc"
                 name="shEngDesc"
@@ -217,11 +199,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 {this.strings.shFrDesc_Instruction}
               </p>
               <TextField
-                styles={
-                  shFrDesc.length >= 1 && shFrDesc.length < 5
-                    ? charCountStyles.errorCharacterLimitStyle
-                    : charCountStyles.characterLimitStyle
-                }
+                styles={charCountStyles.characterLimitStyle}
                 aria-describedby="FrDesc"
                 id="shFrDesc"
                 name="shFrDesc"
@@ -239,9 +217,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
     );
   }
 
-  private onhandleChangeEvent = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void => {
+  private onhandleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const eventName = event.target.name;
     const value = event.target.value;
     const trimmedValue = value.trim();
@@ -252,6 +228,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
       console.log(error);
     }
   };
+
   private validateInput = (value: string) => {
     const trimmedValue = value.trim();
 
@@ -277,16 +254,11 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
   };
 
   private validateCommNameInput = (value: string) => {
-    const charAllowed =
-      /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(
-        value
-      );
+    const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
 
     let specialCharFound = "";
 
-    value.replace(
-      /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/g,
-      (match) => {
+    value.replace(/[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/g,(match) => {
         specialCharFound += match + " ";
         return "";
       }
@@ -301,13 +273,11 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
 
     return (
       <>
-        {value.trim().length >= 1 &&
-          value.trim().length < 5 &&
+        {value.trim().length >= 1 && value.trim().length < 5 &&
           renderErrorMessage(this.strings.minCharacters)}
         {charAllowed &&
-          renderErrorMessage(
-            `${this.strings.remove_special_char} ${specialCharFound}`
-          )}
+          renderErrorMessage(`${this.strings.remove_special_char} ${specialCharFound}`)
+        }
         {!value.trim().length && renderErrorMessage(this.strings.blankField)}
       </>
     );

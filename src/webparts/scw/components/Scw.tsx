@@ -50,8 +50,7 @@ export interface IScwState  {
     showCallout: boolean;
     targetId: string;
     invalidEmail: string;
-    isError: boolean;
-    color: string;
+
    
     
 }
@@ -83,8 +82,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             showCallout: false,
             targetId: '',
             invalidEmail: '',
-            isError: false,
-            color: 'green'
+
 
         };
 
@@ -368,54 +366,55 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     public handleOnChange =(event: any, value:string):void => {
 
-        const eventValue = event;
+        const eventName = event;
         const values = value
         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
-        
+
+        this.setState({
+            ...this.state,
+            [eventName]: values,
+           
+        });
+
         const firstDiv = document.getElementById('first-line');
 
-        if (eventValue === "commPurpose" && value.length < 5)  {
-            this.setState({color: 'pink'});
+        if (eventName === "commPurpose" && value.length < 5)  {
             firstDiv.classList.add(styles.errorBorder)
         }
-         else if (eventValue === "commPurpose"){
+         else if (eventName === "commPurpose"){
             firstDiv.classList.remove(styles.errorBorder)
         }
 
-        if (eventValue === "engName" && (value.length < 5 || charAllowed))  {
-            this.setState({showModal: true});
+        if (eventName === "engName" && (value.length < 5 || charAllowed))  {
             document.getElementById("second-line").classList.add(styles.errorBorder)
         }  
-        else if (eventValue === "engName"){
+        else if (eventName === "engName"){
             document.getElementById("second-line").classList.remove(styles.errorBorder)
         }
         
-        if (eventValue === "frCommName" &&  (value.length < 5 || charAllowed))  {
+        if (eventName === "frCommName" &&  (value.length < 5 || charAllowed))  {
             document.getElementById("third-line").classList.add(styles.errorBorder)
         } 
-        else if (eventValue === "frCommName"){
+        else if (eventName === "frCommName"){
             document.getElementById("third-line").classList.remove(styles.errorBorder)
         }
         
-        if (eventValue === "shEngDesc" && value.length < 5)  {
+        if (eventName === "shEngDesc" && value.length < 5)  {
             document.getElementById("fourth-line").classList.add(styles.errorBorder)
         } 
-        else if (eventValue === "shEngDesc"){
+        else if (eventName === "shEngDesc"){
             document.getElementById("fourth-line").classList.remove(styles.errorBorder)
         }
         
-        if (eventValue === "shFrDesc" && value.length < 5)  {
+        if (eventName === "shFrDesc" && value.length < 5)  {
             document.getElementById("fifth-line").classList.add(styles.errorBorder)
         } 
-        else if (eventValue === "shFrDesc") {
+        else if (eventName === "shFrDesc") {
             document.getElementById("fifth-line").classList.remove(styles.errorBorder)
         }
 
 
-        this.setState({
-            ...this.state,
-            [eventValue]: values
-        });
+       
         
     }
 
@@ -460,15 +459,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         
     }
 
-    // public selectedChoiceCallback = ( selectedChoice: string ): void =>  { 
-
-    //     const saveSelectedChoice = selectedChoice;
-
-    //     this.setState( { 
-    //         selectedChoice: saveSelectedChoice
-    //     })
-    // } 
-
   
     public handleOwnerCallback = ( items: []): void =>  { 
         console.log("calbback",items)
@@ -503,48 +493,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     }
 
-    // public handleMemberCallback = ( items: [] ): void =>  { 
-    //     const MemberArr: string[] = [];
 
-    //     items.forEach(user =>  { 
-    //         // eslint-disable-next-line dot-notation
-    //         MemberArr.push( user['secondaryText'] )
-    //     })
-  
-    //     // this.setState( { 
-    //     //     memberList: MemberArr
-    //     // }) ; 
-
-    // }
-
-    public handleErrorMessage = ( errorMessage: string ):void  => {
-        const errorM = errorMessage;
-        this.setState({
-            errorMessage: errorM
-        });
+    public handleErrorMessage = (field: string ):void  => {
+       console.log("field",field);
     }
-
-    // public checkedTerms = ( event: any, isChecked:boolean ):void => {
-    //     const id = event;
-
-    //     if ( isChecked === true ) {
-           
-    //         this.setState(prevState => ({
-    //             checkedValues: [...prevState.checkedValues, id]
-    //         }));
-    //     } 
-
-    //     else {
-    //         const newArray = this.state.checkedValues.filter((item) => item !== id)
-            
-    //         this.setState({
-    //             checkedValues: newArray
-    //         })
-           
-    //     }
-
-      
-    // }
    
 
      
@@ -558,7 +510,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     };
 
     public getElementId = (id: string): void => {
-        
 
         this.setState({
             targetId: id
@@ -568,9 +519,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
 
     componentDidUpdate(prevProps: Readonly<IScwProps>, prevState: Readonly<IScwState>): void {
-
-        // const { engName} = this.state;
-        // const values =  { commPurpose, engName, frCommName, shEngDesc, shFrDesc}
 
         if ( this.state.current !== prevState.current) {
 
@@ -590,8 +538,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     public render(): React.ReactElement<IScwProps>  { 
       
-        const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, errorMessage, showModal, checkedValues, showCallout, targetId, isError, color } = this.state;
-        console.log("currentPage", current);
+        const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, errorMessage, showModal, checkedValues, showCallout, targetId } = this.state;
 
         const steps = [
         
@@ -609,8 +556,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     shFrDesc= { shFrDesc }
                     errorMessage ={ errorMessage }
                     handleOnChange={this.handleOnChange}
-                    isError = {isError}
-                    color = {color}
+
                 
                 />
                 )
