@@ -138,11 +138,13 @@ define([], function() {
         "minCharacters":"La longueur doit être d’au moins 5 caractères.",
         "remove_special_char": "Veuillez supprimer les caractères spéciaux suivants : ",
         "blankField":"Ne pas laisser en blanc.",
-        "aLonger":"plus long",
-        "purpose":"objet",
-        "please_add_a_purpose":"Veuillez ajouter un objet plus long.",
-        "please_add_a_name" : "Veuillez ajouter un nom plus long.",
-        "please_add_a_description": "Veuillez ajouter une description plus long"
+        "please_add_a_longer_purpose":"Veuillez ajouter un objet plus long.",
+        "please_add_a_longer_name" : "Veuillez ajouter un nom plus long.",
+        "please_add_a_longer_description": "Veuillez ajouter une description plus long.",
+        "please_add_a_purpose":"Veuillez ajouter un objet.",
+        "please_add_a_name" : "Veuillez ajouter un nom.",
+        "please_add_a_description": "Veuillez ajouter une description."
+    
     
         
 

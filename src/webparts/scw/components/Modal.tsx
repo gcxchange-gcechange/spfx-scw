@@ -209,14 +209,14 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     const {current, commPurpose, engName, frCommName, shEngDesc, shFrDesc } = this.props;
 
     const firstValues: any[] = [
-      { name: `${ this.strings.commPurpose_title }`, value: `${commPurpose}` ,  longerText:`${this.strings.please_add_a_purpose}`},
-      { name: `${ this.strings.engName_title }`, value: `${engName}`, longerText: `${this.strings.please_add_a_name}`},
-      { name: `${ this.strings.frCommName_title }`, value: `${frCommName}` , longerText:`${this.strings.please_add_a_name}`},
-      { name: `${ this.strings.shEngDesc_title }`, value: `${shEngDesc}` ,  longerText: `${this.strings.please_add_a_description}`},
-      { name: `${ this.strings.shFrDesc_title }`, value: `${shFrDesc}`,  longerText: `${this.strings.please_add_a_description}` },
+      { name: `${ this.strings.commPurpose_title }`, value: `${commPurpose}` ,  longerText:`${this.strings.please_add_a_longer_purpose}`, addText: `${this.strings.please_add_a_purpose}` },
+      { name: `${ this.strings.engName_title }`, value: `${engName}`, longerText: `${this.strings.please_add_a_longer_name}`, addText: `${this.strings.please_add_a_name}`},
+      { name: `${ this.strings.frCommName_title }`, value: `${frCommName}` , longerText:`${this.strings.please_add_a_longer_name}`, addText:  `${this.strings.please_add_a_name}`},
+      { name: `${ this.strings.shEngDesc_title }`, value: `${shEngDesc}` ,  longerText: `${this.strings.please_add_a_longer_description}`, addText:  `${this.strings.please_add_a_description}`},
+      { name: `${ this.strings.shFrDesc_title }`, value: `${shFrDesc}`,  longerText: `${this.strings.please_add_a_longer_description}`, addText: `${this.strings.please_add_a_description}`},
     ];
 
-    const emptyValues: any[] =[];
+    //const emptyValues: any[] =[];
 
     if (current === 0 ){
 
@@ -227,43 +227,43 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(obj.value);
         //const matchChar =  obj.value.match(/[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/g);
         let special = '';
+        const newKey = 'specialChar';
 
-       const matchChar= obj.value.replace(/[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/g,(match:any) => {
+        obj.value.replace(/[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/g,(match:any) => {
           special  += match + " ";
-          return "";
           });
 
-        if ((obj.name === `${this.strings.engName_title}` || obj.name === `${ this.strings.frCommName_title }`) && matchChar ) {
-          emptyValues.push({name: obj.name, value: obj.value, specialChar: special})
+        console.log("matChar", obj.name)
+
+        if (obj.name === `${this.strings.engName_title}` || obj.name === `${this.strings.frCommName_title}` && charAllowed ) {
+         obj[newKey] = special
+      
         }
-        else if(obj.value.length < 5 && !charAllowed) {
-          emptyValues.push({name: obj.name, value: obj.value, longerText: obj.longerText, specialChar: "" })
-        }
+        // else if(obj.value.length < 5 && !charAllowed) {
+        //   emptyValues.push({name: obj.name, value: obj.value,  specialChar: "",  longerText: obj.longerText})
+        // }
 
       });
 
-      console.log("EmptyValue", emptyValues);
 
     }
 
       return (
         <>
-        {emptyValues.map((item, index) => (
+        {firstValues.map((item, index) => (
           <>
 
-          <h3 key={index}><strong>{item.name}</strong></h3>
+          <h3 key={index}><strong>{item.value < 5 || item.specialChar ? item.name : ""}</strong></h3>
           <ul>
             {(item.value.length >=1 && item.value.length < 5)  && (
-              <>
-              <li>{`${this.strings.minCharacters}`}.</li>
-              <li>{`${item.longerText}`}.</li>
-              </>
+                <li>{`${this.strings.minCharacters} ${item.longerText}`}</li>
               ) 
             }
           
-            {item.specialChar && ( <li>{`${this.strings.remove_special_char}`}<span style={{color:'#C61515'}}> {item.specialChar} </span></li>) }
-            {item.value === ''  && (<li>{`${this.strings.blankField}`} . </li>)}
-           
+            {item.specialChar && 
+            ( <li>{`${this.strings.remove_special_char}`}<span style={{color:'#C61515'}}> {item.specialChar} </span></li>) 
+            }
+            {item.value === ''  && (<li>{`${this.strings.blankField} ${item.addText}`} </li>)}
           </ul>
           </>
         ))}
@@ -329,7 +329,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
 
   public render(): React.ReactElement<IErrorModalProps> {
 
-    //const messages = parse(this.errorMessage());
+    const messages = parse(this.errorMessage());
     const firstPageErrorMessage = this.renderFirstPageMessage();
     const secondPageErrorMessage = parse(this.renderSecondPageMessage());
 
@@ -387,6 +387,14 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
                     <p className={styles.modalContent}> {secondPageErrorMessage} {this.strings.before_proceeding}</p>
                   </Stack>
                 )} 
+
+                {this.props.current === 2 && (
+                  <>
+                 <Stack>
+                    <p className={styles.modalContent}> {messages} {this.strings.before_proceeding}</p>
+                  </Stack>
+                  </>
+                )}
               </div>
               <div style={this.modalStyle.footer}>
                 <Stack>

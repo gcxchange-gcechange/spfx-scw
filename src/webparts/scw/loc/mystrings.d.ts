@@ -144,8 +144,9 @@ declare interface IScwWebPartStrings {
   minCharacters: string;
   remove_special_char: string;
   blankField: string;
-  aLonger: string;
-  purpose: string;
+  please_add_a_longer_purpose: string;
+  please_add_a_longer_name : string;
+  please_add_a_longer_description:  string;
   please_add_a_purpose: string;
   please_add_a_name : string;
   please_add_a_description:  string;

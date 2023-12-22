@@ -146,12 +146,13 @@ define([], function() {
     "oops": "Oops!",
     "minCharacters":"Must be at least 5 characters in length.",
     "remove_special_char": "Please remove the following special characters:",
-    "blankField":"Cannot be left blank. Please add",
-    "aLonger":"a longer",
-    "purpose":"purpose",
+    "blankField":"Cannot be left blank.",
+    "please_add_a_longer_purpose":"Please add a longer purpose",
+    "please_add_a_longer_name" : "Please add a longer name",
+    "please_add_a_longer_description": "Please add a longer description",
     "please_add_a_purpose":"Please add a purpose",
     "please_add_a_name" : "Please add a name",
-    "please_add_a_description": "Please add a description"
+    "please_add_a_description": "Please add a description",
     
 
 
