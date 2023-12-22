@@ -135,11 +135,15 @@ define([], function() {
         "requestorUser":"En tant que demandeur de la création de cette collectivité, vous êtes automatiquement ajouté comme propriétaire.</span> <strong>Vous ne pouvez pas vous inviter en tant que propriétaire</strong>. Veuillez vous désinscrire",
         "onlyAlphabets":"Seuls les caractères alphabétiques (avec accents français), les nombres, les espaces et les apostrophes sont permis.",
         "oops": "Oops!",
-        "minCharacters":"La longueur doit être d’au moins 5 caractères. Veuillez ajouter",
+        "minCharacters":"La longueur doit être d’au moins 5 caractères.",
         "remove_special_char": "Veuillez supprimer les caractères spéciaux suivants : ",
-        "blankField":"Ne pas laisser en blanc. Veuillez ajouter",
+        "blankField":"Ne pas laisser en blanc.",
         "aLonger":"plus long",
         "purpose":"objet",
+        "please_add_a_purpose":"Veuillez ajouter un objet plus long.",
+        "please_add_a_name" : "Veuillez ajouter un nom plus long.",
+        "please_add_a_description": "Veuillez ajouter une description plus long"
+    
         
 
     } 

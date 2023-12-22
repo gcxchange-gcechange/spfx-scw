@@ -209,11 +209,11 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     const {current, commPurpose, engName, frCommName, shEngDesc, shFrDesc } = this.props;
 
     const firstValues: any[] = [
-      { name: `${ this.strings.commPurpose_title }`, value: `${commPurpose}` , special: ""},
-      { name: `${ this.strings.engName_title }`, value: `${engName}`, special: "" },
-      { name: `${ this.strings.frCommName_title }`, value: `${frCommName}` , special: ""},
-      { name: `${ this.strings.shEngDesc_title }`, value: `${shEngDesc}` , special: ""},
-      { name: `${ this.strings.shFrDesc_title }`, value: `${shFrDesc}`, special: "" },
+      { name: `${ this.strings.commPurpose_title }`, value: `${commPurpose}` ,  longerText:`${this.strings.please_add_a_purpose}`},
+      { name: `${ this.strings.engName_title }`, value: `${engName}`, longerText: `${this.strings.please_add_a_name}`},
+      { name: `${ this.strings.frCommName_title }`, value: `${frCommName}` , longerText:`${this.strings.please_add_a_name}`},
+      { name: `${ this.strings.shEngDesc_title }`, value: `${shEngDesc}` ,  longerText: `${this.strings.please_add_a_description}`},
+      { name: `${ this.strings.shFrDesc_title }`, value: `${shFrDesc}`,  longerText: `${this.strings.please_add_a_description}` },
     ];
 
     const emptyValues: any[] =[];
@@ -225,23 +225,24 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       firstValues.forEach((obj) => {
         console.log("obj", obj);
         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(obj.value);
-        //  obj.value.match(/[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/g);
+        //const matchChar =  obj.value.match(/[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/g);
         let special = '';
 
-        const matchChar = obj.value.replace(/[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/g,(match:any) => {
-          special  += match.join("");
+       const matchChar= obj.value.replace(/[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/g,(match:any) => {
+          special  += match + " ";
           return "";
           });
 
         if ((obj.name === `${this.strings.engName_title}` || obj.name === `${ this.strings.frCommName_title }`) && matchChar ) {
-          
           emptyValues.push({name: obj.name, value: obj.value, specialChar: special})
         }
         else if(obj.value.length < 5 && !charAllowed) {
-          emptyValues.push({name: obj.name, value: obj.value, specialChar: special })
+          emptyValues.push({name: obj.name, value: obj.value, longerText: obj.longerText, specialChar: "" })
         }
 
-      })
+      });
+
+      console.log("EmptyValue", emptyValues);
 
     }
 
@@ -249,20 +250,20 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
         <>
         {emptyValues.map((item, index) => (
           <>
+
           <h3 key={index}><strong>{item.name}</strong></h3>
           <ul>
-            {(item.value.length >=1 && item.value.length < 5)  && (this.props.prefLang === "fr-fr")  && (
-              <li>{`${this.strings.minCharacters}`} { 
-                (item.name === 'Brève description en anglais'|| item.name === 'Brève description en français') 
-                ? "une " + item.name.split(" ")[1].toLowerCase() 
-                : "un " + item.name.split(" ")[0].toLowerCase()}.</li>) 
+            {(item.value.length >=1 && item.value.length < 5)  && (
+              <>
+              <li>{`${this.strings.minCharacters}`}.</li>
+              <li>{`${item.longerText}`}.</li>
+              </>
+              ) 
             }
-            {/* {item.value.length >=1 && item.value.length < 5 && this.props.prefLang === "en-en" &&  
-            (<li>{`${this.strings.minCharacters}`} { "a " + item.name.split(" ").pop()}.</li>) 
-            }
+          
             {item.specialChar && ( <li>{`${this.strings.remove_special_char}`}<span style={{color:'#C61515'}}> {item.specialChar} </span></li>) }
-            {(item.value === '' && this.props.prefLang === "fr-fr") && (<li>{`${this.strings.blankField}`} {item.name === 'Brève description en anglais'|| item.name === 'Brève description en français'? "une " + item.name.split(" ")[1].toLowerCase() : "un " + item.name.split(" ")[0].toLowerCase()}. </li>)}
-            {(item.value === '' && this.props.prefLang === "en-en" ) && (<li>{`${this.strings.blankField}`} {"a " + item.name.split(" ").pop()}. </li>)} */}
+            {item.value === ''  && (<li>{`${this.strings.blankField}`} . </li>)}
+           
           </ul>
           </>
         ))}

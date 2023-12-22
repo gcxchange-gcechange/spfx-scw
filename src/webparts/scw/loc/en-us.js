@@ -144,11 +144,14 @@ define([], function() {
     "requestorUser":"As the requester of this community, you are automatically added as an owner. You <strong>cannot invite yourself as an owner.</strong> Please remove yourself",
     "onlyAlphabets": "Only alphabets (with French accents), numbers, spaces and apostrophes are allowed.",
     "oops": "Oops!",
-    "minCharacters":"Must be at least 5 characters in length. Please add",
+    "minCharacters":"Must be at least 5 characters in length.",
     "remove_special_char": "Please remove the following special characters:",
     "blankField":"Cannot be left blank. Please add",
     "aLonger":"a longer",
     "purpose":"purpose",
+    "please_add_a_purpose":"Please add a purpose",
+    "please_add_a_name" : "Please add a name",
+    "please_add_a_description": "Please add a description"
     
 
 

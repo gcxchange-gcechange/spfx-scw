@@ -146,6 +146,9 @@ declare interface IScwWebPartStrings {
   blankField: string;
   aLonger: string;
   purpose: string;
+  please_add_a_purpose: string;
+  please_add_a_name : string;
+  please_add_a_description:  string;
 
 
 
