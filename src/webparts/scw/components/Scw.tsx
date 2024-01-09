@@ -27,6 +27,7 @@ import { Spinner, SpinnerSize } from '@fluentui/react/lib/Spinner';
 // import { CloseCircleOutlined } from '@ant-design/icons';
 import Callouts from './Callouts';
 import Failed from './Failed';
+import ReviewFields from './ReviewFields';
 
 
 
@@ -370,6 +371,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         const values = value
         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
 
+        console.log("Parent_Name", eventName);
+        console.log("Parent_value", values);
+
         this.setState({
             ...this.state,
             [eventName]: values,
@@ -591,8 +595,37 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 />
                 )
             },
-            { 
+            {
                 step: "5",
+                title: this.strings.review_submit,
+                content: (
+                <ReviewFields
+                    current= { current }
+                    prefLang={this.props.prefLang}
+                    engName= { engName }
+                    commPurpose= { commPurpose }
+                    frCommName= { frCommName }
+                    selectedChoice= { selectedChoice }
+                    shEngDesc= { shEngDesc }
+                    shFrDesc= { shFrDesc }
+                    ownerList= { ownerList }
+                    context= { this.props.context }
+                    showCallout = { showCallout}
+                    targetId = { targetId }
+                    commPurposeCallback={ this.commPurposeCallback }
+                    handleEngNameCallback= { this.handleEngNameCallback }
+                    frNameCallBack= { this.frNameCallback }
+                    getOwnersCallback= { this.handleOwnerCallback }
+                    handleFrDescCallback= { this.frDescCallback }
+                    handleEngDescCallback= { this.engDescCallback }
+                    isCalloutVisible ={ this.isCalloutVisible }
+                    getElementId={this.getElementId}
+                    handleOnChange={this.handleOnChange}
+              />
+                ), 
+            },
+            { 
+                step: "6",
                 title: this.strings.review_submit,
                 content: (
                 <LastStep

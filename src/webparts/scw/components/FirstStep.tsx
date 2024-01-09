@@ -53,21 +53,11 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
           fontSize: "12px",
         },
         errorMessage: {
-          color: 'red'
+          color: '#C61515'
         }
       },
-      // errorCharacterLimitStyle: {
-      //   description: {
-      //     float: "right",
-      //     marginTop: "5px",
-      //     fontSize: "12px",
-       
-      //     fontWeight: "700",
-      //   },
-      // },
     };
 
-    //const errorText = document.getElementsByClassName('errorBorder');
 
     const stackTokens = { childrenGap: 18 };
 
@@ -124,7 +114,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 onChange={this.onhandleChangeEvent}
                 defaultValue={engName}
                 validateOnLoad={false}
-                onGetErrorMessage={this.getRichErrorMessage}
+                onGetErrorMessage={this.validateCommNameInput}
                 description={`${engName.length}/80`}
               />
             </div>
@@ -256,7 +246,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
     }
   };
 
-  private getRichErrorMessage = (value: string) => {
+  private validateCommNameInput = (value: string) => {
      const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
 
     let specialCharFound = "";
@@ -278,7 +268,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
       if(charAllowed ) {
         return (
           <>
-        <Stack horizontal>
+        <Stack horizontal style={{ paddingBottom: "5px" }}>
            <Icon iconName="AlertSolid" className={styles.errorIcon} />
            <p className={styles.fieldInstruction}>{this.strings.remove_special_char} {specialCharFound}</p>
         </Stack>
@@ -317,59 +307,37 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
       </Stack>
     }
 
-    // return (
-
-  
-      // value.trim().length >= 1 && value.trim().length < 5 ? 
-      // (
-      //   <Stack horizontal>
-      //     <Icon iconName="AlertSolid" className={styles.errorIcon} />
-      //     <p className={styles.fieldInstruction}>{this.strings.minCharacters}</p>
-      //   </Stack>
-      // ) :  charAllowed ? (
-      //   <Stack horizontal>
-      //     <Icon iconName="AlertSolid" className={styles.errorIcon} />
-      //     <p className={styles.fieldInstruction}>{this.strings.remove_special_char} {specialCharFound}</p>
-      //   </Stack>
-      // ) : !value.trim().length ? 
-      // (
-      //   <Stack horizontal>
-      //   <Icon iconName="AlertSolid" className={styles.errorIcon} />
-      //   <p className={styles.fieldInstruction}>{this.strings.blankField}</p>
-      // </Stack>
-      // ) : null
-    // );
   };
 
-  private validateCommNameInput = (value: string) => {
-    const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
+  // private validateCommNameInput = (value: string) => {
+  //   const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
 
-    let specialCharFound = "";
+  //   let specialCharFound = "";
 
-    value.replace(/[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/g,(match) => {
-        specialCharFound += match + " ";
-        return "";
-      }
-    );
+  //   value.replace(/[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/g,(match) => {
+  //       specialCharFound += match + " ";
+  //       return "";
+  //     }
+  //   );
 
-    const renderErrorMessage = (message: string) => (
-      <Stack horizontal style={{ paddingBottom: "5px" }}>
-        <Icon iconName="AlertSolid" className={styles.errorIcon} />
-        <p className={styles.fieldInstruction}>{message}</p>
-      </Stack>
-    );
+  //   const renderErrorMessage = (message: string) => (
+  //     <Stack horizontal style={{ paddingBottom: "5px" }}>
+  //       <Icon iconName="AlertSolid" className={styles.errorIcon} />
+  //       <p className={styles.fieldInstruction}>{message}</p>
+  //     </Stack>
+  //   );
 
-    return (
-      <>
-        {value.trim().length >= 1 && value.trim().length < 5 &&
-          renderErrorMessage(this.strings.minCharacters)}
-        {charAllowed &&
-          renderErrorMessage(`${this.strings.remove_special_char} ${specialCharFound}`)
-        }
-        {!value.trim().length && renderErrorMessage(this.strings.blankField)}
-      </>
-    );
-  };
+  //   return (
+  //     <>
+  //       {value.trim().length >= 1 && value.trim().length < 5 &&
+  //         renderErrorMessage(this.strings.minCharacters)}
+  //       {charAllowed &&
+  //         renderErrorMessage(`${this.strings.remove_special_char} ${specialCharFound}`)
+  //       }
+  //       {!value.trim().length && renderErrorMessage(this.strings.blankField)}
+  //     </>
+  //   );
+  // };
 }
 
 

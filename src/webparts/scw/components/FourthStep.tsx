@@ -4,7 +4,6 @@ import * as React from 'react';
 import { WebPartContext } from '@microsoft/sp-webpart-base';
 import AddUsers from './AddUsers';
 import styles from './Scw.module.scss';
-// import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { Label } from 'office-ui-fabric-react';
 import { SelectLanguage } from './SelectLanguage';
 import parse from 'html-react-parser';
