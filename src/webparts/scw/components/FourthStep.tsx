@@ -88,7 +88,6 @@ export default class FourthStep extends React.Component<IFourthStepProps> {
     
                     <p>{ this.strings.invite_owners_para1 }</p>
                     <p>{ parse( this.strings.invite_owners_para2 ) }</p>
-                    {/* <p>{ parse( this.strings.invite_owners_para3 ) }</p> */}
                     <div tabIndex={1}>
                         <div>
                             <Label  htmlFor="peoplePicker">
@@ -104,30 +103,12 @@ export default class FourthStep extends React.Component<IFourthStepProps> {
                                 prefLang={this.props.prefLang}
                                 context={this.props.context} 
                                 ownerList={this.props.ownerList}
-                                // memberList={this.props.memberList} 
                                 getOwnersCallback={this.handleOwnerCallback} 
-                                // getMemberCallback={this.handleMemberCallback}
                                 />
 
                             </div>
                         </div>
                     </div>
-                    {/* <div className={styles.inviteContainer}>
-                        
-                        <Stack horizontal>
-                            <Stack.Item align='center'>
-                                <Icon iconName='Zoom' className={styles.magnifyingIcon}/>
-                            </Stack.Item>
-                            <Stack.Item align='center'>
-                                <p>{ parse( this.strings.invite_user_not_found )}</p>
-                            </Stack.Item>
-                        </Stack>
-                        <Stack>
-                            <Stack.Item>
-                                <PrimaryButton styles={ buttonStyles } >{ this.strings.invite_a_colleague}</PrimaryButton>
-                            </Stack.Item>
-                        </Stack>
-                    </div> */}
             </>
         );
     }

@@ -341,7 +341,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     };
 
 
-    console.log("currnet page", this.props.current)
+    console.log("current page", this.props.current)
 
  
     return (

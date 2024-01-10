@@ -7,27 +7,23 @@
 import * as React from 'react';
 import styles from './Scw.module.scss';
 import  { Steps, Button } from 'antd';
-// import  { message} from 'antd';
-import FirstStep from "./FirstStep";
 import  { IScwProps } from './IScwProps';
 import  { Initial } from './InitialPage/Initial';
 import  { ISpinnerStyles, PrimaryButton, Stack } from 'office-ui-fabric-react';
 import  { IButtonStyles } from 'office-ui-fabric-react';
-import LastStep from './LastStep';
-// import  { MessageType } from 'antd/es/message/interface';
 import ErrorModal from './Modal';
+import FirstStep from './FirstStep';
 import FourthStep from './FourthStep';
-// import SecondStep from './SecondStep';
 import { SelectLanguage } from './SelectLanguage';
-// import ThirdStep from './ThirdStep';
 import { AadHttpClient, HttpClientResponse, IHttpClientOptions } from '@microsoft/sp-http';
 import Title from './Title';
 import Complete from './Complete';
 import { Spinner, SpinnerSize } from '@fluentui/react/lib/Spinner';
-// import { CloseCircleOutlined } from '@ant-design/icons';
 import Callouts from './Callouts';
 import Failed from './Failed';
 import ReviewFields from './ReviewFields';
+import { fieldValidations } from './inputValidator';
+
 
 
 
@@ -89,81 +85,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     }
 
-   
-
-    // private next = (): void =>  { 
-       
-    //     const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail } = this.state
-    //     const values = {engName, frCommName, shEngDesc, shFrDesc, commPurpose}
-
-
-    //     // const filtered = checkedValues.filter((value, index) => {
-    //     //     return checkedValues.indexOf(value) === index
-    //     //   });
-    //     // console.log("filtered",filtered)
-    //     console.log("OwnerList", ownerList);
-
-    //     let requestorEmail: string = '';
-
-    //     for (let i = 0; i < ownerList.length; i++) {
-    //         if ( ownerList[i] === this.props.requestor) {
-    //             console.log("found")
-    //             requestorEmail = ownerList[i];
-
-    //             console.log("email",requestorEmail);
-    //         }
-            
-    //     }
-            //const validateStringLength = (value: string, minLength: number): boolean => value.length >= minLength;
-            //const isLessThanMin = Object.values(values).some((value) => !validateStringLength(value, 5));
-            //const hasSpecialChar = Object.entries(values).some(([key, value]) => (key === 'engName' || key === 'frCommName') && /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value));
-
-    //     if (current === 0 ) {
-
-    //         let isLessThanMin =  false;
-    //         let hasSpecialChar = false;
-    
-    
-
-    //         for (const [key, value] of Object.entries(values)) {
-
-    //             const isCharAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value);
-
-    //                 if (value.length < 5) {
-    //                     isLessThanMin = true;
-    //                     this.setState({showModal: true});
-    //                 } 
-                    
-    //                 if ((key === 'engName' || key === "frCommName") && isCharAllowed ) {
-    //                     hasSpecialChar = true;
-    //                     this.setState({showModal: true});
-                
-    //                 }
-    //         }
-
-    //     if (!isLessThanMin || !hasSpecialChar) {
-    //         this.goToNextPg(current);
-    //     } 
-    // }
-    //     else if ( current === 1 && ownerList.length < 1 ) {
-    //         this.setState({ showModal: true });
-    //     }        
-    //      else if (current === 1 &&  invalidEmail !== '' ) {
-    //         this.setState({ showModal: true });
-            
-    //     }
-    //     else if ( current  === 1 && requestorEmail !== '') {
-    //         this.setState({ showModal: true });
-    //     }
-      
-    //     else {
-          
-    //         this.goToNextPg(current);
-    //         // this.setState({invalidEmail: ''})
-    //     }
-
-       
-    // }
 
     private next = (): void => {
         const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail } = this.state;
@@ -201,19 +122,27 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     private prev = (): void =>  { 
         const prevPage = this.state.current - 1;   
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail } = this.state;
+        const requestorEmail = ownerList.find((email) => email === this.props.requestor);
+        const values = { engName, frCommName, shEngDesc, shFrDesc, commPurpose };
+        fieldValidations([this.state]);
+        console.log("VALUES", values.frCommName)
+    
+        const validateStringLength = (value: string, minLength: number): boolean => value.length >= minLength;
+    
+        const isLessThanFiveCharacters = Object.values(values).some((value) => !validateStringLength(value, 5));
+        const hasSpecialChar = Object.entries(values).some(([key, value]) => (key === 'engName' || key === 'frCommName') && /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value));
 
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail  } = this.state
+        console.log("hasSpecial CHar", hasSpecialChar);
+        console.log("less than 5", isLessThanFiveCharacters);
+        console.log('requestorEmail', requestorEmail);
+        console.log("ownerList-Length", ownerList.length);
+        console.log("ownerList", ownerList);
 
-       
-
-        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 0 || invalidEmail !== '')) {
+        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 0 || invalidEmail !== '' || !requestorEmail || isLessThanFiveCharacters || hasSpecialChar)) {
            
             this.setState({ showModal: true });
         }
-        // else    if ( current === 2 && selectedChoice === `${ this.strings.protected_cardTitle }`) {
-
-        //     this.setState({ selectedChoice: `${ this.strings.unclassified_cardTitle }`})
-        // }
 
         else {
             
@@ -244,7 +173,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             backgroundColor:'#004DB8'
         }
     }   
-
 
 
     public escapeQuotes = (str:any) => {
@@ -561,7 +489,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     errorMessage ={ errorMessage }
                     handleOnChange={this.handleOnChange}
 
-                
                 />
                 )
             },
@@ -624,36 +551,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
               />
                 ), 
             },
-            { 
-                step: "6",
-                title: this.strings.review_submit,
-                content: (
-                <LastStep
-                    current= { current }
-                    prefLang={this.props.prefLang}
-                    engName= { engName }
-                    commPurpose= { commPurpose }
-                    frCommName= { frCommName }
-                    selectedChoice= { selectedChoice }
-                    shEngDesc= { shEngDesc }
-                    shFrDesc= { shFrDesc }
-                    ownerList= { ownerList }
-                    // memberList= { memberList }
-                    context= { this.props.context }
-                    showCallout = { showCallout}
-                    targetId = { targetId }
-                    commPurposeCallback={ this.commPurposeCallback }
-                    handleEngNameCallback= { this.handleEngNameCallback }
-                    frNameCallBack= { this.frNameCallback }
-                    getOwnersCallback= { this.handleOwnerCallback }
-                    // getMemberCallback= { this.handleMemberCallback }
-                    handleFrDescCallback= { this.frDescCallback }
-                    handleEngDescCallback= { this.engDescCallback }
-                    isCalloutVisible ={ this.isCalloutVisible }
-                    getElementId={this.getElementId}
-              />
-                ),
-            },
             {
                 step:"6",
                 title: this.strings.title_complete,
@@ -689,6 +586,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         return (
             <>       
             <div className= { styles.scw }>   
+            <h1>{this.state.current.toString()}</h1>
                 <Title current={ current } step={ step } prefLang={this.props.prefLang} status={this.state.validationStatus} />
                 { step === 0 
                 ? 

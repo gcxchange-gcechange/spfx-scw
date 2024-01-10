@@ -6,7 +6,8 @@ import { SelectLanguage } from './SelectLanguage';
 import styles from './Scw.module.scss';
 import ReausableTextField  from './ReusableTextField';
 import { IButtonStyles, IconButton, IIconProps, Label, ILabelStyles, Stack } from 'office-ui-fabric-react';
-import {validateTextField} from './validationFunction'
+import {validateTextField, validateSpecialCharFields } from './validationFunction'
+import AddUsers from './AddUsers';
 
 
 export interface ILastStepProps { 
@@ -33,8 +34,6 @@ export interface ILastStepProps {
     getElementId?: (id: string) => void;
     handleButtonClick?: () => void;
     handleOnChange?:(event:any, value: string)=> void;
-
-
 
   }
 
@@ -83,33 +82,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
 
         this.props.getOwnersCallback( newValues );//pass to parent
     };
-
-    // private validateInput = (value: string) => {
-    //     const trimmedValue = value.trim();
-    
-    //     if (trimmedValue.length >= 1 && trimmedValue.length < 5) {
-    //       return (
-    //         <Stack horizontal horizontalAlign="center">
-    //           <Icon iconName="AlertSolid" className={styles.errorIcon} />
-    //           <p className={styles.fieldInstruction}>
-    //             {this.strings.minCharacters}
-    //           </p>
-    //         </Stack>
-    //       );
-    //     } else if (trimmedValue.length === 0) {
-    //       return (
-    //         <Stack horizontal horizontalAlign="center">
-    //           <Icon iconName="AlertSolid" className={styles.errorIcon} />
-    //           <p className={styles.fieldInstruction}>{this.strings.blankField}</p>
-    //         </Stack>
-    //       );
-    //     } else {
-    //       return null;
-    //     }
-    //   };
-
- 
-    
+   
     public render(): React.ReactElement<ILastStepProps> {
 
 
@@ -121,7 +94,17 @@ export default class LastStep extends React.Component<ILastStepProps> {
             },
           };
         
+
+        const iconStyles: IButtonStyles = {
+            root: {
+                paddingTop: '10px',
+            }
+        }
+
+        const infoIcon: IIconProps = { iconName: 'UnknownSolid' }; 
+
         const charCountStyles = {
+
             characterLimitStyle: {
               description: {
                 float: "right",
@@ -132,29 +115,21 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 color: '#C61515'
               }
             },
-        };
-
-        
-
-        const iconStyles: IButtonStyles = {
-            root: {
-                paddingTop: '10px',
-            }
-        }
-
-        const infoIcon: IIconProps = { iconName: 'UnknownSolid' }; 
+          };
+      
       
         
        
         return (
             
            <>
+            <p>{ this.strings.review_info }</p>
             <Stack horizontal verticalAlign='end'>
                 <Label htmlFor="Community purpose" styles={labelStyle}>
                     <span className={styles.asterik} aria-label={this.strings.required}>
                     *
                     </span>
-                    {/* {this.strings.commPurpose_title} */}
+                    {this.strings.commPurpose_title}
                 </Label>
                 <IconButton id="commPurpose" ariaLabel = {this.strings.infoIcon_CommPurpose} styles={ iconStyles} iconProps={infoIcon} onClick={ this.showCalloutVisible }/>
             </Stack>
@@ -162,7 +137,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
             <ReausableTextField
                 name="commPurpose"
                 id="Community purpose"
-                styles={charCountStyles}
+                styles={charCountStyles.characterLimitStyle}
                 aria-describedby="commPurposeDesc"
                 multiline
                 rows={3}
@@ -171,7 +146,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 maxLength={500}
                 description={`${commPurpose.length}/500`}
                 onChange={this.onhandleChangeEvent}
-                onGetErrorMessage={(value) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.minCharacters})}
+                onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
             />
            
            <Stack horizontal verticalAlign='end'>
@@ -184,7 +159,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
             <ReausableTextField
                 name="engName"
                 id="engName"
-                styles={charCountStyles}
+                styles={charCountStyles.characterLimitStyle}
                 aria-describedby="engName"
                 multiline ={false}
                 rows={1}
@@ -193,6 +168,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 maxLength={80}
                 description={`${engName.length}/80`}
                 onChange={this.onhandleChangeEvent}
+                onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField, removeSpecialChar: this.strings.remove_special_char})}
             />
 
             <Stack horizontal verticalAlign='end'>
@@ -206,7 +182,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
             <ReausableTextField
                 name="FrCommName"
                 id="FrCommName"
-                styles={charCountStyles}
+                styles={charCountStyles.characterLimitStyle}
                 aria-describedby="FrCommName"
                 multiline ={false}
                 rows={1}
@@ -215,6 +191,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 maxLength={80}
                 description={`${frCommName.length}/80`}
                 onChange={this.onhandleChangeEvent}
+                onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField, removeSpecialChar: this.strings.remove_special_char})}
             />
 
 
@@ -228,7 +205,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
             <ReausableTextField
                 name="shEngDesc"
                 id="shEngDesc"
-                styles={charCountStyles}
+                styles={charCountStyles.characterLimitStyle}
                 aria-describedby="shEngDesc"
                 multiline ={false}
                 rows={1}
@@ -237,6 +214,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 maxLength={100}
                 description={`${shEngDesc.length}/100`}
                 onChange={this.onhandleChangeEvent}
+                onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
             />
 
             <Stack horizontal verticalAlign='end'>
@@ -249,9 +227,9 @@ export default class LastStep extends React.Component<ILastStepProps> {
 
             <ReausableTextField
                 name="shFrDesc"
-                id="shEngDesc"
-                styles={charCountStyles}
-                aria-describedby="shEngDesc"
+                id="shFrDesc"
+                styles={charCountStyles.characterLimitStyle}
+                aria-describedby="shFrDesc"
                 multiline ={false}
                 rows={1}
                 defaultValue= {shFrDesc}
@@ -259,6 +237,21 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 maxLength={100}
                 description={`${shFrDesc.length}/100`}
                 onChange={this.onhandleChangeEvent}
+                onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
+            />
+            <Stack horizontal verticalAlign ="end">
+                <Label>
+                    <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
+                    { this.strings.owners }
+                </Label>
+                <IconButton id ="owners" styles  = { iconStyles } iconProps = { infoIcon } ariaLabel = { this.strings.infoIcon_Owners } onClick= { this.showCalloutVisible }/>
+            </Stack>
+            <AddUsers 
+                aria-describedby="ownerInstructions"
+                prefLang={this.props.prefLang}
+                context={this.props.context} 
+                ownerList={this.props.ownerList}
+                getOwnersCallback={this.updateDefaultOwnerValues} 
             />
             
             </>
