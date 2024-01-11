@@ -122,24 +122,14 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     private prev = (): void =>  { 
         const prevPage = this.state.current - 1;   
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail } = this.state;
-        const requestorEmail = ownerList.find((email) => email === this.props.requestor);
-        const values = { engName, frCommName, shEngDesc, shFrDesc, commPurpose };
-        fieldValidations([this.state]);
-        console.log("VALUES", values.frCommName)
-    
-        const validateStringLength = (value: string, minLength: number): boolean => value.length >= minLength;
-    
-        const isLessThanFiveCharacters = Object.values(values).some((value) => !validateStringLength(value, 5));
-        const hasSpecialChar = Object.entries(values).some(([key, value]) => (key === 'engName' || key === 'frCommName') && /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value));
 
-        console.log("hasSpecial CHar", hasSpecialChar);
-        console.log("less than 5", isLessThanFiveCharacters);
-        console.log('requestorEmail', requestorEmail);
-        console.log("ownerList-Length", ownerList.length);
-        console.log("ownerList", ownerList);
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail  } = this.state
+        const values = { engName, frCommName, shEngDesc, shFrDesc, commPurpose}
+        const {isLessThanMinLength, hasSpecialChar} = fieldValidations(values);
 
-        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 0 || invalidEmail !== '' || !requestorEmail || isLessThanFiveCharacters || hasSpecialChar)) {
+       
+
+        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 0 || invalidEmail !== ''|| isLessThanMinLength || hasSpecialChar)) {
            
             this.setState({ showModal: true });
         }
@@ -148,7 +138,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             
             this.setState({ current: prevPage})
         }
-        
     }
 
 
@@ -184,6 +173,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     public successMessage = (): void =>  { 
 
         const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail } = this.state
+        const values = { engName, frCommName, shEngDesc, shFrDesc, commPurpose };
+        const {isLessThanMinLength, hasSpecialChar} = fieldValidations(values);
+        console.log("VALUES", values.frCommName)
+    
 
         let requestingUser: string = '';
         // const owners = ownerList.length;
@@ -196,7 +189,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         }
        
         
-        if (current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 0 || invalidEmail !== '' || requestingUser !== '')) {
+        if (current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 0 || invalidEmail !== '' || requestingUser !== ''|| isLessThanMinLength || hasSpecialChar)) {
             this.setState({ showModal: true });
         }
         else {
@@ -301,6 +294,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         console.log("Parent_Name", eventName);
         console.log("Parent_value", values);
+        
 
         this.setState({
             ...this.state,
@@ -359,13 +353,13 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
      
     }
 
-    public handleEngNameCallback = ( engNameValue: string ): void =>   { 
-        const saveEngName = engNameValue;
-        this.setState ( { 
-            engName: saveEngName
-        });
+    // public handleEngNameCallback = ( engNameValue: string ): void =>   { 
+    //     // const saveEngName = engNameValue;
+    //     // this.setState ( { 
+    //     //     engName: saveEngName
+    //     // });
      
-    }
+    // }
 
     public frNameCallback = ( FrNameValue: string ): void =>   { 
         const saveFrName = FrNameValue;
@@ -540,7 +534,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     showCallout = { showCallout}
                     targetId = { targetId }
                     commPurposeCallback={ this.commPurposeCallback }
-                    handleEngNameCallback= { this.handleEngNameCallback }
+                    // handleEngNameCallback= { this.handleEngNameCallback }
                     frNameCallBack= { this.frNameCallback }
                     getOwnersCallback= { this.handleOwnerCallback }
                     handleFrDescCallback= { this.frDescCallback }

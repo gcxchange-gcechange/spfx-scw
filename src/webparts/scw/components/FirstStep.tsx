@@ -35,17 +35,17 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
   }
   public strings = SelectLanguage(this.props.prefLang);
 
-  private onhandleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const eventName = event.target.name;
-    const value = event.target.value;
-    const trimmedValue = value.trim();
+  // private onhandleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  //   const eventName = event.target.name;
+  //   const value = event.target.value;
+  //   const trimmedValue = value.trim();
 
-    try {
-      this.props.handleOnChange(eventName, trimmedValue);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //   try {
+  //     this.props.handleOnChange(eventName, trimmedValue);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
 
 
@@ -102,7 +102,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 validateOnLoad={false}
                 maxLength={500}
                 description={`${commPurpose.length}/500`}
-                onChange={this.onhandleChangeEvent}
+                handleOnChange={this.props.handleOnChange}
+                //onChange={this.onhandleChangeEvent}
                 onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
             />
         </div>
@@ -134,7 +135,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 validateOnLoad={false}
                 maxLength={80}
                 description={`${engName.length}/80`}
-                onChange={this.onhandleChangeEvent}
+               // onChange={this.onhandleChangeEvent}
                 onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField, removeSpecialChar: this.strings.remove_special_char})}
             />
             </div>
@@ -163,7 +164,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 validateOnLoad={false}
                 maxLength={80}
                 description={`${frCommName.length}/80`}
-                onChange={this.onhandleChangeEvent}
+                //onChange={this.onhandleChangeEvent}
                 onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField, removeSpecialChar: this.strings.remove_special_char})}
             />
             </div>
@@ -197,7 +198,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 validateOnLoad={false}
                 maxLength={100}
                 description={`${shEngDesc.length}/100`}
-                onChange={this.onhandleChangeEvent}
+                //onChange={this.onhandleChangeEvent}
                 onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
             />
             </div>
@@ -226,7 +227,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 validateOnLoad={false}
                 maxLength={100}
                 description={`${shFrDesc.length}/100`}
-                onChange={this.onhandleChangeEvent}
+                //onChange={this.onhandleChangeEvent}
                 onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
             />
             </div>

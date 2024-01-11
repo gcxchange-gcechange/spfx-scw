@@ -1,18 +1,30 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 
-export const fieldValidations = (inputValue: any[]): void => {
+interface ValidationErrors {
+    isLessThanMinLength: boolean;
+    hasSpecialChar: boolean;
+  }
+  
 
- console.log(inputValue);
+export const fieldValidations = (values: Record<string, string>): ValidationErrors => {
 
- inputValue.forEach((value: any) => {
-    console.log("VALUE",value);
+   
 
-    if (value.length  >=1 && value.length < 5 ) {
-        return true
+        const validateStringLength = (value: string, minLength: number): boolean => value.length >= minLength;
+        
+        const isLessThanMinLength = Object.values(values).some((value) => !validateStringLength(value, 5));
+        const hasSpecialChar = Object.entries(values).some(
+            ([key, value]) => (key === 'engName' || key === 'frCommName') && /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value)
+          );
+
+        console.log("lessThan 5",isLessThanMinLength);
+        console.log("specialChar", hasSpecialChar);
+
+    return {
+        isLessThanMinLength,
+        hasSpecialChar
     }
- });
+   
+ }
 
-
-
-}

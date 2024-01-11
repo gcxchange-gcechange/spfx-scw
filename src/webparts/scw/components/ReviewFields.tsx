@@ -24,7 +24,7 @@ export interface ILastStepProps {
     prefLang: string;
     current: number;
     commPurposeCallback?: (commPurpose: string) => void;
-    handleEngNameCallback?: (engNameValue: string ) => void;
+    // handleEngNameCallback?: (engNameValue: string ) => void;
     frNameCallBack?:(frNameValue: string)=> void;
     handleFrDescCallback?:(frDescValue: string)=> void;
     handleEngDescCallback?:(engDescValue: string ) => void;
@@ -48,22 +48,9 @@ export default class LastStep extends React.Component<ILastStepProps> {
     
     public strings = SelectLanguage(this.props.prefLang);
   
-    
-     private onhandleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        const eventName = event.target.name;
-        const value = event.target.value;
-        const trimmedValue = value.trim();
 
-        console.log("INCHILD_EName", eventName);
-        console.log("INCHILD_EValue", value);
     
-        try {
-          this.props.handleOnChange(eventName, trimmedValue);
-        } catch (error) {
-          console.log(error);
-        }
-    };
-
+   
 
     public showCalloutVisible = ( event:any ):void => {
         
@@ -145,7 +132,8 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 validateOnLoad={false}
                 maxLength={500}
                 description={`${commPurpose.length}/500`}
-                onChange={this.onhandleChangeEvent}
+               // onChange={this.onhandleChangeEvent}
+                handleOnChange={this.props.handleOnChange}
                 onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
             />
            
@@ -167,7 +155,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 validateOnLoad={false}
                 maxLength={80}
                 description={`${engName.length}/80`}
-                onChange={this.onhandleChangeEvent}
+                //onChange={this.onhandleChangeEvent}
                 onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField, removeSpecialChar: this.strings.remove_special_char})}
             />
 
@@ -190,7 +178,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 validateOnLoad={false}
                 maxLength={80}
                 description={`${frCommName.length}/80`}
-                onChange={this.onhandleChangeEvent}
+               // onChange={this.onhandleChangeEvent}
                 onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField, removeSpecialChar: this.strings.remove_special_char})}
             />
 
@@ -213,7 +201,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 validateOnLoad={false}
                 maxLength={100}
                 description={`${shEngDesc.length}/100`}
-                onChange={this.onhandleChangeEvent}
+               // onChange={this.onhandleChangeEvent}
                 onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
             />
 
@@ -236,7 +224,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 validateOnLoad={false}
                 maxLength={100}
                 description={`${shFrDesc.length}/100`}
-                onChange={this.onhandleChangeEvent}
+               // onChange={this.onhandleChangeEvent}
                 onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
             />
             <Stack horizontal verticalAlign ="end">

@@ -13,8 +13,9 @@ export interface IReusableTextFieldProps {
     defaultValue: string;
     validateOnLoad: boolean;
     maxLength: number;
-    onChange?: (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => void;
+    //onChange?: (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => void;
     onGetErrorMessage?: (value: string ) => string | JSX.Element | undefined;
+    handleOnChange?:(event:any, value: string) => void;
     
 
 }
@@ -28,12 +29,29 @@ export default class ReausableTextField extends React.Component<IReusableTextFie
 
     }
 
+    private onhandleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        const eventName = event.target.name;
+        const value = event.target.value;
+        const trimmedValue = value.trim();
+
+        console.log("child_eventname_laststep", eventName);
+        console.log("child_eventname_laststep", value);
+    
+        try {
+          this.props.handleOnChange(eventName, trimmedValue);
+        } catch (error) {
+          console.log(error);
+        }
+    };
+
+
 
     public render() {
 
         return (
             <TextField
                {...this.props}
+               onChange={this.onhandleChangeEvent}
             />
         )
 
