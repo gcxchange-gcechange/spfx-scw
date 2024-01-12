@@ -153,6 +153,9 @@ define([], function() {
     "please_add_a_purpose":"Please add a purpose",
     "please_add_a_name" : "Please add a name",
     "please_add_a_description": "Please add a description",
+    "invite_yourself":"cannot invite yourself.",
+    "please_remove_your_name":"Plese remove your name.",
+    "other_than_yourself": "other than yourself",
     
 
 

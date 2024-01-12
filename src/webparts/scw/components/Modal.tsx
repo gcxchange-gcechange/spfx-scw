@@ -216,7 +216,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
       );
   }
 
-  public renderSecondPageMessage = ():string => {
+  public renderSecondPageMessage = ():string | JSX.Element => {
 
     const {invalidUser, ownerList, requestor } = this.props;
 
@@ -232,36 +232,75 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
     const invalidUserBold = "<strong>" + invalidUser + "</strong>";  //unvalid email need to be bold
 
     const secondPageValues: any[] = [
-      { name: `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}` },
+      { name: `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}` },
       { name: `${this.strings.requestorUser }`, value: `${requestingUser}` },
-      { name: `${this.strings.you_must} ${this.strings.one_more_owner}`, value: `${ownerList.length}`}
+      { name: `${this.strings.one_more_owner}`, value: `${ownerList.length}`}
     ];
 
-    const resultValues: any[] =[];
+    const resultValues: string[] =[];
     const comma = `<span style=fontWeight:normal>, </span>`;
     let message = "";
+    //let reviewPageMessage = "";
+
 
       for (const obj of secondPageValues){
         console.log("obj", obj);
 
-        const addOneMoreOwner = obj.name === `${this.strings.you_must} ${this.strings.one_more_owner}`;
-        const invalidEmail = obj.name === `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}`;
+        const addOneMoreOwner = obj.name === `${this.strings.one_more_owner}`;
+        const invalidEmail = obj.name === `${this.strings.invalidEmail} ${
+          invalidUserBold} ${this.strings.is_not_valid}`;
         const removeRequestor = obj.name === `${this.strings.requestorUser}`;
 
         if ((addOneMoreOwner && obj.value < 1 && invalidUser === '') || (invalidEmail && obj.value !== '') || (removeRequestor && obj.value !== '')) {
           resultValues.push(obj.name);
+          console.log("resultVales", resultValues);
+
+           
+
               if (resultValues.length > 1) {
                   const tolower = resultValues.slice(-1)[0];
+                  console.log(resultValues.slice(0, -1))
+                  console.log(resultValues)
                   message = resultValues.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
+          
               }
               else if (resultValues.length === 1) {
-                message = `${obj.name}`
+                if (removeRequestor) {
+                  message = `${obj.name}`
+                } else {
+                  message = `${this.strings.you_must} ${obj.name}`
+                }
+               
               }
           }
       }
+
+    
  
-      console.log("MESSAGE", message);
-      return message;
+      console.log("MESSAGE", resultValues);
+
+     
+      if ( this.props.current === 1 ){
+        return message
+      }
+
+      if ( this.props.current === 2) {
+        return (
+          <>          
+          <h3>{this.strings.owners}</h3>
+          <ul>
+            {resultValues.map((item) => {
+               <li>{parse(item)}</li>
+            })}
+           
+          </ul>
+          </>
+
+
+        )
+      }
+
+     
       
   }
 
@@ -272,7 +311,8 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
     const combinedMessage = (
       <>
         {firstPageMessage}       
-        {parse(secondPageMessage)} 
+        
+        {secondPageMessage} 
 
       </>
     );
@@ -284,7 +324,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
 
     //const messages = parse(this.errorMessage());
     const firstPageErrorMessage = this.renderFirstPageMessage();
-    const secondPageErrorMessage = parse(this.renderSecondPageMessage());
+    const secondPageErrorMessage = parse(this.renderSecondPageMessage().toString());
     const thirdPageErrorMessage = this.renderCombinedMessage();
 
     const iconStyles: Partial<IIconStyles> = { 
@@ -344,6 +384,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
                 {this.props.current === 2 && (
                   <>
                  <Stack>
+                 <h3>Please review the following fields</h3>
                     <p className={styles.modalContent}> {thirdPageErrorMessage}</p>
                   </Stack>
                   </>

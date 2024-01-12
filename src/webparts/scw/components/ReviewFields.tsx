@@ -24,7 +24,7 @@ export interface ILastStepProps {
     prefLang: string;
     current: number;
     commPurposeCallback?: (commPurpose: string) => void;
-    // handleEngNameCallback?: (engNameValue: string ) => void;
+    handleEngNameCallback?: (engNameValue: string ) => void;
     frNameCallBack?:(frNameValue: string)=> void;
     handleFrDescCallback?:(frDescValue: string)=> void;
     handleEngDescCallback?:(engDescValue: string ) => void;
@@ -47,6 +47,79 @@ export default class LastStep extends React.Component<ILastStepProps> {
     }
     
     public strings = SelectLanguage(this.props.prefLang);
+
+    private  onUpdateCommPurpose = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+        let value = event.target.value;
+        const invalidInput: string = '';
+        
+        if (value.length < 5 || value.length > 500 ) {
+            value = invalidInput;
+        }
+
+        const updatedPurpose = value.trim();  
+        this.props.commPurposeCallback(updatedPurpose); 
+     }
+
+    private  onUpdateEngName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+
+        let value = event.target.value;
+        const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value);
+        const invalidInput: string = '';
+
+        if (charAllowed ) {
+           value = invalidInput  
+        } else if (value.length < 5 || value.length > 80) {
+            value = invalidInput;
+        }
+
+        const updatedName = value.trim();
+
+        this.props.handleEngNameCallback(updatedName); 
+     }
+    
+    private  onUpdateFrName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+
+        let value = event.target.value;
+        const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value);
+        const invalidInput: string = '';
+
+        if ( charAllowed  ) {              
+            value = invalidInput;
+        } else if (value.length < 5 || value.length > 80) {
+            value = invalidInput;
+        }
+        const updateFrName = value.trim();
+        
+        this.props.frNameCallBack(updateFrName)    
+     }
+
+     private onUpdateEngDesc = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+        let value = event.target.value;
+        const invalidInput: string = '';
+        // const updateEngDesc = event.target.value;
+
+        if (value.length < 5 || value.length > 100 ) {
+            value = invalidInput
+        }
+
+        const updateEngDesc = value.trim();
+
+        this.props.handleEngDescCallback(updateEngDesc)    
+     }
+
+    private  onUpdateFrDesc = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+        let value = event.target.value;
+        const invalidInput: string = '';
+        
+
+        if(value.length < 5 || value.length > 100 ) {
+            value = invalidInput
+        }
+
+        const updateFrDesc = value.trim();
+        
+        this.props.handleFrDescCallback(updateFrDesc)    
+     }
   
 
     
@@ -132,8 +205,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 validateOnLoad={false}
                 maxLength={500}
                 description={`${commPurpose.length}/500`}
-               // onChange={this.onhandleChangeEvent}
-                handleOnChange={this.props.handleOnChange}
+                onChange={this.onUpdateCommPurpose}
                 onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
             />
            
@@ -155,7 +227,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 validateOnLoad={false}
                 maxLength={80}
                 description={`${engName.length}/80`}
-                //onChange={this.onhandleChangeEvent}
+                onChange={this.onUpdateEngName}
                 onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField, removeSpecialChar: this.strings.remove_special_char})}
             />
 
@@ -178,7 +250,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 validateOnLoad={false}
                 maxLength={80}
                 description={`${frCommName.length}/80`}
-               // onChange={this.onhandleChangeEvent}
+                onChange={this.onUpdateFrName}
                 onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField, removeSpecialChar: this.strings.remove_special_char})}
             />
 
@@ -201,7 +273,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 validateOnLoad={false}
                 maxLength={100}
                 description={`${shEngDesc.length}/100`}
-               // onChange={this.onhandleChangeEvent}
+                onChange={this.onUpdateEngDesc}
                 onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
             />
 
@@ -224,13 +296,13 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 validateOnLoad={false}
                 maxLength={100}
                 description={`${shFrDesc.length}/100`}
-               // onChange={this.onhandleChangeEvent}
+                onChange={this.onUpdateFrDesc}
                 onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
             />
             <Stack horizontal verticalAlign ="end">
                 <Label>
                     <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
-                    { this.strings.owners }
+                    { `${this.strings.owners} ${this.strings.other_than_yourself}`}
                 </Label>
                 <IconButton id ="owners" styles  = { iconStyles } iconProps = { infoIcon } ariaLabel = { this.strings.infoIcon_Owners } onClick= { this.showCalloutVisible }/>
             </Stack>

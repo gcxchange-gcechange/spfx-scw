@@ -150,6 +150,9 @@ declare interface IScwWebPartStrings {
   please_add_a_purpose: string;
   please_add_a_name : string;
   please_add_a_description:  string;
+  invite_yourself:string;
+  please_remove_your_name: stirng;
+  other_than_yourself: string;
 
 
 

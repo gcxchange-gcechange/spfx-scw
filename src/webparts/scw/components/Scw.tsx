@@ -294,7 +294,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         console.log("Parent_Name", eventName);
         console.log("Parent_value", values);
-        
 
         this.setState({
             ...this.state,
@@ -302,6 +301,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
            
         });
 
+        console.log("thisState", this.state.engName)
         const firstDiv = document.getElementById('first-line');
 
         if (eventName === "commPurpose" && value.length < 5)  {
@@ -353,13 +353,13 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
      
     }
 
-    // public handleEngNameCallback = ( engNameValue: string ): void =>   { 
-    //     // const saveEngName = engNameValue;
-    //     // this.setState ( { 
-    //     //     engName: saveEngName
-    //     // });
+    public handleEngNameCallback = ( engNameValue: string ): void =>   { 
+        const saveEngName = engNameValue;
+        this.setState ( { 
+            engName: saveEngName
+        });
      
-    // }
+    }
 
     public frNameCallback = ( FrNameValue: string ): void =>   { 
         const saveFrName = FrNameValue;
@@ -465,6 +465,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     public render(): React.ReactElement<IScwProps>  { 
       
         const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, errorMessage, showModal, checkedValues, showCallout, targetId } = this.state;
+        console.log("STATE", this.state);
 
         const steps = [
         
@@ -534,7 +535,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     showCallout = { showCallout}
                     targetId = { targetId }
                     commPurposeCallback={ this.commPurposeCallback }
-                    // handleEngNameCallback= { this.handleEngNameCallback }
+                    handleEngNameCallback= { this.handleEngNameCallback }
                     frNameCallBack= { this.frNameCallback }
                     getOwnersCallback= { this.handleOwnerCallback }
                     handleFrDescCallback= { this.frDescCallback }

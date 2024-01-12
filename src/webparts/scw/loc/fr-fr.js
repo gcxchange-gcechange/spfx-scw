@@ -130,7 +130,7 @@ define([], function() {
         'required': 'champ obligatoire',
         "SP_TeamsLogos": "Logos SharePoint et Teams avec des flèches indiquant la capacité de partage entre les outils.",
         "valid_email": "Vous devez fournir un courriel valide;",
-        "invalidEmail":"un courriel valide;",
+        "invalidEmail":"fournir un courriel valide;",
         "is_not_valid": "n'est pas valide. Veuillez fournir un courriel valide",
         "requestorUser":"En tant que demandeur de la création de cette collectivité, vous êtes automatiquement ajouté comme propriétaire.</span> <strong>Vous ne pouvez pas vous inviter en tant que propriétaire</strong>. Veuillez vous désinscrire",
         "onlyAlphabets":"Seuls les caractères alphabétiques (avec accents français), les nombres, les espaces et les apostrophes sont permis.",
@@ -143,7 +143,10 @@ define([], function() {
         "please_add_a_longer_description": "Veuillez ajouter une description plus long.",
         "please_add_a_purpose":"Veuillez ajouter un objet.",
         "please_add_a_name" : "Veuillez ajouter un nom.",
-        "please_add_a_description": "Veuillez ajouter une description."
+        "please_add_a_description": "Veuillez ajouter une description.",
+        "invite_yourself":"Vous ne pouvez pas vous inviter",
+        "please_remove_your_name":"Veuillez vous désinscrire",
+        "other_than_yourself": "que vous-même",
     
     
         
