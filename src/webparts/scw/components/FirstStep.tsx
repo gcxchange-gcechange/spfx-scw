@@ -82,16 +82,16 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
       <>
         <h3>{parse(this.strings.commPurpose_title)}</h3>
         <p>{parse(this.strings.commPurpose_desc)}</p>
-        <div id="first-line">
-          <Label htmlFor="Community purpose" styles={labelStyle}>
+          {/* <div id="first-line">   */}
+           <Label htmlFor="Community purpose" styles={labelStyle}>
             <span className={styles.asterik} aria-label={this.strings.required}>
               *
             </span>
             {this.strings.commPurpose_title}
           </Label>
-          <p id="commPurposeDesc" className={styles.instruction}>
+          {/* <p id="commPurposeDesc" className={styles.instruction}>
             {this.strings.commPurpose_Instruction}
-          </p>
+          </p>   */}
           <ReausableTextField
                 name="commPurpose"
                 id="Community purpose"
@@ -105,14 +105,17 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 description={`${commPurpose.length}/500`}
                 onChange={this.onhandleChangeEvent}
                 onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
+                instructions =  {this.strings.commPurpose_Instruction}
+                title = {this.strings.commPurpose_title}
+                lineId={"first-line"}
             />
-        </div>
+        {/* </div> */}
 
         <h3>{this.strings.comm_name}</h3>
         <p className={styles.topMgn0}>{this.strings.engName_desc}</p>
         <Stack tokens={stackTokens}>
           <StackItem>
-            <div id="second-line">
+            {/* <div id="second-line">
               <Label htmlFor="engName" styles={labelStyle}>
                 <span
                   className={styles.asterik}
@@ -123,7 +126,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
               </Label>
               <p id="engNameDesc" className={styles.instruction}>
                 {this.strings.engName_Instruction}
-              </p>
+              </p> */}
               <ReausableTextField
                 name="engName"
                 id="engName"
@@ -137,11 +140,14 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 description={`${engName.length}/80`}
                 onChange={this.onhandleChangeEvent}
                 onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField, removeSpecialChar: this.strings.remove_special_char})}
+                instructions = {this.strings.engName_Instruction}
+                title= {this.strings.engName_title}
+                lineId={"second-line"}
             />
-            </div>
+            {/* </div> */}
           </StackItem>
           <StackItem>
-            <div id="third-line">
+            {/* <div id="third-line">
               <Label htmlFor="frCommName">
                 <span
                   className={styles.asterik}
@@ -152,7 +158,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
               </Label>
               <p id="frNameDesc" className={styles.instruction}>
                 {this.strings.frCommName_Instruction}
-              </p>
+              </p> */}
               <ReausableTextField
                 name="frCommName"
                 id="frCommName"
@@ -166,8 +172,11 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 description={`${frCommName.length}/80`}
                 onChange={this.onhandleChangeEvent}
                 onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField, removeSpecialChar: this.strings.remove_special_char})}
+                instructions = {this.strings.frCommName_Instruction}
+                title =  {this.strings.frCommName_title}
+                lineId={"third-line"}
             />
-            </div>
+            {/* </div> */}
           </StackItem>
         </Stack>
 
@@ -175,7 +184,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
         <p className={styles.topMgn0}> {this.strings.shEngDesc_desc}</p>
         <Stack tokens={stackTokens}>
           <StackItem>
-            <div id="fourth-line">
+            {/* <div id="fourth-line">
               <Label htmlFor="shEngDesc" styles={labelStyle}>
                 <span
                   className={styles.asterik}
@@ -186,7 +195,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
               </Label>
               <p id="shEngDescription" className={styles.instruction}>
                 {this.strings.shEngDesc_Instruction}
-              </p>
+              </p> */}
               <ReausableTextField
                 name="shEngDesc"
                 id="shEngDesc"
@@ -200,12 +209,15 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 description={`${shEngDesc.length}/100`}
                 onChange={this.onhandleChangeEvent}
                 onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
+                instructions = {this.strings.shEngDesc_Instruction}
+                title =  {this.strings.shEngDesc_title}
+                lineId={"fourth-line"}
             />
-            </div>
+            {/* </div> */}
           </StackItem>
           <StackItem>
-            <div id="fifth-line">
-              <Label htmlFor="shFrDesc" styles={labelStyle}>
+            {/* <div id="fifth-line"> */}
+              {/* <Label htmlFor="shFrDesc" styles={labelStyle}>
                 <span
                   className={styles.asterik}
                   aria-label={this.strings.required}>
@@ -215,7 +227,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
               </Label>
               <p id="FrDesc" className={styles.instruction}>
                 {this.strings.shFrDesc_Instruction}
-              </p>
+              </p> */}
               <ReausableTextField
                 name="shFrDesc"
                 id="shFrDesc"
@@ -229,8 +241,11 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 description={`${shFrDesc.length}/100`}
                 onChange={this.onhandleChangeEvent}
                 onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
+                instructions = {this.strings.shFrDesc_Instruction}
+                title = {this.strings.shFrDesc_title}
+                lineId={"fifth-line"}
             />
-            </div>
+            {/* </div> */}
           </StackItem>
         </Stack>
       </>

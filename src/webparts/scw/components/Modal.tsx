@@ -240,7 +240,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
     const resultValues: string[] =[];
     const finalResultsArray: string[] =[];
     const comma = `<span style=fontWeight:normal>, </span>`;
-    let message = "";
+    let message: string = "";
     let finalResults: string = "";
     //let reviewPageMessage = "";
 
@@ -288,7 +288,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
 
      
       if ( this.props.current === 1 ){
-        return message
+        return parse(message).toString()
       }
 
       if ( this.props.current === 2) {
@@ -326,7 +326,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
 
     //const messages = parse(this.errorMessage());
     const firstPageErrorMessage = this.renderFirstPageMessage();
-    const secondPageErrorMessage = parse(this.renderSecondPageMessage().toString());
+    const secondPageErrorMessage = this.renderSecondPageMessage();
     const thirdPageErrorMessage = this.renderCombinedMessage();
 
     const iconStyles: Partial<IIconStyles> = { 

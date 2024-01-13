@@ -207,6 +207,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 description={`${commPurpose.length}/500`}
                 onChange={this.onUpdateCommPurpose}
                 onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
+                title = {this.strings.commPurpose_title}
             />
            
            <Stack horizontal verticalAlign='end'>
@@ -229,6 +230,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 description={`${engName.length}/80`}
                 onChange={this.onUpdateEngName}
                 onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField, removeSpecialChar: this.strings.remove_special_char})}
+                title =  { this.strings.engName_title }
             />
 
             <Stack horizontal verticalAlign='end'>
@@ -252,6 +254,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 description={`${frCommName.length}/80`}
                 onChange={this.onUpdateFrName}
                 onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField, removeSpecialChar: this.strings.remove_special_char})}
+                title = { this.strings.frCommName_title }
             />
 
 
@@ -275,6 +278,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 description={`${shEngDesc.length}/100`}
                 onChange={this.onUpdateEngDesc}
                 onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
+                title =   { this.strings.shEngDesc_title }
             />
 
             <Stack horizontal verticalAlign='end'>
@@ -298,6 +302,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 description={`${shFrDesc.length}/100`}
                 onChange={this.onUpdateFrDesc}
                 onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
+                title = { this.strings.shFrDesc_title }
             />
             <Stack horizontal verticalAlign ="end">
                 <Label>
