@@ -153,6 +153,7 @@ declare interface IScwWebPartStrings {
   invite_yourself:string;
   please_remove_your_name: stirng;
   other_than_yourself: string;
+  please_add_another_owner: string;
 
 
 

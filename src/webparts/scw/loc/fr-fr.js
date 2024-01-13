@@ -146,7 +146,9 @@ define([], function() {
         "please_add_a_description": "Veuillez ajouter une description.",
         "invite_yourself":"Vous ne pouvez pas vous inviter",
         "please_remove_your_name":"Veuillez vous désinscrire",
-        "other_than_yourself": "que vous-même",
+        "other_than_yourself": "que vous-même", 
+        "please_add_another_owner":"Veuillez ajouter un autre propriétaire",
+
     
     
         

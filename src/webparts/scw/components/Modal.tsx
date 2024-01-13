@@ -232,14 +232,16 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
     const invalidUserBold = "<strong>" + invalidUser + "</strong>";  //unvalid email need to be bold
 
     const secondPageValues: any[] = [
-      { name: `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}` },
-      { name: `${this.strings.requestorUser }`, value: `${requestingUser}` },
-      { name: `${this.strings.one_more_owner}`, value: `${ownerList.length}`}
+      { name: `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}`, reviewFieldTxt: `${this.strings.valid_email}` },
+      { name: `${this.strings.requestorUser }`, value: `${requestingUser}`, reviewFieldTxt: `${this.strings.invite_yourself} ${this.strings.please_remove_your_name}` },
+      { name: `${this.strings.you_must} ${this.strings.one_more_owner}`, value: `${ownerList.length}`, reviewFieldTxt: `${this.strings.blankField} ${this.strings.please_add_another_owner }`}
     ];
 
     const resultValues: string[] =[];
+    const finalResultsArray: string[] =[];
     const comma = `<span style=fontWeight:normal>, </span>`;
     let message = "";
+    let finalResults: string = "";
     //let reviewPageMessage = "";
 
 
@@ -247,15 +249,21 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
         console.log("obj", obj);
 
         const addOneMoreOwner = obj.name === `${this.strings.one_more_owner}`;
-        const invalidEmail = obj.name === `${this.strings.invalidEmail} ${
-          invalidUserBold} ${this.strings.is_not_valid}`;
+        const invalidEmail = obj.name === `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}`;
         const removeRequestor = obj.name === `${this.strings.requestorUser}`;
 
         if ((addOneMoreOwner && obj.value < 1 && invalidUser === '') || (invalidEmail && obj.value !== '') || (removeRequestor && obj.value !== '')) {
           resultValues.push(obj.name);
-          console.log("resultVales", resultValues);
 
-           
+          if (this.props.current === 2) {
+
+            finalResultsArray.push(obj.reviewFieldTxt)
+            console.log("finalArray", finalResultsArray);
+  
+            const results: string = finalResultsArray.map((item) => `<li>${item}</li>`).join('');
+            finalResults = `<ul>${results}</ul>`;
+          }
+
 
               if (resultValues.length > 1) {
                   const tolower = resultValues.slice(-1)[0];
@@ -264,20 +272,19 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
                   message = resultValues.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
           
               }
+
               else if (resultValues.length === 1) {
-                if (removeRequestor) {
                   message = `${obj.name}`
-                } else {
-                  message = `${this.strings.you_must} ${obj.name}`
-                }
-               
-              }
+              
+
+
           }
+        }
       }
 
     
  
-      console.log("MESSAGE", resultValues);
+      console.log("ResultValues", resultValues);
 
      
       if ( this.props.current === 1 ){
@@ -287,14 +294,9 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
       if ( this.props.current === 2) {
         return (
           <>          
-          <h3>{this.strings.owners}</h3>
-          <ul>
-            {resultValues.map((item) => {
-               <li>{parse(item)}</li>
-            })}
-           
-          </ul>
-          </>
+            <h3>{this.strings.owners}</h3>
+            {parse(finalResults)}
+          </> 
 
 
         )
