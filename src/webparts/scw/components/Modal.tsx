@@ -6,6 +6,7 @@ import styles from "./Scw.module.scss";
 import { Stack, StackItem } from "office-ui-fabric-react/lib/Stack";
 import parse from 'html-react-parser';
 import { SelectLanguage } from './SelectLanguage';
+ 
 
 export interface IErrorModalProps {
   showModal: boolean;
@@ -219,6 +220,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
   public renderSecondPageMessage = ():string | JSX.Element => {
  
     const {invalidUser, ownerList, requestor } = this.props;
+    
 
     let requestingUser: string = '';
 
@@ -229,6 +231,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
       } 
       
     }
+
     const invalidUserBold = "<strong>" + invalidUser + "</strong>";  //unvalid email need to be bold
 
     const secondPageValues: any[] = [
@@ -263,12 +266,13 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
               const tolower = resultValues.slice(-1)[0];
               console.log(resultValues.slice(0, -1))
               console.log(resultValues)
-              message = resultValues.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
+              const messageResult = resultValues.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
+              message = `${parse(messageResult)}`
       
             }
   
             else if (resultValues.length === 1) {
-              message = `${obj.name}`
+              message = `${parse(obj.name)}`
           
             }
           }

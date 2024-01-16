@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Stack, Icon } from 'office-ui-fabric-react';
+import { Stack, Icon, IPersonaProps } from 'office-ui-fabric-react';
 import * as React from 'react';
  
 import styles from './Scw.module.scss';
 
 
+ 
 
 export const validateTextField = (value: string, strings: { minCharacters: string; blankField: string }): JSX.Element => {
 
@@ -103,5 +104,22 @@ export const validateSpecialCharFields = (value: string, strings: { minCharacter
          <p className={styles.fieldInstruction}>{strings.removeSpecialChar} {specialCharFound}</p>
     </Stack>
   }
+
+}
+
+export const validateOwnerField = (value: IPersonaProps[], strings: { blankfield: string, requestorUser: string}, requestor: string): string | Promise<string> => {
+ 
+ 
+ console.log("requestor-FUNCTION", requestor);
+
+ console.log("ValueOL", value);
+
+  if (value.length === 0) {
+    return (
+      `${strings.blankfield}`
+    )
+  }
+
+
 
 }

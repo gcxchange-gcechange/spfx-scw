@@ -290,59 +290,88 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         const eventName = event;
         const values = value
-        const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
+        //const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
 
         console.log("Parent_Name", eventName);
         console.log("Parent_value", values);
+
+        this.handleSideLineErrorValidation(event, value)
 
         this.setState({
             ...this.state,
             [eventName]: values,
            
         });
-
-        console.log("thisState", this.state.engName)
-        const firstDiv = document.getElementById('first-line');
-
-        if (eventName === "commPurpose" && value.length < 5)  {
-            firstDiv.classList.add(styles.errorBorder)
-        }
-         else if (eventName === "commPurpose"){
-            firstDiv.classList.remove(styles.errorBorder)
-        }
-
-        if (eventName === "engName" && (value.length < 5 || charAllowed))  {
-            document.getElementById("second-line").classList.add(styles.errorBorder)
-        }  
-        else if (eventName === "engName"){
-            document.getElementById("second-line").classList.remove(styles.errorBorder)
-        }
-        
-        if (eventName === "frCommName" &&  (value.length < 5 || charAllowed))  {
-            document.getElementById("third-line").classList.add(styles.errorBorder)
-        } 
-        else if (eventName === "frCommName"){
-            document.getElementById("third-line").classList.remove(styles.errorBorder)
-        }
-        
-        if (eventName === "shEngDesc" && value.length < 5)  {
-            document.getElementById("fourth-line").classList.add(styles.errorBorder)
-        } 
-        else if (eventName === "shEngDesc"){
-            document.getElementById("fourth-line").classList.remove(styles.errorBorder)
-        }
-        
-        if (eventName === "shFrDesc" && value.length < 5)  {
-            document.getElementById("fifth-line").classList.add(styles.errorBorder)
-        } 
-        else if (eventName === "shFrDesc") {
-            document.getElementById("fifth-line").classList.remove(styles.errorBorder)
-        }
-
-
-       
         
     }
+
+    public handleSideLineErrorValidation = (eventName:string, value:string) => {   
+        console.log("eventName:", eventName , "value:" ,value);
+
+        const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
+
+        const addErrorBorder = (lineId: string) => {
+          document.getElementById(lineId).classList.add(styles.errorBorder);
+        };
+      
+        const removeErrorBorder = (lineId: string) => {
+          document.getElementById(lineId).classList.remove(styles.errorBorder);
+        };
+      
+        switch (eventName) {
+          case "commPurpose":
+            if (value.length < 5) {
+              addErrorBorder("first-line");
+            } else {
+              removeErrorBorder("first-line");
+            }
+            break;
+      
+          case "engName":
+            if (value.length < 5 || charAllowed) {
+              addErrorBorder("second-line");
+            } else {
+              removeErrorBorder("second-line");
+            }
+            break;
+      
+          case "frCommName":
+            if (value.length < 5 || charAllowed) {
+              addErrorBorder("third-line");
+            } else {
+              removeErrorBorder("third-line");
+            }
+            break;
+      
+          case "shEngDesc":
+            if (value.length < 5) {
+              addErrorBorder("fourth-line");
+            } else {
+              removeErrorBorder("fourth-line");
+            }
+            break;
+      
+          case "shFrDesc":
+            if (value.length < 5) {
+              addErrorBorder("fifth-line");
+            } else {
+              removeErrorBorder("fifth-line");
+            }
+            break;
+         case "owners":
+                if (value.length < 5) {
+                  addErrorBorder("fifth-line");
+                } else {    
+                  removeErrorBorder("fifth-line");
+                }
+                break;
+      
+          default:
+            break;
+        }
+      };
+      
+      
 
     public commPurposeCallback = ( commPurpose: string ): void =>   { 
         const savePurpose = commPurpose;
@@ -350,6 +379,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         this.setState ( { 
             commPurpose: savePurpose
         });
+        this.handleSideLineErrorValidation("commPurpose", savePurpose)
      
     }
 
@@ -358,6 +388,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         this.setState ( { 
             engName: saveEngName
         });
+        this.handleSideLineErrorValidation("engName", saveEngName)
      
     }
 
@@ -366,7 +397,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         this.setState ( { 
             frCommName: saveFrName
         });
-        
+        this.handleSideLineErrorValidation("frCommName", saveFrName)
     }
 
     public engDescCallback = ( EngDescValue: string ): void =>   { 
@@ -374,6 +405,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         this.setState ( { 
             shEngDesc: saveEngDesc
         });
+        this.handleSideLineErrorValidation("shEngDesc", EngDescValue)
         
     }
 
@@ -383,6 +415,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             shFrDesc: saveFrDesc
         });
         
+        this.handleSideLineErrorValidation("shFrDesc", FrDescValue)
     }
 
   
@@ -510,6 +543,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     prefLang={this.props.prefLang}
                     context= { this.props.context }
                     ownerList= { ownerList }
+                    requestor = {this.props.requestor}
                     // memberList= { memberList }
                     getOwnersCallback= { this.handleOwnerCallback }
                     // getMemberCallback= { this.handleMemberCallback }
@@ -542,6 +576,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     isCalloutVisible ={ this.isCalloutVisible }
                     getElementId={this.getElementId}
                     handleOnChange={this.handleOnChange}
+                    requestor = {this.props.requestor}
               />
                 ), 
             },

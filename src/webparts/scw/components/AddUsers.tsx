@@ -4,6 +4,9 @@ import { PeoplePicker, PrincipalType } from "@pnp/spfx-controls-react/lib/People
 import { DirectionalHint } from "office-ui-fabric-react";
 import * as React from "react";
 import { SelectLanguage } from './SelectLanguage';
+import { validateOwnerField } from "./validationFunction";
+
+
 
 
 
@@ -16,14 +19,17 @@ export interface IAddUsersProps {
     getOwnersCallback?: ( item: [] )  => void;
     // getMemberCallback?: ( item: [] )  => void;
     handleButtonClick? :(event: any) => void;
+    requestor?: string;
 
 }
 
 export default class AUsers extends React.Component<IAddUsersProps> {
      
     public strings = SelectLanguage( this.props.prefLang );
+    
  
-    constructor( props: IAddUsersProps ) {
+ 
+    constructor( props: IAddUsersProps, ) {
         super( props );
 
         this.state = {
@@ -57,6 +63,9 @@ export default class AUsers extends React.Component<IAddUsersProps> {
     public render(): React.ReactElement<IAddUsersProps>  {
 
 
+        const currentUser = this.props.requestor; // Adjust this based on the actual structure of your context
+        console.log("CurrentUser",currentUser)
+
 
         return(
 
@@ -69,7 +78,6 @@ export default class AUsers extends React.Component<IAddUsersProps> {
                     groupName = { "" } // Leave this blank in case you want to filter from all users
                     onChange = { this._getOwnerItems }
                     principalTypes = { [ PrincipalType.User ] }
-                    showHiddenInUI = {false }
                     resolveDelay = {1000}
                     defaultSelectedUsers  = { this.props.ownerList}
                     showtooltip = { true }
@@ -77,6 +85,14 @@ export default class AUsers extends React.Component<IAddUsersProps> {
                     tooltipDirectional  = { DirectionalHint.topCenter }
                     ensureUser={ true }
                     allowUnvalidated={ true }
+                    onGetErrorMessage={(ownerList) => 
+                        validateOwnerField(
+                            ownerList,  {
+                            blankfield: `${this.strings.blankField} ${this.strings.please_add_another_owner}`, 
+                            requestorUser: `${this.strings.invite_yourself} ${this.strings.please_remove_your_name}`
+                            },currentUser
+                         
+                        )}
                 />
 
 {/* 

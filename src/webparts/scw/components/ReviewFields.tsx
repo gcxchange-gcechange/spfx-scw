@@ -34,7 +34,7 @@ export interface ILastStepProps {
     getElementId?: (id: string) => void;
     handleButtonClick?: () => void;
     handleOnChange?:(event:any, value: string)=> void;
-
+    requestor: string
   }
 
 
@@ -202,6 +202,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 title = {this.strings.commPurpose_title}
                 currentPage = {current}
                 showCalloutVisible={this.showCalloutVisible}
+                lineId={"first-line"}
                 
                 
             />
@@ -222,6 +223,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 title =  { this.strings.engName_title }
                 currentPage = {current}
                 showCalloutVisible={this.showCalloutVisible}
+                lineId={"second-line"}
             />
 
             <ReausableTextField
@@ -240,6 +242,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 title = { this.strings.frCommName_title }
                 currentPage = {current}
                 showCalloutVisible={this.showCalloutVisible}
+                lineId={"third-line"}
             />
 
             <ReausableTextField
@@ -258,6 +261,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 title =   { this.strings.shEngDesc_title }
                 currentPage = {current}
                 showCalloutVisible={this.showCalloutVisible}
+                lineId={"fourth-line"}
             />
 
             <ReausableTextField
@@ -276,7 +280,9 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 title = { this.strings.shFrDesc_title }
                 currentPage = {current}
                 showCalloutVisible={this.showCalloutVisible}
+                lineId={"fifth-line"}
             />
+
             <Stack horizontal verticalAlign ="end">
                 <Label styles={labelStyle}>
                     <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
@@ -290,6 +296,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 context={this.props.context} 
                 ownerList={this.props.ownerList}
                 getOwnersCallback={this.updateDefaultOwnerValues} 
+                requestor={this.props.requestor}
             />
             
             </>

@@ -52,7 +52,7 @@ export default class ReausableTextField extends React.Component<IReusableTextFie
         }
 
         return (
-            <div id={this.props.lineId}>
+            <div id={this.props.lineId} style={{marginBottom: '10px'}}>
                 <Stack>
                     <Label>
                         <span className={styles.asterik} aria-label={''}>
