@@ -125,15 +125,16 @@ export default class LastStep extends React.Component<ILastStepProps> {
     
    
 
-    public showCalloutVisible = ( event:any ):void => {
-        
-        const id = event.currentTarget.id;
+    public showCalloutVisible = (event: any):void => {
+        const buttonId = event.currentTarget.id;
 
+
+        this.elementId(buttonId);
         this.props.isCalloutVisible();
-        this.elementId(id)
     }
 
-    public elementId = (id: string ):void => {
+    public elementId = (id: any ):void => {
+
         this.props.getElementId(id)
     }
 
@@ -146,7 +147,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
     public render(): React.ReactElement<ILastStepProps> {
 
 
-        const { commPurpose, engName, frCommName, shEngDesc, shFrDesc } = this.props
+        const { current, commPurpose, engName, frCommName, shEngDesc, shFrDesc } = this.props
 
         const labelStyle: Partial<ILabelStyles> = {
             root: {
@@ -184,19 +185,10 @@ export default class LastStep extends React.Component<ILastStepProps> {
             
            <>
             <p>{ this.strings.review_info }</p>
-            <Stack horizontal verticalAlign='end'>
-                <Label htmlFor="Community purpose" styles={labelStyle}>
-                    <span className={styles.asterik} aria-label={this.strings.required}>
-                    *
-                    </span>
-                    {this.strings.commPurpose_title}
-                </Label>
-                <IconButton id="commPurpose" ariaLabel = {this.strings.infoIcon_CommPurpose} styles={ iconStyles} iconProps={infoIcon} onClick={ this.showCalloutVisible }/>
-            </Stack>
 
             <ReausableTextField
                 name="commPurpose"
-                id="Community purpose"
+                id="commPurpose"
                 styles={charCountStyles.characterLimitStyle}
                 aria-describedby="commPurposeDesc"
                 multiline
@@ -208,15 +200,12 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 onChange={this.onUpdateCommPurpose}
                 onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
                 title = {this.strings.commPurpose_title}
+                currentPage = {current}
+                showCalloutVisible={this.showCalloutVisible}
+                
+                
             />
            
-           <Stack horizontal verticalAlign='end'>
-                <Label htmlFor='engName'>
-                    <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
-                    { this.strings.engName_title }
-                </Label>
-                <IconButton id='Engname' ariaLabel={ this.strings.infoIcon_engName}  styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
-            </Stack>
             <ReausableTextField
                 name="engName"
                 id="engName"
@@ -231,15 +220,9 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 onChange={this.onUpdateEngName}
                 onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField, removeSpecialChar: this.strings.remove_special_char})}
                 title =  { this.strings.engName_title }
+                currentPage = {current}
+                showCalloutVisible={this.showCalloutVisible}
             />
-
-            <Stack horizontal verticalAlign='end'>
-                <Label htmlFor='FrCommName'>
-                    <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
-                    { this.strings.frCommName_title }
-                </Label>
-                <IconButton  ariaLabel={ this.strings.infoIcon_frName} id='FrCommName' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
-            </Stack>
 
             <ReausableTextField
                 name="FrCommName"
@@ -255,16 +238,10 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 onChange={this.onUpdateFrName}
                 onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField, removeSpecialChar: this.strings.remove_special_char})}
                 title = { this.strings.frCommName_title }
+                currentPage = {current}
+                showCalloutVisible={this.showCalloutVisible}
             />
 
-
-<           Stack horizontal verticalAlign='end'>
-                <Label htmlFor='shEngDesc'>
-                    <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
-                    { this.strings.shEngDesc_title }
-                </Label>
-                <IconButton  ariaLabel={ this.strings.infoIcon_engDesc} id='shEngDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
-            </Stack>
             <ReausableTextField
                 name="shEngDesc"
                 id="shEngDesc"
@@ -279,15 +256,9 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 onChange={this.onUpdateEngDesc}
                 onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
                 title =   { this.strings.shEngDesc_title }
+                currentPage = {current}
+                showCalloutVisible={this.showCalloutVisible}
             />
-
-            <Stack horizontal verticalAlign='end'>
-                <Label htmlFor='shFrDesc'>
-                    <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
-                    { this.strings.shFrDesc_title }
-                </Label>
-                <IconButton  ariaLabel={ this.strings.infoIcon_frDesc } id='shFrDesc' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
-            </Stack>
 
             <ReausableTextField
                 name="shFrDesc"
@@ -303,13 +274,15 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 onChange={this.onUpdateFrDesc}
                 onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
                 title = { this.strings.shFrDesc_title }
+                currentPage = {current}
+                showCalloutVisible={this.showCalloutVisible}
             />
             <Stack horizontal verticalAlign ="end">
-                <Label>
+                <Label styles={labelStyle}>
                     <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
-                    { `${this.strings.owners} ${this.strings.other_than_yourself}`}
+                    { `${this.strings.owners} (${this.strings.other_than_yourself})`}
                 </Label>
-                <IconButton id ="owners" styles  = { iconStyles } iconProps = { infoIcon } ariaLabel = { this.strings.infoIcon_Owners } onClick= { this.showCalloutVisible }/>
+                <IconButton id ="owners" styles  = { iconStyles } iconProps = { infoIcon } ariaLabel = { this.strings.infoIcon_Owners }  onClick= { this.showCalloutVisible }/>
             </Stack>
             <AddUsers 
                 aria-describedby="ownerInstructions"

@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import styles from './Scw.module.scss';
-import { ILabelStyles,  Label, Stack, StackItem } from 'office-ui-fabric-react';
+import { Stack, StackItem } from 'office-ui-fabric-react';
 import { SelectLanguage } from './SelectLanguage';
 import parse from 'html-react-parser';
 import { validateSpecialCharFields, validateTextField } from './validationFunction';
@@ -54,11 +54,11 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
     const { engName, commPurpose, frCommName, shEngDesc, shFrDesc } = this.props;
 
 
-    const labelStyle: Partial<ILabelStyles> = {
-      root: {
-        paddingBottom: "5px",
-      },
-    };
+    // const labelStyle: Partial<ILabelStyles> = {
+    //   root: {
+    //     paddingBottom: "5px",
+    //   },
+    // };
 
 
     const charCountStyles = {
@@ -83,12 +83,12 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
         <h3>{parse(this.strings.commPurpose_title)}</h3>
         <p>{parse(this.strings.commPurpose_desc)}</p>
           {/* <div id="first-line">   */}
-           <Label htmlFor="Community purpose" styles={labelStyle}>
+           {/* <Label htmlFor="Community purpose" styles={labelStyle}>
             <span className={styles.asterik} aria-label={this.strings.required}>
               *
             </span>
             {this.strings.commPurpose_title}
-          </Label>
+          </Label> */}
           {/* <p id="commPurposeDesc" className={styles.instruction}>
             {this.strings.commPurpose_Instruction}
           </p>   */}
@@ -108,6 +108,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 instructions =  {this.strings.commPurpose_Instruction}
                 title = {this.strings.commPurpose_title}
                 lineId={"first-line"}
+                
             />
         {/* </div> */}
 

@@ -217,7 +217,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
   }
 
   public renderSecondPageMessage = ():string | JSX.Element => {
-
+ 
     const {invalidUser, ownerList, requestor } = this.props;
 
     let requestingUser: string = '';
@@ -253,42 +253,40 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
         const removeRequestor = obj.name === `${this.strings.requestorUser}`;
 
         if ((addOneMoreOwner && obj.value < 1 && invalidUser === '') || (invalidEmail && obj.value !== '') || (removeRequestor && obj.value !== '')) {
-          resultValues.push(obj.name);
-
-          if (this.props.current === 2) {
-
-            finalResultsArray.push(obj.reviewFieldTxt)
-            console.log("finalArray", finalResultsArray);
-  
-            const results: string = finalResultsArray.map((item) => `<li>${item}</li>`).join('');
-            finalResults = `<ul>${results}</ul>`;
-          }
-
-
-              if (resultValues.length > 1) {
-                  const tolower = resultValues.slice(-1)[0];
-                  console.log(resultValues.slice(0, -1))
-                  console.log(resultValues)
-                  message = resultValues.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
           
-              }
 
-              else if (resultValues.length === 1) {
-                  message = `${obj.name}`
-              
+          if (this.props.current === 1) {
+            resultValues.push(obj.name);
+            console.log("ResultValues", resultValues);
 
-
+            if (resultValues.length > 1) {
+              const tolower = resultValues.slice(-1)[0];
+              console.log(resultValues.slice(0, -1))
+              console.log(resultValues)
+              message = resultValues.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
+      
+            }
+  
+            else if (resultValues.length === 1) {
+              message = `${obj.name}`
+          
+            }
           }
+  
+          else  if (this.props.current === 2) {
+              finalResultsArray.push(obj.reviewFieldTxt)
+              console.log("finalArray", finalResultsArray);
+              const results: string = finalResultsArray.map((item) => `<li>${item}</li>`).join('');
+              finalResults = `<ul>${results}</ul>`;
+            }
+
         }
       }
-
     
- 
-      console.log("ResultValues", resultValues);
 
      
       if ( this.props.current === 1 ){
-        return parse(message).toString()
+        return message
       }
 
       if ( this.props.current === 2) {

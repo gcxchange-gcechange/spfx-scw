@@ -483,7 +483,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     shFrDesc= { shFrDesc }
                     errorMessage ={ errorMessage }
                     handleOnChange={this.handleOnChange}
-
                 />
                 )
             },
