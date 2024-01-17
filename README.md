@@ -8,8 +8,6 @@
 ## Prerequisites
 This web part connects to this [this function app](https://github.com/gcxchange-gcechange/appsvc-fnc-dev-scw-sitecreation).
 
-## API permission
-Function App - User_impersonation
 
 ## Version 
 ![SPFX](https://img.shields.io/badge/SPFX-1.17.4-green.svg)
