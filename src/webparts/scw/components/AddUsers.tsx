@@ -1,10 +1,11 @@
 /* eslint-disable dot-notation */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { PeoplePicker, PrincipalType } from "@pnp/spfx-controls-react/lib/PeoplePicker";
-import { DirectionalHint } from "office-ui-fabric-react";
+import { DirectionalHint} from "office-ui-fabric-react";
 import * as React from "react";
 import { SelectLanguage } from './SelectLanguage';
 import { validateOwnerField } from "./validationFunction";
+import styles from "./Scw.module.scss";
 
 
 
@@ -45,7 +46,7 @@ export default class AUsers extends React.Component<IAddUsersProps> {
             // });
 
         this.props.getOwnersCallback(items);//pass to parent 
-       
+
     };
 
   
@@ -67,11 +68,13 @@ export default class AUsers extends React.Component<IAddUsersProps> {
         console.log("CurrentUser",currentUser)
 
 
+
         return(
 
             <> 
                
                 <PeoplePicker
+                    errorMessageClassName={styles.ownerError}
                     context = { this.props.context }
                     required = { true }
                     personSelectionLimit = { 99 }
@@ -93,23 +96,8 @@ export default class AUsers extends React.Component<IAddUsersProps> {
                             },currentUser
                          
                         )}
+                    
                 />
-
-{/* 
-                <PeoplePicker
-                    context = { this.props.context }
-                    titleText ={`${ this.strings.invite_members}`}
-                    personSelectionLimit = { 1000 }
-                    groupName = { "" } // Leave this blank in case you want to filter from all users
-                    onChange = { this._getMemberItems}
-                    principalTypes = { [ PrincipalType.User ] }
-                    showHiddenInUI = { false }
-                    resolveDelay = { 1000 }
-                    defaultSelectedUsers  = { this.props.memberList } 
-                    showtooltip = { true }
-                    tooltipMessage = { `${ this.strings.owners_Instruction}` }
-                    tooltipDirectional  = { DirectionalHint.topCenter }
-                /> */}
             </>
         );
 

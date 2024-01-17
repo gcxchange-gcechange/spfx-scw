@@ -17,7 +17,7 @@ export const validateTextField = (value: string, strings: { minCharacters: strin
   if (trimmedValue.length >= 1 && trimmedValue.length < 5) {
     return (
       <Stack horizontal horizontalAlign="center">
-        <Icon iconName="AlertSolid" className={styles.errorIcon} />
+        <Icon iconName="Error" className={styles.errorIcon} />
         <p className={styles.fieldInstruction}>
           {strings.minCharacters}
         </p>
@@ -28,7 +28,7 @@ export const validateTextField = (value: string, strings: { minCharacters: strin
     console.log("I am blank")
     return (
       <Stack horizontal horizontalAlign="center">
-      <Icon iconName="AlertSolid" className={styles.errorIcon} />
+      <Icon iconName="Error" className={styles.errorIcon} />
       <p className={styles.fieldInstruction}>
         {strings.blankField}
       </p>
@@ -58,7 +58,7 @@ export const validateSpecialCharFields = (value: string, strings: { minCharacter
     console.log("Iam blank")
     
     return  <Stack horizontal>
-        <Icon iconName="AlertSolid" className={styles.errorIcon} />
+        <Icon iconName="Error" className={styles.errorIcon} />
         <p className={styles.fieldInstruction}>{strings.blankField}</p>
       </Stack>
     
@@ -67,12 +67,12 @@ export const validateSpecialCharFields = (value: string, strings: { minCharacter
       return (
         <>
       <Stack horizontal style={{ paddingBottom: "5px" }}>
-         <Icon iconName="AlertSolid" className={styles.errorIcon} />
+         <Icon iconName="Error" className={styles.errorIcon} />
          <p className={styles.fieldInstruction}>{strings.removeSpecialChar} {specialCharFound}</p>
       </Stack>
       
        <Stack horizontal>
-       <Icon iconName="AlertSolid" className={styles.errorIcon} />
+       <Icon iconName="Error" className={styles.errorIcon} />
        <p className={styles.fieldInstruction}>{strings.minCharacters}</p>
        </Stack>
        </>
@@ -80,7 +80,7 @@ export const validateSpecialCharFields = (value: string, strings: { minCharacter
     }  else {
       return (
         <Stack horizontal>
-       <Icon iconName="AlertSolid" className={styles.errorIcon} />
+       <Icon iconName="Error" className={styles.errorIcon} />
        <p className={styles.fieldInstruction}>{strings.minCharacters}</p>
        </Stack>
       )
@@ -89,7 +89,7 @@ export const validateSpecialCharFields = (value: string, strings: { minCharacter
     if(charAllowed) {
       return (
         <Stack horizontal>
-           <Icon iconName="AlertSolid" className={styles.errorIcon} />
+           <Icon iconName="Error" className={styles.errorIcon} />
            <p className={styles.fieldInstruction}>{strings.removeSpecialChar} {specialCharFound}</p>
         </Stack>
         )
@@ -100,14 +100,14 @@ export const validateSpecialCharFields = (value: string, strings: { minCharacter
 
   if (charAllowed) {
     <Stack horizontal>
-         <Icon iconName="AlertSolid" className={styles.errorIcon} />
+         <Icon iconName="Error" className={styles.errorIcon} />
          <p className={styles.fieldInstruction}>{strings.removeSpecialChar} {specialCharFound}</p>
     </Stack>
   }
 
 }
 
-export const validateOwnerField = (value: IPersonaProps[], strings: { blankfield: string, requestorUser: string}, requestor: string): string | Promise<string> => {
+export const validateOwnerField = (value: IPersonaProps[], strings: { blankfield: string, requestorUser: string}, requestor: string ): string | Promise<string> => {
  
  
  console.log("requestor-FUNCTION", requestor);
@@ -116,10 +116,11 @@ export const validateOwnerField = (value: IPersonaProps[], strings: { blankfield
 
   if (value.length === 0) {
     return (
+      
       `${strings.blankfield}`
     )
   }
-
-
+ 
 
 }
+

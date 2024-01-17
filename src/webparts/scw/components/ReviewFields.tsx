@@ -5,9 +5,10 @@ import * as React from 'react';
 import { SelectLanguage } from './SelectLanguage';
 import styles from './Scw.module.scss';
 import ReausableTextField  from './ReusableTextField';
-import { IButtonStyles, IconButton, IIconProps, Label, ILabelStyles, Stack } from 'office-ui-fabric-react';
+import { IButtonStyles, IconButton, Label, ILabelStyles, Stack, IIconProps, IStackTokens  } from 'office-ui-fabric-react';
 import {validateTextField, validateSpecialCharFields } from './validationFunction'
 import AddUsers from './AddUsers';
+ 
 
 
 export interface ILastStepProps { 
@@ -162,6 +163,8 @@ export default class LastStep extends React.Component<ILastStepProps> {
             }
         }
 
+ 
+
         const infoIcon: IIconProps = { iconName: 'UnknownSolid' }; 
 
         const charCountStyles = {
@@ -179,126 +182,129 @@ export default class LastStep extends React.Component<ILastStepProps> {
           };
       
       
-        
+          const sectionStackTokens: IStackTokens = { childrenGap: 5 };
        
         return (
             
            <>
             <p>{ this.strings.review_info }</p>
-
-            <ReausableTextField
-                name="commPurpose"
-                id="commPurpose"
-                styles={charCountStyles.characterLimitStyle}
-                aria-describedby="commPurposeDesc"
-                multiline
-                rows={3}
-                defaultValue= {commPurpose}
-                validateOnLoad={false}
-                maxLength={500}
-                description={`${commPurpose.length}/500`}
-                onChange={this.onUpdateCommPurpose}
-                onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
-                title = {this.strings.commPurpose_title}
-                currentPage = {current}
-                showCalloutVisible={this.showCalloutVisible}
-                lineId={"first-line"}
-                
-                
-            />
-           
-            <ReausableTextField
-                name="engName"
-                id="engName"
-                styles={charCountStyles.characterLimitStyle}
-                aria-describedby="engName"
-                multiline ={false}
-                rows={1}
-                defaultValue= {engName}
-                validateOnLoad={false}
-                maxLength={80}
-                description={`${engName.length}/80`}
-                onChange={this.onUpdateEngName}
-                onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField, removeSpecialChar: this.strings.remove_special_char})}
-                title =  { this.strings.engName_title }
-                currentPage = {current}
-                showCalloutVisible={this.showCalloutVisible}
-                lineId={"second-line"}
-            />
-
-            <ReausableTextField
-                name="FrCommName"
-                id="FrCommName"
-                styles={charCountStyles.characterLimitStyle}
-                aria-describedby="FrCommName"
-                multiline ={false}
-                rows={1}
-                defaultValue= {frCommName}
-                validateOnLoad={false}
-                maxLength={80}
-                description={`${frCommName.length}/80`}
-                onChange={this.onUpdateFrName}
-                onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField, removeSpecialChar: this.strings.remove_special_char})}
-                title = { this.strings.frCommName_title }
-                currentPage = {current}
-                showCalloutVisible={this.showCalloutVisible}
-                lineId={"third-line"}
-            />
-
-            <ReausableTextField
-                name="shEngDesc"
-                id="shEngDesc"
-                styles={charCountStyles.characterLimitStyle}
-                aria-describedby="shEngDesc"
-                multiline ={false}
-                rows={1}
-                defaultValue= {shEngDesc}
-                validateOnLoad={false}
-                maxLength={100}
-                description={`${shEngDesc.length}/100`}
-                onChange={this.onUpdateEngDesc}
-                onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
-                title =   { this.strings.shEngDesc_title }
-                currentPage = {current}
-                showCalloutVisible={this.showCalloutVisible}
-                lineId={"fourth-line"}
-            />
-
-            <ReausableTextField
-                name="shFrDesc"
-                id="shFrDesc"
-                styles={charCountStyles.characterLimitStyle}
-                aria-describedby="shFrDesc"
-                multiline ={false}
-                rows={1}
-                defaultValue= {shFrDesc}
-                validateOnLoad={false}
-                maxLength={100}
-                description={`${shFrDesc.length}/100`}
-                onChange={this.onUpdateFrDesc}
-                onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
-                title = { this.strings.shFrDesc_title }
-                currentPage = {current}
-                showCalloutVisible={this.showCalloutVisible}
-                lineId={"fifth-line"}
-            />
-
-            <Stack horizontal verticalAlign ="end">
-                <Label styles={labelStyle}>
-                    <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
-                    { `${this.strings.owners} (${this.strings.other_than_yourself})`}
-                </Label>
-                <IconButton id ="owners" styles  = { iconStyles } iconProps = { infoIcon } ariaLabel = { this.strings.infoIcon_Owners }  onClick= { this.showCalloutVisible }/>
-            </Stack>
-            <AddUsers 
-                aria-describedby="ownerInstructions"
-                prefLang={this.props.prefLang}
-                context={this.props.context} 
-                ownerList={this.props.ownerList}
-                getOwnersCallback={this.updateDefaultOwnerValues} 
-                requestor={this.props.requestor}
-            />
+            <Stack tokens={sectionStackTokens}>
+                <ReausableTextField
+                    name="commPurpose"
+                    id="commPurpose"
+                    styles={charCountStyles.characterLimitStyle}
+                    aria-describedby="commPurposeDesc"
+                    multiline
+                    rows={3}
+                    defaultValue= {commPurpose}
+                    validateOnLoad={false}
+                    maxLength={500}
+                    description={`${commPurpose.length}/500`}
+                    onChange={this.onUpdateCommPurpose}
+                    onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
+                    title = {this.strings.commPurpose_title}
+                    currentPage = {current}
+                    showCalloutVisible={this.showCalloutVisible}
+                    lineId={"first-line"}
+                    
+                    
+                />
             
+                <ReausableTextField
+                    name="engName"
+                    id="engName"
+                    styles={charCountStyles.characterLimitStyle}
+                    aria-describedby="engName"
+                    multiline ={false}
+                    rows={1}
+                    defaultValue= {engName}
+                    validateOnLoad={false}
+                    maxLength={80}
+                    description={`${engName.length}/80`}
+                    onChange={this.onUpdateEngName}
+                    onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField, removeSpecialChar: this.strings.remove_special_char})}
+                    title =  { this.strings.engName_title }
+                    currentPage = {current}
+                    showCalloutVisible={this.showCalloutVisible}
+                    lineId={"second-line"}
+                />
+
+                <ReausableTextField
+                    name="FrCommName"
+                    id="FrCommName"
+                    styles={charCountStyles.characterLimitStyle}
+                    aria-describedby="FrCommName"
+                    multiline ={false}
+                    rows={1}
+                    defaultValue= {frCommName}
+                    validateOnLoad={false}
+                    maxLength={80}
+                    description={`${frCommName.length}/80`}
+                    onChange={this.onUpdateFrName}
+                    onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField, removeSpecialChar: this.strings.remove_special_char})}
+                    title = { this.strings.frCommName_title }
+                    currentPage = {current}
+                    showCalloutVisible={this.showCalloutVisible}
+                    lineId={"third-line"}
+                />
+
+                <ReausableTextField
+                    name="shEngDesc"
+                    id="shEngDesc"
+                    styles={charCountStyles.characterLimitStyle}
+                    aria-describedby="shEngDesc"
+                    multiline ={false}
+                    rows={1}
+                    defaultValue= {shEngDesc}
+                    validateOnLoad={false}
+                    maxLength={100}
+                    description={`${shEngDesc.length}/100`}
+                    onChange={this.onUpdateEngDesc}
+                    onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
+                    title =   { this.strings.shEngDesc_title }
+                    currentPage = {current}
+                    showCalloutVisible={this.showCalloutVisible}
+                    lineId={"fourth-line"}
+                />
+
+                <ReausableTextField
+                    name="shFrDesc"
+                    id="shFrDesc"
+                    styles={charCountStyles.characterLimitStyle}
+                    aria-describedby="shFrDesc"
+                    multiline ={false}
+                    rows={1}
+                    defaultValue= {shFrDesc}
+                    validateOnLoad={false}
+                    maxLength={100}
+                    description={`${shFrDesc.length}/100`}
+                    onChange={this.onUpdateFrDesc}
+                    onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
+                    title = { this.strings.shFrDesc_title }
+                    currentPage = {current}
+                    showCalloutVisible={this.showCalloutVisible}
+                    lineId={"fifth-line"}
+                />
+
+                <div id="sixth-line">
+                    <Stack horizontal verticalAlign ="end">
+                        <Label styles={labelStyle}>
+                            <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
+                            { `${this.strings.owners} (${this.strings.other_than_yourself})`}
+                        </Label>
+                        <IconButton id ="owners" styles  = { iconStyles } iconProps = {infoIcon} ariaLabel = { this.strings.infoIcon_Owners }  onClick= { this.showCalloutVisible }/>
+                    </Stack>
+                    <AddUsers 
+                        aria-describedby="ownerInstructions"
+                        prefLang={this.props.prefLang}
+                        context={this.props.context} 
+                        ownerList={this.props.ownerList}
+                        getOwnersCallback={this.updateDefaultOwnerValues} 
+                        requestor={this.props.requestor}
+                    
+                    />
+                </div>
+            </Stack>
             </>
         );
      }

@@ -359,10 +359,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             }
             break;
          case "owners":
-                if (value.length < 5) {
-                  addErrorBorder("fifth-line");
+                if (!value || value.length === 0 || value === "") {
+                  addErrorBorder("sixth-line");
                 } else {    
-                  removeErrorBorder("fifth-line");
+                  removeErrorBorder("sixth-line");
                 }
                 break;
       
@@ -433,6 +433,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         this.getInvalidUsers(items);
 
+        this.handleSideLineErrorValidation("owners", OwnerArr.length.toString())
+     
+
     }
 
     public getInvalidUsers = (users: any[]):void => {
@@ -449,6 +452,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         this.setState({
             invalidEmail: invalidEmailUsers
         })
+
+        this.handleSideLineErrorValidation("owners", invalidEmailUsers)
 
     }
 

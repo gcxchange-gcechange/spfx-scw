@@ -446,6 +446,8 @@ u {
 
 .errorIcon {
     font-size: 16px;
+    color: #C61515;
+    font-weight: 700;
 }
 
 .oopsIcon {
@@ -457,4 +459,18 @@ u {
  border-left: 5px solid #C61515;
  margin-left: -20px;
  padding-left: 14px;
+}
+
+.ownerError span  {
+        color: #C61515;
+        font-weight: 700;
+        font-size: 12px;
+ 
+}
+
+.ownerError i {
+    color: #C61515;
+    font-weight: 700;
+    font-size: 16px;
+
 }

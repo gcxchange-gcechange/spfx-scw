@@ -23,7 +23,6 @@ export interface IReusableTextFieldProps {
     currentPage?: number;
     showCalloutVisible?:(event: any ) => void ;
     getElementId?:(event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) => void;
-    
     targetId?:string;
 }
 
