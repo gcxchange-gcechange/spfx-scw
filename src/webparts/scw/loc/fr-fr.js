@@ -148,6 +148,7 @@ define([], function() {
         "please_remove_your_name":"Veuillez vous désinscrire",
         "other_than_yourself": "que vous-même", 
         "please_add_another_owner":"Veuillez ajouter un autre propriétaire",
+        "isInvalidEmail": "Veuillez supprimer le courriel suivant:",
 
     
     

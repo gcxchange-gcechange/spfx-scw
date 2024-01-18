@@ -2,11 +2,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Stack, Icon, IPersonaProps } from 'office-ui-fabric-react';
 import * as React from 'react';
- 
 import styles from './Scw.module.scss';
 
 
- 
 
 export const validateTextField = (value: string, strings: { minCharacters: string; blankField: string }): JSX.Element => {
 
@@ -25,7 +23,7 @@ export const validateTextField = (value: string, strings: { minCharacters: strin
     );
   } else if (!trimmedValue.length) {
 
-    console.log("I am blank")
+
     return (
       <Stack horizontal horizontalAlign="center">
       <Icon iconName="Error" className={styles.errorIcon} />
@@ -107,20 +105,109 @@ export const validateSpecialCharFields = (value: string, strings: { minCharacter
 
 }
 
-export const validateOwnerField = (value: IPersonaProps[], strings: { blankfield: string, requestorUser: string}, requestor: string ): string | Promise<string> => {
+export const validateOwnerField = (values: IPersonaProps[], strings: { blankfield: string, requestorUser: string, invalidEmail: string}, requestor: string ): string | Promise<string> => {
  
+ let requestorEmail: string = '';
+ let invalidEmail: string = '';
  
- console.log("requestor-FUNCTION", requestor);
+  values.forEach((item)=> {
+    console.log("Item",item)
+    if (item.secondaryText === requestor) {
+        requestorEmail = item.secondaryText
+    } 
 
- console.log("ValueOL", value);
+    if (item.id === undefined) {
+        invalidEmail = item.secondaryText
+    }
 
-  if (value.length === 0) {
+  })
+
+ console.log("ValueOL", values);
+
+  if (values.length === 0) {
     return (
       
       `${strings.blankfield}`
     )
   }
+
+  if (requestorEmail) {
+    return (
+      `${strings.requestorUser}`
+    )
+  }
+
+  if (invalidEmail) {
+    return (
+      `${strings.invalidEmail} ${invalidEmail}`
+    )
+  }
+
+
  
 
 }
+
+
+
+interface ValidationErrors {
+  isLessThanMinLength: boolean;
+  hasSpecialChar: boolean;
+}
+
+
+export const fieldValidations = (values: Record<string, string> | string[]): ValidationErrors => {
+
+
+
+      const validateStringLength = (value: string, minLength: number): boolean => value.length >= minLength;
+      
+      const isLessThanMinLength = Object.values(values).some((value) => !validateStringLength(value, 5));
+      const hasSpecialChar = Object.entries(values).some(
+          ([key, value]) => (key === 'engName' || key === 'frCommName') && /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value)
+        );
+
+      console.log("lessThan 5",isLessThanMinLength);
+      console.log("specialChar", hasSpecialChar);
+
+     
+  
+
+  return {
+      isLessThanMinLength,
+      hasSpecialChar
+  }
+ 
+}
+
+
+
+interface OwnerValidationErrors {
+  // isBlankField: boolean;
+  // userIsRequestor: boolean;
+  // emailIsInvalid: boolean;
+}
+
+
+export const ownerFieldValidations = (values: Record<string, string> | string[], requestor: string, invalidEmail: string ): OwnerValidationErrors => {
+
+  // let isrequestor = '';
+  // let isInvalidEmail = '';
+
+
+  console.log("VALUES",values, requestor, invalidEmail)
+
+  
+
+  return (
+    'hello'
+    // isBlankField 
+    // userIsRequestor 
+    // emailIsInvalid 
+  
+  )
+}
+
+
+
 

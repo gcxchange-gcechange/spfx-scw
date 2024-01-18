@@ -157,6 +157,7 @@ define([], function() {
     "please_remove_your_name":"Plese remove your name.",
     "other_than_yourself": "other than yourself",
     "please_add_another_owner":"Please add another owner",
+    "isInvalidEmail": "Please remove the following invalid email:",
     
 
 

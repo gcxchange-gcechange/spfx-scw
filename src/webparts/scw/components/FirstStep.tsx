@@ -7,7 +7,7 @@ import { Stack, StackItem } from 'office-ui-fabric-react';
 import { SelectLanguage } from './SelectLanguage';
 import parse from 'html-react-parser';
 import { validateSpecialCharFields, validateTextField } from './validationFunction';
-import ReausableTextField from './ReusableTextField';
+import ReusableTextField from './ReusableTextField';
 
 
 
@@ -82,21 +82,12 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
       <>
         <h3>{parse(this.strings.commPurpose_title)}</h3>
         <p>{parse(this.strings.commPurpose_desc)}</p>
-          {/* <div id="first-line">   */}
-           {/* <Label htmlFor="Community purpose" styles={labelStyle}>
-            <span className={styles.asterik} aria-label={this.strings.required}>
-              *
-            </span>
-            {this.strings.commPurpose_title}
-          </Label> */}
-          {/* <p id="commPurposeDesc" className={styles.instruction}>
-            {this.strings.commPurpose_Instruction}
-          </p>   */}
-          <ReausableTextField
+
+          <ReusableTextField
                 name="commPurpose"
                 id="Community purpose"
                 styles={charCountStyles.characterLimitStyle}
-                aria-describedby="commPurposeDesc"
+                label={`${this.strings.commPurpose_Instruction}`}
                 multiline
                 rows={3}
                 defaultValue= {commPurpose}
@@ -108,10 +99,10 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 instructions =  {this.strings.commPurpose_Instruction}
                 title = {this.strings.commPurpose_title}
                 lineId={"first-line"}
+                ariaLabelRequired={this.strings.required}
                 
             />
-        {/* </div> */}
-
+            
         <h3>{this.strings.comm_name}</h3>
         <p className={styles.topMgn0}>{this.strings.engName_desc}</p>
         <Stack tokens={stackTokens}>
@@ -128,11 +119,11 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
               <p id="engNameDesc" className={styles.instruction}>
                 {this.strings.engName_Instruction}
               </p> */}
-              <ReausableTextField
+              <ReusableTextField
                 name="engName"
                 id="engName"
                 styles={charCountStyles.characterLimitStyle}
-                aria-describedby="engNameDesc"
+                label={this.strings.engName_Instruction}
                 multiline ={false}
                 rows={1}
                 defaultValue= {engName}
@@ -144,6 +135,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 instructions = {this.strings.engName_Instruction}
                 title= {this.strings.engName_title}
                 lineId={"second-line"}
+                ariaLabelRequired={this.strings.required}
             />
             {/* </div> */}
           </StackItem>
@@ -160,7 +152,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
               <p id="frNameDesc" className={styles.instruction}>
                 {this.strings.frCommName_Instruction}
               </p> */}
-              <ReausableTextField
+              <ReusableTextField
                 name="frCommName"
                 id="frCommName"
                 styles={charCountStyles.characterLimitStyle}
@@ -173,9 +165,10 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 description={`${frCommName.length}/80`}
                 onChange={this.onhandleChangeEvent}
                 onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField, removeSpecialChar: this.strings.remove_special_char})}
-                instructions = {this.strings.frCommName_Instruction}
+                label = {this.strings.frCommName_Instruction}
                 title =  {this.strings.frCommName_title}
                 lineId={"third-line"}
+                ariaLabelRequired={this.strings.required}
             />
             {/* </div> */}
           </StackItem>
@@ -197,7 +190,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
               <p id="shEngDescription" className={styles.instruction}>
                 {this.strings.shEngDesc_Instruction}
               </p> */}
-              <ReausableTextField
+              <ReusableTextField
                 name="shEngDesc"
                 id="shEngDesc"
                 styles={charCountStyles.characterLimitStyle}
@@ -210,9 +203,10 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 description={`${shEngDesc.length}/100`}
                 onChange={this.onhandleChangeEvent}
                 onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
-                instructions = {this.strings.shEngDesc_Instruction}
+                label = {this.strings.shEngDesc_Instruction}
                 title =  {this.strings.shEngDesc_title}
                 lineId={"fourth-line"}
+                ariaLabelRequired={this.strings.required}
             />
             {/* </div> */}
           </StackItem>
@@ -229,7 +223,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
               <p id="FrDesc" className={styles.instruction}>
                 {this.strings.shFrDesc_Instruction}
               </p> */}
-              <ReausableTextField
+              <ReusableTextField
                 name="shFrDesc"
                 id="shFrDesc"
                 styles={charCountStyles.characterLimitStyle}
@@ -242,9 +236,10 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 description={`${shFrDesc.length}/100`}
                 onChange={this.onhandleChangeEvent}
                 onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
-                instructions = {this.strings.shFrDesc_Instruction}
+                label = {this.strings.shFrDesc_Instruction}
                 title = {this.strings.shFrDesc_title}
                 lineId={"fifth-line"}
+                ariaLabelRequired={this.strings.required}
             />
             {/* </div> */}
           </StackItem>

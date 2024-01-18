@@ -3,9 +3,8 @@
 /* eslint-disable dot-notation */
 import * as React from 'react';
 import { SelectLanguage } from './SelectLanguage';
-import styles from './Scw.module.scss';
-import ReausableTextField  from './ReusableTextField';
-import { IButtonStyles, IconButton, Label, ILabelStyles, Stack, IIconProps, IStackTokens  } from 'office-ui-fabric-react';
+import ReusableTextFieldd  from './ReusableTextField';
+import {   Stack,   IStackTokens  } from 'office-ui-fabric-react';
 import {validateTextField, validateSpecialCharFields } from './validationFunction'
 import AddUsers from './AddUsers';
  
@@ -35,15 +34,16 @@ export interface ILastStepProps {
     getElementId?: (id: string) => void;
     handleButtonClick?: () => void;
     handleOnChange?:(event:any, value: string)=> void;
-    requestor: string
+    requestor: string;
+    invalidEmail: string;
   }
 
 
 export default class LastStep extends React.Component<ILastStepProps> {
 
+
     public constructor(props: ILastStepProps) {
         super(props);
-
         
     }
     
@@ -139,7 +139,8 @@ export default class LastStep extends React.Component<ILastStepProps> {
         this.props.getElementId(id)
     }
 
-    public updateDefaultOwnerValues = ( username: []):void  => {   
+    public updateDefaultOwnerValues = ( username: []):void  => {  
+        console.log("USERNAME",username); 
         const newValues = username;
 
         this.props.getOwnersCallback( newValues );//pass to parent
@@ -150,22 +151,22 @@ export default class LastStep extends React.Component<ILastStepProps> {
 
         const { current, commPurpose, engName, frCommName, shEngDesc, shFrDesc } = this.props
 
-        const labelStyle: Partial<ILabelStyles> = {
-            root: {
-              paddingBottom: "5px",
-            },
-          };
+        // const labelStyle: Partial<ILabelStyles> = {
+        //     root: {
+        //       paddingBottom: "5px",
+        //     },
+        //   };
         
 
-        const iconStyles: IButtonStyles = {
-            root: {
-                paddingTop: '10px',
-            }
-        }
+        // const iconStyles: IButtonStyles = {
+        //     root: {
+        //         paddingTop: '10px',
+        //     }
+        // }
 
  
 
-        const infoIcon: IIconProps = { iconName: 'UnknownSolid' }; 
+        // const infoIcon: IIconProps = { iconName: 'UnknownSolid' }; 
 
         const charCountStyles = {
 
@@ -183,13 +184,14 @@ export default class LastStep extends React.Component<ILastStepProps> {
       
       
           const sectionStackTokens: IStackTokens = { childrenGap: 5 };
+           
        
         return (
             
            <>
             <p>{ this.strings.review_info }</p>
             <Stack tokens={sectionStackTokens}>
-                <ReausableTextField
+                <ReusableTextFieldd
                     name="commPurpose"
                     id="commPurpose"
                     styles={charCountStyles.characterLimitStyle}
@@ -206,11 +208,10 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     currentPage = {current}
                     showCalloutVisible={this.showCalloutVisible}
                     lineId={"first-line"}
-                    
-                    
+                    ariaLabelRequired={this.strings.required}
                 />
             
-                <ReausableTextField
+                <ReusableTextFieldd
                     name="engName"
                     id="engName"
                     styles={charCountStyles.characterLimitStyle}
@@ -227,9 +228,10 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     currentPage = {current}
                     showCalloutVisible={this.showCalloutVisible}
                     lineId={"second-line"}
+                    ariaLabelRequired={this.strings.required}
                 />
 
-                <ReausableTextField
+                <ReusableTextFieldd
                     name="FrCommName"
                     id="FrCommName"
                     styles={charCountStyles.characterLimitStyle}
@@ -246,9 +248,10 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     currentPage = {current}
                     showCalloutVisible={this.showCalloutVisible}
                     lineId={"third-line"}
+                    ariaLabelRequired={this.strings.required}
                 />
 
-                <ReausableTextField
+                <ReusableTextFieldd
                     name="shEngDesc"
                     id="shEngDesc"
                     styles={charCountStyles.characterLimitStyle}
@@ -265,9 +268,10 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     currentPage = {current}
                     showCalloutVisible={this.showCalloutVisible}
                     lineId={"fourth-line"}
+                    ariaLabelRequired={this.strings.required}
                 />
 
-                <ReausableTextField
+                <ReusableTextFieldd
                     name="shFrDesc"
                     id="shFrDesc"
                     styles={charCountStyles.characterLimitStyle}
@@ -284,26 +288,34 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     currentPage = {current}
                     showCalloutVisible={this.showCalloutVisible}
                     lineId={"fifth-line"}
+                    ariaLabelRequired={this.strings.required}
                 />
 
-                <div id="sixth-line">
+                {/* <div id="">
                     <Stack horizontal verticalAlign ="end">
                         <Label styles={labelStyle}>
                             <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
                             { `${this.strings.owners} (${this.strings.other_than_yourself})`}
                         </Label>
                         <IconButton id ="owners" styles  = { iconStyles } iconProps = {infoIcon} ariaLabel = { this.strings.infoIcon_Owners }  onClick= { this.showCalloutVisible }/>
-                    </Stack>
+                    </Stack> */}
                     <AddUsers 
-                        aria-describedby="ownerInstructions"
+                        id={'owners'}
+                        aria-describedby="owners"
                         prefLang={this.props.prefLang}
                         context={this.props.context} 
                         ownerList={this.props.ownerList}
                         getOwnersCallback={this.updateDefaultOwnerValues} 
                         requestor={this.props.requestor}
+                        currentPage={current}
+                        lineId={'sixth-line'}
+                        title = { `${this.strings.owners} (${this.strings.other_than_yourself})` }
+                        showCalloutVisible={this.showCalloutVisible}
+                        invalidEmail={this.props.invalidEmail}
+
                     
                     />
-                </div>
+                {/* </div> */}
             </Stack>
             </>
         );

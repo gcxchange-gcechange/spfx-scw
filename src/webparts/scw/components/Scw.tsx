@@ -22,7 +22,7 @@ import { Spinner, SpinnerSize } from '@fluentui/react/lib/Spinner';
 import Callouts from './Callouts';
 import Failed from './Failed';
 import ReviewFields from './ReviewFields';
-import { fieldValidations } from './inputValidator';
+import { fieldValidations, ownerFieldValidations } from './validationFunction';
 
 
 
@@ -123,21 +123,22 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     private prev = (): void =>  { 
         const prevPage = this.state.current - 1;   
 
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail  } = this.state
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail   } = this.state
         const values = { engName, frCommName, shEngDesc, shFrDesc, commPurpose}
         const {isLessThanMinLength, hasSpecialChar} = fieldValidations(values);
 
-       
+       ownerFieldValidations(ownerList, this.props.requestor, invalidEmail)
 
-        if ( current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 0 || invalidEmail !== ''|| isLessThanMinLength || hasSpecialChar)) {
-           
+        // console.log("blank",isBlankField)
+        // console.log("REQ", userIsRequestor)
+        // console.log("EINVALID",emailIsInvalid)
+
+        if (current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 0 || invalidEmail || isLessThanMinLength || hasSpecialChar)) {
             this.setState({ showModal: true });
+        } else {
+            this.setState({ current: prevPage });
         }
-
-        else {
-            
-            this.setState({ current: prevPage})
-        }
+        
     }
 
 
@@ -305,8 +306,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         
     }
 
-    public handleSideLineErrorValidation = (eventName:string, value:string) => {   
-        console.log("eventName:", eventName , "value:" ,value);
+    public handleSideLineErrorValidation = (eventName:string, value:string ) => {
 
         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
 
@@ -359,7 +359,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             }
             break;
          case "owners":
-                if (!value || value.length === 0 || value === "") {
+                if (!value) {
                   addErrorBorder("sixth-line");
                 } else {    
                   removeErrorBorder("sixth-line");
@@ -453,7 +453,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             invalidEmail: invalidEmailUsers
         })
 
-        this.handleSideLineErrorValidation("owners", invalidEmailUsers)
+     
 
     }
 
@@ -549,6 +549,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     context= { this.props.context }
                     ownerList= { ownerList }
                     requestor = {this.props.requestor}
+                    invalidEmail = {this.state.invalidEmail}
                     // memberList= { memberList }
                     getOwnersCallback= { this.handleOwnerCallback }
                     // getMemberCallback= { this.handleMemberCallback }
@@ -582,6 +583,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     getElementId={this.getElementId}
                     handleOnChange={this.handleOnChange}
                     requestor = {this.props.requestor}
+                    invalidEmail ={this.state.invalidEmail}
               />
                 ), 
             },

@@ -4,6 +4,7 @@ import * as React from 'react';
 import {  IButtonStyles, IIconProps, IconButton, Label, Stack, TextField} from 'office-ui-fabric-react';
 import styles from './Scw.module.scss';
 
+
 export interface IReusableTextFieldProps {
     id: string;
     name: string;
@@ -24,21 +25,19 @@ export interface IReusableTextFieldProps {
     showCalloutVisible?:(event: any ) => void ;
     getElementId?:(event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) => void;
     targetId?:string;
+    ariaLabelRequired:string;
+    label?:string;
 }
 
 
 
-export default class ReausableTextField extends React.Component<IReusableTextFieldProps> {
+export default class ReusableTextField extends React.Component<IReusableTextFieldProps> {
+
 
     constructor(props: IReusableTextFieldProps) {
         super(props);
 
     }
-
-    
-
- 
-
 
     public render() {
 
@@ -49,12 +48,21 @@ export default class ReausableTextField extends React.Component<IReusableTextFie
                 paddingTop: '10px',
             }
         }
+ 
+        // const labelStyle: ILabelStyles = {
+        //     root: {
+        //         fontWeight: "bold",
+        //         fontSize: '16px'
+        //     }
+        // }
+
+    
 
         return (
-            <div id={this.props.lineId} style={{marginBottom: '10px'}}>
+            <div id={this.props.lineId} >
                 <Stack>
-                    <Label>
-                        <span className={styles.asterik} aria-label={''}>
+                    <Label style={{fontWeight:'700'}} >
+                        <span className={styles.asterik} aria-label={this.props.ariaLabelRequired}>
                             *
                         </span>
                         {this.props.title}
@@ -62,9 +70,9 @@ export default class ReausableTextField extends React.Component<IReusableTextFie
                         (<span><IconButton id={this.props.id} styles={ iconStyles } iconProps={infoIcon} onClick={this.props.showCalloutVisible}/></span>)
                         }
                     </Label>
-                        <p id={this.props.id} className={styles.instruction}>
+                        {/* <p id={this.props.ariaDescribedBy} className={styles.instruction}>
                             {this.props.instructions}
-                        </p>
+                        </p> */}
                 </Stack>
                 <TextField
                    {...this.props}
