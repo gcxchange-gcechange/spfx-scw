@@ -23,7 +23,6 @@ export class Initial extends React.Component<IScwProps> {
         const stackStyles: IStackStyles = { 
             root: {
                 display:'flex',
-                // width:'80%',
                 fontSize: '18px;'
           },
         };
@@ -34,7 +33,6 @@ export class Initial extends React.Component<IScwProps> {
           },
         };
 
-        //   const sectionStackTokens: IStackTokens = { childrenGap: 10 };
 
         return (
             <>
@@ -71,15 +69,6 @@ export class Initial extends React.Component<IScwProps> {
 
             </FocusZone>
  
-      
-                 
-               {/* <StackItem>
-                <div className={ styles.card }>
-                    <FontAwesomeIcon icon={ faUsers } size='3x' className={ styles.blue } />
-                    <p>{ parse( this.strings.protected_or_unclassified ) }</p> 
-                    <small>{ parse( this.strings.protected_or_unclassified_smallText )}<Icon className={styles.blue} iconName='NavigateExternalInLine'/></small>
-                </div>
-               </StackItem> */}
           
             </section>
             </>

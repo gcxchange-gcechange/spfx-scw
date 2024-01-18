@@ -7,24 +7,19 @@
 import * as React from 'react';
 import styles from './Scw.module.scss';
 import  { Steps, Button } from 'antd';
-// import  { message} from 'antd';
 import FirstStep from "./FirstStep";
 import  { IScwProps } from './IScwProps';
 import  { Initial } from './InitialPage/Initial';
 import  { ISpinnerStyles, PrimaryButton, Stack } from 'office-ui-fabric-react';
 import  { IButtonStyles } from 'office-ui-fabric-react';
 import LastStep from './LastStep';
-// import  { MessageType } from 'antd/es/message/interface';
 import ErrorModal from './Modal';
 import FourthStep from './FourthStep';
-// import SecondStep from './SecondStep';
 import { SelectLanguage } from './SelectLanguage';
-// import ThirdStep from './ThirdStep';
 import { AadHttpClient, HttpClientResponse, IHttpClientOptions } from '@microsoft/sp-http';
 import Title from './Title';
 import Complete from './Complete';
 import { Spinner, SpinnerSize } from '@fluentui/react/lib/Spinner';
-// import { CloseCircleOutlined } from '@ant-design/icons';
 import Callouts from './Callouts';
 import Failed from './Failed';
 
@@ -35,7 +30,6 @@ export interface IScwState  {
     step: number;
     engName: string;
     ownerList: string[];
-    // memberList: string[];
     commPurpose: string;
     frCommName: string;
     shEngDesc: string;
@@ -57,7 +51,6 @@ export interface IScwState  {
 
 export default class AntDesignStep extends React.Component<IScwProps, IScwState>  { 
    public strings = SelectLanguage(this.props.prefLang);
-//    private owner = this.props.context.pageContext.user.email;
 
     public constructor( props: IScwProps, state: IScwState )  { 
         super( props );
@@ -66,7 +59,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             step: 0,
             engName:'', 
             ownerList: [],
-            // memberList: [this.owner],
             commPurpose: '',
             frCommName: '',
             shEngDesc: '',
@@ -92,11 +84,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
        
         const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail } = this.state
 
-        // const filtered = checkedValues.filter((value, index) => {
-        //     return checkedValues.indexOf(value) === index
-        //   });
-        // console.log("filtered",filtered)
-        console.log("OwnerList", ownerList);
 
         let requestorEmail: string = '';
 
@@ -115,17 +102,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             this.setState({ showModal: true });
        } 
        
-
-
-    //    else if ( current === 1 && selectedChoice === '' ) {
-            
-    //          this.setState({ showModal: true });
-    //    }
-       
-    //    else if ( current === 2 &&  selectedChoice === `${this.strings.protected_cardTitle}` && filtered.length < 7 ) {
-                
-    //             this.setState({ showModal: true });
-    //    } 
         else if ( current === 1 && ownerList.length < 1 ) {
             this.setState({ showModal: true });
         }        
@@ -140,7 +116,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         else {
 
             this.goToNextPg(current);
-            // this.setState({invalidEmail: ''})
         }
 
        
@@ -170,11 +145,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
            
             this.setState({ showModal: true });
         }
-        // else    if ( current === 2 && selectedChoice === `${ this.strings.protected_cardTitle }`) {
-
-        //     this.setState({ selectedChoice: `${ this.strings.unclassified_cardTitle }`})
-        // }
-
         else {
             
             this.setState({ current: prevPage})
@@ -218,7 +188,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail } = this.state
 
         let requestingUser: string = '';
-        // const owners = ownerList.length;
+
     
         for (let i = 0; i < ownerList.length; i++) {
           if ( ownerList[i] === this.props.requestor) {
@@ -238,17 +208,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             requestHeaders.append("Cache-Control", "no-cache");
             
             const owner1 = [...ownerList, this.props.requestor].join(',');
-            // console.log("ownerList",owner1);
-            
-            // let memberlist = "";
-            // // for (let i = 0; i < memberList.length; i++) {
-            //     if (i === memberList.length - 1) {
-            //         memberlist += memberList[i]
-            //     } else {
-            //         memberlist += memberList[i] + ","
-            //     }
-            // }
-            // console.log("memberList",memberlist);
 
           
             const postOptions: IHttpClientOptions = {
@@ -379,15 +338,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         
     }
 
-    // public selectedChoiceCallback = ( selectedChoice: string ): void =>  { 
-
-    //     const saveSelectedChoice = selectedChoice;
-
-    //     this.setState( { 
-    //         selectedChoice: saveSelectedChoice
-    //     })
-    // } 
-
   
     public handleOwnerCallback = ( items: []): void =>  { 
         console.log("calbback",items)
@@ -422,19 +372,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     }
 
-    // public handleMemberCallback = ( items: [] ): void =>  { 
-    //     const MemberArr: string[] = [];
-
-    //     items.forEach(user =>  { 
-    //         // eslint-disable-next-line dot-notation
-    //         MemberArr.push( user['secondaryText'] )
-    //     })
-  
-    //     // this.setState( { 
-    //     //     memberList: MemberArr
-    //     // }) ; 
-
-    // }
 
     public handleErrorMessage = ( errorMessage: string ):void  => {
         const errorM = errorMessage;
@@ -443,28 +380,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         });
     }
 
-    // public checkedTerms = ( event: any, isChecked:boolean ):void => {
-    //     const id = event;
-
-    //     if ( isChecked === true ) {
-           
-    //         this.setState(prevState => ({
-    //             checkedValues: [...prevState.checkedValues, id]
-    //         }));
-    //     } 
-
-    //     else {
-    //         const newArray = this.state.checkedValues.filter((item) => item !== id)
-            
-    //         this.setState({
-    //             checkedValues: newArray
-    //         })
-           
-    //     }
-
-      
-    // }
-   
 
      
     public isCalloutVisible = ():void => {
@@ -523,22 +438,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 />
                 )
             },
-            // { 
-            //     step: "2",
-            //     title: this.strings.classification,
-            //     content: (
-            //     // <SecondStep
-            //     //     prefLang = { this.props.prefLang }
-            //     //     selectedChoice= { selectedChoice }
-            //     //     handleSelectedChoice= { this.selectedChoiceCallback}
-            //     // />
-            //     ),
-            // },
-            // { 
-            //     step: "3",
-            //     title: this.strings.term_of_use,
-            //     content: <ThirdStep prefLang={this.props.prefLang} checkedValues= { checkedValues } checkedTerms = { this.checkedTerms }/>,
-            // },
             { 
                 step: "4",
                 title: this.strings.owners,
@@ -547,9 +446,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     prefLang={this.props.prefLang}
                     context= { this.props.context }
                     ownerList= { ownerList }
-                    // memberList= { memberList }
                     getOwnersCallback= { this.handleOwnerCallback }
-                    // getMemberCallback= { this.handleMemberCallback }
                 />
                 )
             },
@@ -567,7 +464,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     shEngDesc= { shEngDesc }
                     shFrDesc= { shFrDesc }
                     ownerList= { ownerList }
-                    // memberList= { memberList }
                     context= { this.props.context }
                     showCallout = { showCallout}
                     targetId = { targetId }
@@ -575,7 +471,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     handleEngNameCallback= { this.handleEngNameCallback }
                     frNameCallBack= { this.frNameCallback }
                     getOwnersCallback= { this.handleOwnerCallback }
-                    // getMemberCallback= { this.handleMemberCallback }
                     handleFrDescCallback= { this.frDescCallback }
                     handleEngDescCallback= { this.engDescCallback }
                     isCalloutVisible ={ this.isCalloutVisible }
@@ -648,15 +543,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                         <div className="steps-action">
                             <Stack horizontal horizontalAlign='space-between'>
                                 { this.state.current === 0 &&   <Button className={ styles.previousbtn }  onClick= { () => this.goToInitalPage() } >{ this.strings.prev_btn }</Button> }
-                                {/* { this.state.current > 0 &&  (this.state.current !== 4 && steps[this.state.current].step !== '5' || steps[this.state.current].step !== '6')
-                                && ( <Button id='prev'className={ styles.previousbtn } style={{ display: 'inline-block', overflow: 'visible', whiteSpace: 'break-spaces', height:'auto'}}  onClick= { () => this.prev() } > { this.state.current === 2 && selectedChoice === `${this.strings.protected_cardTitle}` ?  `${ this.strings.unclassified_button }` : `${ this.strings.prev_btn }` } </Button> ) 
-                                 } */}
                                  { this.state.current > 0 &&  (this.state.current !== 4 && steps[this.state.current].step !== '5' || steps[this.state.current].step !== '6')
                                 && ( <Button id='prev'className={ styles.previousbtn } style={{ display: 'inline-block', overflow: 'visible', whiteSpace: 'break-spaces', height:'auto'}}  onClick= { () => this.prev() } > { `${ this.strings.prev_btn }` } </Button> ) 
                                  }
                                 { this.state.current < steps.length - 2 && (<Button className={ styles.largebtn } type="primary" onClick= { this.next} > { this.strings.next_btn } </Button> )}
-                                {/* { this.state.current < steps.length - 2 && ( this.state.current !== 2 || selectedChoice === `${ this.strings.unclassified_cardTitle }` ) && (<Button className={ styles.largebtn } type="primary" onClick= { this.next} > { this.strings.next_btn } </Button> )}
-                                { this.state.current < steps.length - 2 && ( this.state.current === 2 && selectedChoice === `${ this.strings.protected_cardTitle }` ) && (<Button className={ styles.largebtn } style={{ height: '54px'}} type="primary" onClick= { this.next} >{ this.strings.next_btn }</Button> ) } */}
                                 { this.state.current === steps.length - 2 && 
                                 ( <Button id="submit" className={ styles.largebtn } type="primary" onClick= { this.successMessage} > { this.strings.submit_btn } </Button> )}
                             </Stack>

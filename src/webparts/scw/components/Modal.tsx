@@ -6,8 +6,6 @@ import styles from "./Scw.module.scss";
 import { Stack } from "office-ui-fabric-react/lib/Stack";
 import parse from 'html-react-parser';
 import { SelectLanguage } from './SelectLanguage';
-// import { IButtonStyles } from "office-ui-fabric-react";
-// import { PrimaryButton } from "office-ui-fabric-react";
 
 export interface IErrorModalProps {
   showModal: boolean;
@@ -72,15 +70,11 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       frCommName,
       shEngDesc,
       shFrDesc,
-      // selectedChoice,
-      // checkedValues,
       ownerList,
       invalidUser,
     } = this.props;
 
-  // const filtered = checkedValues.filter((value, i) => {
-  //   return checkedValues.iOf(value) === i
-  // });
+
 
     interface PropValues {
       name: string;
@@ -88,7 +82,6 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
     }
 
     let requestingUser: string = '';
-    // const owners = ownerList.length;
 
     for (let i = 0; i < ownerList.length; i++) {
       console.log("O",ownerList[i])
@@ -106,13 +99,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       { name: `${ this.strings.shFrDesc_Modal }`, value: `${shFrDesc}` },
     ];
       const invalidUserBold = "<strong>" + invalidUser + "</strong>"; //unvalid email need to be bold
-    // const secondValues: PropValues[] = [
-    //   { name: `${ this.strings.community_classification_Modal }`, value: `${selectedChoice}` },
-    // ];
-   
-    // const thirdValues: PropValues[] = [
-    //   { name: `${ this.strings.term_of_use.toLowerCase() }`, value: `${filtered.length}` },
-    // ];
+
 
     const fourthValues: PropValues[] = [
         { name: `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}` },
@@ -152,40 +139,6 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
       }   
     }
 
-    // for (const obj of secondValues) {
-    //   if (current === 1 && obj.value === "") {
-    //     message = `${this.strings.select }  ${obj.name}`;
-    //   }
-    // }
-
-    // for (const obj of thirdValues) {
-    //   console.log("thirdValues", obj.value)
-    //   if (current === 2 && (obj.value === '' || obj.value < 7)) {
-    //     message += `${this.strings.agree} ${ obj.name }`;
-    //   }
-    // }
-
-    // for  (const obj of fourthValues) {
-    //   console.log("foruth", obj)
-
-    //   if ( (current === 1 && obj.value < 2 ) || invalidUser !== null || user !== null ) {
-    //     results.push(obj.name);
-    //     const owners = results.slice(0, -1);
-
-    //     console.log("owners", owners);
-
-    //     if ( owners.length > 1 ) {
-    //       message =  `${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` + results.slice(-1)
-    //     } 
-    //     else if (owners.length === 1) {
-    //       message = `${obj.name}`
-    //     }
-        
-    //   }
-    //   console.log("res", results);
-
-  
-    // }
 
 
     if (current === 1 ) {
@@ -201,50 +154,11 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
             message = `${obj.name}`
           }
         }
-        // console.log("results", results)
+
       }
-      // if (ownerList.length <= 1 && invalidUser === '' || requestingUser === '') {
-        //     message = `${this.strings.one_more_owner }`
-        //  }
+
     }
    
-   
-    // if (current ===  1) {
-      
-    //   if ( invalidUser ) {
-    //     message = `You must add a valid email. <strong>${invalidUser}</strong> is not a valid email. `
-    //   }
-    //   else if (user) {
-    //     message = `${user}`
-    //   }
-    //   else if ( ownerList.length <= 1 ) {
-    //     message = `${this.strings.one_more_owner }`
-    //   }
- 
-    // }
-   
-
-
-    // if (current === 2 ) {
-    //   debugger
-    //   for (const obj of lastValues) {
-    //     console.log('obj', obj);
-    //     if (obj.value === '' || obj.value <= 1  ) {
-    //       results.push(obj.name);
-    //       console.log("obj", obj);
-    //       console.log("results", results);
-       
-    //       if ( results.length > 1 ) {
-    //         message =  `${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${ this.strings.and }` + results.slice(-1)
-    //       } 
-         
-    //       else if (results.length === 1) {
-    //         message = `${this.strings.provide} ${obj.name}`
-    //       }
-    //     }
-    //   }
-      
-    // }
 
       if (current === 2) {
           for (const obj of lastValues) {
@@ -268,41 +182,26 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
               ) {
                   results.push(obj.name);
               }
-              console.log("RES", results)
+
 
           }
           if (results.length > 1) {
               const tolower = results.slice(-1)[0];
-              // message = results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
               console.log("slice 0 " + results.slice(0)[0])
-
-             // if (results.slice(0)[0].includes('add a valid email') || results.slice(0)[0].includes('un courriel valide')) {
-                //  console.log("contain valid email");
-              //  message = results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
-// } else {
-                  //console.log("do not contain valid email");
                   message = `${this.strings.you_must} ${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
-          //  }
+
  
       }
         else if (results.length === 1) {
-           // if (results[0] === `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}` || `${this.strings.requestorUser }`) {
-            //    message = `${results}`
-          //  } 
-          //  else {
+
                 message = `${this.strings.you_must} ${this.strings.provide} ${results}`
-          //  }
-                
+      
       }  
     
-      // if (results.length > 0) {
-      //   message = `${this.strings.provide} ${results.join(', ')}`;
-      // }
+
     }
     
-   
 
-    console.log('m',message);
     return  message;
   };
 
@@ -310,7 +209,6 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
 
     const messages = parse(this.errorMessage());
 
-    console.log("currnet page", this.props.current)
 
     return (
       <>
@@ -338,16 +236,8 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
             <div style={ this.modalStyle.footer}>
               <Stack>
                 <Stack.Item align="center">
-                  {/* { this.props.invalidUser  ?
-                  ( <p className={ styles.modalContent }>{ this.strings.you_must } {parse(`${this.strings.provide}`)} { this.strings.valid_email } <strong>{messages}</strong> {this.strings.is_not_valid}</p>)
-                  : this.props.requestor ? 
-                  ( <p className={ styles.modalContent }><strong>{messages}</strong></p> )
-                  :
-                    <p className={ styles.modalContent }>{ this.strings.you_must } <strong>{messages}</strong> { this.strings.before_proceeding }</p>
-                  } */}
+
                   {  
-                  // ( <p className={ styles.modalContent }>{ this.strings.you_must } {parse(`${this.strings.provide}`)} { this.strings.valid_email } <strong>{messages}</strong> {this.strings.is_not_valid}</p>)
-                  // :
                   this.props.current === 1 ? 
                   <p>{messages} { this.strings.before_proceeding }</p>
                   :
@@ -372,7 +262,6 @@ export default class ErrorModal extends React.Component<IErrorModalProps, IError
             </div>
             </div>
           </Modal>
-       
       </>
     );
   }

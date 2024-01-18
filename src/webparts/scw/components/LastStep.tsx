@@ -13,7 +13,6 @@ import styles from './Scw.module.scss';
 export interface ILastStepProps { 
     context: any;
     engName: string;
-    // memberList: string[];
     ownerList: string[];
     commPurpose: string;
     frCommName: string;
@@ -142,13 +141,6 @@ export default class LastStep extends React.Component<ILastStepProps> {
         this.props.getOwnersCallback( newValues );//pass to parent
     };
 
-  
-    // public updateDefaultMemberValues = ( items: [] ):void  => { 
-    //        const newValues = items;
-           
-    //     this.props.getMemberCallback( newValues );//pass to parent
-    // };
-
    
 
 
@@ -217,12 +209,6 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 </Stack>
                 <TextField id='shFrDesc' defaultValue={ shFrDesc } onChange={ this.onUpdateFrDesc } onGetErrorMessage={ value => { if (value.trim().length < 5 || value.length > 100  || value === '') return `${this.strings.max100_validation}` }}/>
 
-                {/* <Stack horizontal verticalAlign='end'>
-                    <Label htmlFor='classification'required >{ this.strings.community_classification }</Label>
-                    <IconButton ariaLabel="information" id='classification' styles={ iconStyles } iconProps={infoIcon} onClick={ this.showCalloutVisible } />
-                </Stack> */}
-                {/* <TextField style={{ background:'#eaeaea'}} id='classification' value={selectedChoice}/> */}
-
 
 
                 <Stack horizontal verticalAlign ="end">
@@ -245,22 +231,6 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     allowUnvalidated={ true }
                 />
 
-                {/* <Stack horizontal verticalAlign ="end">
-                    <Label>{ this.strings.members }</Label>
-                    <IconButton id ="members" styles  = { iconStyles } iconProps = { infoIcon } ariaLabel ="InfoIcon" onClick={this.showCalloutVisible }/>
-                </Stack> */}
-                {/* <PeoplePicker
-                    context = { this.props.context }
-                    required = { true }
-                    personSelectionLimit = { 3 }
-                    groupName = { "" } // Leave this blank in case you want to filter from all users
-                    onChange = { this.updateDefaultMemberValues }
-                    principalTypes = { [ PrincipalType.User ] }
-                    showHiddenInUI = {false }
-                    resolveDelay = {1000}
-                    defaultSelectedUsers  = { this.props.memberList }
-                />       */}
-
             </>
         );
      }
@@ -271,7 +241,6 @@ export default class LastStep extends React.Component<ILastStepProps> {
     
 
       if (charAllowed) {
-        // console.log("Value has special char")
         return `${this.strings.special_char_validation}`
       }
 

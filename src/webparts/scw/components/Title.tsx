@@ -25,8 +25,6 @@ export default class Title extends React.Component<ITitleProps> {
         
         const titles: string[] = [ 
 					`${this.strings.community_details}`, 
-					// `${this.strings.community_classification}`, 
-					// `${this.strings.terms}`,
 					`${this.strings.invite_owners_title}`,
 					`${this.strings.review_submit}`,
                     `${this.strings.submissionFailed}`,
@@ -50,12 +48,7 @@ export default class Title extends React.Component<ITitleProps> {
         else if ( current === 2 ) {
             title = `${ titles[2] }`;
         }
-        // else if ( current === 3 ) {
-        //     title=`${ titles[3] }`;
-        // } 
-        // else if ( current === 4 ) {
-        //         title= `${ titles[4] }`;
-        // }
+
         else if ( current === 3 && status !== 200 ) {
             title= `${ titles[3] }`;
         } else  {

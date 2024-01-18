@@ -120,12 +120,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
         const eventName = event.target.name;
         let value = event.target.value;
 
-        // const charAllowed = /[\p{L}\p{N}ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü']/.test(value);
         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value);
-
-
-        // const hasSpecialChar = /[~`!@#$%^&()_+={:;",.|?<>*\x2F\x5D\x5C\x99\x5B-]/.test(value);
-        // const startsWithSpecialChar = /^[~`!@#$%^&()_+={\x5B:;"',.|\x2F\x5D\x5C\x99-]/.test(value);
         const invalidInput: string = '';
         const lessthan5 = value.length < 5;
         const over100 = value.length > 100;
@@ -136,25 +131,17 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
 
         if ((eventName === 'engName'|| eventName === 'frCommName') && (value.length >= 5 && value.length <= 80)) {
             if (charAllowed) {
-                // console.log("value has special character");
                 value = invalidInput;
             }
         } else
 
         if ((eventName === 'engName' || eventName === 'frCommName') && (value.length < 5 || value.length > 80)) {
-            // // console.log("Value for engName and frName must be less than  5 greater than 80 characters.");
             value = invalidInput;
         } else
 
         if ((eventName ===  'shEngDesc' || eventName === 'shFrDesc' ) &&  ( lessthan5 || over100 )) {
             value = invalidInput;
         } 
-        // else 
-
-        // if (eventName === 'shFrDesc' && ( lessthan5 || over100 ) ) {
-        //     value = invalidInput;
-        // }
-
         
         const trimmedValue = value.trim();
         
