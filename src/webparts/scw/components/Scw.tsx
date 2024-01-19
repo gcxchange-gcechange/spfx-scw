@@ -125,6 +125,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail   } = this.state
         const values = { engName, frCommName, shEngDesc, shFrDesc, commPurpose}
+        console.log("prevValues", values);
         const {isLessThanMinLength, hasSpecialChar} = fieldValidations(values);
 
        ownerFieldValidations(ownerList, this.props.requestor, invalidEmail)
@@ -134,6 +135,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         // console.log("EINVALID",emailIsInvalid)
 
         if (current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 0 || invalidEmail || isLessThanMinLength || hasSpecialChar)) {
+            
             this.setState({ showModal: true });
         } else {
             this.setState({ current: prevPage });
@@ -189,10 +191,16 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
           
         }
        
+        console.log("InvalidEmail", invalidEmail);
+        console.log("requesting USer", requestingUser);
+        console.log("ownerList- length", ownerList.length);
         
         if (current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 0 || invalidEmail !== '' || requestingUser !== ''|| isLessThanMinLength || hasSpecialChar)) {
+           
             this.setState({ showModal: true });
+
         }
+
         else {
             const functionUrl = "  ";
             const requestHeaders: Headers = new Headers();
@@ -420,7 +428,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
   
     public handleOwnerCallback = ( items: []): void =>  { 
-        console.log("calbback",items)
+        console.log("PARENT OWNERS",items)
         const OwnerArr: any[]  = [];
 
         items.forEach(user =>  {             
@@ -433,8 +441,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         this.getInvalidUsers(items);
 
-        this.handleSideLineErrorValidation("owners", OwnerArr.length.toString())
-     
+    
 
     }
 
@@ -495,6 +502,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                 element.setAttribute('aria-Label', 'complete')
             }
 
+        }
+
+        if (this.state.ownerList !== prevState.ownerList ) {
+            console.log("I updated");
         }
 
     }

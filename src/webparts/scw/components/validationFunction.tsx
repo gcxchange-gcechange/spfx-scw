@@ -193,13 +193,15 @@ export const ownerFieldValidations = (values: Record<string, string> | string[],
 
   // let isrequestor = '';
   // let isInvalidEmail = '';
-
+  const sideErrorLine = document.getElementById('sixth-line').classList.add(styles.errorBorder);
+  console.log('sideErrorLine', sideErrorLine)
 
   console.log("VALUES",values, requestor, invalidEmail)
 
   
 
   return (
+
     'hello'
     // isBlankField 
     // userIsRequestor 
