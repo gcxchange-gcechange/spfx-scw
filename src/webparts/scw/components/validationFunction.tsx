@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Stack, Icon, IPersonaProps } from 'office-ui-fabric-react';
+import { Stack, Icon, IStackTokens} from 'office-ui-fabric-react';
 import * as React from 'react';
 import styles from './Scw.module.scss';
 
@@ -15,7 +15,7 @@ export const validateTextField = (value: string, strings: { minCharacters: strin
   if (trimmedValue.length >= 1 && trimmedValue.length < 5) {
     return (
       <Stack horizontal horizontalAlign="center">
-        <Icon iconName="Error" className={styles.errorIcon} />
+        <Icon iconName="AlertSolid"className={styles.errorIcon} />
         <p className={styles.fieldInstruction}>
           {strings.minCharacters}
         </p>
@@ -26,7 +26,7 @@ export const validateTextField = (value: string, strings: { minCharacters: strin
 
     return (
       <Stack horizontal horizontalAlign="center">
-      <Icon iconName="Error" className={styles.errorIcon} />
+      <Icon iconName="AlertSolid"className={styles.errorIcon} />
       <p className={styles.fieldInstruction}>
         {strings.blankField}
       </p>
@@ -56,7 +56,7 @@ export const validateSpecialCharFields = (value: string, strings: { minCharacter
     console.log("Iam blank")
     
     return  <Stack horizontal>
-        <Icon iconName="Error" className={styles.errorIcon} />
+        <Icon iconName="AlertSolid"className={styles.errorIcon} />
         <p className={styles.fieldInstruction}>{strings.blankField}</p>
       </Stack>
     
@@ -65,12 +65,12 @@ export const validateSpecialCharFields = (value: string, strings: { minCharacter
       return (
         <>
       <Stack horizontal style={{ paddingBottom: "5px" }}>
-         <Icon iconName="Error" className={styles.errorIcon} />
+         <Icon iconName="AlertSolid"className={styles.errorIcon} />
          <p className={styles.fieldInstruction}>{strings.removeSpecialChar} {specialCharFound}</p>
       </Stack>
       
        <Stack horizontal>
-       <Icon iconName="Error" className={styles.errorIcon} />
+       <Icon iconName="AlertSolid"className={styles.errorIcon} />
        <p className={styles.fieldInstruction}>{strings.minCharacters}</p>
        </Stack>
        </>
@@ -78,7 +78,7 @@ export const validateSpecialCharFields = (value: string, strings: { minCharacter
     }  else {
       return (
         <Stack horizontal>
-       <Icon iconName="Error" className={styles.errorIcon} />
+       <Icon iconName="AlertSolid"className={styles.errorIcon} />
        <p className={styles.fieldInstruction}>{strings.minCharacters}</p>
        </Stack>
       )
@@ -87,7 +87,7 @@ export const validateSpecialCharFields = (value: string, strings: { minCharacter
     if(charAllowed) {
       return (
         <Stack horizontal>
-           <Icon iconName="Error" className={styles.errorIcon} />
+           <Icon iconName="AlertSolid"className={styles.errorIcon} />
            <p className={styles.fieldInstruction}>{strings.removeSpecialChar} {specialCharFound}</p>
         </Stack>
         )
@@ -98,48 +98,57 @@ export const validateSpecialCharFields = (value: string, strings: { minCharacter
 
   if (charAllowed) {
     <Stack horizontal>
-         <Icon iconName="Error" className={styles.errorIcon} />
+         <Icon iconName="AlertSolid"className={styles.errorIcon} />
          <p className={styles.fieldInstruction}>{strings.removeSpecialChar} {specialCharFound}</p>
     </Stack>
   }
 
 }
 
-export const validateOwnerField = (values: IPersonaProps[], strings: { blankfield: string, requestorUser: string, invalidEmail: string}, requestor: string ): string | Promise<string> => {
+export const validateOwnerField = (ownerList: string [], requestingUser: string, invalidEmail: string,  strings: { blankfield: string, requestorUser: string, invalidEmail: string} ): JSX.Element | string => {
  
- let requestorEmail: string = '';
- let invalidEmail: string = '';
- 
-  values.forEach((item)=> {
-    console.log("Item",item)
-    if (item.secondaryText === requestor) {
-        requestorEmail = item.secondaryText
-    } 
+  const sectionStackTokens: IStackTokens = {childrenGap: 5}
 
-    if (item.id === undefined) {
-        invalidEmail = item.secondaryText
-    }
 
-  })
-
- console.log("ValueOL", values);
-
-  if (values.length === 0) {
+  if (ownerList.length === 0) {
     return (
-      
-      `${strings.blankfield}`
+      <Stack horizontal>
+      <Icon iconName="AlertSolid"className={styles.errorIcon} />
+      <p className={styles.fieldInstruction}>{strings.blankfield}</p>
+      </Stack>
     )
   }
 
-  if (requestorEmail) {
+  if(requestingUser && invalidEmail) {
     return (
-      `${strings.requestorUser}`
+      <Stack tokens={sectionStackTokens}>
+        <Stack horizontal>
+          <Icon iconName="AlertSolid"className={styles.errorIcon} />
+          <p className={styles.fieldInstruction}>{strings.requestorUser}</p>
+        </Stack>
+        <Stack horizontal>
+          <Icon iconName="AlertSolid"className={styles.errorIcon} />
+          <p className={styles.fieldInstruction}>{strings.invalidEmail}</p>
+        </Stack>
+      </Stack>
+    )
+  }
+
+  if (requestingUser){
+    return (
+      <Stack horizontal>
+        <Icon iconName="AlertSolid"className={styles.errorIcon} />
+        <p className={styles.fieldInstruction}>{strings.requestorUser}</p>
+      </Stack>
     )
   }
 
   if (invalidEmail) {
     return (
-      `${strings.invalidEmail} ${invalidEmail}`
+      <Stack horizontal>
+        <Icon iconName="AlertSolid"className={styles.errorIcon} />
+        <p className={styles.fieldInstruction}>{strings.invalidEmail}</p>
+      </Stack>
     )
   }
 

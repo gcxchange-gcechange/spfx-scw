@@ -5,7 +5,7 @@ import * as React from 'react';
 import { SelectLanguage } from './SelectLanguage';
 import ReusableTextFieldd  from './ReusableTextField';
 import {   Stack,   IStackTokens  } from 'office-ui-fabric-react';
-import {validateTextField, validateSpecialCharFields } from './validationFunction'
+import {validateTextField, validateSpecialCharFields, validateOwnerField } from './validationFunction'
 import AddUsers from './AddUsers';
  
 
@@ -299,6 +299,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                         </Label>
                         <IconButton id ="owners" styles  = { iconStyles } iconProps = {infoIcon} ariaLabel = { this.strings.infoIcon_Owners }  onClick= { this.showCalloutVisible }/>
                     </Stack> */}
+                    <div id="owners">
                     <AddUsers 
                         id={'owners'}
                         aria-describedby="owners"
@@ -312,10 +313,12 @@ export default class LastStep extends React.Component<ILastStepProps> {
                         title = { `${this.strings.owners} (${this.strings.other_than_yourself})` }
                         showCalloutVisible={this.showCalloutVisible}
                         invalidEmail={this.props.invalidEmail}
-
-                    
                     />
-                {/* </div> */}
+                    <div style={{marginTop: '5px'}}>
+                        {validateOwnerField(this.props.ownerList, this.props.requestor, this.props.invalidEmail, {blankfield: this.strings.blankField, requestorUser: this.strings.invite_yourself, invalidEmail: this.strings.isInvalidEmail})}
+                    </div>
+                    </div>
+                {/* </div> */} 
             </Stack>
             </>
         );

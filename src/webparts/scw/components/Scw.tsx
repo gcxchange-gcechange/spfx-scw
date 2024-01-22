@@ -47,6 +47,7 @@ export interface IScwState  {
     showCallout: boolean;
     targetId: string;
     invalidEmail: string;
+    requestingUser: string;
 
    
     
@@ -79,6 +80,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             showCallout: false,
             targetId: '',
             invalidEmail: '',
+            requestingUser: ''
 
 
         };
@@ -366,13 +368,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
               removeErrorBorder("fifth-line");
             }
             break;
-         case "owners":
-                if (!value) {
-                  addErrorBorder("sixth-line");
-                } else {    
-                  removeErrorBorder("sixth-line");
-                }
-                break;
       
           default:
             break;
@@ -430,39 +425,62 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     public handleOwnerCallback = ( items: []): void =>  { 
         console.log("PARENT OWNERS",items)
         const OwnerArr: any[]  = [];
+        let isRequestor: string = '';
+        let isInvalidEmail: string ='';
 
-        items.forEach(user =>  {             
-                OwnerArr.push( user['secondaryText'] )
+
+        items.forEach(user =>  {      
+            OwnerArr.push( user['secondaryText'] )
+            
+            if (user['secondaryText'] === this.props.requestor) {
+                isRequestor = user['secondaryText']
+            }     
+            
+            if (user['id'] === undefined) {
+                isInvalidEmail = user['secondaryText']
+            }
+                
         })
-  
+
+        const getLineId = document.getElementById('owners');
+        if(getLineId) {
+            if(OwnerArr.length === 0 || isRequestor || isInvalidEmail) {
+                getLineId.classList.add(styles.errorBorder);
+            } 
+            else {
+                getLineId.classList.remove(styles.errorBorder);
+            }
+        }
+   
         this.setState( { 
-            ownerList: OwnerArr
+            ownerList: OwnerArr,
+            requestingUser: isRequestor
         }) ; 
 
-        this.getInvalidUsers(items);
+        // this.getInvalidUsers(items);
 
     
 
     }
 
-    public getInvalidUsers = (users: any[]):void => {
+    // public getInvalidUsers = (users: any[]):void => {
 
-        let invalidEmailUsers: string = '';
+    //     let invalidEmailUsers: string = '';
 
-        users.forEach(user => {
-            if ( user['id'] === undefined) {
-               invalidEmailUsers = user['secondaryText']
-            }
+    //     users.forEach(user => {
+    //         if ( user['id'] === undefined) {
+    //            invalidEmailUsers = user['secondaryText']
+    //         }
         
-        })
+    //     })
 
-        this.setState({
-            invalidEmail: invalidEmailUsers
-        })
+    //     this.setState({
+    //         invalidEmail: invalidEmailUsers
+    //     })
 
      
 
-    }
+    // }
 
 
     public handleErrorMessage = (field: string ):void  => {
@@ -503,10 +521,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             }
 
         }
-
-        if (this.state.ownerList !== prevState.ownerList ) {
-            console.log("I updated");
-        }
+  
 
     }
 
@@ -593,7 +608,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     isCalloutVisible ={ this.isCalloutVisible }
                     getElementId={this.getElementId}
                     handleOnChange={this.handleOnChange}
-                    requestor = {this.props.requestor}
+                    requestor = {this.state.requestingUser}
                     invalidEmail ={this.state.invalidEmail}
               />
                 ), 

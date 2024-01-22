@@ -4,7 +4,7 @@ import { PeoplePicker, PrincipalType } from "@pnp/spfx-controls-react/lib/People
 import {  IButtonStyles, IIconProps, IconButton, Label, Stack} from "office-ui-fabric-react";
 import * as React from "react";
 import { SelectLanguage } from './SelectLanguage';
-import { validateOwnerField } from "./validationFunction";
+//import { validateOwnerField } from "./validationFunction";
 import styles from "./Scw.module.scss";
 
 
@@ -118,17 +118,8 @@ export default class AUsers extends React.Component<IAddUsersProps> {
                         // tooltipDirectional  = { DirectionalHint.topCenter }
                         ensureUser={ true }
                         allowUnvalidated={ true }
-                        onGetErrorMessage={(ownerList) => 
-                            validateOwnerField(
-                                ownerList,  {
-                                blankfield: `${this.strings.blankField} ${this.strings.please_add_another_owner}`, 
-                                requestorUser: `${this.strings.invite_yourself} ${this.strings.please_remove_your_name}`,
-                                invalidEmail: `${this.strings.isInvalidEmail} ${this.props.invalidEmail}`
-                                },currentUser
-                            
-                            )}
-                        
                     />
+
                 </div>
             </>
         );
