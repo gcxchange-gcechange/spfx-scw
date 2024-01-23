@@ -22,7 +22,7 @@ import { Spinner, SpinnerSize } from '@fluentui/react/lib/Spinner';
 import Callouts from './Callouts';
 import Failed from './Failed';
 import ReviewFields from './ReviewFields';
-import { fieldValidations, ownerFieldValidations } from './validationFunction';
+import { fieldValidations} from './validationFunction';
 
 
 
@@ -89,22 +89,26 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
 
     private next = (): void => {
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail } = this.state;
-        const values = { engName, frCommName, shEngDesc, shFrDesc, commPurpose };
-    
-        const validateStringLength = (value: string, minLength: number): boolean => value.length >= minLength;
-    
-        const isLessThanMin = Object.values(values).some((value) => !validateStringLength(value, 5));
-        const hasSpecialChar = Object.entries(values).some(([key, value]) => (key === 'engName' || key === 'frCommName') && /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value));
+        const nextPage = this.state.current + 1;
+        const {commPurpose, engName, frCommName, shEngDesc, shFrDesc, ownerList, current, invalidEmail, requestingUser } = this.state;
+        const values = {commPurpose, engName, frCommName, shEngDesc, shFrDesc}
+        
+        console.log("invalidEmail",invalidEmail)
+        
+        const {isLessThanMinLength, hasSpecialChar} = fieldValidations(values);
 
-        const requestorEmail = ownerList.find((email) => email === this.props.requestor);
-    
-        const showModal = isLessThanMin || hasSpecialChar || (current === 1 && (ownerList.length < 1 || invalidEmail  || requestorEmail ));
-    
-        if (!showModal) {
-            this.goToNextPg(current);
+        const showModal = isLessThanMinLength || hasSpecialChar || (current === 1  && (ownerList.length === 0 || requestingUser || invalidEmail))
+        
+        if(!showModal ) {
+            this.setState({
+                current: nextPage,
+                
+            })
+
         } else {
-            this.setState({ showModal: true });
+            this.setState({
+                showModal: true
+            })
         }
     };
     
@@ -116,31 +120,29 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         })
     }
 
-        private goToNextPg = (pageNumber: number): void =>  {             
-        this.setState ((prevState) => ({
-            current: prevState.current + 1
-        }))
-     }
-
+   
     private prev = (): void =>  { 
         const prevPage = this.state.current - 1;   
 
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail   } = this.state
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail, requestingUser   } = this.state
         const values = { engName, frCommName, shEngDesc, shFrDesc, commPurpose}
         console.log("prevValues", values);
         const {isLessThanMinLength, hasSpecialChar} = fieldValidations(values);
 
-       ownerFieldValidations(ownerList, this.props.requestor, invalidEmail)
 
-        // console.log("blank",isBlankField)
-        // console.log("REQ", userIsRequestor)
-        // console.log("EINVALID",emailIsInvalid)
+        const showModal =  (current === 1  && (ownerList.length === 0 || requestingUser || invalidEmail)) ||
+            (current === 2 && (isLessThanMinLength) || hasSpecialChar || ownerList.length === 0 || requestingUser || invalidEmail);
 
-        if (current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 0 || invalidEmail || isLessThanMinLength || hasSpecialChar)) {
-            
-            this.setState({ showModal: true });
+        if(!showModal  ) {
+            this.setState({
+                current: prevPage
+                
+            })
         } else {
-            this.setState({ current: prevPage });
+            this.setState({
+                showModal: true
+            })
+        
         }
         
     }
@@ -301,10 +303,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         const eventName = event;
         const values = value
-        //const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
-
-        console.log("Parent_Name", eventName);
-        console.log("Parent_value", values);
 
         this.handleSideLineErrorValidation(event, value)
 
@@ -315,6 +313,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         });
         
     }
+
+
 
     public handleSideLineErrorValidation = (eventName:string, value:string ) => {
 
@@ -333,15 +333,15 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             if (value.length < 5) {
               addErrorBorder("first-line");
             } else {
-              removeErrorBorder("first-line");
+              removeErrorBorder("first-line");             
             }
             break;
       
           case "engName":
             if (value.length < 5 || charAllowed) {
-              addErrorBorder("second-line");
+              addErrorBorder("second-line");              
             } else {
-              removeErrorBorder("second-line");
+              removeErrorBorder("second-line");              
             }
             break;
       
@@ -355,9 +355,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
       
           case "shEngDesc":
             if (value.length < 5) {
-              addErrorBorder("fourth-line");
+              addErrorBorder("fourth-line");  
             } else {
-              removeErrorBorder("fourth-line");
+              removeErrorBorder("fourth-line");  
             }
             break;
       
@@ -365,7 +365,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             if (value.length < 5) {
               addErrorBorder("fifth-line");
             } else {
-              removeErrorBorder("fifth-line");
+              removeErrorBorder("fifth-line");  
             }
             break;
       
@@ -422,7 +422,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     }
 
   
-    public handleOwnerCallback = ( items: []): void =>  { 
+    public handleOwnerCallback = ( items: []): void =>  {
         console.log("PARENT OWNERS",items)
         const OwnerArr: any[]  = [];
         let isRequestor: string = '';
@@ -443,7 +443,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         })
 
         const getLineId = document.getElementById('owners');
-        if(getLineId) {
+
+        if(this.state.current === 2 && getLineId) {
             if(OwnerArr.length === 0 || isRequestor || isInvalidEmail) {
                 getLineId.classList.add(styles.errorBorder);
             } 
@@ -454,33 +455,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
    
         this.setState( { 
             ownerList: OwnerArr,
-            requestingUser: isRequestor
+            requestingUser: isRequestor,
+            invalidEmail: isInvalidEmail
         }) ; 
-
-        // this.getInvalidUsers(items);
-
-    
-
     }
-
-    // public getInvalidUsers = (users: any[]):void => {
-
-    //     let invalidEmailUsers: string = '';
-
-    //     users.forEach(user => {
-    //         if ( user['id'] === undefined) {
-    //            invalidEmailUsers = user['secondaryText']
-    //         }
-        
-    //     })
-
-    //     this.setState({
-    //         invalidEmail: invalidEmailUsers
-    //     })
-
-     
-
-    // }
 
 
     public handleErrorMessage = (field: string ):void  => {
@@ -510,7 +488,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     componentDidUpdate(prevProps: Readonly<IScwProps>, prevState: Readonly<IScwState>): void {
 
         if ( this.state.current !== prevState.current) {
-
+         
             const getCheckMark = document.getElementsByClassName('anticon anticon-check ant-steps-finish-icon');
             
     
@@ -521,14 +499,14 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             }
 
         }
-  
+
 
     }
 
 
     public render(): React.ReactElement<IScwProps>  { 
       
-        const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, errorMessage, showModal, checkedValues, showCallout, targetId } = this.state;
+        const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, errorMessage, showModal, checkedValues, showCallout, targetId, requestingUser, invalidEmail } = this.state;
         console.log("STATE", this.state);
 
         const steps = [
@@ -574,8 +552,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     prefLang={this.props.prefLang}
                     context= { this.props.context }
                     ownerList= { ownerList }
-                    requestor = {this.props.requestor}
-                    invalidEmail = {this.state.invalidEmail}
+                    requestor = {requestingUser}
+                    invalidEmail = {invalidEmail}
                     // memberList= { memberList }
                     getOwnersCallback= { this.handleOwnerCallback }
                     // getMemberCallback= { this.handleMemberCallback }
@@ -607,9 +585,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     handleEngDescCallback= { this.engDescCallback }
                     isCalloutVisible ={ this.isCalloutVisible }
                     getElementId={this.getElementId}
-                    handleOnChange={this.handleOnChange}
-                    requestor = {this.state.requestingUser}
-                    invalidEmail ={this.state.invalidEmail}
+                    requestor = {requestingUser}
+                    invalidEmail ={invalidEmail}
               />
                 ), 
             },
@@ -666,7 +643,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                             <Steps aria-current='step' current= { this.state.current } labelPlacement='vertical' items= { items } />
                         </Stack>
                         {  showCallout && <Callouts prefLang={ this.props.prefLang } showCallout={ showCallout }  targetId= { targetId } openCallout = {this.isCalloutVisible} /> }
-                        { this.state.showModal === true && <ErrorModal requestor={ this.props.requestor } invalidUser ={ this.state.invalidEmail } prefLang={ this.props.prefLang } current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } /> } 
+                        { this.state.showModal === true && <ErrorModal requestor={ requestingUser } invalidUser ={ invalidEmail } prefLang={ this.props.prefLang } current = { current }  engName= { engName } commPurpose= { commPurpose } frCommName= { frCommName } shEngDesc= { shEngDesc } shFrDesc= { shFrDesc } checkedValues={ checkedValues }   ownerList= { ownerList } showModal={ showModal } openModal = { this.next } onClose={ this.closeModal } /> } 
                         
                         <div className="steps-content"> 
                             { this.state.isLoading ? 

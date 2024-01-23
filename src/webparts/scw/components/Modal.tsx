@@ -23,7 +23,7 @@ export interface IErrorModalProps {
   current: number;
   prefLang: string;
   invalidUser: string;
-  requestor: any;
+  requestor: string;
 }
 
 
@@ -80,6 +80,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
       shFrDesc,
       ownerList,
       invalidUser,
+      requestor
     } = this.props;
 
 
@@ -89,15 +90,15 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
       value: any;
     }
 
-    let requestingUser: string = '';
+    // let requestingUser: string = '';
 
-    for (let i = 0; i < ownerList.length; i++) {
-      console.log("O",ownerList[i])
-      if ( ownerList[i] === this.props.requestor) {
-        requestingUser = this.props.requestor
-      } 
+    // for (let i = 0; i < ownerList.length; i++) {
+    //   console.log("O",ownerList[i])
+    //   if ( ownerList[i] === this.props.requestor) {
+    //     requestingUser = this.props.requestor
+    //   } 
       
-    }
+    // }
 
     const invalidUserBold = "<strong>" + invalidUser + "</strong>"; //unvalid email need to be bold
   
@@ -108,7 +109,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
       { name: `${ this.strings.shEngDesc_Modal }`, value: `${shEngDesc}` },
       { name: `${ this.strings.shFrDesc_Modal }`, value: `${shFrDesc}` },
       { name: `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}` }, //remove you must provide
-      { name: `${this.strings.requestorUser }`, value: `${requestingUser}` },
+      { name: `${this.strings.requestorUser }`, value: `${requestor}` },
       { name: `${this.strings.you_must} ${this.strings.one_more_owner}`, value: `${ownerList.length}`}
     ];
 
@@ -217,118 +218,107 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
       );
   }
 
-  public renderSecondPageMessage = ():string | JSX.Element => {
- 
-    const {invalidUser, ownerList, requestor } = this.props;
-    
+  public renderSecondPageMessage = ():string  => {
 
-    let requestingUser: string = '';
-
-    for (let i = 0; i < ownerList.length; i++) {
-      console.log("O",ownerList[i])
-      if ( ownerList[i] === requestor) {
-        requestingUser =  requestor
-      } 
-      
-    }
+    const { ownerList, requestor, invalidUser } = this.props;
+    console.log("invalidEmal", invalidUser);
 
     const invalidUserBold = "<strong>" + invalidUser + "</strong>";  //unvalid email need to be bold
+   
+    const messageValues : any [] = [
 
-    const secondPageValues: any[] = [
-      { name: `${this.strings.valid_email} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}`, reviewFieldTxt: `${this.strings.valid_email}` },
-      { name: `${this.strings.requestorUser }`, value: `${requestingUser}`, reviewFieldTxt: `${this.strings.invite_yourself} ${this.strings.please_remove_your_name}` },
-      { name: `${this.strings.you_must} ${this.strings.one_more_owner}`, value: `${ownerList.length}`, reviewFieldTxt: `${this.strings.blankField} ${this.strings.please_add_another_owner }`}
-    ];
+      {name: 'requestingUser', message: `${this.strings.requestorUser }`, value: requestor},
+      {name: 'invalidEmailUser', message: `${this.strings.invalidEmail} ${parse(invalidUserBold)} ${this.strings.is_not_valid}`, value: invalidUser}
+
+    ]
 
     const resultValues: string[] =[];
-    const finalResultsArray: string[] =[];
-    const comma = `<span style=fontWeight:normal>, </span>`;
-    let message: string = "";
-    let finalResults: string = "";
-    //let reviewPageMessage = "";
+    //const comma = `<span style=fontWeight:normal>, </span>`;
+    let message:string  = "";
 
+    messageValues.forEach((item) => {
+      console.log(item.value)
+      if (item.value !== '') {
+        resultValues.push(item.message); 
 
-      for (const obj of secondPageValues){
-        console.log("obj", obj);
-
-        const addOneMoreOwner = obj.name === `${this.strings.one_more_owner}`;
-        const invalidEmail = obj.name === `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}`;
-        const removeRequestor = obj.name === `${this.strings.requestorUser}`;
-
-        if ((addOneMoreOwner && obj.value < 1 && invalidUser === '') || (invalidEmail && obj.value !== '') || (removeRequestor && obj.value !== '')) {
+        if(resultValues.length > 1) {
           
-
-          if (this.props.current === 1) {
-            resultValues.push(obj.name);
-            console.log("ResultValues", resultValues);
-
-            if (resultValues.length > 1) {
-              const tolower = resultValues.slice(-1)[0];
-              console.log(resultValues.slice(0, -1))
-              console.log(resultValues)
-              const messageResult = resultValues.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
-              message = `${parse(messageResult)}`
-      
-            }
-  
-            else if (resultValues.length === 1) {
-              message = `${parse(obj.name)}`
+          const tolower = resultValues.slice(-1)[0];
+          message = resultValues.slice(0, -1).join(`,`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
           
-            }
-          }
-  
-          else  if (this.props.current === 2) {
-              finalResultsArray.push(obj.reviewFieldTxt)
-              console.log("finalArray", finalResultsArray);
-              const results: string = finalResultsArray.map((item) => `<li>${item}</li>`).join('');
-              finalResults = `<ul>${results}</ul>`;
-            }
-
+        }  
+        else if (resultValues.length === 1 && item.message === `${this.strings.invalidEmail} ${parse(invalidUserBold)} ${this.strings.is_not_valid}`) {
+          message = `${this.strings.you_must} ${resultValues[0]}`
+        }
+        else  if(resultValues.length === 1) { 
+          console.log("res", resultValues)
+          message = resultValues[0];
         }
       }
-    
 
-     
-      if ( this.props.current === 1 ){
-        return message
-      }
+    })
 
-      if ( this.props.current === 2) {
-        return (
-          <>          
-            <h3>{this.strings.owners}</h3>
-            {parse(finalResults)}
-          </> 
+     if(ownerList.length === 0 ) {
+      message = `${this.strings.you_must} ${this.strings.one_more_owner}`;
+     }
 
+      return message
 
-        )
-      }
-
-     
-      
   }
 
+  
   public renderCombinedMessage = (): JSX.Element | string => {
     const firstPageMessage = this.renderFirstPageMessage();
-    const secondPageMessage = this.renderSecondPageMessage();
-  
-    const combinedMessage = (
-      <>
-        {firstPageMessage}       
-        
-        {secondPageMessage} 
 
-      </>
+    const { ownerList, requestor, invalidUser } = this.props;
+
+    const invalidUserBold = "<strong>" + invalidUser + "</strong>";
+
+    const reviewOwnerMessages : any [] = [
+
+      {name: 'requestingUser', message: `${this.strings.invite_yourself} ${this.strings.please_remove_your_name}`, value: requestor},
+      {name: 'invalidEmailUser', message: parse(`${this.strings.isInvalidEmail} ${invalidUserBold}`), value: this.props.invalidUser}
+
+    ]
+
+    const ownerResults: string[] =[];
+
+    reviewOwnerMessages.forEach((item) => {
+      if(item.value !== '') {
+        ownerResults.push(item.message);
+      }
+
+    } )
+
+    if(ownerList.length === 0) {
+      ownerResults.push(`${this.strings.blankField} ${this.strings.please_add_another_owner}`)
+    }
+
+
+    return (
+      <>
+      {firstPageMessage}   
+      
+        <>
+        {ownerResults.length !== 0 && (<h3><strong>Owners</strong></h3>)}
+        {ownerResults.map((item, index) => (
+        <ul key={index}>
+          <li>{item}</li>
+        </ul>
+      ))}
+        </>
+
+    </>
     );
-  
-    return combinedMessage;
+
+
   }
+
   
   public render(): React.ReactElement<IErrorModalProps> {
 
-    //const messages = parse(this.errorMessage());
     const firstPageErrorMessage = this.renderFirstPageMessage();
-    const secondPageErrorMessage = this.renderSecondPageMessage();
+    const secondPageErrorMessage = parse(this.renderSecondPageMessage());
     const thirdPageErrorMessage = this.renderCombinedMessage();
 
     const iconStyles: Partial<IIconStyles> = { 

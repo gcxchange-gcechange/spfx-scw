@@ -100,25 +100,13 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 title = {this.strings.commPurpose_title}
                 lineId={"first-line"}
                 ariaLabelRequired={this.strings.required}
-                
             />
             
         <h3>{this.strings.comm_name}</h3>
         <p className={styles.topMgn0}>{this.strings.engName_desc}</p>
         <Stack tokens={stackTokens}>
           <StackItem>
-            {/* <div id="second-line">
-              <Label htmlFor="engName" styles={labelStyle}>
-                <span
-                  className={styles.asterik}
-                  aria-label={this.strings.required}>
-                  *
-                </span>
-                {this.strings.engName_title}
-              </Label>
-              <p id="engNameDesc" className={styles.instruction}>
-                {this.strings.engName_Instruction}
-              </p> */}
+
               <ReusableTextField
                 name="engName"
                 id="engName"
@@ -140,18 +128,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
             {/* </div> */}
           </StackItem>
           <StackItem>
-            {/* <div id="third-line">
-              <Label htmlFor="frCommName">
-                <span
-                  className={styles.asterik}
-                  aria-label={this.strings.required}>
-                  *
-                </span>
-                {this.strings.frCommName_title}
-              </Label>
-              <p id="frNameDesc" className={styles.instruction}>
-                {this.strings.frCommName_Instruction}
-              </p> */}
+ 
               <ReusableTextField
                 name="frCommName"
                 id="frCommName"
@@ -170,7 +147,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 lineId={"third-line"}
                 ariaLabelRequired={this.strings.required}
             />
-            {/* </div> */}
+ 
           </StackItem>
         </Stack>
 
@@ -178,18 +155,6 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
         <p className={styles.topMgn0}> {this.strings.shEngDesc_desc}</p>
         <Stack tokens={stackTokens}>
           <StackItem>
-            {/* <div id="fourth-line">
-              <Label htmlFor="shEngDesc" styles={labelStyle}>
-                <span
-                  className={styles.asterik}
-                  aria-label={this.strings.required}>
-                  *
-                </span>
-                {this.strings.shEngDesc_title}
-              </Label>
-              <p id="shEngDescription" className={styles.instruction}>
-                {this.strings.shEngDesc_Instruction}
-              </p> */}
               <ReusableTextField
                 name="shEngDesc"
                 id="shEngDesc"
@@ -208,21 +173,10 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 lineId={"fourth-line"}
                 ariaLabelRequired={this.strings.required}
             />
-            {/* </div> */}
+ 
           </StackItem>
           <StackItem>
-            {/* <div id="fifth-line"> */}
-              {/* <Label htmlFor="shFrDesc" styles={labelStyle}>
-                <span
-                  className={styles.asterik}
-                  aria-label={this.strings.required}>
-                  *
-                </span>
-                {this.strings.shFrDesc_title}
-              </Label>
-              <p id="FrDesc" className={styles.instruction}>
-                {this.strings.shFrDesc_Instruction}
-              </p> */}
+            
               <ReusableTextField
                 name="shFrDesc"
                 id="shFrDesc"
@@ -241,7 +195,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 lineId={"fifth-line"}
                 ariaLabelRequired={this.strings.required}
             />
-            {/* </div> */}
+           
           </StackItem>
         </Stack>
       </>

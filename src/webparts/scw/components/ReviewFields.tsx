@@ -49,34 +49,45 @@ export default class LastStep extends React.Component<ILastStepProps> {
     
     public strings = SelectLanguage(this.props.prefLang);
 
-    private  onUpdateCommPurpose = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-        let value = event.target.value;
-        const invalidInput: string = '';
+    private onhandleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        const eventName = event.target.name;
+        const value = event.target.value;
+    
+        try {
+          this.props.handleOnChange(eventName, value);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+    // private  onUpdateCommPurpose = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+    //     let value = event.target.value;
+    //     const invalidInput: string = '';
         
-        if (value.length < 5 || value.length > 500 ) {
-            value = invalidInput;
-        }
+    //     if (value.length < 5 || value.length > 500 ) {
+    //         value = invalidInput;
+    //     }
 
-        const updatedPurpose = value.trim();  
-        this.props.commPurposeCallback(updatedPurpose); 
-     }
+    //     const updatedPurpose = value.trim();  
+    //     this.props.commPurposeCallback(updatedPurpose); 
+    //  }
 
-    private  onUpdateEngName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+    // private  onUpdateEngName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
 
-        let value = event.target.value;
-        const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value);
-        const invalidInput: string = '';
+    //     let value = event.target.value;
+    //     const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value);
+    //     const invalidInput: string = '';
 
-        if (charAllowed ) {
-           value = invalidInput  
-        } else if (value.length < 5 || value.length > 80) {
-            value = invalidInput;
-        }
+    //     if (charAllowed ) {
+    //        value = invalidInput  
+    //     } else if (value.length < 5 || value.length > 80) {
+    //         value = invalidInput;
+    //     }
 
-        const updatedName = value.trim();
+    //     const updatedName = value.trim();
 
-        this.props.handleEngNameCallback(updatedName); 
-     }
+    //     this.props.handleEngNameCallback(updatedName); 
+    //  }
     
     private  onUpdateFrName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
 
@@ -202,7 +213,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     validateOnLoad={false}
                     maxLength={500}
                     description={`${commPurpose.length}/500`}
-                    onChange={this.onUpdateCommPurpose}
+                    onChange={this.onhandleChangeEvent}
                     onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
                     title = {this.strings.commPurpose_title}
                     currentPage = {current}
@@ -210,6 +221,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     lineId={"first-line"}
                     ariaLabelRequired={this.strings.required}
                 />
+                
             
                 <ReusableTextFieldd
                     name="engName"
@@ -222,7 +234,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     validateOnLoad={false}
                     maxLength={80}
                     description={`${engName.length}/80`}
-                    onChange={this.onUpdateEngName}
+                    onChange={this.onhandleChangeEvent}
                     onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField, removeSpecialChar: this.strings.remove_special_char})}
                     title =  { this.strings.engName_title }
                     currentPage = {current}
@@ -291,34 +303,25 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     ariaLabelRequired={this.strings.required}
                 />
 
-                {/* <div id="">
-                    <Stack horizontal verticalAlign ="end">
-                        <Label styles={labelStyle}>
-                            <span className={ styles.asterik }  aria-label={ this.strings.required }>*</span>
-                            { `${this.strings.owners} (${this.strings.other_than_yourself})`}
-                        </Label>
-                        <IconButton id ="owners" styles  = { iconStyles } iconProps = {infoIcon} ariaLabel = { this.strings.infoIcon_Owners }  onClick= { this.showCalloutVisible }/>
-                    </Stack> */}
                     <div id="owners">
-                    <AddUsers 
-                        id={'owners'}
-                        aria-describedby="owners"
-                        prefLang={this.props.prefLang}
-                        context={this.props.context} 
-                        ownerList={this.props.ownerList}
-                        getOwnersCallback={this.updateDefaultOwnerValues} 
-                        requestor={this.props.requestor}
-                        currentPage={current}
-                        lineId={'sixth-line'}
-                        title = { `${this.strings.owners} (${this.strings.other_than_yourself})` }
-                        showCalloutVisible={this.showCalloutVisible}
-                        invalidEmail={this.props.invalidEmail}
-                    />
-                    <div style={{marginTop: '5px'}}>
-                        {validateOwnerField(this.props.ownerList, this.props.requestor, this.props.invalidEmail, {blankfield: this.strings.blankField, requestorUser: this.strings.invite_yourself, invalidEmail: this.strings.isInvalidEmail})}
-                    </div>
-                    </div>
-                {/* </div> */} 
+                        <AddUsers 
+                            id={'owners'}
+                            aria-describedby="owners"
+                            prefLang={this.props.prefLang}
+                            context={this.props.context} 
+                            ownerList={this.props.ownerList}
+                            getOwnersCallback={this.updateDefaultOwnerValues} 
+                            requestor={this.props.requestor}
+                            currentPage={current}
+                            lineId={'sixth-line'}
+                            title = { `${this.strings.owners} (${this.strings.other_than_yourself})` }
+                            showCalloutVisible={this.showCalloutVisible}
+                            invalidEmail={this.props.invalidEmail}
+                        />
+                        <div style={{marginTop: '5px'}}>
+                            {validateOwnerField(this.props.ownerList, this.props.requestor, this.props.invalidEmail, {blankfield: this.strings.blankField, requestorUser: this.strings.invite_yourself, invalidEmail: this.strings.isInvalidEmail})}
+                        </div>
+                </div>
             </Stack>
             </>
         );

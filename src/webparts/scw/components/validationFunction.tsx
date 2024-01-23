@@ -8,9 +8,7 @@ import styles from './Scw.module.scss';
 
 export const validateTextField = (value: string, strings: { minCharacters: string; blankField: string }): JSX.Element => {
 
-    const trimmedValue = value.trim();
-   
-  console.log("Value", trimmedValue);
+  const trimmedValue = value.trim();
 
   if (trimmedValue.length >= 1 && trimmedValue.length < 5) {
     return (
@@ -25,17 +23,18 @@ export const validateTextField = (value: string, strings: { minCharacters: strin
 
 
     return (
-      <Stack horizontal horizontalAlign="center">
-      <Icon iconName="AlertSolid"className={styles.errorIcon} />
-      <p className={styles.fieldInstruction}>
-        {strings.blankField}
-      </p>
-    </Stack>
+      <Stack horizontal horizontalAlign="center" >
+        <Icon iconName="AlertSolid"className={styles.errorIcon} />
+        <p className={styles.fieldInstruction}>
+          {strings.blankField}
+        </p>
+      </Stack>
 
     );
   } else {
     return null;
   }
+
   
 }
 
@@ -187,36 +186,6 @@ export const fieldValidations = (values: Record<string, string> | string[]): Val
       hasSpecialChar
   }
  
-}
-
-
-
-interface OwnerValidationErrors {
-  // isBlankField: boolean;
-  // userIsRequestor: boolean;
-  // emailIsInvalid: boolean;
-}
-
-
-export const ownerFieldValidations = (values: Record<string, string> | string[], requestor: string, invalidEmail: string ): OwnerValidationErrors => {
-
-  // let isrequestor = '';
-  // let isInvalidEmail = '';
-  const sideErrorLine = document.getElementById('sixth-line').classList.add(styles.errorBorder);
-  console.log('sideErrorLine', sideErrorLine)
-
-  console.log("VALUES",values, requestor, invalidEmail)
-
-  
-
-  return (
-
-    'hello'
-    // isBlankField 
-    // userIsRequestor 
-    // emailIsInvalid 
-  
-  )
 }
 
 

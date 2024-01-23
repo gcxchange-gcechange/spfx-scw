@@ -11,7 +11,7 @@ export interface IReusableTextFieldProps {
     styles: any;
     multiline: boolean;
     rows: number;
-    description: string;
+    description?: string;
     defaultValue: string;
     validateOnLoad: boolean;
     maxLength: number;

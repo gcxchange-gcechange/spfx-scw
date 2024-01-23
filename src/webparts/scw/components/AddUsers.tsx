@@ -86,7 +86,7 @@ export default class AUsers extends React.Component<IAddUsersProps> {
         return(
 
             <> 
-                <div id={this.props.lineId} tabIndex={1}>
+                <div id={this.props.id} tabIndex={1}>
                     <Stack>
                         <Label htmlFor="peoplePicker" style={{fontWeight:'700'}}>
                             <span className={styles.asterik} aria-label={'required'}>
