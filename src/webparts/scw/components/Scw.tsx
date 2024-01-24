@@ -80,7 +80,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             showCallout: false,
             targetId: '',
             invalidEmail: '',
-            requestingUser: ''
+            requestingUser: '',
 
 
         };
@@ -100,11 +100,13 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         const arrayVal=  Object.values(stateValues[0]);
 
         for (let i = 0; i < keys.length; i++) {
-        const key = keys[i];
-        const value = arrayVal[i];
+            const key = keys[i];
+            const value = arrayVal[i];
 
-        this.handleSideLineErrorValidation(key, value);
+            this.handleSideLineErrorValidation(key, value);  
         }
+
+
         const {isLessThanMinLength, hasSpecialChar} = fieldValidations(values);
 
         const showModal =  isLessThanMinLength || hasSpecialChar || (current === 1  && (ownerList.length === 0 || requestingUser || invalidEmail))
@@ -117,7 +119,8 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         } else {
             this.setState({
-                showModal: true
+                showModal: true,
+                
             })
         }
     };
@@ -345,11 +348,21 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             //document.getElementById(lineId).classList.remove(styles.charCountError);
           };
       
+          const addErrorText = (textId: string) => {
+            const getTextId = document.getElementById(textId);
+            const newText = document.createElement('p');
+            newText.textContent = 'cannot be blank'
+            if (getTextId) {
+                getTextId.appendChild(newText)
+            }
+ 
+          };
         switch (eventName) {
           case "commPurpose":
             if (value.length < 5) {
               addErrorBorder("first-line");
               addErrorCharCount("commPurposeCharCount");
+              addErrorText("commPurposeErrorText")
             } else {
               removeErrorBorder("first-line");    
               removeErrorCharCount("commPurposeCharCount")         

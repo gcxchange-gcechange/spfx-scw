@@ -101,8 +101,9 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 lineId={"first-line"}
                 ariaLabelRequired={this.strings.required}
                 charCountId = {"commPurposeCharCount"}
-            />
-            
+          />
+          <div id="commPurposeErrorText"></div>
+
         <h3>{this.strings.comm_name}</h3>
         <p className={styles.topMgn0}>{this.strings.engName_desc}</p>
         <Stack tokens={stackTokens}>
