@@ -91,11 +91,23 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     private next = (): void => {
         const nextPage = this.state.current + 1;
         const {commPurpose, engName, frCommName, shEngDesc, shFrDesc, ownerList, current, invalidEmail, requestingUser } = this.state;
-        const values = {commPurpose, engName, frCommName, shEngDesc, shFrDesc}
         
+        const values = {commPurpose, engName, frCommName, shEngDesc, shFrDesc};
+
+        //Obj Array to use for validating if user goes to next page without changing field inputs.
+        const stateValues = [{commPurpose: commPurpose , engName: engName, frCommName: frCommName, shEngDesc: shEngDesc, shFrDesc: shFrDesc}];
+        const keys = Object.keys(stateValues[0]);
+        const arrayVal=  Object.values(stateValues[0]);
+
+        for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+        const value = arrayVal[i];
+
+        this.handleSideLineErrorValidation(key, value);
+        }
         const {isLessThanMinLength, hasSpecialChar} = fieldValidations(values);
 
-        const showModal = isLessThanMinLength || hasSpecialChar || (current === 1  && (ownerList.length === 0 || requestingUser || invalidEmail))
+        const showModal =  isLessThanMinLength || hasSpecialChar || (current === 1  && (ownerList.length === 0 || requestingUser || invalidEmail))
         
         if(!showModal ) {
             this.setState({
@@ -322,7 +334,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             if (getCharCountId) {
                 getCharCountId.classList.add(styles.charCountError);
             }
-            // document.getElementById(lineId).classList.add(styles.charCountError);
+ 
           };
         
           const removeErrorCharCount = (charCountId: string) => {
