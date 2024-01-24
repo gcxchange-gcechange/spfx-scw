@@ -140,7 +140,7 @@ define([], function() {
         "blankField":"Ne pas laisser en blanc.",
         "please_add_a_longer_purpose":"Veuillez ajouter un objet plus long.",
         "please_add_a_longer_name" : "Veuillez ajouter un nom plus long.",
-        "please_add_a_longer_description": "Veuillez ajouter une description plus long.",
+        "please_add_a_longer_description": "Veuillez ajouter une description plus longue.",
         "please_add_a_purpose":"Veuillez ajouter un objet.",
         "please_add_a_name" : "Veuillez ajouter un nom.",
         "please_add_a_description": "Veuillez ajouter une description.",
