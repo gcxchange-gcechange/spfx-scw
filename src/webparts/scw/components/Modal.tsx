@@ -228,7 +228,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
     const messageValues : any [] = [
 
       {name: 'requestingUser', message: `${this.strings.requestorUser }`, value: requestor},
-      {name: 'invalidEmailUser', message: `${this.strings.invalidEmail} ${parse(invalidUserBold)} ${this.strings.is_not_valid}`, value: invalidUser}
+      {name: 'invalidEmailUser', message: `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}`, value: invalidUser}
 
     ]
 
@@ -247,7 +247,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
           message = resultValues.slice(0, -1).join(`,`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
           
         }  
-        else if (resultValues.length === 1 && item.message === `${this.strings.invalidEmail} ${parse(invalidUserBold)} ${this.strings.is_not_valid}`) {
+        else if (resultValues.length === 1 && item.message === `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}`) {
           message = `${this.strings.you_must} ${resultValues[0]}`
         }
         else  if(resultValues.length === 1) { 

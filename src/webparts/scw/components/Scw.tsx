@@ -93,8 +93,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         const {commPurpose, engName, frCommName, shEngDesc, shFrDesc, ownerList, current, invalidEmail, requestingUser } = this.state;
         const values = {commPurpose, engName, frCommName, shEngDesc, shFrDesc}
         
-        console.log("invalidEmail",invalidEmail)
-        
         const {isLessThanMinLength, hasSpecialChar} = fieldValidations(values);
 
         const showModal = isLessThanMinLength || hasSpecialChar || (current === 1  && (ownerList.length === 0 || requestingUser || invalidEmail))
@@ -179,34 +177,19 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     
     public successMessage = (): void =>  { 
 
-        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail } = this.state
+        const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail, requestingUser } = this.state
         const values = { engName, frCommName, shEngDesc, shFrDesc, commPurpose };
         const {isLessThanMinLength, hasSpecialChar} = fieldValidations(values);
-        console.log("VALUES", values.frCommName)
-    
 
-        let requestingUser: string = '';
-        // const owners = ownerList.length;
-    
-        for (let i = 0; i < ownerList.length; i++) {
-          if ( ownerList[i] === this.props.requestor) {
-            requestingUser = this.props.requestor
-          } 
-          
-        }
-       
-        console.log("InvalidEmail", invalidEmail);
-        console.log("requesting USer", requestingUser);
-        console.log("ownerList- length", ownerList.length);
-        
-        if (current === 2 && (!commPurpose || !engName || !frCommName || !shEngDesc || !shFrDesc || ownerList.length === 0 || invalidEmail !== '' || requestingUser !== ''|| isLessThanMinLength || hasSpecialChar)) {
-           
-            this.setState({ showModal: true });
+        const showModal =  ownerList.length === 0 || requestingUser || invalidEmail || isLessThanMinLength || hasSpecialChar ;
 
+
+        if (showModal) {
+            this.setState({ showModal: true }); 
         }
 
         else {
-            const functionUrl = "  ";
+            const functionUrl = " ";
             const requestHeaders: Headers = new Headers();
             requestHeaders.append("Content-type", "application/json");
             requestHeaders.append("Cache-Control", "no-cache");
@@ -321,51 +304,83 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
 
         const addErrorBorder = (lineId: string) => {
-          document.getElementById(lineId).classList.add(styles.errorBorder);
+            const getlineId = document.getElementById(lineId)
+            if (getlineId){
+              getlineId.classList.add(styles.errorBorder);
+            }
         };
       
         const removeErrorBorder = (lineId: string) => {
-          document.getElementById(lineId).classList.remove(styles.errorBorder);
+            const getlineId = document.getElementById(lineId);
+            if (getlineId) {
+              getlineId.classList.remove(styles.errorBorder);
+            }
         };
+
+        const addErrorCharCount = (charCountId: string) => {
+            const getCharCountId = document.getElementById(charCountId);
+            if (getCharCountId) {
+                getCharCountId.classList.add(styles.charCountError);
+            }
+            // document.getElementById(lineId).classList.add(styles.charCountError);
+          };
+        
+          const removeErrorCharCount = (charCountId: string) => {
+            const getCharCountId = document.getElementById(charCountId);
+            if (getCharCountId) {
+                getCharCountId.classList.remove(styles.charCountError);
+            }
+            //document.getElementById(lineId).classList.remove(styles.charCountError);
+          };
       
         switch (eventName) {
           case "commPurpose":
             if (value.length < 5) {
               addErrorBorder("first-line");
+              addErrorCharCount("commPurposeCharCount");
             } else {
-              removeErrorBorder("first-line");             
+              removeErrorBorder("first-line");    
+              removeErrorCharCount("commPurposeCharCount")         
             }
             break;
       
           case "engName":
             if (value.length < 5 || charAllowed) {
-              addErrorBorder("second-line");              
+              addErrorBorder("second-line");   
+              addErrorCharCount("engNameCharCount");          
             } else {
-              removeErrorBorder("second-line");              
+              removeErrorBorder("second-line");  
+              removeErrorCharCount("engNameCharCount");         
             }
             break;
       
           case "frCommName":
             if (value.length < 5 || charAllowed) {
               addErrorBorder("third-line");
+              addErrorCharCount("frCommNameCharCount");
             } else {
               removeErrorBorder("third-line");
+              removeErrorCharCount("frCommNameCharCount")
             }
             break;
       
           case "shEngDesc":
             if (value.length < 5) {
-              addErrorBorder("fourth-line");  
+              addErrorBorder("fourth-line");
+              addErrorCharCount("shEngDescCharCount")
             } else {
-              removeErrorBorder("fourth-line");  
+              removeErrorBorder("fourth-line");
+              removeErrorCharCount("shEngDescCharCount");
             }
             break;
       
           case "shFrDesc":
             if (value.length < 5) {
               addErrorBorder("fifth-line");
+              addErrorCharCount("shFrDescCharCount");
             } else {
               removeErrorBorder("fifth-line");  
+              removeErrorCharCount("shFrDescCharCount");
             }
             break;
       
@@ -377,17 +392,19 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
       
 
     public commPurposeCallback = ( commPurpose: string ): void =>   { 
-        const savePurpose = commPurpose;
+        const savePurpose = commPurpose.trim();
+        console.log("Purpose",savePurpose);
 
         this.setState ( { 
             commPurpose: savePurpose
         });
+
         this.handleSideLineErrorValidation("commPurpose", savePurpose)
      
     }
 
     public handleEngNameCallback = ( engNameValue: string ): void =>   { 
-        const saveEngName = engNameValue;
+        const saveEngName = engNameValue.trim();
         this.setState ( { 
             engName: saveEngName
         });
@@ -396,7 +413,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     }
 
     public frNameCallback = ( FrNameValue: string ): void =>   { 
-        const saveFrName = FrNameValue;
+        const saveFrName = FrNameValue.trim();
         this.setState ( { 
             frCommName: saveFrName
         });
@@ -404,7 +421,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     }
 
     public engDescCallback = ( EngDescValue: string ): void =>   { 
-        const saveEngDesc = EngDescValue;
+        const saveEngDesc = EngDescValue.trim();
         this.setState ( { 
             shEngDesc: saveEngDesc
         });
@@ -413,7 +430,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     }
 
     public frDescCallback = ( FrDescValue: string ): void =>   { 
-        const saveFrDesc = FrDescValue;
+        const saveFrDesc = FrDescValue.trim();
         this.setState ( { 
             shFrDesc: saveFrDesc
         });
@@ -625,7 +642,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         return (
             <>       
             <div className= { styles.scw }>   
-            <h1>{this.state.current.toString()}</h1>
                 <Title current={ current } step={ step } prefLang={this.props.prefLang} status={this.state.validationStatus} />
                 { step === 0 
                 ? 

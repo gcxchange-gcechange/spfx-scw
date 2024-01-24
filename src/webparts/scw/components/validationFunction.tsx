@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Stack, Icon, IStackTokens} from 'office-ui-fabric-react';
 import * as React from 'react';
-import styles from './Scw.module.scss';
+import styles from './Scw.module.scss'
 
 
 
@@ -127,7 +127,7 @@ export const validateOwnerField = (ownerList: string [], requestingUser: string,
         </Stack>
         <Stack horizontal>
           <Icon iconName="AlertSolid"className={styles.errorIcon} />
-          <p className={styles.fieldInstruction}>{strings.invalidEmail}</p>
+          <p className={styles.fieldInstruction}>{strings.invalidEmail} {invalidEmail}</p>
         </Stack>
       </Stack>
     )
@@ -146,7 +146,7 @@ export const validateOwnerField = (ownerList: string [], requestingUser: string,
     return (
       <Stack horizontal>
         <Icon iconName="AlertSolid"className={styles.errorIcon} />
-        <p className={styles.fieldInstruction}>{strings.invalidEmail}</p>
+        <p className={styles.fieldInstruction}>{strings.invalidEmail} {invalidEmail}</p>
       </Stack>
     )
   }

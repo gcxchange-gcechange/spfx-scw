@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import * as React from 'react';
 import {  IButtonStyles, IIconProps, IconButton, Label, Stack, TextField} from 'office-ui-fabric-react';
-import styles from './Scw.module.scss';
+import styles from './Scw.module.scss'
 
 
 export interface IReusableTextFieldProps {
@@ -27,6 +27,7 @@ export interface IReusableTextFieldProps {
     targetId?:string;
     ariaLabelRequired:string;
     label?:string;
+    charCountId: string;
 }
 
 
@@ -56,6 +57,14 @@ export default class ReusableTextField extends React.Component<IReusableTextFiel
         //     }
         // }
 
+        const renderDescription = (): JSX.Element => {
+            return (
+              <Stack id={this.props.charCountId} horizontalAlign='end' style={{fontSize: '12px'}}>
+                {this.props.description}
+              </Stack>
+            );
+          };
+
     
 
         return (
@@ -75,7 +84,7 @@ export default class ReusableTextField extends React.Component<IReusableTextFiel
                         </p> */}
                 </Stack>
                 <TextField
-                   {...this.props}
+                   {...this.props} onRenderDescription={renderDescription}
                 />
             </div>
         )

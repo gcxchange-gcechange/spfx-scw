@@ -49,70 +49,32 @@ export default class LastStep extends React.Component<ILastStepProps> {
     
     public strings = SelectLanguage(this.props.prefLang);
 
-    private onhandleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        const eventName = event.target.name;
+    private  onUpdateCommPurpose = (event: React.ChangeEvent<HTMLInputElement>) :void => {
         const value = event.target.value;
-    
-        try {
-          this.props.handleOnChange(eventName, value);
-        } catch (error) {
-          console.log(error);
-        }
-      };
+        const updatedPurpose = value.trim();  
+        this.props.commPurposeCallback(updatedPurpose); 
+     }
 
-    // private  onUpdateCommPurpose = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-    //     let value = event.target.value;
-    //     const invalidInput: string = '';
-        
-    //     if (value.length < 5 || value.length > 500 ) {
-    //         value = invalidInput;
-    //     }
+    private  onUpdateEngName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
 
-    //     const updatedPurpose = value.trim();  
-    //     this.props.commPurposeCallback(updatedPurpose); 
-    //  }
+        const value = event.target.value;
 
-    // private  onUpdateEngName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+        const updatedName = value.trim();
 
-    //     let value = event.target.value;
-    //     const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value);
-    //     const invalidInput: string = '';
-
-    //     if (charAllowed ) {
-    //        value = invalidInput  
-    //     } else if (value.length < 5 || value.length > 80) {
-    //         value = invalidInput;
-    //     }
-
-    //     const updatedName = value.trim();
-
-    //     this.props.handleEngNameCallback(updatedName); 
-    //  }
+        this.props.handleEngNameCallback(updatedName); 
+     }
     
     private  onUpdateFrName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
 
-        let value = event.target.value;
-        const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value);
-        const invalidInput: string = '';
+        const value = event.target.value;
 
-        if ( charAllowed  ) {              
-            value = invalidInput;
-        } else if (value.length < 5 || value.length > 80) {
-            value = invalidInput;
-        }
         const updateFrName = value.trim();
         
         this.props.frNameCallBack(updateFrName)    
      }
 
      private onUpdateEngDesc = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-        let value = event.target.value;
-        const invalidInput: string = '';
-        // const updateEngDesc = event.target.value;
-
-        if (value.length < 5 || value.length > 100 ) {
-            value = invalidInput
-        }
+        const value = event.target.value;
 
         const updateEngDesc = value.trim();
 
@@ -120,13 +82,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
      }
 
     private  onUpdateFrDesc = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-        let value = event.target.value;
-        const invalidInput: string = '';
-        
-
-        if(value.length < 5 || value.length > 100 ) {
-            value = invalidInput
-        }
+        const value = event.target.value;
 
         const updateFrDesc = value.trim();
         
@@ -134,12 +90,8 @@ export default class LastStep extends React.Component<ILastStepProps> {
      }
   
 
-    
-   
-
     public showCalloutVisible = (event: any):void => {
         const buttonId = event.currentTarget.id;
-
 
         this.elementId(buttonId);
         this.props.isCalloutVisible();
@@ -151,7 +103,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
     }
 
     public updateDefaultOwnerValues = ( username: []):void  => {  
-        console.log("USERNAME",username); 
+
         const newValues = username;
 
         this.props.getOwnersCallback( newValues );//pass to parent
@@ -161,23 +113,6 @@ export default class LastStep extends React.Component<ILastStepProps> {
 
 
         const { current, commPurpose, engName, frCommName, shEngDesc, shFrDesc } = this.props
-
-        // const labelStyle: Partial<ILabelStyles> = {
-        //     root: {
-        //       paddingBottom: "5px",
-        //     },
-        //   };
-        
-
-        // const iconStyles: IButtonStyles = {
-        //     root: {
-        //         paddingTop: '10px',
-        //     }
-        // }
-
- 
-
-        // const infoIcon: IIconProps = { iconName: 'UnknownSolid' }; 
 
         const charCountStyles = {
 
@@ -213,13 +148,14 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     validateOnLoad={false}
                     maxLength={500}
                     description={`${commPurpose.length}/500`}
-                    onChange={this.onhandleChangeEvent}
+                    onChange={this.onUpdateCommPurpose}
                     onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
                     title = {this.strings.commPurpose_title}
                     currentPage = {current}
                     showCalloutVisible={this.showCalloutVisible}
                     lineId={"first-line"}
                     ariaLabelRequired={this.strings.required}
+                    charCountId = {"commPurposeDesc"}
                 />
                 
             
@@ -234,13 +170,14 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     validateOnLoad={false}
                     maxLength={80}
                     description={`${engName.length}/80`}
-                    onChange={this.onhandleChangeEvent}
+                    onChange={this.onUpdateEngName}
                     onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField, removeSpecialChar: this.strings.remove_special_char})}
                     title =  { this.strings.engName_title }
                     currentPage = {current}
                     showCalloutVisible={this.showCalloutVisible}
                     lineId={"second-line"}
                     ariaLabelRequired={this.strings.required}
+                    charCountId = {"engNameCharCount"}
                 />
 
                 <ReusableTextFieldd
@@ -261,6 +198,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     showCalloutVisible={this.showCalloutVisible}
                     lineId={"third-line"}
                     ariaLabelRequired={this.strings.required}
+                    charCountId = {"frCommNameCharCount"}
                 />
 
                 <ReusableTextFieldd
@@ -281,6 +219,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     showCalloutVisible={this.showCalloutVisible}
                     lineId={"fourth-line"}
                     ariaLabelRequired={this.strings.required}
+                    charCountId={'shEngDescCharCount'}
                 />
 
                 <ReusableTextFieldd
@@ -301,6 +240,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     showCalloutVisible={this.showCalloutVisible}
                     lineId={"fifth-line"}
                     ariaLabelRequired={this.strings.required}
+                    charCountId={'shFrDescCharCount'}
                 />
 
                     <div id="owners">

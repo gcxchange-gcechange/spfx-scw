@@ -268,11 +268,11 @@
     }
 }
 
-// :global {
-//     .ms-TextField-errorMessage {
-//         display: none;
-//       }
-// }
+:global {
+    .ms-TextField-errorMessage {
+        margin-top: -20px;
+      }
+}
 
 .terms {
     margin: 0px!important;
@@ -479,11 +479,11 @@ u {
     .ms-Label {
         font-weight: normal;
     }
-    
-    
+
+   
 }
 .charCountError {
     color: #C61515;
     font-weight: 700!important;
-    margin-top: -20px;
+    // margin-top: -20px;
 }

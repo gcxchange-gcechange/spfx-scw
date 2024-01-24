@@ -100,6 +100,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 title = {this.strings.commPurpose_title}
                 lineId={"first-line"}
                 ariaLabelRequired={this.strings.required}
+                charCountId = {"commPurposeCharCount"}
             />
             
         <h3>{this.strings.comm_name}</h3>
@@ -124,6 +125,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 title= {this.strings.engName_title}
                 lineId={"second-line"}
                 ariaLabelRequired={this.strings.required}
+                charCountId = {"engNameCharCount"}
             />
             {/* </div> */}
           </StackItem>
@@ -146,6 +148,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 title =  {this.strings.frCommName_title}
                 lineId={"third-line"}
                 ariaLabelRequired={this.strings.required}
+                charCountId = {"frCommNameCharCount"}
             />
  
           </StackItem>
@@ -172,6 +175,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 title =  {this.strings.shEngDesc_title}
                 lineId={"fourth-line"}
                 ariaLabelRequired={this.strings.required}
+                charCountId={'shEngDescCharCount'}
             />
  
           </StackItem>
@@ -194,6 +198,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 title = {this.strings.shFrDesc_title}
                 lineId={"fifth-line"}
                 ariaLabelRequired={this.strings.required}
+                charCountId={'shFrDescCharCount'}
             />
            
           </StackItem>
