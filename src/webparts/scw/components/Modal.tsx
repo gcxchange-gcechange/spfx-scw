@@ -67,98 +67,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
     },
   };
 
-  public errorMessage = (): string => {
-
-
-   
-    const {
-      current,
-      commPurpose,
-      engName,
-      frCommName,
-      shEngDesc,
-      shFrDesc,
-      ownerList,
-      invalidUser,
-      requestor
-    } = this.props;
-
-
-
-    interface PropValues {
-      name: string;
-      value: any;
-    }
-
-    // let requestingUser: string = '';
-
-    // for (let i = 0; i < ownerList.length; i++) {
-    //   console.log("O",ownerList[i])
-    //   if ( ownerList[i] === this.props.requestor) {
-    //     requestingUser = this.props.requestor
-    //   } 
-      
-    // }
-
-    const invalidUserBold = "<strong>" + invalidUser + "</strong>"; //unvalid email need to be bold
   
-    const lastValues: PropValues[] = [
-      { name: `${ this.strings.commPurpose_Modal }`, value: `${commPurpose}` },
-      { name: `${ this.strings.engName_Modal }`, value: `${engName}` },
-      { name: `${ this.strings.frCommName_Modal }`, value: `${frCommName}` },
-      { name: `${ this.strings.shEngDesc_Modal }`, value: `${shEngDesc}` },
-      { name: `${ this.strings.shFrDesc_Modal }`, value: `${shFrDesc}` },
-      { name: `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}`, value: `${invalidUser}` }, //remove you must provide
-      { name: `${this.strings.requestorUser }`, value: `${requestor}` },
-      { name: `${this.strings.you_must} ${this.strings.one_more_owner}`, value: `${ownerList.length}`}
-    ];
-
-    let message: string = "";
-    const results: string[] = [];
-    const comma = `<span style=fontWeight:normal>, </span>`;
-  
-      if (current === 2) {
-          for (const obj of lastValues) {
-              console.log('obj', obj);
-              if (
-                  // Check if specific input fields are empty
-                  (obj.name === `${this.strings.commPurpose_Modal}` && obj.value === "") ||
-                  (obj.name === `${this.strings.engName_Modal}` && obj.value === "") ||
-                  (obj.name === `${this.strings.frCommName_Modal}` && obj.value === "") ||
-                  (obj.name === `${this.strings.shEngDesc_Modal}` && obj.value === "") ||
-                  (obj.name === `${this.strings.shFrDesc_Modal}` && obj.value === "") ||
-
-                  // Check for invalid email format
-                  (obj.name === `${this.strings.invalidEmail} ${invalidUserBold} ${this.strings.is_not_valid}` && obj.value !== "") ||
-
-                  // Check if requestor user is provided
-                  (obj.name === `${this.strings.requestorUser}` && obj.value !== "") ||
-
-                  // Check if there is at least one more owner
-                  (obj.name === `${this.strings.you_must} ${this.strings.one_more_owner}` && obj.value < 1)
-              ) {
-                  results.push(obj.name);
-              }
-              console.log("RES", results)
-
-          }
-
-          if (results.length > 1) {
-              const tolower = results.slice(-1)[0];
-              
-              console.log("slice 0 " + results.slice(0)[0])
-              message = `${this.strings.you_must} ${this.strings.provide}` + results.slice(0, -1).join(`${comma}`) + `${this.strings.and}` + tolower.charAt(0).toLowerCase() + tolower.slice(1)//on last slice only lower first character
-
-            }
-              else if (results.length === 1) {
-                      message = `${this.strings.you_must} ${this.strings.provide} ${results}`          
-            }  
-
-    }
-
-    console.log('MES',message);
-    return  message;
-  };
 
   public renderFirstPageMessage = ():JSX.Element => {
 
@@ -178,7 +87,6 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
       //iterate through the values in obj arary
     
       firstValues.forEach((obj) => {
-        console.log("Modal", obj);
         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(obj.value);
         let special = '';
         const newKey = 'specialChar';
@@ -221,7 +129,6 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
   public renderSecondPageMessage = ():string  => {
 
     const { ownerList, requestor, invalidUser } = this.props;
-    console.log("invalidEmal", invalidUser);
 
     const invalidUserBold = "<strong>" + invalidUser + "</strong>";  //unvalid email need to be bold
    
@@ -251,7 +158,6 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
           message = `${this.strings.you_must} ${resultValues[0]}`
         }
         else  if(resultValues.length === 1) { 
-          console.log("res", resultValues)
           message = resultValues[0];
         }
       }
@@ -326,9 +232,6 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
               color: 'white'
             } 
     };
-
-
-    console.log("current page", this.props.current)
 
  
     return (
