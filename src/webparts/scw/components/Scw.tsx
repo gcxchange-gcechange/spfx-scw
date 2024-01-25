@@ -23,6 +23,7 @@ import Callouts from './Callouts';
 import Failed from './Failed';
 import ReviewFields from './ReviewFields';
 import { fieldValidations} from './validationFunction';
+ 
 
 
 
@@ -48,6 +49,14 @@ export interface IScwState  {
     targetId: string;
     invalidEmail: string;
     requestingUser: string;
+    isError: [
+        {
+        commPurpose: boolean;
+        engName: boolean;
+        frCommName: boolean;
+        shEngDesc: boolean;
+        shFrDesc: boolean;
+    }]
 
    
     
@@ -81,6 +90,13 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             targetId: '',
             invalidEmail: '',
             requestingUser: '',
+            isError: [{
+                commPurpose: false,
+                engName:false,
+                frCommName: false,
+                shEngDesc: false,
+                shFrDesc: false,
+            }]
 
 
         };
@@ -94,6 +110,10 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         
         const values = {commPurpose, engName, frCommName, shEngDesc, shFrDesc};
 
+        const {isLessThanMinLength, hasSpecialChar } = fieldValidations(values);
+
+
+
         //Obj Array to use for validating if user goes to next page without changing field inputs.
         const stateValues = [{commPurpose: commPurpose , engName: engName, frCommName: frCommName, shEngDesc: shEngDesc, shFrDesc: shFrDesc}];
         const keys = Object.keys(stateValues[0]);
@@ -104,10 +124,13 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             const value = arrayVal[i];
 
             this.handleSideLineErrorValidation(key, value);  
+
+            this.blankFieldValidation(key, value);
+
         }
 
 
-        const {isLessThanMinLength, hasSpecialChar} = fieldValidations(values);
+       
 
         const showModal =  isLessThanMinLength || hasSpecialChar || (current === 1  && (ownerList.length === 0 || requestingUser || invalidEmail))
         
@@ -124,7 +147,17 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             })
         }
     };
-    
+
+    public  blankFieldValidation = (key: string, value: string):void =>  {
+        console.log("key", key)
+        console.log("value", value)
+
+       
+
+
+       
+    }
+     
 
 
     public closeModal = (): void => {
@@ -348,24 +381,61 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             //document.getElementById(lineId).classList.remove(styles.charCountError);
           };
       
-          const addErrorText = (textId: string) => {
-            const getTextId = document.getElementById(textId);
-            const newText = document.createElement('p');
-            newText.textContent = 'cannot be blank'
-            if (getTextId) {
-                getTextId.appendChild(newText)
-            }
+        //   const addErrorText = (textId: string) => {
+        //     const getTextId = document.getElementById(textId);
+        //     const newText = document.createElement('p');
+        //     newText.textContent = 'cannot be blank'
+        //     newText.classList.add('ownerError')
+        //     if (getTextId) {
+        //         getTextId.appendChild(newText)
+        //     }
  
-          };
+        //   };
+        //   const removeErrorText = (textId: string) => {
+        //     const getTextId = document.getElementById(textId);
+        //     if (getTextId) {
+        //        getTextId.remove();
+        //     }
+ 
+        //   };
+
+        //   const addErrorText = (textId: string) => {
+        //     const getbyId = document.getElementById(textId) ;
+        //     const getAttributeNode = getbyId.classList[0]
+            
+        //     if(getbyId) {
+        //         console.log(getAttributeNode)
+        //      // getbyId.classList.remove(getAttributeNode)
+        //       getbyId.classList.remove(getAttributeNode)
+               
+        //     }
+ 
+        //   };
+        //   const removeErrorText = (textId: string) => {
+        //     const getbyId = document.getElementById(textId);
+        //     // const getAttributeNode = getbyId.classList[0]
+        //     if (getbyId ) {
+        //         getbyId.classList.add('styles.hideError')
+        //     }
+ 
+        //   };
         switch (eventName) {
           case "commPurpose":
+            console.log("value",value);
+
+            // if (value.trim() === '') {
+            //     addErrorText("commPurposeErrorText")
+            // } else {
+            //     removeErrorText("commPurposeErrorText")    
+            // }
+
             if (value.length < 5) {
               addErrorBorder("first-line");
               addErrorCharCount("commPurposeCharCount");
-              addErrorText("commPurposeErrorText")
+                 
             } else {
               removeErrorBorder("first-line");    
-              removeErrorCharCount("commPurposeCharCount")         
+              removeErrorCharCount("commPurposeCharCount")
             }
             break;
       
@@ -567,6 +637,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     shFrDesc= { shFrDesc }
                     errorMessage ={ errorMessage }
                     handleOnChange={this.handleOnChange}
+                    isError={this.state.isError}
                 />
                 )
             },

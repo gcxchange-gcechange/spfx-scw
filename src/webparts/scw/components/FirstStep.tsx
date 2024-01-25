@@ -6,7 +6,7 @@ import styles from './Scw.module.scss';
 import { Stack, StackItem } from 'office-ui-fabric-react';
 import { SelectLanguage } from './SelectLanguage';
 import parse from 'html-react-parser';
-import { validateSpecialCharFields, validateTextField } from './validationFunction';
+import { validateSpecialCharFields, validateTextField, validateisError } from './validationFunction';
 import ReusableTextField from './ReusableTextField';
 
 
@@ -21,6 +21,14 @@ export interface IFirstStepProps {
     shFrDesc: string;
     errorMessage: string;
     showModal: boolean;
+    isError?: [
+      {
+      commPurpose: boolean;
+      engName: boolean;
+      frCommName: boolean;
+      shEngDesc: boolean;
+      shFrDesc: boolean;
+  }]
 
     handleOnChange?:(event:any, value: string)=> void;
     handleErrorMessage?: (errorMessage: string) => void;
@@ -82,7 +90,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
       <>
         <h3>{parse(this.strings.commPurpose_title)}</h3>
         <p>{parse(this.strings.commPurpose_desc)}</p>
-
+       
           <ReusableTextField
                 name="commPurpose"
                 id="Community purpose"
@@ -101,8 +109,14 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 lineId={"first-line"}
                 ariaLabelRequired={this.strings.required}
                 charCountId = {"commPurposeCharCount"}
+                blankFieldText={this.strings.blankField}
+                errorId={"commPurposeErrorText"}      
+                
           />
-          <div id="commPurposeErrorText"></div>
+          
+          <div style={{marginTop: '5px'}}>
+              {validateisError( commPurpose, {blankField: this.strings.blankField })}
+          </div>
 
         <h3>{this.strings.comm_name}</h3>
         <p className={styles.topMgn0}>{this.strings.engName_desc}</p>
@@ -127,6 +141,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 lineId={"second-line"}
                 ariaLabelRequired={this.strings.required}
                 charCountId = {"engNameCharCount"}
+                blankFieldText={this.strings.blankField}
             />
             {/* </div> */}
           </StackItem>

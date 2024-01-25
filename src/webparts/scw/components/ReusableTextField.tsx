@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import * as React from 'react';
-import {  IButtonStyles, IIconProps, IconButton, Label, Stack, TextField} from 'office-ui-fabric-react';
-import styles from './Scw.module.scss'
+import {  IButtonStyles, IIconProps,  IconButton, Label, Stack, TextField} from 'office-ui-fabric-react';
+import styles from './Scw.module.scss';
+ 
 
 
 export interface IReusableTextFieldProps {
@@ -28,6 +29,9 @@ export interface IReusableTextFieldProps {
     ariaLabelRequired:string;
     label?:string;
     charCountId: string;
+    blankFieldText?: string;
+    errorId?: string;
+    isError? : (value: string ) => string | JSX.Element | undefined;
 }
 
 
@@ -79,13 +83,11 @@ export default class ReusableTextField extends React.Component<IReusableTextFiel
                         (<span><IconButton id={this.props.id} styles={ iconStyles } iconProps={infoIcon} onClick={this.props.showCalloutVisible}/></span>)
                         }
                     </Label>
-                        {/* <p id={this.props.ariaDescribedBy} className={styles.instruction}>
-                            {this.props.instructions}
-                        </p> */}
                 </Stack>
                 <TextField
                    {...this.props} onRenderDescription={renderDescription} 
                 />
+                {/* <div>{this.props.isError}</div> */}
 
             </div>
         )

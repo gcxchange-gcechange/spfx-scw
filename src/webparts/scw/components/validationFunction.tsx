@@ -4,7 +4,25 @@ import { Stack, Icon, IStackTokens} from 'office-ui-fabric-react';
 import * as React from 'react';
 import styles from './Scw.module.scss'
 
+export const validateisError = (value: string, strings: {  blankField: string }): JSX.Element => {
 
+  
+  if (value === "") {
+    return (
+      <Stack horizontal>
+        <Icon iconName="AlertSolid"className={styles.errorIcon} />
+        <p className={styles.fieldInstruction}>
+          {strings.blankField}
+        </p>
+      </Stack>
+
+    );
+  } else {
+    return null;
+  }
+
+  
+}
 
 export const validateTextField = (value: string, strings: { minCharacters: string; blankField: string }): JSX.Element => {
 
@@ -51,15 +69,16 @@ export const validateSpecialCharFields = (value: string, strings: { minCharacter
   );
   console.log("Value Lenght", value.length);
 
-  if (!value.trim().length) {
-    console.log("Iam blank")
+  // if (!value.trim().length) {
+  //   console.log("Iam blank")
     
-    return  <Stack horizontal>
-        <Icon iconName="AlertSolid"className={styles.errorIcon} />
-        <p className={styles.fieldInstruction}>{strings.blankField}</p>
-      </Stack>
+  //   return  <Stack horizontal>
+  //       <Icon iconName="AlertSolid"className={styles.errorIcon} />
+  //       <p className={styles.fieldInstruction}>{strings.blankField}</p>
+  //     </Stack>
     
-  } else if (value.trim().length >= 1 && value.trim().length < 5) {
+  // } else 
+  if (value.trim().length >= 1 && value.trim().length < 5) {
     if(charAllowed ) {
       return (
         <>
@@ -166,10 +185,10 @@ interface ValidationErrors {
 
 export const fieldValidations = (values: Record<string, string> | string[]): ValidationErrors => {
 
-
+  console.log("VALUES",values)
 
       const validateStringLength = (value: string, minLength: number): boolean => value.length >= minLength;
-      
+       
       const isLessThanMinLength = Object.values(values).some((value) => !validateStringLength(value, 5));
       const hasSpecialChar = Object.entries(values).some(
           ([key, value]) => (key === 'engName' || key === 'frCommName') && /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value)
@@ -183,7 +202,7 @@ export const fieldValidations = (values: Record<string, string> | string[]): Val
 
   return {
       isLessThanMinLength,
-      hasSpecialChar
+      hasSpecialChar,
   }
  
 }
