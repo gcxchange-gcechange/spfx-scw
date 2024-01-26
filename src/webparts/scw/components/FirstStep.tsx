@@ -21,14 +21,7 @@ export interface IFirstStepProps {
     shFrDesc: string;
     errorMessage: string;
     showModal: boolean;
-    isError?: [
-      {
-      commPurpose: boolean;
-      engName: boolean;
-      frCommName: boolean;
-      shEngDesc: boolean;
-      shFrDesc: boolean;
-  }]
+    isError?: string[];
 
     handleOnChange?:(event:any, value: string)=> void;
     handleErrorMessage?: (errorMessage: string) => void;
@@ -59,7 +52,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
 
 
   public render(): React.ReactElement<IFirstStepProps> {
-    const { engName, commPurpose, frCommName, shEngDesc, shFrDesc } = this.props;
+    const { engName, commPurpose, frCommName, shEngDesc, shFrDesc, isError } = this.props;
 
 
     // const labelStyle: Partial<ILabelStyles> = {
@@ -109,14 +102,17 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 lineId={"first-line"}
                 ariaLabelRequired={this.strings.required}
                 charCountId = {"commPurposeCharCount"}
-                blankFieldText={this.strings.blankField}
-                errorId={"commPurposeErrorText"}      
+   
                 
           />
-          
-          <div style={{marginTop: '5px'}}>
-              {validateisError( commPurpose, {blankField: this.strings.blankField })}
-          </div>
+          {isError.includes('commPurpose') && (
+              <div style={{marginTop: '5px'}}>
+              {validateisError( {blankField: this.strings.blankField })}
+            </div>
+
+            )
+          }
+        
 
         <h3>{this.strings.comm_name}</h3>
         <p className={styles.topMgn0}>{this.strings.engName_desc}</p>
@@ -141,9 +137,14 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 lineId={"second-line"}
                 ariaLabelRequired={this.strings.required}
                 charCountId = {"engNameCharCount"}
-                blankFieldText={this.strings.blankField}
             />
-            {/* </div> */}
+                {isError.includes('engName') && 
+                  (
+                  <div style={{marginTop: '5px'}}>
+                    {validateisError( {blankField: this.strings.blankField })}
+                  </div>
+                  )
+                }
           </StackItem>
           <StackItem>
  
@@ -166,6 +167,13 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 ariaLabelRequired={this.strings.required}
                 charCountId = {"frCommNameCharCount"}
             />
+             {isError.includes('frCommName') && 
+                (
+                <div style={{marginTop: '5px'}}>
+                  {validateisError( {blankField: this.strings.blankField })}
+                </div>
+                )
+             }
  
           </StackItem>
         </Stack>
@@ -193,6 +201,15 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 ariaLabelRequired={this.strings.required}
                 charCountId={'shEngDescCharCount'}
             />
+
+                {isError.includes('shEngDesc') && 
+                  (
+                  <div style={{marginTop: '5px'}}>
+                  {validateisError( {blankField: this.strings.blankField })}
+                  </div>
+                  )
+                }
+ 
  
           </StackItem>
           <StackItem>
@@ -216,6 +233,13 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 ariaLabelRequired={this.strings.required}
                 charCountId={'shFrDescCharCount'}
             />
+              {isError.includes('shFrDesc') && 
+                (
+                  <div style={{marginTop: '5px'}}>
+                    {validateisError( {blankField: this.strings.blankField })}
+                  </div>
+                )
+              }
            
           </StackItem>
         </Stack>

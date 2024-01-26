@@ -4,12 +4,10 @@ import { Stack, Icon, IStackTokens} from 'office-ui-fabric-react';
 import * as React from 'react';
 import styles from './Scw.module.scss'
 
-export const validateisError = (value: string, strings: {  blankField: string }): JSX.Element => {
+export const validateisError = (strings: {  blankField: string }): JSX.Element => {
 
-  
-  if (value === "") {
     return (
-      <Stack horizontal>
+      <Stack horizontal style={{marginTop: '-18px'}}>
         <Icon iconName="AlertSolid"className={styles.errorIcon} />
         <p className={styles.fieldInstruction}>
           {strings.blankField}
@@ -17,10 +15,6 @@ export const validateisError = (value: string, strings: {  blankField: string })
       </Stack>
 
     );
-  } else {
-    return null;
-  }
-
   
 }
 
@@ -69,15 +63,15 @@ export const validateSpecialCharFields = (value: string, strings: { minCharacter
   );
   console.log("Value Lenght", value.length);
 
-  // if (!value.trim().length) {
-  //   console.log("Iam blank")
+  if (!value.trim().length) {
+    console.log("Iam blank")
     
-  //   return  <Stack horizontal>
-  //       <Icon iconName="AlertSolid"className={styles.errorIcon} />
-  //       <p className={styles.fieldInstruction}>{strings.blankField}</p>
-  //     </Stack>
+    return  <Stack horizontal>
+        <Icon iconName="AlertSolid"className={styles.errorIcon} />
+        <p className={styles.fieldInstruction}>{strings.blankField}</p>
+      </Stack>
     
-  // } else 
+  } else 
   if (value.trim().length >= 1 && value.trim().length < 5) {
     if(charAllowed ) {
       return (

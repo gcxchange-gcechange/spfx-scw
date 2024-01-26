@@ -29,9 +29,6 @@ export interface IReusableTextFieldProps {
     ariaLabelRequired:string;
     label?:string;
     charCountId: string;
-    blankFieldText?: string;
-    errorId?: string;
-    isError? : (value: string ) => string | JSX.Element | undefined;
 }
 
 

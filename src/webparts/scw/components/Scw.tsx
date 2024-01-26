@@ -22,7 +22,7 @@ import { Spinner, SpinnerSize } from '@fluentui/react/lib/Spinner';
 import Callouts from './Callouts';
 import Failed from './Failed';
 import ReviewFields from './ReviewFields';
-import { fieldValidations} from './validationFunction';
+import { fieldValidations } from './validationFunction';
  
 
 
@@ -49,14 +49,7 @@ export interface IScwState  {
     targetId: string;
     invalidEmail: string;
     requestingUser: string;
-    isError: [
-        {
-        commPurpose: boolean;
-        engName: boolean;
-        frCommName: boolean;
-        shEngDesc: boolean;
-        shFrDesc: boolean;
-    }]
+    isError: string[];
 
    
     
@@ -90,13 +83,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             targetId: '',
             invalidEmail: '',
             requestingUser: '',
-            isError: [{
-                commPurpose: false,
-                engName:false,
-                frCommName: false,
-                shEngDesc: false,
-                shFrDesc: false,
-            }]
+            isError: []
 
 
         };
@@ -125,12 +112,9 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
             this.handleSideLineErrorValidation(key, value);  
 
-            this.blankFieldValidation(key, value);
-
         }
 
-
-       
+        this.blankFieldValidation(values);
 
         const showModal =  isLessThanMinLength || hasSpecialChar || (current === 1  && (ownerList.length === 0 || requestingUser || invalidEmail))
         
@@ -148,14 +132,19 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         }
     };
 
-    public  blankFieldValidation = (key: string, value: string):void =>  {
-        console.log("key", key)
-        console.log("value", value)
+    public  blankFieldValidation = (values: any):void =>  {
+        const errorFields:string[] = [];
 
-       
+        for(const [key, value] of Object.entries(values)) {
 
-
-       
+            if (value === '') {
+                errorFields.push(key)
+                this.setState({
+                    ...this.state,
+                    isError: errorFields
+                })
+            }
+        }   
     }
      
 
@@ -172,7 +161,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
         const { current, engName, frCommName, shEngDesc, shFrDesc, commPurpose, ownerList, invalidEmail, requestingUser   } = this.state
         const values = { engName, frCommName, shEngDesc, shFrDesc, commPurpose}
-        console.log("prevValues", values);
+
         const {isLessThanMinLength, hasSpecialChar} = fieldValidations(values);
 
 
@@ -218,7 +207,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
 
     public escapeQuotes = (str:any) => {
-        console.log("string",str)
         return  str.replace(/"/g, '\\"');
       };
       
@@ -237,7 +225,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         }
 
         else {
-            const functionUrl = " ";
+            const functionUrl = "CreateItem?";
             const requestHeaders: Headers = new Headers();
             requestHeaders.append("Content-type", "application/json");
             requestHeaders.append("Cache-Control", "no-cache");
@@ -290,7 +278,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             document.getElementById("submit").style.display = 'none';
                 
               this.props.context.aadHttpClientFactory
-              .getClient(" ")
+              .getClient("")
               .then((client: AadHttpClient) => {
                
                 client.post(functionUrl, AadHttpClient.configurations.v1, postOptions)
@@ -378,56 +366,12 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             if (getCharCountId) {
                 getCharCountId.classList.remove(styles.charCountError);
             }
-            //document.getElementById(lineId).classList.remove(styles.charCountError);
+           
           };
       
-        //   const addErrorText = (textId: string) => {
-        //     const getTextId = document.getElementById(textId);
-        //     const newText = document.createElement('p');
-        //     newText.textContent = 'cannot be blank'
-        //     newText.classList.add('ownerError')
-        //     if (getTextId) {
-        //         getTextId.appendChild(newText)
-        //     }
- 
-        //   };
-        //   const removeErrorText = (textId: string) => {
-        //     const getTextId = document.getElementById(textId);
-        //     if (getTextId) {
-        //        getTextId.remove();
-        //     }
- 
-        //   };
-
-        //   const addErrorText = (textId: string) => {
-        //     const getbyId = document.getElementById(textId) ;
-        //     const getAttributeNode = getbyId.classList[0]
-            
-        //     if(getbyId) {
-        //         console.log(getAttributeNode)
-        //      // getbyId.classList.remove(getAttributeNode)
-        //       getbyId.classList.remove(getAttributeNode)
-               
-        //     }
- 
-        //   };
-        //   const removeErrorText = (textId: string) => {
-        //     const getbyId = document.getElementById(textId);
-        //     // const getAttributeNode = getbyId.classList[0]
-        //     if (getbyId ) {
-        //         getbyId.classList.add('styles.hideError')
-        //     }
- 
-        //   };
+      
         switch (eventName) {
           case "commPurpose":
-            console.log("value",value);
-
-            // if (value.trim() === '') {
-            //     addErrorText("commPurposeErrorText")
-            // } else {
-            //     removeErrorText("commPurposeErrorText")    
-            // }
 
             if (value.length < 5) {
               addErrorBorder("first-line");
@@ -488,7 +432,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
     public commPurposeCallback = ( commPurpose: string ): void =>   { 
         const savePurpose = commPurpose.trim();
-        console.log("Purpose",savePurpose);
 
         this.setState ( { 
             commPurpose: savePurpose
@@ -535,7 +478,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
 
   
     public handleOwnerCallback = ( items: []): void =>  {
-        console.log("PARENT OWNERS",items)
         const OwnerArr: any[]  = [];
         let isRequestor: string = '';
         let isInvalidEmail: string ='';
@@ -573,11 +515,6 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     }
 
 
-    public handleErrorMessage = (field: string ):void  => {
-       console.log("field",field);
-    }
-   
-
      
     public isCalloutVisible = ():void => {
 
@@ -600,26 +537,76 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
     componentDidUpdate(prevProps: Readonly<IScwProps>, prevState: Readonly<IScwState>): void {
 
         if ( this.state.current !== prevState.current) {
-         
             const getCheckMark = document.getElementsByClassName('anticon anticon-check ant-steps-finish-icon');
-            
-    
+        
             for (let i = 0; i < getCheckMark.length; i++) {
                 const element = getCheckMark[i];
-    
                 element.setAttribute('aria-Label', 'complete')
             }
 
         }
+     
+        if ( this.state.commPurpose !== prevState.commPurpose) {
+           const index = this.state.isError.indexOf('commPurpose');
+           if (index > -1 ) {
+             const updateIsError = [...this.state.isError]
+             updateIsError.splice(index, 1);
 
-
+             this.setState({
+                isError: updateIsError
+             })    
+           }
+        }
+        if ( this.state.engName !== prevState.engName) {
+            const index = this.state.isError.indexOf('engName');
+            if (index > -1 ) {
+              const updateIsError = [...this.state.isError]
+              updateIsError.splice(index, 1);
+ 
+              this.setState({
+                 isError: updateIsError
+              })    
+            }
+         }
+         if ( this.state.frCommName !== prevState.frCommName) {
+            const index = this.state.isError.indexOf('frCommName');
+            if (index > -1 ) {
+              const updateIsError = [...this.state.isError]
+              updateIsError.splice(index, 1);
+ 
+              this.setState({
+                 isError: updateIsError
+              })    
+            }
+         }
+         if ( this.state.shEngDesc !== prevState.shEngDesc) {
+            const index = this.state.isError.indexOf('shEngDesc');
+            if (index > -1 ) {
+              const updateIsError = [...this.state.isError]
+              updateIsError.splice(index, 1);
+ 
+              this.setState({
+                 isError: updateIsError
+              })    
+            }
+         }
+         if ( this.state.shFrDesc !== prevState.shFrDesc) {
+            const index = this.state.isError.indexOf('shFrDesc');
+            if (index > -1 ) {
+              const updateIsError = [...this.state.isError]
+              updateIsError.splice(index, 1);
+ 
+              this.setState({
+                 isError: updateIsError
+              })    
+            }
+         }
     }
 
 
     public render(): React.ReactElement<IScwProps>  { 
       
-        const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, errorMessage, showModal, checkedValues, showCallout, targetId, requestingUser, invalidEmail } = this.state;
-        console.log("STATE", this.state);
+        const  { current, step, commPurpose, engName, frCommName, shEngDesc, shFrDesc, selectedChoice, ownerList, errorMessage, showModal, checkedValues, showCallout, targetId, requestingUser, invalidEmail, isError } = this.state;
 
         const steps = [
         
@@ -637,7 +624,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
                     shFrDesc= { shFrDesc }
                     errorMessage ={ errorMessage }
                     handleOnChange={this.handleOnChange}
-                    isError={this.state.isError}
+                    isError={isError}
                 />
                 )
             },
