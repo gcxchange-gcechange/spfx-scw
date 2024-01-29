@@ -182,7 +182,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
 
     const reviewOwnerMessages : any [] = [
 
-      {name: 'requestingUser', message: `${this.strings.invite_yourself} ${this.strings.please_remove_your_name}`, value: requestor},
+      {name: 'requestingUser', message: `${this.strings.owner_cannot_invite_yourself}`, value: requestor},
       {name: 'invalidEmailUser', message: parse(`${this.strings.isInvalidEmail} ${invalidUserBold}`), value: this.props.invalidUser}
 
     ]
@@ -197,7 +197,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
     } )
 
     if(ownerList.length === 0) {
-      ownerResults.push(`${this.strings.blankField} ${this.strings.please_add_another_owner}`)
+      ownerResults.push(`${this.strings.blankField} ${this.strings.owner_cannot_be_blank}`)
     }
 
 
@@ -206,7 +206,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
       {firstPageMessage}   
       
         <>
-        {ownerResults.length !== 0 && (<h3><strong>Owners</strong></h3>)}
+        {ownerResults.length !== 0 && (<h3><strong>{this.strings.owners}</strong></h3>)}
         {ownerResults.map((item, index) => (
         <ul key={index}>
           <li>{item}</li>
@@ -267,7 +267,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
                 
                 {this.props.current === 0 && (
                   <>
-                  <h3>Please review the following fields</h3>
+                  <h3>{this.strings.please_review_the_following_fields}</h3>
                   {firstPageErrorMessage}
                   </>
                 )}
@@ -281,7 +281,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
                 {this.props.current === 2 && (
                   <>
                  <Stack>
-                 <h3>Please review the following fields</h3>
+                 <h3>{this.strings.please_review_the_following_fields}</h3>
                     <p className={styles.modalContent}> {thirdPageErrorMessage}</p>
                   </Stack>
                   </>

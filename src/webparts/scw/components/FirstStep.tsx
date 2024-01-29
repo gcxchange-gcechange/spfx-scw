@@ -96,7 +96,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 maxLength={500}
                 description={`${commPurpose.length}/500`}
                 onChange={this.onhandleChangeEvent}
-                onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
+                onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_purpose}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_purpose} `})}
                 instructions =  {this.strings.commPurpose_Instruction}
                 title = {this.strings.commPurpose_title}
                 lineId={"first-line"}
@@ -107,7 +107,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
           />
           {isError.includes('commPurpose') && (
               <div style={{marginTop: '5px'}}>
-              {validateisError( {blankField: this.strings.blankField })}
+              {validateisError( {blankField: `${this.strings.blankField} ${this.strings.please_add_a_purpose}` })}
             </div>
 
             )
@@ -131,7 +131,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 maxLength={80}
                 description={`${engName.length}/80`}
                 onChange={this.onhandleChangeEvent}
-                onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField, removeSpecialChar: this.strings.remove_special_char})}
+                onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_name}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_name}`, removeSpecialChar: this.strings.remove_special_char})}
                 instructions = {this.strings.engName_Instruction}
                 title= {this.strings.engName_title}
                 lineId={"second-line"}
@@ -141,7 +141,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 {isError.includes('engName') && 
                   (
                   <div style={{marginTop: '5px'}}>
-                    {validateisError( {blankField: this.strings.blankField })}
+                    {validateisError( {blankField: `${this.strings.blankField} ${this.strings.please_add_a_name}` })}
                   </div>
                   )
                 }
@@ -160,7 +160,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 maxLength={80}
                 description={`${frCommName.length}/80`}
                 onChange={this.onhandleChangeEvent}
-                onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField, removeSpecialChar: this.strings.remove_special_char})}
+                onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_name}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_name}`, removeSpecialChar: this.strings.remove_special_char})}
                 label = {this.strings.frCommName_Instruction}
                 title =  {this.strings.frCommName_title}
                 lineId={"third-line"}
@@ -170,7 +170,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
              {isError.includes('frCommName') && 
                 (
                 <div style={{marginTop: '5px'}}>
-                  {validateisError( {blankField: this.strings.blankField })}
+                  {validateisError( {blankField: `${this.strings.blankField} ${this.strings.please_add_a_name}` })}
                 </div>
                 )
              }
@@ -194,7 +194,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 maxLength={100}
                 description={`${shEngDesc.length}/100`}
                 onChange={this.onhandleChangeEvent}
-                onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
+                onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_description}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_description}`})}
                 label = {this.strings.shEngDesc_Instruction}
                 title =  {this.strings.shEngDesc_title}
                 lineId={"fourth-line"}
@@ -205,7 +205,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 {isError.includes('shEngDesc') && 
                   (
                   <div style={{marginTop: '5px'}}>
-                  {validateisError( {blankField: this.strings.blankField })}
+                  {validateisError( {blankField: `${this.strings.blankField} ${this.strings.please_add_a_description}` })}
                   </div>
                   )
                 }
@@ -226,7 +226,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 maxLength={100}
                 description={`${shFrDesc.length}/100`}
                 onChange={this.onhandleChangeEvent}
-                onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: this.strings.minCharacters, blankField: this.strings.blankField})}
+                onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_description}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_description}`})}
                 label = {this.strings.shFrDesc_Instruction}
                 title = {this.strings.shFrDesc_title}
                 lineId={"fifth-line"}
@@ -236,7 +236,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
               {isError.includes('shFrDesc') && 
                 (
                   <div style={{marginTop: '5px'}}>
-                    {validateisError( {blankField: this.strings.blankField })}
+                    {validateisError( {blankField: `${this.strings.blankField} ${this.strings.please_add_a_description}` })}
                   </div>
                 )
               }
