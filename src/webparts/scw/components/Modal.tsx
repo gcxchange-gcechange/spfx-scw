@@ -197,7 +197,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
     } )
 
     if(ownerList.length === 0) {
-      ownerResults.push(`${this.strings.blankField} ${this.strings.owner_cannot_be_blank}`)
+      ownerResults.push(`${this.strings.owner_cannot_be_blank}`)
     }
 
 
