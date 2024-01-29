@@ -1,10 +1,13 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import styles from './Scw.module.scss';
-import { ILabelStyles, Label, Stack, StackItem, TextField } from 'office-ui-fabric-react';
+import { Stack, StackItem } from 'office-ui-fabric-react';
 import { SelectLanguage } from './SelectLanguage';
 import parse from 'html-react-parser';
+import { validateSpecialCharFields, validateTextField, validateisError } from './validationFunction';
+import ReusableTextField from './ReusableTextField';
 
 
 
@@ -18,163 +21,219 @@ export interface IFirstStepProps {
     shFrDesc: string;
     errorMessage: string;
     showModal: boolean;
+    isError?: string[];
 
     handleOnChange?:(event:any, value: string)=> void;
     handleErrorMessage?: (errorMessage: string) => void;
-
-
 
 }
 
 
 export default class FirstStep extends React.Component<IFirstStepProps> {
+  public constructor(props: IFirstStepProps) {
+    super(props);
 
+  }
+  
+  public strings = SelectLanguage(this.props.prefLang);
 
-    public constructor(props: IFirstStepProps) {
-        super(props);
+  private onhandleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const eventName = event.target.name;
+    const value = event.target.value;
+    const trimmedValue = value.trim();
 
+    try {
+      this.props.handleOnChange(eventName, trimmedValue);
+    } catch (error) {
+      console.log(error);
     }
-    public strings = SelectLanguage(this.props.prefLang);
+  };
 
 
-    public render(): React.ReactElement<IFirstStepProps> {
-        
 
-        const {engName, commPurpose,  frCommName, shEngDesc, shFrDesc} = this.props;
+  public render(): React.ReactElement<IFirstStepProps> {
+    const { engName, commPurpose, frCommName, shEngDesc, shFrDesc, isError } = this.props;
 
-        const labelStyle: Partial<ILabelStyles> = {
-            root: {
-                paddingBottom: '5px',
-            },
-            
+    const charCountStyles = {
 
-           
+      characterLimitStyle: {
+        description: {
+          float: "right",
+          marginTop: "5px",
+          fontSize: "12px",
+        },
+        errorMessage: {
+          color: '#C61515'
         }
-
-       const stackTokens = { childrenGap: 18 }
-
-        return (
-            <>
-           
-            <h3>{ parse( this.strings.commPurpose_title ) }</h3>
-            <p>{ parse( this.strings.commPurpose_desc) }</p>
-            <Label htmlFor='Community purpose'styles={ labelStyle } >
-                <span className={styles.asterik}  aria-label={ this.strings.required }>*</span>
-                { this.strings.commPurpose_title }
-            </Label> 
-            <p id='commPurposeDesc' className={ styles.instruction }>{ this.strings.commPurpose_Instruction}</p>
-            
-            <TextField aria-describedby="commPurposeDesc" type='text' name='commPurpose' id='Community purpose' multiline rows={3} onChange={ this.onhandleChangeEvent } 
-            defaultValue={ commPurpose }  validateOnLoad= { false }  onGetErrorMessage={ value => { if (value.trim().length === 0 || value.length < 5 || value.length > 500 ) return `${this.strings.max500_validation}` } }
-            />
-
-            <h3>{ this.strings.comm_name }</h3>
-            <p className={ styles.topMgn0 }>{ this.strings.engName_desc}</p>
-            <Stack tokens={ stackTokens }>
-                <StackItem>
-                    <Label htmlFor='engName' styles={ labelStyle } >
-                        <span className={styles.asterik}  aria-label={ this.strings.required }>*</span>
-                        { this.strings.engName_title }
-                    </Label>
-                    <p id="engNameDesc" className={ styles.instruction }>{ this.strings.engName_Instruction}</p>
-                    <TextField aria-describedby="engNameDesc" id='engName' name='engName' onChange={ this.onhandleChangeEvent } defaultValue={ engName }  validateOnLoad= { false }  
-                    onGetErrorMessage={ this.validateInput } />
-                </StackItem>
-                <StackItem>
-                    <Label htmlFor='frCommName'>
-                        <span className={styles.asterik}  aria-label={ this.strings.required }>*</span>
-                        {this.strings.frCommName_title }
-                    </Label>
-                    <p id="frNameDesc" className={ styles.instruction }>{ this.strings.frCommName_Instruction}</p>
-                    <TextField aria-describedby="frNameDesc" id='frCommName' name='frCommName' onChange={ this.onhandleChangeEvent } defaultValue={ frCommName } validateOnLoad= { false } onGetErrorMessage={ this.validateInput } />
-                </StackItem>
-            </Stack>
-
-            <h3>{ this.strings.comm_desc_title }</h3>
-            <p className={ styles.topMgn0 }> { this.strings.shEngDesc_desc }</p>
-            <Stack tokens={ stackTokens }>
-                <StackItem>
-                    <Label htmlFor='shEngDesc' styles={ labelStyle } >
-                        <span className={styles.asterik}  aria-label={ this.strings.required }>*</span>
-                        { this.strings.shEngDesc_title }
-                    </Label>
-                    <p id="shEngDescription" className={ styles.instruction }>{ this.strings.shEngDesc_Instruction }</p>
-                    <TextField aria-describedby="shEngDescription" id='shEngDesc' name='shEngDesc'onChange={ this.onhandleChangeEvent} defaultValue={ shEngDesc } validateOnLoad= { false }  onGetErrorMessage={ value => { if ( value.trim().length < 5 || value.length > 100  || value === '') return `${this.strings.max100_validation}` }} />
-                </StackItem>
-                <StackItem>
-                    <Label htmlFor='shFrDesc' styles={ labelStyle } >
-                        <span className={styles.asterik}  aria-label={ this.strings.required }>*</span>
-                        { this.strings.shFrDesc_title }
-                    </Label>
-                    <p id="FrDesc" className={ styles.instruction }>{ this.strings.shFrDesc_Instruction }</p>
-                    <TextField aria-describedby="FrDesc" id='shFrDesc' name='shFrDesc' onChange={ this.onhandleChangeEvent} defaultValue={ shFrDesc } validateOnLoad= { false }  onGetErrorMessage={ value => { if ( value.trim().length < 5 || value.length > 100 || value === '') return `${this.strings.max100_validation}` }}/> 
-                </StackItem>
-            </Stack>
-            </>
-        );
-    }
-
-    private onhandleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-      
-    
-        const eventName = event.target.name;
-        let value = event.target.value;
-
-        const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value);
-        const invalidInput: string = '';
-        const lessthan5 = value.length < 5;
-        const over100 = value.length > 100;
-
-        if (eventName === 'commPurpose' && (value.length < 5 || value.length > 500)) {
-            value = invalidInput;
-        } else
-
-        if ((eventName === 'engName'|| eventName === 'frCommName') && (value.length >= 5 && value.length <= 80)) {
-            if (charAllowed) {
-                value = invalidInput;
-            }
-        } else
-
-        if ((eventName === 'engName' || eventName === 'frCommName') && (value.length < 5 || value.length > 80)) {
-            value = invalidInput;
-        } else
-
-        if ((eventName ===  'shEngDesc' || eventName === 'shFrDesc' ) &&  ( lessthan5 || over100 )) {
-            value = invalidInput;
-        } 
-        
-        const trimmedValue = value.trim();
-        
-
-        try {
-                this.props.handleOnChange(eventName, trimmedValue)
-            
-
-        } catch (error) {
-
-            console.log(error);
-        }
-         
-    }
-
-
-    private validateInput = (value: string): string => {
-
-        const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
-    
-
-      if (charAllowed) {
-        return `${this.strings.special_char_validation}`
-      }
-
-      if ( value.trim().length < 5 || value.trim().length > 80 )  {
-        return `${this.strings.between_5_80_char_validation}`
-      }
-    
-    
+      },
     };
 
 
+    const stackTokens = { childrenGap: 18 };
+
+    return (
+      <>
+        <h3>{parse(this.strings.commPurpose_title)}</h3>
+        <p>{parse(this.strings.commPurpose_desc)}</p>
+       
+          <ReusableTextField
+                name="commPurpose"
+                id="Community purpose"
+                styles={charCountStyles.characterLimitStyle}
+                label={`${this.strings.commPurpose_Instruction}`}
+                multiline
+                rows={3}
+                defaultValue= {commPurpose}
+                validateOnLoad={false}
+                maxLength={500}
+                description={`${commPurpose.length}/500`}
+                onChange={this.onhandleChangeEvent}
+                onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_purpose}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_purpose} `})}
+                instructions =  {this.strings.commPurpose_Instruction}
+                title = {this.strings.commPurpose_title}
+                lineId={"first-line"}
+                ariaLabelRequired={this.strings.required}
+                charCountId = {"commPurposeCharCount"}
+   
+                
+          />
+          {isError.includes('commPurpose') && 
+            (
+              <div style={{marginTop: '5px'}}>
+              {validateisError( {blankField: `${this.strings.blankField} ${this.strings.please_add_a_purpose}` })}
+            </div>
+            )
+          }
+        
+
+        <h3>{this.strings.comm_name}</h3>
+        <p className={styles.topMgn0}>{this.strings.engName_desc}</p>
+        <Stack tokens={stackTokens}>
+          <StackItem>
+              <ReusableTextField
+                name="engName"
+                id="engName"
+                styles={charCountStyles.characterLimitStyle}
+                label={this.strings.engName_Instruction}
+                multiline ={false}
+                rows={1}
+                defaultValue= {engName}
+                validateOnLoad={false}
+                maxLength={80}
+                description={`${engName.length}/80`}
+                onChange={this.onhandleChangeEvent}
+                onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_name}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_name}`, removeSpecialChar: this.strings.remove_special_char})}
+                instructions = {this.strings.engName_Instruction}
+                title= {this.strings.engName_title}
+                lineId={"second-line"}
+                ariaLabelRequired={this.strings.required}
+                charCountId = {"engNameCharCount"}
+            />
+                {isError.includes('engName') && 
+                  (
+                  <div style={{marginTop: '5px'}}>
+                    {validateisError( {blankField: `${this.strings.blankField} ${this.strings.please_add_a_name}` })}
+                  </div>
+                  )
+                }
+          </StackItem>
+
+          <StackItem>
+              <ReusableTextField
+                name="frCommName"
+                id="frCommName"
+                styles={charCountStyles.characterLimitStyle}
+                aria-describedby="frNameDesc"
+                multiline ={false}
+                rows={1}
+                defaultValue= {frCommName}
+                validateOnLoad={false}
+                maxLength={80}
+                description={`${frCommName.length}/80`}
+                onChange={this.onhandleChangeEvent}
+                onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_name}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_name}`, removeSpecialChar: this.strings.remove_special_char})}
+                label = {this.strings.frCommName_Instruction}
+                title =  {this.strings.frCommName_title}
+                lineId={"third-line"}
+                ariaLabelRequired={this.strings.required}
+                charCountId = {"frCommNameCharCount"}
+            />
+             {isError.includes('frCommName') && 
+                (
+                <div style={{marginTop: '5px'}}>
+                  {validateisError( {blankField: `${this.strings.blankField} ${this.strings.please_add_a_name}` })}
+                </div>
+                )
+             }
+          </StackItem>
+        </Stack>
+
+        <h3>{this.strings.comm_desc_title}</h3>
+        <p className={styles.topMgn0}> {this.strings.shEngDesc_desc}</p>
+        <Stack tokens={stackTokens}>
+          <StackItem>
+              <ReusableTextField
+                name="shEngDesc"
+                id="shEngDesc"
+                styles={charCountStyles.characterLimitStyle}
+                aria-describedby="shEngDescription"
+                multiline ={false}
+                rows={1}
+                defaultValue= {shEngDesc}
+                validateOnLoad={false}
+                maxLength={100}
+                description={`${shEngDesc.length}/100`}
+                onChange={this.onhandleChangeEvent}
+                onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_description}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_description}`})}
+                label = {this.strings.shEngDesc_Instruction}
+                title =  {this.strings.shEngDesc_title}
+                lineId={"fourth-line"}
+                ariaLabelRequired={this.strings.required}
+                charCountId={'shEngDescCharCount'}
+            />
+
+                {isError.includes('shEngDesc') && 
+                  (
+                  <div style={{marginTop: '5px'}}>
+                  {validateisError( {blankField: `${this.strings.blankField} ${this.strings.please_add_a_description}` })}
+                  </div>
+                  )
+                }
+          </StackItem>
+
+          <StackItem>
+              <ReusableTextField
+                name="shFrDesc"
+                id="shFrDesc"
+                styles={charCountStyles.characterLimitStyle}
+                aria-describedby="FrDesc"
+                multiline ={false}
+                rows={1}
+                defaultValue= {shFrDesc}
+                validateOnLoad={false}
+                maxLength={100}
+                description={`${shFrDesc.length}/100`}
+                onChange={this.onhandleChangeEvent}
+                onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_description}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_description}`})}
+                label = {this.strings.shFrDesc_Instruction}
+                title = {this.strings.shFrDesc_title}
+                lineId={"fifth-line"}
+                ariaLabelRequired={this.strings.required}
+                charCountId={'shFrDescCharCount'}
+            />
+              {isError.includes('shFrDesc') && 
+                (
+                  <div style={{marginTop: '5px'}}>
+                    {validateisError( {blankField: `${this.strings.blankField} ${this.strings.please_add_a_description}` })}
+                  </div>
+                )
+              }
+           
+          </StackItem>
+        </Stack>
+      </>
+    );
+  } 
 }
 
 

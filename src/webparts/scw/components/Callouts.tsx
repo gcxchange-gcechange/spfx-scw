@@ -28,12 +28,13 @@ export default class Callouts extends React.Component< ICalloutsProps > {
   private messageText = () : string => {
     const { targetId } = this.props;
 
+
     let message: any = '';
 
     if ( targetId === 'commPurpose' ) {
       message = `${ this.strings.commPurpose_desc } <br/> ${ this.strings.commPurpose_Instruction}`
     }
-    else if ( targetId === 'Engname' ) {
+    else if ( targetId === 'engName' ) {
       message = `${ this.strings.engName_desc } <br/> ${ this.strings.engName_Instruction }`
     }
     else if ( targetId === 'FrCommName' ) {
@@ -62,7 +63,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
     if ( targetId === 'commPurpose' )  {
       title = `${ this.strings.commPurpose_title }`
     }
-    else if ( targetId === 'Engname' ) {
+    else if ( targetId === 'engName' ) {
       title = `${ this.strings.engName_title }`
     }
     else if ( targetId === 'FrCommName' ) {
@@ -172,8 +173,6 @@ export default class Callouts extends React.Component< ICalloutsProps > {
                 </div>
               </FocusZone>
             </div>
-            
-           
 
           </FocusTrapCallout>
       </>
