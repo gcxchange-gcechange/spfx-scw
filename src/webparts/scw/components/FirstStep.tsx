@@ -88,7 +88,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 name="commPurpose"
                 id="Community purpose"
                 styles={charCountStyles.characterLimitStyle}
-                label={`${this.strings.commPurpose_Instruction}`}
+                //label={`${this.strings.commPurpose_Instruction}`}
                 multiline
                 rows={3}
                 defaultValue= {commPurpose}
@@ -123,7 +123,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 name="engName"
                 id="engName"
                 styles={charCountStyles.characterLimitStyle}
-                label={this.strings.engName_Instruction}
+                //label={this.strings.engName_Instruction}
                 multiline ={false}
                 rows={1}
                 defaultValue= {engName}
@@ -161,7 +161,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 description={`${frCommName.length}/80`}
                 onChange={this.onhandleChangeEvent}
                 onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_name}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_name}`, removeSpecialChar: this.strings.remove_special_char})}
-                label = {this.strings.frCommName_Instruction}
+                instructions = {this.strings.frCommName_Instruction}
                 title =  {this.strings.frCommName_title}
                 lineId={"third-line"}
                 ariaLabelRequired={this.strings.required}
@@ -195,7 +195,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 description={`${shEngDesc.length}/100`}
                 onChange={this.onhandleChangeEvent}
                 onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_description}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_description}`})}
-                label = {this.strings.shEngDesc_Instruction}
+                instructions = {this.strings.shEngDesc_Instruction}
                 title =  {this.strings.shEngDesc_title}
                 lineId={"fourth-line"}
                 ariaLabelRequired={this.strings.required}
@@ -227,7 +227,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 description={`${shFrDesc.length}/100`}
                 onChange={this.onhandleChangeEvent}
                 onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_description}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_description}`})}
-                label = {this.strings.shFrDesc_Instruction}
+                instructions = {this.strings.shFrDesc_Instruction}
                 title = {this.strings.shFrDesc_title}
                 lineId={"fifth-line"}
                 ariaLabelRequired={this.strings.required}
