@@ -4,10 +4,7 @@ import { PeoplePicker, PrincipalType } from "@pnp/spfx-controls-react/lib/People
 import {  IButtonStyles, IIconProps, IconButton, Label, Stack} from "office-ui-fabric-react";
 import * as React from "react";
 import { SelectLanguage } from './SelectLanguage';
-//import { validateOwnerField } from "./validationFunction";
 import styles from "./Scw.module.scss";
-
-
 
 
 
@@ -24,7 +21,6 @@ export interface IAddUsersProps {
     requestor?: string;
     invalidEmail: string;
     getOwnersCallback?: ( item: [] )  => void;
-    // getMemberCallback?: ( item: [] )  => void;
     handleButtonClick? :(event: any) => void;
     showCalloutVisible?:(event: any ) => void ;
     infoButton?: string;
@@ -47,26 +43,10 @@ export default class AUsers extends React.Component<IAddUsersProps> {
     }
 
     public _getOwnerItems = ( items: []):void  => {  
-        console.log("NEW OWNER VALUE", items)  
-         
-            // this.setState({
-            //     ownerList: items
-            // });
 
-        this.props.getOwnersCallback(items);//pass to parent 
+        this.props.getOwnersCallback(items);
 
     };
-
-  
-    // public _getMemberItems = ( items: [] ):void  => {
-    //     this.setState({    
-    //         memberList: items
-    // });
-   
-    //     this.props.getMemberCallback( items );//pass to parent
-    // };
-
-
 
 
     public render(): React.ReactElement<IAddUsersProps>  {
@@ -117,9 +97,6 @@ export default class AUsers extends React.Component<IAddUsersProps> {
                         principalTypes = { [ PrincipalType.User ] }
                         resolveDelay = {1000}
                         defaultSelectedUsers  = { this.props.ownerList}
-                        // showtooltip = { true }
-                        // tooltipMessage = { `${ this.strings.owners_Instruction}`}
-                        // tooltipDirectional  = { DirectionalHint.topCenter }
                         ensureUser={ true }
                         allowUnvalidated={ true }
                     />

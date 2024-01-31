@@ -28,7 +28,6 @@ export default class Callouts extends React.Component< ICalloutsProps > {
   private messageText = () : string => {
     const { targetId } = this.props;
 
-    console.log("TARGET_ID", targetId);
 
     let message: any = '';
 

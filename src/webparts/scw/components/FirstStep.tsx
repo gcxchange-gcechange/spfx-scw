@@ -54,14 +54,6 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
   public render(): React.ReactElement<IFirstStepProps> {
     const { engName, commPurpose, frCommName, shEngDesc, shFrDesc, isError } = this.props;
 
-
-    // const labelStyle: Partial<ILabelStyles> = {
-    //   root: {
-    //     paddingBottom: "5px",
-    //   },
-    // };
-
-
     const charCountStyles = {
 
       characterLimitStyle: {
@@ -104,11 +96,11 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
    
                 
           />
-          {isError.includes('commPurpose') && (
+          {isError.includes('commPurpose') && 
+            (
               <div style={{marginTop: '5px'}}>
               {validateisError( {blankField: `${this.strings.blankField} ${this.strings.please_add_a_purpose}` })}
             </div>
-
             )
           }
         
@@ -117,7 +109,6 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
         <p className={styles.topMgn0}>{this.strings.engName_desc}</p>
         <Stack tokens={stackTokens}>
           <StackItem>
-
               <ReusableTextField
                 name="engName"
                 id="engName"
@@ -144,8 +135,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                   )
                 }
           </StackItem>
+
           <StackItem>
- 
               <ReusableTextField
                 name="frCommName"
                 id="frCommName"
@@ -171,7 +162,6 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 </div>
                 )
              }
- 
           </StackItem>
         </Stack>
 
@@ -205,11 +195,9 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                   </div>
                   )
                 }
- 
- 
           </StackItem>
+
           <StackItem>
-            
               <ReusableTextField
                 name="shFrDesc"
                 id="shFrDesc"
@@ -240,10 +228,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
         </Stack>
       </>
     );
-  }
-
-  
- 
+  } 
 }
 
 

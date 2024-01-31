@@ -61,19 +61,17 @@ export const validateSpecialCharFields = (value: string, strings: { minCharacter
       return "";
     }
   );
-  console.log("Value Lenght", value.length);
 
   if (!value.trim().length) {
-    console.log("Iam blank")
-    
-    return  <Stack horizontal>
+    return  (
+      <Stack horizontal>
         <Icon iconName="AlertSolid"className={styles.errorIcon} />
         <p className={styles.fieldInstruction}>{strings.blankField}</p>
       </Stack>
+    )
     
-  } else 
-  if (value.trim().length >= 1 && value.trim().length < 5) {
-    if(charAllowed ) {
+  } else if (value.trim().length >= 1 && value.trim().length < 5) {
+    if (charAllowed ) {
       return (
         <>
       <Stack horizontal style={{ paddingBottom: "5px" }}>
@@ -81,18 +79,18 @@ export const validateSpecialCharFields = (value: string, strings: { minCharacter
          <p className={styles.fieldInstruction}>{strings.removeSpecialChar} <span aria-Label={`${specialCharFound}`}>{specialCharFound}</span></p>
       </Stack>
       
-       <Stack horizontal>
-       <Icon iconName="AlertSolid"className={styles.errorIcon} />
-       <p className={styles.fieldInstruction}>{strings.minCharacters}</p>
-       </Stack>
+        <Stack horizontal>
+          <Icon iconName="AlertSolid"className={styles.errorIcon} />
+          <p className={styles.fieldInstruction}>{strings.minCharacters}</p>
+        </Stack>
        </>
       )
     }  else {
       return (
         <Stack horizontal>
-       <Icon iconName="AlertSolid"className={styles.errorIcon} />
-       <p className={styles.fieldInstruction}>{strings.minCharacters}</p>
-       </Stack>
+          <Icon iconName="AlertSolid"className={styles.errorIcon} />
+          <p className={styles.fieldInstruction}>{strings.minCharacters}</p>
+        </Stack>
       )
     }
   } else if ( value.trim().length >= 5) {
@@ -114,24 +112,22 @@ export const validateSpecialCharFields = (value: string, strings: { minCharacter
          <p className={styles.fieldInstruction}>{strings.removeSpecialChar} <span aria-Label={`${specialCharFound}`}>{specialCharFound}</span></p>
     </Stack>
   }
-
 }
 
 export const validateOwnerField = (ownerList: string [], requestingUser: string, invalidEmail: string,  strings: { blankfield: string, requestorUser: string, invalidEmail: string} ): JSX.Element | string => {
  
   const sectionStackTokens: IStackTokens = {childrenGap: 5}
 
-
   if (ownerList.length === 0) {
     return (
       <Stack horizontal>
-      <Icon iconName="AlertSolid"className={styles.errorIcon} />
-      <p className={styles.fieldInstruction}>{strings.blankfield}</p>
+        <Icon iconName="AlertSolid"className={styles.errorIcon} />
+        <p className={styles.fieldInstruction}>{strings.blankfield}</p>
       </Stack>
     )
   }
 
-  if(requestingUser && invalidEmail) {
+  if (requestingUser && invalidEmail) {
     return (
       <Stack tokens={sectionStackTokens}>
         <Stack horizontal>
@@ -146,7 +142,7 @@ export const validateOwnerField = (ownerList: string [], requestingUser: string,
     )
   }
 
-  if (requestingUser){
+  if (requestingUser) {
     return (
       <Stack horizontal>
         <Icon iconName="AlertSolid"className={styles.errorIcon} />
@@ -163,13 +159,7 @@ export const validateOwnerField = (ownerList: string [], requestingUser: string,
       </Stack>
     )
   }
-
-
- 
-
 }
-
-
 
 interface ValidationErrors {
   isLessThanMinLength: boolean;
@@ -179,26 +169,17 @@ interface ValidationErrors {
 
 export const fieldValidations = (values: Record<string, string> | string[]): ValidationErrors => {
 
-  console.log("VALUES",values)
-
-      const validateStringLength = (value: string, minLength: number): boolean => value.length >= minLength;
-       
-      const isLessThanMinLength = Object.values(values).some((value) => !validateStringLength(value, 5));
-      const hasSpecialChar = Object.entries(values).some(
-          ([key, value]) => (key === 'engName' || key === 'frCommName') && /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value)
-        );
-
-      console.log("lessThan 5",isLessThanMinLength);
-      console.log("specialChar", hasSpecialChar);
-
-     
-  
+  const validateStringLength = (value: string, minLength: number): boolean => value.length >= minLength;
+      
+  const isLessThanMinLength = Object.values(values).some((value) => !validateStringLength(value, 5));
+  const hasSpecialChar = Object.entries(values).some(
+    ([key, value]) => (key === 'engName' || key === 'frCommName') && /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(value)
+  );
 
   return {
-      isLessThanMinLength,
-      hasSpecialChar,
+    isLessThanMinLength,
+    hasSpecialChar,
   }
- 
 }
 
 

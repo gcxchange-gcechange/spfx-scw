@@ -1,10 +1,7 @@
 import { IImageProps, Icon, ImageFit, PrimaryButton, Stack } from "office-ui-fabric-react";
 import * as React from "react";
-// import styles from "./Scw.module.scss";
 import { SelectLanguage }  from './SelectLanguage'
 import parse from 'html-react-parser';
-
-
 
 
 
@@ -22,11 +19,6 @@ export default class Complete extends React.Component<ICompleteProps, ICompleteS
     super(props);
   }
 
-
-
-
-
-  
   
   public render(): React.ReactElement<ICompleteProps> {
 
@@ -36,8 +28,7 @@ export default class Complete extends React.Component<ICompleteProps, ICompleteS
         imageFit: ImageFit.contain,
         
     };
-  
-    console.log("url", this.props.url);
+
     return (
       <>
         <Stack verticalAlign="center">
@@ -50,7 +41,6 @@ export default class Complete extends React.Component<ICompleteProps, ICompleteS
             <Stack horizontal horizontalAlign="center">
                 <PrimaryButton id="GCXHomepage" text={this.strings.complete_button} href={this.props.url} />
             </Stack> 
-
         </Stack>
       </>
     );

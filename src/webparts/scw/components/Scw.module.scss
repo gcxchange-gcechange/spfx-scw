@@ -97,7 +97,6 @@
     .ant-steps .ant-steps-item-process .ant-steps-item-icon >.ant-steps-icon {
         color:#004DB8;
         font-weight: bold;
-        // vertical-align: middle;
        
     }
 
@@ -191,13 +190,7 @@
     }
   }
 
-// :global {
-//     font-size: 18px;
 
-//     .p {
-//         font-size: 18px;
-//     }
-// }
 
 .instruction {
     font-weight: 400;
@@ -229,7 +222,7 @@
 .cancelIcon:hover{
     background-color: transparent;
     color: white;
-//     font-weight: 900;
+
 }
 
 .cancelIcon:focus {

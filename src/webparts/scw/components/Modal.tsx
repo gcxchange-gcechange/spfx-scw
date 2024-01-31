@@ -17,7 +17,6 @@ export interface IErrorModalProps {
   commPurpose: string;
   shEngDesc: string;
   shFrDesc: string;
-  // selectedChoice: string;
   checkedValues: string[];
   ownerList: string[];
   current: number;
@@ -28,9 +27,6 @@ export interface IErrorModalProps {
 
 
 export default class ErrorModal extends React.Component<IErrorModalProps> {
-  public constructor(props: IErrorModalProps) {
-    super(props);
-  }
 
   public strings = SelectLanguage(this.props.prefLang);
 
@@ -73,7 +69,6 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
 
     const {commPurpose, engName, frCommName, shEngDesc, shFrDesc } = this.props;
 
-    console.log("PROPS", this.props);
 
     const firstValues: any[] = [
       { name: `${ this.strings.commPurpose_title }`, value: `${commPurpose}` ,  longerText:`${this.strings.please_add_a_longer_purpose}`, addText: `${this.strings.please_add_a_purpose}` },
@@ -83,8 +78,6 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
       { name: `${ this.strings.shFrDesc_title }`, value: `${shFrDesc}`,  longerText: `${this.strings.please_add_a_longer_description}`, addText: `${this.strings.please_add_a_description}`},
     ];
 
-
-      //iterate through the values in obj arary
     
       firstValues.forEach((obj) => {
         const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûü'\s]/.test(obj.value);
@@ -140,7 +133,6 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
     ]
 
     const resultValues: string[] =[];
-    //const comma = `<span style=fontWeight:normal>, </span>`;
     let message:string  = "";
 
     messageValues.forEach((item) => {

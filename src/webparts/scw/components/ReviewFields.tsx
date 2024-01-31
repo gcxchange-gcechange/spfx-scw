@@ -3,7 +3,7 @@
 /* eslint-disable dot-notation */
 import * as React from 'react';
 import { SelectLanguage } from './SelectLanguage';
-import ReusableTextFieldd  from './ReusableTextField';
+import ReusableTextField  from './ReusableTextField';
 import {   Stack,   IStackTokens  } from 'office-ui-fabric-react';
 import {validateTextField, validateSpecialCharFields, validateOwnerField } from './validationFunction'
 import AddUsers from './AddUsers';
@@ -36,85 +36,80 @@ export interface ILastStepProps {
     handleOnChange?:(event:any, value: string)=> void;
     requestor: string;
     invalidEmail: string;
-  }
+}
 
 
 export default class LastStep extends React.Component<ILastStepProps> {
 
 
-    public constructor(props: ILastStepProps) {
-        super(props);
-        
-    }
+  
+	public strings = SelectLanguage(this.props.prefLang);
+
+	private  onUpdateCommPurpose = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+			const value = event.target.value;
+			const updatedPurpose = value.trim();  
+			this.props.commPurposeCallback(updatedPurpose); 
+	}
+
+	private  onUpdateEngName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+
+			const value = event.target.value;
+
+			const updatedName = value.trim();
+
+			this.props.handleEngNameCallback(updatedName); 
+	}
     
-    public strings = SelectLanguage(this.props.prefLang);
+	private  onUpdateFrName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
 
-    private  onUpdateCommPurpose = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-        const value = event.target.value;
-        const updatedPurpose = value.trim();  
-        this.props.commPurposeCallback(updatedPurpose); 
-     }
+			const value = event.target.value;
 
-    private  onUpdateEngName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+			const updateFrName = value.trim();
+			
+			this.props.frNameCallBack(updateFrName)    
+	}
 
-        const value = event.target.value;
+	private onUpdateEngDesc = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+		const value = event.target.value;
 
-        const updatedName = value.trim();
+		const updateEngDesc = value.trim();
 
-        this.props.handleEngNameCallback(updatedName); 
-     }
-    
-    private  onUpdateFrName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+		this.props.handleEngDescCallback(updateEngDesc)    
+	}
 
-        const value = event.target.value;
+	private  onUpdateFrDesc = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+		const value = event.target.value;
 
-        const updateFrName = value.trim();
-        
-        this.props.frNameCallBack(updateFrName)    
-     }
-
-     private onUpdateEngDesc = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-        const value = event.target.value;
-
-        const updateEngDesc = value.trim();
-
-        this.props.handleEngDescCallback(updateEngDesc)    
-     }
-
-    private  onUpdateFrDesc = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-        const value = event.target.value;
-
-        const updateFrDesc = value.trim();
-        
-        this.props.handleFrDescCallback(updateFrDesc)    
-     }
+		const updateFrDesc = value.trim();
+		
+		this.props.handleFrDescCallback(updateFrDesc)    
+	}
   
 
-    public showCalloutVisible = (event: any):void => {
-        const buttonId = event.currentTarget.id;
+	public showCalloutVisible = (event: any):void => {
+			const buttonId = event.currentTarget.id;
+			this.elementId(buttonId);
+			this.props.isCalloutVisible();
+	}
 
-        this.elementId(buttonId);
-        this.props.isCalloutVisible();
-    }
+	public elementId = (id: any ):void => {
 
-    public elementId = (id: any ):void => {
+			this.props.getElementId(id)
+	}
 
-        this.props.getElementId(id)
-    }
+	public updateDefaultOwnerValues = ( username: []):void  => {  
 
-    public updateDefaultOwnerValues = ( username: []):void  => {  
+			const newValues = username;
 
-        const newValues = username;
-
-        this.props.getOwnersCallback( newValues );//pass to parent
-    };
+			this.props.getOwnersCallback( newValues );//pass to parent
+	};
    
-    public render(): React.ReactElement<ILastStepProps> {
+	public render(): React.ReactElement<ILastStepProps> {
 
 
-        const { current, commPurpose, engName, frCommName, shEngDesc, shFrDesc } = this.props
+		const { current, commPurpose, engName, frCommName, shEngDesc, shFrDesc } = this.props
 
-        const charCountStyles = {
+		const charCountStyles = {
 
             characterLimitStyle: {
               description: {
@@ -137,7 +132,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
            <>
             <p>{ this.strings.review_info }</p>
             <Stack tokens={sectionStackTokens}>
-                <ReusableTextFieldd
+                <ReusableTextField
                     name="commPurpose"
                     id="commPurpose"
                     styles={charCountStyles.characterLimitStyle}
@@ -159,7 +154,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 />
                 
             
-                <ReusableTextFieldd
+                <ReusableTextField
                     name="engName"
                     id="engName"
                     styles={charCountStyles.characterLimitStyle}
@@ -181,7 +176,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     infoButton={this.strings.infoIcon_engName}
                 />
 
-                <ReusableTextFieldd
+                <ReusableTextField
                     name="FrCommName"
                     id="FrCommName"
                     styles={charCountStyles.characterLimitStyle}
@@ -203,7 +198,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     infoButton={this.strings.infoIcon_frName}
                 />
 
-                <ReusableTextFieldd
+                <ReusableTextField
                     name="shEngDesc"
                     id="shEngDesc"
                     styles={charCountStyles.characterLimitStyle}
@@ -225,7 +220,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     infoButton={this.strings.infoIcon_engDesc}
                 />
 
-                <ReusableTextFieldd
+                <ReusableTextField
                     name="shFrDesc"
                     id="shFrDesc"
                     styles={charCountStyles.characterLimitStyle}
