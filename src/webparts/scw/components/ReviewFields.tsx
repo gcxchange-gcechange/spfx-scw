@@ -141,7 +141,6 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     name="commPurpose"
                     id="commPurpose"
                     styles={charCountStyles.characterLimitStyle}
-                    aria-describedby="commPurposeDesc"
                     multiline
                     rows={3}
                     defaultValue= {commPurpose}
@@ -156,6 +155,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     lineId={"first-line"}
                     ariaLabelRequired={this.strings.required}
                     charCountId = {"commPurposeDesc"}
+                    infoButton={this.strings.infoIcon_CommPurpose}
                 />
                 
             
@@ -178,6 +178,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     lineId={"second-line"}
                     ariaLabelRequired={this.strings.required}
                     charCountId = {"engNameCharCount"}
+                    infoButton={this.strings.infoIcon_engName}
                 />
 
                 <ReusableTextFieldd
@@ -199,6 +200,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     lineId={"third-line"}
                     ariaLabelRequired={this.strings.required}
                     charCountId = {"frCommNameCharCount"}
+                    infoButton={this.strings.infoIcon_frName}
                 />
 
                 <ReusableTextFieldd
@@ -220,6 +222,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     lineId={"fourth-line"}
                     ariaLabelRequired={this.strings.required}
                     charCountId={'shEngDescCharCount'}
+                    infoButton={this.strings.infoIcon_engDesc}
                 />
 
                 <ReusableTextFieldd
@@ -241,6 +244,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     lineId={"fifth-line"}
                     ariaLabelRequired={this.strings.required}
                     charCountId={'shFrDescCharCount'}
+                    infoButton={this.strings.infoIcon_frDesc}
                 />
 
                     <div id="owners">
@@ -257,6 +261,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                             title = { `${this.strings.owners_other_than_yourself}` }
                             showCalloutVisible={this.showCalloutVisible}
                             invalidEmail={this.props.invalidEmail}
+                            infoButton={this.strings.infoIcon_Owners}
                         />
                         <div style={{marginTop: '5px'}}>
                             {validateOwnerField(this.props.ownerList, this.props.requestor, this.props.invalidEmail, {blankfield: this.strings.owner_cannot_be_blank, requestorUser: this.strings.owner_cannot_invite_yourself, invalidEmail: this.strings.isInvalidEmail})}

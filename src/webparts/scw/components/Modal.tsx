@@ -116,7 +116,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
             }
           
             {item.specialChar && 
-            ( <li>{`${this.strings.remove_special_char}`}<span style={{color:'#C61515'}}> {item.specialChar} </span></li>) 
+            ( <li>{`${this.strings.remove_special_char}`}<span style={{color:'#C61515'}} aria-label={item.specialChar} > {item.specialChar} </span></li>) 
             }
             {item.value === ''  && (<li>{`${this.strings.blankField} ${item.addText}`} </li>)}
           </ul>

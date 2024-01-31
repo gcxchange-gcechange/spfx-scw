@@ -78,7 +78,7 @@ export const validateSpecialCharFields = (value: string, strings: { minCharacter
         <>
       <Stack horizontal style={{ paddingBottom: "5px" }}>
          <Icon iconName="AlertSolid"className={styles.errorIcon} />
-         <p className={styles.fieldInstruction}>{strings.removeSpecialChar} {specialCharFound}</p>
+         <p className={styles.fieldInstruction}>{strings.removeSpecialChar} <span aria-Label={`${specialCharFound}`}>{specialCharFound}</span></p>
       </Stack>
       
        <Stack horizontal>
@@ -100,7 +100,7 @@ export const validateSpecialCharFields = (value: string, strings: { minCharacter
       return (
         <Stack horizontal>
            <Icon iconName="AlertSolid"className={styles.errorIcon} />
-           <p className={styles.fieldInstruction}>{strings.removeSpecialChar} {specialCharFound}</p>
+           <p className={styles.fieldInstruction}>{strings.removeSpecialChar} <span aria-Label={`${specialCharFound}`}>{specialCharFound}</span></p>
         </Stack>
         )
     } else {
@@ -111,7 +111,7 @@ export const validateSpecialCharFields = (value: string, strings: { minCharacter
   if (charAllowed) {
     <Stack horizontal>
          <Icon iconName="AlertSolid"className={styles.errorIcon} />
-         <p className={styles.fieldInstruction}>{strings.removeSpecialChar} {specialCharFound}</p>
+         <p className={styles.fieldInstruction}>{strings.removeSpecialChar} <span aria-Label={`${specialCharFound}`}>{specialCharFound}</span></p>
     </Stack>
   }
 

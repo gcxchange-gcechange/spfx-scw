@@ -204,7 +204,8 @@
     font-size: 14px;
     color: #605E5C;
     margin:0px;
-    padding-left: 5px;
+    // padding-left: 5px;
+    padding-top: 5px;
 }
 :global {
     .icon-131 {
@@ -272,7 +273,10 @@
 :global {
     .ms-TextField-errorMessage {
         margin-top: -20px;
-      }
+    }
+    .ms-TextField-fieldGroup::before {
+        content: "";
+    }
 }
 
 .terms {
@@ -434,7 +438,8 @@ u {
 
 .asterik {
     color: #C61515;
-    padding-right: 2px
+    padding-right: 2px;
+    margin-left: -10px;
 }
 
 .fieldInstruction {
@@ -477,18 +482,18 @@ u {
 
 }
 
-:global {
+// :global {
    
-    .ms-Label::before {
-        content: "*";
-        color: #C61515;
-    }
-    .ms-Label::after {
-        content: "";
-    }
+//     .ms-Label::before {
+//         content: "*";
+//         color: #C61515;
+//     }
+//     .ms-Label::after {
+//         content: "";
+//     }
 
    
-}
+// }
 .charCountError {
     color: #C61515;
     font-weight: 700!important;

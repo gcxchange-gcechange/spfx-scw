@@ -88,7 +88,6 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 name="commPurpose"
                 id="Community purpose"
                 styles={charCountStyles.characterLimitStyle}
-                //label={`${this.strings.commPurpose_Instruction}`}
                 multiline
                 rows={3}
                 defaultValue= {commPurpose}
@@ -123,7 +122,6 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 name="engName"
                 id="engName"
                 styles={charCountStyles.characterLimitStyle}
-                //label={this.strings.engName_Instruction}
                 multiline ={false}
                 rows={1}
                 defaultValue= {engName}
@@ -152,7 +150,6 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 name="frCommName"
                 id="frCommName"
                 styles={charCountStyles.characterLimitStyle}
-                aria-describedby="frNameDesc"
                 multiline ={false}
                 rows={1}
                 defaultValue= {frCommName}
@@ -186,7 +183,6 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 name="shEngDesc"
                 id="shEngDesc"
                 styles={charCountStyles.characterLimitStyle}
-                aria-describedby="shEngDescription"
                 multiline ={false}
                 rows={1}
                 defaultValue= {shEngDesc}
@@ -218,7 +214,6 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 name="shFrDesc"
                 id="shFrDesc"
                 styles={charCountStyles.characterLimitStyle}
-                aria-describedby="FrDesc"
                 multiline ={false}
                 rows={1}
                 defaultValue= {shFrDesc}

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
 import styles from "./Scw.module.scss";
-import { DirectionalHint, FocusTrapCallout, FocusZone, IconButton, mergeStyleSets, PrimaryButton, Stack, Text } from 'office-ui-fabric-react';
+import { DirectionalHint, FocusTrapCallout, FocusZone, IconButton, mergeStyleSets, PrimaryButton, Stack } from 'office-ui-fabric-react';
 import { SelectLanguage } from './SelectLanguage';
 import parse from 'html-react-parser';
 
@@ -33,7 +33,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
     let message: any = '';
 
     if ( targetId === 'commPurpose' ) {
-      message = `${ this.strings.commPurpose_desc } <br/> ${ this.strings.commPurpose_Instruction}`
+      message = `${this.strings.commPurpose_desc} <br/> ${ this.strings.commPurpose_Instruction}`
     }
     else if ( targetId === 'engName' ) {
       message = `${ this.strings.engName_desc } <br/> ${ this.strings.engName_Instruction }`
@@ -47,9 +47,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
     else if ( targetId === 'shFrDesc' ) {
       message = `${ this.strings.shFrDesc_desc } <br/> ${ this.strings.shFrDesc_Instruction}`
     }
-    // else if ( targetId === 'classification' ) {
-    //   message = `${ this.strings.community_classification_desc } <br/><br/> ${this.strings.community_classification_link}`
-    // }
+ 
     else if ( targetId === 'owners' ) {
       message = `${this.strings.owners_instruction_Callout}`
     }
@@ -78,15 +76,11 @@ export default class Callouts extends React.Component< ICalloutsProps > {
     else if ( targetId === 'shFrDesc' ) {
       title = `${ this.strings.shFrDesc_title }`
     }
-    // else if ( targetId === 'classification' ) {
-    //   title = ` ${ this.strings.community_classification}`
-    // }
+    
     else if ( targetId === 'owners' ) {
       title = `${this.strings.owners}`
     }
-    // else if ( targetId === 'members' ) {
-    //   title = `${this.strings.members}`
-    // }
+ 
 
     return title
   }
@@ -96,8 +90,8 @@ export default class Callouts extends React.Component< ICalloutsProps > {
   
   public render(): React.ReactElement<ICalloutsProps> {
 
-  
-   const message = parse( this.messageText());
+ 
+  const message = parse( this.messageText());
    
   
   const calloutStyle = {
@@ -122,7 +116,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
   const stylesCallout = mergeStyleSets({
 
     heading: {
-      height: '50px',
+      height: 'auto',
      
     },
     body: {
@@ -133,7 +127,6 @@ export default class Callouts extends React.Component< ICalloutsProps > {
       fontSize: '16px',
       padding: '10px',
       color: 'white',
-      marginBottom: 12,
       fontWeight: 'normal',
       backgroundColor:  "#106EBE",
 
@@ -152,6 +145,9 @@ export default class Callouts extends React.Component< ICalloutsProps > {
         
           <FocusTrapCallout
             role="dialog"
+            aria-modal="true"
+            aria-labelledby="dialog_title"
+            aria-describedby="dialog_desc"
             target={ `#${ this.props.targetId}` }
             isBeakVisible={ true }
             beakWidth={ 16 }
@@ -161,10 +157,10 @@ export default class Callouts extends React.Component< ICalloutsProps > {
             setInitialFocus = {true}
             onDismiss = { this.props.openCallout} 
           >
-
+            <FocusZone>
             <div className={stylesCallout.heading}>
               <Stack horizontal horizontalAlign="space-between" verticalAlign="center" className={ stylesCallout.title }>
-                <Text>{ this.getTitles() }</Text>
+                <h2 id="dialog_title">{ this.getTitles() }</h2>
                 <IconButton
                   aria-Label=  { this.strings.close }
                   className={ styles.cancelIcon }
@@ -173,17 +169,14 @@ export default class Callouts extends React.Component< ICalloutsProps > {
                 />
               </Stack>
             </div>
-            <div className={stylesCallout.body}>
-              <Text>{ message }</Text>
-              <FocusZone>
+            <div id="dialog_desc" className={stylesCallout.body}>
+              <p>{ message }</p>
+              
                 <div className={ stylesCallout.buttons } >
                     <PrimaryButton onClick={this.props.openCallout} > {this.strings.close} </PrimaryButton>
                 </div>
-              </FocusZone>
             </div>
-            
-           
-
+              </FocusZone>
           </FocusTrapCallout>
       </>
     );

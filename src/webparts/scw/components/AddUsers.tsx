@@ -27,6 +27,7 @@ export interface IAddUsersProps {
     // getMemberCallback?: ( item: [] )  => void;
     handleButtonClick? :(event: any) => void;
     showCalloutVisible?:(event: any ) => void ;
+    infoButton?: string;
     
 
 }
@@ -94,7 +95,10 @@ export default class AUsers extends React.Component<IAddUsersProps> {
                             </span>
                             {this.props.title}
                             {this.props.currentPage === 2 && 
-                            (<span><IconButton id={this.props.id} styles={ iconStyles } iconProps={infoIcon} onClick={this.props.showCalloutVisible}/></span>)
+                            (<span>
+                                <IconButton ariaLabel={this.props.infoButton} id={this.props.id} styles={ iconStyles } iconProps={infoIcon} onClick={this.props.showCalloutVisible}/>
+                            </span>
+                            )
                             }
                         </Label>
                             <p id={this.props.id} className={styles.instruction} >

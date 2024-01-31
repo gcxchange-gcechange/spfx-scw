@@ -155,6 +155,7 @@ define([], function() {
         "owner_cannot_invite_yourself":"Vous ne pouvez pas vous inviter vous-même. Veuillez retirer votre nom.",
         "owners": "Propriétaires",
 
+
     
     
         

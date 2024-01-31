@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import * as React from 'react';
-import {  IButtonStyles, IIconProps, IconButton, TextField, Label, ILabelStyles } from 'office-ui-fabric-react';
+import {  IButtonStyles, IIconProps, IconButton, TextField, Label, ILabelStyles, Stack, IStackTokens, StackItem } from 'office-ui-fabric-react';
 import styles from './Scw.module.scss';
 
 
@@ -27,8 +27,8 @@ export interface IReusableTextFieldProps {
     getElementId?:(event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) => void;
     targetId?:string;
     ariaLabelRequired:string;
-    //label?: string;
     charCountId: string;
+    infoButton?: string;
 }
 
 
@@ -55,44 +55,44 @@ export default class ReusableTextField extends React.Component<IReusableTextFiel
             root: {
                 fontWeight: "700",
                 fontSize: '16px',
-                display: 'inline-flex',
+
             },
         }
         
-        // const onWrapDefaultLabelRenderer = (
-        //     props: ITextFieldProps, defaultRender: IRenderFunction<ITextFieldProps>,): JSX.Element => {
 
-        //         return (
-        //             <>
-        //             <Stack horizontal verticalAlign="center" >
-        //                 <Label styles={labelStyle} >
-        //                     <span className={styles.asterik} >
-        //                         *
-        //                     </span>
-        //                     {defaultRender(props)} 
-                            
-        //                 </Label>
+        const stackTokens: IStackTokens = {
+            childrenGap: 8,
+    
+          };
 
-        //             {this.props.currentPage === 2 && 
-        //                 (<span><IconButton id={this.props.id} styles={ iconStyles } iconProps={infoIcon} onClick={this.props.showCalloutVisible}/></span>)
-        //             }
-        //             </Stack>
-        //             </>
-        //         );
-        // };
+        
+        const renderDescription = (): JSX.Element => {
+            return (
+                <Stack id={this.props.charCountId} horizontalAlign='end' style={{fontSize: '12px'}}>
+                {this.props.description}
+                </Stack>
+            );
+        };
 
 
         const onCustomlabelRender = ():JSX.Element => {
             return (
 
-                 
-                    <Label styles={labelStyle} htmlFor={this.props.id} required aria-required='true'>
+                <Stack  horizontal verticalAlign="center" tokens={stackTokens}>
+                    <StackItem >
+                    <Label styles={labelStyle} htmlFor={this.props.id} >
+                        <span className={styles.asterik} aria-label={this.props.ariaLabelRequired}>
+                            *
+                        </span>
                         {this.props.title}
                         {this.props.currentPage === 2 && 
-                        (<span><IconButton id={this.props.id} styles={ iconStyles } iconProps={infoIcon} onClick={this.props.showCalloutVisible}/></span>)
+                        (<span><IconButton ariaLabel={this.props.infoButton} id={this.props.id} styles={ iconStyles } iconProps={infoIcon} onClick={this.props.showCalloutVisible}/></span>)
                         }
                         <p className={styles.instruction}>{this.props.instructions}</p>
                     </Label>
+
+                    </StackItem>
+                </Stack>
                 
             ) 
         }
@@ -101,22 +101,8 @@ export default class ReusableTextField extends React.Component<IReusableTextFiel
       
         return (
             <div id={this.props.lineId} >
-                {/* <Stack>
-                    <Label styles={labelStyle} htmlFor={this.props.id}>
-                        <span className={styles.asterik} aria-label={this.props.ariaLabelRequired}>
-                            *
-                        </span>
-                        {this.props.title}
-                        {this.props.currentPage === 2 && 
-                        (<span><IconButton id={this.props.id} styles={ iconStyles } iconProps={infoIcon} onClick={this.props.showCalloutVisible}/></span>)
-                        }
-                    </Label>
-                    <p id={this.props.instructionId}  className={ styles.instruction }>{this.props.instructions}</p>
-                 
-
-                </Stack> */}
                 <TextField
-                   {...this.props}  onRenderLabel={onCustomlabelRender}
+                   {...this.props}  onRenderLabel={onCustomlabelRender} onRenderDescription={renderDescription} required
                 />
 
             </div>
