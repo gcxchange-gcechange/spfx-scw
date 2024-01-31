@@ -225,7 +225,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
         }
 
         else {
-            const functionUrl = "https://appsvc-fnc-dev-scw-list-dotnet001.azurewebsites.net/api/CreateItem?";
+            const functionUrl = "CreateItem?";
             const requestHeaders: Headers = new Headers();
             requestHeaders.append("Content-type", "application/json");
             requestHeaders.append("Cache-Control", "no-cache");
@@ -278,7 +278,7 @@ export default class AntDesignStep extends React.Component<IScwProps, IScwState>
             document.getElementById("submit").style.display = 'none';
                 
               this.props.context.aadHttpClientFactory
-              .getClient("3385e8cd-40a4-41f5-bd2f-68690654a54b")
+              .getClient("")
               .then((client: AadHttpClient) => {
                
                 client.post(functionUrl, AadHttpClient.configurations.v1, postOptions)
