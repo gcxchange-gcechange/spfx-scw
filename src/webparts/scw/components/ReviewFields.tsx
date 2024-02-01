@@ -242,9 +242,9 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     infoButton={this.strings.infoIcon_frDesc}
                 />
 
-                    <div id="owners">
+                    <div id="owners" >
                         <AddUsers 
-                            id={'owners'}
+                            id='owners'   
                             aria-describedby="owners"
                             prefLang={this.props.prefLang}
                             context={this.props.context} 
@@ -261,7 +261,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                         <div style={{marginTop: '5px'}}>
                             {validateOwnerField(this.props.ownerList, this.props.requestor, this.props.invalidEmail, {blankfield: this.strings.owner_cannot_be_blank, requestorUser: this.strings.owner_cannot_invite_yourself, invalidEmail: this.strings.isInvalidEmail})}
                         </div>
-                </div>
+                    </div>
             </Stack>
             </>
         );

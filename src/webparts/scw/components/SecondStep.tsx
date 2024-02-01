@@ -35,7 +35,7 @@ export default class SecondStep extends React.Component<ISecondStepProps> {
         <p>{this.strings.invite_owners_para1}</p>
         <p>{parse(this.strings.invite_owners_para2)}</p>
 
-        <div id="peoplePicker">
+   
           <AddUsers
             id={"owners"}
             title={this.strings.invite_owners_label}
@@ -48,7 +48,7 @@ export default class SecondStep extends React.Component<ISecondStepProps> {
             requestor={this.props.requestor}
             invalidEmail={this.props.invalidEmail}
           />
-        </div>
+      
       </>
     );
   }

@@ -1,10 +1,11 @@
 /* eslint-disable dot-notation */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { PeoplePicker, PrincipalType } from "@pnp/spfx-controls-react/lib/PeoplePicker";
-import {  IButtonStyles, IIconProps, IconButton, Label, Stack} from "office-ui-fabric-react";
+import {  IButtonStyles, IIconProps, IconButton, Label, Stack } from "office-ui-fabric-react";
 import * as React from "react";
 import { SelectLanguage } from './SelectLanguage';
 import styles from "./Scw.module.scss";
+
 
 
 
@@ -61,16 +62,17 @@ export default class AUsers extends React.Component<IAddUsersProps> {
             }
         }
 
-        const infoIcon: IIconProps = { iconName: 'UnknownSolid' }; 
+        const infoIcon: IIconProps = { iconName: 'UnknownSolid' };     
+        
 
 
         return(
 
             <> 
-                <div id={this.props.id} tabIndex={1}>
+                <div id={this.props.id} tabIndex={0}>
                     <Stack>
-                        <Label htmlFor="peoplePicker" style={{fontWeight:'700'}}>
-                            <span className={styles.asterik} aria-label={'required'}>
+                        <Label htmlFor={this.props.id} style={{fontWeight:'700'}} aria-required={true}>
+                            <span className={styles.asterik} aria-label={this.strings.required} >
                                 *
                             </span>
                             {this.props.title}
@@ -81,13 +83,12 @@ export default class AUsers extends React.Component<IAddUsersProps> {
                             )
                             }
                         </Label>
-                            <p id={this.props.id} className={styles.instruction} >
+                            <p className={styles.instruction} >
                                 {this.props.instructions}
                             </p>
                     </Stack>
                 
                     <PeoplePicker
-                        aria-describedby = {this.props.id}
                         errorMessageClassName={styles.ownerError}
                         context = { this.props.context }
                         required = { true }
