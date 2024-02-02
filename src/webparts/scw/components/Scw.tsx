@@ -326,6 +326,7 @@ export default class AntDesignStep extends React.Component<
       ...this.state,
       [eventName]: values,
     });
+
   };
 
   public handleSideLineErrorValidation = (eventName: string, value: string) => {
@@ -350,7 +351,6 @@ export default class AntDesignStep extends React.Component<
 
         const addErrorCharCount = (charCountId: string) => {
             const getCharCountId = document.getElementById(charCountId);
-            console.log("char", getCharCountId)
             if (getCharCountId) {
                 getCharCountId.classList.add(styles.charCountError);
             }
@@ -665,6 +665,7 @@ export default class AntDesignStep extends React.Component<
             getElementId={this.getElementId}
             requestor={requestingUser}
             invalidEmail={invalidEmail}
+            isError={this.state.isError}
           />
         ),
       },
@@ -696,6 +697,8 @@ export default class AntDesignStep extends React.Component<
     const labelSpinnerStyles: Partial<ISpinnerStyles> = {
       root: { padding: 20 },
     };
+
+    console.log("onChangeBlank",isError);
 
     return (
       <>

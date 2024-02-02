@@ -87,7 +87,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 maxLength={500}
                 description={`${commPurpose.length}/500`}
                 onChange={this.onhandleChangeEvent}
-                onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_purpose}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_purpose} `})}
+                onGetErrorMessage={(commPurpose) => validateTextField(commPurpose,  isError, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_purpose}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_purpose} `})}
                 instructions =  {this.strings.commPurpose_Instruction}
                 title = {this.strings.commPurpose_title}
                 lineId={"first-line"}
@@ -96,7 +96,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
    
                 
           />
-          {isError.includes('commPurpose') && 
+          {(isError.includes('commPurpose') && commPurpose.length !== 0 )&& 
             (
               <div style={{marginTop: '5px'}}>
               {validateisError( {blankField: `${this.strings.blankField} ${this.strings.please_add_a_purpose}` })}
@@ -148,7 +148,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 maxLength={80}
                 description={`${frCommName.length}/80`}
                 onChange={this.onhandleChangeEvent}
-                onGetErrorMessage={(engName) => validateSpecialCharFields(engName, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_name}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_name}`, removeSpecialChar: this.strings.remove_special_char})}
+                onGetErrorMessage={(frCommName) => validateSpecialCharFields(frCommName,  {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_name}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_name}`, removeSpecialChar: this.strings.remove_special_char})}
                 instructions = {this.strings.frCommName_Instruction}
                 title =  {this.strings.frCommName_title}
                 lineId={"third-line"}
@@ -180,7 +180,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 maxLength={100}
                 description={`${shEngDesc.length}/100`}
                 onChange={this.onhandleChangeEvent}
-                onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_description}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_description}`})}
+                onGetErrorMessage={(shEngDesc) => validateTextField(shEngDesc, isError, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_description}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_description}`})}
                 instructions = {this.strings.shEngDesc_Instruction}
                 title =  {this.strings.shEngDesc_title}
                 lineId={"fourth-line"}
@@ -188,7 +188,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 charCountId={'shEngDescCharCount'}
             />
 
-                {isError.includes('shEngDesc') && 
+                {(isError.includes('shEngDesc') && shEngDesc.length !== 0 ) && 
                   (
                   <div style={{marginTop: '5px'}}>
                   {validateisError( {blankField: `${this.strings.blankField} ${this.strings.please_add_a_description}` })}
@@ -209,14 +209,14 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 maxLength={100}
                 description={`${shFrDesc.length}/100`}
                 onChange={this.onhandleChangeEvent}
-                onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_description}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_description}`})}
+                onGetErrorMessage={(shFrDesc) => validateTextField(shFrDesc, isError, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_description}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_description}`})}
                 instructions = {this.strings.shFrDesc_Instruction}
                 title = {this.strings.shFrDesc_title}
                 lineId={"fifth-line"}
                 ariaLabelRequired={this.strings.required}
                 charCountId={'shFrDescCharCount'}
             />
-              {isError.includes('shFrDesc') && 
+              {(isError.includes('shFrDesc') &&  shFrDesc.length !== 0) && 
                 (
                   <div style={{marginTop: '5px'}}>
                     {validateisError( {blankField: `${this.strings.blankField} ${this.strings.please_add_a_description}` })}
