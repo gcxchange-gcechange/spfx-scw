@@ -18,11 +18,11 @@ export const validateisError = (strings: {  blankField: string }): JSX.Element =
   
 }
 
-export const validateTextField = (value: string, isError:string[] ,strings: { minCharacters: string; blankField: string }): JSX.Element => {
+export const validateTextField = (value: string,  isError: string[], strings: { minCharacters: string; blankField: string }): JSX.Element => {
 
-  console.log("e", isError.length );
-  console.log("val", value)
-
+const commPurposeError = isError.includes('commPurpose');
+console.log("ERROR", commPurposeError);
+ 
   const trimmedValue = value.trim();
 
   if (trimmedValue.length >= 1 && trimmedValue.length < 5) {
@@ -35,7 +35,7 @@ export const validateTextField = (value: string, isError:string[] ,strings: { mi
       </Stack>
     );
   } 
-  else if (isError.length === 0 ) {
+  else if (!value.trim().length) {
 
     return (
       <Stack horizontal horizontalAlign="center" >
@@ -46,7 +46,8 @@ export const validateTextField = (value: string, isError:string[] ,strings: { mi
       </Stack>
 
     );
-  }  else {
+  }  
+  else {
     return null;
   }
 
@@ -65,16 +66,16 @@ export const validateSpecialCharFields = (value: string, strings: { minCharacter
     }
   );
 
-  // if (!value.trim().length) {
-  //   return  (
-  //     <Stack horizontal>
-  //       <Icon iconName="AlertSolid"className={styles.errorIcon} />
-  //       <p className={styles.fieldInstruction}>{strings.blankField}</p>
-  //     </Stack>
-  //   )
+  if (!value.trim().length) {
+    return  (
+      <Stack horizontal>
+        <Icon iconName="AlertSolid"className={styles.errorIcon} />
+        <p className={styles.fieldInstruction}>{strings.blankField}</p>
+      </Stack>
+    )
     
-  // } 
-  // else 
+  } 
+  else 
   if (value.trim().length >= 1 && value.trim().length < 5) {
     if (charAllowed ) {
       return (

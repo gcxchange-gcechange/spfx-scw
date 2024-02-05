@@ -70,7 +70,13 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
 
 
     const stackTokens = { childrenGap: 18 };
+    const getTExtfield = document.getElementById('Community purpose');
+    let getariaInvalid;
 
+    if(getTExtfield) {
+      getariaInvalid = getTExtfield.attributes[8].value
+    }
+    console.log(getariaInvalid);
     return (
       <>
         <h3>{parse(this.strings.commPurpose_title)}</h3>
@@ -93,12 +99,13 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 lineId={"first-line"}
                 ariaLabelRequired={this.strings.required}
                 charCountId = {"commPurposeCharCount"}
-   
+  
                 
           />
-          {(isError.includes('commPurpose') && commPurpose.length !== 0 )&& 
+          {(isError.includes('commPurpose') && getariaInvalid === 'false') && 
             (
               <div style={{marginTop: '5px'}}>
+                {console.log(isError.includes('commPurpose'), getariaInvalid)}
               {validateisError( {blankField: `${this.strings.blankField} ${this.strings.please_add_a_purpose}` })}
             </div>
             )
@@ -148,7 +155,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 maxLength={80}
                 description={`${frCommName.length}/80`}
                 onChange={this.onhandleChangeEvent}
-                onGetErrorMessage={(frCommName) => validateSpecialCharFields(frCommName,  {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_name}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_name}`, removeSpecialChar: this.strings.remove_special_char})}
+                onGetErrorMessage={(frCommName) => validateSpecialCharFields(frCommName, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_name}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_name}`, removeSpecialChar: this.strings.remove_special_char})}
                 instructions = {this.strings.frCommName_Instruction}
                 title =  {this.strings.frCommName_title}
                 lineId={"third-line"}

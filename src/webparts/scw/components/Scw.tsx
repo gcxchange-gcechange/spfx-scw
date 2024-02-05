@@ -137,10 +137,17 @@ export default class AntDesignStep extends React.Component<
   };
 
   public blankFieldValidation = (values: any): void => {
+    console.log("VAL-blankfunction", values);
+
+    const getElement = document.getElementsByClassName('ms-TextField-errorMessage');
+
+    console.log('e', getElement);
+     
+
     const errorFields: string[] = [];
 
     for (const [key, value] of Object.entries(values)) {
-      if (value === "") {
+      if (value === "" ) {
         errorFields.push(key);
         this.setState({
           ...this.state,
@@ -326,6 +333,14 @@ export default class AntDesignStep extends React.Component<
       ...this.state,
       [eventName]: values,
     });
+
+
+
+    // const valueState = {[eventName]: value}
+
+    // console.log("VS=val onHandle", valueState);
+
+    // this.blankFieldValidation( valueState)
 
   };
 
@@ -529,14 +544,15 @@ export default class AntDesignStep extends React.Component<
 
     if (this.state.commPurpose !== prevState.commPurpose) {
       const index = this.state.isError.indexOf("commPurpose");
-      if (index > -1) {
-        const updateIsError = [...this.state.isError];
-        updateIsError.splice(index, 1);
+      console.log("index on update", index);
+      // if (index > -1) {
+      //   const updateIsError = [...this.state.isError];
+      //   updateIsError.splice(index, 1);
 
-        this.setState({
-          isError: updateIsError,
-        });
-      }
+      //   this.setState({
+      //     isError: updateIsError,
+      //   });
+      // }
     }
     if (this.state.engName !== prevState.engName) {
       const index = this.state.isError.indexOf("engName");
@@ -665,7 +681,8 @@ export default class AntDesignStep extends React.Component<
             getElementId={this.getElementId}
             requestor={requestingUser}
             invalidEmail={invalidEmail}
-            isError={this.state.isError}
+            isError ={isError}
+
           />
         ),
       },
