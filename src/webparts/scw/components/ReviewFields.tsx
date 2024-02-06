@@ -36,7 +36,6 @@ export interface ILastStepProps {
     handleOnChange?:(event:any, value: string)=> void;
     requestor: string;
     invalidEmail: string;
-    isError?: string[];
 }
 
 
@@ -108,7 +107,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
 	public render(): React.ReactElement<ILastStepProps> {
 
 
-		const { current, commPurpose, engName, frCommName, shEngDesc, shFrDesc, isError  } = this.props
+		const { current, commPurpose, engName, frCommName, shEngDesc, shFrDesc} = this.props
 
 		const charCountStyles = {
 
@@ -144,7 +143,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     maxLength={500}
                     description={`${commPurpose.length}/500`}
                     onChange={this.onUpdateCommPurpose}
-                    onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, isError, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_purpose}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_purpose}` })}
+                    onGetErrorMessage={(commPurpose) => validateTextField(commPurpose, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_purpose}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_purpose}` })}
                     title = {this.strings.commPurpose_title}
                     currentPage = {current}
                     showCalloutVisible={this.showCalloutVisible}
@@ -211,7 +210,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     maxLength={100}
                     description={`${shEngDesc.length}/100`}
                     onChange={this.onUpdateEngDesc}
-                    onGetErrorMessage={(shEngDesc) => validateTextField(shEngDesc, isError, {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_description}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_description}`})}
+                    onGetErrorMessage={(shEngDesc) => validateTextField(shEngDesc,  {minCharacters: `${this.strings.minCharacters} ${this.strings.please_add_a_longer_description}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_description}`})}
                     title =   { this.strings.shEngDesc_title }
                     currentPage = {current}
                     showCalloutVisible={this.showCalloutVisible}
@@ -233,7 +232,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     maxLength={100}
                     description={`${shFrDesc.length}/100`}
                     onChange={this.onUpdateFrDesc}
-                    onGetErrorMessage={(shFrDesc) => validateTextField(shFrDesc, isError, {minCharacters:`${this.strings.minCharacters} ${this.strings.please_add_a_longer_description}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_description}`})}
+                    onGetErrorMessage={(shFrDesc) => validateTextField(shFrDesc, {minCharacters:`${this.strings.minCharacters} ${this.strings.please_add_a_longer_description}`, blankField: `${this.strings.blankField} ${this.strings.please_add_a_description}`})}
                     title = { this.strings.shFrDesc_title }
                     currentPage = {current}
                     showCalloutVisible={this.showCalloutVisible}

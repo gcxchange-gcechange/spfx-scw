@@ -96,28 +96,59 @@ export default class AntDesignStep extends React.Component<
     } = this.state;
     const values = { commPurpose, engName, frCommName, shEngDesc, shFrDesc };
     const { isLessThanMinLength, hasSpecialChar } = fieldValidations(values);
+    const blankInputFields:any [] = [];
 
-    //Obj Array to use for validating if user goes to next page without changing field inputs.
-    const stateValues = [
-      {
-        commPurpose: commPurpose,
-        engName: engName,
-        frCommName: frCommName,
-        shEngDesc: shEngDesc,
-        shFrDesc: shFrDesc,
-      },
-    ];
-    const keys = Object.keys(stateValues[0]);
-    const arrayVal = Object.values(stateValues[0]);
-
-    for (let i = 0; i < keys.length; i++) {
-      const key = keys[i];
-      const value = arrayVal[i];
-
-      this.handleSideLineErrorValidation(key, value);
+    for (const key in values) {
+      if (values.hasOwnProperty(key)) {
+        const value = values[key as keyof typeof values];
+    
+        // Check for empty values
+        if (value === '') {
+          blankInputFields.push(key);
+        }
+    
+        // Handle side line error validation
+        this.handleSideLineErrorValidation(key, value);
+      }
     }
 
-    this.blankFieldValidation(values);
+    //Obj Array to use for validating if user goes to next page without changing field inputs.
+    // const stateValues = [
+    //   {
+    //     commPurpose: commPurpose,
+    //     engName: engName,
+    //     frCommName: frCommName,
+    //     shEngDesc: shEngDesc,
+    //     shFrDesc: shFrDesc,
+    //   },
+    // ];
+    // const keys = Object.keys(stateValues[0]);
+    // const arrayVal = Object.values(stateValues[0]);
+
+    // for (let i = 0; i < keys.length; i++) {
+    //   const key = keys[i];
+    //   const value = arrayVal[i];
+
+    //   //get all empty values
+    //   if ( value === '') {
+    //     blankInputFields.push(key)
+    //   }
+
+    //   this.handleSideLineErrorValidation(key, value);
+    // }
+
+    //Check if the textField validation exists
+
+    const inputFieldAriaValidArray:any[] = [];
+  
+    blankInputFields.forEach((field) => {
+      const getInputFieldId = document.getElementById(field);
+      if (getInputFieldId) {
+        inputFieldAriaValidArray.push({[field]: getInputFieldId.getAttribute('aria-invalid')})
+      }
+    })
+   
+    this.blankFieldValidation(inputFieldAriaValidArray);
 
     const showModal =
       isLessThanMinLength ||
@@ -137,22 +168,18 @@ export default class AntDesignStep extends React.Component<
   };
 
   public blankFieldValidation = (values: any): void => {
-    console.log("VAL-blankfunction", values);
-
-    const getElement = document.getElementsByClassName('ms-TextField-errorMessage');
-
-    console.log('e', getElement);
-     
 
     const errorFields: string[] = [];
 
-    for (const [key, value] of Object.entries(values)) {
-      if (value === "" ) {
-        errorFields.push(key);
-        this.setState({
-          ...this.state,
-          isError: errorFields,
-        });
+    for (const obj of values) {
+      for (const [key, value] of Object.entries(obj)) {
+        if (value === 'false') {
+          errorFields.push(key);
+          this.setState({
+            ...this.state,
+            isError: errorFields
+          });
+        }
       }
     }
   };
@@ -164,6 +191,7 @@ export default class AntDesignStep extends React.Component<
   };
 
   private prev = (): void => {
+    console.log('prevStep', this.state.current);
     const prevPage = this.state.current - 1;
 
     const {
@@ -178,17 +206,11 @@ export default class AntDesignStep extends React.Component<
       requestingUser,
     } = this.state;
     const values = { engName, frCommName, shEngDesc, shFrDesc, commPurpose };
-
     const { isLessThanMinLength, hasSpecialChar } = fieldValidations(values);
 
     const showModal =
-      (current === 1 &&
-        (ownerList.length === 0 || requestingUser || invalidEmail)) ||
-      (current === 2 && isLessThanMinLength) ||
-      hasSpecialChar ||
-      ownerList.length === 0 ||
-      requestingUser ||
-      invalidEmail;
+      (current === 1 && (ownerList.length === 0 || requestingUser || invalidEmail)) ||
+      (current === 2 && isLessThanMinLength) || hasSpecialChar || ownerList.length === 0 || requestingUser || invalidEmail;
 
     if (!showModal) {
       this.setState({
@@ -541,18 +563,24 @@ export default class AntDesignStep extends React.Component<
         element.setAttribute("aria-Label", "complete");
       }
     }
+    
+    if(this.state.step === 0 && this.state.step !== prevState.step) {
+      this.setState({
+        isError: [],
+      });
+    } 
+
 
     if (this.state.commPurpose !== prevState.commPurpose) {
       const index = this.state.isError.indexOf("commPurpose");
-      console.log("index on update", index);
-      // if (index > -1) {
-      //   const updateIsError = [...this.state.isError];
-      //   updateIsError.splice(index, 1);
+      if (index > -1) {
+        const updateIsError = [...this.state.isError];
+        updateIsError.splice(index, 1);
 
-      //   this.setState({
-      //     isError: updateIsError,
-      //   });
-      // }
+        this.setState({
+          isError: updateIsError,
+        });
+      }
     }
     if (this.state.engName !== prevState.engName) {
       const index = this.state.isError.indexOf("engName");
@@ -681,7 +709,6 @@ export default class AntDesignStep extends React.Component<
             getElementId={this.getElementId}
             requestor={requestingUser}
             invalidEmail={invalidEmail}
-            isError ={isError}
 
           />
         ),
@@ -720,6 +747,8 @@ export default class AntDesignStep extends React.Component<
     return (
       <>
         <div className={styles.scw}>
+          <h3>CURRENT:{this.state.current.toString()}</h3>
+          <h2>STEP:{this.state.step.toString()}</h2>
           <Title
             current={current}
             step={step}

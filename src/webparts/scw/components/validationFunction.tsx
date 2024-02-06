@@ -18,10 +18,8 @@ export const validateisError = (strings: {  blankField: string }): JSX.Element =
   
 }
 
-export const validateTextField = (value: string,  isError: string[], strings: { minCharacters: string; blankField: string }): JSX.Element => {
+export const validateTextField = (value: string, strings: { minCharacters: string; blankField: string }): JSX.Element => {
 
-const commPurposeError = isError.includes('commPurpose');
-console.log("ERROR", commPurposeError);
  
   const trimmedValue = value.trim();
 
