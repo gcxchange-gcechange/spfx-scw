@@ -356,14 +356,6 @@ export default class AntDesignStep extends React.Component<
       [eventName]: values,
     });
 
-
-
-    // const valueState = {[eventName]: value}
-
-    // console.log("VS=val onHandle", valueState);
-
-    // this.blankFieldValidation( valueState)
-
   };
 
   public handleSideLineErrorValidation = (eventName: string, value: string) => {
