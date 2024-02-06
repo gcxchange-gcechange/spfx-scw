@@ -191,7 +191,6 @@ export default class AntDesignStep extends React.Component<
   };
 
   private prev = (): void => {
-    console.log('prevStep', this.state.current);
     const prevPage = this.state.current - 1;
 
     const {
@@ -739,8 +738,6 @@ export default class AntDesignStep extends React.Component<
     return (
       <>
         <div className={styles.scw}>
-          <h3>CURRENT:{this.state.current.toString()}</h3>
-          <h2>STEP:{this.state.step.toString()}</h2>
           <Title
             current={current}
             step={step}
