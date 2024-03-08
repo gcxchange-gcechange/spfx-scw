@@ -6,7 +6,7 @@
 
 
 ## Prerequisites
-This web part connects to this [this function app](https://github.com/gcxchange-gcechange/appsvc-fnc-dev-scw-sitecreation).
+This web part connects to this [this function app]([https://github.com/gcxchange-gcechange/appsvc-fnc-dev-scw-sitecreation](https://github.com/gcxchange-gcechange/appsvc-fnc-dev-scw-list).
 
 
 ## Version 
