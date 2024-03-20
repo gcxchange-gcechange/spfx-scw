@@ -28,6 +28,7 @@ import Failed from "./Failed";
 import ReviewFields from "./ReviewFields";
 import { fieldValidations } from "./validationFunction";
 
+
 export interface IScwState {
   current: number;
   step: number;
@@ -272,7 +273,7 @@ export default class AntDesignStep extends React.Component<
     if (showModal) {
       this.setState({ showModal: true });
     } else {
-      const functionUrl = "CreateItem?";
+      const functionUrl = "https://appsvc-fnc-dev-scw-list-dotnet001.azurewebsites.net/api/CreateItem?";
       const requestHeaders: Headers = new Headers();
       requestHeaders.append("Content-type", "application/json");
       requestHeaders.append("Cache-Control", "no-cache");
@@ -308,7 +309,7 @@ export default class AntDesignStep extends React.Component<
         document.getElementById("submit").style.display = "none";
 
         this.props.context.aadHttpClientFactory
-          .getClient("")
+          .getClient("3385e8cd-40a4-41f5-bd2f-68690654a54b")
           .then((client: AadHttpClient) => {
             client
               .post(functionUrl, AadHttpClient.configurations.v1, postOptions)
@@ -734,6 +735,11 @@ export default class AntDesignStep extends React.Component<
     };
 
     console.log("onChangeBlank",isError);
+    // const processSteps: number [] = [];
+ 
+    // const barsteps = steps.map((item) =>
+    
+    // )
 
     return (
       <>
@@ -763,14 +769,20 @@ export default class AntDesignStep extends React.Component<
           ) : (
             <div className={styles.container}>
               <div className={styles.row}>
-                <Stack horizontalAlign="center">
+                <div role="progressbar" 
+                  aria-valuemax={3} 
+                  aria-valuemin={0} 
+                  aria-valuenow={Math.floor(parseFloat(steps[this.state.current].step))}  
+                  aria-valuetext={`Step ${this.state.current + 1} out of 3`} 
+                >
+                <Stack horizontalAlign="center" >
                   <Steps
-                    aria-current="step"
                     current={this.state.current}
                     labelPlacement="vertical"
                     items={items}
                   />
                 </Stack>
+                </div>
                 {showCallout && (
                   <Callouts
                     prefLang={this.props.prefLang}
