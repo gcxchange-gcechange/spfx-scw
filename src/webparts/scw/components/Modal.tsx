@@ -229,7 +229,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
     return (
       <>
         <Modal
-          titleAriaId={this.strings.oops}
+          titleAriaId={"Error pop up"}
           isOpen={ this.props.showModal}
           onDismiss={ this.props.onClose}
           isBlocking={ true}
@@ -241,9 +241,9 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
             
               <div style={ this.modalStyle.header}>
                 <IconButton iconProps={{iconName: "ChromeClose"}} 
-                  className ={styles.cancelIcon}  
-                  tabIndex={1} 
-                  aria-label= { this.strings.close } 
+                  className ={styles.cancelIcon} 
+                  aria-label={this.strings.close}
+                  aria-hidden= "true"
                   onClick={ this.props.onClose}
                 />
                 <Stack>
@@ -251,7 +251,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
                   <Icon iconName={"Error"} styles={iconStyles}/>
                   </StackItem>
                   <StackItem align="center">
-                  <h2>{this.strings.oops}</h2>
+                  <h2 aria-label="Error pop up">{this.strings.oops}</h2>
                   </StackItem>   
                 </Stack>
               </div>
