@@ -142,6 +142,7 @@ define([], function() {
     "owner_cannot_be_blank": "Cannot be left blank. Please add another owner.",
     "owner_cannot_invite_yourself":"Cannot invite yourself. Please remove your name.",
     "owners": "Owners",
+    "errorPopUp":"Error pop up",
 
     
 

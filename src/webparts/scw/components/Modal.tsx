@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
-import { IIconStyles, Icon, Modal, PrimaryButton } from "@fluentui/react";
+import { IIconStyles, Icon, Modal } from "@fluentui/react";
 import { IconButton } from "@fluentui/react/lib/Button";
 import styles from "./Scw.module.scss";
 import { Stack, StackItem } from "office-ui-fabric-react/lib/Stack";
@@ -45,7 +45,8 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
       paddingBottom: "10px",
       paddingLeft: "30px",
       paddingRight: "30px",
-
+     
+      
     },
 
     body: {
@@ -221,38 +222,34 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
     const iconStyles: Partial<IIconStyles> = { 
       root: { fontSize: '70px',
               color: 'white'
-            } //
+            } 
     };
 
  
     return (
-
       <>
         <Modal
           titleAriaId={"dialogTitle"}
           isOpen={ this.props.showModal}
           onDismiss={ this.props.onClose}
+          isBlocking={ true}
           styles={{
             main: this.modalStyle.main,
           }}
         >
-          <div>      
               <div style={ this.modalStyle.header}>
-              <div>
-                  {/* <IconButton iconProps={{iconName: "ChromeClose"}} 
-                    title={this.strings.close}
-                    className ={styles.cancelIcon} 
-                    ariaHidden={true}
-                    onClick={ this.props.onClose}
-                  /> */}
-                  <PrimaryButton text="X" onClick={this.props.onClose} className ={styles.cancelIcon}/>
-              </div>
+                <IconButton iconProps={{iconName: "ChromeClose"}} 
+                  className ={styles.cancelIcon}  
+                  tabIndex={1} 
+                  aria-label= { this.strings.close } 
+                  onClick={ this.props.onClose}
+                />
                 <Stack>
                   <StackItem align="center">
                   <Icon iconName={"Error"} styles={iconStyles}/>
                   </StackItem>
                   <StackItem align="center">
-                  <h2 id="dialogTitle" aria-label={"Error pop-up"}>{this.strings.oops}</h2>
+                  <h2 id="dialogTitle" aria-label={this.strings.errorPopUp} >{this.strings.oops}</h2>
                   </StackItem>   
                 </Stack>
               </div>
@@ -288,9 +285,8 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
                   </StackItem>
                   <StackItem align="center">
                     <button
-                      tabIndex={1}
-                      aria-label="Bottom Close Button"
-                      // aria-label= { this.strings.close }
+                      // tabIndex={2}
+                      aria-label= { this.strings.close }
                       onClick={ this.props.onClose}
                       className={styles.close}
                     >
@@ -299,7 +295,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
                   </StackItem>
                 </Stack>   
               </div>
-          </div>
+ 
         </Modal>
       </>
     )

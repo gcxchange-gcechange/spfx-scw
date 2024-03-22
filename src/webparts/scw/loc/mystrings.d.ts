@@ -132,6 +132,7 @@ declare interface IScwWebPartStrings {
   owner_cannot_be_blank: string;
   owner_cannot_invite_yourself: string;
   owners: string;
+  errorPopUp: string;
 
 
 
