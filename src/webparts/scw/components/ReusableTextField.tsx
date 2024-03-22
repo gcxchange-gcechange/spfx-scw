@@ -15,6 +15,7 @@ export interface IReusableTextFieldProps {
     description?: string;
     defaultValue: string;
     validateOnLoad: boolean;
+    validateOnFocusOut: boolean;
     maxLength: number;
     onChange?: (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => void;
     onGetErrorMessage?: (value: string ) => string | JSX.Element | undefined;
@@ -80,15 +81,15 @@ export default class ReusableTextField extends React.Component<IReusableTextFiel
 
                 <Stack  horizontal verticalAlign="center" tokens={stackTokens}>
                     <StackItem >
-                    <Label styles={labelStyle} htmlFor={this.props.id} >
+                    <Label styles={labelStyle} htmlFor={this.props.id}>
                         <span className={styles.asterik} aria-label={this.props.ariaLabelRequired}>
                             *
                         </span>
                         {this.props.title}
                         {this.props.currentPage === 2 && 
-                        (<span><IconButton ariaLabel={this.props.infoButton} id={this.props.id} styles={ iconStyles } iconProps={infoIcon} onClick={this.props.showCalloutVisible}/></span>)
+                        (<span><IconButton required ariaLabel={this.props.infoButton} id={this.props.id} styles={ iconStyles } iconProps={infoIcon} onClick={this.props.showCalloutVisible}/></span>)
                         }
-                        <p className={styles.instruction}>{this.props.instructions}</p>
+                        <p className={styles.instruction}>{this.props.instructions}</p> 
                     </Label>
 
                     </StackItem>

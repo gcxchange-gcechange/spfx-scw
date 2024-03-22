@@ -83,6 +83,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 rows={3}
                 defaultValue= {commPurpose}
                 validateOnLoad={false}
+                validateOnFocusOut={true}
                 maxLength={500}
                 description={`${commPurpose.length}/500`}
                 onChange={this.onhandleChangeEvent}
@@ -116,6 +117,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 rows={1}
                 defaultValue= {engName}
                 validateOnLoad={false}
+                validateOnFocusOut={true}
                 maxLength={80}
                 description={`${engName.length}/80`}
                 onChange={this.onhandleChangeEvent}
@@ -143,7 +145,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 multiline ={false}
                 rows={1}
                 defaultValue= {frCommName}
-                validateOnLoad={false}
+                validateOnLoad={false}   
+                validateOnFocusOut={true}
                 maxLength={80}
                 description={`${frCommName.length}/80`}
                 onChange={this.onhandleChangeEvent}
@@ -175,7 +178,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 multiline ={false}
                 rows={1}
                 defaultValue= {shEngDesc}
-                validateOnLoad={false}
+                validateOnLoad={false}  
+                validateOnFocusOut={true}
                 maxLength={100}
                 description={`${shEngDesc.length}/100`}
                 onChange={this.onhandleChangeEvent}
@@ -204,7 +208,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 multiline ={false}
                 rows={1}
                 defaultValue= {shFrDesc}
-                validateOnLoad={false}
+                validateOnLoad={false}  
+                validateOnFocusOut={true}
                 maxLength={100}
                 description={`${shFrDesc.length}/100`}
                 onChange={this.onhandleChangeEvent}
