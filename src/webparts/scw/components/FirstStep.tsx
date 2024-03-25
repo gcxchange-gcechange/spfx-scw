@@ -69,7 +69,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
     };
 
     const stackTokens = { childrenGap: 18 };
-  
+   
     return (
       <>
         <h3>{parse(this.strings.commPurpose_title)}</h3>
@@ -93,9 +93,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 lineId={"first-line"}
                 ariaLabelRequired={this.strings.required}
                 charCountId = {"commPurposeCharCount"}
-                charText={{out_of: `${this.strings.out_of}`, characters: `${this.strings.characters}`}}
-  
-                
+                out_of_Text = {this.strings.out_of}
+                characterCountText={this.strings.characters}            
           />
           {isError.includes('commPurpose') && 
             (
@@ -128,6 +127,9 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 lineId={"second-line"}
                 ariaLabelRequired={this.strings.required}
                 charCountId = {"engNameCharCount"}
+                out_of_Text = {this.strings.out_of}
+                characterCountText={this.strings.characters}  
+                
             />
                 {(isError.includes('engName')) && 
                   (
@@ -157,6 +159,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 lineId={"third-line"}
                 ariaLabelRequired={this.strings.required}
                 charCountId = {"frCommNameCharCount"}
+                out_of_Text = {this.strings.out_of}
+                characterCountText={this.strings.characters}
             />
              {isError.includes('frCommName') && 
                 (
@@ -190,6 +194,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 lineId={"fourth-line"}
                 ariaLabelRequired={this.strings.required}
                 charCountId={'shEngDescCharCount'}
+                out_of_Text = {this.strings.out_of}
+                characterCountText={this.strings.characters}
             />
 
                 {isError.includes('shEngDesc') && 
@@ -220,6 +226,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 lineId={"fifth-line"}
                 ariaLabelRequired={this.strings.required}
                 charCountId={'shFrDescCharCount'}
+                out_of_Text = {this.strings.out_of}
+                characterCountText={this.strings.characters}
             />
               {isError.includes('shFrDesc') && 
                 (

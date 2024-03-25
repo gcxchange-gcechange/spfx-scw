@@ -30,7 +30,8 @@ export interface IReusableTextFieldProps {
     ariaLabelRequired:string;
     charCountId: string;
     infoButton?: string;
-    charText?: any;
+    out_of_Text: string;
+    characterCountText: string;
 }
 
 
@@ -64,14 +65,14 @@ export default class ReusableTextField extends React.Component<IReusableTextFiel
         const stackTokens: IStackTokens = {
             childrenGap: 8,
     
-          };
-
+        };
         
-        const renderDescription = (): JSX.Element => {
-            console.log(this.props.charText);
+        
+        const renderDescription = (): JSX.Element  => {
+
             return (
                 <Stack id={this.props.charCountId} horizontalAlign='end'>
-                    <p aria-label={`${this.props.defaultValue.length}  ${this.props.maxLength}`}> {this.props.description}</p>
+                    <p style={{fontSize: '12px', margin:'0px'}} aria-label={`${this.props.defaultValue.length} ${this.props.out_of_Text} ${this.props.maxLength} ${this.props.characterCountText}`}> {this.props.description}</p>
                 </Stack>
             );
         };
