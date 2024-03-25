@@ -30,6 +30,7 @@ export interface IReusableTextFieldProps {
     ariaLabelRequired:string;
     charCountId: string;
     infoButton?: string;
+    charText?: any;
 }
 
 
@@ -56,7 +57,6 @@ export default class ReusableTextField extends React.Component<IReusableTextFiel
             root: {
                 fontWeight: "700",
                 fontSize: '16px',
-
             },
         }
         
@@ -68,9 +68,10 @@ export default class ReusableTextField extends React.Component<IReusableTextFiel
 
         
         const renderDescription = (): JSX.Element => {
+            console.log(this.props.charText);
             return (
-                <Stack id={this.props.charCountId} horizontalAlign='end' style={{fontSize: '12px'}}>
-                {this.props.description}
+                <Stack id={this.props.charCountId} horizontalAlign='end'>
+                    <p aria-label={`${this.props.defaultValue.length}  ${this.props.maxLength}`}> {this.props.description}</p>
                 </Stack>
             );
         };

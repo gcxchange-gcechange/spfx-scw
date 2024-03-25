@@ -143,6 +143,8 @@ define([], function() {
     "owner_cannot_invite_yourself":"Cannot invite yourself. Please remove your name.",
     "owners": "Owners",
     "errorPopUp":"Error pop up",
+    "out_of":"out of",
+    "characters": "characters",
 
     
 

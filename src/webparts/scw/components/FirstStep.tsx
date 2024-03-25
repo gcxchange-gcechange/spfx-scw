@@ -93,6 +93,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 lineId={"first-line"}
                 ariaLabelRequired={this.strings.required}
                 charCountId = {"commPurposeCharCount"}
+                charText={{out_of: `${this.strings.out_of}`, characters: `${this.strings.characters}`}}
   
                 
           />
