@@ -191,16 +191,17 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
     return (
       <>
         <Modal centered open={this.props.showModal} footer={null} onCancel={this.props.onClose} >
-          <div  style={{backgroundColor: '#106EBE', }}>
+          <div  style={{backgroundColor: '#106EBE'}}>
             <Stack>
               <StackItem align="center">
                 <Icon iconName={"Error"} styles={iconStyles}/>
               </StackItem>
               <StackItem align="center">
-                <h2>{this.strings.oops}</h2>
+                <h2 style={{color: 'white'}}aria-label={"Error pop-up"}>{this.strings.oops}</h2>
               </StackItem>   
             </Stack>
           </div>
+          <div style={{padding: '20px'}}>
           {this.props.current === 0 && (
             <>
             <h3>{this.strings.please_review_the_following_fields}</h3>
@@ -222,14 +223,14 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
             </Stack>
             </>
           )}
-
-          <div>
+          </div>
+          <div style={{padding: '20px'}}>
               <Stack>
                  <StackItem>
                     <hr  aria-hidden= 'true' className={styles.horizontalLine} />
                   </StackItem>
                  <StackItem align="center"> 
-                   <Button  onClick={this.props.onClose} >{this.strings.close}</Button>
+                   <Button className={styles.close} onClick={this.props.onClose} >{this.strings.close}</Button>
                  </StackItem>
               </Stack>
           </div>
