@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
-//import { IIconStyles, Icon, Modal } from "@fluentui/react";
+import { IIconStyles, Icon} from "@fluentui/react";
 //import { IconButton } from "@fluentui/react/lib/Button";
 import styles from "./Scw.module.scss";
 import parse from 'html-react-parser';
@@ -182,9 +182,25 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
     const secondPageErrorMessage = parse(this.renderSecondPageMessage());
     const thirdPageErrorMessage = this.renderCombinedMessage();
 
+    const iconStyles: Partial<IIconStyles> = { 
+            root: { fontSize: '70px',
+                    color: 'white'
+                  } 
+          };
+
     return (
       <>
-        <Modal open={this.props.showModal} footer={null}>
+        <Modal centered open={this.props.showModal} footer={null} onCancel={this.props.onClose} >
+          <div  style={{backgroundColor: '#106EBE', }}>
+            <Stack>
+              <StackItem align="center">
+                <Icon iconName={"Error"} styles={iconStyles}/>
+              </StackItem>
+              <StackItem align="center">
+                <h2>{this.strings.oops}</h2>
+              </StackItem>   
+            </Stack>
+          </div>
           {this.props.current === 0 && (
             <>
             <h3>{this.strings.please_review_the_following_fields}</h3>
