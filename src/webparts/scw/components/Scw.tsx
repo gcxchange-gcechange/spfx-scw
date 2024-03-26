@@ -1,3 +1,4 @@
+/* eslint-disable no-prototype-builtins */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable dot-notation */
 /* eslint-disable @typescript-eslint/no-floating-promises */
@@ -11,7 +12,7 @@ import { IScwProps } from "./IScwProps";
 import { Initial } from "./InitialPage/Initial";
 import { ISpinnerStyles, PrimaryButton, Stack } from "office-ui-fabric-react";
 import { IButtonStyles } from "office-ui-fabric-react";
-import ErrorModal from "./Modal";
+import ErrorModal from "../components/Modal";
 import FirstStep from "./FirstStep";
 import SecondStep from "./SecondStep";
 import { SelectLanguage } from "./SelectLanguage";

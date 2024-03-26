@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
-import { IIconStyles, Icon, Modal } from "@fluentui/react";
-import { IconButton } from "@fluentui/react/lib/Button";
+//import { IIconStyles, Icon, Modal } from "@fluentui/react";
+//import { IconButton } from "@fluentui/react/lib/Button";
 import styles from "./Scw.module.scss";
-import { Stack, StackItem } from "office-ui-fabric-react/lib/Stack";
 import parse from 'html-react-parser';
 import { SelectLanguage } from './SelectLanguage';
- 
+import { Button, Modal } from "antd";
+import { Stack, StackItem } from "office-ui-fabric-react";
 
 export interface IErrorModalProps {
   showModal: boolean;
@@ -25,45 +25,9 @@ export interface IErrorModalProps {
   requestor: string;
 }
 
-
 export default class ErrorModal extends React.Component<IErrorModalProps> {
 
   public strings = SelectLanguage(this.props.prefLang);
-
-  private modalStyle = {
-    main: {
-      display: "flex",
-      borderRadius: "5px",
-      minWidth: "602px",
-      maxWidth: "602px",
-      minHeight: "207px"
-    },
-    header: {
-      backgroundColor: "#106EBE",
-      color: "white",
-      paddingTop: "10px",
-      paddingBottom: "10px",
-      paddingLeft: "30px",
-      paddingRight: "30px",
-     
-      
-    },
-
-    body: {
-      paddingTop: "20px",
-      paddingBottom: "20px",
-      paddingLeft: "30px",
-      paddingRight: "30px",
-     
-    },
-    footer: {
-      paddingBottom: "10px",
-      marginLeft: "60px",
-      marginRight: "60px"
-    },
-  };
-
-  
 
   public renderFirstPageMessage = ():JSX.Element => {
 
@@ -188,7 +152,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
 
     } )
 
-    if(ownerList.length === 0) {
+    if (ownerList.length === 0) {
       ownerResults.push(`${this.strings.owner_cannot_be_blank}`)
     }
 
@@ -212,94 +176,50 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
 
   }
 
-  
   public render(): React.ReactElement<IErrorModalProps> {
 
     const firstPageErrorMessage = this.renderFirstPageMessage();
     const secondPageErrorMessage = parse(this.renderSecondPageMessage());
     const thirdPageErrorMessage = this.renderCombinedMessage();
 
-    const iconStyles: Partial<IIconStyles> = { 
-      root: { fontSize: '70px',
-              color: 'white'
-            } 
-    };
-
- 
     return (
       <>
-        <Modal
-          titleAriaId={this.strings.oops}
-          isOpen={ this.props.showModal}
-          onDismiss={ this.props.onClose}
-          isBlocking={ true}
-          styles={{
-            main: this.modalStyle.main,
-          }}
-        >
+        <Modal open={this.props.showModal} footer={null}>
+          {this.props.current === 0 && (
+            <>
+            <h3>{this.strings.please_review_the_following_fields}</h3>
+            {firstPageErrorMessage}
+            </>
+          )}
+
+          {this.props.current === 1 && (
+            <Stack>
+              <p style={{ textAlign: 'center'}} className={styles.modalContent}> {secondPageErrorMessage} {this.strings.before_proceeding}</p>
+            </Stack>
+         )}
+
+          {this.props.current === 2 && (
+            <>
+            <Stack>
+            <h3>{this.strings.please_review_the_following_fields}</h3>
+              <p className={styles.modalContent}> {thirdPageErrorMessage}</p>
+            </Stack>
+            </>
+          )}
+
           <div>
-            
-              <div style={ this.modalStyle.header}>
-                <IconButton iconProps={{iconName: "ChromeClose"}} 
-                  className ={styles.cancelIcon}  
-                  tabIndex={1} 
-                  aria-label= { this.strings.close } 
-                  onClick={ this.props.onClose}
-                />
-                <Stack>
-                  <StackItem align="center">
-                  <Icon iconName={"Error"} styles={iconStyles}/>
-                  </StackItem>
-                  <StackItem align="center">
-                  <h2>{this.strings.oops}</h2>
-                  </StackItem>   
-                </Stack>
-              </div>
-              <div style={this.modalStyle.body}>
-                
-                {this.props.current === 0 && (
-                  <>
-                  <h3>{this.strings.please_review_the_following_fields}</h3>
-                  {firstPageErrorMessage}
-                  </>
-                )}
-
-                {this.props.current === 1 && (
-                  <Stack>
-                    <p style={{ textAlign: 'center'}} className={styles.modalContent}> {secondPageErrorMessage} {this.strings.before_proceeding}</p>
-                  </Stack>
-                )}
-
-                {this.props.current === 2 && (
-                  <>
-                 <Stack>
-                 <h3>{this.strings.please_review_the_following_fields}</h3>
-                    <p className={styles.modalContent}> {thirdPageErrorMessage}</p>
-                  </Stack>
-                  </>
-                )}
-                
-              </div>
-              <div style={this.modalStyle.footer}>
-                <Stack>
-                  <StackItem>
+              <Stack>
+                 <StackItem>
                     <hr  aria-hidden= 'true' className={styles.horizontalLine} />
                   </StackItem>
-                  <StackItem align="center">
-                    <button
-                      tabIndex={2}
-                      aria-label= { this.strings.close }
-                      onClick={ this.props.onClose}
-                      className={styles.close}
-                    >
-                      { this.strings.close }
-                    </button>
-                  </StackItem>
-                </Stack>   
-              </div>
+                 <StackItem align="center"> 
+                   <Button  onClick={this.props.onClose} >{this.strings.close}</Button>
+                 </StackItem>
+              </Stack>
           </div>
-        </Modal>
+      </Modal>
       </>
-    )
+    );
   }
+
 }
