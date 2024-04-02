@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
-import { IIconStyles, Icon} from "@fluentui/react";
+import { IIconStyles, Icon, Stack, StackItem} from "@fluentui/react";
 //import { IconButton } from "@fluentui/react/lib/Button";
 import styles from "./Scw.module.scss";
 import parse from 'html-react-parser';
 import { SelectLanguage } from './SelectLanguage';
-import { Button, Modal } from "antd";
-import { Stack, StackItem } from "office-ui-fabric-react";
+import { Button, Modal} from "antd";
+
 
 export interface IErrorModalProps {
   showModal: boolean;
@@ -183,21 +183,24 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
     const thirdPageErrorMessage = this.renderCombinedMessage();
 
     const iconStyles: Partial<IIconStyles> = { 
-            root: { fontSize: '70px',
-                    color: 'white'
-                  } 
-          };
+      root: { fontSize: '70px',
+              color: 'white'
+            } 
+    };
+
+
 
     return (
-      <>
-        <Modal centered open={this.props.showModal} footer={null} onCancel={this.props.onClose} >
-          <div  style={{backgroundColor: '#106EBE'}}>
+
+       <>        
+        <Modal title="Error pop-up" aria-label={"Error pop-up"} centered open={this.props.showModal} footer={null} onCancel={this.props.onClose}>
+          <div style={{backgroundColor: '#106EBE'}}>
             <Stack>
               <StackItem align="center">
-                <Icon iconName={"Error"} styles={iconStyles}/>
+                <Icon aria-label="Error" iconName={"Error"} styles={iconStyles}/>
               </StackItem>
               <StackItem align="center">
-                <h2 style={{color: 'white'}}aria-label={"Error pop-up"}>{this.strings.oops}</h2>
+                <h2 style={{color: 'white'}} >{this.strings.oops}</h2>
               </StackItem>   
             </Stack>
           </div>
@@ -234,7 +237,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
                  </StackItem>
               </Stack>
           </div>
-      </Modal>
+        </Modal>
       </>
     );
   }
