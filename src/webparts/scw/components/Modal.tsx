@@ -193,40 +193,55 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
  
 			<div className={styles.overlay} >
 				<dialog open className={styles.modal} role="dialog" aria-modal="true" aria-labelledby="dialogTitle" aria-describedby="dialog_desc" data-is-focusable="true" tabIndex={-1}>
-					<Icon aria-label="Error" iconName={"Error"} styles={iconStyles}/>
-					<h2 id="dialogTitle" style={{ color: 'white'}} aria-label={"Error pop-up"}>{this.strings.oops}</h2>
-					<div id="dialog_desc" >
-					{this.props.current === 0 && (
+					<div style={{backgroundColor: '#106EBE', paddingTop:"10px"}}>
+							<Stack>
+								<StackItem align="center">
+									<Icon aria-label="Error" iconName={"Error"} styles={iconStyles}/>
+								</StackItem>
+								<StackItem align="center">
+									<h2 id="dialogTitle" aria-Label="Error pop-up" style={{color: 'white'}} >{this.strings.oops}</h2>
+								</StackItem>   
+							</Stack>
+					</div>
+					<div id="dialog_desc" className={styles.modalContent}>
+						{ this.props.current === 0 && (
 							<>
 								<h3>{this.strings.please_review_the_following_fields}</h3>
-								{firstPageErrorMessage}
+								<p>{firstPageErrorMessage}</p>
 							</>
-					)}
+							)
+						}
+				
+						{this.props.current === 1 && (
+							<Stack>
+								<p style={{ textAlign: 'center'}} className={styles.modalContent}> {secondPageErrorMessage} {this.strings.before_proceeding}</p>
+							</Stack>
+							)
+						}
 
-					 {this.props.current === 1 && (
-            <Stack>
-              <p style={{ textAlign: 'center'}} className={styles.modalContent}> {secondPageErrorMessage} {this.strings.before_proceeding}</p>
-            </Stack>
-         	)}
+						{this.props.current === 2 &&
+							(
+								<>
+									<Stack>
+										<h3>{this.strings.please_review_the_following_fields}</h3>
+										<p className={styles.modalContent}>{thirdPageErrorMessage}</p>
+									</Stack>
+								</>
+							)
+						}
+					
+						<div>
+							<Stack>
+								<StackItem>
+									<hr aria-hidden='true' className={styles.horizontalLine} />
+								</StackItem>
 
-          {this.props.current === 2 && (
-            <>
-            <Stack>
-            <h3>{this.strings.please_review_the_following_fields}</h3>
-              <p className={styles.modalContent}> {thirdPageErrorMessage}</p>
-            </Stack>
-            </>
-          )}
+								<StackItem align="center">
+									<button type="button" className={styles.close} onClick={this.props.onClose}>{this.strings.close}</button>
+								</StackItem>
+							</Stack>
+						</div>
 					</div>
-					<Stack>
-						<StackItem>
-							<hr aria-hidden='true' className={styles.horizontalLine} />
-						</StackItem>
-
-						<StackItem align="center">
-							<button type="button" className={styles.close} onClick={this.props.onClose}>{this.strings.close}</button>
-						</StackItem>
-					</Stack>
 				</dialog>
 			</div>
     );
