@@ -5,6 +5,7 @@ import { IIconStyles, Icon, Stack, StackItem} from "@fluentui/react";
 import styles from "./Scw.module.scss";
 import parse from 'html-react-parser';
 import { SelectLanguage } from './SelectLanguage';
+import { Button, Modal} from "antd";
 
 
 export interface IErrorModalProps {
@@ -190,23 +191,32 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
 
 
     return (
-			<div className={styles.overlay} >
-				<dialog open className={styles.modal} role="dialog" aria-modal="true" aria-labelledby="dialogTitle" aria-describedby="dialog_desc" data-is-focusable="true" >
-					<Icon aria-label="Error" iconName={"Error"} styles={iconStyles}/>
-					<h2 id="dialogTitle" style={{ color: 'white'}} aria-label={"Error pop-up"}>{this.strings.oops}</h2>
-					<div id="dialog_desc" >
-					{this.props.current === 0 && (
-							<>
-								<h3>{this.strings.please_review_the_following_fields}</h3>
-								{firstPageErrorMessage}
-							</>
-					)}
 
-					 {this.props.current === 1 && (
+       <>        
+        <Modal title="Error pop-up" aria-label={"Error pop-up"} centered open={this.props.showModal} footer={null} onCancel={this.props.onClose}>
+          <div style={{backgroundColor: '#106EBE'}}>
+            <Stack>
+              <StackItem align="center">
+                <Icon aria-label="Error" iconName={"Error"} styles={iconStyles}/>
+              </StackItem>
+              <StackItem align="center">
+                <h2 style={{color: 'white'}} >{this.strings.oops}</h2>
+              </StackItem>   
+            </Stack>
+          </div>
+          <div style={{padding: '20px'}}>
+          {this.props.current === 0 && (
+            <>
+            <h3>{this.strings.please_review_the_following_fields}</h3>
+            {firstPageErrorMessage}
+            </>
+          )}
+
+          {this.props.current === 1 && (
             <Stack>
               <p style={{ textAlign: 'center'}} className={styles.modalContent}> {secondPageErrorMessage} {this.strings.before_proceeding}</p>
             </Stack>
-         	)}
+         )}
 
           {this.props.current === 2 && (
             <>
@@ -216,19 +226,19 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
             </Stack>
             </>
           )}
-					</div>
-					<Stack>
-						<StackItem>
-							<hr aria-hidden='true' className={styles.horizontalLine} />
-						</StackItem>
-
-						<StackItem align="center">
-							<button type="button" className={styles.close} onClick={this.props.onClose}>{this.strings.close}</button>
-						</StackItem>
-					</Stack>
-				</dialog>
-			</div>
-
+          </div>
+          <div style={{padding: '20px'}}>
+              <Stack>
+                 <StackItem>
+                    <hr  aria-hidden= 'true' className={styles.horizontalLine} />
+                  </StackItem>
+                 <StackItem align="center"> 
+                   <Button className={styles.close} onClick={this.props.onClose} >{this.strings.close}</Button>
+                 </StackItem>
+              </Stack>
+          </div>
+        </Modal>
+      </>
     );
   }
 

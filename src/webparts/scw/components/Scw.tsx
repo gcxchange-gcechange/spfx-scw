@@ -12,7 +12,7 @@ import { IScwProps } from "./IScwProps";
 import { Initial } from "./InitialPage/Initial";
 import { ISpinnerStyles, PrimaryButton, Stack } from "office-ui-fabric-react";
 import { IButtonStyles } from "office-ui-fabric-react";
-import ErrorModal from "../components/Modal";
+import ErrorModal from "./Modal";
 import FirstStep from "./FirstStep";
 import SecondStep from "./SecondStep";
 import { SelectLanguage } from "./SelectLanguage";
