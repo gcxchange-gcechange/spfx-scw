@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
-import { IIconStyles, Icon, Stack, StackItem} from "@fluentui/react";
+import {  IIconStyles, Icon, Stack, StackItem} from "@fluentui/react";
 //import { IconButton } from "@fluentui/react/lib/Button";
 import styles from "./Scw.module.scss";
 import parse from 'html-react-parser';
@@ -190,8 +190,9 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
 
 
     return (
+ 
 			<div className={styles.overlay} >
-				<dialog open className={styles.modal} role="dialog" aria-modal="true" aria-labelledby="dialogTitle" aria-describedby="dialog_desc" data-is-focusable="true" >
+				<dialog open className={styles.modal} role="dialog" aria-modal="true" aria-labelledby="dialogTitle" aria-describedby="dialog_desc" data-is-focusable="true" tabIndex={-1}>
 					<Icon aria-label="Error" iconName={"Error"} styles={iconStyles}/>
 					<h2 id="dialogTitle" style={{ color: 'white'}} aria-label={"Error pop-up"}>{this.strings.oops}</h2>
 					<div id="dialog_desc" >
@@ -228,7 +229,6 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
 					</Stack>
 				</dialog>
 			</div>
-
     );
   }
 

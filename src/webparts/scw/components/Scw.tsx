@@ -10,7 +10,7 @@ import styles from "./Scw.module.scss";
 import { Steps, Button } from "antd";
 import { IScwProps } from "./IScwProps";
 import { Initial } from "./InitialPage/Initial";
-import { ISpinnerStyles, PrimaryButton, Stack } from "office-ui-fabric-react";
+import { FocusTrapZone, ISpinnerStyles, PrimaryButton, Stack } from "office-ui-fabric-react";
 import { IButtonStyles } from "office-ui-fabric-react";
 import ErrorModal from "./Modal";
 import FirstStep from "./FirstStep";
@@ -781,22 +781,24 @@ export default class AntDesignStep extends React.Component<
                   />
                 )}
                 {this.state.showModal === true && (
-                  <ErrorModal
-                    requestor={requestingUser}
-                    invalidUser={invalidEmail}
-                    prefLang={this.props.prefLang}
-                    current={current}
-                    engName={engName}
-                    commPurpose={commPurpose}
-                    frCommName={frCommName}
-                    shEngDesc={shEngDesc}
-                    shFrDesc={shFrDesc}
-                    checkedValues={checkedValues}
-                    ownerList={ownerList}
-                    showModal={showModal}
-                    openModal={this.next}
-                    onClose={this.closeModal}
-                  />
+                  <FocusTrapZone>
+                    <ErrorModal
+                      requestor={requestingUser}
+                      invalidUser={invalidEmail}
+                      prefLang={this.props.prefLang}
+                      current={current}
+                      engName={engName}
+                      commPurpose={commPurpose}
+                      frCommName={frCommName}
+                      shEngDesc={shEngDesc}
+                      shFrDesc={shFrDesc}
+                      checkedValues={checkedValues}
+                      ownerList={ownerList}
+                      showModal={showModal}
+                      openModal={this.next}
+                      onClose={this.closeModal}
+                    />
+                  </FocusTrapZone>
                 )}
 
                 <div className="steps-content">
@@ -842,6 +844,7 @@ export default class AntDesignStep extends React.Component<
                       )}
                     {this.state.current < steps.length - 2 && (
                       <Button
+                        id="next"
                         className={styles.largebtn}
                         type="primary"
                         onClick={this.next}
