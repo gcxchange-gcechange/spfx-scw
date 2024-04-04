@@ -199,7 +199,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
 									<Icon aria-hidden="true" iconName={"Error"} styles={iconStyles}/>
 								</StackItem>
 								<StackItem align="center">
-									<h2 id="dialogTitle" aria-Label="Error pop-up" style={{color: 'white', marginTop: '0px'}} >{this.strings.oops}</h2>
+									<h2 id="dialogTitle" aria-Label={this.strings.errorPopUp} style={{color: 'white', marginTop: '0px'}} >{this.strings.oops}</h2>
 								</StackItem>   
 							</Stack>
 					</div>
