@@ -193,13 +193,13 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
  
 			<div className={styles.overlay} >
 				<dialog open className={styles.modal} role="dialog" aria-modal="true" aria-labelledby="dialogTitle" aria-describedby="dialog_desc" data-is-focusable="true" tabIndex={-1}>
-					<div style={{backgroundColor: '#106EBE', paddingTop:"10px"}}>
+					<div className={styles.modalHeader}>
 							<Stack>
 								<StackItem align="center">
-									<Icon aria-label="Error" iconName={"Error"} styles={iconStyles}/>
+									<Icon aria-hidden="true" iconName={"Error"} styles={iconStyles}/>
 								</StackItem>
 								<StackItem align="center">
-									<h2 id="dialogTitle" aria-Label="Error pop-up" style={{color: 'white'}} >{this.strings.oops}</h2>
+									<h2 id="dialogTitle" aria-Label="Error pop-up" style={{color: 'white', marginTop: '0px'}} >{this.strings.oops}</h2>
 								</StackItem>   
 							</Stack>
 					</div>
@@ -230,14 +230,14 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
 							)
 						}
 					
-						<div>
+						<div style={{paddingTop:'20px'}}>
 							<Stack>
 								<StackItem>
 									<hr aria-hidden='true' className={styles.horizontalLine} />
 								</StackItem>
 
 								<StackItem align="center">
-									<button type="button" className={styles.close} onClick={this.props.onClose}>{this.strings.close}</button>
+									<button type="button" className={styles.close} onClick={this.props.onClose}>{this.strings.close.toUpperCase()}</button>
 								</StackItem>
 							</Stack>
 						</div>
