@@ -114,6 +114,7 @@ export default class AntDesignStep extends React.Component<
       }
     }
 
+
     //Obj Array to use for validating if user goes to next page without changing field inputs.
     // const stateValues = [
     //   {
@@ -349,6 +350,7 @@ export default class AntDesignStep extends React.Component<
   public handleOnChange = (event: any, value: string): void => {
     const eventName = event;
     const values = value;
+    console.log(eventName, values )
 
     this.handleSideLineErrorValidation(event, value);
 
@@ -360,10 +362,7 @@ export default class AntDesignStep extends React.Component<
   };
 
   public handleSideLineErrorValidation = (eventName: string, value: string) => {
-    const charAllowed =
-      /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(
-        value
-      );
+    const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
 
     const addErrorBorder = (lineId: string) => {
       const getlineId = document.getElementById(lineId);
@@ -398,7 +397,6 @@ export default class AntDesignStep extends React.Component<
       
         switch (eventName) {
           case "commPurpose":
-
             if (value.length < 5) {
               addErrorBorder("first-line");
               addErrorCharCount("commPurposeCharCount");
@@ -457,14 +455,14 @@ export default class AntDesignStep extends React.Component<
       
 
     public commPurposeCallback = ( commPurpose: string ): void =>   { 
-        const savePurpose = commPurpose.trim();
+      const savePurpose = commPurpose.trim();
 
-    this.setState({
-      commPurpose: savePurpose,
-    });
+      this.setState({
+        commPurpose: savePurpose,
+      });
 
-    this.handleSideLineErrorValidation("commPurpose", savePurpose);
-  };
+      this.handleSideLineErrorValidation("commPurpose", savePurpose);
+    };
 
   public handleEngNameCallback = (engNameValue: string): void => {
     const saveEngName = engNameValue.trim();
@@ -727,9 +725,7 @@ export default class AntDesignStep extends React.Component<
       },
     ];
 
-    const items = steps.map((item) =>
-      item.step !== "4" ? { key: item.step, title: item.title } : null
-    );
+    const items = steps.map((item) => item.step !== "4" ? { key: item.step, title: item.title } : null );
 
     const labelSpinnerStyles: Partial<ISpinnerStyles> = {
       root: { padding: 20 },
@@ -836,10 +832,8 @@ export default class AntDesignStep extends React.Component<
                         {this.strings.prev_btn}
                       </Button>
                     )}
-                    {this.state.current > 0 &&
-                      ((this.state.current !== 4 &&
-                        steps[this.state.current].step !== "3") ||
-                        steps[this.state.current].step !== "4") && (
+                    {this.state.current > 0 && ((this.state.current !== 4 && steps[this.state.current].step !== "3") || steps[this.state.current].step !== "4") && 
+                    (
                         <Button
                           id="prev"
                           className={styles.previousbtn}

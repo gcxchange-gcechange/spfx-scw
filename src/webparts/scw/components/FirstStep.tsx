@@ -40,6 +40,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
   private onhandleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const eventName = event.target.name;
     const value = event.target.value;
+    console.log("valu", value)
     const trimmedValue = value.trim();
 
     try {
@@ -83,7 +84,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 rows={3}
                 defaultValue= {commPurpose}
                 validateOnLoad={false}
-                validateOnFocusOut={true}
+                // validateOnFocusOut={true}
                 maxLength={500}
                 description={`${commPurpose.length}/500`}
                 onChange={this.onhandleChangeEvent}
@@ -117,7 +118,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 rows={1}
                 defaultValue= {engName}
                 validateOnLoad={false}
-                validateOnFocusOut={true}
+                // validateOnFocusOut={true}
                 maxLength={80}
                 description={`${engName.length}/80`}
                 onChange={this.onhandleChangeEvent}
@@ -149,7 +150,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 rows={1}
                 defaultValue= {frCommName}
                 validateOnLoad={false}   
-                validateOnFocusOut={true}
+                //validateOnFocusOut={true}
                 maxLength={80}
                 description={`${frCommName.length}/80`}
                 onChange={this.onhandleChangeEvent}
@@ -184,7 +185,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 rows={1}
                 defaultValue= {shEngDesc}
                 validateOnLoad={false}  
-                validateOnFocusOut={true}
+                //validateOnFocusOut={true}
                 maxLength={100}
                 description={`${shEngDesc.length}/100`}
                 onChange={this.onhandleChangeEvent}
@@ -216,7 +217,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 rows={1}
                 defaultValue= {shFrDesc}
                 validateOnLoad={false}  
-                validateOnFocusOut={true}
+                //validateOnFocusOut={true}
                 maxLength={100}
                 description={`${shFrDesc.length}/100`}
                 onChange={this.onhandleChangeEvent}

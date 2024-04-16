@@ -15,7 +15,7 @@ export interface IReusableTextFieldProps {
     description?: string;
     defaultValue: string;
     validateOnLoad: boolean;
-    validateOnFocusOut: boolean;
+    validateOnFocusOut?: boolean;
     maxLength: number;
     onChange?: (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => void;
     onGetErrorMessage?: (value: string ) => string | JSX.Element | undefined;
@@ -30,8 +30,8 @@ export interface IReusableTextFieldProps {
     ariaLabelRequired:string;
     charCountId: string;
     infoButton?: string;
-    out_of_Text: string;
-    characterCountText: string;
+    out_of_Text?: string;
+    characterCountText?: string;
 }
 
 
@@ -58,6 +58,7 @@ export default class ReusableTextField extends React.Component<IReusableTextFiel
             root: {
                 fontWeight: "700",
                 fontSize: '16px',
+
             },
         }
         
@@ -65,14 +66,13 @@ export default class ReusableTextField extends React.Component<IReusableTextFiel
         const stackTokens: IStackTokens = {
             childrenGap: 8,
     
-        };
-        
-        
-        const renderDescription = (): JSX.Element  => {
+          };
 
+        
+        const renderDescription = (): JSX.Element => {
             return (
-                <Stack id={this.props.charCountId} horizontalAlign='end'>
-                    <p style={{fontSize: '12px', margin:'0px'}} aria-label={`${this.props.defaultValue.length} ${this.props.out_of_Text} ${this.props.maxLength} ${this.props.characterCountText}`}> {this.props.description}</p>
+                <Stack id={this.props.charCountId} horizontalAlign='end' style={{fontSize: '12px'}}>
+                {this.props.description}
                 </Stack>
             );
         };
@@ -83,15 +83,15 @@ export default class ReusableTextField extends React.Component<IReusableTextFiel
 
                 <Stack  horizontal verticalAlign="center" tokens={stackTokens}>
                     <StackItem >
-                    <Label styles={labelStyle} htmlFor={this.props.id}>
+                    <Label styles={labelStyle} htmlFor={this.props.id} >
                         <span className={styles.asterik} aria-label={this.props.ariaLabelRequired}>
                             *
                         </span>
                         {this.props.title}
                         {this.props.currentPage === 2 && 
-                        (<span><IconButton required ariaLabel={this.props.infoButton} id={this.props.id} styles={ iconStyles } iconProps={infoIcon} onClick={this.props.showCalloutVisible}/></span>)
+                        (<span><IconButton ariaLabel={this.props.infoButton} id={this.props.id} styles={ iconStyles } iconProps={infoIcon} onClick={this.props.showCalloutVisible}/></span>)
                         }
-                        <p className={styles.instruction}>{this.props.instructions}</p> 
+                        <p className={styles.instruction}>{this.props.instructions}</p>
                     </Label>
 
                     </StackItem>
