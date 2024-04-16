@@ -69,7 +69,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
     };
 
     const stackTokens = { childrenGap: 18 };
-  
+   
     return (
       <>
         <h3>{parse(this.strings.commPurpose_title)}</h3>
@@ -83,6 +83,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 rows={3}
                 defaultValue= {commPurpose}
                 validateOnLoad={false}
+                validateOnFocusOut={true}
                 maxLength={500}
                 description={`${commPurpose.length}/500`}
                 onChange={this.onhandleChangeEvent}
@@ -92,8 +93,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 lineId={"first-line"}
                 ariaLabelRequired={this.strings.required}
                 charCountId = {"commPurposeCharCount"}
-  
-                
+                out_of_Text = {this.strings.out_of}
+                characterCountText={this.strings.characters}            
           />
           {isError.includes('commPurpose') && 
             (
@@ -116,6 +117,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 rows={1}
                 defaultValue= {engName}
                 validateOnLoad={false}
+                validateOnFocusOut={true}
                 maxLength={80}
                 description={`${engName.length}/80`}
                 onChange={this.onhandleChangeEvent}
@@ -125,6 +127,9 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 lineId={"second-line"}
                 ariaLabelRequired={this.strings.required}
                 charCountId = {"engNameCharCount"}
+                out_of_Text = {this.strings.out_of}
+                characterCountText={this.strings.characters}  
+                
             />
                 {(isError.includes('engName')) && 
                   (
@@ -143,7 +148,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 multiline ={false}
                 rows={1}
                 defaultValue= {frCommName}
-                validateOnLoad={false}
+                validateOnLoad={false}   
+                validateOnFocusOut={true}
                 maxLength={80}
                 description={`${frCommName.length}/80`}
                 onChange={this.onhandleChangeEvent}
@@ -153,6 +159,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 lineId={"third-line"}
                 ariaLabelRequired={this.strings.required}
                 charCountId = {"frCommNameCharCount"}
+                out_of_Text = {this.strings.out_of}
+                characterCountText={this.strings.characters}
             />
              {isError.includes('frCommName') && 
                 (
@@ -175,7 +183,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 multiline ={false}
                 rows={1}
                 defaultValue= {shEngDesc}
-                validateOnLoad={false}
+                validateOnLoad={false}  
+                validateOnFocusOut={true}
                 maxLength={100}
                 description={`${shEngDesc.length}/100`}
                 onChange={this.onhandleChangeEvent}
@@ -185,6 +194,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 lineId={"fourth-line"}
                 ariaLabelRequired={this.strings.required}
                 charCountId={'shEngDescCharCount'}
+                out_of_Text = {this.strings.out_of}
+                characterCountText={this.strings.characters}
             />
 
                 {isError.includes('shEngDesc') && 
@@ -204,7 +215,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 multiline ={false}
                 rows={1}
                 defaultValue= {shFrDesc}
-                validateOnLoad={false}
+                validateOnLoad={false}  
+                validateOnFocusOut={true}
                 maxLength={100}
                 description={`${shFrDesc.length}/100`}
                 onChange={this.onhandleChangeEvent}
@@ -214,6 +226,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 lineId={"fifth-line"}
                 ariaLabelRequired={this.strings.required}
                 charCountId={'shFrDescCharCount'}
+                out_of_Text = {this.strings.out_of}
+                characterCountText={this.strings.characters}
             />
               {isError.includes('shFrDesc') && 
                 (

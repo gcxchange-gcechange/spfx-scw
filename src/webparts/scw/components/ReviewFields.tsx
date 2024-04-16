@@ -140,6 +140,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     rows={3}
                     defaultValue= {commPurpose}
                     validateOnLoad={false}
+                    validateOnFocusOut={true}
                     maxLength={500}
                     description={`${commPurpose.length}/500`}
                     onChange={this.onUpdateCommPurpose}
@@ -151,6 +152,8 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     ariaLabelRequired={this.strings.required}
                     charCountId = {"commPurposeCharCount"}
                     infoButton={this.strings.infoIcon_CommPurpose}
+                    out_of_Text = {this.strings.out_of}
+                    characterCountText={this.strings.characters} 
                 />
                 
             
@@ -163,6 +166,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     rows={1}
                     defaultValue= {engName}
                     validateOnLoad={false}
+                    validateOnFocusOut={true}
                     maxLength={80}
                     description={`${engName.length}/80`}
                     onChange={this.onUpdateEngName}
@@ -174,6 +178,8 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     ariaLabelRequired={this.strings.required}
                     charCountId = {"engNameCharCount"}
                     infoButton={this.strings.infoIcon_engName}
+                    out_of_Text = {this.strings.out_of}
+                    characterCountText={this.strings.characters} 
                 />
 
                 <ReusableTextField
@@ -185,6 +191,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     rows={1}
                     defaultValue= {frCommName}
                     validateOnLoad={false}
+                    validateOnFocusOut={true}
                     maxLength={80}
                     description={`${frCommName.length}/80`}
                     onChange={this.onUpdateFrName}
@@ -196,6 +203,8 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     ariaLabelRequired={this.strings.required}
                     charCountId = {"frCommNameCharCount"}
                     infoButton={this.strings.infoIcon_frName}
+                    out_of_Text = {this.strings.out_of}
+                    characterCountText={this.strings.characters} 
                 />
 
                 <ReusableTextField
@@ -207,6 +216,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     rows={1}
                     defaultValue= {shEngDesc}
                     validateOnLoad={false}
+                    validateOnFocusOut={true}
                     maxLength={100}
                     description={`${shEngDesc.length}/100`}
                     onChange={this.onUpdateEngDesc}
@@ -218,6 +228,8 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     ariaLabelRequired={this.strings.required}
                     charCountId={'shEngDescCharCount'}
                     infoButton={this.strings.infoIcon_engDesc}
+                    out_of_Text = {this.strings.out_of}
+                    characterCountText={this.strings.characters} 
                 />
 
                 <ReusableTextField
@@ -229,6 +241,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     rows={1}
                     defaultValue= {shFrDesc}
                     validateOnLoad={false}
+                    validateOnFocusOut={true}
                     maxLength={100}
                     description={`${shFrDesc.length}/100`}
                     onChange={this.onUpdateFrDesc}
@@ -240,6 +253,8 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     ariaLabelRequired={this.strings.required}
                     charCountId={'shFrDescCharCount'}
                     infoButton={this.strings.infoIcon_frDesc}
+                    out_of_Text = {this.strings.out_of}
+                    characterCountText={this.strings.characters} 
                 />
 
                     <div id="owners" >
