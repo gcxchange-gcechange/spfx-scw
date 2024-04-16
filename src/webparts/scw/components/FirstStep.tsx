@@ -8,6 +8,7 @@ import { SelectLanguage } from './SelectLanguage';
 import parse from 'html-react-parser';
 import { validateSpecialCharFields, validateTextField, validateisError } from './validationFunction';
 import ReusableTextField from './ReusableTextField';
+import ReusableTextField2 from './ReusableTextField2';
 
 
 
@@ -76,15 +77,11 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
         <h3>{parse(this.strings.commPurpose_title)}</h3>
         <p>{parse(this.strings.commPurpose_desc)}</p>
        
-          <ReusableTextField
+          <ReusableTextField2
                 name="commPurpose"
                 id="commPurpose"
                 styles={charCountStyles.characterLimitStyle}
-                multiline
-                rows={3}
                 defaultValue= {commPurpose}
-                validateOnLoad={false}
-                // validateOnFocusOut={true}
                 maxLength={500}
                 description={`${commPurpose.length}/500`}
                 onChange={this.onhandleChangeEvent}
@@ -95,7 +92,8 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 ariaLabelRequired={this.strings.required}
                 charCountId = {"commPurposeCharCount"}
                 out_of_Text = {this.strings.out_of}
-                characterCountText={this.strings.characters}            
+                characterCountText={this.strings.characters}
+                isError={this.props.isError}       
           />
           {isError.includes('commPurpose') && 
             (
