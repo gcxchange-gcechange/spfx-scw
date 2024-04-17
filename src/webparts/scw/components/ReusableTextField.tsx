@@ -71,8 +71,8 @@ export default class ReusableTextField extends React.Component<IReusableTextFiel
         
         const renderDescription = (): JSX.Element => {
             return (
-                <Stack id={this.props.charCountId} horizontalAlign='end' style={{fontSize: '12px'}}>
-                {this.props.description}
+                <Stack id={this.props.charCountId} horizontalAlign='end'>
+                    <p style={{fontSize: '12px', margin:'0px'}} aria-label={`${this.props.defaultValue.length} ${this.props.out_of_Text} ${this.props.maxLength} ${this.props.characterCountText}`}> {this.props.description}</p>
                 </Stack>
             );
         };
