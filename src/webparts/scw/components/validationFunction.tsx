@@ -18,7 +18,7 @@ export const validateisError = (strings: {  blankField: string }): JSX.Element =
   
 }
 
-export const validateTextField = (value: string, strings: { minCharacters: string; blankField: string }): JSX.Element => {
+export const validateTextField = (value: string, strings: { minCharacters: string; blankField: string }): JSX.Element | string => {
 
  
   const trimmedValue = value.trim();
@@ -46,13 +46,13 @@ export const validateTextField = (value: string, strings: { minCharacters: strin
     );
   }  
   else {
-    return null;
+    return '';
   }
 
   
 }
 
-export const validateSpecialCharFields = (value: string, strings: { minCharacters: string; blankField: string; removeSpecialChar: string }): JSX.Element => {
+export const validateSpecialCharFields = (value: string, strings: { minCharacters: string; blankField: string; removeSpecialChar: string }): JSX.Element | string => {
 
   const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
 
@@ -106,7 +106,7 @@ export const validateSpecialCharFields = (value: string, strings: { minCharacter
         </Stack>
         )
     } else {
-      return (null)
+      return ''
     }
   }
 
