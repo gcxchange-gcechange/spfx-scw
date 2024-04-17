@@ -140,7 +140,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     rows={3}
                     defaultValue= {commPurpose}
                     validateOnLoad={false}
-                   // validateOnFocusOut={true}
+                    validateOnFocusOut={true}
                     maxLength={500}
                     description={`${commPurpose.length}/500`}
                     onChange={this.onUpdateCommPurpose}
@@ -166,7 +166,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     rows={1}
                     defaultValue= {engName}
                     validateOnLoad={false}
-                    //validateOnFocusOut={true}
+                    validateOnFocusOut={true}
                     maxLength={80}
                     description={`${engName.length}/80`}
                     onChange={this.onUpdateEngName}
@@ -191,7 +191,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     rows={1}
                     defaultValue= {frCommName}
                     validateOnLoad={false}
-                    //validateOnFocusOut={true}
+                    validateOnFocusOut={true}
                     maxLength={80}
                     description={`${frCommName.length}/80`}
                     onChange={this.onUpdateFrName}
@@ -216,7 +216,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     rows={1}
                     defaultValue= {shEngDesc}
                     validateOnLoad={false}
-                    //validateOnFocusOut={true}
+                    validateOnFocusOut={true}
                     maxLength={100}
                     description={`${shEngDesc.length}/100`}
                     onChange={this.onUpdateEngDesc}
@@ -241,7 +241,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     rows={1}
                     defaultValue= {shFrDesc}
                     validateOnLoad={false}
-                   // validateOnFocusOut={true}
+                    validateOnFocusOut={true}
                     maxLength={100}
                     description={`${shFrDesc.length}/100`}
                     onChange={this.onUpdateFrDesc}
