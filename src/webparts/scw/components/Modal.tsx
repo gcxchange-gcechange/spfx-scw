@@ -155,7 +155,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
       ownerResults.push(`${this.strings.owner_cannot_be_blank}`)
     }
 
-
+    console.log("CURRENT", this.props.current)
     return (
       <>
       {firstPageMessage}   
@@ -212,14 +212,14 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
 							)
 						}
 				
-						{this.props.current === 1 && (
+						{this.props.current === 3 && (
 							<Stack>
 								<p style={{ textAlign: 'center'}} className={styles.modalContent}> {secondPageErrorMessage} {this.strings.before_proceeding}</p>
 							</Stack>
 							)
 						}
 
-						{this.props.current === 2 &&
+						{this.props.current === 4 &&
 							(
 								<>
 									<Stack>

@@ -14,6 +14,7 @@ import { FocusTrapZone, ISpinnerStyles, PrimaryButton, Stack } from "office-ui-f
 import { IButtonStyles } from "office-ui-fabric-react";
 import ErrorModal from "./Modal";
 import FirstStep from "./FirstStep";
+import FourthStep from "./FourthStep";
 import SecondStep from "./SecondStep";
 import { SelectLanguage } from "./SelectLanguage";
 import {
@@ -28,6 +29,7 @@ import Callouts from "./Callouts";
 import Failed from "./Failed";
 import ReviewFields from "./ReviewFields";
 import { fieldValidations } from "./validationFunction";
+import ThirdStep from "./ThirdStep";
 
 
 export interface IScwState {
@@ -156,7 +158,7 @@ export default class AntDesignStep extends React.Component<
     const showModal =
       isLessThanMinLength ||
       hasSpecialChar ||
-      (current === 1 &&
+      (current === 3 &&
         (ownerList.length === 0 || requestingUser || invalidEmail));
 
     if (!showModal) {
@@ -211,8 +213,8 @@ export default class AntDesignStep extends React.Component<
     const { isLessThanMinLength, hasSpecialChar } = fieldValidations(values);
 
     const showModal =
-      (current === 1 && (ownerList.length === 0 || requestingUser || invalidEmail)) ||
-      (current === 2 && isLessThanMinLength) || hasSpecialChar || ownerList.length === 0 || requestingUser || invalidEmail;
+      (current === 2 && (ownerList.length === 0 || requestingUser || invalidEmail)) ||
+      (current === 3 && isLessThanMinLength) || hasSpecialChar || ownerList.length === 0 || requestingUser || invalidEmail;
 
     if (!showModal) {
       this.setState({
@@ -275,7 +277,7 @@ export default class AntDesignStep extends React.Component<
     if (showModal) {
       this.setState({ showModal: true });
     } else {
-      const functionUrl = "CreateItem?";
+      const functionUrl = "https://appsvc-fnc-dev-scw-list-dotnet001.azurewebsites.net/api/CreateQueue";
       const requestHeaders: Headers = new Headers();
       requestHeaders.append("Content-type", "application/json");
       requestHeaders.append("Cache-Control", "no-cache");
@@ -311,7 +313,7 @@ export default class AntDesignStep extends React.Component<
         document.getElementById("submit").style.display = "none";
 
         this.props.context.aadHttpClientFactory
-          .getClient(" ")
+          .getClient('3385e8cd-40a4-41f5-bd2f-68690654a54b')
           .then((client: AadHttpClient) => {
             client
               .post(functionUrl, AadHttpClient.configurations.v1, postOptions)
@@ -619,6 +621,31 @@ export default class AntDesignStep extends React.Component<
     }
   }
 
+  public selectedChoiceCallback = ( selectedChoice: string ): void =>  { 
+
+    const saveSelectedChoice = selectedChoice;
+
+    this.setState( { 
+        selectedChoice: saveSelectedChoice
+    })
+  } 
+
+  public checkedTerms = ( event: any, isChecked:boolean ):void => {
+    const id = event;
+
+    if ( isChecked === true ) {
+        this.setState(prevState => ({
+            checkedValues: [...prevState.checkedValues, id]
+        }));
+    } 
+    else {
+        const newArray = this.state.checkedValues.filter((item) => item !== id)
+        this.setState({
+            checkedValues: newArray
+        })
+    }
+  }
+
   public render(): React.ReactElement<IScwProps> {
     const {
       current,
@@ -661,9 +688,33 @@ export default class AntDesignStep extends React.Component<
       },
       {
         step: "2",
-        title: this.strings.owners,
+        title: this.strings.classification,
         content: (
           <SecondStep
+            prefLang={this.props.prefLang}
+            selectedChoice= { selectedChoice }
+            handleSelectedChoice= { this.selectedChoiceCallback}
+          />
+        ),
+      },
+      {
+        step: "3",
+        title: this.strings.term_of_use,
+        content: (
+          <ThirdStep
+            prefLang={this.props.prefLang}
+            checkedValues= { checkedValues } 
+            checkedTerms = { this.checkedTerms }
+            selectedChoice = { selectedChoice }
+            
+          />
+        ),
+      },
+      {
+        step: "4",
+        title: this.strings.owners,
+        content: (
+          <FourthStep
             prefLang={this.props.prefLang}
             context={this.props.context}
             ownerList={ownerList}
@@ -674,7 +725,7 @@ export default class AntDesignStep extends React.Component<
         ),
       },
       {
-        step: "3",
+        step: "4",
         title: this.strings.review_submit,
         content: (
           <ReviewFields
@@ -705,7 +756,7 @@ export default class AntDesignStep extends React.Component<
         ),
       },
       {
-        step: "4",
+        step: "5",
         title: this.strings.title_complete,
         content:
           this.state.validationStatus === 200 ? (
@@ -725,7 +776,7 @@ export default class AntDesignStep extends React.Component<
       },
     ];
 
-    const items = steps.map((item) => item.step !== "4" ? { key: item.step, title: item.title } : null );
+    const items = steps.map((item) => item.step !== "5" ? { key: item.step, title: item.title } : null );
 
     const labelSpinnerStyles: Partial<ISpinnerStyles> = {
       root: { padding: 20 },
@@ -741,6 +792,7 @@ export default class AntDesignStep extends React.Component<
     return (
       <>
         <div className={styles.scw}>
+          <h1>{this.state.current.toString()}</h1>
           <Title
             current={current}
             step={step}
@@ -767,10 +819,10 @@ export default class AntDesignStep extends React.Component<
             <div className={styles.container}>
               <div className={styles.row}>
                 <div role="progressbar" 
-                  aria-valuemax={3} 
+                  aria-valuemax={4} 
                   aria-valuemin={0} 
                   aria-valuenow={Math.floor(parseFloat(steps[this.state.current].step))}  
-                  aria-valuetext={`Step ${this.state.current + 1} out of 3`} 
+                  aria-valuetext={`Step ${this.state.current + 1} out of 5`} 
                 >
                 <Stack horizontalAlign="center" >
                   <Steps
@@ -845,9 +897,11 @@ export default class AntDesignStep extends React.Component<
                           }}
                           onClick={() => this.prev()}
                         >
-                          {`${this.strings.prev_btn}`}
+                           { this.state.current === 2 && selectedChoice === `${this.strings.protected_cardTitle}` ?  `${ this.strings.unclassified_button }` : `${ this.strings.prev_btn }` }
                         </Button>
                       )}
+                   
+                   
                     {this.state.current < steps.length - 2 && (
                       <Button
                         id="next"
