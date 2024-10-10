@@ -21,20 +21,20 @@ export default class SecondStep extends React.Component<ISecondStepProps> {
         const elementclass = document.querySelector(".ms-ChoiceField-wrapper.is-inFocus");
 
       
-        if (option.key === 'Unclassified community') {
+        if (option.key === "1") {
             console.log("this is the key",option.key)
             elementclass.classList.add(styles.checkedRadioButton1);
             
         } 
-        else if (option.key === 'Protected A or B community') {
+        else if (option.key === "2") {
             elementclass.classList.add(styles.checkedRadioButton2)
         }
 
         this.setState({
-            selectedChoice: option.text
+            selectedChoice: option.key
         })
 
-        this.props.handleSelectedChoice(option.text)
+        this.props.handleSelectedChoice(option.key)
     }
 
     public render(): React.ReactElement<ISecondStepProps> {
@@ -46,7 +46,7 @@ export default class SecondStep extends React.Component<ISecondStepProps> {
         }
 
         const templateChoice: IChoiceGroupOption[] = [
-            {   key: `${this.strings.unclassified_cardTitle}`, 
+            {   key: "1", 
                 text: `${this.strings.unclassified_cardTitle}`, 
                 ariaLabel: 'Unclassified community' ,
                 onRenderField: (props, render) => {
@@ -63,7 +63,7 @@ export default class SecondStep extends React.Component<ISecondStepProps> {
                 }
             },
 
-             {  key: `${this.strings.protected_cardTitle}`, 
+             {  key: "2", 
                 text:`${this.strings.protected_cardTitle}`, 
                 ariaLabel: 'Protected A or B community',
                 onRenderField: (props, render) => {

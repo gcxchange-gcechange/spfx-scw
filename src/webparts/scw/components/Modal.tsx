@@ -211,6 +211,14 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
 							</>
 							)
 						}
+            {this.props.current === 1 && (
+              <p style={{ textAlign: 'center'}} className={styles.modalContent}>{parse(this.strings.classificationChoice_Modal)}</p>
+            )}
+            {
+              this.props.current === 2 && (
+                <p style={{ textAlign: 'center'}} className={styles.modalContent}>{parse(this.strings.termsofUse_Modal)}</p>
+              )
+            }
 				
 						{this.props.current === 3 && (
 							<Stack>

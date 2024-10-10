@@ -166,6 +166,8 @@ define([], function() {
     "chk6b":"I will regularly review membership on my community and remove members who have changed roles.",
     "chk7":"GCXchange has a retention policy of 2 years for all documents and should only be used to store transitory information.",
     "chk7b":"I agree to back up my community documents on my department's official repository if they contain information of business value.",
+    "termsofUse_Modal":"You must agree to all <strong>terms of use</strong> before proceeding",
+    "classificationChoice_Modal":"You must select a <strong>community classification</strong> before proceeding",
 
 
 

@@ -16,6 +16,7 @@ export default class ThirdStep extends React.Component<IThirdStepProps> {
     public strings = SelectLanguage(this.props.prefLang);
 
     private onChange = ( event: React.ChangeEvent<HTMLInputElement>, isChecked:boolean ): void => {
+        console.log("E",event)
         const checkBoxId = event.target.id;
         this.props.checkedTerms( checkBoxId, isChecked) 
     }
@@ -49,7 +50,7 @@ export default class ThirdStep extends React.Component<IThirdStepProps> {
 
         return (
             <>
-            { this.props.selectedChoice === `${this.strings.protected_cardTitle}` ? 
+            { this.props.selectedChoice === "2" ? 
             <div>
                 <p>{ this.strings.protected_para1 }</p>
                 <p>{ this.strings.protected_para2 }</p>

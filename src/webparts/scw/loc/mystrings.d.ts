@@ -156,6 +156,8 @@ declare interface IScwWebPartStrings {
   protected_para2: string;
   term_of_use: string;
   unclassified_button: string;
+  termsofUse_Modal: string;
+  classificationChoice_Modal: string;
 
 
 

@@ -156,6 +156,8 @@ define([], function() {
         "errorPopUp":"Message d’erreur",
         "out_of":"sur",
         "characters": "caractères",
+        "termsofUse_Modal":"You must agree to all <strong>terms of use</strong> before proceeding",
+        "classificationChoice_Modal":"You must select a <strong>community classification</strong> before proceeding",
 
 
     
