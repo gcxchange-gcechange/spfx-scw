@@ -22,7 +22,6 @@ export default class SecondStep extends React.Component<ISecondStepProps> {
 
       
         if (option.key === "1") {
-            console.log("this is the key",option.key)
             elementclass.classList.add(styles.checkedRadioButton1);
             
         } 
@@ -67,7 +66,6 @@ export default class SecondStep extends React.Component<ISecondStepProps> {
                 text:`${this.strings.protected_cardTitle}`, 
                 ariaLabel: 'Protected A or B community',
                 onRenderField: (props, render) => {
-                    console.log("props",props)
                     return (
                         <div className={ styles.choiceCard }>
                             <div className={styles.cardHeading2}>

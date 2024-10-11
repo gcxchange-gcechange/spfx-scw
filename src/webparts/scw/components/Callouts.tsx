@@ -28,7 +28,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
   private messageText = () : string => {
     const { targetId } = this.props;
 
-
+    
     let message: any = '';
 
     if ( targetId === 'commPurpose' ) {
@@ -46,7 +46,9 @@ export default class Callouts extends React.Component< ICalloutsProps > {
     else if ( targetId === 'shFrDesc' ) {
       message = `${ this.strings.shFrDesc_desc } <br/> ${ this.strings.shFrDesc_Instruction}`
     }
- 
+    else if ( targetId === 'classification' ) {
+      message = `${ this.strings.classificationCallout }`
+    }
     else if ( targetId === 'owners' ) {
       message = `${this.strings.owners_instruction_Callout}`
     }
@@ -75,7 +77,9 @@ export default class Callouts extends React.Component< ICalloutsProps > {
     else if ( targetId === 'shFrDesc' ) {
       title = `${ this.strings.shFrDesc_title }`
     }
-    
+    else if(targetId === 'classification') {
+      title = `${this.strings.classification}`
+    } 
     else if ( targetId === 'owners' ) {
       title = `${this.strings.owners}`
     }
@@ -89,7 +93,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
   
   public render(): React.ReactElement<ICalloutsProps> {
 
- 
+    console.log("CallOut ID", this.props.targetId);
   const message = parse( this.messageText());
    
   

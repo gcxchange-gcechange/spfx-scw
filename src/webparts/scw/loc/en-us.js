@@ -168,6 +168,9 @@ define([], function() {
     "chk7b":"I agree to back up my community documents on my department's official repository if they contain information of business value.",
     "termsofUse_Modal":"You must agree to all <strong>terms of use</strong> before proceeding",
     "classificationChoice_Modal":"You must select a <strong>community classification</strong> before proceeding",
+    "unclassifiedTermTitle":"Unclassified community terms of use",
+    "protectedTermTitle":"Protected community terms of use",
+    "classificationCallout":"To change the classification of your community, you need to go back to the Community classification page, and read the terms of use.",
 
 
 

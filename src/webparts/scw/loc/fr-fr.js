@@ -158,6 +158,9 @@ define([], function() {
         "characters": "caractères",
         "termsofUse_Modal":"You must agree to all <strong>terms of use</strong> before proceeding",
         "classificationChoice_Modal":"You must select a <strong>community classification</strong> before proceeding",
+        "unclassifiedTermTitle":"Conditions d’utilisation des collectivités non classifiées",
+        "protectedTermTitle":"Conditions d’utilisation des collectivités protégées",
+        "classificationCallout":"Pour modifier la classification de votre collectivité, vous devez retourner à la page sur la classification de la collectivité et lire les conditions d’utilisation. ",
 
 
     

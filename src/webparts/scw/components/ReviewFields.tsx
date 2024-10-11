@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable dot-notation */
 import * as React from 'react';
 import { SelectLanguage } from './SelectLanguage';
 import ReusableTextField  from './ReusableTextField';
-import {   Stack,   IStackTokens  } from 'office-ui-fabric-react';
+import {   Stack,   IStackTokens } from 'office-ui-fabric-react';
 import {validateTextField, validateSpecialCharFields, validateOwnerField } from './validationFunction'
 import AddUsers from './AddUsers';
  
@@ -87,6 +88,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
   
 
 	public showCalloutVisible = (event: any):void => {
+        console.log(event);
 			const buttonId = event.currentTarget.id;
 			this.elementId(buttonId);
 			this.props.isCalloutVisible();
@@ -103,6 +105,17 @@ export default class LastStep extends React.Component<ILastStepProps> {
 
 			this.props.getOwnersCallback( newValues );//pass to parent
 	};
+
+    public selectedChoiceText = ():string => {
+        if(this.props.selectedChoice === "1") {
+          return (this.strings.unclassified_cardTitle);
+        } else {
+          return (this.strings.protected_cardTitle);
+        }
+
+    }
+
+   
    
 	public render(): React.ReactElement<ILastStepProps> {
 
@@ -124,7 +137,15 @@ export default class LastStep extends React.Component<ILastStepProps> {
           };
       
       
-          const sectionStackTokens: IStackTokens = { childrenGap: 5 };
+            const sectionStackTokens: IStackTokens = { childrenGap: 5 };
+
+            // let unclassified: string
+            // let protectedB: string
+
+   
+
+
+          
            
        
         return (
@@ -256,8 +277,30 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     out_of_Text = {this.strings.out_of}
                     characterCountText={this.strings.characters} 
                 />
+                
+                <ReusableTextField
+                    name="classification"
+                    id= "classification"
+                    styles={charCountStyles.characterLimitStyle}
+                    aria-describedby=""
+                    multiline ={false}
+                    rows={1}
+                    defaultValue= {this.selectedChoiceText()}
+                    validateOnLoad={false}
+                    validateOnFocusOut={true}
+                    maxLength={100}
+                    title = { this.strings.community_classification}
+                    currentPage = {current}
+                    showCalloutVisible={this.showCalloutVisible}
+                    lineId={"seventh-line"}
+                    ariaLabelRequired={this.strings.required}
+                    infoButton={this.strings.infoIcon_frDesc}
+                    readOnly
 
-                    <div id="owners" >
+                />
+
+
+                    <div id="owners" style={{marginTop: '10px'}} >
                         <AddUsers 
                             id='owners'   
                             aria-describedby="owners"

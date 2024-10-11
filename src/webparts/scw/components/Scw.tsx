@@ -373,7 +373,6 @@ export default class AntDesignStep extends React.Component<
   public handleOnChange = (event: any, value: string): void => {
     const eventName = event;
     const values = value;
-    console.log(eventName, values )
 
     this.handleSideLineErrorValidation(event, value);
 
@@ -555,12 +554,14 @@ export default class AntDesignStep extends React.Component<
   };
 
   public isCalloutVisible = (): void => {
+    console.log("STATE", this.state.showCallout);
     this.setState((prevState) => ({
       showCallout: !prevState.showCallout,
     }));
   };
 
   public getElementId = (id: string): void => {
+    console.log("targetID", id)
     this.setState({
       targetId: id,
     });
@@ -653,8 +654,7 @@ export default class AntDesignStep extends React.Component<
 
   public checkedTerms = ( event: any, isChecked:boolean ):void => {
     const id = event;
-    console.log("event", event);
-    console.log("isCHecked", isChecked);
+
     if ( isChecked === true ) {
         this.setState(prevState => ({
             checkedValues: [...prevState.checkedValues, id]
@@ -804,23 +804,16 @@ export default class AntDesignStep extends React.Component<
       root: { padding: 20 },
     };
 
-    //console.log("onChangeBlank",isError);
-    console.log("checked Array", this.state.checkedValues)
-    // const processSteps: number [] = [];
- 
-    // const barsteps = steps.map((item) =>
-    
-    // )
 
     return (
       <>
         <div className={styles.scw}>
-          <h1>{this.state.current.toString()}</h1>
           <Title
             current={current}
             step={step}
             prefLang={this.props.prefLang}
             status={this.state.validationStatus}
+            selectedChoice={this.state.selectedChoice}
           />
           {step === 0 ? (
             <>
@@ -923,18 +916,31 @@ export default class AntDesignStep extends React.Component<
                            { this.state.current === 2 && selectedChoice === "2" ? `${ this.strings.unclassified_button }` : `${ this.strings.prev_btn }` }
                         </Button>
                       )}
-                   
-                   
-                    {this.state.current < steps.length - 2 && (
-                      <Button
-                        id="next"
-                        className={styles.largebtn}
-                        type="primary"
-                        onClick={this.next}
-                      >
-                        {this.strings.next_btn}
-                      </Button>
-                    )}
+
+                      {this.state.current < steps.length - 2 && (
+                        <>
+                          {this.state.current === 2 && selectedChoice === "2" ? (
+                            <Button
+                              className={styles.largebtn}
+                              style={{ height: '54px' }}
+                              type="primary"
+                              onClick={this.next}
+                            >
+                              {this.strings.next_btn}
+                            </Button>
+                          ) : (
+                            <Button
+                              id="next"
+                              className={styles.largebtn}
+                              type="primary"
+                              onClick={this.next}
+                            >
+                              {this.strings.next_btn}
+                            </Button>
+                          )}
+                        </>
+                      )}
+
                     {this.state.current === steps.length - 2 && (
                       <Button
                         id="submit"
