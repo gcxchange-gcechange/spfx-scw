@@ -55,12 +55,12 @@ define([], function() {
     "owners_Instruction": ' Start typing an owner’s email address to find and add them.',
     "owners_instruction_Callout": "Start typing an owner’s email address (who is registered to GCXchange) to find and add them.",
 
-    "collaborate":"Collaborate with colleagues across departments using Microsoft Teams\n and SharePoint to share ideas, documents, and much more. Make sure to only store <strong>unclassified documents</strong>",
+    "collaborate":"Collaborate with colleagues across departments using Microsoft Teams\n and SharePoint to share ideas, documents, and much more.",
     "a_few_things":"A few things before you start",
     "to_create": "To create a community, you will need to:",
     "bilingual_name_smallText": "Community name and description need to be fully bilingual to comply with the <i>Official Languages Act</i>",
     "indentify_one_more_owner": "Identify at least <strong className={ styles.blue }>one more owner</strong>\n already registered to GCXchange",
-    "indentify_one_more_owner_smallText": "Identifying more than one owner ensures the continuity of the community if one owner leaves",
+    "indentify_one_more_owner_smallText": "Identifying more than one owner ensures the <br> continuity of the community if one owner leaves",
   
     "Lets_go": "Let's go",
     "comm_desc_title": "Community description",
@@ -171,6 +171,8 @@ define([], function() {
     "unclassifiedTermTitle":"Unclassified community terms of use",
     "protectedTermTitle":"Protected community terms of use",
     "classificationCallout":"To change the classification of your community, you need to go back to the Community classification page, and read the terms of use.",
+    "initial_thirdCardText": "Identify if your community will be \n <strong className={ styles.blue }>Protected</strong> or <strong className={ styles.blue }>Unclassified</strong>",
+    "initial_thirCardSmallText": "Terms and conditions for creating a protected community will need to be accepted prior to creating one ",
 
 
 

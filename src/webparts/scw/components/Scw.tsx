@@ -220,32 +220,44 @@ export default class AntDesignStep extends React.Component<
     const values = { engName, frCommName, shEngDesc, shFrDesc, commPurpose };
     const { isLessThanMinLength, hasSpecialChar } = fieldValidations(values);
 
-    console.log(current);
+    console.log("CUrrentPage",current);
+    console.log("SElection", selectedChoice)
 
     const showModal =
       (current === 3 && (ownerList.length === 0 || requestingUser || invalidEmail)) ||
-      (current === 4 && isLessThanMinLength) || hasSpecialChar || ownerList.length === 0 || requestingUser || invalidEmail;
+      (current === 4 && isLessThanMinLength) || hasSpecialChar || ownerList.length === 0 || requestingUser || invalidEmail;    
 
-    if (current === 2 && selectedChoice === "2") {
-      this.setState({
-       
-        showModal: false
-      });
-    }      
 
-    if (!showModal) {
-      this.setState({
-        current: prevPage,
-      });
-    } else if(current === 2 && selectedChoice === "2"){
-      this.setState({
-        selectedChoice: "1",
-      });
-    } else {
-      this.setState({ 
-        showModal: true
-      });
-    }
+      if (current === 2 && selectedChoice === "2") {
+        this.setState({
+          selectedChoice: "1",
+        });
+      }
+
+      if (!showModal) {
+        this.setState({
+          current: prevPage,
+        });
+      } else {
+        this.setState({
+          showModal: true,
+        });
+      }
+      
+
+    // if (!showModal) {
+    //   this.setState({
+    //     current: prevPage,
+    //   });
+    // } else if(current === 2 && selectedChoice === "2"){
+    //   this.setState({
+    //     selectedChoice: "1",
+    //   });
+    // } else {
+    //   this.setState({ 
+    //     showModal: true
+    //   });
+    // }
   };
 
   public handleClickEvent = (): void => {
@@ -274,6 +286,7 @@ export default class AntDesignStep extends React.Component<
   };
 
   public successMessage = (): void => {
+
     const {
       current,
       engName,
@@ -283,10 +296,12 @@ export default class AntDesignStep extends React.Component<
       commPurpose,
       ownerList,
       invalidEmail,
-      requestingUser,
+      requestingUser
     } = this.state;
     const values = { engName, frCommName, shEngDesc, shFrDesc, commPurpose };
     const { isLessThanMinLength, hasSpecialChar } = fieldValidations(values);
+
+    
 
     const showModal =
       ownerList.length === 0 ||
@@ -298,13 +313,14 @@ export default class AntDesignStep extends React.Component<
     if (showModal) {
       this.setState({ showModal: true });
     } else {
-      const functionUrl = "https://appsvc-fnc-dev-scw-list-dotnet001.azurewebsites.net/api/CreateQueue";
+      const functionUrl = "https://appsvc-fnc-dev-scw-list-dotnet001.azurewebsites.net/api/CreateItem";
       const requestHeaders: Headers = new Headers();
       requestHeaders.append("Content-type", "application/json");
       requestHeaders.append("Cache-Control", "no-cache");
 
       const owner1 = [...ownerList, this.props.requestor].join(",");
 
+      
       const postOptions: IHttpClientOptions = {
         headers: requestHeaders,
         body: `
@@ -319,8 +335,8 @@ export default class AntDesignStep extends React.Component<
 						"TemplateTitle": "Generic",
 						"RequesterName": "${this.props.context.pageContext.user.displayName}",
 						"RequesterEmail": "${this.props.requestor}",
-						"SecurityCategory": "unclassified",
-						"Status": "Submitted",		
+						"SecurityCategory": "${this.state.selectedChoice === '1' ? 'unclassified' : this.state.selectedChoice === '2' ? 'protected' : this.state.selectedChoice}",
+						"Status": "Submitted"		
 					}`,
       };
 
@@ -747,7 +763,7 @@ export default class AntDesignStep extends React.Component<
         ),
       },
       {
-        step: "4",
+        step: "5",
         title: this.strings.review_submit,
         content: (
           <ReviewFields
@@ -778,7 +794,7 @@ export default class AntDesignStep extends React.Component<
         ),
       },
       {
-        step: "5",
+        step: "6",
         title: this.strings.title_complete,
         content:
           this.state.validationStatus === 200 ? (
@@ -798,7 +814,7 @@ export default class AntDesignStep extends React.Component<
       },
     ];
 
-    const items = steps.map((item) => item.step !== "5" ? { key: item.step, title: item.title } : null );
+    const items = steps.map((item) => item.step !== "6" ? { key: item.step, title: item.title } : null );
 
     const labelSpinnerStyles: Partial<ISpinnerStyles> = {
       root: { padding: 20 },

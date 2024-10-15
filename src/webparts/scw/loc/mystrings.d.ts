@@ -161,6 +161,8 @@ declare interface IScwWebPartStrings {
   unclassifiedTermTitle: string;
   protectedTermTitle: string;
   classificationCallout: string;
+  initial_thirdCardText: string;
+  initial_thirCardSmallText: string;
 
 
 

@@ -47,7 +47,7 @@ define([], function() {
         // "members_Instruction": 'Commencez à taper le nom de famille d’un membre pour le trouver et l’ajouter.',
         // "community_classification_desc": "Pour modifier la classification de votre collectivité, vous devez retourner à la page sur la classification de la collectivité et lire les conditions d’utilisation.",
         // "community_classification_link": "Accéder à la page Classification de la collectivité",
-        "collaborate": "Collaborer avec des collègues d’autres ministères en utilisant Microsoft Teams et SharePoint pour échanger des idées, des documents, et bien plus encore. Assurez-vous de stocker uniquement des <strong>documents non classifiés</strong>",
+        "collaborate": "Collaborer avec des collègues d’autres ministères en utilisant Microsoft Teams et SharePoint pour échanger des idées, des documents, et bien plus encore.",
         "a_few_things": "Quelques directives avant de commencer",
         "to_create": "Pour créer une collectivité, vous devrez :",
         "bilingual_name_smallText": "Indiquer le nom et la description de la collectivité et le tout doit être entièrement bilingue pour respecter la <i>Loi sur les langues officielles</i>",
@@ -161,7 +161,8 @@ define([], function() {
         "unclassifiedTermTitle":"Conditions d’utilisation des collectivités non classifiées",
         "protectedTermTitle":"Conditions d’utilisation des collectivités protégées",
         "classificationCallout":"Pour modifier la classification de votre collectivité, vous devez retourner à la page sur la classification de la collectivité et lire les conditions d’utilisation. ",
-
+        "initial_thirdCardText": "Indiquer si votre collectivité présentera des renseignements de niveau\n <strong className={ styles.blue }>Protégé</strong>  ou <strong className={ styles.blue }>Non classifié</strong>",
+        "initial_thirCardSmallText": "Les conditions de création d’une collectivité protégée devront être acceptées avant la création d’une collectivité.",
 
     
     
