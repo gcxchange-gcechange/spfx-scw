@@ -22,6 +22,7 @@ export interface IErrorModalProps {
   prefLang: string;
   invalidUser: string;
   requestor: string;
+  selectedChoice: string;
 }
 
 export default class ErrorModal extends React.Component<IErrorModalProps> {
@@ -211,7 +212,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
 							</>
 							)
 						}
-            {this.props.current === 1 && (
+            {this.props.current === 1 && this.props.selectedChoice === "" && (
               <p style={{ textAlign: 'center'}} className={styles.modalContent}>{parse(this.strings.classificationChoice_Modal)}</p>
             )}
             {

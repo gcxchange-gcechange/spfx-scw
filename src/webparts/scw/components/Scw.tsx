@@ -71,7 +71,7 @@ export default class AntDesignStep extends React.Component<
       frCommName: "",
       shEngDesc: "",
       shFrDesc: "",
-      selectedChoice: "",
+      selectedChoice: "1",
       errorMessage: "",
       showModal: false,
       checkedValues: [],
@@ -202,6 +202,55 @@ export default class AntDesignStep extends React.Component<
     });
   };
 
+  // private prev = (): void => {
+  //   debugger;
+  //   const prevPage = this.state.current - 1;
+
+  //   const {
+  //     current,
+  //     engName,
+  //     frCommName,
+  //     shEngDesc,
+  //     shFrDesc,
+  //     commPurpose,
+  //     ownerList,
+  //     invalidEmail,
+  //     requestingUser,
+  //     selectedChoice
+  //   } = this.state;
+  //   const values = { engName, frCommName, shEngDesc, shFrDesc, commPurpose };
+  //   const { isLessThanMinLength, hasSpecialChar } = fieldValidations(values);
+
+  //   console.log("CUrrentPage",current);
+  //   console.log("SElection", selectedChoice)
+
+  //   const showOwnerModal = current === 3 && (ownerList.length === 0 || requestingUser || invalidEmail);
+  //   const showReviewModal = (current === 4 && isLessThanMinLength) || hasSpecialChar || ownerList.length === 0 || requestingUser || invalidEmail; 
+
+
+  //   const showModal =
+  //     showOwnerModal ||
+  //     showReviewModal
+  //     //(current === 4 && isLessThanMinLength) || hasSpecialChar || ownerList.length === 0 || requestingUser || invalidEmail;    
+
+  //   if (current === 0 && (isLessThanMinLength || hasSpecialChar) ) {
+  //     console.log("error page `1")
+  //   } else if (!showModal) {
+  //     console.log("not show modal");
+  //     this.setState({
+  //       current: prevPage
+  //     })
+  //   }
+
+    
+  // };
+
+  private clearState = ():void => {
+    this.setState({
+      selectedChoice: "1"
+    })
+  }
+
   private prev = (): void => {
     const prevPage = this.state.current - 1;
 
@@ -220,45 +269,40 @@ export default class AntDesignStep extends React.Component<
     const values = { engName, frCommName, shEngDesc, shFrDesc, commPurpose };
     const { isLessThanMinLength, hasSpecialChar } = fieldValidations(values);
 
-    console.log("CUrrentPage",current);
-    console.log("SElection", selectedChoice)
+    console.log("SelectedChoice", selectedChoice);
 
-    const showModal =
-      (current === 3 && (ownerList.length === 0 || requestingUser || invalidEmail)) ||
-      (current === 4 && isLessThanMinLength) || hasSpecialChar || ownerList.length === 0 || requestingUser || invalidEmail;    
-
-
-      if (current === 2 && selectedChoice === "2") {
-        this.setState({
-          selectedChoice: "1",
-        });
-      }
-
-      if (!showModal) {
-        this.setState({
-          current: prevPage,
-        });
-      } else {
-        this.setState({
-          showModal: true,
-        });
-      }
-      
-
-    // if (!showModal) {
-    //   this.setState({
-    //     current: prevPage,
-    //   });
-    // } else if(current === 2 && selectedChoice === "2"){
-    //   this.setState({
-    //     selectedChoice: "1",
-    //   });
-    // } else {
-    //   this.setState({ 
-    //     showModal: true
-    //   });
-    // }
-  };
+    // const showModal =
+    //   (current === 3 && (ownerList.length === 0 || requestingUser || invalidEmail)) ||
+    //   (current === 4 && isLessThanMinLength) || hasSpecialChar || ownerList.length === 0 || requestingUser || invalidEmail;
+    if (current === 1) {
+      this.setState({
+        showModal: false,
+        current: prevPage
+      });
+    } else if (current === 2 && selectedChoice === "2") {
+      this.clearState();
+    } 
+    else if (current === 2 && selectedChoice ==="1"){
+      this.setState({
+        showModal: false,
+        current: prevPage
+      })
+    }
+    else if( current === 3 && (ownerList.length === 0 || requestingUser || invalidEmail)) {
+      this.setState({
+        showModal: true
+      })
+    } else if((current === 4 && isLessThanMinLength) || hasSpecialChar || ownerList.length === 0 || requestingUser || invalidEmail) {
+      this.setState({
+        showModal: true
+      })
+    }  else {
+      this.setState({
+        current: prevPage
+      })
+    }
+  }; 
+ 
 
   public handleClickEvent = (): void => {
     const step = this.state.step + 1;
@@ -313,7 +357,7 @@ export default class AntDesignStep extends React.Component<
     if (showModal) {
       this.setState({ showModal: true });
     } else {
-      const functionUrl = "https://appsvc-fnc-dev-scw-list-dotnet001.azurewebsites.net/api/CreateItem";
+      const functionUrl = "";
       const requestHeaders: Headers = new Headers();
       requestHeaders.append("Content-type", "application/json");
       requestHeaders.append("Cache-Control", "no-cache");
@@ -335,8 +379,8 @@ export default class AntDesignStep extends React.Component<
 						"TemplateTitle": "Generic",
 						"RequesterName": "${this.props.context.pageContext.user.displayName}",
 						"RequesterEmail": "${this.props.requestor}",
-						"SecurityCategory": "${this.state.selectedChoice === '1' ? 'unclassified' : this.state.selectedChoice === '2' ? 'protected' : this.state.selectedChoice}",
-						"Status": "Submitted"		
+						"SecurityCategory": "${this.state.selectedChoice === '1' ? 'unclassified' : this.state.selectedChoice === '2' ? 'prob' : this.state.selectedChoice}",
+						"Status": "Submitted",
 					}`,
       };
 
@@ -350,7 +394,7 @@ export default class AntDesignStep extends React.Component<
         document.getElementById("submit").style.display = "none";
 
         this.props.context.aadHttpClientFactory
-          .getClient('3385e8cd-40a4-41f5-bd2f-68690654a54b')
+          .getClient('')
           .then((client: AadHttpClient) => {
             client
               .post(functionUrl, AadHttpClient.configurations.v1, postOptions)
@@ -889,6 +933,7 @@ export default class AntDesignStep extends React.Component<
                       showModal={showModal}
                       openModal={this.next}
                       onClose={this.closeModal}
+                      selectedChoice={selectedChoice}
                     />
                   </FocusTrapZone>
                 )}

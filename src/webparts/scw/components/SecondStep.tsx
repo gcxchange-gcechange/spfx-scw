@@ -85,7 +85,14 @@ export default class SecondStep extends React.Component<ISecondStepProps> {
                 <div>
                     <p>{this.strings.comm_classification_para1}</p>
                     <Stack horizontalAlign='center'>
-                        <ChoiceGroup id='choiceGroup' options={templateChoice} required={true} onChange={this.onSelectedKey} styles={ flexSyle } defaultSelectedKey={this.props.selectedChoice}/>
+                        <ChoiceGroup 
+                            id='choiceGroup' 
+                            options={templateChoice} 
+                            required={true} 
+                            onChange={this.onSelectedKey} 
+                            styles={ flexSyle } 
+                            defaultSelectedKey={this.props.selectedChoice}
+                        />
                     </Stack>
                 </div>
             </>
