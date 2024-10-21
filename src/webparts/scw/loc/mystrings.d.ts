@@ -163,6 +163,7 @@ declare interface IScwWebPartStrings {
   classificationCallout: string;
   initial_thirdCardText: string;
   initial_thirCardSmallText: string;
+  unclassified_para2: string;
 
 
 

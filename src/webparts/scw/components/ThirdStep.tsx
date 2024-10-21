@@ -88,6 +88,7 @@ export default class ThirdStep extends React.Component<IThirdStepProps> {
                 : 
                     <div>
                         <p>{parse( this.strings.unclassified )}</p>
+                        <p>{this.strings.unclassified_para2}</p>
                     </div>
                 }
             </>

@@ -41,6 +41,14 @@ export default class SecondStep extends React.Component<ISecondStepProps> {
         const flexSyle: Partial<IChoiceGroupStyles> = {
             flexContainer:{
                 display:'flex'
+            },
+            label:{
+                color: 'white',
+                 selectors: {
+                    hover:{
+                    color: 'white'
+                    }   
+                }
             }
         }
 
