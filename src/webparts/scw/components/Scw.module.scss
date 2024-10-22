@@ -274,8 +274,9 @@
 }
 
 .terms {
-    margin: 0px!important;
-    text-indent: 2.5em;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 2.5em;
 }
 
 .previousbtn {
@@ -484,10 +485,9 @@ u {
 //     }
 //     .ms-Label::after {
 //         content: "";
-//     }
-
-   
+//     } 
 // }
+
 .charCountError {
     color: #C61515;
     font-weight: 700!important;

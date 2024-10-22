@@ -152,6 +152,9 @@ declare interface IScwWebPartStrings {
   chk6b: string;
   chk7: string;
   chk7b: string;
+  chk7c: string;
+  chk8: string;
+  chk8b: string;
   protected_para1: string;
   protected_para2: string;
   term_of_use: string;

@@ -158,7 +158,7 @@ export default class AntDesignStep extends React.Component<
     this.blankFieldValidation(inputFieldAriaValidArray);
 
     const isMissingClassification =  current === 1 && (selectedChoice === "");
-    const isMissingCheckedValues = current === 2 && (selectedChoice === "2" && checkedValues.length < 7);
+    const isMissingCheckedValues = current === 2 && (selectedChoice === "2" && checkedValues.length < 8);
 
     const showModal =
       isLessThanMinLength ||
@@ -853,6 +853,7 @@ export default class AntDesignStep extends React.Component<
               shEngDesc={shEngDesc}
               shFrDesc={shFrDesc}
               validationStatus={this.state.validationStatus}
+              selectedChoice={selectedChoice}
             />
           ),
       },

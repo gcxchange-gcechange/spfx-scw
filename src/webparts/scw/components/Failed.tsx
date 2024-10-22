@@ -13,6 +13,7 @@ export interface IFailedProps {
   shEngDesc: string;
   shFrDesc: string;
   validationStatus: number;
+  selectedChoice: string;
 }
 
 export default class Failed extends React.Component<IFailedProps> {

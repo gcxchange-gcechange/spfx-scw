@@ -53,7 +53,7 @@ export default class ThirdStep extends React.Component<IThirdStepProps> {
             <div>
                 <p>{ this.strings.protected_para1 }</p>
                 <p>{ this.strings.protected_para2 }</p>
-                <Label required>{ this.strings.agree_to_terms }</Label>
+                <span className={styles.asterik} aria-label={this.strings.required}>*</span><Label>{ this.strings.agree_to_terms }</Label>
                 <Stack tokens = { stackTokens } styles={ stackStyles }>
                     <StackItem>
                         <Checkbox id='1' styles={checkBoxStyles} label={`${ this.strings.chk1 }`} onChange={ this.onChange } defaultChecked={this.props.checkedValues[0]}/>
@@ -81,7 +81,12 @@ export default class ThirdStep extends React.Component<IThirdStepProps> {
                     </StackItem>
                     <StackItem>
                         <Checkbox id='7' styles={checkBoxStyles} label={`${ this.strings.chk7 }`}  onChange={ this.onChange }  defaultChecked={this.props.checkedValues[6]}/>
-                        <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>{ this.strings.chk7b }</strong></p>
+                        <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>{ parse(this.strings.chk7b) }</strong></p>
+                        {/* <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>{ parse(this.strings.chk7c) }</strong></p> */}
+                    </StackItem>
+                    <StackItem>
+                        <Checkbox id='8' styles={checkBoxStyles} label={`${ parse(this.strings.chk8) }`}  onChange={ this.onChange }  defaultChecked={this.props.checkedValues[6]}/>
+                        <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>{ parse(this.strings.chk8b) }</strong></p>
                     </StackItem>
                 </Stack>
             </div>

@@ -32,9 +32,7 @@ export default class FourthStep extends React.Component<IFourthStepProps> {
   public render(): React.ReactElement<IFourthStepProps> {
     return (
       <>
-        <p>{this.strings.invite_owners_para1}</p>
-        <p>{parse(this.strings.invite_owners_para2)}</p>
-
+        <p>{parse(this.strings.invite_owners_para1)}</p>
    
           <AddUsers
             id={"owners"}
