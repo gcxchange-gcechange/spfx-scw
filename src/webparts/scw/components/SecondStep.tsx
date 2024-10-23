@@ -1,7 +1,7 @@
 import * as React from "react";
 import { SelectLanguage } from './SelectLanguage';
 import styles from "./Scw.module.scss";
-import { ChoiceGroup, IChoiceGroupOption, IChoiceGroupStyles } from 'office-ui-fabric-react/lib/ChoiceGroup';
+import { ChoiceGroup, IChoiceGroupOption, IChoiceGroupOptionStyles, IChoiceGroupStyles } from 'office-ui-fabric-react/lib/ChoiceGroup';
 import { Stack } from 'office-ui-fabric-react';
 import parse from 'html-react-parser';
 
@@ -42,6 +42,12 @@ export default class SecondStep extends React.Component<ISecondStepProps> {
             flexContainer:{
                 display:'flex'
             }     
+        }
+
+        const hoverStyle: Partial<IChoiceGroupOptionStyles> = {
+            field:{
+                color:'red'
+            }
         }
 
         const templateChoice: IChoiceGroupOption[] = [
@@ -90,7 +96,7 @@ export default class SecondStep extends React.Component<ISecondStepProps> {
                             options={templateChoice} 
                             required={true} 
                             onChange={this.onSelectedKey} 
-                            styles={ flexSyle } 
+                            styles={ flexSyle} 
                             defaultSelectedKey={this.props.selectedChoice}
                         />
                     </Stack>

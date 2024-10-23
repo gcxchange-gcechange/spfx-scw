@@ -53,7 +53,11 @@ export default class ThirdStep extends React.Component<IThirdStepProps> {
             <div>
                 <p>{ this.strings.protected_para1 }</p>
                 <p>{ this.strings.protected_para2 }</p>
-                <span className={styles.asterik} aria-label={this.strings.required}>*</span><Label>{ this.strings.agree_to_terms }</Label>
+                <div style={{display:'flex', alignItems:'center'}}>
+                    <span style={{color: 'red'}} aria-label={this.strings.required}>*</span>
+                    <Label>{ this.strings.agree_to_terms }</Label>
+                </div>
+                
                 <Stack tokens = { stackTokens } styles={ stackStyles }>
                     <StackItem>
                         <Checkbox id='1' styles={checkBoxStyles} label={`${ this.strings.chk1 }`} onChange={ this.onChange } defaultChecked={this.props.checkedValues[0]}/>

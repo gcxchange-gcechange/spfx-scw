@@ -71,7 +71,7 @@ export default class AUsers extends React.Component<IAddUsersProps> {
             <> 
                 <div id={this.props.id} tabIndex={0}>
                     <Stack>
-                        <Label htmlFor={this.props.id} style={{fontWeight:'700'}} aria-required={true}>
+                        <Label htmlFor={this.props.id} style={{fontWeight:'700', paddingBottom: '0px'}} aria-required={true}>
                             <span className={styles.asterik} aria-label={this.strings.required} >
                                 *
                             </span>
