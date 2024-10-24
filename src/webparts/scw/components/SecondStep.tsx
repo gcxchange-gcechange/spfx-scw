@@ -45,15 +45,18 @@ export default class SecondStep extends React.Component<ISecondStepProps> {
         }
 
         const hoverStyle: Partial<IChoiceGroupOptionStyles> = {
-            field:{
-                color:'red'
+            choiceFieldWrapper:{
+                ':hover': {
+                    color: 'red'
+                }
             }
         }
 
         const templateChoice: IChoiceGroupOption[] = [
             {   key: "1", 
                 text: `${this.strings.unclassified_cardTitle}`, 
-                ariaLabel: 'Unclassified community' ,
+                ariaLabel: 'Unclassified community',
+                styles: hoverStyle,
                 onRenderField: (props, render) => {
                     return (
                         <div className={ styles.choiceCard } >

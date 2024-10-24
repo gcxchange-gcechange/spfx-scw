@@ -148,6 +148,8 @@
 
     .ant-steps .ant-steps-item-title {
         font-size: 12px;
+        line-height: 20px;
+        margin-top: 2px;
     }
 
     .ant-steps .ant-steps-item-wait>.ant-steps-item-container>.ant-steps-item-content>.ant-steps-item-title{
@@ -404,12 +406,17 @@
     opacity: 0.8;
 }
 
+// #ChoiceGroupLabel38-1:hover {
+//     color: red; /* Change this to your desired hover color */
+//   }
+
 :global {
     .ms-ChoiceField {
         margin-right: 50px;
-    }
-    
-    
+    } 
+    .ms-ChoiceFieldLabel:hover {
+        color: 'pink'
+    }  
 }
 
 .checkedRadioButton1 {
