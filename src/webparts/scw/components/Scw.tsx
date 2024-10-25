@@ -394,7 +394,7 @@ export default class AntDesignStep extends React.Component<
         document.getElementById("submit").style.display = "none";
 
         this.props.context.aadHttpClientFactory
-          .getClient('33')
+          .getClient('3')
           .then((client: AadHttpClient) => {
             client
               .post(functionUrl, AadHttpClient.configurations.v1, postOptions)
