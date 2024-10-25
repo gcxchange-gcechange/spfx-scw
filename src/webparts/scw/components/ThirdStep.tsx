@@ -55,7 +55,7 @@ export default class ThirdStep extends React.Component<IThirdStepProps> {
                 <p>{ this.strings.protected_para2 }</p>
                 <div style={{display:'flex', alignItems:'center'}}>
                     <span style={{color: 'red'}} aria-label={this.strings.required}>*</span>
-                    <Label>{ this.strings.agree_to_terms }</Label>
+                    <Label style={{fontWeight: '700'}}>{ this.strings.agree_to_terms }</Label>
                 </div>
                 
                 <Stack tokens = { stackTokens } styles={ stackStyles }>

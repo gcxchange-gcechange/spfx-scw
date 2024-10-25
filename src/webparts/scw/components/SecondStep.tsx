@@ -45,7 +45,7 @@ export default class SecondStep extends React.Component<ISecondStepProps> {
         }
 
         const hoverStyle: Partial<IChoiceGroupOptionStyles> = {
-            choiceFieldWrapper:{
+            labelWrapper:{
                 ':hover': {
                     color: 'red'
                 }

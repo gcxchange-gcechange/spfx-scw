@@ -34,7 +34,7 @@ export default class Failed extends React.Component<IFailedProps> {
     return (
       <div>
         <h2 style={{ textAlign: "center" }}>{`${this.strings.failed_oops}`}</h2>    
-      {this.props.selectedChoice === "1" && (
+      {this.props.selectedChoice === "1" ? (
       <div>
         {this.props.prefLang === "fr-fr" ? (
           <p>
@@ -88,7 +88,15 @@ export default class Failed extends React.Component<IFailedProps> {
           </p>
         )}
         </div>
-        )}
+        )
+        
+        : 
+        <div>
+         <p>{this.strings.failed_ProB_text}</p> 
+       </div>
+       
+       }
+        
       </div>
 
     );

@@ -76,7 +76,7 @@ export default class AUsers extends React.Component<IAddUsersProps> {
                                 *
                             </span>
                             {this.props.title}
-                            {this.props.currentPage === 2 && 
+                            {this.props.currentPage === 4 && 
                             (<span>
                                 <IconButton ariaLabel={this.props.infoButton} id={this.props.id} styles={ iconStyles } iconProps={infoIcon} onClick={this.props.showCalloutVisible}/>
                             </span>
