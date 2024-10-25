@@ -132,21 +132,20 @@ export default class LastStep extends React.Component<ILastStepProps> {
               },
               errorMessage: {
                 color: '#C61515'
-              }
+              },
+
             },
+            readOnlyField: {
+                field: {
+                    backgroundColor: '#e4e3e1'
+                }
+            }
           };
       
+         
       
-            const sectionStackTokens: IStackTokens = { childrenGap: 5 };
+        const sectionStackTokens: IStackTokens = { childrenGap: 5 };
 
-            // let unclassified: string
-            // let protectedB: string
-
-   
-
-
-          
-           
        
         return (
             
@@ -281,7 +280,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                 <ReusableTextField
                     name="classification"
                     id= "classification"
-                    styles={charCountStyles.characterLimitStyle}
+                    styles={charCountStyles.readOnlyField}
                     aria-describedby=""
                     multiline ={false}
                     rows={1}
@@ -292,7 +291,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     title = { this.strings.community_classification}
                     currentPage = {current}
                     showCalloutVisible={this.showCalloutVisible}
-                    lineId={"seventh-line"}
+                    lineId={"seventh-line"} 
                     ariaLabelRequired={this.strings.required}
                     infoButton={this.strings.infoIcon_frDesc}
                     readOnly
