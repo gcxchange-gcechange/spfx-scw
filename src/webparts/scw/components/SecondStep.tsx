@@ -19,9 +19,7 @@ export default class SecondStep extends React.Component<ISecondStepProps> {
     private onSelectedKey = ( event: React.ChangeEvent<HTMLInputElement>, option: IChoiceGroupOption):void => {
 
         const elementclass = document.querySelector(".ms-ChoiceField-wrapper.is-inFocus");
-        const isCheckedCard = document.querySelector("ms-ChoiceField-field is-checked");
 
-        console.log("Checked", isCheckedCard)
       
         if (option.key === "1") {
             elementclass.classList.add(styles.checkedRadioButton1);

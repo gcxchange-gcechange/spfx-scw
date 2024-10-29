@@ -310,6 +310,17 @@
     justify-content: space-around;
 }
 
+.border1 {
+    border: 2px solid #004DB8;
+    border-radius:5px;
+}
+
+.border2 {
+    border: 2px solid #02A0FF;
+    border-radius: 5px;
+}
+    
+
 .choiceCardBorder {
    border: 1px solid #004DB8;
    border-radius: 5px;
@@ -556,6 +567,8 @@ dialog {
 dialog:focus-visible {
     outline: none;
 }
-    
+
+
+
 
 
