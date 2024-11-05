@@ -744,6 +744,12 @@ export default class AntDesignStep extends React.Component<
     }
   }
 
+  public goToPage = (page: number):void => {
+    this.setState({
+      current: page
+    })
+  }
+
   public render(): React.ReactElement<IScwProps> {
     const {
       current,
@@ -931,6 +937,8 @@ export default class AntDesignStep extends React.Component<
                     showCallout={showCallout}
                     targetId={targetId}
                     openCallout={this.isCalloutVisible}
+                    current={current}
+                    goToPage={this.goToPage}
                   />
                 )}
                 {this.state.showModal === true && (

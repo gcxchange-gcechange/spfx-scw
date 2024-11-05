@@ -168,6 +168,7 @@ declare interface IScwWebPartStrings {
   initial_thirCardSmallText: string;
   unclassified_para2: string;
   failed_ProB_text:string;
+  changeClassificationButton: string;
 
 
 

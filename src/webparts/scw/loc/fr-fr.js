@@ -53,6 +53,7 @@ define([], function() {
         //"classificationChoice_Modal":"Vous devez sélectionner <strong>community classification</strong> avant de poursuivre.",
         "classificationCallout":"Pour modifier la classification de votre collectivité, vous devez retourner à la page sur la classification de la collectivité et lire les conditions d’utilisation. ",
         "shFrDesc_Modal": 'description en français',
+        "changeClassificationButton":"Accéder à la page <i>Classification de la collectivité</i>",
 
         //First Step
         "community_details": "Détails de la collectivité",

@@ -12,6 +12,8 @@ export interface ICalloutsProps {
   prefLang: string;
   targetId: string;
   openCallout?: ()=> void;
+  goToPage?: (page: number)=> void;
+  current: number;
 
 }
 
@@ -24,6 +26,10 @@ export default class Callouts extends React.Component< ICalloutsProps > {
     super(props);
   }
 
+  private goToClassificationPage = ():void => {
+    const prevPage = this.props.current - 3;
+    this.props.goToPage(prevPage)
+  }
 
   private messageText = () : string => {
     const { targetId } = this.props;
@@ -174,6 +180,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
             </div>
             <div id="dialog_desc" className={stylesCallout.body}>
               <p>{ message }</p>
+              {this.props.targetId === 'classification'   && (<button onClick={this.goToClassificationPage}>{parse(this.strings.changeClassificationButton)}</button>)}
               
                 <div className={ stylesCallout.buttons } >
                     <PrimaryButton onClick={this.props.openCallout} > {this.strings.close} </PrimaryButton>
