@@ -706,18 +706,21 @@ export default class AntDesignStep extends React.Component<
   public selectedChoiceCallback = ( selectedChoice: string ): void =>  { 
     console.log("SC",selectedChoice)
     const saveSelectedChoice = selectedChoice;
-    const elementclass = document.querySelector(".ms-ChoiceField");
+    const unclassifiedCard = document.querySelector('[class^="choiceCard"]');
+    console.log("un", unclassifiedCard);
+    const protectedCard = document.querySelector('[class^="choiceCard2"]');
+    console.log("pro", protectedCard)
 
     if(selectedChoice === "1") {
-      elementclass.classList.add(styles.border1);
+      unclassifiedCard.classList.add(styles.border1);
     } else {
-      elementclass.classList.remove(styles.border1);
+      unclassifiedCard.classList.remove(styles.border1);
     }
 
     if(selectedChoice === "2") {
-      elementclass.classList.add(styles.border2);
+      protectedCard.classList.add(styles.border2);
     } else {
-      elementclass.classList.remove(styles.border2);
+      protectedCard.classList.remove(styles.border2);
     }
 
     this.setState( { 
