@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
 import styles from "./Scw.module.scss";
-import { DirectionalHint, FocusTrapCallout, FocusZone, IconButton, mergeStyleSets, PrimaryButton, Stack } from 'office-ui-fabric-react';
+import { DefaultButton, DirectionalHint, FocusTrapCallout, FocusZone, IconButton, mergeStyleSets, PrimaryButton, Stack } from 'office-ui-fabric-react';
 import { SelectLanguage } from './SelectLanguage';
 import parse from 'html-react-parser';
 
@@ -180,11 +180,17 @@ export default class Callouts extends React.Component< ICalloutsProps > {
             </div>
             <div id="dialog_desc" className={stylesCallout.body}>
               <p>{ message }</p>
-              {this.props.targetId === 'classification'   && (<button onClick={this.goToClassificationPage}>{parse(this.strings.changeClassificationButton)}</button>)}
               
-                <div className={ stylesCallout.buttons } >
+                {this.props.targetId === 'classification' ? (
+                  <Stack horizontal horizontalAlign="space-between">
+                    <DefaultButton className={styles.classbtn} onClick={this.goToClassificationPage}>{parse(this.strings.changeClassificationButton)}</DefaultButton>
                     <PrimaryButton onClick={this.props.openCallout} > {this.strings.close} </PrimaryButton>
+                </Stack>
+                 ):
+                <div className={ stylesCallout.buttons } >
+                 <PrimaryButton onClick={this.props.openCallout} > {this.strings.close} </PrimaryButton>
                 </div>
+                 } 
             </div>
               </FocusZone>
           </FocusTrapCallout>

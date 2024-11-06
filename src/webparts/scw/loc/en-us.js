@@ -149,7 +149,7 @@ define([], function() {
     //Modal
     "community_classification_Modal": "<span style=fontWeight:normal>a</span> Community classification",
     "classificationCallout":"To change the classification of your community, you need to go back to the Community classification page, and read the terms of use.",
-    "changeClassificationButton":"Go to the <i>Community classification</i> page",
+    "changeClassificationButton":"Community classification page",
 
     //Errors
     'you_must':'You must',
