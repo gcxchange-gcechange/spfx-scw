@@ -745,8 +745,10 @@ export default class AntDesignStep extends React.Component<
   }
 
   public goToPage = (page: number):void => {
+  
     this.setState({
-      current: page
+      current: page,
+      showCallout: false
     })
   }
 
