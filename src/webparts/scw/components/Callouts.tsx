@@ -169,7 +169,7 @@ export default class Callouts extends React.Component< ICalloutsProps > {
             <FocusZone>
             <div className={stylesCallout.heading}>
               <Stack horizontal horizontalAlign="space-between" verticalAlign="center" className={ stylesCallout.title }>
-                <h2 id="dialog_title">{ this.getTitles() }</h2>
+                <h2 style={{color: 'white!important'}} id="dialog_title">{ this.getTitles() }</h2>
                 <IconButton
                   aria-Label=  { this.strings.close }
                   className={ styles.cancelIcon }
