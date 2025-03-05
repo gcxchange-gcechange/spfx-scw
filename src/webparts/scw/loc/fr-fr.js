@@ -67,10 +67,10 @@ define([], function() {
         "frCommName_desc": "Le nom de la collectivité est le titre de votre collectivité. Créer un nom court et descriptif. Un nom bilingue respecte la Loi sur les langues officielles et permet aux autres de trouver plus facilement votre collectivité dans le catalogue GCÉchange. ",
         "frCommName_Instruction": 'Utiliser des mots-clés, et non des abréviations, pour aider les gens à repérer votre collectivité. Il doit comporter de 5 à 80 caractères. Seuls les caractères alphabétiques (avec accents français), les nombres, les espaces et les apostrophes sont permis.',
         "shEngDesc_title": 'Brève description en anglais',
-        // "shEngDesc_desc": 'La description de la collectivité sera visible pour les utilisateurs lorsqu’ils utiliseront la page « Toutes les collectivités » et lorsqu’ils font une recherche.',
+        "shEngDesc_desc": 'La description de la collectivité sera visible pour les utilisateurs lorsqu’ils utiliseront la page « Toutes les collectivités » et lorsqu’ils font une recherche.',
         "shEngDesc_Instruction": 'Elle doit comporter de 5 à 100 caractères',
         "shFrDesc_title": 'Brève description en français',
-        // "shFrDesc_desc": 'La description de la collectivité sera visible pour les utilisateurs lorsqu’ils utiliseront la page « Toutes les collectivités » et lorsqu’ils font une recherche.',
+        "shFrDesc_desc": 'La description de la collectivité sera visible pour les utilisateurs lorsqu’ils utiliseront la page « Toutes les collectivités » et lorsqu’ils font une recherche.',
         "shFrDesc_Instruction": 'Elle doit comporter de 5 à 100 caractères',
         'required': 'champ obligatoire',
 

@@ -65,10 +65,10 @@ define([], function() {
     "frCommName_desc":"The community’s name is the title of your community. Create a short descriptive name. A bilingual name complies with the Official Languages Act and makes it easier for others to find your community in the GCXchange Catalogue.",
     "frCommName_Instruction": "Use keywords, not abbreviations, to help people find your community. Must be between 5 and 80 characters. Only alphabets (with French accents), numbers, spaces and apostrophes are allowed.",
     "shEngDesc_title": 'Short English description',
-    // "shEngDesc_desc": 'The community description will be visible to users when they use the “All Communities” page and when they search for it.',
+    "shEngDesc_desc": 'The community description will be visible to users when they use the “All Communities” page and when they search for it.',
     "shEngDesc_Instruction": 'Must be between 5 and 100 characters.',
     "shFrDesc_title": 'Short French description',
-    // "shFrDesc_desc": 'The community description will be visible to users when they use the “All Communities” page and when they search for it. ',
+    "shFrDesc_desc": 'The community description will be visible to users when they use the “All Communities” page and when they search for it. ',
     "shFrDesc_Instruction": 'Must be between 5 and 100 characters.',
     'required': 'required field',
 
