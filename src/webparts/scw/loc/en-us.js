@@ -83,7 +83,7 @@ define([], function() {
     //Third Step
     "protectedTermTitle":"Protected community - terms and conditions",
     "protected_para1":"Looks like you need a space to store protected documents and information on GCXchange. We have a few terms and conditions for protected communities.",
-    "protected_para2":"The security of documents is the responsibility of all Members on GCXchange, including yourself. We ask that you review your departmental security guidelines to make sure you are familiar with your responsibilities and so that you can inform your Members about their responsibilities, before agreeing to the terms of use below.",
+    "protected_para2":"The security of documents is the responsibility of all Members on GCXchange, including yourself. We ask that you review your departmental security guidelines to make sure you are familiar with your responsibilities and so that you can inform your Members about their responsibilities, before agreeing to the terms and conditions below.",
     "agree_to_terms":"I agree to the terms and conditions below",
     'agree':'<span style="fontWeight:normal"> agree to all </span>',
      
