@@ -78,7 +78,7 @@ define([], function() {
     "unclassified_cardTitle":"Unclassified community",
     "unclassified_cardText": "No, I don’t need to store protected information. <strong>All users will be able to find your community, and search for it.</strong>",
     "protected_cardTitle":"Protected A or B community",
-    "protected_cardText":"Yes, I need to store protected information such as: consent forms, personal information, contact details for individuals or organizations, financial documentation, or other documents that, if compromised, <strong>could cause injury to an individual, organization or the government.</strong>",
+    "protected_cardText":"Yes, I need to store protected information such as: consent forms, financial documentation, or other documents that, if compromised, <strong>could cause injury to an individual, organization or the government.</strong>",
     
     //Third Step
     "protectedTermTitle":"Protected community - terms and conditions",

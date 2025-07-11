@@ -80,7 +80,7 @@ define([], function() {
         'unclassified_cardTitle': 'Collectivité non classifiée',
         "unclassified_cardText": "Non, je n’ai pas besoin de stocker des renseignements protégés. <strong>Tous les utilisateurs pourront trouver leur collectivité et en faire la recherche</strong>.",
         'protected_cardTitle': 'Collectivité Protégé A ou B',
-        "protected_cardText": "Oui, je dois stocker des renseignements protégés tels que des formulaires de consentement, des renseignements personnels, des coordonnées de personnes ou d’organisations, des documents financiers ou d’autres documents qui, s’ils sont compromis, <strong>pourraient causer un préjudice à une personne, à une organisation ou au gouvernement</strong>.",
+        "protected_cardText": "Oui, je dois stocker des renseignements protégés tels que des formulaires de consentement, des documents financiers ou d’autres documents qui, s’ils sont compromis, <strong>pourraient causer un préjudice à une personne, à une organisation ou au gouvernement</strong>.",
        
        //Third
        "protectedTermTitle":"Collectivités protégées - Conditions d’utilisation",
