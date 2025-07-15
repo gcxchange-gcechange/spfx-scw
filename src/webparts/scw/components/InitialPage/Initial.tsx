@@ -1,7 +1,7 @@
 import { FocusZone, IImageProps, ImageFit, IStackStyles, Stack} from 'office-ui-fabric-react';
 import * as React from 'react';
 import styles from  '../InitialPage/Initial.module.scss';
-import {faUsers, faGlobe } from '@fortawesome/free-solid-svg-icons';
+import {faUsers, faGlobe, faLock} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IScwProps } from '../IScwProps';
 import { SelectLanguage } from '../SelectLanguage';
@@ -51,7 +51,7 @@ export class Initial extends React.Component<IScwProps> {
             <p>{ this.strings.to_create }</p>
 
             <FocusZone as="ul">
-                <Stack horizontal styles={stackStyles } horizontalAlign='space-around' verticalAlign="center" >
+                <Stack horizontal styles={stackStyles } horizontalAlign='space-around' verticalAlign="baseline" >
                 
                 <li className={ styles.card }  data-is-focusable>
                         <FontAwesomeIcon icon={ faGlobe } size='3x' className={ styles.blue } />
@@ -62,7 +62,13 @@ export class Initial extends React.Component<IScwProps> {
                 <li className={ styles.card }  data-is-focusable>
                         <FontAwesomeIcon icon={faUsers } size='3x' className={ styles.blue } />
                         <p>{ parse( this.strings.indentify_one_more_owner ) }</p>
-                        <small>{ this.strings.indentify_one_more_owner_smallText }</small> 
+                        <small>{ parse(this.strings.indentify_one_more_owner_smallText) }</small> 
+                </li>
+
+                <li className={ styles.card }  data-is-focusable>
+                        <FontAwesomeIcon icon={faLock } size='3x' className={ styles.blue } />
+                        <p>{ parse( this.strings.initial_thirdCardText ) }</p>
+                        <small>{ this.strings.initial_thirCardSmallText }</small> 
                 </li>
 
                 </Stack>

@@ -22,6 +22,7 @@ export interface IErrorModalProps {
   prefLang: string;
   invalidUser: string;
   requestor: string;
+  selectedChoice: string;
 }
 
 export default class ErrorModal extends React.Component<IErrorModalProps> {
@@ -155,7 +156,7 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
       ownerResults.push(`${this.strings.owner_cannot_be_blank}`)
     }
 
-
+    console.log("CURRENT", this.props.current)
     return (
       <>
       {firstPageMessage}   
@@ -211,15 +212,23 @@ export default class ErrorModal extends React.Component<IErrorModalProps> {
 							</>
 							)
 						}
+            {this.props.current === 1 && this.props.selectedChoice === "" && (
+              <p style={{ textAlign: 'center'}} className={styles.modalContent}>{parse(this.strings.classificationChoice_Modal)}</p>
+            )}
+            {
+              this.props.current === 2 && (
+                <p style={{ textAlign: 'center'}} className={styles.modalContent}>{parse(this.strings.termsofUse_Modal)}</p>
+              )
+            }
 				
-						{this.props.current === 1 && (
+						{this.props.current === 3 && (
 							<Stack>
 								<p style={{ textAlign: 'center'}} className={styles.modalContent}> {secondPageErrorMessage} {this.strings.before_proceeding}</p>
 							</Stack>
 							)
 						}
 
-						{this.props.current === 2 &&
+						{this.props.current === 4 &&
 							(
 								<>
 									<Stack>
