@@ -148,8 +148,6 @@
 
     .ant-steps .ant-steps-item-title {
         font-size: 12px;
-        line-height: 20px;
-        margin-top: 2px;
     }
 
     .ant-steps .ant-steps-item-wait>.ant-steps-item-container>.ant-steps-item-content>.ant-steps-item-title{
@@ -179,7 +177,7 @@
 }
 
 .centerButton {
-    left:46%;
+    left:40%;
     width:150px;
 }
 
@@ -276,9 +274,8 @@
 }
 
 .terms {
-    margin-top: 0px;
-    margin-bottom: 0px;
-    margin-left: 2.5em;
+    margin: 0px!important;
+    text-indent: 2.5em;
 }
 
 .previousbtn {
@@ -294,16 +291,6 @@
     color:#335075!important ;
 }
 
-.classbtn {
-    background: #c0c0cc!important;
-    color:#335075;
-    border: 1px solid transparent;
-    border-radius: 5px;
-
-    &:hover {
-        color:#335075!important ; 
-    }
-}
 
 
 
@@ -319,24 +306,6 @@
     flex-direction: column;
     justify-content: space-around;
 }
-.choiceCard2{
-    box-shadow: 2px ;
-    width: 350px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
-
-.border1 {
-    border: 2px solid #004DB8;
-    border-radius:5px;
-}
-
-.border2 {
-    border: 2px solid #02A0FF;
-    border-radius: 5px;
-}
-    
 
 .choiceCardBorder {
    border: 1px solid #004DB8;
@@ -431,17 +400,12 @@
     opacity: 0.8;
 }
 
-// #ChoiceGroupLabel38-1:hover {
-//     color: red; /* Change this to your desired hover color */
-//   }
-
 :global {
     .ms-ChoiceField {
         margin-right: 50px;
-    } 
-    .ms-ChoiceFieldLabel:hover {
-        color: 'white'!important;
-    }  
+    }
+    
+    
 }
 
 .checkedRadioButton1 {
@@ -520,9 +484,10 @@ u {
 //     }
 //     .ms-Label::after {
 //         content: "";
-//     } 
-// }
+//     }
 
+   
+// }
 .charCountError {
     color: #C61515;
     font-weight: 700!important;
@@ -584,8 +549,6 @@ dialog {
 dialog:focus-visible {
     outline: none;
 }
-
-
-
+    
 
 
