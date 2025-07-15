@@ -13,7 +13,6 @@ export interface IFailedProps {
   shEngDesc: string;
   shFrDesc: string;
   validationStatus: number;
-  selectedChoice: string;
 }
 
 export default class Failed extends React.Component<IFailedProps> {
@@ -33,9 +32,7 @@ export default class Failed extends React.Component<IFailedProps> {
 
     return (
       <div>
-        <h2 style={{ textAlign: "center" }}>{`${this.strings.failed_oops}`}</h2>    
-      {this.props.selectedChoice === "1" ? (
-      <div>
+        <h2 style={{ textAlign: "center" }}>{`${this.strings.failed_oops}`}</h2>
         {this.props.prefLang === "fr-fr" ? (
           <p>
             {this.strings.failed_txt1}{" "}
@@ -53,10 +50,8 @@ export default class Failed extends React.Component<IFailedProps> {
             email.
           </p>
         )}
-
-          <p>{this.strings.failed_txt2}</p>
-          <p>{this.strings.failed_txt3}</p>
-          
+        <p>{this.strings.failed_txt2}</p>
+        <p>{this.strings.failed_txt3}</p>
         {this.props.prefLang === "fr-fr" ? (
           <p>
             {parse(this.strings.failed_txt4)}{" "}
@@ -87,18 +82,7 @@ export default class Failed extends React.Component<IFailedProps> {
             />
           </p>
         )}
-        </div>
-        )
-        
-        : 
-        <div>
-         <p>{this.strings.failed_ProB_text}</p> 
-       </div>
-       
-       }
-        
       </div>
-
     );
   }
 }
