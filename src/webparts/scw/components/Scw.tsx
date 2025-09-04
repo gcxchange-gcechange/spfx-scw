@@ -28,7 +28,8 @@ import Callouts from "./Callouts";
 import Failed from "./Failed";
 import ReviewFields from "./ReviewFields";
 import { fieldValidations } from "./validationFunction";
-import { createSpaceConfig } from "../../../servicesConfig";
+//import { createSpaceConfig } from "../../../servicesConfig";
+import {EnvConfig} from '../../../env/generatedConfig'
 
 
 export interface IScwState {
@@ -312,10 +313,10 @@ export default class AntDesignStep extends React.Component<
         document.getElementById("submit").style.display = "none";
 
         this.props.context.aadHttpClientFactory
-          .getClient(`${createSpaceConfig.clientId}`)
+          .getClient(`${EnvConfig.clientId}`)
           .then((client: AadHttpClient) => {
             client
-              .post(createSpaceConfig.createUrl, AadHttpClient.configurations.v1, postOptions)
+              .post(EnvConfig.createUrl, AadHttpClient.configurations.v1, postOptions)
               .then((response: HttpClientResponse) => {
                 console.log(`Status code: ${response}`);
 
@@ -339,7 +340,7 @@ export default class AntDesignStep extends React.Component<
                     }
                   })
                   .catch((response: any) => {
-                    const errMsg: string = `WARNING - error when calling URL ${createSpaceConfig.createUrl}. Error = ${response.message}`;
+                    const errMsg: string = `WARNING - error when calling URL ${EnvConfig.createUrl}. Error = ${response.message}`;
                     console.log("err is ", errMsg);
                   });
               });

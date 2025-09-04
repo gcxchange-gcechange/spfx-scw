@@ -13,6 +13,7 @@ import * as strings from 'ScwWebPartStrings';
 import { IScwProps } from './components/IScwProps';
 import AntDesignStep from './components/Scw';
 
+
 export interface IScwWebPartProps {
     prefLang: string;
     url: any;
@@ -80,7 +81,12 @@ export default class ScwWebPart extends BaseClientSideWebPart<IScwWebPartProps> 
                         { key: 'en-us', text: 'English' },
                         { key: 'fr-fr', text: 'Français' }
                     ]
-                }),
+                })
+                //  PropertyPaneTextField('description', {
+                //   label: strings.DescriptionFieldLabel,
+                //   value: EnvConfig.description,
+                //   disabled: CurrentEnv !== 'dev'
+                // })
 
               ]
             }
