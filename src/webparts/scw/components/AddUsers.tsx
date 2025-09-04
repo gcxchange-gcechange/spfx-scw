@@ -1,10 +1,11 @@
 /* eslint-disable dot-notation */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { PeoplePicker, PrincipalType } from "@pnp/spfx-controls-react/lib/PeoplePicker";
-import {  IButtonStyles, IIconProps, IconButton, Label, Stack } from "office-ui-fabric-react";
+
 import * as React from "react";
 import { SelectLanguage } from './SelectLanguage';
 import styles from "./Scw.module.scss";
+import { PeoplePicker, PrincipalType } from "@pnp/spfx-controls-react/lib/PeoplePicker";
+import { IButtonStyles, IIconProps, IconButton, Label, Stack } from "office-ui-fabric-react";
 
 
 
