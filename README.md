@@ -10,8 +10,8 @@ This web part connects to this [this function app](https://github.com/gcxchange-
 
 
 ## Version 
-![SPFX](https://img.shields.io/badge/SPFX-1.17.4-green.svg)
-![Node.js](https://img.shields.io/badge/Node.js-v16.3+-green.svg)
+![SPFX](https://img.shields.io/badge/SPFX-1.21.1-green.svg)
+![Node.js](https://img.shields.io/badge/Node.js-v22+-green.svg)
 
 ## Applies to
 - [SharePoint Framework](https://aka.ms/spfx)
@@ -25,6 +25,7 @@ Version|Date|Comments
 -------|----|--------
 1.0|Jan 31, 2023 |Initial release
 1.1|Jan 31, 2024 | Layout Modifications
+2.0|sep 10, 2025 | Upgrade SPFX 1.21.1
 
 ## Minimal Path to Awesome
 - Clone this repository
