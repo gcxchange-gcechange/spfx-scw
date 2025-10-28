@@ -74,6 +74,7 @@ declare interface IScwWebPartStrings {
   eng_desc: string;
   fr_desc: string;
   owners: string;
+  protected_next_btn: string;
  
   close: string;
   you_must: string;
@@ -155,6 +156,10 @@ declare interface IScwWebPartStrings {
   chk7c: string;
   chk8: string;
   chk8b: string;
+  chk9:string,
+  chk9b :string,
+  chk10 :string,
+  chk10b :string,
   protected_para1: string;
   protected_para2: string;
   term_of_use: string;
