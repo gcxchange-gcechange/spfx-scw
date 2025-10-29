@@ -89,8 +89,17 @@ export default class ThirdStep extends React.Component<IThirdStepProps> {
                         {/* <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>{ parse(this.strings.chk7c) }</strong></p> */}
                     </StackItem>
                     <StackItem>
-                        <Checkbox id='8' styles={checkBoxStyles} label={`${ parse(this.strings.chk8) }`}  onChange={ this.onChange }  defaultChecked={this.props.checkedValues[6]}/>
+                        <Checkbox id='8' styles={checkBoxStyles} label={`${ parse(this.strings.chk8) }`}  onChange={ this.onChange }  defaultChecked={this.props.checkedValues[7]}/>
                         <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>{ parse(this.strings.chk8b) }</strong></p>
+                    </StackItem>
+
+                     <StackItem>
+                        <Checkbox id='9' styles={checkBoxStyles} label={`${ parse(this.strings.chk9) }`}  onChange={ this.onChange }  defaultChecked={this.props.checkedValues[8]}/>
+                        <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>{ parse(this.strings.chk9b) }</strong></p>
+                    </StackItem>
+                     <StackItem>
+                        <Checkbox id='10' styles={checkBoxStyles} label={`${ parse(this.strings.chk10) }`}  onChange={ this.onChange }  defaultChecked={this.props.checkedValues[9]}/>
+                        <p className={ styles.terms }><strong style={{ fontSize: '14px' }}>{ parse(this.strings.chk10b) }</strong></p>
                     </StackItem>
                 </Stack>
             </div>

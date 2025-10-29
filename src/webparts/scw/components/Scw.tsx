@@ -158,7 +158,7 @@ export default class AntDesignStep extends React.Component<
     this.blankFieldValidation(inputFieldAriaValidArray);
 
     const isMissingClassification =  current === 1 && (selectedChoice === "");
-    const isMissingCheckedValues = current === 2 && (selectedChoice === "2" && checkedValues.length < 8);
+    const isMissingCheckedValues = current === 2 && (selectedChoice === "2" && checkedValues.length < 10);
 
     const showModal =
       isLessThanMinLength ||
@@ -358,6 +358,7 @@ export default class AntDesignStep extends React.Component<
       this.setState({ showModal: true });
     } else {
       const functionUrl = "https://appsvc-fnc-dev-scw-list-dotnet001.azurewebsites.net/api/CreateItem?";
+      const clientId = "3385"
       const requestHeaders: Headers = new Headers();
       requestHeaders.append("Content-type", "application/json");
       requestHeaders.append("Cache-Control", "no-cache");
@@ -394,7 +395,7 @@ export default class AntDesignStep extends React.Component<
         document.getElementById("submit").style.display = "none";
 
         this.props.context.aadHttpClientFactory
-          .getClient('3')
+          .getClient(clientId)
           .then((client: AadHttpClient) => {
             client
               .post(functionUrl, AadHttpClient.configurations.v1, postOptions)
