@@ -893,7 +893,6 @@ export default class AntDesignStep extends React.Component<
     return (
       <>
         <div className={styles.scw}>
-        <h2>{current.toString()}</h2>
           <Title
             current={current}
             step={step}
