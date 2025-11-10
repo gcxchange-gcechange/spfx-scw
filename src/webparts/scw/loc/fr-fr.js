@@ -80,8 +80,8 @@ define([], function() {
         "comm_classification_para1": "Vous devrez peut-être conserver des renseignements protégés dans la bibliothèque de votre collectivité. GCÉchange peut fournir un espace pour des renseignements protégés. Tout d’abord, il faut savoir si vous allez stocker des renseignements protégés dans votre collectivité.",
         'unclassified_cardTitle': 'Collectivité non classifiée',
         "unclassified_cardText": "Non, je n’ai pas besoin de stocker des renseignements protégés. <strong>Tous les utilisateurs pourront trouver leur collectivité et en faire la recherche</strong>.",
-        'protected_cardTitle': 'Collectivité Protégé A ou B',
-        "protected_cardText": "Oui, je dois stocker des renseignements protégés tels que des formulaires de consentement, des renseignements personnels, des coordonnées de personnes ou d’organisations, des documents financiers ou d’autres documents qui, s’ils sont compromis, <strong>pourraient causer un préjudice à une personne, à une organisation ou au gouvernement</strong>.",
+        'protected_cardTitle': 'Collectivité Protégée B',
+        "protected_cardText": "Oui, je dois stocker des informations protégées jusqu'au niveau B inclus, tels que des formulaires de consentement, des documents financiers ou d'autres documents qui, s'ils étaient compromis, pourraient causer un préjudice à une personne, à une organisation ou à un gouvernement.",
        
        //Third
        "protectedTermTitle":"Collectivités protégées - Conditions d’utilisation",
