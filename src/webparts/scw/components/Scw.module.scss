@@ -1,37 +1,41 @@
 @import '~@fluentui/react/dist/sass/References.scss';
-@import '~office-ui-fabric-react/dist/sass/References.scss';
+// @import '~office-ui-fabric-react/dist/sass/References.scss';
 .scw {
     .container {
         margin: 0px;
        
     }
 
+    // .row {
+    //     @include ms-Grid-row;
+    //     padding: 30px;
+    // }
+
+    // .column {
+    //     @include ms-Grid-col;
+    //     @include ms-lg10;
+    //     @include ms-xl8;
+    //     @include ms-xlPush2;
+    //     @include ms-lgPush1;
+    // }
+
+    // .title {
+    //     @include ms-font-xl;
+    //     @include ms-fontColor-white;
+    // }
+
+    // .subTitle {
+    //     @include ms-font-l;
+    //     @include ms-fontColor-white;
+    // }
+
+    // .description {
+    //     @include ms-font-l;
+    //     @include ms-fontColor-white;
+    // }
+
     .row {
-        @include ms-Grid-row;
         padding: 30px;
-    }
-
-    .column {
-        @include ms-Grid-col;
-        @include ms-lg10;
-        @include ms-xl8;
-        @include ms-xlPush2;
-        @include ms-lgPush1;
-    }
-
-    .title {
-        @include ms-font-xl;
-        @include ms-fontColor-white;
-    }
-
-    .subTitle {
-        @include ms-font-l;
-        @include ms-fontColor-white;
-    }
-
-    .description {
-        @include ms-font-l;
-        @include ms-fontColor-white;
     }
 
     .button {

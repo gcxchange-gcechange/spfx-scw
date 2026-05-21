@@ -2,7 +2,7 @@
 import * as React from "react";
 import { SelectLanguage } from "./SelectLanguage";
 import parse from "html-react-parser";
-import { Icon } from "office-ui-fabric-react";
+import { Icon } from '@fluentui/react';
 
 export interface IFailedProps {
   prefLang: string;

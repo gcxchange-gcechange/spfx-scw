@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import * as React from 'react';
-import {  IButtonStyles, IIconProps, IconButton, TextField, Label, ILabelStyles, Stack, IStackTokens, StackItem } from 'office-ui-fabric-react';
+import {  IButtonStyles, IIconProps, IconButton, TextField, Label, ILabelStyles, Stack, IStackTokens, StackItem } from '@fluentui/react';
 import styles from './Scw.module.scss';
 
 

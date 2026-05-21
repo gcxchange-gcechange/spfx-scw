@@ -10,8 +10,7 @@ import styles from "./Scw.module.scss";
 import { Steps, Button } from "antd";
 import { IScwProps } from "./IScwProps";
 import { Initial } from "./InitialPage/Initial";
-import { FocusTrapZone, ISpinnerStyles, PrimaryButton, Stack } from "office-ui-fabric-react";
-import { IButtonStyles } from "office-ui-fabric-react";
+import { FocusTrapZone, ISpinnerStyles, PrimaryButton, Stack, IButtonStyles} from '@fluentui/react';
 import ErrorModal from "./Modal";
 import FirstStep from "./FirstStep";
 import SecondStep from "./SecondStep";
@@ -30,6 +29,7 @@ import ReviewFields from "./ReviewFields";
 import { fieldValidations } from "./validationFunction";
 //import { createSpaceConfig } from "../../../servicesConfig";
 import {EnvConfig} from '../../../env/generatedConfig'
+import { IPersonaProps } from "@fluentui/react";
 
 
 export interface IScwState {
@@ -309,8 +309,14 @@ export default class AntDesignStep extends React.Component<
 
       // use aad authentication
       this.setState({ isLoading: true }, () => {
-        document.getElementById("prev").style.display = "none";
-        document.getElementById("submit").style.display = "none";
+        const prevButton = document.getElementById?.("prev");
+        if (prevButton) {
+          prevButton.style.display = "none";
+        }
+        const submitButton = document.getElementById?.("submit");
+        if (submitButton) {
+          submitButton.style.display = "none";
+        }
 
         this.props.context.aadHttpClientFactory
           .getClient(`${EnvConfig.clientId}`)
@@ -499,7 +505,7 @@ export default class AntDesignStep extends React.Component<
     this.handleSideLineErrorValidation("shFrDesc", FrDescValue);
   };
 
-  public handleOwnerCallback = (items: []): void => {
+  public handleOwnerCallback = (items: IPersonaProps[]): void => {
     const OwnerArr: any[] = [];
     let isRequestor: string = "";
     let isInvalidEmail: string = "";
@@ -508,11 +514,11 @@ export default class AntDesignStep extends React.Component<
       OwnerArr.push(user["secondaryText"]);
 
       if (user["secondaryText"] === this.props.requestor) {
-        isRequestor = user["secondaryText"];
+        isRequestor = user["secondaryText"] ?? "";
       }
 
       if (user["id"] === undefined) {
-        isInvalidEmail = user["secondaryText"];
+        isInvalidEmail = user["secondaryText"] ?? "";
       }
     });
 
@@ -727,7 +733,9 @@ export default class AntDesignStep extends React.Component<
       },
     ];
 
-    const items = steps.map((item) => item.step !== "4" ? { key: item.step, title: item.title } : null );
+    const items = steps
+      .filter((item) => item.step !== "4")
+      .map((item) => ({ key: item.step, title: item.title }));
 
     const labelSpinnerStyles: Partial<ISpinnerStyles> = {
       root: { padding: 20 },
