@@ -4,7 +4,7 @@
 import * as React from 'react';
 import { SelectLanguage } from './SelectLanguage';
 import ReusableTextField  from './ReusableTextField';
-import {   Stack,   IStackTokens  } from 'office-ui-fabric-react';
+import {   Stack,   IStackTokens, IPersonaProps } from '@fluentui/react';
 import {validateTextField, validateSpecialCharFields, validateOwnerField } from './validationFunction'
 import AddUsers from './AddUsers';
  
@@ -28,8 +28,8 @@ export interface ILastStepProps {
     frNameCallBack?:(frNameValue: string)=> void;
     handleFrDescCallback?:(frDescValue: string)=> void;
     handleEngDescCallback?:(engDescValue: string ) => void;
-    getOwnersCallback?: (item: []) => void;
-    getMemberCallback?: (item: []) => void;
+    getOwnersCallback?: (item: IPersonaProps[]) => void;
+    getMemberCallback?: (item: string[]) => void;
     isCalloutVisible?: ()=> void;  
     getElementId?: (id: string) => void;
     handleButtonClick?: () => void;
@@ -45,63 +45,71 @@ export default class LastStep extends React.Component<ILastStepProps> {
   
 	public strings = SelectLanguage(this.props.prefLang);
 
-	private  onUpdateCommPurpose = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-			const value = event.target.value;
-			const updatedPurpose = value.trim();  
-			this.props.commPurposeCallback(updatedPurpose); 
-	}
+	// private  onUpdateCommPurpose = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+	// 		const value = event.target.value;
+	// 		const updatedPurpose = value.trim();  
+	// 		this.props.commPurposeCallback?.(updatedPurpose);
+	// }
 
-	private  onUpdateEngName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+    private onUpdateCommPurpose = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string): void => {
 
-			const value = event.target.value;
+        const updatedPurpose = (newValue || '').trim();
 
-			const updatedName = value.trim();
+        this.props.commPurposeCallback?.(updatedPurpose);
+    };
 
-			this.props.handleEngNameCallback(updatedName); 
+	private  onUpdateEngName = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) :void => {
+
+			//const value = event.target.value;
+
+			const updatedName = (newValue || '').trim();
+
+			this.props.handleEngNameCallback?.(updatedName); 
 	}
     
-	private  onUpdateFrName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+	private  onUpdateFrName = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) :void => {
 
-			const value = event.target.value;
+			// const value = event.target.value;
 
-			const updateFrName = value.trim();
+			const updateFrName = (newValue || '').trim();
 			
-			this.props.frNameCallBack(updateFrName)    
+			this.props.frNameCallBack?.(updateFrName)    
 	}
 
-	private onUpdateEngDesc = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-		const value = event.target.value;
+	private onUpdateEngDesc = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) :void => {
+		//const value = event.target.value;
 
-		const updateEngDesc = value.trim();
+		const updateEngDesc = (newValue || "").trim();
 
-		this.props.handleEngDescCallback(updateEngDesc)    
+		this.props.handleEngDescCallback?.(updateEngDesc)    
 	}
 
-	private  onUpdateFrDesc = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-		const value = event.target.value;
+	private  onUpdateFrDesc = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) :void => {
+		//const value = event.target.value;
 
-		const updateFrDesc = value.trim();
+		const updateFrDesc = (newValue || "").trim();
 		
-		this.props.handleFrDescCallback(updateFrDesc)    
+		this.props.handleFrDescCallback?.(updateFrDesc)    
 	}
   
 
 	public showCalloutVisible = (event: any):void => {
 			const buttonId = event.currentTarget.id;
 			this.elementId(buttonId);
-			this.props.isCalloutVisible();
+			this.props.isCalloutVisible?.();
 	}
 
 	public elementId = (id: any ):void => {
 
-			this.props.getElementId(id)
+			this.props.getElementId?.(id)
 	}
 
-	public updateDefaultOwnerValues = ( username: []):void  => {  
+	public updateDefaultOwnerValues = ( username: IPersonaProps[]):void  => {  
 
+        console.log("username", username)
 			const newValues = username;
 
-			this.props.getOwnersCallback( newValues );//pass to parent
+			this.props.getOwnersCallback?.( newValues );//pass to parent
 	};
    
 	public render(): React.ReactElement<ILastStepProps> {

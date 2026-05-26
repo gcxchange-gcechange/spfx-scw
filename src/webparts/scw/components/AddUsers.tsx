@@ -5,7 +5,7 @@ import * as React from "react";
 import { SelectLanguage } from './SelectLanguage';
 import styles from "./Scw.module.scss";
 import { PeoplePicker, PrincipalType } from "@pnp/spfx-controls-react/lib/PeoplePicker";
-import { IButtonStyles, IIconProps, IconButton, Label, Stack } from "office-ui-fabric-react";
+import { IButtonStyles, IIconProps, IPersonaProps, IconButton, Label, Stack } from '@fluentui/react';
 
 
 
@@ -22,9 +22,9 @@ export interface IAddUsersProps {
     prefLang: string;
     requestor?: string;
     invalidEmail: string;
-    getOwnersCallback?: ( item: [] )  => void;
-    handleButtonClick? :(event: any) => void;
-    showCalloutVisible?:(event: any ) => void ;
+    getOwnersCallback?: (items: IPersonaProps[]) => void | undefined;
+    handleButtonClick? :(event: any) => void | undefined;
+    showCalloutVisible?:(event: any ) => void | undefined;
     infoButton?: string;
     
 
@@ -44,9 +44,11 @@ export default class AUsers extends React.Component<IAddUsersProps> {
         }
     }
 
-    public _getOwnerItems = ( items: []):void  => {  
+    public _getOwnerItems = ( items: IPersonaProps[] ):void | undefined  => {  
 
-        this.props.getOwnersCallback(items);
+        console.log("Persona Items", items)
+
+        this.props.getOwnersCallback?.(items);
 
     };
 

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
 import {  IIconStyles, Icon, Stack, StackItem} from "@fluentui/react";
-//import { IconButton } from "@fluentui/react/lib/Button";
 import styles from "./Scw.module.scss";
 import parse from 'html-react-parser';
 import { SelectLanguage } from './SelectLanguage';

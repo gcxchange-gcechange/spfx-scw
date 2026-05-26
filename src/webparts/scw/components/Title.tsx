@@ -26,7 +26,7 @@ export default class Title extends React.Component<ITitleProps> {
     let title: string = "";
 
     if (step === 0) {
-      title = null;
+      title = "";
     } else if (step === 1 && current === 0) {
       title = `${titles[0]}`;
     } else if (current === 1) {

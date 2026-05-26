@@ -5,13 +5,14 @@ import { WebPartContext } from "@microsoft/sp-webpart-base";
 import AddUsers from "./AddUsers";
 import { SelectLanguage } from "./SelectLanguage";
 import parse from "html-react-parser";
+import { IPersonaProps } from "@fluentui/react";
 
 export interface ISecondStepProps {
   context: WebPartContext;
   ownerList: string[];
   prefLang: string;
-  getOwnersCallback?: (item: []) => void;
-  getMemberCallback?: (item: []) => void;
+  getOwnersCallback: (item: IPersonaProps[]) => void | undefined;
+  //getMemberCallback: (item: []) => void;
   requestor: string;
   invalidEmail: string;
 }
@@ -25,7 +26,7 @@ export interface IPerson {
 export default class SecondStep extends React.Component<ISecondStepProps> {
   public strings = SelectLanguage(this.props.prefLang);
 
-  public handleOwnerCallback = (items: []): void => {
+  public handleOwnerCallback = (items: IPersonaProps[]): void => {
     this.props.getOwnersCallback(items);
   };
 

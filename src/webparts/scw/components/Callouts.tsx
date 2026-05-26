@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
 import styles from "./Scw.module.scss";
-import { DirectionalHint, FocusTrapCallout, FocusZone, IconButton, mergeStyleSets, PrimaryButton, Stack } from 'office-ui-fabric-react';
+import { DirectionalHint, FocusTrapCallout, FocusZone, IconButton, mergeStyleSets, PrimaryButton, Stack } from '@fluentui/react';
 import { SelectLanguage } from './SelectLanguage';
 import parse from 'html-react-parser';
 
