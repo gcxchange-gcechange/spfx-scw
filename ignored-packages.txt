@@ -1,0 +1,9 @@
+@microsoft/sp-adaptive-card-extension-base
+@nuvemerudita/react-controls
+@pnp/spfx-controls-react
+adaptivecards
+js-cookie
+lodash
+react-overflow-list
+react-use
+swiper

@@ -1,4 +1,4 @@
-import { IImageProps, Icon, ImageFit, PrimaryButton, Stack } from "office-ui-fabric-react";
+import { IImageProps, Icon, ImageFit, PrimaryButton, Stack } from '@fluentui/react';
 import * as React from "react";
 import { SelectLanguage }  from './SelectLanguage'
 import parse from 'html-react-parser';

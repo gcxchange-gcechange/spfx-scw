@@ -1,11 +1,10 @@
-/* eslint-disable no-unused-expressions */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable dot-notation */
 import * as React from 'react';
 import { SelectLanguage } from './SelectLanguage';
 import ReusableTextField  from './ReusableTextField';
-import {   Stack,   IStackTokens } from 'office-ui-fabric-react';
+import {   Stack,   IStackTokens, IPersonaProps } from '@fluentui/react';
 import {validateTextField, validateSpecialCharFields, validateOwnerField } from './validationFunction'
 import AddUsers from './AddUsers';
  
@@ -29,8 +28,8 @@ export interface ILastStepProps {
     frNameCallBack?:(frNameValue: string)=> void;
     handleFrDescCallback?:(frDescValue: string)=> void;
     handleEngDescCallback?:(engDescValue: string ) => void;
-    getOwnersCallback?: (item: []) => void;
-    getMemberCallback?: (item: []) => void;
+    getOwnersCallback?: (item: IPersonaProps[]) => void;
+    getMemberCallback?: (item: string[]) => void;
     isCalloutVisible?: ()=> void;  
     getElementId?: (id: string) => void;
     handleButtonClick?: () => void;
@@ -46,76 +45,72 @@ export default class LastStep extends React.Component<ILastStepProps> {
   
 	public strings = SelectLanguage(this.props.prefLang);
 
-	private  onUpdateCommPurpose = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-			const value = event.target.value;
-			const updatedPurpose = value.trim();  
-			this.props.commPurposeCallback(updatedPurpose); 
-	}
+	// private  onUpdateCommPurpose = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+	// 		const value = event.target.value;
+	// 		const updatedPurpose = value.trim();  
+	// 		this.props.commPurposeCallback?.(updatedPurpose);
+	// }
 
-	private  onUpdateEngName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+    private onUpdateCommPurpose = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string): void => {
 
-			const value = event.target.value;
+        const updatedPurpose = (newValue || '').trim();
 
-			const updatedName = value.trim();
+        this.props.commPurposeCallback?.(updatedPurpose);
+    };
 
-			this.props.handleEngNameCallback(updatedName); 
+	private  onUpdateEngName = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) :void => {
+
+			//const value = event.target.value;
+
+			const updatedName = (newValue || '').trim();
+
+			this.props.handleEngNameCallback?.(updatedName); 
 	}
     
-	private  onUpdateFrName = (event: React.ChangeEvent<HTMLInputElement>) :void => {
+	private  onUpdateFrName = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) :void => {
 
-			const value = event.target.value;
+			// const value = event.target.value;
 
-			const updateFrName = value.trim();
+			const updateFrName = (newValue || '').trim();
 			
-			this.props.frNameCallBack(updateFrName)    
+			this.props.frNameCallBack?.(updateFrName)    
 	}
 
-	private onUpdateEngDesc = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-		const value = event.target.value;
+	private onUpdateEngDesc = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) :void => {
+		//const value = event.target.value;
 
-		const updateEngDesc = value.trim();
+		const updateEngDesc = (newValue || "").trim();
 
-		this.props.handleEngDescCallback(updateEngDesc)    
+		this.props.handleEngDescCallback?.(updateEngDesc)    
 	}
 
-	private  onUpdateFrDesc = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-		const value = event.target.value;
+	private  onUpdateFrDesc = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) :void => {
+		//const value = event.target.value;
 
-		const updateFrDesc = value.trim();
+		const updateFrDesc = (newValue || "").trim();
 		
-		this.props.handleFrDescCallback(updateFrDesc)    
+		this.props.handleFrDescCallback?.(updateFrDesc)    
 	}
   
 
 	public showCalloutVisible = (event: any):void => {
-        console.log(event);
 			const buttonId = event.currentTarget.id;
 			this.elementId(buttonId);
-			this.props.isCalloutVisible();
+			this.props.isCalloutVisible?.();
 	}
 
 	public elementId = (id: any ):void => {
 
-			this.props.getElementId(id)
+			this.props.getElementId?.(id)
 	}
 
-	public updateDefaultOwnerValues = ( username: []):void  => {  
+	public updateDefaultOwnerValues = ( username: IPersonaProps[]):void  => {  
 
+        console.log("username", username)
 			const newValues = username;
 
-			this.props.getOwnersCallback( newValues );//pass to parent
+			this.props.getOwnersCallback?.( newValues );//pass to parent
 	};
-
-    public selectedChoiceText = ():string => {
-        if(this.props.selectedChoice === "1") {
-          return (this.strings.unclassified_cardTitle);
-        } else {
-          return (this.strings.protected_cardTitle);
-        }
-
-    }
-
-   
    
 	public render(): React.ReactElement<ILastStepProps> {
 
@@ -132,20 +127,13 @@ export default class LastStep extends React.Component<ILastStepProps> {
               },
               errorMessage: {
                 color: '#C61515'
-              },
-
+              }
             },
-            readOnlyField: {
-                field: {
-                    backgroundColor: '#e4e3e1'
-                }
-            }
           };
       
-         
       
-        const sectionStackTokens: IStackTokens = { childrenGap: 5 };
-
+          const sectionStackTokens: IStackTokens = { childrenGap: 5 };
+           
        
         return (
             
@@ -276,30 +264,8 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     out_of_Text = {this.strings.out_of}
                     characterCountText={this.strings.characters} 
                 />
-                
-                <ReusableTextField
-                    name="classification"
-                    id= "classification"
-                    styles={charCountStyles.readOnlyField}
-                    aria-describedby=""
-                    multiline ={false}
-                    rows={1}
-                    defaultValue= {this.selectedChoiceText()}
-                    validateOnLoad={false}
-                    validateOnFocusOut={true}
-                    maxLength={100}
-                    title = { this.strings.community_classification}
-                    currentPage = {current}
-                    showCalloutVisible={this.showCalloutVisible}
-                    lineId={"seventh-line"} 
-                    ariaLabelRequired={this.strings.required}
-                    infoButton={this.strings.infoIcon_frDesc}
-                    readOnly
 
-                />
-
-
-                    <div id="owners" style={{marginTop: '10px'}} >
+                    <div id="owners" >
                         <AddUsers 
                             id='owners'   
                             aria-describedby="owners"

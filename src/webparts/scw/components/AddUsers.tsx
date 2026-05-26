@@ -1,10 +1,11 @@
 /* eslint-disable dot-notation */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { PeoplePicker, PrincipalType } from "@pnp/spfx-controls-react/lib/PeoplePicker";
-import {  IButtonStyles, IIconProps, IconButton, Label, Stack } from "office-ui-fabric-react";
+
 import * as React from "react";
 import { SelectLanguage } from './SelectLanguage';
 import styles from "./Scw.module.scss";
+import { PeoplePicker, PrincipalType } from "@pnp/spfx-controls-react/lib/PeoplePicker";
+import { IButtonStyles, IIconProps, IPersonaProps, IconButton, Label, Stack } from '@fluentui/react';
 
 
 
@@ -21,9 +22,9 @@ export interface IAddUsersProps {
     prefLang: string;
     requestor?: string;
     invalidEmail: string;
-    getOwnersCallback?: ( item: [] )  => void;
-    handleButtonClick? :(event: any) => void;
-    showCalloutVisible?:(event: any ) => void ;
+    getOwnersCallback?: (items: IPersonaProps[]) => void | undefined;
+    handleButtonClick? :(event: any) => void | undefined;
+    showCalloutVisible?:(event: any ) => void | undefined;
     infoButton?: string;
     
 
@@ -43,9 +44,11 @@ export default class AUsers extends React.Component<IAddUsersProps> {
         }
     }
 
-    public _getOwnerItems = ( items: []):void  => {  
+    public _getOwnerItems = ( items: IPersonaProps[] ):void | undefined  => {  
 
-        this.props.getOwnersCallback(items);
+        console.log("Persona Items", items)
+
+        this.props.getOwnersCallback?.(items);
 
     };
 
@@ -71,12 +74,12 @@ export default class AUsers extends React.Component<IAddUsersProps> {
             <> 
                 <div id={this.props.id} tabIndex={0}>
                     <Stack>
-                        <Label htmlFor={this.props.id} style={{fontWeight:'700', paddingBottom: '0px'}} aria-required={true}>
+                        <Label htmlFor={this.props.id} style={{fontWeight:'700'}} aria-required={true}>
                             <span className={styles.asterik} aria-label={this.strings.required} >
                                 *
                             </span>
                             {this.props.title}
-                            {this.props.currentPage === 4 && 
+                            {this.props.currentPage === 2 && 
                             (<span>
                                 <IconButton ariaLabel={this.props.infoButton} id={this.props.id} styles={ iconStyles } iconProps={infoIcon} onClick={this.props.showCalloutVisible}/>
                             </span>

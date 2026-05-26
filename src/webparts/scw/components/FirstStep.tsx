@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import styles from './Scw.module.scss';
-import { Stack, StackItem } from 'office-ui-fabric-react';
+import { Stack, StackItem } from '@fluentui/react';
 import { SelectLanguage } from './SelectLanguage';
 import parse from 'html-react-parser';
 import { validateSpecialCharFields, validateTextField, validateisError } from './validationFunction';
@@ -21,10 +21,10 @@ export interface IFirstStepProps {
     shFrDesc: string;
     errorMessage: string;
     showModal: boolean;
-    isError?: string[];
+    isError?: string[] | undefined;
 
-    handleOnChange?:(event:any, value: string)=> void;
-    handleErrorMessage?: (errorMessage: string) => void;
+    handleOnChange?:(event:any, value: string)=> void | undefined;
+    handleErrorMessage?: (errorMessage: string) => void | undefined;
 
 }
 
@@ -37,13 +37,15 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
   
   public strings = SelectLanguage(this.props.prefLang);
 
-  private onhandleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const eventName = event.target.name;
-    const value = event.target.value;
+  private onhandleChangeEvent = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,newValue?: string): void => {
+    const eventName = event.currentTarget.name;
+    console.log("eventName", eventName)
+    const value = event.currentTarget.value;
+    console.log("value", value)
     const trimmedValue = value.trim();
 
     try {
-      this.props.handleOnChange(eventName, trimmedValue);
+      this.props.handleOnChange?.(eventName, trimmedValue);
     } catch (error) {
       console.log(error);
     }
@@ -96,7 +98,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 out_of_Text = {this.strings.out_of}
                 characterCountText={this.strings.characters}            
           />
-          {isError.includes('commPurpose') && 
+          {isError?.includes('commPurpose') && 
             (
               <div style={{marginTop: '5px'}}>
               {validateisError( {blankField: `${this.strings.blankField} ${this.strings.please_add_a_purpose}` })}
@@ -131,7 +133,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 characterCountText={this.strings.characters}  
                 
             />
-                {(isError.includes('engName')) && 
+                {(isError?.includes('engName')) && 
                   (
                   <div style={{marginTop: '5px'}}>
                     {validateisError( {blankField: `${this.strings.blankField} ${this.strings.please_add_a_name}` })}
@@ -162,7 +164,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 out_of_Text = {this.strings.out_of}
                 characterCountText={this.strings.characters}
             />
-             {isError.includes('frCommName') && 
+             {isError?.includes('frCommName') && 
                 (
                 <div style={{marginTop: '5px'}}>
                   {validateisError( {blankField: `${this.strings.blankField} ${this.strings.please_add_a_name}` })}
@@ -198,7 +200,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 characterCountText={this.strings.characters}
             />
 
-                {isError.includes('shEngDesc') && 
+                {isError?.includes('shEngDesc') && 
                   (
                   <div style={{marginTop: '5px'}}>
                   {validateisError( {blankField: `${this.strings.blankField} ${this.strings.please_add_a_description}` })}
@@ -229,7 +231,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
                 out_of_Text = {this.strings.out_of}
                 characterCountText={this.strings.characters}
             />
-              {isError.includes('shFrDesc') && 
+              {isError?.includes('shFrDesc') && 
                 (
                   <div style={{marginTop: '5px'}}>
                     {validateisError( {blankField: `${this.strings.blankField} ${this.strings.please_add_a_description}` })}

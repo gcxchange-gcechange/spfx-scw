@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Stack, Icon, IStackTokens} from 'office-ui-fabric-react';
+import { Stack, Icon, IStackTokens} from '@fluentui/react';
 import * as React from 'react';
 import styles from './Scw.module.scss'
 
@@ -52,7 +52,7 @@ export const validateTextField = (value: string, strings: { minCharacters: strin
   
 }
 
-export const validateSpecialCharFields = (value: string, strings: { minCharacters: string; blankField: string; removeSpecialChar: string }): JSX.Element | string => {
+export const validateSpecialCharFields = (value: string, strings: { minCharacters: string; blankField: string; removeSpecialChar: string }): JSX.Element | string | undefined => {
 
   const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
 
@@ -118,7 +118,7 @@ export const validateSpecialCharFields = (value: string, strings: { minCharacter
   }
 }
 
-export const validateOwnerField = (ownerList: string [], requestingUser: string, invalidEmail: string,  strings: { blankfield: string, requestorUser: string, invalidEmail: string} ): JSX.Element | string => {
+export const validateOwnerField = (ownerList: string [], requestingUser: string, invalidEmail: string,  strings: { blankfield: string, requestorUser: string, invalidEmail: string} ): JSX.Element | string | undefined => {
  
   const sectionStackTokens: IStackTokens = {childrenGap: 5}
 

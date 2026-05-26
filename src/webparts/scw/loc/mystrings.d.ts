@@ -26,7 +26,7 @@ declare interface IScwWebPartStrings {
   complete_img_alt: string;
   complete_button: string;
 
-  community_classification: string;
+  
   commPurpose_title: string;
   commPurpose_Modal: string;
   commPurpose_desc: string;
@@ -83,13 +83,12 @@ declare interface IScwWebPartStrings {
   before_proceeding: string,
   and: string;
   the: string;
-  unclassified: string;
+ 
   owners_and_members: string;
   unclassified_cardTitle: string;
   protected_cardTitle: string;
-  protected_cardText: string;
   one_more_owner: string;
-  unclassified_cardText: string;
+ 
   shEngDesc_Modal: string;
   shFrDesc_Modal: string;
   select: string;
