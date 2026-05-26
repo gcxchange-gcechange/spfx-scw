@@ -10,7 +10,7 @@ import styles from "./Scw.module.scss";
 import { Steps, Button } from "antd";
 import { IScwProps } from "./IScwProps";
 import { Initial } from "./InitialPage/Initial";
-import { FocusTrapZone, ISpinnerStyles, PrimaryButton, Stack, IButtonStyles} from '@fluentui/react';
+import { FocusTrapZone, ISpinnerStyles, PrimaryButton, Stack, IButtonStyles, Spinner, SpinnerSize, IPersonaProps} from '@fluentui/react';
 import ErrorModal from "./Modal";
 import FirstStep from "./FirstStep";
 import SecondStep from "./SecondStep";
@@ -22,14 +22,12 @@ import {
 } from "@microsoft/sp-http";
 import Title from "./Title";
 import Complete from "./Complete";
-import { Spinner, SpinnerSize } from "@fluentui/react/lib/Spinner";
 import Callouts from "./Callouts";
 import Failed from "./Failed";
 import ReviewFields from "./ReviewFields";
 import { fieldValidations } from "./validationFunction";
 //import { createSpaceConfig } from "../../../servicesConfig";
 import {EnvConfig} from '../../../env/generatedConfig'
-import { IPersonaProps } from "@fluentui/react";
 
 
 export interface IScwState {

@@ -1,4 +1,4 @@
-import { FocusZone, IImageProps, ImageFit, IStackStyles, Stack} from 'office-ui-fabric-react';
+import { FocusZone, IImageProps, ImageFit, IStackStyles, Stack} from '@fluentui/react';
 import * as React from 'react';
 import styles from  '../InitialPage/Initial.module.scss';
 import {faUsers, faGlobe } from '@fortawesome/free-solid-svg-icons';
