@@ -356,7 +356,6 @@ export default class AntDesignStep extends React.Component<
   public handleOnChange = (event: any, value: string): void => {
     const eventName = event;
     const values = value;
-    console.log(eventName, values )
 
     this.handleSideLineErrorValidation(event, value);
 
@@ -739,7 +738,6 @@ export default class AntDesignStep extends React.Component<
       root: { padding: 20 },
     };
 
-    console.log("onChangeBlank",isError);
     // const processSteps: number [] = [];
  
     // const barsteps = steps.map((item) =>
