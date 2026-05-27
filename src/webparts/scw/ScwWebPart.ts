@@ -8,7 +8,7 @@ import {
     PropertyPaneDropdown,
     // PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
-import { BaseClientSideWebPart} from '@microsoft/sp-webpart-base';
+import { BaseClientSideWebPart, WebPartContext} from '@microsoft/sp-webpart-base';
 import * as strings from 'ScwWebPartStrings';
 import { IScwProps } from './components/IScwProps';
 import AntDesignStep from './components/Scw';
@@ -17,6 +17,7 @@ import AntDesignStep from './components/Scw';
 export interface IScwWebPartProps {
     prefLang: string;
     url: any;
+    context: WebPartContext;
  
 }
 
