@@ -1,23 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
 import { SelectLanguage } from './SelectLanguage';
-import { Checkbox, ICheckboxStyles, IStackStyles, Label, Stack, StackItem } from 'office-ui-fabric-react';
+import { Checkbox, ICheckboxStyles, IStackStyles, Label, Stack, StackItem } from '@fluentui/react';
 import styles from "./Scw.module.scss";
 import parse from 'html-react-parser';
 
 export interface IThirdStepProps {
     prefLang: string;
     checkedValues: any[];
-    checkedTerms?:( checked: string, isChecked: boolean ) => void; 
+    checkedTerms:( checked: string, isChecked: boolean ) => void | undefined; 
     selectedChoice: string;
 }
 
 export default class ThirdStep extends React.Component<IThirdStepProps> {
     public strings = SelectLanguage(this.props.prefLang);
 
-    private onChange = ( event: React.ChangeEvent<HTMLInputElement>, isChecked:boolean ): void => {
-        const checkBoxId = event.target.id;
-        this.props.checkedTerms( checkBoxId, isChecked) 
+    private onChange = (ev?: React.FormEvent<HTMLElement | HTMLInputElement>, checked?: boolean): void => {
+        const target = ev?.target as HTMLInputElement;
+        const checkboxId = target?.id ?? '';
+        const isChecked = checked !== undefined ? checked : target?.checked;
+
+        if (checkboxId && isChecked !== undefined) {
+            this.props.checkedTerms(checkboxId, isChecked);
+        }
     }
 
 

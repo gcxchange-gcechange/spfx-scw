@@ -4,7 +4,12 @@
 import * as React from "react";
 import { SelectLanguage } from './SelectLanguage';
 import styles from "./Scw.module.scss";
-import { PeoplePicker, PrincipalType } from "@pnp/spfx-controls-react/lib/PeoplePicker";
+import {
+
+    IPeoplePickerContext,
+  PeoplePicker,
+  PrincipalType
+} from "@pnp/spfx-controls-react/lib/controls/peoplepicker";
 import { IButtonStyles, IIconProps, IPersonaProps, IconButton, Label, Stack } from '@fluentui/react';
 
 
@@ -22,7 +27,7 @@ export interface IAddUsersProps {
     prefLang: string;
     requestor?: string;
     invalidEmail: string;
-    getOwnersCallback?: (items: IPersonaProps[]) => void | undefined;
+    getOwnersCallback?: (items: IPersonaProps[]) => void ;
     handleButtonClick? :(event: any) => void | undefined;
     showCalloutVisible?:(event: any ) => void | undefined;
     infoButton?: string;
@@ -33,8 +38,8 @@ export interface IAddUsersProps {
 export default class AUsers extends React.Component<IAddUsersProps> {
      
     public strings = SelectLanguage( this.props.prefLang );
+
     
- 
  
     constructor( props: IAddUsersProps, ) {
         super( props );
@@ -47,7 +52,6 @@ export default class AUsers extends React.Component<IAddUsersProps> {
     public _getOwnerItems = ( items: IPersonaProps[] ):void | undefined  => {  
 
         console.log("Persona Items", items)
-
         this.props.getOwnersCallback?.(items);
 
     };
@@ -56,8 +60,8 @@ export default class AUsers extends React.Component<IAddUsersProps> {
     public render(): React.ReactElement<IAddUsersProps>  {
 
 
-        const currentUser = this.props.requestor; // Adjust this based on the actual structure of your context
-        console.log("CurrentUser",currentUser)
+       // const currentUser = this.props.requestor; // Adjust this based on the actual structure of your context
+
 
         const iconStyles: IButtonStyles = {
             root: {
@@ -66,7 +70,13 @@ export default class AUsers extends React.Component<IAddUsersProps> {
         }
 
         const infoIcon: IIconProps = { iconName: 'UnknownSolid' };     
-        
+
+
+        const peoplePickerContext: IPeoplePickerContext = {
+            absoluteUrl: this.props.context.pageContext.web.absoluteUrl,
+            msGraphClientFactory: this.props.context.msGraphClientFactory,
+            spHttpClient: this.props.context.spHttpClient
+        };
 
 
         return(
@@ -79,7 +89,7 @@ export default class AUsers extends React.Component<IAddUsersProps> {
                                 *
                             </span>
                             {this.props.title}
-                            {this.props.currentPage === 2 && 
+                            {this.props.currentPage === 4 && 
                             (<span>
                                 <IconButton ariaLabel={this.props.infoButton} id={this.props.id} styles={ iconStyles } iconProps={infoIcon} onClick={this.props.showCalloutVisible}/>
                             </span>
@@ -93,7 +103,7 @@ export default class AUsers extends React.Component<IAddUsersProps> {
                 
                     <PeoplePicker
                         errorMessageClassName={styles.ownerError}
-                        context = { this.props.context }
+                        context = {peoplePickerContext}
                         required = { true }
                         personSelectionLimit = { 99 }
                         groupName = { "" } // Leave this blank in case you want to filter from all users

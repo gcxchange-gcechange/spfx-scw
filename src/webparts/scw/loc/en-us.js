@@ -203,7 +203,5 @@ define([], function() {
     "errorPopUp":"Error pop up",
     "out_of":"out of",
     "characters": "characters",
-    
-
   }
 })

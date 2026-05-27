@@ -28,10 +28,11 @@ export interface IReusableTextFieldProps {
     getElementId?:(event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) => void;
     targetId?:string;
     ariaLabelRequired:string;
-    charCountId: string;
+    charCountId?: string;
     infoButton?: string;
     out_of_Text?: string;
     characterCountText?: string;
+    readOnly?: boolean;
 }
 
 
@@ -43,7 +44,6 @@ export default class ReusableTextField extends React.Component<IReusableTextFiel
         super(props);
 
     }
-
     public render() {
 
         const infoIcon: IIconProps = { iconName: 'UnknownSolid' }; 
@@ -88,7 +88,7 @@ export default class ReusableTextField extends React.Component<IReusableTextFiel
                             *
                         </span>
                         {this.props.title}
-                        {this.props.currentPage === 2 && 
+                        {this.props.currentPage === 4 && 
                         (<span><IconButton ariaLabel={this.props.infoButton} id={this.props.id} styles={ iconStyles } iconProps={infoIcon} onClick={this.props.showCalloutVisible}/></span>)
                         }
                         <p className={styles.instruction}>{this.props.instructions}</p>

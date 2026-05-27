@@ -39,9 +39,7 @@ export default class FirstStep extends React.Component<IFirstStepProps> {
 
   private onhandleChangeEvent = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,newValue?: string): void => {
     const eventName = event.currentTarget.name;
-    console.log("eventName", eventName)
     const value = event.currentTarget.value;
-    console.log("value", value)
     const trimmedValue = value.trim();
 
     try {

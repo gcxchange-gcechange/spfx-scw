@@ -52,7 +52,7 @@ export const validateTextField = (value: string, strings: { minCharacters: strin
   
 }
 
-export const validateSpecialCharFields = (value: string, strings: { minCharacters: string; blankField: string; removeSpecialChar: string }): JSX.Element | string | undefined => {
+export const validateSpecialCharFields = (value: string, strings: { minCharacters: string; blankField: string; removeSpecialChar: string }): JSX.Element | string |undefined => {
 
   const charAllowed = /[^a-zA-Z0-9ÀÁÂÃÄÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïòóôõöùúûüÆŒœæŸÿ'\s]/.test(value);
 
@@ -185,7 +185,3 @@ export const fieldValidations = (values: Record<string, string> | string[]): Val
     hasSpecialChar,
   }
 }
-
-
-
-

@@ -1,56 +1,111 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react/no-unescaped-entities */
 import * as React from "react";
-import { WebPartContext } from "@microsoft/sp-webpart-base";
-import AddUsers from "./AddUsers";
-import { SelectLanguage } from "./SelectLanguage";
-import parse from "html-react-parser";
-import { IPersonaProps } from "@fluentui/react";
+import { SelectLanguage } from './SelectLanguage';
+import styles from "./Scw.module.scss";
+import { ChoiceGroup, IChoiceGroupOption, IChoiceGroupOptionStyles, IChoiceGroupStyles, Stack } from "@fluentui/react";
+import parse from 'html-react-parser';
+
 
 export interface ISecondStepProps {
-  context: WebPartContext;
-  ownerList: string[];
-  prefLang: string;
-  getOwnersCallback: (item: IPersonaProps[]) => void | undefined;
-  //getMemberCallback: (item: []) => void;
-  requestor: string;
-  invalidEmail: string;
+    prefLang: string;
+    handleSelectedChoice?: ( selectedChoice: string ) => void | undefined;
+    selectedChoice: string;
 }
 
-export interface IPerson {
-  displayName: string;
-  email: string;
-  userPrincipalName: string;
-}
 
 export default class SecondStep extends React.Component<ISecondStepProps> {
-  public strings = SelectLanguage(this.props.prefLang);
+    public strings = SelectLanguage(this.props.prefLang);
 
-  public handleOwnerCallback = (items: IPersonaProps[]): void => {
-    this.props.getOwnersCallback(items);
-  };
+    private onSelectedKey = ( ev?: React.FormEvent<HTMLInputElement | HTMLElement>, option?: IChoiceGroupOption): void => {
 
-  public render(): React.ReactElement<ISecondStepProps> {
-    return (
-      <>
-        <p>{this.strings.invite_owners_para1}</p>
-        <p>{parse(this.strings.invite_owners_para2)}</p>
+        if (!option) {
+            return;
+        }
 
-   
-          <AddUsers
-            id={"owners"}
-            title={this.strings.invite_owners_label}
-            instructions={this.strings.owners_Instruction}
-            aria-describedby="owners"
-            prefLang={this.props.prefLang}
-            context={this.props.context}
-            ownerList={this.props.ownerList}
-            getOwnersCallback={this.handleOwnerCallback}
-            requestor={this.props.requestor}
-            invalidEmail={this.props.invalidEmail}
-          />
-      
-      </>
-    );
-  }
+        const elementclass = document.querySelector(".ms-ChoiceField-wrapper.is-inFocus");
+
+        if (option.key === "1") {
+            elementclass?.classList.add(styles.checkedRadioButton1);
+        } else if (option.key === "2") {
+            elementclass?.classList.add(styles.checkedRadioButton2);
+        }
+
+        this.setState({
+            selectedChoice: option.key
+        });
+
+        this.props.handleSelectedChoice?.(option.key);
+    }
+
+    public render(): React.ReactElement<ISecondStepProps> {
+
+        const flexSyle: Partial<IChoiceGroupStyles> = {
+            flexContainer:{
+                display:'flex'
+            }     
+        }
+
+        const hoverStyle: Partial<IChoiceGroupOptionStyles> = {
+            labelWrapper:{
+                ':hover': {
+                    color: 'red'
+                }
+            }
+        }
+
+        const templateChoice: IChoiceGroupOption[] = [
+            {   key: "1", 
+                text: `${this.strings.unclassified_cardTitle}`, 
+                ariaLabel: 'Unclassified community',
+                styles: hoverStyle,
+                onRenderField: (props, render) => {
+                    return (
+                        <div className={ styles.choiceCard } >
+                            <div className={ styles.cardHeading}>
+                                {render?.(props)}
+                            </div>
+                            <div className={styles.cardBody}>
+                                { parse( this.strings.unclassified_cardText )}
+                            </div>
+                        </div>  
+                    )
+                }
+            },
+
+             {  key: "2", 
+                text:`${this.strings.protected_cardTitle}`, 
+                ariaLabel: 'Protected A or B community',
+                onRenderField: (props, render) => {
+                    return (
+                        <div className={ styles.choiceCard2 }>
+                            <div className={styles.cardHeading2}>
+                                {render?.(props)}
+                            </div>
+                            <div className={styles.cardBody}>
+                            { parse( this.strings.protected_cardText )}
+                            </div>
+                        </div>  
+                    );
+                } 
+            }
+        ]
+
+        return (
+            <>
+                <div>
+                    <p>{this.strings.comm_classification_para1}</p>
+                    <Stack horizontalAlign='center'>
+                        <ChoiceGroup 
+                            id='choiceGroup' 
+                            options={templateChoice} 
+                            required={true} 
+                            onChange={this.onSelectedKey} 
+                            styles={ flexSyle} 
+                            defaultSelectedKey={this.props.selectedChoice}
+                        />
+                    </Stack>
+                </div>
+            </>
+        )
+    }
+
 }

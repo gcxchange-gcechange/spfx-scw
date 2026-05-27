@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable dot-notation */
@@ -45,22 +46,13 @@ export default class LastStep extends React.Component<ILastStepProps> {
   
 	public strings = SelectLanguage(this.props.prefLang);
 
-	// private  onUpdateCommPurpose = (event: React.ChangeEvent<HTMLInputElement>) :void => {
-	// 		const value = event.target.value;
-	// 		const updatedPurpose = value.trim();  
-	// 		this.props.commPurposeCallback?.(updatedPurpose);
-	// }
+	private  onUpdateCommPurpose = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) :void => {
+			const updatedPurpose = (newValue || '').trim(); 
+			this.props.commPurposeCallback?.(updatedPurpose); 
+	}
 
-    private onUpdateCommPurpose = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string): void => {
+	private  onUpdateEngName = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string):void => {
 
-        const updatedPurpose = (newValue || '').trim();
-
-        this.props.commPurposeCallback?.(updatedPurpose);
-    };
-
-	private  onUpdateEngName = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) :void => {
-
-			//const value = event.target.value;
 
 			const updatedName = (newValue || '').trim();
 
@@ -70,7 +62,6 @@ export default class LastStep extends React.Component<ILastStepProps> {
 	private  onUpdateFrName = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) :void => {
 
 			// const value = event.target.value;
-
 			const updateFrName = (newValue || '').trim();
 			
 			this.props.frNameCallBack?.(updateFrName)    
@@ -94,6 +85,7 @@ export default class LastStep extends React.Component<ILastStepProps> {
   
 
 	public showCalloutVisible = (event: any):void => {
+        console.log(event);
 			const buttonId = event.currentTarget.id;
 			this.elementId(buttonId);
 			this.props.isCalloutVisible?.();
@@ -105,12 +97,21 @@ export default class LastStep extends React.Component<ILastStepProps> {
 	}
 
 	public updateDefaultOwnerValues = ( username: IPersonaProps[]):void  => {  
-
-        console.log("username", username)
 			const newValues = username;
 
 			this.props.getOwnersCallback?.( newValues );//pass to parent
 	};
+
+    public selectedChoiceText = ():string => {
+        if(this.props.selectedChoice === "1") {
+          return (this.strings.unclassified_cardTitle);
+        } else {
+          return (this.strings.protected_cardTitle);
+        }
+
+    }
+
+   
    
 	public render(): React.ReactElement<ILastStepProps> {
 
@@ -127,13 +128,20 @@ export default class LastStep extends React.Component<ILastStepProps> {
               },
               errorMessage: {
                 color: '#C61515'
-              }
+              },
+
             },
+            readOnlyField: {
+                field: {
+                    backgroundColor: '#e4e3e1'
+                }
+            }
           };
       
+         
       
-          const sectionStackTokens: IStackTokens = { childrenGap: 5 };
-           
+        const sectionStackTokens: IStackTokens = { childrenGap: 5 };
+
        
         return (
             
@@ -264,8 +272,30 @@ export default class LastStep extends React.Component<ILastStepProps> {
                     out_of_Text = {this.strings.out_of}
                     characterCountText={this.strings.characters} 
                 />
+                
+                <ReusableTextField
+                    name="classification"
+                    id= "classification"
+                    styles={charCountStyles.readOnlyField}
+                    aria-describedby=""
+                    multiline ={false}
+                    rows={1}
+                    defaultValue= {this.selectedChoiceText()}
+                    validateOnLoad={false}
+                    validateOnFocusOut={true}
+                    maxLength={100}
+                    title = { this.strings.community_classification}
+                    currentPage = {current}
+                    showCalloutVisible={this.showCalloutVisible}
+                    lineId={"seventh-line"} 
+                    ariaLabelRequired={this.strings.required}
+                    infoButton={this.strings.infoIcon_frDesc}
+                    readOnly 
 
-                    <div id="owners" >
+                />
+
+
+                    <div id="owners" style={{marginTop: '10px'}} >
                         <AddUsers 
                             id='owners'   
                             aria-describedby="owners"
