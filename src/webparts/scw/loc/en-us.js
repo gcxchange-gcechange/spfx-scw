@@ -116,7 +116,7 @@ define([], function() {
     
     //Fourth page
     "invite_owners_title": "Invite Owners",
-    "invite_owners_para1": "We need you to add at least one more Owner before your community can be created. Please remember that Owners have a higher level of responsibility within your community. You will also be able to add Members who are registered to GCXchange once your community is created.",
+    "invite_owners_para1": "We need you to add at least one more Owner before your community can be created. You can add a maximum of four additional owners. Please remember that Owners have a higher level of responsibility within your community. You will also be able to add Members who are registered to GCXchange once your community is created.",
     "invite_owners_label": "Invite Owners already registered to GCXchange.",
     "owners_Instruction": "Start typing an Owner’s last name to find and add them.",
     "owners_instruction_Callout": "Start typing an Owner’s email address (who is registered to GCXchange) to find and add them.",

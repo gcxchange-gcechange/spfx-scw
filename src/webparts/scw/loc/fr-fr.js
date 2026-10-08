@@ -116,7 +116,7 @@ define([], function() {
 
        //Fourth Page
        "invite_owners_title": "Inviter les propriétaires",
-       "invite_owners_para1": "Nous vous demandons d’ajouter au moins un propriétaire avant que votre collectivité soit créée. Veuillez vous rappeler que les propriétaires disposent d’un niveau de responsabilité élevé au sein de votre collectivité. Vous pourrez également ajouter des membres qui sont inscrits à GCÉchange, une fois votre collectivité créée.",
+       "invite_owners_para1": "Nous vous demandons d’ajouter au moins un propriétaire avant que votre collectivité soit créée. Vous pouvez ajouter jusqu'à quatre propriétaires. Veuillez vous rappeler que les propriétaires disposent d’un niveau de responsabilité élevé au sein de votre collectivité. Vous pourrez également ajouter des membres qui sont inscrits à GCÉchange, une fois votre collectivité créée.",
        "invite_owners_label": "Inviter les propriétaires déjà inscrits à GCÉchange.",
        "owners_Instruction": 'Commencez à taper le nom de famille d’un responsable pour le trouver et l’ajouter.',
        "owners_instruction_Callout": "Commencez à taper l’adresse courriel d’un propriétaire (qui est inscrit GCÉchange) pour les trouver et les ajouter.",
