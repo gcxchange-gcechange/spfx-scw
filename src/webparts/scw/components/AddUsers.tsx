@@ -101,7 +101,7 @@ export default class AUsers extends React.Component<IAddUsersProps> {
                         errorMessageClassName={styles.ownerError}
                         context = { peoplePickerContext }
                         required = { true }
-                        personSelectionLimit = { 99 }
+                        personSelectionLimit = { 4 }
                         groupName = { "" } // Leave this blank in case you want to filter from all users
                         onChange = { this._getOwnerItems }
                         principalTypes = { [ PrincipalType.User ] }
@@ -109,6 +109,7 @@ export default class AUsers extends React.Component<IAddUsersProps> {
                         defaultSelectedUsers  = { this.props.ownerList}
                         ensureUser={ true }
                         allowUnvalidated={ true }
+
                     />
 
                 </div>

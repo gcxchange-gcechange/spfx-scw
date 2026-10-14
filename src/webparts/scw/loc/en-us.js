@@ -68,7 +68,7 @@ define([], function() {
     "unclassified": "The information you are storing is unclassified so you won't need a classified document space. Make sure <strong>not to store</strong> any classified documents in your library. If you are unsure what information is classified you can check with your departmental security policy or information management branch.",
     
     "invite_owners_para1": "As a GCXchange owner you can modify your community and invite other users to your site so they can collaborate with you in Microsoft Teams.",
-    "invite_owners_para2": "We need you to <strong>add at least one more owner other than yourself</strong> before your community can be created.",
+    "invite_owners_para2": "We need you to <strong>add at least one more owner other than yourself</strong> before your community can be created. You can add a maximum of four additional owners. Once the community is created, you can then add more owners.",
    
     "invite_owners_label":"Invite owners already registered to GCXchange.",
 
